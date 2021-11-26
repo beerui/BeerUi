@@ -1,2 +1,2 @@
 ## beer-ui
-> This is a Svelet Ui Components
+> This is a Svelte Ui Components

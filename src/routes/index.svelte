@@ -2,4 +2,4 @@
 	import { First } from '$lib';
 </script>
 
-<First name="World" textColor="yellowgreen" />
+<First title="dwrew" name="2222" textColor="yellowgreen" />
