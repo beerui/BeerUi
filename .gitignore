@@ -4,3 +4,7 @@ node_modules
 /.svelte-kit
 /package
 .idea/
+*.log
+cypress/screenshots
+cypress/videos
+storybook-static

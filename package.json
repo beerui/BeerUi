@@ -1,11 +1,80 @@
 {
   "name": "@beerui/beerui",
   "version": "1.0.0",
-  "description": "a svelet ui components",
+  "description": "A Svelte ui components",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "svelte-kit build",
+    "build-storybook": "build-storybook",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "chromatic": "chromatic --exit-zero-on-changes",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "dev": "svelte-kit dev",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "lint": "eslint --ignore-path .gitignore .",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview",
+    "storybook": "start-storybook -p 6006",
+    "test": "start-server-and-test storybook http://localhost:6006 cy:run"
   },
-  "author": "",
+  "devDependencies": {
+    "@babel/core": "7.16.0",
+    "@babel/preset-env": "7.16.4",
+    "@storybook/addon-actions": "6.3.12",
+    "@storybook/addon-essentials": "6.3.12",
+    "@storybook/addon-links": "6.3.12",
+    "@storybook/addon-storyshots": "6.3.12",
+    "@storybook/addon-svelte-csf": "1.1.0",
+    "@storybook/svelte": "6.3.12",
+    "@sveltejs/kit": "next",
+    "@testing-library/cypress": "8.0.2",
+    "@typescript-eslint/eslint-plugin": "5.4.0",
+    "@typescript-eslint/parser": "5.4.0",
+    "babel-loader": "8.2.3",
+    "chromatic": "6.0.6",
+    "cypress": "9.1.0",
+    "eslint": "8.3.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-cypress": "2.12.1",
+    "eslint-plugin-svelte3": "3.2.1",
+    "husky": "7.0.4",
+    "lint-staged": "12.1.2",
+    "prettier": "2.4.1",
+    "prettier-plugin-svelte": "2.5.0",
+    "start-server-and-test": "1.14.0",
+    "svelte": "3.44.2",
+    "svelte-check": "2.2.10",
+    "svelte-loader": "3.1.2",
+    "svelte-preprocess": "4.9.8",
+    "svelte2tsx": "0.4.10",
+    "tslib": "2.3.1",
+    "typescript": "4.5.2"
+  },
+  "homepage": "https://github.com/beerui/BeerUi",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js, ts, svelte}": [
+      "eslint --fix"
+    ],
+    "*.{svelte, html, css, scss, stylus, js, ts, json, yml, yaml, md}": [
+      "prettier --write --plugin-search-dir=."
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 4,
+    "useTabs": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:beerui/BeerUi.git"
+  },
+  "type": "module",
   "license": "MIT"
 }
