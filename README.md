@@ -12,7 +12,7 @@
 #### git status 
 #### git add . 
 #### git commit -m '提交信息'
-#### git origin push main 
+#### git push origin main 
 ### 6.pull request给原作者
 
 ### 7.等待原作者同意并合并
