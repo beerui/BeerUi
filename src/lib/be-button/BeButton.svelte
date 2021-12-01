@@ -37,11 +37,4 @@
 </button>
 
 <style>
-	h1 {
-		margin: auto;
-		font-family: Arial, Helvetica, sans-serif;
-		font-size: 5rem;
-		font-weight: lighter;
-		text-align: center;
-	}
 </style>

@@ -1,5 +1,6 @@
 {
   "name": "@beerui/beerui",
+  "private": true,
   "version": "1.0.0",
   "description": "A Svelte ui components",
   "main": "index.js",
@@ -17,6 +18,7 @@
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "storybook": "start-storybook -p 6006",
+    "preinstall": "npx only-allow pnpm",
     "test": "start-server-and-test storybook http://localhost:6006 cy:run"
   },
   "devDependencies": {
@@ -72,10 +74,15 @@
     "tabWidth": 4,
     "useTabs": true
   },
+  "bugs": {
+    "url": "https://github.com/sveltejs/kit/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:beerui/BeerUi.git"
+    "url": "git+ssh://git@github.com/beerui/BeerUi.git"
   },
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [],
+  "author": ""
 }

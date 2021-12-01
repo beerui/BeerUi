@@ -32,5 +32,9 @@
 		"src/**/*.js",
 		"src/**/*.ts",
 		"src/**/*.svelte"
-	]
+	],
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=6"
+  }
 }

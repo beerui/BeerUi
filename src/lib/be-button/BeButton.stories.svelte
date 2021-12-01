@@ -1,6 +1,6 @@
 <script>
 	import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
-    import Button from "./Button.svelte";
+    import Button from "./BeButton.svelte";
 </script>
 
 <!-- 👇 Creates specific parameters for the story -->
