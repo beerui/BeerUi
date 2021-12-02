@@ -1,16 +1,15 @@
 <script lang="ts">
-    // import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher } from "svelte";
 
     export let type = ''
     export let size = ''
     export let round = ''
     export let disabled = false
     export let loading = false
-    // const dispatch = createEventDispatcher()
-    // const handleClick = (evt: MouseEvent) => {
-    //     console.log(evt)
-    //     dispatch('click', evt)
-    // }
+    const dispatch = createEventDispatcher()
+    const handleClick = (evt: MouseEvent) => {
+        dispatch('click', evt)
+    }
 </script>
 <button
     class={[
@@ -21,6 +20,7 @@
         round ? ' be-button--round__' + round : '',
         loading ? ' be-button--' + loading : ''
     ].join('')}
+	on:click={handleClick}
 >
 <!--    <beer-icon></beer-icon>-->
     <span>

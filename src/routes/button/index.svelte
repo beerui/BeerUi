@@ -1,7 +1,7 @@
 <script>
 	import { BeButton } from '$lib';
 </script>
-<div class='container'>
+<div class='page-container'>
 	<h1>Size</h1>
 	<div class='mt-10'><BeButton size="large" type="primary">提交</BeButton> <code>large</code></div>
 	<div class='mt-10'><BeButton size="medium" type="primary">提交</BeButton> <code>medium</code></div>
@@ -22,6 +22,5 @@
 </div>
 
 <style lang='scss'>
-.container {padding: 5rem;}
 .mt-10 {margin-top: 1rem;}
 </style>

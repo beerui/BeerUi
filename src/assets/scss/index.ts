@@ -1,3 +1,6 @@
+/**
+ * 自动导入所有的scss文件
+ */
 import  '$assets/scss/index.scss'
 import fs from 'fs';
 import { browser } from '$app/env';
