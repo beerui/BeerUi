@@ -1,4 +1,5 @@
 import preprocess from 'svelte-preprocess';
+import * as path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,6 +15,15 @@ const config = {
 				return !filepath.endsWith('.stories.svelte');
 			},
 		},
+		vite: {
+			resolve: {
+				alias: {
+					$utils: path.resolve('./src/utils'),
+					$assets: path.resolve('./src/assets'),
+					$template: path.resolve('./src/template')
+				}
+			}
+		}
 	},
 };
 

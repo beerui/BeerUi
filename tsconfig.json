@@ -16,7 +16,13 @@
 		"moduleResolution": "node",
 		"paths": {
 			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"]
+			"$lib/*": ["src/lib/*"],
+			"$utils": ["src/utils"],
+			"$utils/*": ["src/utils/*"],
+			"$assets": ["src/assets"],
+			"$assets/*": ["src/assets/*"],
+			"$template": ["src/template"],
+			"$template/*": ["src/template/*"]
 		},
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
