@@ -1,0 +1,16 @@
+@import "../common/colors";
+
+.be-alert{
+  width: 100%;
+  font-size:.85rem;
+  padding: .5rem;
+  color: #fff;
+  display:flex;
+  align-items: center;
+  p{
+    margin: 0;
+  }
+}
+.be-alert--success{
+  background-color: $success-color;
+}
