@@ -1,0 +1,13 @@
+.beer-button {
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  white-space: nowrap;
+  color: rgb(59, 130, 246);
+  background: #ffffff;
+  border: 0;
+  padding: .5rem .75rem;
+  border-radius: 0.375rem;
+
+  &--disabled{background: #f2f2f2;}
+}

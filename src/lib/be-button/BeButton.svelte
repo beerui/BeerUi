@@ -35,6 +35,3 @@
         <slot></slot>
     </span>
 </button>
-
-<style>
-</style>
