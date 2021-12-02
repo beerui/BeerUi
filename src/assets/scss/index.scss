@@ -1,5 +1,1 @@
-@import "reset";
-@import "colors";
-@import "variables";
-@import "grid";
-@import "modules/button";
+@import './common/colors.scss';@import './common/grid.scss';@import './common/reset.scss';@import './common/variables.scss';@import './modules/button.scss';

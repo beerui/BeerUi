@@ -1,12 +1,13 @@
 import  '$assets/scss/index.scss'
 import fs from 'fs';
-import path from 'path';
 import { browser } from '$app/env';
 
-console.log(this);
 if (!browser) {
-	// console.log(require.context('./modules', true, /\.scss$/))
-	// const _path = path.resolve('./modules/*')
-	// const modules = fs.readFileSync(_path)
-	// console.log(modules)
+	// 把modules和common中的scss文件 写入index.scss
+	const modules = fs.readdirSync('./src/assets/scss/modules')
+	const commons = fs.readdirSync('./src/assets/scss/common')
+	const modulesFiles = modules.map(el => `@import './modules/${el}'`)
+	const commonsFiles = commons.map(el => `@import './common/${el}'`)
+	fs.writeFileSync('./src/assets/scss/index.scss', [...commonsFiles, ...modulesFiles].join(';\r') + ';')
+	console.log('index.scss 导入已更新！')
 }
