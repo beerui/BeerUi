@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import { BeAlert } from '$lib';
 </script>
 <BeAlert title="这是alert" type="success">

@@ -1,13 +1,13 @@
 <script>
 	import { BeButton, BeDialog } from '$lib';
-	import { model } from '$lib/stores';
 
-	let showModal = false
+	let visible = false
 	let message = ''
+	$: {
+		console.log('visible1', visible)
+	}
 	let openDialog = () => {
-		console.log('openDialog')
-		showModal = true
-		model.set({ delay: 3000, show: true, message: '没有角色，请联系管理员！' })
+		visible = true
 	}
 </script>
 <div class='page-container'>
@@ -17,7 +17,7 @@
 	<p>Dialog 弹出一个对话框，适合需要定制性更大的场景。</p>
 	<div class="demo-block demo-dialog">
 		<BeButton size="normal" type="primary" on:click={openDialog}>点击打开 Dialog</BeButton>
-		<BeDialog visible={showModal}>
+		<BeDialog bind:visible={visible} closeOnClickModal='false'>
 			<p>{message}</p>
 		</BeDialog>
 	</div>

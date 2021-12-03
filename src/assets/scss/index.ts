@@ -11,6 +11,6 @@ if (!browser) {
 	const commons = fs.readdirSync('./src/assets/scss/common')
 	const modulesFiles = modules.map(el => `@import './modules/${el}'`)
 	const commonsFiles = commons.map(el => `@import './common/${el}'`)
-	fs.writeFileSync('./src/assets/scss/index.scss', [...commonsFiles, ...modulesFiles].join(';\r') + ';')
+	fs.writeFileSync('./src/assets/scss/index.scss', ['// 自动引入，请勿修改此文件！ Auto import, Don\'t Changed', ...commonsFiles, ...modulesFiles].join(';\r') + ';')
 	console.log('index.scss 导入已更新！')
 }
