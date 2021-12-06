@@ -7,4 +7,5 @@
 	<li><a href='pagination'>Pagination 示例</a></li>
 	<li><a href='alert'>Alert 示例</a></li>
 	<li><a href='switch'>Switch 示例</a></li>
+	<li><a href='select'>select 示例</a></li>
 </ul>
