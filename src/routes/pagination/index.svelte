@@ -12,9 +12,11 @@
 			phone: Math.random().toString().substr(0, 11),
 			content: '1'
 		}
+		let temp = []
 		for (let i = 0; i < 10; i++) {
-			list.push(Object.assign(defaultItem, { content: name[i % 8], name: i + 'name' }))
+			temp.push(Object.assign(defaultItem, { content: name[i % 8], name: i + 'name' }))
 		}
+		list = temp
 	}
 	feedBackList()
 	// 切换页面
@@ -49,3 +51,7 @@
 	</div>
 	<BePagination currentPage={query.page} pageSize={query.limit} {total} async layouts="prev, pager, next" on:changePage={changePage} />
 </div>
+
+<code>
+<!--	<BePagination currentPage={query.page} pageSize={query.limit} {total} async layouts="prev, pager, next" on:changePage={changePage} />-->
+</code>

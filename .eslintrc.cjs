@@ -27,5 +27,8 @@ module.exports = {
   root: true,
   settings: {
     'svelte3/typescript': () => require('typescript')
+  },
+  rules: {
+	"@typescript-eslint/explicit-module-boundary-types": "off"
   }
 };
