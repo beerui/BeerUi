@@ -1,13 +1,9 @@
-<script>
-	import { First, BeButton } from '$lib';
-	let count = 1
-	function handleClick(e,val) {
-		console.log(e,val)
-	}
+<script lang='ts'>
 </script>
-
-<First title="dwrew" name="2222" textColor="yellowgreen" />
-<BeButton size="small" type="primary" disabled>提交</BeButton>
-<a href='content/1'>content 1</a>
-<a href='content/2'>content 2</a>
-<div on:click={(e) =>  {handleClick(e, 111)}}>11111</div>
+<h1>BeerUi 展板</h1>
+<ul>
+	<li><a href='button'>Button 示例</a></li>
+	<li><a href='dialog'>Dialog 示例</a></li>
+	<li><a href='pagination'>Pagination 示例</a></li>
+	<li><a href='alert'>Alert 示例</a></li>
+</ul>
