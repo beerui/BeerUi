@@ -40,10 +40,16 @@
     }
   }
 }
+.is-disabled {
+  opacity: .6;
+  .be-switch__core {
+    cursor: not-allowed;
+  }
+}
 .is-checked {
   .be-switch__core {
-    border-color: #409eff;
-    background-color: #409eff;
+    border-color: #1492FF;
+    background-color: #1492FF;
     &::after {
       left: 100%;
       margin-left: -17px;

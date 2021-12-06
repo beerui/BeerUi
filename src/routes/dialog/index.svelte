@@ -1,13 +1,12 @@
-<script>
+<script lang="ts">
 	import { BeButton, BeDialog } from '$lib';
 
 	let visible = false
-	let message = ''
-	$: {
-		console.log('visible1', visible)
-	}
 	let openDialog = () => {
 		visible = true
+	}
+	const beforeClose = (evt) => {
+		console.log(evt.detail)
 	}
 </script>
 <div class='page-container'>
@@ -17,8 +16,20 @@
 	<p>Dialog 弹出一个对话框，适合需要定制性更大的场景。</p>
 	<div class="demo-block demo-dialog">
 		<BeButton size="normal" type="primary" on:click={openDialog}>点击打开 Dialog</BeButton>
-		<BeDialog bind:visible={visible} closeOnClickModal='false'>
-			<p>{message}</p>
+		<BeDialog bind:visible={visible} closeOnClickModal='false' on:beforeClose={beforeClose}>
+			<p>这里是对话框内容</p>
 		</BeDialog>
 	</div>
+
+	<code >
+		{@html
+			`let visible = false
+			let openDialog = () => {
+				visible = true
+			}
+			const beforeClose = (evt) => {
+				console.log(evt.detail)
+			}`
+		}
+	</code>
 </div>
