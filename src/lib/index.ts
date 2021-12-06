@@ -4,4 +4,5 @@ import { default as BeButton } from './be-button/BeButton.svelte';
 import { default as BeAlert} from './be-alert/BeAlert.svelte'
 import { default as BeDialog} from './be-dialog/BeDialog.svelte'
 import { default as BePagination} from './be-pagination/BePagination.svelte'
-export { First, BeButton, BeAlert, BeDialog, BePagination };
+import { default as BeSwitch} from './be-switch/BeSwitch.svelte'
+export { First, BeButton, BeAlert, BeDialog, BePagination, BeSwitch };
