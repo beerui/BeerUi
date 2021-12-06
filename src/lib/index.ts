@@ -6,4 +6,5 @@ import { default as BeDialog} from './be-dialog/BeDialog.svelte'
 import { default as BePagination} from './be-pagination/BePagination.svelte'
 import { default as BeSwitch} from './be-switch/BeSwitch.svelte'
 import { default as BeTabs} from './be-tabs/BeTabs.svelte'
-export { First, BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs };
+import { default as BeSelect} from './be-select/BeSelect.svelte'
+export { First, BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs,BeSelect };
