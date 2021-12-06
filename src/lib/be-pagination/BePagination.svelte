@@ -1,6 +1,5 @@
 <!-- http://face.cms.talelin.com/#/lin-cms-ui/data/pagination -->
-<!--suppress TypeScriptUnresolvedVariable, JSUndeclaredVariable, JSUnresolvedVariable -->
-<script>
+<script lang="ts">
 	/**
 	 * 分页
 	 * @params total 总条数
@@ -19,6 +18,7 @@
 	const dispatch = createEventDispatcher()
 
 	export let total = 0 // 总条数
+	export let type = 'normal' // 类别 mini/normal
 	export let currentPage = 1 // 当前页
 	export let pageSize = 15 // 显示条数
 	export let pagerCount = 8 // 显示多少个
@@ -39,7 +39,7 @@
 		pageList = computePageList() // 计算页码
 	})
 	function computePageList() {
-		let pages = []
+		let pages:any[]
 		// 页码数小于等于 pagerCount 时
 		if (totalpages <= pagerCount) {
 			pages = normalPageList()
@@ -107,8 +107,9 @@
 	}
 
 </script>
-<div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-	<div class="flex-1 flex justify-between sm:hidden">
+<div class="be-pagination">
+	{#if type === 'mini'}
+	<div class="be-pagination__container_mini">
 		<div on:click={changePage} data-page={currentPage - 1} class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {currentPage === 1 ? 'bg-gray-300' : ''}">
 			上一页
 		</div>
@@ -116,9 +117,11 @@
 			下一页
 		</div>
 	</div>
-	<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+	{/if}
+	{#if type === 'normal'}
+	<div class='be-pagination__container'>
 		{#if layouts}
-			<div>
+			<div class='be-pagination__analyze'>
 				<p class="text-sm text-gray-700">
 					显示
 					<span class="font-medium">{pageSize}条 </span>
@@ -130,35 +133,23 @@
 				</p>
 			</div>
 		{/if}
-		<div>
-			<nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px select-none" aria-label="Pagination">
-				<div on:click={changePage} data-page={currentPage - 1} class="cursor-pointer relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-300 {currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : ''}">
-					<span class="sr-only pointer-events-none">上一页</span>
-					<!-- Heroicon name: solid/chevron-left -->
-					<svg class="h-5 w-5 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-						<path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-					</svg>
-				</div>
-				<!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-				{#each pageList as item, index}
-					{#if item.type === 'ellipsis'}
-						<div on:click={changePage} data-page="{item.n}" class="cursor-pointer bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium {currentPage === item.n ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' : ''}">
-							...
-						</div>
-					{:else}
-						<div on:click={changePage} data-page="{item.n}" class="cursor-pointer bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium {currentPage === item.n ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' : ''}">
-							{item.n}
-						</div>
-					{/if}
-				{/each}
-				<div on:click={changePage} data-page={currentPage + 1} class="cursor-pointer relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-300 {currentPage === totalpages ? 'bg-gray-300 cursor-not-allowed' : ''}">
-					<span class="sr-only pointer-events-none">下一页</span>
-					<!-- Heroicon name: solid/chevron-right -->
-					<svg class="h-5 w-5 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-					</svg>
-				</div>
-			</nav>
+		<div class='be-pagination__container'>
+			<div on:click={changePage} data-page={currentPage - 1} class="list {currentPage === 1 ? 'disabled' : ''}">上一页</div>
+			{#each pageList as item, index}
+				{#if item.type === 'ellipsis'}
+					<div on:click={changePage} data-page="{item.n}" class="list {currentPage === item.n ? 'active' : ''}">
+						...
+					</div>
+				{:else}
+					<div on:click={changePage} data-page="{item.n}" class="list {currentPage === item.n ? 'active' : ''}">
+						{item.n}
+					</div>
+				{/if}
+			{/each}
+			<div on:click={changePage} data-page={currentPage + 1} class="list {currentPage === totalpages ? 'disabled' : ''}">
+				<span class="sr-only pointer-events-none">下一页</span>
+			</div>
 		</div>
 	</div>
+	{/if}
 </div>
