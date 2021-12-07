@@ -8,4 +8,7 @@
 	<li><a href='alert'>Alert 示例</a></li>
 	<li><a href='switch'>Switch 示例</a></li>
 	<li><a href='datePicker'>date-picker 示例</a></li>
+	<li><a href='select'>Select 示例</a></li>
+	<li><a href='tabs'>Tabs 示例</a></li>
+	<li><a href='input'>Input 示例</a></li>
 </ul>

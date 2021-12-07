@@ -1,0 +1,85 @@
+.be-select {
+	width: 240px;
+	position: relative;
+	.be-select__content {
+		display: flex;
+		align-items: center;
+		box-sizing: border-box;
+		.be-select__top_arrows {
+			width: 10px;
+			height: 9px;
+			cursor: pointer;
+			border-top: 2px solid #c3c8d6;
+			border-right: 2px solid #c3c8d6;
+			transform: rotate(-45deg);
+			margin-right: 12px;
+			margin-top: 6px;
+		}
+		.be-select__bottom_arrows {
+			width: 10px;
+			height: 9px;
+			cursor: pointer;
+			border-top: 2px solid #c3c8d6;
+			border-right: 2px solid #c3c8d6;
+			transform: rotate(135deg);
+			margin-right: 12px;
+		}
+	}
+	.be-select__option {
+		position: absolute;
+		border: 1px solid #e4e7ed;
+		border-radius: 4px;
+		background-color: #fff;
+		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+		box-sizing: border-box;
+		margin: 8px 0;
+		width: 100%;
+		padding: 6px 0;
+		list-style: none;
+		max-height: 274px;
+		overflow: scroll;
+		li {
+			font-size: 14px;
+			padding: 0 20px;
+			position: relative;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			color: #606266;
+			height: 34px;
+			line-height: 34px;
+			box-sizing: border-box;
+			cursor: pointer;
+		}
+		li:hover {
+			background-color: #f5f7fa;
+		}
+	}
+	// .be-select__option::-webkit-scrollbar {
+	// 	display: none;
+	// }
+	/* 设置滚动条的样式 */
+	.be-select__option::-webkit-scrollbar {
+		width: 8px;
+	}
+	/* 滚动槽 */
+	.be-select__option::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
+		border-radius: 6px;
+	}
+	/* 滚动条滑块 */
+	.be-select__option::-webkit-scrollbar-thumb {
+		border-radius: 6px;
+		background: rgba(0, 0, 0, 0.1);
+		-webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+	}
+}
+.be-select__checked {
+	color: #409eff !important;
+	font-weight: 700;
+}
+
+// padding: 8px;
+
+.be-option {
+}

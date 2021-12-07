@@ -91,14 +91,11 @@
 	}
 	// 取中间值
 	const roundNum = (n1, n2) => Math.round((Number(n1) + Number(n2)) / 2)
-	function changePage(ev) {
-		const { page } = ev.target.dataset
+	function changePage(page) {
+		// 解决点击上一页/下一页 page会为0的问题/age会超出最大值的问题
+		if (page <= 0 || page > totalpages) return
 		// 设置当前选中的元素
 		currentPage = Number(page)
-		// 解决点击上一页 page会为0的问题
-		if (page <= 0) currentPage = 1
-		// 解决点击下一页 page会超出最大值的问题
-		if (page >= totalpages) currentPage = totalpages
 		// 计算页码
 		pageList = computePageList()
 		// 通知父组件 页码修改
@@ -110,10 +107,10 @@
 <div class="be-pagination">
 	{#if type === 'mini'}
 	<div class="be-pagination__container_mini">
-		<div on:click={changePage} data-page={currentPage - 1} class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {currentPage === 1 ? 'bg-gray-300' : ''}">
+		<div on:click={() => changePage(currentPage - 1)} class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {currentPage === 1 ? 'bg-gray-300' : ''}">
 			上一页
 		</div>
-		<div on:click={changePage} data-page={currentPage + 1} class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {currentPage === totalpages ? 'bg-gray-300' : ''}">
+		<div on:click={() => changePage(currentPage + 1)} class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {currentPage === totalpages ? 'bg-gray-300' : ''}">
 			下一页
 		</div>
 	</div>
@@ -125,6 +122,8 @@
 				<p class="text-sm text-gray-700">
 					显示
 					<span class="font-medium">{pageSize}条 </span>
+					当前在
+					<span class="font-medium">第{currentPage}页 </span>
 					共有
 					<span class="font-medium">{total}</span>
 					条结果
@@ -134,19 +133,19 @@
 			</div>
 		{/if}
 		<div class='be-pagination__container'>
-			<div on:click={changePage} data-page={currentPage - 1} class="list {currentPage === 1 ? 'disabled' : ''}">上一页</div>
+			<div on:click={() => changePage(currentPage - 1)} class="list {currentPage === 1 ? 'disabled' : ''}">上一页</div>
 			{#each pageList as item, index}
 				{#if item.type === 'ellipsis'}
-					<div on:click={changePage} data-page="{item.n}" class="list {currentPage === item.n ? 'active' : ''}">
+					<div on:click={() => changePage(item.n)} class="list {currentPage === item.n ? 'active' : ''}">
 						...
 					</div>
 				{:else}
-					<div on:click={changePage} data-page="{item.n}" class="list {currentPage === item.n ? 'active' : ''}">
+					<div on:click={() => changePage(item.n)} class="list {currentPage === item.n ? 'active' : ''}">
 						{item.n}
 					</div>
 				{/if}
 			{/each}
-			<div on:click={changePage} data-page={currentPage + 1} class="list {currentPage === totalpages ? 'disabled' : ''}">
+			<div on:click={() => changePage(currentPage + 1)} class="list {currentPage === totalpages ? 'disabled' : ''}">
 				<span class="sr-only pointer-events-none">下一页</span>
 			</div>
 		</div>
