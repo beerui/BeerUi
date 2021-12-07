@@ -1,5 +1,6 @@
 <script>
 	import { BeSelect } from '$lib';
+	let value = '2'
 	let options = [
 		{
 			value: '1',
@@ -42,6 +43,7 @@
 			label: '北京烤鸭',
 		},
 	];
+	$:console.log(value);
 </script>
 
 <!-- <BeSelect {options} /> -->
@@ -52,7 +54,7 @@
 	<div class="demo-block demo-select ">
 		<div class="source">
 			<div>
-				<BeSelect {options} />
+				<BeSelect {options} bind:value={value}/>
 			</div>
 		</div>
 	</div>
