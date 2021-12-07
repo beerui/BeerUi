@@ -7,4 +7,5 @@
 	<li><a href='pagination'>Pagination 示例</a></li>
 	<li><a href='alert'>Alert 示例</a></li>
 	<li><a href='switch'>Switch 示例</a></li>
+	<li><a href='datePicker'>date-picker 示例</a></li>
 </ul>
