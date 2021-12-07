@@ -10,10 +10,13 @@
   }
   &__item {
     padding: 0 20px;height: 40px;box-sizing: border-box;line-height: 40px;display: inline-block;
-    list-style: none;font-size: 14px;font-weight: 500;color: #303133;position: relative;
+    list-style: none;font-size: 14px;font-weight: 500;color: #303133;position: relative;transition: .3s;
+    &.is-active {color: #409eff;}
   }
   &__nav-wrap:after {
     content: "";position: absolute;left: 0;bottom: 0;width: 100%;height: 2px;background-color: #e4e7ed;z-index: 1;
   }
   &__content {overflow: hidden;position: relative;}
+  .hidden {display: none;}
+  &__content.block {display: block;}
 }
