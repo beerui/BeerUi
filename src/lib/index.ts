@@ -8,4 +8,5 @@ import { default as BeSwitch} from './be-switch/BeSwitch.svelte'
 import { default as BeTabs} from './be-tabs/BeTabs.svelte'
 import { default as BeTabPane} from './be-tabs/BeTabPane.svelte'
 import { default as BeSelect} from './be-select/BeSelect.svelte'
-export { First, BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect };
+import { default as BeInput} from './be-input/BeInput.svelte'
+export { First, BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput };
