@@ -1,4 +1,5 @@
 <script lang="ts">
+  import{ BeInput } from '$lib'
 	import { onMount } from 'svelte';
 	import { sineIn } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
@@ -40,13 +41,17 @@
     {/each}
   </select> -->
 	<div class="be-select__content">
-		<input type="text"	class="be-select__input"	on:click|stopPropagation={() => {	rotatefun();}} bind:value={value}	on:blur={() => {
-			if (!isSelect) {	isSelect = true;	} console.log(isSelect) }} readonly/>
-		{#if isSelect}
-			<div class="be-select__top_arrows" in:arrowsRotate on:click|stopPropagation={() => { rotatefun();}}/>
-		{:else}
-			<div class="be-select__bottom_arrows"	in:arrowsRotate on:click|stopPropagation={() => {	rotatefun();}}/>
-		{/if}
+      <div on:click={() => {	rotatefun();}} class="w-full">
+        <BeInput bind:value	on:blur={() => { if (!isSelect) {	isSelect = true;	} console.log(isSelect) }} readonly>
+          <div slot="suffix">
+            {#if isSelect}
+            <div class="be-select__top_arrows" in:arrowsRotate on:click|stopPropagation={() => { rotatefun();}}/>
+            {:else}
+            <div class="be-select__bottom_arrows" in:arrowsRotate on:click|stopPropagation={() => {	rotatefun();}}/>
+            {/if}
+          </div>
+        </BeInput>
+      </div>
 	</div>
 	<div class="be-select__option_content">
       {#if !isSelect}

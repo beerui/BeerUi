@@ -1,6 +1,6 @@
 <script>
 	import { BeSelect } from '$lib';
-	let value = '2'
+	let value = ''
 	let options = [
 		{
 			value: '1',

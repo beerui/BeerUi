@@ -51,3 +51,23 @@
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   width: 100%;
 }
+
+.be-input__suffix {
+  position: absolute;
+  height: 100%;
+  right: 5px;
+  top: 0;
+  text-align: center;
+  color: #c0c4cc;
+  transition: all .3s;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+.be-input__suffix-inner {
+  pointer-events: all;
+}
+.be-input__icon {
+  width: 25px;
+  line-height: 40px;
+}
