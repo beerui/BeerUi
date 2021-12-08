@@ -30,10 +30,11 @@
   }
   // 在input获得焦点时触发
   function focus(event){
-    dispatch('focus',event)
+    dispatch('focus',this)
   }
   // 仅在输入框失去焦点或用户按下回车时触发
   function change(event){
+    console.log(event)
     dispatch('change', event.target.value);
   }
   // 在 input 值改变时触发

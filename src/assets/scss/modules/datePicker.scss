@@ -1,3 +1,7 @@
+.be-date {
+  position: relative;
+  width: 300px;
+}
 .be-picker-panel {
   color: #606266;
   border: 1px solid #e4e7ed;
@@ -21,6 +25,9 @@
   }
 }
 .be-date-picker {
+  position: absolute;
+  left: 0;
+  top: 50px;
   width: 322px;
   height: 350px;
   &__header {
@@ -84,7 +91,36 @@
       border-radius: 50%;
     }
   }
+  .today span {
+    color: #409eff;
+    font-weight: 700;
+  }
+  .current:not(.disabled) span {
+    color: #fff;
+    background-color: #409eff;
+  }
 }
-.be-popper[x-placement^=bottom] {
-  margin-top: 12px;
+.popper__arrow {
+  width: 8px;
+  height: 8px;
+  border-left: 1px solid #e4e7ed;
+  border-top: 1px solid #e4e7ed;
+  background-color: transparent;
+  transform: rotate(45deg);
+  position: absolute;
+  top: -6px;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
+  left: 35px;
+  // border: 1px solid #e4e7ed;
+  &::after {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 12px;
+    background-color: #fff;
+    height: 12px;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 6px;
+  }
 }

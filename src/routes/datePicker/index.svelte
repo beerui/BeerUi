@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { BeDatePicker } from '$lib';
+  import { BeDatePicker } from '$lib';
 
 </script>
 <div class='page-container'>
-  <BeDatePicker />
+  <BeDatePicker value={"2021-12-10"}/>
 </div>

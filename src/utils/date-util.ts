@@ -1,6 +1,5 @@
 // 获取指定月份天数
 export const getDayCountOfMonth = function(year, month) {
-  console.log('month', month)
   if (month === 3 || month === 5 || month === 8 || month === 10) {
     return 30;
   }
@@ -14,6 +13,12 @@ export const getDayCountOfMonth = function(year, month) {
   }
 
   return 31;
+};
+
+export const getFirstDayOfMonth = function(date) {
+  const temp = new Date(date.getTime());
+  temp.setDate(1);
+  return temp.getDay();
 };
 
 export const getDateTimestamp = function(time) {
