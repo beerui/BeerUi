@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '$utils/date-util.ts'
+import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '$utils/../../utils/date-util'
 const dispatch = createEventDispatcher()
 const weeks = ['日','一','二','三','四','五','六']
 let rows = []
@@ -34,7 +34,7 @@ function initDate(date) {
   getMonthArray()
   // console.log(dateWeekOfMonth)
 }
-  
+
 function getMonthArray() {
   let count = 1
   const offset = dateWeekOfMonth == 0 ? 7 : dateWeekOfMonth

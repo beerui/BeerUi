@@ -2,7 +2,7 @@
 import { createEventDispatcher } from 'svelte';
 import DateTable from '../basic/date-table.svelte'
 import { cubicInOut } from 'svelte/easing';
-import { nextMonth, prevMonth, prevYear, nextYear } from '$utils/date-util.ts'
+import { nextMonth, prevMonth, prevYear, nextYear } from '$utils/../../utils/date-util'
 const dispatch = createEventDispatcher()
 export let value
 export let visible = false
@@ -34,7 +34,7 @@ function zoomIn(node, params) {
     easing: cubicInOut,
     css: t => {
       return `
-        opacity: ${t}; 
+        opacity: ${t};
         transform: scaleY(${t});
         transform-origin: center top;`
     }

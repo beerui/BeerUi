@@ -1,6 +1,5 @@
 {
   "name": "@beerui/beerui",
-  "private": true,
   "version": "1.0.0",
   "description": "A Svelte ui components",
   "main": "index.js",
