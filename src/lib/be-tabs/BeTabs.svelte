@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { TabItem } from '../common.d.ts';
 import { createEventDispatcher } from 'svelte';
-import { classes } from '$lib/utils';
+import { classes } from '../utils';
 
 let _class = null;
 export { _class as class };
@@ -49,3 +49,7 @@ function tabClick(key, i) {
 		<slot></slot>
 	</div>
 </div>
+
+<style lang="scss">
+  @import '../assets/scss/modules/tabs';
+</style>

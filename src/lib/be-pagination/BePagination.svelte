@@ -152,3 +152,7 @@
 	</div>
 	{/if}
 </div>
+
+<style lang="scss">
+  @import '../assets/scss/modules/pagination';
+</style>

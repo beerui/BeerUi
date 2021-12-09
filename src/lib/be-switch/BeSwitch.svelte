@@ -6,11 +6,11 @@
   export let checked:boolean = false
 
   export let disabled:boolean = false
-  
+
   export let width:number = 40
 
   export let activeColor:string
-  
+
   export let inactiveColor:string
 
   let core
@@ -33,12 +33,12 @@
   }
 
   onMount(() => {
-    
+
     if (activeColor || inactiveColor) {
         setBackgroundColor();
       }
   })
-  
+
   $:switchDisabled =  disabled
 
 </script>
@@ -48,3 +48,7 @@
   <!-- <input class="be-switch__input" disabled={switchDisabled} checked={checked} type="checkbox" /> -->
   <span class="be-switch__core" bind:this={core} style="width: {width}px;"></span>
 </div>
+
+<style lang="scss">
+  @import '../assets/scss/modules/switch';
+</style>

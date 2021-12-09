@@ -13,7 +13,7 @@
   // 右侧icon
   export let suffixIcon = ''
   // let showClear = false;
-  
+
   function showClear() {
     return clearable&&!readonly&&!disabled
   }
@@ -22,7 +22,7 @@
   function getSuffixVisible(){
     return $$slots.suffix
   }
-  
+
   let dispatch = createEventDispatcher()
   // 在input失去焦点时触发
   function blur(event){
@@ -59,3 +59,7 @@
   </div>
   {/if}
 </div>
+
+<style lang="scss">
+  @import '../assets/scss/modules/input';
+</style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '$utils/../../utils/date-util'
+import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '../date-util.js'
 const dispatch = createEventDispatcher()
 const weeks = ['日','一','二','三','四','五','六']
 let rows = []

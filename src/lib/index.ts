@@ -1,13 +1,11 @@
-import  '$lib/assets/scss'
-import { default as First } from './first/First.svelte';
-import { default as BeButton } from './be-button/BeButton.svelte';
-import { default as BeAlert} from './be-alert/BeAlert.svelte'
-import { default as BeDialog} from './be-dialog/BeDialog.svelte'
-import { default as BePagination} from './be-pagination/BePagination.svelte'
-import { default as BeSwitch} from './be-switch/BeSwitch.svelte'
-import { default as BeDatePicker} from './be-date-picker/BeDatePicker.svelte'
-import { default as BeTabs} from './be-tabs/BeTabs.svelte'
-import { default as BeTabPane} from './be-tabs/BeTabPane.svelte'
-import { default as BeSelect} from './be-select/BeSelect.svelte'
-import { default as BeInput} from './be-input/BeInput.svelte'
-export { First, BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker };
+import BeButton from './be-button/BeButton.svelte'
+import BeAlert from './be-alert/BeAlert.svelte'
+import BeDialog from './be-dialog/BeDialog.svelte'
+import BePagination from './be-pagination/BePagination.svelte'
+import BeSwitch from './be-switch/BeSwitch.svelte'
+import BeDatePicker from './be-date-picker/BeDatePicker.svelte'
+import BeTabs from './be-tabs/BeTabs.svelte'
+import BeTabPane from './be-tabs/BeTabPane.svelte'
+import BeSelect from './be-select/BeSelect.svelte'
+import BeInput from './be-input/BeInput.svelte'
+export { BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker };

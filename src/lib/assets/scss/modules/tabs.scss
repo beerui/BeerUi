@@ -16,7 +16,4 @@
   &__nav-wrap:after {
     content: "";position: absolute;left: 0;bottom: 0;width: 100%;height: 2px;background-color: #e4e7ed;z-index: 1;
   }
-  &__content {overflow: hidden;position: relative;}
-  .hidden {display: none;}
-  &__content.block {display: block;}
 }

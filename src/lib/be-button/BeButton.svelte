@@ -27,3 +27,7 @@
         <slot></slot>
     </span>
 </button>
+
+<style lang="scss">
+  @import '../assets/scss/modules/button';
+</style>

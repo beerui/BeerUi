@@ -8,3 +8,8 @@ $: isActive = (key === active)
 	<slot></slot>
 </div>
 
+<style lang="scss">
+  .be-tabs__content {overflow: hidden;position: relative;}
+  .hidden {display: none;}
+  .block {display: block;}
+</style>

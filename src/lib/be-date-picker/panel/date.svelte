@@ -2,7 +2,7 @@
 import { createEventDispatcher } from 'svelte';
 import DateTable from '../basic/date-table.svelte'
 import { cubicInOut } from 'svelte/easing';
-import { nextMonth, prevMonth, prevYear, nextYear } from '$utils/../../utils/date-util'
+import { nextMonth, prevMonth, prevYear, nextYear } from '../date-util.js'
 const dispatch = createEventDispatcher()
 export let value
 export let visible = false

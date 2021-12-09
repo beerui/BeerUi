@@ -56,5 +56,5 @@
   </div>
 <!-- </div> -->
 <style lang="scss">
-  // @import '@/assets/scss/module/alert.scss'
+   @import '../assets/scss/modules/alert';
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher, onDestroy } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import BeButton from '$lib/be-button/BeButton.svelte';
+	import BeButton from '../be-button/BeButton.svelte';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
@@ -57,3 +57,7 @@
 		</div>
 	</div>
 {/if}
+
+<style lang="scss">
+  @import '../assets/scss/modules/dialog';
+</style>
