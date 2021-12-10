@@ -8,4 +8,5 @@ import BeTabs from './be-tabs/BeTabs.svelte'
 import BeTabPane from './be-tabs/BeTabPane.svelte'
 import BeSelect from './be-select/BeSelect.svelte'
 import BeInput from './be-input/BeInput.svelte'
-export { BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker };
+import BeClock from './be-clock/BeClock.svelte'
+export { BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker, BeClock };
