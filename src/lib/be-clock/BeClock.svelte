@@ -7,7 +7,13 @@
 	 * - 支持PM AM
 	 */
 	import { onDestroy, onMount } from "svelte";
+	import { classes } from '../utils';
+
+	let _class = null;
+	export { _class as class };
+
 	export let defaultTime:string = ''
+	export let async:boolean = false
 	export let formatTime:string = 'yyyy-MM-dd HH:mm:ss' // 格式化格式
 
 	const timerMatch:string[] = formatTime.match(/\W/g) // 取出分隔符
@@ -46,11 +52,10 @@
 	}
 	let timer = null
 	let timerShow = defaultTime
-
-	onMount(() => timer = setInterval(() => getNowTime(), 1000))
+	if (async) getNowTime()
+	timer = setInterval(() => getNowTime(), 1000)
 	onDestroy(() => timer && clearInterval(timer))
 </script>
-<div class="m-timer">{timerShow}</div>
+<div class={classes('be-timer', _class)}>{timerShow}</div>
 <style>
-    .m-timer {font-size: 24px;color: #def8ff;}
 </style>
