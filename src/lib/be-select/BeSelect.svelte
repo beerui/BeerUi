@@ -1,27 +1,56 @@
 <script lang='ts'>
 	import BeInput from '../be-input/BeInput.svelte';
 	import { sineIn } from 'svelte/easing';
-	import { fly } from 'svelte/transition';
+	import { zoomIn } from '../../utils/common'
+	import { createEventDispatcher } from 'svelte'
 	// export let value = '1';
 	export let options;
 	// 下拉框选中的值
 	export let value;
+	// 是否禁用
+	export let disabled = false;
+
 	// option选中的id
 	let checkedId;
 	// 下拉框
 	let isSelect = true;
+	// 获取输入框
+	let input
 
-	function rotatefun() {
+	let softFocus = false
+
+	let dispatch = createEventDispatcher()
+
+	function rotatefun(e) {
+		if(disabled) {
+			e.preventDefault()
+			return
+		}
 		isSelect = !isSelect;
 	}
-
+	// 鼠标右键点击
+	function handleMousedown(item,e){
+		if(item.disabled){
+			e.preventDefault()
+		}
+	}
 	// 选中下拉选项
 	function selectOption(item) {
-		isSelect = true;
-		value = item.label;
-		checkedId = item.value;
-	}
+		if(!item.disabled){
+			isSelect = true;
+			value = item.label;
+			checkedId = item.value;
+			dispatch('change',item.value)
+		}else{
+			input.getblur()
+		}
 
+	}
+	function handleblur(e){
+		setTimeout(()=>{
+			if (!isSelect) {	isSelect = true;	}
+		},100)
+	}
 	// 箭头动画
 	function arrowsRotate(node, params) {
 		return {
@@ -32,28 +61,20 @@
 			}
 		};
 	}
-
-	// option 下拉动画
-
 </script>
 
 <div class='be-select'>
-	<!-- <select bind:value={value} bind:this={select} class="be-select"  >
-    {#each options as item, index}
-    <option value={item.value}>{item.label}</option>
-    {/each}
-  </select> -->
-	<div class='be-select__content'>
-		<div on:click={() => {	rotatefun();}} class='w-full'>
-			<BeInput bind:value on:blur={() => { if (!isSelect) {	isSelect = true;	} console.log(isSelect) }}
-					 readonly>
+	<!--  disabled?' is-disabled':'' -->
+	<div class={['be-select__content',disabled ? ' is-disabled':''].join('')}>
+		<div on:click={(e) => {	rotatefun(e);}} class='w-full'>
+			<BeInput bind:value bind:this={input} readonly disabled={disabled} on:blur={(e) => { handleblur(e) }}>
 				<div slot='suffix'>
 					{#if isSelect}
 						<div class='be-select__top_arrows' in:arrowsRotate
-							 on:click|stopPropagation={() => { rotatefun();}} />
+							 on:click|stopPropagation={(e) => { rotatefun(e);}} />
 					{:else}
 						<div class='be-select__bottom_arrows' in:arrowsRotate
-							 on:click|stopPropagation={() => {	rotatefun();}} />
+							 on:click|stopPropagation={(e) => {	rotatefun(e);}} />
 					{/if}
 				</div>
 			</BeInput>
@@ -61,10 +82,11 @@
 	</div>
 	<div class='be-select__option_content'>
 		{#if !isSelect}
-			<ul class='be-select__option' transition:fly={{ y: -20, duration: 300,easing:sineIn}}>
+			<ul class='be-select__option' in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 300}}">
 				{#each options as item, index}
-					<li value={item.value} on:click|stopPropagation={() => { selectOption(item);}}
-						class={checkedId === item.value ? 'be-select__checked': ''}>{item.label}</li>
+					<li value={item.value} on:click|preventDefault ={(e) => { selectOption(item,e);}}
+						on:mousedown={(e) => {handleMousedown(item,e)}}
+						class={['be-select-dropdown__item ',checkedId === item.value ? 'be-select__checked': '',item.disabled?'is-disabled':''].join('')}>{item.label}</li>
 				{/each}
 			</ul>
 		{/if}

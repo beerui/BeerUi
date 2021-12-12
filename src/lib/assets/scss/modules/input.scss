@@ -60,9 +60,12 @@
   text-align: center;
   color: #c0c4cc;
   transition: all .3s;
-  pointer-events: none;
+  // pointer-events: none;
   display: flex;
   align-items: center;
+}
+.be-input__suffix.is-disabled{
+  cursor:not-allowed;
 }
 .be-input__suffix-inner {
   pointer-events: all;

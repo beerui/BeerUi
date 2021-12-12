@@ -1,6 +1,11 @@
 <script lang="ts">
     import { BeInput } from '$lib'
+    import { onMount } from 'svelte'
     let value = ''
+    let input
+    onMount(()=>{
+      console.log(input)
+    })
 </script>
 <section class="page-container content">
 	<h2>input 输入框</h2>
@@ -19,7 +24,7 @@
 		<div class="source">
 			<div>
         <div class="demo-input-size">
-            <BeInput bind:value placeholder="请输入内容" />
+            <BeInput bind:value placeholder="请输入内容" bind:this={input} />
             <BeInput bind:value placeholder="请输入内容"  size="medium" />
             <BeInput bind:value placeholder="请输入内容"  size="small" />
             <BeInput bind:value placeholder="请输入内容"  size="mini" />

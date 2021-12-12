@@ -21,29 +21,32 @@
 		{
 			value: '5',
 			label: '北京烤鸭',
-		},
+		}
+	];
+	let options1 = [
 		{
-			value: '6',
+			value: '1',
 			label: '黄金糕',
+			disabled: true
 		},
 		{
-			value: '7',
+			value: '2',
 			label: '双皮奶',
 		},
 		{
-			value: '8',
+			value: '3',
 			label: '蚵仔煎',
 		},
 		{
-			value: '9',
+			value: '4',
 			label: '龙须面',
 		},
 		{
-			value: '10',
+			value: '5',
 			label: '北京烤鸭',
-		},
+		}
 	];
-	$:console.log(value);
+	let value1
 </script>
 
 <!-- <BeSelect {options} /> -->
@@ -55,6 +58,24 @@
 		<div class="source">
 			<div>
 				<BeSelect {options} bind:value={value}/>
+			</div>
+		</div>
+	</div>
+	<h3>有禁用选项</h3>
+	<p>在<code>options</code>数组中设定<code>disabled</code>值为 true，即可禁用该选项</p>
+	<div class="demo-block demo-select ">
+		<div class="source">
+			<div>
+				<BeSelect options = {options1} bind:value={value1}/>
+			</div>
+		</div>
+	</div>
+	<h3>禁用状态</h3>
+	<p>选择器不可用状态</p>
+	<div class="demo-block demo-select ">
+		<div class="source">
+			<div>
+				<BeSelect options = {options1} bind:value={value1} disabled/>
 			</div>
 		</div>
 	</div>

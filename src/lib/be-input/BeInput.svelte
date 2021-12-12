@@ -13,12 +13,12 @@
   // 右侧icon
   export let suffixIcon = ''
   // let showClear = false;
-
+  let input
   function showClear() {
     return clearable&&!readonly&&!disabled
   }
   let suffix;
-  // 判断后置内容是否纯在
+  // 判断后置内容是否存在
   function getSuffixVisible(){
     return $$slots.suffix
   }
@@ -28,26 +28,29 @@
   function blur(event){
     dispatch('blur',event)
   }
+  // 是输入框获取焦点
+  export function getblur(){
+    input.focus()
+  }
   // 在input获得焦点时触发
   function focus(event){
-    dispatch('focus',this)
+    dispatch('focus',event)
   }
   // 仅在输入框失去焦点或用户按下回车时触发
   function change(event){
-    console.log(event)
-    dispatch('change', event.target.value);
+    dispatch('change', event.target.value)
   }
   // 在 input 值改变时触发
-  function input(event){
-    dispatch('input', event.target.value);
+  function oninput(event){
+    dispatch('input', event.target.value)
   }
 </script>
 
 <div class={['be-input', size?' be-input--'+ size:'', disabled?' is-disabled':''].join('')}>
-  <input type="text" placeholder={placeholder} bind:value class="be-input__inner" {readonly} {disabled} on:blur={(e)=>{blur(e)}} on:focus={(e)=>{focus(e)}} on:change={(e)=>{change(e)}} on:input={(e)=>{input(e)}}>
+  <input type="text" placeholder={placeholder} bind:value class="be-input__inner" {readonly} {disabled} on:blur={(e)=>{blur(e)}} on:focus={(e)=>{focus(e)}} on:change={(e)=>{change(e)}} on:input={(e)=>{oninput(e)}} bind:this={input}>
   {#if getSuffixVisible()}
-  <div class="be-input__suffix">
-    <div class="be-input__suffix-inner">
+  <span class={['be-input__suffix',disabled ? ' is-disabled':''].join('')}>
+    <span class="be-input__suffix-inner ">
       <template>
         <slot name="suffix"></slot>
         <!-- suffixIcon -->
@@ -55,8 +58,8 @@
         <i class={['be-input__icon ', suffixIcon].join('')}></i>
         {/if}
       </template>
-    </div>
-  </div>
+    </span>
+  </span>
   {/if}
 </div>
 
