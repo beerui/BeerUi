@@ -1,0 +1,25 @@
+.be-scrollbar{
+  overflow: hidden;
+}
+.be-scrollbar-content{
+  overflow: auto;
+  transition:  overflow 1.5s;
+}
+  /* 滚动条整体部分 */
+.be-scrollbar-content::-webkit-scrollbar{
+    width: 8px; /* 纵向滚动条宽度 */
+    height: 8px;/* 横向滚动条高度 */
+    // background-color: #F5F5F5; /* 滚动条整体背景，一般被覆盖着 */
+}
+/* 滚动条里面的滑块 */
+.be-scrollbar-content::-webkit-scrollbar-thumb{
+    border-radius: 6px; /* 滚动条滑块圆角 */
+    -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3); /* 滚动条滑块阴影 */
+    background-color:  rgba(0, 0, 0, 0.1);; /* 滚动条滑块颜色 */
+}
+/* 滚动条的轨道（里面装有Thumb） */
+.be-scrollbar-content::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); /* 滚动条轨道阴影 */
+    border-radius: 6px; /* 滚动条轨道圆角 */
+    // background-color: #F5F5F5; /* 滚动条轨道背景 */
+}

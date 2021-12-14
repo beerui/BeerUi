@@ -12,5 +12,6 @@
 	<li><a href='tabs'>Tabs 示例</a></li>
 	<li><a href='input'>Input 示例</a></li>
 	<li><a href='clock'>Clock 示例</a></li>
+	<li><a href='scrollbar'>Scrollbar 示例</a></li>
 	<li><a href='drag'>Drag 示例</a></li>
 </ul>
