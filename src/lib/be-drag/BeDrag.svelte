@@ -1,55 +1,72 @@
 <script lang="ts">
-	import { quintOut } from 'svelte/easing';
-	import { crossfade } from 'svelte/transition';
-	import { flip } from 'svelte/animate';
 	import type DragItem from '$lib/common.d.ts';
 
 	export let list: DragItem[]
 
-	const [send, receive] = crossfade({
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
+	let status = false
+	let draggedIndex = null
+	let dragEnterIndex = null
+	let pIndex;
+	let _list;
 
-			return {
-				duration: 600,
-				easing: quintOut,
-				css: t => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
 	let dragstartHandle = (evt) => {
+		if (status) return
 		console.log('dragstartHandle', evt);
-	}
-	let dragoverHandle = (evt) => {
-		console.log('dragoverHandle ', evt);
+		evt.dataTransfer.dropEffect = "copy";
+		draggedIndex = evt.target.dataset.index
+		_list = JSON.parse(JSON.stringify(list))
+		status = true
+		evt.stopPropagation();
 	}
 	let dragenterHandle = (evt) => {
-		console.log('dragenterHandle', evt);
+		const { index, type } = evt.target.dataset
+		if (index) {
+			dragEnterIndex = index
+			// TODO: 需要新增一个 key为999999的元素来解决延迟问题
+			_list = JSON.parse(JSON.stringify(list))
+			const oldIndex = _list.splice(draggedIndex, 1)
+			_list.splice(dragEnterIndex, 0, ...oldIndex)
+		}
 	}
-	let dragHandle = (evt) => {
-		console.log('dragHandle', evt);
+	let dragendHandle = (evt) => {
+		console.log(`draggedIndex ${draggedIndex} dragEnterIndex ${dragEnterIndex}`);
+		list = _list
+		status = false
+		dragEnterIndex = null
+		pIndex = null
 	};
 
 </script>
 
 <div class='be-drag'>
-	{#each list as item (item.key)}
+	{#each list as item , index (item.key)}
 		<div
-			on:drag={dragHandle}
-			on:dragstart={dragstartHandle}
-			on:dragover={dragoverHandle}
-			on:dragenter={dragenterHandle}
+			class='be-drag-placeholder'
+			on:dragenter={() => pIndex = index}
+			class:overed={pIndex === index}
+			data-index={index}
+		></div>
+		<div
 			class='be-drag-list'
-			in:receive="{{key: item.key}}"
-			out:send="{{key: item.key}}"
-			animate:flip
+			class:visible={String(index) === dragEnterIndex}
+			on:dragstart={dragstartHandle}
+			on:dragover={dragenterHandle}
+			on:dragend={dragendHandle}
+			draggable='true'
+			data-index={index}
 		>
-			<span>{item.label}</span>
+			<div class='be-drag-item' data-index={index}>
+				<span>{item.label}</span>
+			</div>
 		</div>
+		{#if index === list.length-1}
+			<div
+				class='be-drag-placeholder'
+				on:dragenter={() => pIndex = index+1}
+				class:overed={pIndex === index+1}
+				data-index={index+1}
+			></div>
+		{/if}
 	{/each}
 </div>
 
@@ -57,8 +74,13 @@
 .be-drag {
   width: 300px;margin: 50px auto;
   &-list {
-	box-shadow: 0 0 3px rgba(31, 45, 61, .3);margin-bottom: 10px;padding: 10px 15px;cursor: move;transition: .3s;
-	&:hover {padding-left: 25px;}
+	cursor: move;transition: .3s;
+	&.visible {}
+  }
+  &-item {box-shadow: 0 0 3px rgba(31, 45, 61, .3);padding: 10px 15px;}
+  &-placeholder {
+	padding: 5px 15px;transition: .3s;border: 1px dashed transparent;
+  	&.overed {padding: 20px 15px;border: 1px dashed #c2c2c2;}
   }
 }
 </style>
