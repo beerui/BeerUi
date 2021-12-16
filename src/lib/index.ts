@@ -11,4 +11,5 @@ import BeInput from './be-input/BeInput.svelte'
 import BeClock from './be-clock/BeClock.svelte'
 import BeScrollbar from './be-scrollbar/BeScrollbar.svelte';
 import BeDrag from './be-drag/BeDrag.svelte'
-export { BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker, BeClock, BeDrag,BeScrollbar };
+import BeProgress from './be-progress/BeProgress.svelte'
+export { BeButton, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker, BeClock, BeDrag, BeScrollbar, BeProgress };
