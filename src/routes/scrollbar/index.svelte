@@ -13,7 +13,7 @@
     <BeScrollbar>
       <ul class="scrollbar-container">
         {#each item as item,i }
-        <div>这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的</div>
+        <div>这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的这是测试scrollbar的</div>
         {/each}
         </ul>
     </BeScrollbar>
@@ -23,6 +23,6 @@
 
 <style lang="scss">
   .scrollbar-container{
-    height: 200px;
+    height: 500px;
   }
 </style>
