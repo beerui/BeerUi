@@ -17,3 +17,93 @@ export function stripClassWhitespace(classString) {
 export function classes(...args) {
 	return args.filter(cls => !!cls).join(' ');
 }
+
+/**
+ * 深拷贝
+ * @param { Object } target 原对象
+ * @param { Map } map 已克隆的容器
+ * @returns { Object }
+ */
+export function deepClone(target, map = new Map()) {
+	// 检测数据类型
+	if (typeof target === 'object' && target !== null) {
+		let cache = map.get(target) // 判断数据是否克隆过 解决循环引用问题
+		if (cache) return cache
+		let isArray = Array.isArray(target) // 判断目标数据类型
+		const result = isArray ? [] : {}
+		map.set(target, result) // 存入容器
+		if (isArray) {
+			// 数组
+			target.forEach((item, index) => {
+				result[index] = deepClone(item, map)
+			})
+		} else {
+			// 对象 获取所有的键名，遍历
+			Object.keys(target).forEach(key => {
+				result[key] = deepClone(target[key], map)
+			})
+		}
+		return result
+	} else {
+		return target
+	}
+}
+
+/**
+ * 字符串截断
+ * @param { String } str
+ * @param { Number } size
+ * @returns {String}
+ */
+export function truncate(str, size) {
+	return str.slice(0, size) + '...'
+}
+
+/**
+ * 展开多维数组
+ * @param { Array } arr
+ * @returns {Array}
+ */
+export function flatten(arr) {
+	let result = [...arr]
+	while (result.some(item => Array.isArray(item))) {
+		result = [].concat(...result)
+	}
+	return result
+}
+
+/**
+ * 数组分块
+ * @param { Array } arr 原数组
+ * @param { Number } size 分几块
+ * @returns {Array}
+ */
+export function chunk(arr, size = 1) {
+	let result = []
+	let tmp = []
+
+	arr.forEach(item => {
+		if (tmp.length === 0) {
+			result.push(tmp)
+		}
+
+		tmp.push(item)
+
+		if (tmp.length === size) {
+			tmp = []
+		}
+	})
+	return result
+}
+
+/**
+ * 数组差集
+ * @param { Array } arr1
+ * @param { Array } arr2
+ * @returns { Array }
+ */
+export function difference(arr1, arr2 = []) {
+	if (arr1.length === 0) return []
+	if (arr2.length === 0) return arr1.slice()
+	return arr1.filter(item => !arr2.includes(item))
+}

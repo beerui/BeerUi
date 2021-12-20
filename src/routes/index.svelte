@@ -15,4 +15,5 @@
 	<li><a href='scrollbar'>Scrollbar 示例</a></li>
 	<li><a href='drag'>Drag 示例</a></li>
 	<li><a href='upload'>Upload 示例</a></li>
+	<li><a href='notification'>Notification 示例</a></li>
 </ul>
