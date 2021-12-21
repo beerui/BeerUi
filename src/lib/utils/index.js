@@ -118,7 +118,7 @@ export function mergeObject(...objs) {
 
 	objs.forEach(obj => {
 		Object.keys(obj).forEach(key => {
-			if (result.hasOwnProperty(key)) {
+			if (Object.prototype.hasOwnProperty.call(result, key)) {
 				result[key] = [].concat(result[key], obj[key])
 			} else {
 				result[key] = obj[key]
@@ -173,7 +173,7 @@ eventBus.emit = function(type, data) {
 
 eventBus.off = function(eventName) {
 	if (eventName) {
-		delete this.callbacks[eventName]
+		this.callbacks && delete this.callbacks[eventName]
 	} else {
 		this.callbacks = {}
 	}
@@ -210,10 +210,10 @@ BeerPS.unsubscribe = function(flag) {
 		this.callbacks = {}
 	} else if (typeof flag === 'string') {
 		if (flag.indexOf('token_') === 0) {
-			let callbackObj = Object.values(this.callbacks).find(obj => obj.hasOwnProperty(flag))
+			let callbackObj = Object.values(this.callbacks).find(obj => Object.prototype.hasOwnProperty.call(obj, flag))
 			if (callbackObj) delete callbackObj[flag]
 		} else {
-			delete this.callbacks[flag]
+			this.callbacks && delete this.callbacks[flag]
 		}
 
 	}
