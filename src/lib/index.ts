@@ -13,6 +13,7 @@ import BeScrollbar from './be-scrollbar/BeScrollbar.svelte';
 import BeDrag from './be-drag/BeDrag.svelte'
 import BeProgress from './be-progress/BeProgress.svelte'
 import BeUpload from './be-upload/BeUpload.svelte'
+import BeNotification from './be-notification/BeNotification.svelte'
 export {
 	BeButton,
 	BeAlert,
@@ -28,5 +29,6 @@ export {
 	BeDrag,
 	BeScrollbar,
 	BeProgress,
-	BeUpload
+	BeUpload,
+	BeNotification
 }
