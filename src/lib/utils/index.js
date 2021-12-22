@@ -107,3 +107,114 @@ export function difference(arr1, arr2 = []) {
 	if (arr2.length === 0) return arr1.slice()
 	return arr1.filter(item => !arr2.includes(item))
 }
+
+/**
+ * 合并两个对象
+ * @param objs
+ * @returns {{}}
+ */
+export function mergeObject(...objs) {
+	const result = {}
+
+	objs.forEach(obj => {
+		Object.keys(obj).forEach(key => {
+			if (Object.prototype.hasOwnProperty.call(result, key)) {
+				result[key] = [].concat(result[key], obj[key])
+			} else {
+				result[key] = obj[key]
+			}
+		})
+	})
+	return result
+}
+
+/**
+ * 事件委托
+ * @param { any } el 元素标识
+ * @param { String } type
+ * @param { Function } fn
+ * @param { String } selector tag标签
+ */
+export function addEventListener(el, type, fn, selector) {
+	if (typeof el === 'string') {
+		el = document.querySelector(el)
+	}
+	if (!selector) {
+		el.addEventListener(type, fn)
+	} else {
+		el.addEventListener(type, function(e) {
+			const target = e.target
+			if (target.matches(selector)) {
+				fn.call(target, e)
+			}
+		})
+	}
+}
+
+export const eventBus = {
+	callbacks: {}
+}
+
+eventBus.on = function(type, callback) {
+	if (this.callbacks[type]) {
+		this.callbacks[type].push(callback)
+	} else {
+		this.callbacks[type] = [callback]
+	}
+}
+
+eventBus.emit = function(type, data) {
+	if (this.callbacks[type] && this.callbacks[type].length > 0) {
+		this.callbacks[type].forEach(callback => {
+			callback(data)
+		})
+	}
+}
+
+eventBus.off = function(eventName) {
+	if (eventName) {
+		this.callbacks && delete this.callbacks[eventName]
+	} else {
+		this.callbacks = {}
+	}
+}
+
+export const BeerPS = {
+	id: 1,
+	callbacks: {}
+}
+// 订阅
+BeerPS.subscribe = function(channel, callback) {
+	let token = 'token_' + this.id++
+
+	if (this.callbacks[channel]) {
+		this.callbacks[channel][token] = callback
+	} else {
+		this.callbacks[channel] = {
+			[token]: callback
+		}
+	}
+	return token
+}
+// 发布
+BeerPS.publish = function(channel, data) {
+	if (this.callbacks[channel]) {
+		Object.values(this.callbacks[channel]).forEach(callback => {
+			callback(data)
+		})
+	}
+}
+// 清空
+BeerPS.unsubscribe = function(flag) {
+	if (flag === undefined) {
+		this.callbacks = {}
+	} else if (typeof flag === 'string') {
+		if (flag.indexOf('token_') === 0) {
+			let callbackObj = Object.values(this.callbacks).find(obj => Object.prototype.hasOwnProperty.call(obj, flag))
+			if (callbackObj) delete callbackObj[flag]
+		} else {
+			this.callbacks && delete this.callbacks[flag]
+		}
+
+	}
+}
