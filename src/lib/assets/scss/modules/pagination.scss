@@ -19,11 +19,22 @@
     display: flex;margin: 0;justify-content: space-between;
     .active {color: #409eff;cursor: default;}
     .list {
-      padding: 0 4px;vertical-align: top;display: inline-block;font-size: 13px;min-width: 35.5px;height: 28px;
-      line-height: 28px;cursor: pointer;box-sizing: border-box;text-align: center;margin: 0;
+      margin: 0 4px;vertical-align: top;display: inline-block;font-size: 13px;min-width: 35.5px;height: 28px;
+      line-height: 28px;cursor: pointer;box-sizing: border-box;text-align: center;
     }
     .disabled {color: #b7b7b7;cursor: not-allowed;}
     .more {line-height: 28px;color: #303133;}
     &_mini {}
+  }
+}
+.be-pagination-card {
+  .be-pagination__container {
+    .list {
+      background: #f4f4f5;color: #606266;border-radius: 2px;min-width: 30px;
+      &.active {background: #1492FF;cursor: default;color: #fff;}
+      &:hover {
+        color: #1492FF;
+      }
+    }
   }
 }

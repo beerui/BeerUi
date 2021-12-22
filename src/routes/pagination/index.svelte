@@ -2,6 +2,14 @@
 	import { BePagination } from '$lib';
 
 	const query = { limit: 10, name: "", page: 1 }
+	const options = {
+		card: true,
+		icon: {
+			width: 12,
+			height: 12,
+			color: '#1492FF'
+		}
+	}
 	let list = []
 	let total = 0 // 总条数
 	const feedBackList = async () => {
@@ -49,7 +57,7 @@
 			</tbody>
 		</table>
 	</div>
-	<BePagination currentPage={query.page} pageSize={query.limit} {total} async layouts="prev, pager, next" on:changePage={changePage} />
+	<BePagination currentPage={query.page} pageSize={query.limit} {total} async layouts="prev, pager, next" on:changePage={changePage} {options} />
 </div>
 
 <code>
