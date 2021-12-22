@@ -4,6 +4,7 @@
 	const query = { limit: 10, name: "", page: 1 }
 	const options = {
 		card: true,
+		showNumber: 3,
 		icon: {
 			width: 12,
 			height: 12,
@@ -57,7 +58,7 @@
 			</tbody>
 		</table>
 	</div>
-	<BePagination currentPage={query.page} pageSize={query.limit} {total} async layouts="prev, pager, next" on:changePage={changePage} {options} />
+	<BePagination currentPage=1 pageSize={query.limit} {total} async layouts="prev, pager, next" on:changePage={changePage} {options} />
 </div>
 
 <code>

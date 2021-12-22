@@ -15,18 +15,22 @@
 	 * III. 1  ....5 6 7 8 9 10 11 12
 	 */
 	import { beforeUpdate, createEventDispatcher, onMount } from 'svelte'
+	import { filterMidArray } from '$lib/utils';
 	const dispatch = createEventDispatcher()
 
 	export let total = 0 // 总条数
 	export let type = 'normal' // 类别 mini/normal
 	export let currentPage = 1 // 当前页
 	export let pageSize = 15 // 显示条数
-	export let pagerCount = 8 // 显示多少个
 	export let layouts = 'prev, pager, next' // 最大页码按钮数
 	export let async = false // 后续是否更新
+
+	console.log('currentPage', typeof currentPage);
 	// 其它设置
 	export let options = {
 		card: false, // 是否是块状
+		showNumber: 8, // 是否是块状
+		scroll: true, // 是否需要自动滚动到头部
 		icon: {} // 上一页 下一页的大小和颜色
 	}
 
@@ -39,6 +43,7 @@
 		color: '#323232'
 	}
 	let isCard = options.card
+	let pagerCount = options.showNumber
 	if (options.icon) {
 		icon = Object.assign(icon, options.icon)
 	}
@@ -57,6 +62,8 @@
 		// 页码数小于等于 pagerCount 时
 		if (totalpages <= pagerCount) {
 			pages = normalPageList()
+		} else if (pagerCount <= 5) {
+			pages = smallPageList()
 		} else {
 			// 页码数大于 pagerCount 时 会出现 ...
 			pages = outPageList()
@@ -80,7 +87,7 @@
 		// 前方 超过2位出现 ...
 		if (i > 2) pages.push({ n: roundNum(1, i), type: 'ellipsis' })
 		// 循环 5 条数据
-		const len = i + 5
+		const len = i + pagerCount
 		for (i; i < len; i++) {
 			if (i < totalpages) {
 				pages.push({ n: i, type: 'normal' })
@@ -103,6 +110,19 @@
 		}
 		return pages
 	}
+	// 数量少于5时
+	const smallPageList = () => {
+		const pages = []
+		let i = 1
+		while (i <= totalpages) {
+			pages.push(i)
+			i++
+		}
+		const result = []
+		const sameResult = filterMidArray(pages, currentPage, pagerCount)
+		sameResult.forEach(el => result.push({ n: el, type: 'normal' }))
+		return result
+	}
 	// 取中间值
 	const roundNum = (n1, n2) => Math.round((Number(n1) + Number(n2)) / 2)
 	function changePage(page) {
@@ -114,17 +134,19 @@
 		pageList = computePageList()
 		// 通知父组件 页码修改
 		dispatch('changePage', currentPage)
-		document.body.scrollIntoView({ behavior: "smooth" });
+		if (options.scroll) {
+			document.body.scrollIntoView({ behavior: "smooth" });
+		}
 	}
 
 </script>
 <div class="{isCard ? 'be-pagination be-pagination-card' : 'be-pagination'}" >
 	{#if type === 'mini'}
 	<div class="be-pagination__container_mini">
-		<div on:click={() => changePage(currentPage - 1)} class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {currentPage === 1 ? 'bg-gray-300' : ''}">
+		<div on:click={() => changePage(+currentPage - 1)} class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {+currentPage === 1 ? 'bg-gray-300' : ''}">
 			上一页
 		</div>
-		<div on:click={() => changePage(currentPage + 1)} class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {currentPage === totalpages ? 'bg-gray-300' : ''}">
+		<div on:click={() => changePage(+currentPage + 1)} class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {+currentPage === totalpages ? 'bg-gray-300' : ''}">
 			下一页
 		</div>
 	</div>
@@ -137,7 +159,7 @@
 					显示
 					<span class="font-medium">{pageSize}条 </span>
 					当前在
-					<span class="font-medium">第{currentPage}页 </span>
+					<span class="font-medium">第{+currentPage}页 </span>
 					共有
 					<span class="font-medium">{total}</span>
 					条结果
@@ -147,7 +169,7 @@
 			</div>
 		{/if}
 		<div class='be-pagination__container'>
-			<div on:click={() => changePage(currentPage - 1)} class="list" class:disabled={currentPage === 1}>
+			<div on:click={() => changePage(+currentPage - 1)} class="list" class:disabled={+currentPage === 1}>
 				<div class="sr-only pointer-events-none svg-icon">
 					<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
 						<path fill={icon.color} d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path>
@@ -156,16 +178,16 @@
 			</div>
 			{#each pageList as item, index}
 				{#if item.type === 'ellipsis'}
-					<div on:click={() => changePage(item.n)} class="list" class:active={currentPage === item.n}>
+					<div on:click={() => changePage(item.n)} class="list" class:active={+currentPage === item.n}>
 						...
 					</div>
 				{:else}
-					<div on:click={() => changePage(item.n)} class="list" class:active={currentPage === item.n}>
+					<div on:click={() => changePage(item.n)} class="list" class:active={+currentPage === item.n}>
 						{item.n}
 					</div>
 				{/if}
 			{/each}
-			<div on:click={() => changePage(currentPage + 1)} class="list" class:disabled={currentPage === totalpages}>
+			<div on:click={() => changePage(+currentPage + 1)} class="list" class:disabled={+currentPage === totalpages}>
 				<div class="sr-only pointer-events-none svg-icon">
 					<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
 						<path fill={icon.color} d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path>

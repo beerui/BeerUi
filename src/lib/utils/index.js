@@ -218,3 +218,41 @@ BeerPS.unsubscribe = function(flag) {
 
 	}
 }
+
+/**
+ * 过滤数组
+ * 1、固定数目
+ * 2、当前位置在中间
+ * 3、返回过滤后的数组 不能超出或小于 list
+ * @param list 需要过滤的数组
+ * @param current 当前所在位置
+ * @param count 需要返回的位数
+ * @return { Array }
+ */
+export const filterMidArray = (list, current, count) => {
+	let result = [] // 存储结果
+	const preResult = [] // 对比前的数组
+	const total = list.length // 总页数
+	current = Number(current)
+	const mid = Math.floor(count/2) // 中位数
+	for (let i = current-mid;i < current-mid + count; i++) {
+		preResult.push(i)
+	}
+	// 同传入的数组对比 取相同项
+	result = preResult.filter(el => list.includes(el))
+	let len = result.length
+	const isInHead = preResult[preResult.length-1] > total // 是否需要倒过来补位
+	// 补位
+	while (len < count) {
+
+		if (isInHead) {
+			const num = result[0] - (count - len)
+			result.unshift(num)
+			len++
+		} else {
+			len++
+			result.push(len)
+		}
+	}
+	return result
+}
