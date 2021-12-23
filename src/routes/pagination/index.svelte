@@ -1,10 +1,10 @@
 <script>
 	import { BePagination } from '$lib';
 
-	const query = { limit: 10, name: "", page: 1 }
+	const query = { limit: 11, name: "", page: 1 }
 	const options = {
 		card: true,
-		showNumber: 3,
+		// showNumber: 3,
 		icon: {
 			width: 12,
 			height: 12,
@@ -12,9 +12,9 @@
 		}
 	}
 	let list = []
-	let total = 0 // 总条数
+	let total = 11 // 总条数
 	const feedBackList = async () => {
-		total = 100
+		total = 11
 		const name = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 		const defaultItem = {
 			name: name[0],

@@ -42,8 +42,8 @@
 		height: 12,
 		color: '#323232'
 	}
-	let isCard = options.card
-	let pagerCount = options.showNumber
+	let isCard = options.card || false
+	let pagerCount = options.showNumber || 8
 	if (options.icon) {
 		icon = Object.assign(icon, options.icon)
 	}
