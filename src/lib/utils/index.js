@@ -263,7 +263,7 @@ export const filterMidArray = (list, current, count) => {
  */
 export const previewImages = (src, list) => {
 	let container, body = document.body
-	const imgObj = {
+	const previewImage = {
 		index: 0,
 		length: 0,
 		node: null,
@@ -288,6 +288,13 @@ export const previewImages = (src, list) => {
 			if (this.index < 0) this.index = this.length
 			if (this.index > this.length) this.index = 0
 			this.node.src = this.list[this.index]
+		},
+		close() {
+			body.removeChild(document.querySelector('.be-preview'))
+			this.index = 0
+			this.length = 0
+			this.node = null
+			this.list = []
 		}
 	}
 	if (document.querySelector('.be-preview')) {
@@ -311,10 +318,12 @@ export const previewImages = (src, list) => {
 	const prevDom = container.querySelector('.be-preview__prev')
 	const nextDom = container.querySelector('.be-preview__next')
 
-	maskDom.addEventListener("click", () => body.removeChild(document.querySelector('.be-preview')))
-	closeDom.addEventListener("click", () => body.removeChild(document.querySelector('.be-preview')))
-	prevDom.addEventListener("click", () => imgObj.changeImage('prev'))
-	nextDom.addEventListener("click", () => imgObj.changeImage('next'))
-	imgObj.init(imgDom, list, src)
+	maskDom.addEventListener("click", () => previewImage.close(body))
+	closeDom.addEventListener("click", () => previewImage.close(body))
+	prevDom.addEventListener("click", () => previewImage.changeImage('prev'))
+	nextDom.addEventListener("click", () => previewImage.changeImage('next'))
+	previewImage.init(imgDom, list, src)
+	console.log(previewImage)
 	body.appendChild(container)
 }
+
