@@ -74,6 +74,9 @@
     text-align: center;
     cursor: pointer;
     position: relative;
+    &:hover {
+      color: #409eff;
+    }
     div {
       height: 30px;
       padding: 3px 0;

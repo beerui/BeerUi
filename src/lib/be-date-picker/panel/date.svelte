@@ -43,7 +43,7 @@ function zoomIn(node, params) {
 </script>
 
 {#if visible}
-<div class="be-picker-panel be-date-picker be-popper" in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 300}}">
+<div class="be-picker-panel be-date-picker be-popper" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__body-wrapper">
     <div class="be-picker-panel__body">
       <div class="be-date-picker__header">
@@ -55,7 +55,7 @@ function zoomIn(node, params) {
           <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click|stopPropagation={handleNextMonth}>下月-</span>
       </div>
       <div class="be-picker-panel__content">
-        <DateTable value={value} date={date} on:pick={confirmPick}/>
+        <DateTable date={date} on:pick={confirmPick}/>
       </div>
     </div>
   </div>

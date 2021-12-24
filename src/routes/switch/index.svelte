@@ -5,8 +5,10 @@
 	let width = 40
 	let activeColor = ''
 	let inactiveColor = ''
-	$: {
-		console.log(switchValue)
+	function change(val) {
+		setTimeout(() => {
+			switchValue = true
+		}, 3000);
 	}
 </script>
 
@@ -18,7 +20,7 @@
 		<div class="demo-block demo-alert">
 			<div class="source">
 					<!-- disabled={disabled} width={width} activeColor={activeColor} inactiveColor={inactiveColor} -->
-					<BeSwitch bind:checked={switchValue} />
+					<BeSwitch bind:checked={switchValue} on:change={change} activeColor="#fff000"/>
 			</div>
 		</div>
 		<h3>禁用状态</h3>

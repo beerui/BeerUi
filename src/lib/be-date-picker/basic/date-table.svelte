@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+import { createEventDispatcher } from 'svelte';
 import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '../date-util.js'
 const dispatch = createEventDispatcher()
 const weeks = ['日','一','二','三','四','五','六']
 let rows = []
 
 export let date
-export let value
-
+let value
 let dateCountOfMonth
 let dateCountOfLastMonth
 let dateWeekOfMonth
@@ -18,7 +17,7 @@ const now = getDateTimestamp(new Date());
 $: initDate(date)
 
 function initDate(date) {
-
+  value = date
   rows = [[],[],[],[],[],[]]
   year = date.getFullYear()
   month = date.getMonth()
@@ -87,10 +86,9 @@ function selectDay(e, cell, index) {
   dispatch('pick', `${year}-${dateMonth + 1}-${cell.text}`)
 }
 function cellMatchesDate(cell) {
-  const time = new Date(value);
-  return year === time.getFullYear() &&
-    month === time.getMonth() &&
-    Number(cell.text) === time.getDate();
+  return year === value.getFullYear() &&
+    month === value.getMonth() &&
+    Number(cell.text) === value.getDate();
 }
 function getCellClasses(cell) {
   let classes = [];
