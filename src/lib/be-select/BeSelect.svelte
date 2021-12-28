@@ -71,7 +71,7 @@
 				return `
         opacity: ${t};
         transform: scaleY(${t});
-        transform-origin: center top;`
+        transform-origin: center ${position === 'top' ?'bottom':'top'};`
 			}
 		};
 	}
