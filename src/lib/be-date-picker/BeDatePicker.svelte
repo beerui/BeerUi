@@ -4,14 +4,14 @@
 
 	export let value;
 	let visible;
-	let input;
-
+ 	let input
 	function confirmPick(e) {
 		value = e.detail;
+		visible = false
 	}
 
 	function handleShowDatePopper(e) {
-		console.log(e);
+		console.log(e, input);
 		visible = true;
 	}
 
@@ -20,18 +20,18 @@
 	}
 
 	function handleCloseDatePopper(e) {
-		if (!visible) return;
+		console.log(e.target, input)
+		// if (!visible) return;
 		visible = false;
 	}
 </script>
 <svelte:body on:click={handleCloseDatePopper} />
-<div class='be-date'>
-	<div on:click|stopPropagation={handleShowDatePopper}>
-		<BeInput readonly on:change={handleChange} bind:value={value} />
-	</div>
+<div class='be-date' on:click|stopPropagation={()=>{}}>
+	<!-- <div on:click|stopPropagation={handleShowDatePopper}> -->
+		<BeInput on:change={handleChange} bind:value={value} on:focus={handleShowDatePopper} bind:this={input}/>
+	<!-- </div> -->
 	<Date value={value} bind:visible={visible} on:pick={confirmPick} />
 </div>
-
 <style lang="scss" global>
   @import '../assets/scss/modules/datePicker';
 </style>

@@ -1,0 +1,5 @@
+.be-drag {
+  width: 300px;margin: 50px auto;touch-action: none;user-select: none;list-style: none;
+  &-item {padding: 10px 15px;border: 1px solid #c1c1c1;}
+  &-list {cursor: move;transition: .3s;margin-bottom: 10px;}
+}

@@ -1,7 +1,6 @@
 <script lang='ts'>
 	import BeInput from '../be-input/BeInput.svelte';
-	import { sineIn } from 'svelte/easing';
-	import { zoomIn } from '../../utils/common'
+	import { cubicInOut, sineIn } from 'svelte/easing';
 	import { createEventDispatcher } from 'svelte'
 	// export let value = '1';
 	export let options;
@@ -24,7 +23,7 @@
 
 	let dispatch = createEventDispatcher()
 
-	function rotatefun(e) {
+	function rotateHandler(e) {
 		if(disabled) {
 			e.preventDefault()
 			return
@@ -49,7 +48,7 @@
 		}
 
 	}
-	function handleblur(e){
+	function blurHandler(e){
 		setTimeout(()=>{
 			if (!isSelect) {	isSelect = true;	}
 		},100)
@@ -64,20 +63,32 @@
 			}
 		};
 	}
+	function zoomIn(node, params) {
+		return {
+			duration:params.duration,
+			easing: cubicInOut,
+			css: t => {
+				return `
+        opacity: ${t};
+        transform: scaleY(${t});
+        transform-origin: center top;`
+			}
+		};
+	}
 </script>
 
 <div class='be-select'>
 	<!--  disabled?' is-disabled':'' -->
 	<div class={['be-select__content',disabled ? ' is-disabled':''].join('')}>
-		<div on:click={(e) => {	rotatefun(e);}} class='w-full'>
-			<BeInput bind:value bind:this={input} readonly disabled={disabled} on:blur={(e) => { handleblur(e) }}>
+		<div on:click={(e) => {	rotateHandler(e);}} class='w-full'>
+			<BeInput bind:value bind:this={input} readonly disabled={disabled} on:blur={(e) => { blurHandler(e) }}>
 				<div slot='suffix'>
 					{#if isSelect}
-						<div class='be-select__top_arrows ' in:arrowsRotate
-							 on:click|stopPropagation={(e) => { rotatefun(e);}} />
+						<div class='be-select__top_arrows' in:arrowsRotate
+							 on:click|stopPropagation={(e) => { rotateHandler(e);}} />
 					{:else}
 						<div class='be-select__bottom_arrows' in:arrowsRotate
-							 on:click|stopPropagation={(e) => {	rotatefun(e);}} />
+							 on:click|stopPropagation={(e) => {	rotateHandler(e);}} />
 					{/if}
 				</div>
 			</BeInput>

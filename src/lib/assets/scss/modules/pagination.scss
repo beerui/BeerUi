@@ -1,29 +1,29 @@
 .be-pagination {
   white-space: nowrap;padding: 2px 5px;color: #303133;font-weight: 700;
-  .button {
-    border: none;padding: 0 6px;background: transparent;
-    display: inline-block;font-size: 13px;min-width: 35.5px;height: 28px;line-height: 28px;vertical-align: top;box-sizing: border-box;
-    &:disabled {color: #c0c4cc;background-color: #fff;cursor: not-allowed;}
-  }
-  .btn-next, .btn-prev {
-    background-size: 16px;background: #fff no-repeat 50% 50%;cursor: pointer;margin: 0;color: #303133;
-  }
-  .btn-prev {padding-right: 12px;}
-  .btn-next {padding-left: 12px;}
 
-  &__analyze {
-
-  }
   &__container {
     user-select: none;list-style: none;vertical-align: top;font-size: 0;padding: 0;
     display: flex;margin: 0;justify-content: space-between;
     .active {color: #409eff;cursor: default;}
     .list {
-      padding: 0 4px;vertical-align: top;display: inline-block;font-size: 13px;min-width: 35.5px;height: 28px;
-      line-height: 28px;cursor: pointer;box-sizing: border-box;text-align: center;margin: 0;
+      margin: 0 4px;vertical-align: top;display: inline-block;font-size: 13px;min-width: 35.5px;height: 28px;
+      line-height: 28px;cursor: pointer;box-sizing: border-box;text-align: center;
     }
     .disabled {color: #b7b7b7;cursor: not-allowed;}
-    .more {line-height: 28px;color: #303133;}
     &_mini {}
+  }
+}
+.be-pagination-card {
+  .be-pagination__container {
+    .list {
+      background: #f4f4f5;color: #606266;border-radius: 2px;min-width: 30px;
+      &.active {
+        background: #1492FF;cursor: default;color: #fff;
+        &:hover {color: #fff;}
+      }
+      &:hover {
+        color: #1492FF;
+      }
+    }
   }
 }

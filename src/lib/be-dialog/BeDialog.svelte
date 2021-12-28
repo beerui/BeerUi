@@ -40,7 +40,7 @@
 			<slot name='header'>
 				<div class='be-dialog__header'>
 					<span class='be-dialog__title'>{title}</span>
-					<div class='be-dialog__close' on:click={handle_close}>X</div>
+					<div class='be-dialog__close' on:click={handle_close}>×</div>
 				</div>
 			</slot>
 			<div class="be-dialog__body">

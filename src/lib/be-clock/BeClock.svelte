@@ -12,21 +12,21 @@
 	let _class = null;
 	export { _class as class };
 
-	export let defaultTime:string = ''
-	export let async:boolean = false
-	export let formatTime:string = 'yyyy-MM-dd HH:mm:ss' // 格式化格式
+	export let defaultTime = ''
+	export let async = false
+	export let formatTime = 'yyyy-MM-dd HH:mm:ss' // 格式化格式
 
 	const timerMatch:string[] = formatTime.match(/\W/g) // 取出分隔符
 	const _timer:string[] = formatTime.replaceAll(/\W/g, ',').split(',') // 取出格式
 	const getNowTime = () => {
 		timerShow = ''
 		const _date = new Date()
-		const _year:string = String(_date.getFullYear())
-		const _month:string = String(_date.getMonth() + 1)
-		const _day:string = String(_date.getDate())
-		const _hours:string = String(_date.getHours())
-		const _minutes:string = String(_date.getMinutes())
-		const _seconds:string = String(_date.getSeconds())
+		const _year = String(_date.getFullYear())
+		const _month = String(_date.getMonth() + 1)
+		const _day = String(_date.getDate())
+		const _hours = String(_date.getHours())
+		const _minutes = String(_date.getMinutes())
+		const _seconds = String(_date.getSeconds())
 		const t = {
 			yyyy: _year,
 			M: _month,

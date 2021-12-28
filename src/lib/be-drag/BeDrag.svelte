@@ -1,64 +1,46 @@
 <script lang="ts">
-	import { quintOut } from 'svelte/easing';
-	import { crossfade } from 'svelte/transition';
-	import { flip } from 'svelte/animate';
 	import type DragItem from '$lib/common.d.ts';
-
+	import { flip } from 'svelte/animate';
+	/**
+	 * 拖拽上传文件可以参考链接
+	 * https://segmentfault.com/a/1190000039109938?utm_source=sf-similar-article
+	 */
 	export let list: DragItem[]
+	let draggingItem = null // 被拖动的元素
+	let lastItem = null // 被拖动的元素
 
-	const [send, receive] = crossfade({
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
-
-			return {
-				duration: 600,
-				easing: quintOut,
-				css: t => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
+	let dragstartHandle = (item) => {
+		draggingItem = item
+	}
+	let dragoverHandle = (item) => {
+		if (item !== draggingItem && lastItem !== item) {
+			const fromIndex = list.indexOf(draggingItem);
+			const toIndex = list.indexOf(item);
+			const temp = list[fromIndex];
+			list[fromIndex] = list[toIndex];
+			list[toIndex] = temp;
+			list = [...list];
 		}
-	});
-	let dragstartHandle = (evt) => {
-		console.log('dragstartHandle', evt);
+		lastItem = item;
 	}
-	let dragoverHandle = (evt) => {
-		console.log('dragoverHandle ', evt);
-	}
-	let dragenterHandle = (evt) => {
-		console.log('dragenterHandle', evt);
-	}
-	let dragHandle = (evt) => {
-		console.log('dragHandle', evt);
-	};
-
 </script>
 
 <div class='be-drag'>
-	{#each list as item (item.key)}
+	{#each list as item , index (item.key)}
 		<div
-			on:drag={dragHandle}
-			on:dragstart={dragstartHandle}
-			on:dragover={dragoverHandle}
-			on:dragenter={dragenterHandle}
 			class='be-drag-list'
-			in:receive="{{key: item.key}}"
-			out:send="{{key: item.key}}"
+			on:dragstart={() => dragstartHandle(item)}
+			on:dragover={() => dragoverHandle(item)}
+			draggable='true'
 			animate:flip
 		>
-			<span>{item.label}</span>
+			<div class='be-drag-item'>
+				<span>{item.key} {item.label}</span>
+			</div>
 		</div>
 	{/each}
 </div>
 
 <style lang='scss'>
-.be-drag {
-  width: 300px;margin: 50px auto;
-  &-list {
-	box-shadow: 0 0 3px rgba(31, 45, 61, .3);margin-bottom: 10px;padding: 10px 15px;cursor: move;transition: .3s;
-	&:hover {padding-left: 25px;}
-  }
-}
+  @import '../assets/scss/modules/drag';
 </style>
