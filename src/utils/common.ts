@@ -12,7 +12,7 @@
       return `
         opacity: ${t};
         transform: scaleY(${t});
-        transform-origin: center top;`
+        transform-origin: center ${[...node.classList].includes('is_top')?'bottom':'top'};`
     }
   };
 }
