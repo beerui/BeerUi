@@ -4,59 +4,89 @@
    * 
   */
   import {onMount } from 'svelte'
-//  export let hidden:boolean = false
-  let scrollbar
-  let scrollbarThumb
-  let scrollbarWrap
-  let rate
+  let beScroll
+  let scrollContent;
+  let thumb = 0
+  let maxToTop = 0 
+  let top = 0
+  let drag = false
+  let moveTop = null
+  let rate = 0
+  let boxToTop = 0
+  $:thumbH = thumb + "px";
+  $:thumbTop = top + "px";
   onMount(()=>{
-    // $:console.log('ssss',scrollbarWrap.scrollTop())
-    rate  = scrollbarWrap.clientHeight / scrollbarWrap.scrollHeight
-    console.log(scrollbarWrap.scrollHeight)
-    if(rate<1){
-      var barHeight = rate * scrollbarWrap.clientHeight;
-    scrollbarThumb.style.height = barHeight + 'px'
-    }else{
-      scrollbarThumb.style.display = 'none'
-    }
+    boxToTop = beScroll.offsetTop
+    initScrollbar()
   })
-//  检测鼠标是否在dom上
- function mousemove():void {
-  // scrollbar.style.overflow = "auto"
-  // scrollbar = document.getElementById("scrollbar")
-   scrollbar.style.opacity = 1
-   scrollbar.style.transitionProperty = 'opacity'
-   scrollbar.style.transitionDuration = '0.34s'
-   scrollbar.style.transitionTimingFunction = 'ease-out'
- }
- function mouseleave(){
-  scrollbar.style.opacity = 0
-  scrollbar.style.transitionProperty = 'opacity'
-  scrollbar.style.transitionDuration = '0.12s'
-  scrollbar.style.transitionTimingFunction = 'ease-out'
-  // scrollbar.style.overflow = "visible"
- }
-//  监听内容的滚动高度
 
+  function initScrollbar():void {
+    let contentClientHeight = scrollContent.clientHeight; // dom 边框高度
+    let contentScrollHeight = scrollContent.scrollHeight; // 实际内容高度
 
- function onScrollbarWrapScroll(e){
-  let translateYHeight = e.target.scrollTop * rate
-  // scrollbarThumb.style.transform = `translateY(${ translateYHeight + 'px' })`
-  // console.log(scrollbarWrap.childNodes)
-  scrollbarThumb.style.top = translateYHeight + 'px'
+    rate = contentClientHeight / contentScrollHeight;
 
- }
+    if(rate < 1) {
+      thumb = rate * contentClientHeight;
+      maxToTop = contentClientHeight - thumb;
+      scrollContent.addEventListener('scroll', onScroll)
+      window.addEventListener("mouseup", mouseup);
+      window.addEventListener("mousemove",mousemove);
+    }
+
+  }
+
+  // 监听滚动
+  function onScroll(){
+    top = scrollContent.scrollTop * rate // 计算滚动条所在高度
+  }
+
+  //  检测鼠标是否在dom上
+  function mousemove(e):void {
+    if(drag) {
+      if(moveTop) {
+        let speed = e.clientY - boxToTop - moveTop
+        let topHeight = top + speed
+        scrollThumb(topHeight) 
+      }
+      moveTop= e.clientY - boxToTop;
+      e.preventDefault()
+    }
+  }
+  function scrollThumb(topHeight){
+      // console.log('top:',topHeight,'maxToTop:',maxToTop);
+      if(topHeight < 0) {
+        topHeight=0;
+      }else if(topHeight > maxToTop) {
+        topHeight = maxToTop;
+      }
+      top = topHeight;
+      scrollContent.scrollTop = top / rate;
+  }
+
+  function mouseleave():void{
+
+  }
+
+  function mousedown():void{
+    drag = true;
+    moveTop = null
+  }
+
+  function mouseup():void{
+    drag = false
+  }
 </script>
 
-<div class="be-scrollbar" on:mouseleave={()=>{mouseleave()}} on:mousemove={()=>{mousemove()}}>
-  <div class="page-component__nav be-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;"  on:scroll={(e)=>onScrollbarWrapScroll(e)} bind:this={scrollbarWrap}>
-    <div class="be-scrollbar__view" >
-      <slot></slot>
-    </div>
-    <div class="be-scrollbar__bar is-vertical" id="scrollbar" bind:this = {scrollbar}>
-      <div class="be-scrollbar__thumb" bind:this = {scrollbarThumb}></div>
-    </div>
+<div class="be-scroll" bind:this={beScroll}>
+  <div class="be-scroll-box" bind:this={scrollContent}>
+    <slot></slot>
   </div>
+  {#if rate < 1}
+  <div class="be-scroll-thumb">
+    <div class="be-scroll-bar" style={`height:${thumbH};top:${thumbTop};`} on:mousedown={mousedown} on:mouseup={mouseup}></div>
+  </div>
+  {/if}
 </div>
 
 <style lang="scss">
