@@ -9,6 +9,9 @@
 	// 是否禁用
 	export let disabled = false;
 
+	// 位置
+	export let position = 'bottom'
+
 	// option选中的id
 	let checkedId;
 	// 下拉框
@@ -93,7 +96,7 @@
 	</div>
 	<div class='be-select__option_content'>
 		{#if !isSelect}
-			<ul class='be-select__option' in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 300}}">
+			<ul class={['be-select__option',position === 'top'?' is_top':' '].join('')} in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 300}}">
 				{#each options as item, index}
 					<li value={item.value} on:click|preventDefault ={(e) => { selectOption(item,e);}}
 						on:mousedown={(e) => {handleMousedown(item,e)}}

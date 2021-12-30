@@ -301,6 +301,7 @@ export const previewImages = (src, list) => {
 		container = document.querySelector('.be-preview')
 	} else {
 		container = document.createElement('div')
+		// @ts-ignore
 		container.classList = 'be-preview'
 		container.innerHTML = `
             <div class="be-preview__mask"></div>
@@ -318,7 +319,9 @@ export const previewImages = (src, list) => {
 	const prevDom = container.querySelector('.be-preview__prev')
 	const nextDom = container.querySelector('.be-preview__next')
 
+	// @ts-ignore
 	maskDom.addEventListener("click", () => previewImage.close(body))
+	// @ts-ignore
 	closeDom.addEventListener("click", () => previewImage.close(body))
 	prevDom.addEventListener("click", () => previewImage.changeImage('prev'))
 	nextDom.addEventListener("click", () => previewImage.changeImage('next'))
