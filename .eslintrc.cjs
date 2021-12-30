@@ -13,7 +13,7 @@ module.exports = {
     processor: 'svelte3/svelte3'
   }, {
     extends: ['plugin:cypress/recommended'],
-    files: ['./cypress/plugins/index.ts', '*.spec.*']
+    files: ['./cypress/plugins/index.js', '*.spec.*']
   }, {
     extends: ['plugin:@typescript-eslint/recommended'],
     files: ['*.ts']

@@ -20,7 +20,7 @@
 	}
 
 	function handleCloseDatePopper(e) {
-		console.log(e.target, input)
+		// console.log(e.target, input)
 		// if (!visible) return;
 		visible = false;
 	}
