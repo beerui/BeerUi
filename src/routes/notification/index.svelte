@@ -1,6 +1,6 @@
 <script>
 	import BeNotification from '$lib/be-notification/BeNotification.svelte';
-	import { addEventListener, BeerPS, eventBus, mergeObject } from '$lib/utils';
+	import { addEventListener, BeerPS, eventBus, mergeObject } from '$lib/utils/index.js';
 	import { onMount } from 'svelte';
 
 	eventBus.on('login', data => {
