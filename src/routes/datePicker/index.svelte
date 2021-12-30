@@ -3,5 +3,5 @@
 
 </script>
 <div class='page-container'>
-  <BeDatePicker value={"2021-12-10"}/>
+  <BeDatePicker value={"2024-12-10"}/>
 </div>

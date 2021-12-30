@@ -30,7 +30,18 @@ export const getDateTimestamp = function(time) {
     return NaN;
   }
 };
-
+export const getMonthTimestamp = function(time) {
+  if (typeof time === 'number' || typeof time === 'string') {
+    return clearDate(new Date(time)).getTime();
+  } else if (time instanceof Date) {
+    return clearDate(time).getTime();
+  } else {
+    return NaN;
+  }
+};
+export const clearDate = (date) => {
+  return new Date(date.getFullYear(), date.getMonth());
+};
 export const clearTime = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
