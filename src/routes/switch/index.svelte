@@ -20,7 +20,7 @@
 		<div class="demo-block demo-alert">
 			<div class="source">
 					<!-- disabled={disabled} width={width} activeColor={activeColor} inactiveColor={inactiveColor} -->
-					<BeSwitch bind:checked={switchValue} on:change={change} activeColor="#fff000"/>
+					<BeSwitch bind:checked={switchValue} on:change={change} inactiveColor="#fff000"/>
 			</div>
 		</div>
 		<h3>禁用状态</h3>

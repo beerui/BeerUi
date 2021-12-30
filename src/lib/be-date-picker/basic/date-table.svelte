@@ -6,7 +6,7 @@ const weeks = ['日','一','二','三','四','五','六']
 let rows = []
 
 export let date
-let value
+export let value
 let dateCountOfMonth
 let dateCountOfLastMonth
 let dateWeekOfMonth
@@ -17,7 +17,6 @@ const now = getDateTimestamp(new Date());
 $: initDate(date)
 
 function initDate(date) {
-  value = date
   rows = [[],[],[],[],[],[]]
   year = date.getFullYear()
   month = date.getMonth()
@@ -86,9 +85,10 @@ function selectDay(e, cell, index) {
   dispatch('pick', `${year}-${dateMonth + 1}-${cell.text}`)
 }
 function cellMatchesDate(cell) {
-  return year === value.getFullYear() &&
-    month === value.getMonth() &&
-    Number(cell.text) === value.getDate();
+  const dataValue = new Date(value)
+  return year === dataValue.getFullYear() &&
+    month === dataValue.getMonth() &&
+    Number(cell.text) === dataValue.getDate();
 }
 function getCellClasses(cell) {
   let classes = [];

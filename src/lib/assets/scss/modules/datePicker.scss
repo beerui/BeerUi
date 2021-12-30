@@ -29,7 +29,7 @@
   left: 0;
   top: 50px;
   width: 322px;
-  height: 350px;
+  // height: 350px;
   &__header {
     margin: 12px;
     text-align: center;
@@ -101,6 +101,39 @@
   .current:not(.disabled) span {
     color: #fff;
     background-color: #409eff;
+  }
+}
+.el-month-table {
+  font-size: 12px;
+  border-collapse: collapse;
+  td {
+    text-align: center;
+    padding: 8px 0;
+    cursor: pointer;
+    &>div {
+    height: 48px;
+    padding: 6px 0;
+    box-sizing: border-box
+    }
+    &:hover {
+      color: #409eff;
+    }
+    .cell {
+      width: 60px;
+      height: 36px;
+      display: block;
+      line-height: 36px;
+      color: #606266;
+      margin: 0 auto;
+      border-radius: 18px;
+    }
+  }
+  .today .cell {
+    color: #409eff;
+    font-weight: 700;
+  }
+  .current:not(.disabled) .cell {
+    color: #409eff;
   }
 }
 .popper__arrow {
