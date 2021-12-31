@@ -17,12 +17,12 @@ svelte & svelte-kit
 - `npm i @beerui/beerui -D`
 - `npm i sass -D`
 
-@[toc](目录)
+[toc]
 
 ****
 
 ## 组件开发状态
-- [x] Button 按钮
+- [x] <a href="Button">Button 按钮</a>
   - [ ] 按钮组 
 - [x] Dialog 弹框
     - [ ] 关闭回调
@@ -40,7 +40,7 @@ svelte & svelte-kit
 - [x] PreviewImage 图片预览
 - [ ] 拖拽上传
 
-### Button 按钮
+### <a id="Button">Button 按钮</a>
 
 ```html
 <BeButton size="normal" round='circle' type="primary"></BeButton>
