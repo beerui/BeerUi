@@ -2,19 +2,25 @@
 import { createEventDispatcher } from 'svelte';
 import DateTable from '../basic/date-table.svelte'
 import MonthTable from '../basic/month-table.svelte'
+import YearTable from '../basic/year-table.svelte'
 import { cubicInOut } from 'svelte/easing';
 import { nextMonth, prevMonth, prevYear, nextYear } from '../date-util.js'
 const dispatch = createEventDispatcher()
 export let value
 export let visible = false
 
-export let selectMode = 'day'
-let currentView = 'date'
+const format = 'yyyy-MM-dd'
 
-$:date = new Date(value)
+export let selectMode
+
+$:currentView = selectMode === 'day' ? 'date' : selectMode
+
+let yearLabel = ''
+
+$:date = value ? new Date(value) : new Date()
 
 $: if(!visible) {
-  date = new Date(value)
+  date =  value ? new Date(value) : new Date()
   if(selectMode == 'day') {
     currentView = 'date'
   }
@@ -34,31 +40,49 @@ function handleNextMonth() {
   date = nextMonth(date)
 }
 function handlePrevYear() {
-  date = prevYear(date)
+  if (currentView === 'year') {
+    date = prevYear(date, 10);
+  } else {
+    date = prevYear(date);
+  }
 }
 function handleNextYear() {
-  date = nextYear(date)
+  if (currentView === 'year') {
+    date = nextYear(date, 10);
+  } else {
+    date = nextYear(date);
+  }
 }
 
 $:year = date.getFullYear()
+
 $:month = String(date.getMonth() + 1).padStart(2, '0')
+
+$: if (currentView === 'year') {
+  const startYear = Math.floor(year / 10) * 10;
+  yearLabel = startYear + ' - ' + (startYear + 9);
+}
+
+function confirmPick(e) {
+  value = e.detail
+  dispatch('pick',  e.detail)
+}
 
 function confirmMonthPick(e) {
   if(selectMode=='day') {
-    date = new Date(e.detail)
+    date = e.detail
     currentView = 'date'
   } else {
     dispatch('pick',  e.detail)
   }
 }
-function confirmPick(e) {
-  console.log(date)
-  value = e.detail
-  dispatch('pick',  e.detail)
-}
-
-function selectMonth() {
-  currentView = 'month'
+function confirmYearPick(e) {
+  if(selectMode=='month' || selectMode=='day') {
+    date = e.detail
+    currentView = 'month'
+  } else {
+    dispatch('pick',  e.detail)
+  }
 }
 function zoomIn(node, params) {
   return {
@@ -80,24 +104,32 @@ function zoomIn(node, params) {
     <div class="be-picker-panel__body">
       <div class="be-date-picker__header">
           <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click|stopPropagation={handlePrevYear}>上年</span>
-          {#if currentView == 'date'}
+          {#if currentView === 'date'}
             <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click|stopPropagation={handlePrevMonth}>-上月</span>
           {/if}
-          <span class="be-date-picker__header-label">{year} 年</span>
-          {#if currentView == 'date'}
-            <span class="be-date-picker__header-label" on:click={selectMonth}>{month} 月</span>
+          {#if currentView !== 'year'}
+            <span class="be-date-picker__header-label" on:click={() => currentView = 'year'}>{year} 年</span>
+          {/if}
+          {#if currentView === 'year'}
+          <span class="be-date-picker__header-label">{yearLabel}</span>
+          {/if}
+          {#if currentView === 'date'}
+            <span class="be-date-picker__header-label" on:click={() => currentView = 'month'}>{month} 月</span>
           {/if}
           <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click|stopPropagation={handleNextYear}>下年</span>
-          {#if currentView == 'date'}
+          {#if currentView === 'date'}
             <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click|stopPropagation={handleNextMonth}>下月-</span>
           {/if}
       </div>
       <div class="be-picker-panel__content">
-        {#if currentView == 'date'}
+        {#if currentView === 'date'}
           <DateTable date={date} on:pick={confirmPick} value={value}/>
         {/if}
-        {#if currentView == 'month'}
+        {#if currentView === 'month'}
           <MonthTable date={date} on:pick={confirmMonthPick} value={value}/>
+        {/if}
+        {#if currentView === 'year'}
+          <YearTable date={date} on:pick={confirmYearPick} value={value}/>
         {/if}
       </div>
     </div>

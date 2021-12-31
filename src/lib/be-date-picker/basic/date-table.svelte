@@ -1,6 +1,6 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
-import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '../date-util.js'
+import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth, modifyDate } from '../date-util.js'
 const dispatch = createEventDispatcher()
 const weeks = ['日','一','二','三','四','五','六']
 let rows = []
@@ -49,7 +49,7 @@ function getMonthArray() {
         cell.type = 'prev-month';
       } else {
         if (count <= dateCountOfMonth) {
-          const curDate = `${year}-${month + 1}-${count}`
+          const curDate = new Date(year, month,count)
           const time = getDateTimestamp(curDate)
           cell.text = count++;
           const isToday = time === now;
@@ -82,7 +82,8 @@ function selectDay(e, cell, index) {
       dateMonth = 11
     }
   }
-  dispatch('pick', `${year}-${dateMonth + 1}-${cell.text}`)
+  const dateTime = new Date(year, dateMonth, cell.text)
+  dispatch('pick', dateTime)
 }
 function cellMatchesDate(cell) {
   const dataValue = new Date(value)

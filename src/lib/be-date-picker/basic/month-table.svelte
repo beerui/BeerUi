@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-import { getMonthTimestamp ,clearDate } from '../date-util.js'
+import { getMonthTimestamp } from '../date-util.js'
 const dispatch = createEventDispatcher()
 let rows = []
 const now = getMonthTimestamp(new Date());
@@ -45,8 +45,8 @@ function ininMonth(date) {
 }
 function selectMonth(e, cell) {
   const year = date.getFullYear()
-  console.log(`${year}-${cell.text + 1}`)
-  dispatch('pick', `${year}-${cell.text + 1}`)
+  const dateTime = new Date(year, cell.text, 1)
+  dispatch('pick', dateTime)
 }
 function cellMatchesDate(cell) {
   const dateValue = new Date(value)
@@ -55,7 +55,7 @@ function cellMatchesDate(cell) {
   return year === dateValue.getFullYear() &&
     month === cell.text
 }
-function getCellClasses(cell, index) {
+function getCellClasses(cell) {
   let classes = [];
   if ((cell.type === 'normal' || cell.type === 'today') && !cell.disabled) {
       classes.push('available');
@@ -73,7 +73,7 @@ function getCellClasses(cell, index) {
 
 </script>
 
-<table class="el-month-table">
+<table class="be-month-table">
   <tbody>
     {#each rows as row}
       <tr>

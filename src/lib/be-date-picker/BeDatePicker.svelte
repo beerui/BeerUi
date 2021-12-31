@@ -3,6 +3,7 @@
 	import BeInput from '../be-input/BeInput.svelte';
 
 	export let value;
+	export let selectMode = 'day'
 	let visible;
  	let input
 	function confirmPick(e) {
@@ -30,7 +31,7 @@
 	<!-- <div on:click|stopPropagation={handleShowDatePopper}> -->
 		<BeInput on:change={handleChange} bind:value={value} on:focus={handleShowDatePopper} bind:this={input}/>
 	<!-- </div> -->
-	<Date value={value} bind:visible={visible} on:pick={confirmPick} />
+	<Date value={value} bind:visible={visible} on:pick={confirmPick} selectMode={selectMode}/>
 </div>
 <style lang="scss" global>
   @import '../assets/scss/modules/datePicker';

@@ -17,7 +17,7 @@
 	export let formatTime = 'yyyy-MM-dd HH:mm:ss' // 格式化格式
 
 	const timerMatch:string[] = formatTime.match(/\W/g) // 取出分隔符
-	const _timer:string[] = formatTime.replaceAll(/\W/g, ',').split(',') // 取出格式
+	const _timer:string[] = formatTime.replace(/\W/g, ',').split(',') // 取出格式
 	const getNowTime = () => {
 		timerShow = ''
 		const _date = new Date()
