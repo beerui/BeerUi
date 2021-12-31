@@ -6,54 +6,25 @@
 	 * - 支持12小时
 	 * - 支持PM AM
 	 */
-	import { onDestroy, onMount } from "svelte";
+	import { onDestroy } from "svelte";
 	import { classes } from '../utils';
+  import { FormatTime } from '$lib/utils/beerui';
 
 	let _class = null;
 	export { _class as class };
 
-	export let defaultTime = ''
 	export let async = false
 	export let formatTime = 'yyyy-MM-dd HH:mm:ss' // 格式化格式
+	export let defaultTime = '' // 格式化格式
 
-	const timerMatch:string[] = formatTime.match(/\W/g) // 取出分隔符
-	const _timer:string[] = formatTime.replaceAll(/\W/g, ',').split(',') // 取出格式
-	const getNowTime = () => {
-		timerShow = ''
-		const _date = new Date()
-		const _year = String(_date.getFullYear())
-		const _month = String(_date.getMonth() + 1)
-		const _day = String(_date.getDate())
-		const _hours = String(_date.getHours())
-		const _minutes = String(_date.getMinutes())
-		const _seconds = String(_date.getSeconds())
-		const t = {
-			yyyy: _year,
-			M: _month,
-			MM: concatZero(_month),
-			d: _day,
-			dd: concatZero(_day),
-			H: _hours,
-			HH: concatZero(_hours),
-			m: _minutes,
-			mm: concatZero(_minutes),
-			s: _seconds,
-			ss: concatZero(_seconds)
-		}
-		timerShow = concatTimer(t)
-	}
-	// 补零
-	const concatZero = (v) => v.padStart(2, '0')
-	// 拼接时间和分隔符
-	const concatTimer = (t) => {
-		let str = ''
-		_timer.forEach((el, i) => str += t[el] + (timerMatch[i] || ''))
-		return str
-	}
+	// 实例化时间
+  const times = new FormatTime(formatTime)
+  console.log(times.getTime);
+
 	let timer = null
 	let timerShow = defaultTime
-	if (async) getNowTime()
-	timer = setInterval(() => getNowTime(), 1000)
+	if (async) times.getTime
+	timer = setInterval(() => timerShow = times.getTime, 1000)
 	onDestroy(() => timer && clearInterval(timer))
 </script>
 <div class={classes('be-timer', _class)}>{timerShow}</div>
