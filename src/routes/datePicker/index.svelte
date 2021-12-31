@@ -3,7 +3,7 @@
 
 </script>
 <div class='page-container'>
-  <h2>datePicker</h2>
+  <h2>datePicker组件</h2>
   <h3>基本用法</h3>
   <p class='desc'>datePicker 日期选择</p>
   <BeDatePicker value={'2021-10-11'} selectMode={"day"} format={"yyyy-MM-dd"}/>
