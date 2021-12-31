@@ -17,6 +17,10 @@ svelte & svelte-kit
 - `npm i @beerui/beerui -D`
 - `npm i sass -D`
 
+@[toc](目录)
+
+****
+
 ## 组件开发状态
 - [x] Button 按钮
   - [ ] 按钮组 
