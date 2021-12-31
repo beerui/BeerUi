@@ -1,6 +1,6 @@
 {
   "name": "@beerui/beerui",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "A Svelte ui components",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,9 @@
     "storybook": "start-storybook -p 6006",
     "preinstall": "npx only-allow pnpm",
     "test": "start-server-and-test storybook http://localhost:6006 cy:run"
+  },
+  "publishConfig": {
+    "registry":"https://www.npmjs.com/package/@beerui/beerui"
   },
   "devDependencies": {
     "@babel/core": "7.16.0",

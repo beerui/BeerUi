@@ -17,7 +17,7 @@ svelte & svelte-kit
 - `npm i @beerui/beerui -D`
 - `npm i sass -D`
 
-[toc]
+### Concat Us `beerui2021@gmail.com`
 
 ****
 
