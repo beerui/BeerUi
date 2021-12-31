@@ -1,7 +1,7 @@
 ### DatePicker 组件
 
 ```html
- <BeDatePicker value='2021-10-11' selectMode="day" format="yyyy-MM-dd"/>
+  <BeDatePicker value='2021-10-11' selectMode="day" format="yyyy-MM-dd"/>
 ```
 
 
@@ -14,8 +14,8 @@
 
 ### Switch 开关
 
-```javascript
-	<BeSwitch bind:checked={true} activeColor="#fff000" inactiveColor="#fff000" disabled={false}/>
+```html
+  <BeSwitch bind:checked={true} activeColor="#fff000" inactiveColor="#fff000" disabled={false}/>
 ```
 
 | 参数                | 说明                      | 类型      | 可选值 | 默认值   |
