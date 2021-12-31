@@ -26,6 +26,7 @@
 }
 .be-date-picker {
   position: absolute;
+  z-index: 999;
   left: 0;
   top: 50px;
   width: 322px;

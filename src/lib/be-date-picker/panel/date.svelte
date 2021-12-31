@@ -4,15 +4,16 @@ import DateTable from '../basic/date-table.svelte'
 import MonthTable from '../basic/month-table.svelte'
 import YearTable from '../basic/year-table.svelte'
 import { cubicInOut } from 'svelte/easing';
+import { FormatTime } from '$lib/utils/beerui';
 import { nextMonth, prevMonth, prevYear, nextYear } from '../date-util.js'
 const dispatch = createEventDispatcher()
+
 export let value
 export let visible = false
-
-const format = 'yyyy-MM-dd'
-
+export let format
 export let selectMode
 
+const times = new FormatTime(format)
 $:currentView = selectMode === 'day' ? 'date' : selectMode
 
 let yearLabel = ''
@@ -65,7 +66,8 @@ $: if (currentView === 'year') {
 
 function confirmPick(e) {
   value = e.detail
-  dispatch('pick',  e.detail)
+  console.log(formatDate(e.detail), e.detail)
+  dispatch('pick', formatDate(e.detail))
 }
 
 function confirmMonthPick(e) {
@@ -73,7 +75,8 @@ function confirmMonthPick(e) {
     date = e.detail
     currentView = 'date'
   } else {
-    dispatch('pick',  e.detail)
+    console.log(formatDate(e.detail), e.detail)
+    dispatch('pick',  formatDate(e.detail))
   }
 }
 function confirmYearPick(e) {
@@ -81,9 +84,15 @@ function confirmYearPick(e) {
     date = e.detail
     currentView = 'month'
   } else {
-    dispatch('pick',  e.detail)
+    console.log(formatDate(e.detail), e.detail)
+    dispatch('pick', formatDate(e.detail))
   }
 }
+
+function formatDate(time) {
+  return times.setTime(time)
+}
+
 function zoomIn(node, params) {
   return {
     duration:params.duration,
