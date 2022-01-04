@@ -1,9 +1,14 @@
+import isString from 'lodash/isString'
+import { browser } from '$app/env';
+
+const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**
  * 图片预览
  * @param {string} src 当前图片链接
  * @param {string[]} list 图片数组
  * @param {function} cb 图片切换后 监听的回调
  */
+
 export const previewImages = (src: string, list?: string[], cb?: Function):PreviewImage => new PreviewImage(src, list, cb)
 
 class PreviewImage {
@@ -167,5 +172,157 @@ export class FormatTime {
 	// 补零
 	concatZero(v:string) {
 		return v.padStart(2, '0')
+	}
+}
+
+export const on = ((): any => {
+	if (browser && document.addEventListener) {
+		return (element: Node, event: string, handler: EventListenerOrEventListenerObject): any => {
+			if (element && event && handler) {
+				element.addEventListener(event, handler, false);
+				return () => off(element, event, handler);
+			}
+		};
+	}
+	return (element: Node, event: string, handler: EventListenerOrEventListenerObject): any => {
+		if (element && event && handler) {
+			(element as any).attachEvent(`on${event}`, handler);
+			return () => off(element, event, handler);
+		}
+	};
+})();
+
+export const off = ((): any => {
+	if (browser && document.removeEventListener) {
+		return (element: Node, event: string, handler: EventListenerOrEventListenerObject): any => {
+			if (element && event) {
+				element.removeEventListener(event, handler, false);
+			}
+		};
+	}
+	return (element: Node, event: string, handler: EventListenerOrEventListenerObject): any => {
+		if (element && event) {
+			(element as any).detachEvent(`on${event}`, handler);
+		}
+	};
+})();
+
+export function once(element: Node, event: string, handler: EventListenerOrEventListenerObject) {
+	const handlerFn = typeof handler === 'function' ? handler : handler.handleEvent;
+	const callback = (evt: any) => {
+		handlerFn(evt);
+		off(element, event, callback);
+	};
+
+	on(element, event, callback);
+}
+
+export function hasClass(el: Element, cls: string): any {
+	if (!el || !cls) return false;
+	if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
+	if (el.classList) {
+		return el.classList.contains(cls);
+	}
+	return ` ${el.className} `.indexOf(` ${cls} `) > -1;
+}
+
+export function addClass(el: Element, cls: string): any {
+	if (!el) return;
+	let curClass = el.className;
+	const classes = (cls || '').split(' ');
+
+	for (let i = 0, j = classes.length; i < j; i++) {
+		const clsName = classes[i];
+		if (!clsName) continue;
+
+		if (el.classList) {
+			el.classList.add(clsName);
+		} else if (!hasClass(el, clsName)) {
+			curClass += ` ${clsName}`;
+		}
+	}
+	if (!el.classList) {
+		el.className = curClass;
+	}
+}
+
+export function removeClass(el: Element, cls: string): any {
+	if (!el || !cls) return;
+	const classes = cls.split(' ');
+	let curClass = ` ${el.className} `;
+
+	for (let i = 0, j = classes.length; i < j; i++) {
+		const clsName = classes[i];
+		if (!clsName) continue;
+
+		if (el.classList) {
+			el.classList.remove(clsName);
+		} else if (hasClass(el, clsName)) {
+			curClass = curClass.replace(` ${clsName} `, ' ');
+		}
+	}
+	if (!el.classList) {
+		el.className = trim(curClass);
+	}
+}
+
+export const getAttach = (node: any): HTMLElement => {
+	const attachNode = typeof node === 'function' ? node() : node;
+	if (!attachNode) {
+		return document.body;
+	}
+	if (isString(attachNode)) {
+		return document.querySelector(attachNode);
+	}
+	if (attachNode instanceof HTMLElement) {
+		return attachNode;
+	}
+	return document.body;
+};
+
+export function containerDom(parent: Element | Iterable<any> | ArrayLike<any>, child: any): boolean {
+	if (parent && child) {
+		let pNode = child;
+		while (pNode) {
+			if (parent === pNode) {
+				return true;
+			}
+			const { parentNode } = pNode;
+			pNode = parentNode;
+		}
+	}
+	return false;
+}
+
+export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: Function): void => {
+	on(document, 'click', (event: { target: Element }) => {
+		if (Array.isArray(els)) {
+			const isFlag = Array.from(els).every((item) => containerDom(item, event.target) === false);
+			isFlag && cb && cb();
+		} else {
+			if (containerDom(els, event.target)) {
+				return false;
+			}
+			cb && cb();
+		}
+	});
+};
+
+
+export const clickOutSide = (els: Element, cb: Function) => {
+	console.log('clickOutHandle2', els, cb);
+	on(document, 'click', (event: { target: Element }) => {
+		console.log('!containerDom(els, event.target)', !containerDom(els, event.target));
+		cb(!containerDom(els, event.target))
+	})
+	return {
+		update(visible) {
+			// `bar` 已发生变更
+			console.log('update visible', visible);
+		},
+		destroy() {
+			// node已从DOM中移除
+			console.log('destroy');
+		}
 	}
 }

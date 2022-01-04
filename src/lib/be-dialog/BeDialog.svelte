@@ -2,6 +2,7 @@
 	import { createEventDispatcher, onDestroy } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import BeButton from '../be-button/BeButton.svelte';
+	import { containerDom, on } from '$lib/utils/beerui';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
@@ -29,10 +30,30 @@
 			return;
 		}
 	};
+	const clickOutSide = (node) => {
+		let init = false
+		function clickOutSideCb(evt) {
+			console.log('clickOutSideCb', evt);
+		}
+		// clickOutSide(node, clickOutSideCb)
+		console.log('node', node);
+		document.addEventListener('click', event => {
+			if (init && !containerDom(node, event.target)) {
+				visible = false
+			}
+			init = true
+		})
+		return {
+			destroy(visible) {
+				console.log('destroy', visible);
+				init = false
+			}
+		}
+	}
 </script>
 <svelte:window on:keydown={handle_keydown}/>
 {#if visible}
-	<div class='be-dialog'>
+	<div class='be-dialog' use:clickOutSide>
 		{#if mask}
 		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>
 		{/if}
