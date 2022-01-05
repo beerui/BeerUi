@@ -1,7 +1,8 @@
 <script lang='ts'>
 	import Date from './panel/date.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
-
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher()
 	export let value;
 	export let selectMode = 'day'
 	export let format
@@ -10,10 +11,10 @@
 	function confirmPick(e) {
 		value = e.detail;
 		visible = false
+		dispatch('change', e.detail)
 	}
 
 	function handleShowDatePopper(e) {
-		console.log(e, input);
 		visible = true;
 	}
 
@@ -22,8 +23,6 @@
 	}
 
 	function handleCloseDatePopper(e) {
-		// console.log(e.target, input)
-		// if (!visible) return;
 		visible = false;
 	}
 </script>
