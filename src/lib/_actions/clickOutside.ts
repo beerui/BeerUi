@@ -10,7 +10,7 @@ export default function clickOutside (els: Element, cb?: Function) {
 	if (cb && typeof cb !== 'function') throw new Error('回调需是一个函数 callback must be Function.');
 	function clickHandler(event) {
 		if (!els.contains(event.target)) {
-			els.dispatchEvent(new CustomEvent('outside'));
+			els.dispatchEvent(new CustomEvent('outside'))
 			cb && cb()
 		}
 	}
@@ -19,5 +19,5 @@ export default function clickOutside (els: Element, cb?: Function) {
 		destroy: () => {
 			off(document, 'click', clickHandler)
 		}
-	};
+	}
 }
