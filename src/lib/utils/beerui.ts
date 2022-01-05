@@ -1,6 +1,13 @@
 import isString from 'lodash/isString'
 import { browser } from '$app/env';
 
+if (browser) {
+	// @ts-ignore
+	window.__beerui__ = {
+		clickOutSide: { init: false }
+	};
+}
+
 const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**
  * 图片预览
@@ -309,20 +316,3 @@ export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: Func
 };
 
 
-export const clickOutSide = (els: Element, cb: Function) => {
-	console.log('clickOutHandle2', els, cb);
-	on(document, 'click', (event: { target: Element }) => {
-		console.log('!containerDom(els, event.target)', !containerDom(els, event.target));
-		cb(!containerDom(els, event.target))
-	})
-	return {
-		update(visible) {
-			// `bar` 已发生变更
-			console.log('update visible', visible);
-		},
-		destroy() {
-			// node已从DOM中移除
-			console.log('destroy');
-		}
-	}
-}

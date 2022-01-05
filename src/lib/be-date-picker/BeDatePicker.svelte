@@ -1,8 +1,10 @@
 <script lang='ts'>
 	import Date from './panel/date.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
+	import clickOutside from '$lib/_actions/clickOutside';
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher()
+
 	export let value;
 	export let selectMode = 'day'
 	export let format
@@ -22,12 +24,14 @@
 		visible = false;
 	}
 
-	function handleCloseDatePopper(e) {
+	function handleCloseDatePopper(v) {
+		// console.log(e.target, input)
+		// if (!visible) return;
 		visible = false;
 	}
 </script>
-<svelte:body on:click={handleCloseDatePopper} />
-<div class='be-date' on:click|stopPropagation={()=>{}}>
+<!--<svelte:body on:click={handleCloseDatePopper} />-->
+<div class='be-date' on:click|stopPropagation={()=>{}} use:clickOutside on:outside={handleCloseDatePopper}>
 	<!-- <div on:click|stopPropagation={handleShowDatePopper}> -->
 		<BeInput on:change={handleChange} bind:value={value} on:focus={handleShowDatePopper} bind:this={input}/>
 	<!-- </div> -->

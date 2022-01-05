@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import BeButton from '../be-button/BeButton.svelte';
-	import { containerDom, on } from '$lib/utils/beerui';
+	import clickOutside from '$lib/_actions/clickOutside';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
@@ -11,7 +11,9 @@
 	export let closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog
 
 	const handle_close = () => {
-		if (closeOnClickModal) visible = false;
+		if (closeOnClickModal) {
+			close();
+		}
 	}
 	const handle_confirm = (type: string) => {
 		if (type === 'cancel') {
@@ -29,31 +31,33 @@
 			close();
 			return;
 		}
-	};
-	const clickOutSide = (node) => {
-		let init = false
-		function clickOutSideCb(evt) {
-			console.log('clickOutSideCb', evt);
-		}
-		// clickOutSide(node, clickOutSideCb)
-		console.log('node', node);
-		document.addEventListener('click', event => {
-			if (init && !containerDom(node, event.target)) {
-				visible = false
-			}
-			init = true
-		})
-		return {
-			destroy(visible) {
-				console.log('destroy', visible);
-				init = false
-			}
-		}
+	}
+	const close = () => {
+		dispatch('beforeClose')
+		visible = false;
 	}
 </script>
+<!--
+@component
+Here's some documentation for this component.
+It will show up on hover.
+
+- You can use markdown here.
+- You can also use code blocks here.
+- Usage:
+  ```javascript
+	  let visible = false
+	let openDialog = () => {
+		visible = true
+	}
+	const beforeClose = (evt) => {
+		console.log(evt.detail)
+	}
+  ```
+-->
 <svelte:window on:keydown={handle_keydown}/>
 {#if visible}
-	<div class='be-dialog' use:clickOutSide>
+	<div class='be-dialog' use:clickOutside on:outside={close}>
 		{#if mask}
 		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>
 		{/if}
@@ -61,7 +65,7 @@
 			<slot name='header'>
 				<div class='be-dialog__header'>
 					<span class='be-dialog__title'>{title}</span>
-					<div class='be-dialog__close' on:click={handle_close}>×</div>
+					<div class='be-dialog__close' on:click={close}>×</div>
 				</div>
 			</slot>
 			<div class="be-dialog__body">

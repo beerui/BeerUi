@@ -1,2 +1,1 @@
-import BeButton from './BeButton.svelte';
-export default BeButton;
+export { default as default } from './BeButton.svelte';

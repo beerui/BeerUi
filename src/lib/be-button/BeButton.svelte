@@ -20,7 +20,7 @@
         round ? ' be-button--round__' + round : '',
         loading ? ' be-button--' + loading : ''
     ].join('')}
-	on:click={handleClick}
+	on:click|stopPropagation={handleClick}
 >
 <!--    <beer-icon></beer-icon>-->
     <span>

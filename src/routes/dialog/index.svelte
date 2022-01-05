@@ -20,7 +20,6 @@
 			<p>这里是对话框内容</p>
 		</BeDialog>
 	</div>
-
 	<code >
 		{@html
 			`let visible = false
