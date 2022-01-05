@@ -1,6 +1,13 @@
 import isString from 'lodash/isString'
 import { browser } from '$app/env';
 
+if (browser) {
+	// @ts-ignore
+	window.__beerui__ = {
+		clickOutSide: { init: false }
+	};
+}
+
 const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**
  * 图片预览
@@ -310,19 +317,19 @@ export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: Func
 
 
 export const clickOutSide = (els: Element, cb: Function) => {
-	console.log('clickOutHandle2', els, cb);
-	on(document, 'click', (event: { target: Element }) => {
-		console.log('!containerDom(els, event.target)', !containerDom(els, event.target));
-		cb(!containerDom(els, event.target))
-	})
+	if (!cb && typeof cb !== 'function') throw new Error('需要一个回调 should contain callback.');
+	// @ts-ignore
+	let isFirst = __beerui__.clickOutSide.init
+	const callback = (evt: { target: Element }) => {
+		// 解决第一次就触发的问题 resolve first trigger
+		isFirst && cb(containerDom(els, evt.target))
+		isFirst = true
+	}
+	on(document, 'click', callback)
 	return {
-		update(visible) {
-			// `bar` 已发生变更
-			console.log('update visible', visible);
-		},
 		destroy() {
-			// node已从DOM中移除
-			console.log('destroy');
+			isFirst = false
+			off(document, 'click', callback)
 		}
 	}
 }
