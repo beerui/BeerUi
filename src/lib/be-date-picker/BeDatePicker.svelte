@@ -1,7 +1,7 @@
 <script lang='ts'>
-	import { clickOutSide } from '$lib/utils/beerui';
 	import Date from './panel/date.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
+	import clickOutside from '$lib/_actions/clickOutside';
 
 	export let value;
 	export let selectMode = 'day'
@@ -25,12 +25,11 @@
 	function handleCloseDatePopper(v) {
 		// console.log(e.target, input)
 		// if (!visible) return;
-		visible = v;
+		visible = false;
 	}
-
 </script>
 <!--<svelte:body on:click={handleCloseDatePopper} />-->
-<div class='be-date' on:click|stopPropagation={()=>{}} use:clickOutSide={handleCloseDatePopper}>
+<div class='be-date' on:click|stopPropagation={()=>{}} use:clickOutside on:outside={handleCloseDatePopper}>
 	<!-- <div on:click|stopPropagation={handleShowDatePopper}> -->
 		<BeInput on:change={handleChange} bind:value={value} on:focus={handleShowDatePopper} bind:this={input}/>
 	<!-- </div> -->

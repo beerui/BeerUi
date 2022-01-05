@@ -316,20 +316,3 @@ export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: Func
 };
 
 
-export const clickOutSide = (els: Element, cb: Function) => {
-	if (!cb && typeof cb !== 'function') throw new Error('需要一个回调 should contain callback.');
-	// @ts-ignore
-	let isFirst = __beerui__.clickOutSide.init
-	const callback = (evt: { target: Element }) => {
-		// 解决第一次就触发的问题 resolve first trigger
-		isFirst && cb(containerDom(els, evt.target))
-		isFirst = true
-	}
-	on(document, 'click', callback)
-	return {
-		destroy() {
-			isFirst = false
-			off(document, 'click', callback)
-		}
-	}
-}

@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import BeButton from '../be-button/BeButton.svelte';
-	import { clickOutSide } from '$lib/utils/beerui';
+	import clickOutside from '$lib/_actions/clickOutside';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
@@ -36,11 +36,28 @@
 		dispatch('beforeClose')
 		visible = false;
 	}
-	let cb = () => close()
 </script>
+<!--
+@component
+Here's some documentation for this component.
+It will show up on hover.
+
+- You can use markdown here.
+- You can also use code blocks here.
+- Usage:
+  ```javascript
+	  let visible = false
+	let openDialog = () => {
+		visible = true
+	}
+	const beforeClose = (evt) => {
+		console.log(evt.detail)
+	}
+  ```
+-->
 <svelte:window on:keydown={handle_keydown}/>
 {#if visible}
-	<div class='be-dialog' use:clickOutSide={cb}>
+	<div class='be-dialog' use:clickOutside on:outside={close}>
 		{#if mask}
 		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>
 		{/if}
@@ -48,7 +65,7 @@
 			<slot name='header'>
 				<div class='be-dialog__header'>
 					<span class='be-dialog__title'>{title}</span>
-					<div class='be-dialog__close' on:click={handle_close}>×</div>
+					<div class='be-dialog__close' on:click={close}>×</div>
 				</div>
 			</slot>
 			<div class="be-dialog__body">
