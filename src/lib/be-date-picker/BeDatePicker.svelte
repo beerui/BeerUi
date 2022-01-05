@@ -2,6 +2,8 @@
 	import Date from './panel/date.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher()
 
 	export let value;
 	export let selectMode = 'day'
@@ -11,10 +13,10 @@
 	function confirmPick(e) {
 		value = e.detail;
 		visible = false
+		dispatch('change', e.detail)
 	}
 
 	function handleShowDatePopper(e) {
-		console.log(e, input);
 		visible = true;
 	}
 

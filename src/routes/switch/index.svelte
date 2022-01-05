@@ -6,9 +6,10 @@
 	let activeColor = ''
 	let inactiveColor = ''
 	function change(val) {
-		setTimeout(() => {
-			switchValue = true
-		}, 3000);
+		console.log(val)
+		// setTimeout(() => {
+		// 	switchValue = true
+		// }, 3000);
 	}
 </script>
 
