@@ -4,12 +4,10 @@ interface DragElement {
 	isFree?: boolean,
 	isDrag?: boolean
 }
-
 interface DragLimit {
 	left: number,
 	top: number
 }
-
 /**
  * 边界判定
  * @param w
