@@ -18,4 +18,5 @@
 	<li><a href='notification'>Notification 示例</a></li>
 	<li><a href='carousel'>Carousel 示例</a></li>
 	<li><a href='preview'>PreviewImage 示例</a></li>
+	<li><a href='notice'>Notice 示例</a></li>
 </ul>

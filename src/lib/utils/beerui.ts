@@ -1,12 +1,18 @@
 import isString from 'lodash/isString'
 import { browser } from '$app/env';
-
+import Notice from './notice' 
 if (browser) {
 	// @ts-ignore
 	window.__beerui__ = {
 		clickOutSide: { init: false }
 	};
 }
+
+/**
+ * notify 消息提醒
+ * 
+ */
+export const notify = (title: string, message: string): void => {new Notice(title, message)}
 
 const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**
