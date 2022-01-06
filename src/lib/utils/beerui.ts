@@ -308,7 +308,7 @@ export function containerDom(parent: Element | Iterable<any> | ArrayLike<any>, c
 	return false;
 }
 
-export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: Function): void => {
+export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: () => void): void => {
 	on(document, 'click', (event: { target: Element }) => {
 		if (Array.isArray(els)) {
 			const isFlag = Array.from(els).every((item) => containerDom(item, event.target) === false);
