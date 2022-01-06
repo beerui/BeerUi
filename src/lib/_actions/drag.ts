@@ -2,6 +2,7 @@ import { off, on } from '$lib/utils/beerui';
 interface DragElement {
 	isLimit?: boolean,
 	isFree?: boolean,
+	els: string,
 	isDrag?: boolean
 }
 interface DragLimit {
@@ -31,13 +32,14 @@ const isInWindow = (w:number, h:number, l:number, t:number): DragLimit  => {
 /**
  * 注册元素的拖拽事件
  * @param dragBox
- * @param options { isLimit：false 限制在可视范围内, isDrag: true 可拖拽, isFree: false 上和下会限制 非完全不限制拖拽范围 }
+ * @param options { isLimit：false 限制在可视范围内, isDrag: true 可拖拽, isFree: false 上和下会限制 非完全不限制拖拽范围, els: 被拖拽的元素 }
  * @constructor
  */
-export default function DragEvent(dragBox: HTMLElement, options: DragElement = { isDrag: false, isLimit: false, isFree: false }) {
+export default function DragEvent(dragBox: HTMLElement, options: DragElement = { isDrag: false, isLimit: false, isFree: false, els: '.drag' }) {
 	if (!options.isDrag) return
+	if (!options.els) throw new Error('需要被拖拽的元素！')
 	const target = dragBox;
-	const dragArea = dragBox.querySelector('.dragArea');
+	const dragArea = dragBox.querySelector(options.els);
 	const dragHandler = (targetEvent: MouseEvent) => {
 		// 算出鼠标相对元素的位置
 		const disX = targetEvent.clientX - target.offsetLeft;

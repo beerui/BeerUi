@@ -4,12 +4,15 @@
 	let visible1 = false
 	let visible2 = false
 	let visible3 = false
+	let visible4 = false
 	let openDialog1 = () => visible1 = true
 	let openDialog2 = () => visible2 = true
 	let openDialog3 = () => visible3 = true
+	let openDialog4 = () => visible4 = true
 	const beforeClose1 = (evt) => console.log('beforeClose1', evt.detail)
 	const beforeClose2 = (evt) => console.log('beforeClose2', evt.detail)
 	const beforeClose3 = (evt) => console.log('beforeClose3', evt.detail)
+	const beforeClose4 = (evt) => console.log('beforeClose4', evt.detail)
 </script>
 <div class='page-container'>
 	<h2>Dialog 对话框</h2>
@@ -23,14 +26,20 @@
 		</BeDialog>
 	</div>
 	<div class="demo-block demo-dialog">
-		<BeButton size="normal" type="primary" on:click={openDialog2} autofocus>可以拖拽的 Dialog 点击mask可关闭 自动聚焦</BeButton>
+		<BeButton size="normal" type="primary" on:click={openDialog2} autofocus>基础拖拽 点击mask可关闭</BeButton>
 		<BeDialog bind:visible={visible2} closeOnClickModal={true} on:beforeClose={beforeClose2} isDrag={true}>
 			<p>这里是对话框内容</p>
 		</BeDialog>
 	</div>
 	<div class="demo-block demo-dialog">
-		<BeButton size="normal" type="primary" on:click={openDialog3}>限制拖拽范围的 Dialog</BeButton>
+		<BeButton size="normal" type="primary" on:click={openDialog3}>限制拖拽范围</BeButton>
 		<BeDialog bind:visible={visible3} closeOnClickModal={false} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
+			<p>这里是对话框内容</p>
+		</BeDialog>
+	</div>
+	<div class="demo-block demo-dialog">
+		<BeButton size="normal" type="primary" on:click={openDialog4}>完全自由</BeButton>
+		<BeDialog bind:visible={visible4} closeOnClickModal={false} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
 			<p>这里是对话框内容</p>
 		</BeDialog>
 	</div>

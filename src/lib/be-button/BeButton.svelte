@@ -23,7 +23,7 @@
         round ? ' be-button--round__' + round : '',
         loading ? ' be-button--' + loading : ''
     ].join('')}
-	on:click|stopPropagation={handleClick}
+	on:click={handleClick}
 	type={nativeType}
 >
 <!--    <beer-icon></beer-icon>-->
