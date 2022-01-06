@@ -75,9 +75,13 @@ $primary-text-color: #363A44;
   overflow: hidden;
 
 }
- .right {
+.be-notify.right {
   right: 16px;
 }
+.be-notify.left {
+  left: 16px;
+}
+
 .be-notify__group{
   margin-left: 13px;
   margin-right: 8px;

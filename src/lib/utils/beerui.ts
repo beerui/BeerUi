@@ -13,7 +13,7 @@ if (browser) {
  * notify 消息提醒
  *
  */
-export const notify = (title: string, message: string): void => {new Notice(title, message)}
+export const notify = (title: string, message: string,position?:string): void => {new Notice(title, message,position)}
 
 const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**
