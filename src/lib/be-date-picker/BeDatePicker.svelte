@@ -31,7 +31,7 @@
 	}
 </script>
 <!--<svelte:body on:click={handleCloseDatePopper} />-->
-<div class='be-date' on:click|stopPropagation={()=>{}} use:clickOutside on:outside={handleCloseDatePopper}>
+<div class='be-date' on:click|stopPropagation={()=>{}} use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
 	<!-- <div on:click|stopPropagation={handleShowDatePopper}> -->
 		<BeInput on:change={handleChange} bind:value={value} on:focus={handleShowDatePopper} bind:this={input}/>
 	<!-- </div> -->

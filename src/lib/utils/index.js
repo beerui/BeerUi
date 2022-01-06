@@ -128,29 +128,6 @@ export function mergeObject(...objs) {
 	return result
 }
 
-/**
- * 事件委托
- * @param { any } el 元素标识
- * @param { String } type
- * @param { Function } fn
- * @param { String } selector tag标签
- */
-export function addEventListener(el, type, fn, selector) {
-	if (typeof el === 'string') {
-		el = document.querySelector(el)
-	}
-	if (!selector) {
-		el.addEventListener(type, fn)
-	} else {
-		el.addEventListener(type, function(e) {
-			const target = e.target
-			if (target.matches(selector)) {
-				fn.call(target, e)
-			}
-		})
-	}
-}
-
 export const eventBus = {
 	callbacks: {}
 }
