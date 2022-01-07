@@ -1,12 +1,6 @@
 <script>
 	import BeCarousel from '$lib/be-carousel/BeCarousel.svelte';
-	const images = [
-		'https://wapi.zhihuihedao.cn/uploads/banner/picturePic_90.jpg',
-		'https://wapi.zhihuihedao.cn/uploads/banner/picturePic_91.jpg',
-		'https://wapi.zhihuihedao.cn/uploads/banner/picturePic_92.jpg',
-		'https://wapi.zhihuihedao.cn/uploads/banner/picturePic_93.jpg',
-		'https://www.zhihuihedao.cn/upload/images/task/2021/03-04/taskIssueImageOne_504362_01614819472970.jpg'
-	]
+	const images = ['/images/1.jpg', '/images/2.jpg', '/images/3.jpg', '/images/4.jpg', '/images/5.jpg', '/images/6.jpg']
 	const handleImageClicked = e => {
 		console.log(e.detail)
 	}
