@@ -4,7 +4,10 @@
 import { BeButton } from '$lib';
 
 function openInfo():void{
-  notify('相思', '红豆生南国,春来发几枝,红豆生南国.愿君多采撷，此物最相思')
+  notify({
+    title: '相思',
+    message: '红豆生南国,春来发几枝,红豆生南国.愿君多采撷，此物最相思'
+  })
 }
 function openPosInfo(position:string):void{
   let title:string = '提示'
@@ -22,7 +25,7 @@ function openPosInfo(position:string):void{
     title = '长恨歌'
     message = '在天愿作比翼鸟，在地愿为连理枝。天长地久有时尽，此恨绵绵无绝期。'
   }
-  notify(title, message,position)
+  notify({title,message,position})
 }
 
 

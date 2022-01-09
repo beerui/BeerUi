@@ -2,31 +2,38 @@
 /**
  * 
  */
+ interface options {
+    title:string,
+    message:string,
+    position?:string
+}
 
+interface instanceType extends options {
+  dom:HTMLElement
+}
+const instances:Array<instanceType> = [];
 export default class Notice{
   title: string|HTMLElement; // 标题
   content: string|HTMLElement; // 内容
   // htmlContainer: Array<HTMLCollection>; // 元素
   private _body:HTMLElement = document.body // 私有属性 获取body
   position:string;
-
-  constructor(title:string|HTMLElement, content:string|HTMLElement,position?:string){
-    this.title = title;
-    this.content = content;
-    this.position = position || 'top-right'; 
+  
+  constructor(options:options){
+    this.title = options.title;
+    this.content = options.message;
+    this.position = options.position || 'top-right'; 
     this.setHTML()
   }
   /**
-   * 多次点击会出现多个 每个dom元素的高为78 间隔为16
+   * 
    */
   setHTML():void{
-  // if(this.htmlContainer.length>1){
-  //   console.log(this.htmlContainer[0].offsetTop);
-  // }
+  const instance = <instanceType>{};
    const container:HTMLElement = document.createElement('div');
     container.classList.add('be-notify');
-    const pos:string[] =  this.position.split('-');
-    container.classList.add(pos[1]);
+    // const pos:string[] =  this.position.split('-');
+    container.classList.add(this.setPositionClass(this.position));
     container.innerHTML = `
     <div class="be-notify__group">
       <h2 class="be-notify__title">${this.title}</h2>
@@ -34,33 +41,30 @@ export default class Notice{
     </div>
     `;
     this._body.appendChild(container);
-    const length = this.htmlDoms.length
-    if(this.htmlDoms&&length === 1){
-      (this.htmlDoms[0] as HTMLElement).style[pos[0]] = '16px'
-    }else{
-      (this.htmlDoms[length - 1] as HTMLElement).style[pos[0]] = (this.htmlDoms[length-2] as HTMLElement)[`offset${pos[0].replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`] + 110 + 'px'
-    }
-    // for (let i = 0; i < this.htmlDoms.length; i++) {
-    //   const item = (this.htmlDoms[i] as HTMLElement);
-    //   // this.htmlDoms[0]
-    //   item.style['z-index'] = 2000 + i*1 
-    //   const pos:string[] =  this.position.split('-');
-    //   if(i === 0){
-    //     item.classList.add(pos[1]);
 
-    //     item.style[pos[0]] = '16px'
-    //   }else{
-    //     item.style[pos[0]] =(this.htmlDoms[i-1] as HTMLElement).offsetTop + 110 +'px'
-    //     console.log((this.htmlDoms[i-1] as HTMLElement).offsetTop);
-    //   }
-    // }
+    instance.position = this.position
+    instance.dom = container;
+    instances.push(instance);
+
+    let verticalOffset:number;
+    // 将同一位置的弹框过滤到一个数组中并设置偏移量
+    instances.filter(item => item.position === this.position).forEach((item,index) =>{
+      if(index !== 0 ){
+        verticalOffset += item.dom.offsetHeight + 16
+      }else {
+        verticalOffset = 0
+      }
+    })
+
+    verticalOffset += 16;
+    container.style[this.setProperty(this.position)] = verticalOffset + 'px';
   }
-
-  get htmlDoms():NodeList{
-    return document.querySelectorAll('.be-notify')
+  // 设置弹框类名
+  setPositionClass(position:string):string{
+    return position.includes('right') ? 'right':'left'
   }
-
-  setPosition(position:string):string[]{
-    return position.split('-')
+  // 设置弹框样式属性
+  setProperty(position:string):string {
+    return /^top-/.test(position) ? 'top' : 'bottom'
   }
 }
