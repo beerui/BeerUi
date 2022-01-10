@@ -4,6 +4,8 @@
     export let type = ''
     export let size = ''
     export let round = ''
+    export let nativeType = 'button'
+    export let autofocus = false
     export let disabled = false
     export let loading = false
     const dispatch = createEventDispatcher()
@@ -12,7 +14,8 @@
     }
 </script>
 <button
-    class={[
+	{autofocus}
+	class={[
         'be-button',
         disabled ? ' be-button--disabled' : '',
         size ? ' be-button--' + size : '',
@@ -20,7 +23,8 @@
         round ? ' be-button--round__' + round : '',
         loading ? ' be-button--' + loading : ''
     ].join('')}
-	on:click|stopPropagation={handleClick}
+	on:click={handleClick}
+	type={nativeType}
 >
 <!--    <beer-icon></beer-icon>-->
     <span>

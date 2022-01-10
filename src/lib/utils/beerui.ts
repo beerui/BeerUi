@@ -1,12 +1,19 @@
 import isString from 'lodash/isString'
 import { browser } from '$app/env';
-
+import Notice from './notice'
 if (browser) {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	window.__beerui__ = {
 		clickOutSide: { init: false }
 	};
 }
+
+/**
+ * notify 消息提醒
+ *
+ */
+export const notify = (options): void => {new Notice(options)}
 
 const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**
@@ -16,20 +23,20 @@ const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEF
  * @param {function} cb 图片切换后 监听的回调
  */
 
-export const previewImages = (src: string, list?: string[], cb?: Function):PreviewImage => new PreviewImage(src, list, cb)
+export const previewImages = (src: string, list?: string[], cb?: () => void):PreviewImage => new PreviewImage(src, list, cb)
 
 class PreviewImage {
 	private readonly body: HTMLElement = document.body
 	public src: string // 传入图片的 URL
 	public list?: string[] // 图片列表
 	private container: HTMLElement // 生成的元素
-	private _index: number = 0 // 当前展示的图片索引
+	private _index = 0 // 当前展示的图片索引
 	private node: HTMLImageElement // 图片元素节点
 	private static instance: PreviewImage // 当前实例
-	private cb: Function // 图片切换后 监听的回调
+	private cb: (current: { current: string; index: number; list: string[] }) => void // 图片切换后 监听的回调
 	private style: string // body样式恢复
 
-	constructor(src: string, list: string[] = [], cb?: Function) {
+	constructor(src: string, list: string[] = [], cb?: () => void) {
 		if (!PreviewImage.instance) {
 			this.src = src
 			this.list = list
@@ -50,7 +57,7 @@ class PreviewImage {
 		return this._index
 	}
 	// 图片切换时触发
-	watchHandle(cb?: Function) {
+	watchHandle(cb?: () => void) {
 		if (cb) this.cb = cb
 		this.cb && this.cb(this.current)
 	}
@@ -301,7 +308,7 @@ export function containerDom(parent: Element | Iterable<any> | ArrayLike<any>, c
 	return false;
 }
 
-export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: Function): void => {
+export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: () => void): void => {
 	on(document, 'click', (event: { target: Element }) => {
 		if (Array.isArray(els)) {
 			const isFlag = Array.from(els).every((item) => containerDom(item, event.target) === false);

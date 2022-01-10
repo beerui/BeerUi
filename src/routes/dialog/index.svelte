@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { BeButton, BeDialog } from '$lib';
 
-	let visible = false
-	let openDialog = () => {
-		visible = true
-	}
-	const beforeClose = (evt) => {
-		console.log(evt.detail)
-	}
+	let visible1 = false
+	let visible2 = false
+	let visible3 = false
+	let visible4 = false
+	let openDialog1 = () => visible1 = true
+	let openDialog2 = () => visible2 = true
+	let openDialog3 = () => visible3 = true
+	let openDialog4 = () => visible4 = true
+	const beforeClose1 = (evt) => console.log('beforeClose1', evt.detail)
+	const beforeClose2 = (evt) => console.log('beforeClose2', evt.detail)
+	const beforeClose3 = (evt) => console.log('beforeClose3', evt.detail)
+	const beforeClose4 = (evt) => console.log('beforeClose4', evt.detail)
 </script>
 <div class='page-container'>
 	<h2>Dialog 对话框</h2>
@@ -15,11 +20,30 @@
 	<h3>基本用法</h3>
 	<p>Dialog 弹出一个对话框，适合需要定制性更大的场景。</p>
 	<div class="demo-block demo-dialog">
-		<BeButton size="normal" type="primary" on:click={openDialog}>点击打开 Dialog</BeButton>
-		<BeDialog bind:visible={visible} closeOnClickModal={false} mask={false} on:beforeClose={beforeClose}>
+		<BeButton size="normal" type="primary" on:click={openDialog1} nativeType='submit'>基础 Dialog</BeButton>
+		<BeDialog bind:visible={visible1} closeOnClickModal={false} on:beforeClose={beforeClose1}>
 			<p>这里是对话框内容</p>
 		</BeDialog>
 	</div>
+	<div class="demo-block demo-dialog">
+		<BeButton size="normal" type="primary" on:click={openDialog2} autofocus>基础拖拽 点击mask可关闭</BeButton>
+		<BeDialog bind:visible={visible2} closeOnClickModal={true} on:beforeClose={beforeClose2} isDrag={true}>
+			<p>这里是对话框内容</p>
+		</BeDialog>
+	</div>
+	<div class="demo-block demo-dialog">
+		<BeButton size="normal" type="primary" on:click={openDialog3}>限制拖拽范围</BeButton>
+		<BeDialog bind:visible={visible3} closeOnClickModal={false} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
+			<p>这里是对话框内容</p>
+		</BeDialog>
+	</div>
+	<div class="demo-block demo-dialog">
+		<BeButton size="normal" type="primary" on:click={openDialog4}>完全自由</BeButton>
+		<BeDialog bind:visible={visible4} closeOnClickModal={false} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
+			<p>这里是对话框内容</p>
+		</BeDialog>
+	</div>
+
 	<code >
 		{@html
 			`let visible = false
