@@ -200,6 +200,7 @@ BeerPS.subscribe = function(channel, callback) {
 BeerPS.publish = function(channel, data) {
 	if (this.callbacks[channel]) {
 		Object.values(this.callbacks[channel]).forEach(callback => {
+			console.log(channel, callback, data)
 			callback(data)
 		})
 	}

@@ -58,6 +58,7 @@
 .be-date-table {
   font-size: 12px;
   user-select: none;
+  border-spacing: 0;
   th {
     padding: 5px;
     color: #606266;
@@ -103,10 +104,17 @@
     color: #fff;
     background-color: #409eff;
   }
+  .disabled div {
+    background-color: #F5F7FA;
+    opacity: 1;
+    cursor: not-allowed;
+    color: #C0C4CC;
+  }
 }
 .be-month-table, .be-year-table {
   font-size: 12px;
   border-collapse: collapse;
+  border-spacing: 0;
   td {
     text-align: center;
     padding: 8px 0;
@@ -135,6 +143,12 @@
   }
   .current:not(.disabled) .cell {
     color: #409eff;
+  }
+  .disabled div {
+    background-color: #F5F7FA;
+    opacity: 1;
+    cursor: not-allowed;
+    color: #C0C4CC;
   }
 }
 .popper__arrow {

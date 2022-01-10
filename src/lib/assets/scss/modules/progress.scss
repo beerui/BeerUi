@@ -1,0 +1,105 @@
+@import "../common/colors";
+.be-progress_line {
+  // width: 350px;
+}
+.be-progress_circle, .be-progress_dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  span {
+    position: absolute;
+  }
+  &-outer {
+    stroke: #e5e9f2;
+  }
+  &-inner {
+    stroke: #20a0ff;
+    // transition: all 0.6s ease;
+    &_primary {
+      stroke: $primary-color;
+    }
+    &_success {
+      stroke: $success-color;
+    }
+    &_info {
+      stroke: $info-color;
+    }
+    &_warning {
+      stroke: $warning-color;
+    }
+    &_danger {
+      stroke: $danger-color;
+    }
+  }
+}
+.be-progress_circle-inner {
+  transform: rotateZ(-90deg);
+  transform-origin: center;
+}
+.be-progress_dashboard svg{
+  transform: rotateZ(90deg);
+  transform-origin: center;
+}
+.be-progress {
+  &-bar {
+    width: 100%;
+    &_outer {
+      width: 300px;
+      height: 6px;
+      border-radius: 100px;
+      background-color: #ebeef5;
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &_inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      border-radius: 100px;
+      background-color: $primary-color;
+      transition: width 0.6s ease;
+      text-align: right;
+      &_text {
+        // display: inline-block;
+        // height: 100%;
+        // vertical-align: middle;
+        color: #fff;
+        font-size: 12px;
+        margin: 0 5px;
+        &::after {
+          display: inline-block;
+          content: "";
+          height: 100%;
+          vertical-align: middle;
+        }
+      }
+    }
+    &_text {
+      font-size: 14px;
+      color: #606266;
+      display: inline-block;
+      vertical-align: middle;
+      // margin-left: 10px;
+      line-height: 1;
+    }
+  }
+}
+.be-progress-bar-primary {
+  background-color: $primary-color;
+}
+.be-progress-bar-success {
+  background-color: $success-color;
+}
+.be-progress-bar-info {
+  background-color: $info-color;
+}
+.be-progress-bar-warning {
+  background-color: $warning-color;
+}
+.be-progress-bar-danger {
+  background-color: $danger-color;
+}

@@ -8,6 +8,7 @@
 	export let value;
 	export let selectMode = 'day'
 	export let format
+	export let disabledDate: Function
 	let visible;
  	let input
 	function confirmPick(e) {
@@ -35,7 +36,7 @@
 	<!-- <div on:click|stopPropagation={handleShowDatePopper}> -->
 		<BeInput on:change={handleChange} bind:value={value} on:focus={handleShowDatePopper} bind:this={input}/>
 	<!-- </div> -->
-	<Date value={value} bind:visible={visible} on:pick={confirmPick} selectMode={selectMode} format={format}/>
+	<Date {disabledDate} {value} bind:visible={visible} on:pick={confirmPick} {selectMode} {format}/>
 </div>
 <style lang="scss" global>
   @import '../assets/scss/modules/datePicker';
