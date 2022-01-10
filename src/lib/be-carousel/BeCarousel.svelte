@@ -140,13 +140,6 @@
         display: flex;
         justify-content: center;
         flex-wrap: nowrap;
-        -webkit-mask: linear-gradient(
-                to right,
-                transparent,
-                black 40%,
-                black 60%,
-                transparent
-        );
         mask: linear-gradient(
                 to right,
                 transparent,
