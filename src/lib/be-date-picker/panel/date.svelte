@@ -12,6 +12,7 @@ export let value
 export let visible = false
 export let format
 export let selectMode
+export let disabledDate: Function
 
 const times = new FormatTime(format)
 $:currentView = selectMode === 'day' ? 'date' : selectMode
@@ -66,7 +67,6 @@ $: if (currentView === 'year') {
 
 function confirmPick(e) {
   value = e.detail
-  console.log(formatDate(e.detail), e.detail)
   dispatch('pick', formatDate(e.detail))
 }
 
@@ -75,7 +75,6 @@ function confirmMonthPick(e) {
     date = e.detail
     currentView = 'date'
   } else {
-    console.log(formatDate(e.detail), e.detail)
     dispatch('pick',  formatDate(e.detail))
   }
 }
@@ -84,7 +83,6 @@ function confirmYearPick(e) {
     date = e.detail
     currentView = 'month'
   } else {
-    console.log(formatDate(e.detail), e.detail)
     dispatch('pick', formatDate(e.detail))
   }
 }
@@ -132,13 +130,13 @@ function zoomIn(node, params) {
       </div>
       <div class="be-picker-panel__content">
         {#if currentView === 'date'}
-          <DateTable date={date} on:pick={confirmPick} value={value}/>
+          <DateTable disabledDate={disabledDate} date={date} on:pick={confirmPick} value={value}/>
         {/if}
         {#if currentView === 'month'}
-          <MonthTable date={date} on:pick={confirmMonthPick} value={value}/>
+          <MonthTable disabledDate={disabledDate} date={date} on:pick={confirmMonthPick} value={value}/>
         {/if}
         {#if currentView === 'year'}
-          <YearTable date={date} on:pick={confirmYearPick} value={value}/>
+          <YearTable disabledDate={disabledDate} date={date} on:pick={confirmYearPick} value={value}/>
         {/if}
       </div>
     </div>

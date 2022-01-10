@@ -1,12 +1,14 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
-import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth, modifyDate } from '../date-util.js'
+import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '../date-util.js'
 const dispatch = createEventDispatcher()
 const weeks = ['日','一','二','三','四','五','六']
 let rows = []
 
 export let date
 export let value
+export let disabledDate: Function
+
 let dateCountOfMonth
 let dateCountOfLastMonth
 let dateWeekOfMonth
@@ -28,7 +30,6 @@ function initDate(date) {
   dateWeekOfMonth = getFirstDayOfMonth(date)
   // console.log(date.getMonth(), dateCountOfMonth, dateCountOfLastMonth, dateWeekOfMonth)
   // 当前日期时间戳
-
   getMonthArray()
   // console.log(dateWeekOfMonth)
 }
@@ -39,17 +40,21 @@ function getMonthArray() {
   for(let i = 0; i < 6; i++) {
     const row = rows[i]
     for(let j = 0; j < 7; j++) {
-      const index = i * 7 + j; // 0 1 2 3 4 5 6 7 8
-      const cell = { text: null, row: i, column: j, type: 'normal', inRange: false };
-      //计算需要补的天数 目的是调整前两行日期的位置 (dateCountOfLastMonth - dateWeekOfMonth + 1 + index)
-      const day = dateCountOfLastMonth - offset + 1 + index
+      const index = i * 7 + j; // 下标 0 1 2 3 4 5 6 7 8
+      const cell = { text: null, row: i, column: j, type: 'normal', disabled: false };
+      //计算需要补的天数 目的是调整前两行日期的位置
+      const offsetDay = - offset + 1 + index
+      // 计算需要补上月的日期
+      const day = dateCountOfLastMonth + offsetDay
+      // let curDate =  new Date(year, month, count)
+      // 数字代表的实际日期 eg: new Date(2022,0,-1) = new Date(2021,12,30)
+      let curDate = new Date(year, month, offsetDay)
       // if(dateWeekOfMonth != 0 && day <= dateCountOfLastMonth) {
       if(day <= dateCountOfLastMonth) {
         cell.text = day
         cell.type = 'prev-month';
       } else {
         if (count <= dateCountOfMonth) {
-          const curDate = new Date(year, month,count)
           const time = getDateTimestamp(curDate)
           cell.text = count++;
           const isToday = time === now;
@@ -61,26 +66,21 @@ function getMonthArray() {
           cell.type = 'next-month';
         }
       }
+      //  禁用日期
+      cell.disabled = typeof disabledDate === 'function' && disabledDate(curDate);
       row.push(cell)
     }
   }
 }
+
 function selectDay(e, cell, index) {
-  let dateYear = year
+  if(cell.disabled) throw new Error('该日期已禁用！')
   let dateMonth = month
   if(cell.type == 'next-month') {
     dateMonth++
-    if(month == 11) {
-      dateYear += 1
-      dateMonth = 0
-    }
   }
   if(cell.type == 'prev-month') {
     dateMonth--
-    if(month == 0) {
-      dateYear -= 1
-      dateMonth = 11
-    }
   }
   const dateTime = new Date(year, dateMonth, cell.text)
   dispatch('pick', dateTime)
@@ -103,6 +103,9 @@ function getCellClasses(cell) {
   }
   if ((cell.type === 'normal' || cell.type === 'today') && cellMatchesDate(cell)) {
     classes.push('current');
+  }
+  if (cell.disabled) {
+    classes.push('disabled');
   }
   return classes.join(' ');
 }

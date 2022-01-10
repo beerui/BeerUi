@@ -6,6 +6,7 @@ let rows = []
 const now = getMonthTimestamp(new Date());
 export let date
 export let value
+export let disabledDate: Function
 const MONTHS = {
   '0': '一月',
   '1': '二月',
@@ -33,17 +34,20 @@ function ininMonth(date) {
         cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
       }
       cell.type = 'normal'
-      const time = new Date(date.getFullYear(), index).getTime();
+      const curDate = new Date(date.getFullYear(), index)
+      const time = curDate.getTime();
       const isToday = time === now;
       if (isToday) {
         cell.type = 'today';
       }
+      cell.disabled = typeof disabledDate === 'function' && disabledDate(curDate);
       cell.text = index;
       row.push(cell)
     }
   }
 }
 function selectMonth(e, cell) {
+  if(cell.disabled) throw new Error('该日期已禁用！')
   const year = date.getFullYear()
   const dateTime = new Date(year, cell.text, 1)
   dispatch('pick', dateTime)
@@ -68,6 +72,9 @@ function getCellClasses(cell) {
   if ((cell.type === 'normal' || cell.type === 'today') && cellMatchesDate(cell)) {
     classes.push('current');
   }
+  if (cell.disabled) {
+    classes.push('disabled');
+  }
   return classes.join(' ');
 }
 
@@ -80,7 +87,7 @@ function getCellClasses(cell) {
         {#each row as cell}
           <td class={getCellClasses(cell)} on:click={(e)=> selectMonth(e, cell)}>
             <div>
-              <a class="cell">{MONTHS[cell.text]}</a>
+              <span class="cell">{MONTHS[cell.text]}</span>
             </div>
           </td>
         {/each}

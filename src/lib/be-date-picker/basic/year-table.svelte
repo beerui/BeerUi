@@ -1,15 +1,19 @@
-<script>
+<script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
   export let date
   export let value
-  
+	export let disabledDate: Function
+
   const dispatch = createEventDispatcher()
   $:startYear = Math.floor(date.getFullYear() / 10) * 10 
-
+  function isDisabled(date) {
+    return typeof disabledDate === 'function' && disabledDate(date)
+  }
   function selectYear(e) {
     const year = e.target.outerText
     const dateTime = new Date(year)
+    if(isDisabled(dateTime)) throw new Error('该日期已禁用！')
     dispatch('pick', dateTime)
   }
   function getCellClasses(year) {
@@ -21,6 +25,10 @@
     } else {
       classes.push('available');
     }
+    const disabled = isDisabled(new Date(String(year)))
+    if(disabled) {
+      classes.push('disabled');
+    }
     return classes.join(' ')
   }
 </script>
@@ -30,56 +38,56 @@
       <tr>
         <td class={getCellClasses(startYear)}>
           <div>
-            <a class="cell">{ startYear }</a>
+            <span class="cell">{ startYear }</span>
           </div>
         </td>
         <td class={getCellClasses(startYear + 1)}>
           <div>
-            <a class="cell">{ startYear + 1 }</a>
+            <span class="cell">{ startYear + 1 }</span>
           </div>
         </td>
         <td class={getCellClasses(startYear + 2)}>
           <div>
-            <a class="cell">{ startYear + 2 }</a>
+            <span class="cell">{ startYear + 2 }</span>
           </div>
         </td>
         <td class={getCellClasses(startYear + 3)}>
           <div>
-            <a class="cell">{ startYear + 3 }</a>
+            <span class="cell">{ startYear + 3 }</span>
           </div>
         </td>
       </tr>
       <tr>
         <td class={getCellClasses(startYear + 4)}>
           <div>
-            <a class="cell">{ startYear + 4 }</a>
+            <span class="cell">{ startYear + 4 }</span>
           </div>
         </td>
-        <td class={getCellClasses(startYear + 15)}>
+        <td class={getCellClasses(startYear + 5)}>
           <div>
-            <a class="cell">{ startYear + 5 }</a>
+            <span class="cell">{ startYear + 5 }</span>
           </div>
         </td>
         <td class={getCellClasses(startYear + 6)}>
           <div>
-            <a class="cell">{ startYear + 6 }</a>
+            <span class="cell">{ startYear + 6 }</span>
           </div>
         </td>
         <td class={getCellClasses(startYear + 7)}>
           <div>
-            <a class="cell">{ startYear + 7 }</a>
+            <span class="cell">{ startYear + 7 }</span>
           </div>
         </td>
       </tr>
       <tr>
         <td class={getCellClasses(startYear + 8)}>
           <div>
-            <a class="cell">{ startYear + 8 }</a>
+            <span class="cell">{ startYear + 8 }</span>
           </div>
         </td>
         <td class={getCellClasses(startYear + 9)}>
           <div>
-            <a class="cell">{ startYear + 9 }</a>
+            <span class="cell">{ startYear + 9 }</span>
           </div>
         </td>
       </tr>
