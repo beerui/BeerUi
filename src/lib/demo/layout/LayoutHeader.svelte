@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
 
   export let menu: string = '/'
+  console.log('menu', menu);
 	let active: string = 'light'
 	onMount(() => {
 	  const _theme = getStorage('BEER_THEME')

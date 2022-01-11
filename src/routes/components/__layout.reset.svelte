@@ -3,9 +3,16 @@
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
   import SideBar from '$lib/demo/layout/SideBar.svelte';
+
+	$:formatUrl = () => {
+	  if ($page.url.pathname.indexOf('/components') !== -1) {
+		  return '/' + $page.url.pathname.split('/')[1]
+		}
+	  return $page.url.pathname
+	}
 </script>
 <div class='be-warp'>
-	<LayoutHeader menu={$page.url.pathname} />
+	<LayoutHeader menu={formatUrl()} />
 	<div class='be-container'>
 		<SideBar />
 		<div class='be-main'>
