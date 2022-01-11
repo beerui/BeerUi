@@ -1,6 +1,5 @@
 import isString from 'lodash/isString'
 import { browser } from '$app/env';
-import Notice from './notice'
 if (browser) {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
@@ -9,11 +8,6 @@ if (browser) {
 	};
 }
 
-/**
- * notify 消息提醒
- *
- */
-export const notify = (options): void => {new Notice(options)}
 
 const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**

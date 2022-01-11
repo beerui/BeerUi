@@ -1,12 +1,19 @@
 <script lang="ts" >
-  import { notify } from '$lib/utils/beerui';
-
+import Notice from '$lib/utils/notice'
+import { onMount } from 'svelte'
+ 
 import { BeButton } from '$lib';
+let notice;
+onMount(() => {
+  notice = new Notice()
+})
+
 
 function openInfo():void{
-  notify({
+  notice.setNotice({
     title: '相思',
-    message: '红豆生南国,春来发几枝,红豆生南国.愿君多采撷，此物最相思'
+    message: '红豆生南国，春来发几枝',
+    duration:1000
   })
 }
 function openPosInfo(position:string):void{
@@ -25,7 +32,7 @@ function openPosInfo(position:string):void{
     title = '长恨歌'
     message = '在天愿作比翼鸟，在地愿为连理枝。天长地久有时尽，此恨绵绵无绝期。'
   }
-  notify({title,message,position})
+  // notify({title,message,position})
 }
 
 
