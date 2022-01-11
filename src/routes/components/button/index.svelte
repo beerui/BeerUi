@@ -1,7 +1,22 @@
 <script>
 	import { BeButton } from '$lib';
+  import { onMount } from 'svelte';
+  import CodeView from '$lib/demo/CodeView.svelte';
+  // import 'highlight.js/styles/github.css';
+  // import hljs from 'highlight.js';
+  // const res = hljs.highlightAuto('<span>Hello World!</span>')
+  // console.log(res);
+  let code = `<div class='mt-10'><BeButton size="large" type="primary">提交</BeButton> <code>size="large"</code></div>`
+  let highlight = `<div class='mt-10'><BeButton size="large" type="primary">提交</BeButton> <code>size="large"</code></div>`
+  let isMount = false
+  onMount(() => {
+	  isMount = true;
+  })
 </script>
 <div class='page-container'>
+	{#if isMount}
+		<CodeView value={code} {highlight} />
+	{/if}
 	<h1>Size</h1>
 	<div class='mt-10'><BeButton size="large" type="primary">提交</BeButton> <code>size="large"</code></div>
 	<div class='mt-10'><BeButton size="medium" type="primary">提交</BeButton> <code>size="medium"</code></div>
