@@ -3,22 +3,22 @@
   font-weight: 600;
   line-height: 1rem;
   white-space: nowrap;
-  color: #ffffff;
-  background: #1492FF;
+  color: var(--be-text-color-anti);
+  background: var(--be-primary);
   border: none;
   padding: .5rem 1rem;
   border-radius: 0.375rem;
   cursor: pointer;
   transition: .3s;
 
-  &--disabled{background: #f2f2f2;}
+  &--disabled{background: var(--be-disabled);}
   &--large{padding: .8rem 3rem;font-size: 1.15rem;}
   &--medium{padding: .75rem 2.2rem;font-size: 1rem;}
   &--normal{padding: .5rem 2rem;}
   &--small{padding: .45rem 1.8rem;}
   &--mini{padding: .35rem 1.5rem;}
 
-  &:hover {background: #075c4a;}
+  &:hover {background: var(--be-primary-hover);}
 
   &--round {
     &__circle {border-radius: 50%;padding: 1rem;}
@@ -28,27 +28,27 @@
   }
 
   &--default {
-    background: #ffffff;border: 1px solid #dcdfe6;color: #606266;
-    &:hover {background: #f2f2f2;}
+    background: var(--be-bg-color-container);border: 1px solid var(--be-font-gray-4);color: var(--be-font-gray-1);
+    &:hover {background: var(--be-bg-color-container-hover);}
   }
   &--primary {
-    background: #1492FF;
-    &:hover {background: #0A508C;}
+    background: var(--be-primary);
+    &:hover {background: var(--be-primary-hover);}
   }
   &--success {
-    background: #2FA78E;
-    &:hover {background: #075c4a;}
+    background: var(--be-success);
+    &:hover {background: var(--be-success-hover);}
   }
   &--info {
-    background: #686B73;
-    &:hover {background: #363A44;}
+    background: var(--be-info);
+    &:hover {background: var(--be-info-hover);}
   }
   &--warning {
-    background: #EB6C3A;
-    &:hover {background: #b33706;}
+    background: var(--be-warning);
+    &:hover {background: var(--be-warning-hover);}
   }
   &--danger {
-    background: #E63633;
-    &:hover {background: #930907;}
+    background: var(--be-danger);
+    &:hover {background: var(--be-danger-hover);}
   }
 }

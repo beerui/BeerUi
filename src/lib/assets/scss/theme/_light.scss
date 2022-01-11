@@ -1,5 +1,22 @@
 :root,
 :root[theme-mode="light"] {
+  --be-disabled: #f2f2f2;
+
+  --be-primary: #1492FF;
+  --be-primary-hover: #0A508C;
+
+  --be-success: #2FA78E;
+  --be-success-hover: #075c4a;
+
+  --be-info: #686B73;
+  --be-info-hover: #363A44;
+
+  --be-warning: #EB6C3A;
+  --be-warning-hover: #b33706;
+
+  --be-danger: #E63633;
+  --be-danger-hover: #930907;
+
   --be-brand-color-1: #ecf2fe;
   --be-brand-color-2: #d4e3fc;
   --be-brand-color-3: #bbd3fb;
@@ -121,6 +138,7 @@
   --be-bg-color-specialcomponent: #fff;
 
   // 文本颜色
+  --be-text-color-white: #ffffff;      // 色彩-文字-主要
   --be-text-color-primary: var(--be-font-gray-1);      // 色彩-文字-主要
   --be-text-color-secondary: var(--be-font-gray-2);    // 色彩-文字-次要
   --be-text-color-placeholder: var(--be-font-gray-3);  // 色彩-文字-占位符/说明

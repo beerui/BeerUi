@@ -1,5 +1,3 @@
-@import "../common/colors";
-
 .be-alert{
   width: 100%;
   font-size:.85rem;
@@ -16,16 +14,20 @@
     line-height: 1.125rem;
   }
   &--success{
-    background-color: $success-color;
-    color: #fff;
+    background-color: var(--be-success);
+    color: var(--be-text-color-white);
+    &:hover {background-color: var(--be-success-hover);}
   }
   &--info{
-    background-color: $info-color;
+    background-color: var(--be-info);
+    &:hover {background-color: var(--be-info-hover);}
   }
   &--warning{
-    background-color: $warning-color;
+    background-color: var(--be-warning);
+    &:hover {background-color: var(--be-warning-hover);}
   }
   &--danger{
-    background-color: $danger-color;
+    background-color: var(--be-danger);
+    &:hover {background-color: var(--be-danger-hover);}
   }
 }
