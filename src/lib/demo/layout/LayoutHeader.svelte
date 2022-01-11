@@ -1,10 +1,20 @@
 <script lang='ts'>
-	export let menu: string = '/';
-	let active = 'light';
+	import { getStorage, setStorage } from '$lib/utils/storage';
+  import { onMount } from 'svelte';
+
+  export let menu: string = '/'
+	let active: string = 'light'
+	onMount(() => {
+	  const _theme = getStorage('BEER_THEME')
+	  if (_theme) active = _theme.v
+	  setTheme(active)
+	})
 	let changeTheme = (theme) => {
-		active = theme;
-		document.querySelector('html').setAttribute('theme-mode', theme);
+		active = theme
+	  setStorage('BEER_THEME', { k: 'theme', v: theme })
+	  setTheme(theme)
 	};
+	const setTheme = v => document.querySelector('html').setAttribute('theme-mode', v)
 </script>
 <div class='be-header'>
 	<div class='logo'>BeerUi</div>
