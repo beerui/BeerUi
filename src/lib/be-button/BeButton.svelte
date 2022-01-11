@@ -1,17 +1,16 @@
-<script lang="ts">
-    import { createEventDispatcher } from "svelte";
-
-    export let type = ''
-    export let size = ''
-    export let round = ''
-    export let nativeType = 'button'
-    export let autofocus = false
-    export let disabled = false
-    export let loading = false
-    const dispatch = createEventDispatcher()
-    const handleClick = (evt: MouseEvent) => {
-        dispatch('click', evt)
-    }
+<script lang='ts'>
+	import { createEventDispatcher } from 'svelte';
+	export let type = '';
+	export let size = '';
+	export let round = '';
+	export let nativeType = 'button';
+	export let autofocus = false;
+	export let disabled = false;
+	export let loading = false;
+	const dispatch = createEventDispatcher();
+	const handleClick = (evt: MouseEvent) => {
+		dispatch('click', evt);
+	};
 </script>
 <button
 	{autofocus}
@@ -26,12 +25,11 @@
 	on:click={handleClick}
 	type={nativeType}
 >
-<!--    <beer-icon></beer-icon>-->
-    <span>
+	<!--    <beer-icon></beer-icon>-->
+	<span>
         <slot></slot>
     </span>
 </button>
-
-<style lang="scss">
+<style lang='scss'>
   @import '../assets/scss/modules/button';
 </style>
