@@ -121,55 +121,55 @@
   --be-mask-disabled: rgba(255, 255, 255, 60%); // 遮罩-禁用
 
   // 背景色
-  --be-bg-color-page: var(--be-gray-color-2);                        // 色彩 - page
-  --be-bg-color-container: #fff;                                // 色彩 - 容器
-  --be-bg-color-container-hover: var(--be-gray-color-1);             // 色彩 - 容器 - hover
-  --be-bg-color-container-active: var(--be-gray-color-3);            // 色彩 - 容器 - active
-  --be-bg-color-container-select: #fff;                         // 色彩 - 容器 - select
-  --be-bg-color-secondarycontainer: var(--be-gray-color-1);          // 色彩 - 次级容器
-  --be-bg-color-secondarycontainer-hover: var(--be-gray-color-2);    // 色彩 - 次级容器 - hover
-  --be-bg-color-secondarycontainer-active: var(--be-gray-color-4);   // 色彩 - 次级容器 - active
-  --be-bg-color-component: var(--be-gray-color-3);                   // 色彩 - 组件
-  --be-bg-color-component-hover: var(--be-gray-color-4);             // 色彩 - 组件 - hover
-  --be-bg-color-component-active: var(--be-gray-color-6);            // 色彩 - 组件 - active
-  --be-bg-color-component-disabled: var(--be-gray-color-2);          // 色彩 - 组件 - disabled
+  --bg-color-page: var(--be-gray-color-2);                        // 色彩 - page
+  --bg-color-container: #fff;                                // 色彩 - 容器
+  --bg-color-container-hover: var(--be-gray-color-1);             // 色彩 - 容器 - hover
+  --bg-color-container-active: var(--be-gray-color-3);            // 色彩 - 容器 - active
+  --bg-color-container-select: #eee;                         // 色彩 - 容器 - select
+  --bg-color-secondarycontainer: var(--be-gray-color-1);          // 色彩 - 次级容器
+  --bg-color-secondarycontainer-hover: var(--be-gray-color-2);    // 色彩 - 次级容器 - hover
+  --bg-color-secondarycontainer-active: var(--be-gray-color-4);   // 色彩 - 次级容器 - active
+  --bg-color-component: var(--be-gray-color-3);                   // 色彩 - 组件
+  --bg-color-component-hover: var(--be-gray-color-4);             // 色彩 - 组件 - hover
+  --bg-color-component-active: var(--be-gray-color-6);            // 色彩 - 组件 - active
+  --bg-color-component-disabled: var(--be-gray-color-2);          // 色彩 - 组件 - disabled
 
   // 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
-  --be-bg-color-specialcomponent: #fff;
+  --bg-color-specialcomponent: #fff;
 
   // 文本颜色
-  --be-text-color-white: #ffffff;      // 色彩-文字-主要
-  --be-text-color-primary: var(--be-font-gray-1);      // 色彩-文字-主要
-  --be-text-color-secondary: var(--be-font-gray-2);    // 色彩-文字-次要
-  --be-text-color-placeholder: var(--be-font-gray-3);  // 色彩-文字-占位符/说明
-  --be-text-color-disabled: var(--be-font-gray-4);    // 色彩-文字-禁用
-  --be-text-color-anti: #fff;                      // 色彩-文字-反色
-  --be-text-color-brand: var(--be-brand-color-8);           // 色彩-文字-品牌
-  --be-text-color-link: var(--be-brand-color-8);            // 色彩-文字-链接
+  --text-color-white: #ffffff;      // 色彩-文字-主要
+  --text-color-primary: var(--be-font-gray-1);      // 色彩-文字-主要
+  --text-color-secondary: var(--be-font-gray-2);    // 色彩-文字-次要
+  --text-color-placeholder: var(--be-font-gray-3);  // 色彩-文字-占位符/说明
+  --text-color-disabled: var(--be-font-gray-4);    // 色彩-文字-禁用
+  --text-color-anti: #fff;                      // 色彩-文字-反色
+  --text-color-brand: var(--be-brand-color-8);           // 色彩-文字-品牌
+  --text-color-link: var(--be-brand-color-8);            // 色彩-文字-链接
 
   // 分割线
-  --be-border-level-1-color: var(--be-gray-color-3);
-  --be-component-stroke: var(--be-gray-color-3);
+  --border-level-1-color: var(--be-gray-color-3);
+  --component-stroke: var(--be-gray-color-3);
   // 边框
-  --be-border-level-2-color: var(--be-gray-color-4);
-  --be-component-border: var(--be-gray-color-4);
+  --border-level-2-color: var(--be-gray-color-4);
+  --component-border: var(--be-gray-color-4);
 
   // 基础/下层 投影 hover 使用的组件包括：表格 /
-  --be-shadow-1: 0 1px 10px rgba(0, 0, 0, 5%), 0 4px 5px rgba(0, 0, 0, 8%), 0 2px 4px -1px rgba(0, 0, 0, 12%);
+  --shadow-1: 0 1px 10px rgba(0, 0, 0, 5%), 0 4px 5px rgba(0, 0, 0, 8%), 0 2px 4px -1px rgba(0, 0, 0, 12%);
   // 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
-  --be-shadow-2: 0 3px 14px 2px rgba(0, 0, 0, 5%), 0 8px 10px 1px rgba(0, 0, 0, 6%), 0 5px 5px -3px rgba(0, 0, 0, 10%);
+  --shadow-2: 0 3px 14px 2px rgba(0, 0, 0, 5%), 0 8px 10px 1px rgba(0, 0, 0, 6%), 0 5px 5px -3px rgba(0, 0, 0, 10%);
   // 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
-  --be-shadow-3: 0 6px 30px 5px rgba(0, 0, 0, 5%), 0 16px 24px 2px rgba(0, 0, 0, 4%), 0 8px 10px -5px rgba(0, 0, 0, 8%);
+  --shadow-3: 0 6px 30px 5px rgba(0, 0, 0, 5%), 0 16px 24px 2px rgba(0, 0, 0, 4%), 0 8px 10px -5px rgba(0, 0, 0, 8%);
 
   // 内投影 用于弹窗类组件（气泡确认框 / 全局提示 / 消息通知）的内描边
-  --be-shadow-inset-top: inset 0 .5px 0 #dcdcdc;
-  --be-shadow-inset-right: inset .5px 0 0 #dcdcdc;
-  --be-shadow-inset-bottom: inset 0 -.5px 0 #dcdcdc;
-  --be-shadow-inset-left: inset -.5px 0 0 #dcdcdc;
+  --shadow-inset-top: inset 0 .5px 0 #dcdcdc;
+  --shadow-inset-right: inset .5px 0 0 #dcdcdc;
+  --shadow-inset-bottom: inset 0 -.5px 0 #dcdcdc;
+  --shadow-inset-left: inset -.5px 0 0 #dcdcdc;
 
   // table 特定阴影
-  --be-table-shadow-color: rgba(0, 0, 0, 8%);
+  --table-shadow-color: rgba(0, 0, 0, 8%);
 
   // 滚动条颜色
-  --be-scrollbar-color: rgba(0, 0, 0, 10%);
+  --scrollbar-color: rgba(0, 0, 0, 10%);
 }

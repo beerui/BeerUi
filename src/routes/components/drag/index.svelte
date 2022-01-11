@@ -10,4 +10,7 @@ const list = [
 	{ key: 6, label: 'fix some bugs' },
 ]
 </script>
-<BeDrag {list} />
+
+<div class='page-container'>
+	<BeDrag {list} />
+</div>

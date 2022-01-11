@@ -14,7 +14,7 @@
 </script>
 
 
-	<section class="page-container content">
+<div class='page-container'>
 		<h2 >Switch 开关</h2>
 		<p>表示两种相互对立的状态间的切换，多用于触发「开/关」。</p>
 		<h3>基本用法</h3>
@@ -30,6 +30,6 @@
 				<BeSwitch bind:checked={switchValue} disabled={disabled}/>
 			</div>
 		</div>
-	</section>
-	
-	
+</div>
+
+

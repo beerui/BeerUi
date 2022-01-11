@@ -1,0 +1,66 @@
+<script lang="ts">
+	import  '$lib/assets/scss/index.scss'
+	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
+	import { page } from '$app/stores';
+  import SideBar from '$lib/demo/layout/SideBar.svelte';
+</script>
+<div class='be-warp'>
+	<LayoutHeader menu={$page.url.pathname} />
+	<div class='be-container'>
+		<SideBar />
+		<div class='be-main'>
+			<slot></slot>
+			<div class='be-main__footer'>
+				<div class='list'>
+					<div class='list-item'><span>Contributors</span></div>
+					<div class='list-item'><a href='https://github.com/beerui/BeerUi'>BeerUi</a></div>
+				</div>
+				<div class='list'>
+					<div class='list-item'><span>Github</span></div>
+					<div class='list-item'><a href='https://github.com/beerui/BeerUi'>组件 BeerUi</a></div>
+					<div class='list-item'><a href='https://github.com/beerui/Svelte-Beerui-admin'>系统 Svelte-BeerUi-Admin</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style lang='scss'>
+	.be-warp {
+	  height: 100%;overflow: hidden;
+    background: var(--bg-color-container);
+	}
+	.be-container, .be-main {
+		height: calc(100vh - 60px);overflow-x: hidden;overflow-y: auto;position: relative;
+    /* 设置滚动条的样式 */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    /* 滚动槽 */
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: var(--scrollbar-color);
+      border-radius: 6px;
+    }
+    /* 滚动条滑块 */
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.1);
+      -webkit-box-shadow: var(--scrollbar-color);
+    }
+	}
+	.be-main__footer {
+		height: 100px;
+		margin-left: 240px;
+		padding: 15px;
+		background: var(--bg-color-footer);
+		display: flex;
+		justify-content: space-around;
+		.list {
+			&-item {margin: 5px;display: block;}
+		}
+		span {color: var(--text-secondary)}
+		a {color: var(--text-primary)}
+	}
+	:global(.page-container) {
+		margin-left: 260px;padding: 35px;
+	}
+</style>

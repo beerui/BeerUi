@@ -5,14 +5,16 @@
 		console.log(e.detail)
 	}
 </script>
-<BeCarousel
-	{images}
-	imageWidth={250}
-	imageSpacing={15}
-	controlColor={'black'}
-	controlScale={0.8}
-	displayControls={true}
-	autoplay={false}
-	autoplaySpeed={3000}
-	on:imageClicked={handleImageClicked}
-/>
+<div class='page-container'>
+	<BeCarousel
+		{images}
+		imageWidth={250}
+		imageSpacing={15}
+		controlColor={'black'}
+		controlScale={0.8}
+		displayControls={true}
+		autoplay={false}
+		autoplaySpeed={3000}
+		on:imageClicked={handleImageClicked}
+	/>
+</div>

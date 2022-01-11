@@ -933,52 +933,7 @@
 .demo-color-box-lite {
 	color: #303133;
 }
-.be-footer,
-.be-header {
-	background-color: #b3c0d1;
-	color: #333;
-	line-height: 60px;
-}
-.be-aside {
-	color: #333;
-}
-#chang-jian-ye-mian-bu-ju + .demo-container .be-footer,
-#chang-jian-ye-mian-bu-ju + .demo-container .be-header {
-	text-align: center;
-}
-#chang-jian-ye-mian-bu-ju + .demo-container .be-aside {
-	background-color: #d3dce6;
-	text-align: center;
-	line-height: 200px;
-}
-#chang-jian-ye-mian-bu-ju + .demo-container .be-main {
-	background-color: #e9eef3;
-	color: #333;
-	text-align: center;
-	line-height: 160px;
-}
-#chang-jian-ye-mian-bu-ju + .demo-container > .source > .be-container {
-	margin-bottom: 40px;
-}
-#chang-jian-ye-mian-bu-ju
-	+ .demo-container
-	> .source
-	> .be-container:nth-child(5)
-	.be-aside,
-#chang-jian-ye-mian-bu-ju
-	+ .demo-container
-	> .source
-	> .be-container:nth-child(6)
-	.be-aside {
-	line-height: 260px;
-}
-#chang-jian-ye-mian-bu-ju
-	+ .demo-container
-	> .source
-	> .be-container:nth-child(7)
-	.be-aside {
-	line-height: 320px;
-}
+
 .demo-block.demo-date-picker .source > div {
 	padding: 0;
 	display: flex;
@@ -1922,14 +1877,6 @@ textarea {
 	min-height: 100%;
 }
 .container,
-.page-container {
-	width: 1140px;
-	padding: 0;
-	margin: 0 auto;
-}
-.page-container {
-	padding-top: 55px;
-}
 .page-container h2 {
 	font-size: 28px;
 	color: #1f2d3d;
