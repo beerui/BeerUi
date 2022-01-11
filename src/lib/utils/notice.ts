@@ -29,11 +29,11 @@ export default class Notice{
    * 
    */
   setHTML():void{
-  const instance = <instanceType>{};
-   const container:HTMLElement = document.createElement('div');
+    const instance = <instanceType>{};
+    const container:HTMLElement = document.createElement('div');
     container.classList.add('be-notify');
-    // const pos:string[] =  this.position.split('-');
     container.classList.add(this.setPositionClass(this.position));
+
     container.innerHTML = `
     <div class="be-notify__group">
       <h2 class="be-notify__title">${this.title}</h2>
@@ -41,17 +41,18 @@ export default class Notice{
     </div>
     `;
     this._body.appendChild(container);
+    container.classList.add('be-notify-fade');
 
     instance.position = this.position
     instance.dom = container;
     instances.push(instance);
-
-    let verticalOffset:number;
+    let verticalOffset:number = 0;
     // 将同一位置的弹框过滤到一个数组中并设置偏移量
     instances.filter(item => item.position === this.position).forEach((item,index) =>{
-      if(index !== 0 ){
+      item.dom.style['z-index'] = 2000 + index
+      if(index !==0 ){
         verticalOffset += item.dom.offsetHeight + 16
-      }else {
+      }else{
         verticalOffset = 0
       }
     })

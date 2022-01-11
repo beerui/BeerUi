@@ -68,6 +68,7 @@
   position: fixed;
   background-color: #fff;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  transform:translateX(0%);
   transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
   overflow: hidden;
   &.right {
@@ -76,7 +77,6 @@
   &.left {
     left: 16px;
   }
-
   &__group{
     margin-left: 13px;
     margin-right: 8px;
@@ -93,5 +93,34 @@
     margin: 6px 0 0;
     color: #606266;
     text-align: justify;
+  }
+}
+
+.be-notify-fade{
+  &.right {
+    animation: notify-right-in 0.3s linear 
+  }
+
+  &.left {
+    animation: notify-left-in 0.3s linear 
+
+  }
+}
+
+@keyframes notify-right-in{
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+}
+
+@keyframes notify-left-in{
+  0%{
+    transform: translateX(-100%);
+  }
+  100%{
+    transform: translateX(0%);
   }
 }
