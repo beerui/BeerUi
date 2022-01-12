@@ -25,6 +25,7 @@ export interface ICodeJarOptions extends Partial<IOptions> {
 
 export function codejar(element: HTMLElement, options: ICodeJarOptions): ICodeJarAction {
 	let {highlight, onUpdate, syntax, value, withLineNumbers = false, ...extendedOptions} = options;
+
 	let jar = CodeJar(element, wrapHighlight(highlight), extendedOptions);
 
 	function destroy() {
@@ -47,8 +48,7 @@ export function codejar(element: HTMLElement, options: ICodeJarOptions): ICodeJa
 	function wrapHighlight(highlight?: IHighlightCode): IHighlightElement {
 		const _highlight = highlight
 			? (element: HTMLElement) => {
-				element.innerHTML = hljs.highlightAuto(element.textContent ?? "").value
-				console.log('element', element);
+				element.innerHTML = highlight(element.textContent ?? "", syntax);
 			}
 			: (element: HTMLElement) => void 0;
 

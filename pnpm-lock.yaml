@@ -20,7 +20,6 @@ importers:
       autoprefixer: ^10.4.1
       babel-loader: 8.2.3
       chromatic: 6.3.3
-      codejar: 3.5.0
       cssnano: ^5.0.14
       cypress: 9.2.0
       eslint: 8.6.0
@@ -64,7 +63,6 @@ importers:
       '@typescript-eslint/parser': 5.9.0_eslint@8.6.0+typescript@4.5.4
       babel-loader: 8.2.3_@babel+core@7.16.7
       chromatic: 6.3.3
-      codejar: 3.5.0
       cypress: 9.2.0
       eslint: 8.6.0
       eslint-config-prettier: 8.3.0_eslint@8.6.0
