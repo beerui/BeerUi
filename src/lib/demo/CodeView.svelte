@@ -8,11 +8,13 @@
 	export let style: $$Props["style"] = undefined
 	export {_class as class}
 	export let code = ''
+	export let js = ''
 
-  const highlightCode = (code: string): string => {
-	  return hljs.highlightAuto(code, ['html']).value
+  const highlightCode = (code: string, type): string => {
+	  return hljs.highlightAuto(code, [type]).value
   }
-  $: highlightedCode = highlightCode(code)
+  $: highlightedCode = highlightCode(code, 'html')
+  $: highlightedCodeJS = highlightCode(js, 'javascript')
 </script>
 <div
 	class="high-code {_class ?? ''}"
@@ -20,6 +22,7 @@
 >
 	<pre>
 		<code>
+			{@html highlightedCodeJS}
 			{@html highlightedCode}
 		</code>
 	</pre>

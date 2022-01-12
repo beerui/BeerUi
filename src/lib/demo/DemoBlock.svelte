@@ -2,6 +2,7 @@
 import CodeView from '$lib/demo/CodeView.svelte';
 
 export let code
+export let js
 </script>
 <div class='demo-block'>
 	<div class='source'>
@@ -11,6 +12,7 @@ export let code
 		<div class='description'>
 			<slot name='description'></slot>
 		</div>
+		<CodeView class='m-iframe' {js} />
 		<CodeView class='m-iframe' {code} />
 	</div>
 </div>

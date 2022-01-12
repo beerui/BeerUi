@@ -1,9 +1,10 @@
 <script>
 	import { BeButton } from '$lib';
-  import CodeView from '$lib/demo/CodeView.svelte';
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
-  let code = `
+  let js = `import { BeButton } from '$lib'`
+  let code =
+`
 // Size
 <BeButton size="large" type="primary">提交</BeButton>
 <BeButton size="medium" type="primary">提交</BeButton>
@@ -25,7 +26,7 @@
 `
 </script>
 <div class='page-container'>
-	<DemoBlock {code}>
+	<DemoBlock {code} {js}>
 		<div slot='source'>
 			<div class='demo-list'>
 				<BeButton class='demo-button' size="normal" type="default">默认按钮</BeButton>
