@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { BeButton, BeDialog } from '$lib';
+	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
 	let visible1 = false
 	let visible2 = false
@@ -13,46 +14,92 @@
 	const beforeClose2 = (evt) => console.log('beforeClose2', evt.detail)
 	const beforeClose3 = (evt) => console.log('beforeClose3', evt.detail)
 	const beforeClose4 = (evt) => console.log('beforeClose4', evt.detail)
+
+	let js = `import { BeButton, BeDialog } from '@beerui/beerui'`
+	let code = `
+<BeDialog bind:visible={visible1} closeOnClickModal={false} on:beforeClose={beforeClose1}>
+	<p>这里是对话框内容</p>
+</BeDialog>`
+	const code1 = `
+<BeDialog bind:visible={visible2} closeOnClickModal={true} on:beforeClose={beforeClose2} isDrag={true}>
+	<p>这里是对话框内容</p>
+</BeDialog>
+	`
+	const code3 = `
+<BeDialog bind:visible={visible3} closeOnClickModal={false} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
+	<p>这里是对话框内容</p>
+</BeDialog>
+	`
+	const code2 = `
+<BeDialog bind:visible={visible4} closeOnClickModal={false} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
+	<p>这里是对话框内容</p>
+</BeDialog>
+	`
 </script>
 <div class='page-container'>
 	<h2>Dialog 对话框</h2>
 	<p class='desc'>在保留当前页面状态的情况下，告知用户并承载相关操作。</p>
 	<h3>基本用法</h3>
-	<p>Dialog 弹出一个对话框，适合需要定制性更大的场景。</p>
-	<div class="demo-block demo-dialog">
-		<BeButton size="normal" type="primary" on:click={openDialog1} nativeType='submit'>基础 Dialog</BeButton>
-		<BeDialog bind:visible={visible1} closeOnClickModal={false} on:beforeClose={beforeClose1}>
-			<p>这里是对话框内容</p>
-		</BeDialog>
-	</div>
-	<div class="demo-block demo-dialog">
-		<BeButton size="normal" type="primary" on:click={openDialog2} autofocus>基础拖拽 点击mask可关闭</BeButton>
-		<BeDialog bind:visible={visible2} closeOnClickModal={true} on:beforeClose={beforeClose2} isDrag={true}>
-			<p>这里是对话框内容</p>
-		</BeDialog>
-	</div>
-	<div class="demo-block demo-dialog">
-		<BeButton size="normal" type="primary" on:click={openDialog3}>限制拖拽范围</BeButton>
-		<BeDialog bind:visible={visible3} closeOnClickModal={false} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
-			<p>这里是对话框内容</p>
-		</BeDialog>
-	</div>
-	<div class="demo-block demo-dialog">
-		<BeButton size="normal" type="primary" on:click={openDialog4}>完全自由</BeButton>
-		<BeDialog bind:visible={visible4} closeOnClickModal={false} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
-			<p>这里是对话框内容</p>
-		</BeDialog>
-	</div>
-
-	<code >
-		{@html
-			`let visible = false
-			let openDialog = () => {
-				visible = true
-			}
-			const beforeClose = (evt) => {
-				console.log(evt.detail)
-			}`
-		}
-	</code>
+	<DemoBlock {code} {js}>
+		<div slot='source'>
+			<div class='demo-list'>
+				<BeButton size="normal" type="primary" on:click={openDialog1} nativeType='submit'>打开 Dialog</BeButton>
+				<BeDialog bind:visible={visible1} closeOnClickModal={false} on:beforeClose={beforeClose1}>
+					<p>这里是对话框内容</p>
+				</BeDialog>
+			</div>
+		</div>
+		<div slot='description'>
+			基础 Dialog
+		</div>
+	</DemoBlock>
+	<hr>
+	<DemoBlock code={code1}>
+		<div slot='source'>
+			<div class='demo-list'>
+				<BeButton size="normal" type="primary" on:click={openDialog2} autofocus>打开 Dialog</BeButton>
+				<BeDialog bind:visible={visible2} closeOnClickModal={true} on:beforeClose={beforeClose2} isDrag={true}>
+					<p>这里是对话框内容</p>
+				</BeDialog>
+			</div>
+		</div>
+		<div slot='description'>
+			基础拖拽 点击mask可关闭
+		</div>
+	</DemoBlock>
+	<hr>
+	<DemoBlock code={code2}>
+		<div slot='source'>
+			<div class='demo-list'>
+				<BeButton size="normal" type="primary" on:click={openDialog3}>限制拖拽范围</BeButton>
+				<BeDialog bind:visible={visible3} closeOnClickModal={false} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
+					<p>这里是对话框内容</p>
+				</BeDialog>
+			</div>
+		</div>
+		<div slot='description'>
+			限制拖拽范围
+		</div>
+	</DemoBlock>
+	<hr>
+	<DemoBlock code={code3}>
+		<div slot='source'>
+			<div class='demo-list'>
+				<BeButton size="normal" type="primary" on:click={openDialog4}>完全自由</BeButton>
+				<BeDialog bind:visible={visible4} closeOnClickModal={false} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
+					<p>这里是对话框内容</p>
+				</BeDialog>
+			</div>
+		</div>
+		<div slot='description'>
+			完全自由
+		</div>
+	</DemoBlock>
 </div>
+
+<style lang='scss' global>
+  .demo-title {font-size: 22px;color: var(--text-color-primary);margin: 15px 0;}
+  .demo-list {
+    margin: 16px 0;
+  }
+</style>
