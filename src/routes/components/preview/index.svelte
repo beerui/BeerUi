@@ -4,6 +4,7 @@
 	const list = ['/images/1.jpg', '/images/2.jpg', '/images/3.jpg', '/images/4.jpg', '/images/5.jpg', '/images/6.jpg']
   const clickImage = (src: string) => {
 	  const p1 = previewImages(src, list)
+		console.log(p1);
 	  // console.log(p1.current); // 获取元素状态
 	  // console.log(p1.index); // 获取当前点击的元素索引
 	  // 调用方法 监听图片的改变

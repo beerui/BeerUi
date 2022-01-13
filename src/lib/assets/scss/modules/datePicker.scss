@@ -2,6 +2,19 @@
   position: relative;
   width: 300px;
 }
+@mixin right-arrow {
+  position: absolute;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid #9d9b9b;
+  border-bottom: 1px solid #9d9b9b;
+  content: '';
+}
+@mixin right-arrow-hover {
+  border-right: 1px solid #409eff;
+  border-bottom: 1px solid #409eff;
+}
 .be-picker-panel {
   color: #606266;
   border: 1px solid #e4e7ed;
@@ -34,12 +47,65 @@
   &__header {
     margin: 12px;
     text-align: center;
+    user-select: none;
   }
   &__prev-btn {
     float: left;
+    position: relative;
+    &:hover::before {
+      @include right-arrow-hover;
+    }
+    &:before {
+      @include right-arrow;
+      right: -46px;
+      transform: rotate(135deg);
+    }
+  }
+  &__d-prev-btn {
+    float: left;
+    position: relative;
+    &:hover::before, &:hover::after {
+      @include right-arrow-hover;
+    }
+    &:before {
+      @include right-arrow;
+      right: -20px;
+      transform: rotate(135deg);
+    }
+    &:after {
+      @include right-arrow;
+      right: -24px;
+      transform: rotate(135deg);
+    }
   }
   &__next-btn {
     float: right;
+    position: relative;
+    &:hover::before {
+      @include right-arrow-hover;
+    }
+    &:before {
+      @include right-arrow;
+      right: 36px;
+      transform: rotate(315deg);
+    }
+  }
+  &__d-next-btn {
+    float: right;
+    position: relative;
+    &:hover::before, &:hover::after {
+      @include right-arrow-hover;
+    }
+    &:before {
+      @include right-arrow;
+      right: 10px;
+      transform: rotate(315deg);
+    }
+    &:after {
+      @include right-arrow;
+      right: 14px;
+      transform: rotate(315deg);
+    }
   }
   &__header-label {
     font-size: 16px;
