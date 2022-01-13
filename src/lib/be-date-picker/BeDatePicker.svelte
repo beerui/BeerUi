@@ -39,5 +39,5 @@
 	<Date {disabledDate} {value} bind:visible={visible} on:pick={confirmPick} {selectMode} {format}/>
 </div>
 <style lang="scss" global>
-  @import '../assets/scss/modules/datePicker';
+  // @import '../assets/scss/modules/datePicker';
 </style>

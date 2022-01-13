@@ -110,9 +110,9 @@ function zoomIn(node, params) {
   <div class="be-picker-panel__body-wrapper">
     <div class="be-picker-panel__body">
       <div class="be-date-picker__header">
-          <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click|stopPropagation={handlePrevYear}>上年</span>
+          <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click|stopPropagation={handlePrevYear}></span>
           {#if currentView === 'date'}
-            <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click|stopPropagation={handlePrevMonth}>-上月</span>
+            <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click|stopPropagation={handlePrevMonth}></span>
           {/if}
           {#if currentView !== 'year'}
             <span class="be-date-picker__header-label" on:click={() => currentView = 'year'}>{year} 年</span>
@@ -123,9 +123,9 @@ function zoomIn(node, params) {
           {#if currentView === 'date'}
             <span class="be-date-picker__header-label" on:click={() => currentView = 'month'}>{month} 月</span>
           {/if}
-          <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click|stopPropagation={handleNextYear}>下年</span>
+          <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click|stopPropagation={handleNextYear}></span>
           {#if currentView === 'date'}
-            <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click|stopPropagation={handleNextMonth}>下月-</span>
+            <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click|stopPropagation={handleNextMonth}></span>
           {/if}
       </div>
       <div class="be-picker-panel__content">
