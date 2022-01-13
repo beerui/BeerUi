@@ -1,8 +1,8 @@
 <script lang="ts">
 import CodeView from '$lib/demo/CodeView.svelte';
 
-export let code
-export let js
+export let code = null
+export let js = null
 </script>
 <div class='demo-block'>
 	<div class='source'>
