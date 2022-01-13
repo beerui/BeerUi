@@ -1,57 +1,40 @@
 <script lang="ts">
-	import {createEventDispatcher} from "svelte";
-  import { codejar, ICodeJarOptions } from '$lib/_actions/codejar';
-	type $$Events = {
-		change: CustomEvent<{value: string}>;
-	};
-	type $$Props = {
-		element?: HTMLPreElement;
-		class?: string;
-		style?: string;
-		syntax?: string;
-	} & ICodeJarOptions;
+  import hljs from 'highlight.js'
+  import 'highlight.js/styles/a11y-light.css'
+  import 'highlight.js/styles/github.css'
+  import type { $$Props } from '../../global'
 
-	const dispatch = createEventDispatcher();
-	export let element: $$Props["element"] = undefined;
-	let _class: $$Props["class"] = undefined;
-	export let style: $$Props["style"] = undefined;
-	export {_class as class};
-	export let addClosing: $$Props["addClosing"] = true;
-	export let catchTab: $$Props["catchTab"] = true;
-	export let history: $$Props["history"] = true;
-	export let indentOn: $$Props["indentOn"] = /{$/;
-	export let preserveIdent: $$Props["preserveIdent"] = true;
-	export let spellcheck: $$Props["spellcheck"] = false;
-	export let tab: $$Props["tab"] = "\t";
-	export let withLineNumbers: $$Props["withLineNumbers"] = undefined;
-	export let highlight: $$Props["highlight"] = undefined;
-	export let syntax: $$Props["syntax"] = undefined;
-	export let value: $$Props["value"] = "";
+	let _class: $$Props["class"] = undefined
+	export let style: $$Props["style"] = undefined
+	export {_class as class}
+	export let code = ''
+	export let js = ''
 
-  console.log(value);
-	function onUpdate(new_value: string): void {
-		value = new_value;
-		dispatch("change", {value: new_value});
-	}
+  const highlightCode = (code: string, type): string => {
+	  return hljs.highlightAuto(code, [type]).value
+  }
+  $: highlightedCode = highlightCode(code, 'html')
+  $: highlightedCodeJS = highlightCode(js, 'javascript')
 </script>
+<div
+	class="high-code {_class ?? ''}"
+	style={style ? style : ''}
+>
+	<pre>
+		<code>
+			{@html highlightedCodeJS}
+			{@html highlightedCode}
+		</code>
+	</pre>
+</div>
 
-<!-- prettier-ignore -->
-<pre
-	bind:this={element}
-	class="{syntax ? `language-${syntax}` : ''} {_class ?? ''}"
-	style={style ? style : ""}
-	use:codejar={{
-        addClosing,
-        catchTab,
-        highlight,
-        history,
-        indentOn,
-        onUpdate,
-        preserveIdent,
-        spellcheck,
-        syntax,
-        tab,
-        value,
-        withLineNumbers
-    }}><code class={syntax ? `language-${syntax}` : ''}>{value}</code></pre>
-
+<style lang='scss'>
+	.high-code {
+		width: 100%;background: var(--bg-color-code);padding: 16px;border-radius: 6px;
+    :global(.hljs-tag) {color: #878787;}
+		code {
+      background-color: transparent;line-height: 1.5;font-size: 14px;
+		}
+		* {margin: 0;padding: 0;border: 0;width: 100%;height: 100%;display: block;}
+	}
+</style>

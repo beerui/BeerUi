@@ -39,7 +39,6 @@
     "@typescript-eslint/parser": "5.9.0",
     "babel-loader": "8.2.3",
     "chromatic": "6.3.3",
-    "codejar": "3.5.0",
     "cypress": "9.2.0",
     "eslint": "8.6.0",
     "eslint-config-prettier": "8.3.0",
