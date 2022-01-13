@@ -13,7 +13,7 @@ function openInfo():void{
   notice.setNotice({
     title: '相思',
     message: '红豆生南国，春来发几枝',
-    duration:1000
+    duration:3000
   })
 }
 function openPosInfo(position:string):void{
@@ -32,7 +32,12 @@ function openPosInfo(position:string):void{
     title = '长恨歌'
     message = '在天愿作比翼鸟，在地愿为连理枝。天长地久有时尽，此恨绵绵无绝期。'
   }
-  // notify({title,message,position})
+  notice.setNotice({
+    title,
+    message,
+    position,
+    duration:3000
+  })
 }
 
 

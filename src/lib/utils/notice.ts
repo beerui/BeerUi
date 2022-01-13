@@ -1,63 +1,72 @@
-
 /**
- * 
+ * this is notice component
  */
+
  interface options {
-    title:string,
-    message:string,
-    duration?:number,
-    position?:string
+  title:string,
+  message:string,
+  duration?:number,
+  position?:string
 }
 
 interface instanceType extends options {
   id:number,
   dom:HTMLElement,
+  timer:NodeJS.Timeout|null,
   verticalOffset:number,
+  verticalProperty:string,
 }
-const instances:Array<instanceType> = [];
+
 export default class Notice{
-  title: string|HTMLElement; // 标题
-  content: string|HTMLElement; // 内容
-  duration:number;
-  // htmlContainer: Array<HTMLCollection>; // 元素
+  title: string; // 标题
+  message: string; // 内容
+  duration:number; // 间隔
+  position:string; // 位置
   private _body:HTMLElement = document.body // 私有属性 获取body
-  position:string;
-  // private instance:instanceType = <instanceType>{} ;
-  seed:number = 1;
+  instances:Array<instanceType> = [];  // 储存弹窗信息
+  instance = <instanceType>{};
+  seed = 0;
+  id:number;
 
-  constructor(){
+  // constructor(){
+  // }
 
-  }
-  /**
-   * 
-   */
-   setNotice(options:options):void{
+  setNotice(options:options):void {
     this.title = options.title;
-    this.content = options.message;
-    this.position = options.position || 'top-right'; 
+    this.message = options.message;
+    this.position = options.position || 'top-right';
     this.duration = options.duration || 0
-    const instance=<instanceType>{};
+    this.setHtml()
+  }
 
+  setHtml():void {
     const container:HTMLElement = document.createElement('div');
     container.classList.add('be-notify');
     container.classList.add(this.setPositionClass(this.position));
-
     container.innerHTML = `
     <div class="be-notify__group">
       <h2 class="be-notify__title">${this.title}</h2>
-      <div class="be-notify__content">${this.content}</div>
+      <div class="be-notify__content">${this.message}</div>
     </div>
     `;
     this._body.appendChild(container);
-    container.classList.add('be-notify-fade');
+    // container.classList.add('be-notify-fade');
+    setTimeout(() => {
+      container.style.transform = "translateX(0%)"
+    });
+
+    const instance=<instanceType>{};
+    this.id = this.seed ++
+    instance.dom = container
     instance.duration = this.duration
-    instance.id = this.seed ++
-    instance.position = this.position;
-    instance.dom = container;
-    instances.push(instance);
-    let verticalOffset:number = 0;
-    // 将同一位置的弹框过滤到一个数组中并设置偏移量
-    instances.filter(item => item.position === this.position).forEach((item,index) =>{
+    instance.id = this.id
+    instance.position = this.position
+    instance.verticalProperty = this.setProperty(this.position)
+    this.instances.push(instance);
+    let verticalOffset = 0;
+      // 将同一位置的弹框过滤到一个数组中并设置偏移量
+      
+    this.instances.filter(item => item.position === this.position).forEach((item,index) =>{
       item.dom.style['z-index'] = 2000 + index
       if(index !==0 ){
         verticalOffset += item.dom.offsetHeight + 16
@@ -67,37 +76,36 @@ export default class Notice{
     })
     verticalOffset += 16;
     instance.verticalOffset = verticalOffset;
-    container.style[this.setProperty(this.position)] = verticalOffset + 'px';
-    instance.dom.addEventListener('animationend',(e)=>{
-      container.classList.remove('be-notify-fade');
-    })
-    this.close()
+    instance.dom.style[this.setProperty(this.position)] = verticalOffset + 'px';
+    instance.timer = setTimeout(() => {
+      this.close(instance.id)
+    }, instance.duration);
   }
 
-  close(){
-    for (let i = 0; i < instances.length; i++) {
-      const element = instances[i];
-      setTimeout(() => {
-        // element.dom.style.display = 'none';
-        if(element.dom.parentNode){
-          element.dom.parentNode.removeChild(element.dom);
-        console.log( element.dom);
-
-        if(instances[i+1]){
-          instances[i+1].dom.style.top = element.verticalOffset + 'px'
-        }
-        instances.splice(i,1)
+  close(id:number):void {
+    let index = -1
+    const len = this.instances.length
+    const instance = this.instances.filter((instance,i)=>{
+      if (instance.id === id) {
+        index = i;
+        return true;
       }
-      }, element.duration*1);
+      return false;
+    })[0]
+    if(!instance) return;
+    const position = instance.position
+    const removeHeight = instance.dom.offsetHeight
+    instance.dom.parentNode.removeChild(instance.dom);
+    this.instances.splice(index, 1);
+    clearTimeout(instance.timer);
+    if(len <= 1) return;
+    for (let i = index; i < len - 1; i++) {
+      if(this.instances[i].position === position){
+        this.instances[i].dom.style[instance.verticalProperty] = parseInt(this.instances[i].dom.style[instance.verticalProperty],10) - removeHeight - 16 + 'px';
+      }
     }
   }
-
-  destroyElement(){
-    console.log('销毁了');
-    // instance.dom.removeEventListener('animationend',this.destroyElement.bind(this))
-    // instance.dom.parentNode.removeChild(instance.dom)
-  }
-  // 设置弹框类名
+    // 设置弹框类名
   setPositionClass(position:string):string{
     return position.includes('right') ? 'right':'left'
   }

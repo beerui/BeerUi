@@ -68,13 +68,14 @@
   position: fixed;
   background-color: #fff;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-  transform:translateX(0%);
   transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
   overflow: hidden;
   &.right {
+   transform: translateX(100%);
     right: 16px;
   }
   &.left {
+    transform: translateX(-100%);
     left: 16px;
   }
   &__group{
