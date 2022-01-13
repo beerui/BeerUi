@@ -1,37 +1,35 @@
-<script lang="ts">
-    import { createEventDispatcher } from "svelte";
+<script lang='ts'>
+	import { createEventDispatcher } from 'svelte'
+  import { filterClass } from '$lib/utils/beerui';
 
-    export let type = ''
-    export let size = ''
-    export let round = ''
-    export let nativeType = 'button'
-    export let autofocus = false
-    export let disabled = false
-    export let loading = false
-    const dispatch = createEventDispatcher()
-    const handleClick = (evt: MouseEvent) => {
-        dispatch('click', evt)
-    }
+  export let style = null
+	export let type = '';
+	export let size = '';
+	export let round = '';
+	export let nativeType = 'button';
+	export let autofocus = false;
+	export let disabled = false;
+	export let loading = false;
+
+  const _class = ['be-button', ...filterClass($$props, 'be-button--')].join(' ')
+
+	const dispatch = createEventDispatcher();
+	const handleClick = (evt: MouseEvent) => {
+		dispatch('click', evt);
+	};
 </script>
 <button
 	{autofocus}
-	class={[
-        'be-button',
-        disabled ? ' be-button--disabled' : '',
-        size ? ' be-button--' + size : '',
-        type ? ' be-button--' + type : '',
-        round ? ' be-button--round__' + round : '',
-        loading ? ' be-button--' + loading : ''
-    ].join('')}
+	class={_class}
+	{style}
 	on:click={handleClick}
 	type={nativeType}
 >
-<!--    <beer-icon></beer-icon>-->
-    <span>
+	<!--    <beer-icon></beer-icon>-->
+	<span>
         <slot></slot>
     </span>
 </button>
-
-<style lang="scss">
+<style lang='scss'>
   @import '../assets/scss/modules/button';
 </style>

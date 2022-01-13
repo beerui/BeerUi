@@ -1,6 +1,5 @@
 import isString from 'lodash/isString'
 import { browser } from '$app/env';
-import Notice from './notice'
 if (browser) {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
@@ -9,11 +8,6 @@ if (browser) {
 	};
 }
 
-/**
- * notify 消息提醒
- *
- */
-export const notify = (options): void => {new Notice(options)}
 
 const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 /**
@@ -320,6 +314,22 @@ export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: () =
 			cb && cb();
 		}
 	});
-};
+}
+
+/**
+ * 计算class
+ * @param props 组件传入值
+ * @param prefix 类名前缀
+ */
+export const filterClass = (props: Object, prefix: string): string[] => {
+	const preClass = ['type', 'size', 'round', 'loading', 'disabled']
+	let r1 = []
+	let r2 = []
+	for (let key in props) {
+		if (preClass.includes(key)) r1.push(`${prefix}${props[key]}`)
+		if (key === 'class') r2 = props[key].split(' ')
+	}
+	return [...r1, ...r2]
+}
 
 

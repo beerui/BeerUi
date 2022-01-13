@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "7.16.7",
     "@babel/preset-env": "7.16.7",
+    "@novacbn/svelte-codejar": "^0.1.1",
     "@storybook/addon-actions": "6.4.9",
     "@storybook/addon-essentials": "6.4.9",
     "@storybook/addon-links": "6.4.9",
@@ -44,6 +45,7 @@
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-storybook": "^0.5.5",
     "eslint-plugin-svelte3": "3.2.1",
+    "highlight.js": "^11.4.0",
     "husky": "7.0.4",
     "lint-staged": "12.1.5",
     "lodash": "^4.17.21",
@@ -75,7 +77,7 @@
   },
   "prettier": {
     "singleQuote": true,
-    "tabWidth": 4,
+    "tabWidth": 2,
     "useTabs": true
   },
   "bugs": {

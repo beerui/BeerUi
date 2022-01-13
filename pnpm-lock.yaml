@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@babel/core': 7.16.7
       '@babel/preset-env': 7.16.7
+      '@novacbn/svelte-codejar': ^0.1.1
       '@storybook/addon-actions': 6.4.9
       '@storybook/addon-essentials': 6.4.9
       '@storybook/addon-links': 6.4.9
@@ -26,6 +27,7 @@ importers:
       eslint-plugin-cypress: 2.12.1
       eslint-plugin-storybook: ^0.5.5
       eslint-plugin-svelte3: 3.2.1
+      highlight.js: ^11.4.0
       husky: 7.0.4
       lint-staged: 12.1.5
       lodash: ^4.17.21
@@ -48,6 +50,7 @@ importers:
     devDependencies:
       '@babel/core': 7.16.7
       '@babel/preset-env': 7.16.7_@babel+core@7.16.7
+      '@novacbn/svelte-codejar': 0.1.1
       '@storybook/addon-actions': 6.4.9
       '@storybook/addon-essentials': 6.4.9_719c85830174ada8feb03c520a79282d
       '@storybook/addon-links': 6.4.9
@@ -66,6 +69,7 @@ importers:
       eslint-plugin-cypress: 2.12.1_eslint@8.6.0
       eslint-plugin-storybook: 0.5.5_eslint@8.6.0+typescript@4.5.4
       eslint-plugin-svelte3: 3.2.1_eslint@8.6.0+svelte@3.44.3
+      highlight.js: 11.4.0
       husky: 7.0.4
       lint-staged: 12.1.5
       lodash: 4.17.21
@@ -1839,6 +1843,13 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@novacbn/svelte-codejar/0.1.1:
+    resolution: {integrity: sha512-/Kfc5JwOCcxF3WgjWSfNGoqPsjL3Rr8bwEBoNCZHothVS1Xs+UY7Z7VrqnX//d1JiM1wp/fCoyS5QYNI7qoJuw==}
+    dependencies:
+      codejar: 3.5.0
+      svelte: 3.44.3
     dev: true
 
   /@npmcli/fs/1.1.0:
@@ -5809,6 +5820,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /codejar/3.5.0:
+    resolution: {integrity: sha512-uXrFZZ+yb23YY7+WtTux2Yyokt+Lty/kBnW/OhhEGp8IW8/lrJw5Gs1wwCyt2vpMfsVdudLmV5xAgYqsZY/49A==}
+    dev: true
+
   /collapse-white-space/1.0.6:
     resolution: {integrity: sha512-jEovNnrhMuqyCcjfEJA56v0Xq8SkIoPKDyaHahwo3POf4qcSXqMYuwNcOTzp74vTsR9Tn08z4MxWqAhcekogkQ==}
     dev: true
@@ -8284,6 +8299,11 @@ packages:
 
   /highlight.js/10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
+    dev: true
+
+  /highlight.js/11.4.0:
+    resolution: {integrity: sha512-nawlpCBCSASs7EdvZOYOYVkJpGmAOKMYZgZtUqSRqodZE0GRVcFKwo1RcpeOemqh9hyttTdd5wDBwHkuSyUfnA==}
+    engines: {node: '>=12.0.0'}
     dev: true
 
   /history/5.0.0:
