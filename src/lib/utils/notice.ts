@@ -45,7 +45,9 @@ export default class Notice{
     this.titleColor = options.titleColor
     this.messageColor = options.messageColor
     const userOnClose = options.onClose
-    
+    const userOnclick = options.onClick
+
+
     const container:HTMLElement = document.createElement('div');
     container.classList.add('be-notify');
     container.classList.add(this.setPositionClass(this.position));
@@ -71,6 +73,13 @@ export default class Notice{
     instance.close = ()=> {
       this.close(instance.id,userOnClose)
     }
+
+    if(typeof userOnclick === 'function'){
+      instance.dom.addEventListener("click",userOnclick)
+      instance.onClick = ()=>{userOnclick}
+
+    }
+
     instance.position = this.position
     instance.verticalProperty = this.setProperty(this.position)
     this.instances.push(instance);
