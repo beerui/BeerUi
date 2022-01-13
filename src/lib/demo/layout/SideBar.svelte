@@ -5,6 +5,7 @@
 <section class='nav-container'>
 	<div class='nav-container__scroll'>
 		<ul>
+			<li><a class:active={$page.url.pathname === '/components/icons'} href='/components/icons'>Icons 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/button'} href='/components/button'>Button 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/dialog'} href='/components/dialog'>Dialog 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 示例</a></li>

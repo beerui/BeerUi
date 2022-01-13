@@ -1,4 +1,28 @@
 :root {
+  --be-disabled: #f2f2f2;
+
+  --be-default: #fff;
+  --be-default-border: #dcdfe6;
+  --be-default-border-hover: #c6e2f1;
+  --be-default-text: #606266;
+  --be-default-hover: #ecf5ff;
+  --be-default-text-hover: #409ef2;
+
+  --be-primary: #1492FF;
+  --be-primary-hover: #0A508C;
+
+  --be-success: #2FA78E;
+  --be-success-hover: #075c4a;
+
+  --be-info: #686B73;
+  --be-info-hover: #363A44;
+
+  --be-warning: #EB6C3A;
+  --be-warning-hover: #b33706;
+
+  --be-danger: #E63633;
+  --be-danger-hover: #930907;
+
   --header-height: 64px;
   --doc-header-height: 252px;
   --aside-width: 260px;

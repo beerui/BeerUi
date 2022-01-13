@@ -21,7 +21,7 @@
 	<div class='logo'>BeerUi</div>
 	<div class='nav'>
 		<a class:active={menu === '/'} href='/'>主页</a>
-		<a class:active={menu === '/components'} href='/components'>组件</a>
+		<a class:active={menu === '/svg'} href='/components'>组件</a>
 		<a class:active={menu === '/logs'} href='/logs'>更新日志</a>
 		<a class:active={menu === '/others'} href='/others'>其它</a>
 		<div class='tabs'>

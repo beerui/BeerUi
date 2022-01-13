@@ -5,7 +5,7 @@
   import SideBar from '$lib/demo/layout/SideBar.svelte';
 
 	$:formatUrl = () => {
-	  if ($page.url.pathname.indexOf('/components') !== -1) {
+	  if ($page.url.pathname.indexOf('/svg') !== -1) {
 		  return '/' + $page.url.pathname.split('/')[1]
 		}
 	  return $page.url.pathname
@@ -31,7 +31,7 @@
 		</div>
 	</div>
 </div>
-<style lang='scss'>
+<style lang='scss' global>
 	.be-warp {
 	  height: 100%;overflow: hidden;
     background: var(--bg-color-container);
@@ -67,7 +67,31 @@
 		span {color: var(--text-secondary)}
 		a {color: var(--text-primary)}
 	}
-	:global(.page-container) {
+	.page-container {
 		margin-left: 260px;padding: 35px;
+    * {color: var(--text-color-primary)}
 	}
+  .demo-title {font-size: 22px;color: var(--text-color-primary);margin: 15px 0;}
+  .demo-list {margin: 16px 0;}
+
+  .demo-block {
+    border: 1px solid var(--border-level-1-color);border-radius: 3px;transition: .2s;
+    .source {padding: 24px;}
+    .meta {background: var(--bg-color-code);border-top: 1px solid var(--border-level-2-color);transition: height .2s;}
+    .description {
+      padding: 20px;box-sizing: border-box;font-size: 14px;
+      line-height: 22px;color: var(--text-color-primary);word-break: break-word;background-color: var(--bg-color-container);
+    }
+  }
+  .demo-code-container {padding: 20px;}
+  .pt-0 {padding-top: 0;}
+  .pb-0 {padding-bottom: 0;}
+  .high-code {
+    width: 100%;background: var(--bg-color-code);border-radius: 6px;
+    .hljs-tag {color: #878787;}
+    code {
+      background-color: transparent;font-size: 14px;
+    }
+    & * {margin: 0;padding: 0;border: 0;line-height: 1.3;}
+  }
 </style>
