@@ -81,6 +81,7 @@ svg {user-select: none;}
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
   overflow: hidden;
+  cursor: pointer;
   &.right {
    transform: translateX(100%);
     right: 16px;
