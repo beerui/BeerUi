@@ -69,7 +69,7 @@
 	}
 	.page-container {
 		margin-left: 260px;padding: 35px;
-    h1,h2,h3,h4,h5,p,span {color: var(--text-color-primary)}
+    h1,h2,h3,h4,h5,p {color: var(--text-color-primary)}
 	}
   .demo-title {font-size: 22px;color: var(--text-color-primary);margin: 15px 0;}
   .demo-list {margin: 16px 0;}

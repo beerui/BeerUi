@@ -8,7 +8,7 @@
   let list = svgNameList.slice(0, 50)
   let code =
 `
-<BeIcon name='add' fill='#000' />
+<BeIcon name='add' color='#000' />
 `
 	let isShowMore = true
 	const showMore = async () => {
