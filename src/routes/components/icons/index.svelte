@@ -1,11 +1,11 @@
 <script>
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
   import BeIcon from '$lib/be-icon/BeIcon.svelte';
-  import svgList from '$lib/utils/svgList.js';
+  import { svgNameList } from '$lib/utils/svgList.js';
   import { tick } from 'svelte';
   let js = `import { BeIcon } from '@beerui/beerui'`
 
-  let list = svgList.slice(0, 50)
+  let list = svgNameList.slice(0, 50)
   let code =
 `
 <BeIcon name='add' fill='#000' />
@@ -14,7 +14,7 @@
 	const showMore = async () => {
 	  isShowMore = false
 		await tick()
-	  list = svgList
+	  list = svgNameList
   }
 </script>
 <div class='page-container'>
@@ -24,7 +24,7 @@
 				{#each list as icon}
 					<div class='icon-list'>
 						<div class='demo-icon'>
-							<BeIcon name={icon} fill='#000' width='30' height='30' />
+							<BeIcon name={icon} width='30' height='30' />
 						</div>
 						<div style="text-align:center;">{icon}</div>
 					</div>

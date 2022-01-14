@@ -22,22 +22,22 @@
 	<BeButton size="normal" round='lg' type="danger">危险按钮</BeButton>
 </div>
 <BeButton class='demo-button' size="normal" round='circle' icon='IconActivity' type="default">
-	<BeIcon name='add' fill='#000' />
+	<BeIcon name='add' color='#000' />
 </BeButton>
 <BeButton class='demo-button' size="normal" round='circle' type="primary">
-	<BeIcon name='books' fill='#fff' />
+	<BeIcon name='books' color='#fff' />
 </BeButton>
 <BeButton class='demo-button' size="normal" round='circle' type="success">
-	<BeIcon name='call' fill='#fff' />
+	<BeIcon name='call' color='#fff' />
 </BeButton>
 <BeButton class='demo-button' size="normal" round='circle' type="info">
-	<BeIcon name='chat' fill='#fff' />
+	<BeIcon name='chat' color='#fff' />
 </BeButton>
 <BeButton class='demo-button' size="normal" round='circle' type="warning">
-	<BeIcon name='clear' fill='#fff' />
+	<BeIcon name='clear' color='#fff' />
 </BeButton>
 <BeButton class='demo-button' size="normal" round='circle' type="danger">
-	<BeIcon name='cloud' fill='#fff' />
+	<BeIcon name='cloud' color='#fff' />
 </BeButton>
 `
 </script>
@@ -62,22 +62,22 @@
 			</div>
 			<div class='demo-list'>
 				<BeButton class='demo-button' size="normal" round='circle' icon='IconActivity' type="default">
-					<BeIcon name='add' fill='#000' />
+					<BeIcon name='add' color='#000' />
 				</BeButton>
 				<BeButton class='demo-button' size="normal" round='circle' type="primary">
-					<BeIcon name='books' fill='#fff' />
+					<BeIcon name='books' color='#fff' />
 				</BeButton>
 				<BeButton class='demo-button' size="normal" round='circle' type="success">
-					<BeIcon name='call' fill='#fff' />
+					<BeIcon name='call' color='#fff' />
 				</BeButton>
 				<BeButton class='demo-button' size="normal" round='circle' type="info">
-					<BeIcon name='chat' fill='#fff' />
+					<BeIcon name='chat' color='#fff' />
 				</BeButton>
 				<BeButton class='demo-button' size="normal" round='circle' type="warning">
-					<BeIcon name='clear' fill='#fff' />
+					<BeIcon name='clear' color='#fff' />
 				</BeButton>
 				<BeButton class='demo-button' size="normal" round='circle' type="danger">
-					<BeIcon name='cloud' fill='#fff' />
+					<BeIcon name='cloud' color='#fff' />
 				</BeButton>
 			</div>
 		</div>
