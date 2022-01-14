@@ -17,22 +17,22 @@
 
 	let js = `import { BeButton, BeDialog } from '@beerui/beerui'`
 	let code = `
-<BeDialog bind:visible={visible1} closeOnClickModal={false} on:beforeClose={beforeClose1}>
-	<p>这里是对话框内容</p>
+<BeDialog bind:visible={visible1} on:beforeClose={beforeClose1}>
+	<p>基础 Dialog</p>
 </BeDialog>`
 	const code1 = `
-<BeDialog bind:visible={visible2} closeOnClickModal={true} on:beforeClose={beforeClose2} isDrag={true}>
-	<p>这里是对话框内容</p>
+<BeDialog bind:visible={visible2} closeOnClickModal={false} on:beforeClose={beforeClose2} isDrag={true}>
+	<p>点击Mask不可以关闭</p>
 </BeDialog>
 	`
 	const code3 = `
-<BeDialog bind:visible={visible3} closeOnClickModal={false} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
-	<p>这里是对话框内容</p>
+<BeDialog bind:visible={visible3} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
+	<p>限制拖拽范围</p>
 </BeDialog>
 	`
 	const code2 = `
-<BeDialog bind:visible={visible4} closeOnClickModal={false} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
-	<p>这里是对话框内容</p>
+<BeDialog bind:visible={visible4} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
+	<p>拖拽完全自由</p>
 </BeDialog>
 	`
 </script>
@@ -44,8 +44,8 @@
 		<div slot='source'>
 			<div class='demo-list'>
 				<BeButton size="normal" type="primary" on:click={openDialog1} nativeType='submit'>打开 Dialog</BeButton>
-				<BeDialog bind:visible={visible1} closeOnClickModal={false} on:beforeClose={beforeClose1}>
-					<p>这里是对话框内容</p>
+				<BeDialog bind:visible={visible1} on:beforeClose={beforeClose1}>
+					<p>基础 Dialog</p>
 				</BeDialog>
 			</div>
 		</div>
@@ -58,13 +58,13 @@
 		<div slot='source'>
 			<div class='demo-list'>
 				<BeButton size="normal" type="primary" on:click={openDialog2} autofocus>打开 Dialog</BeButton>
-				<BeDialog bind:visible={visible2} closeOnClickModal={true} on:beforeClose={beforeClose2} isDrag={true}>
-					<p>这里是对话框内容</p>
+				<BeDialog bind:visible={visible2} closeOnClickModal={false} on:beforeClose={beforeClose2} isDrag={true}>
+					<p>点击Mask不可以关闭</p>
 				</BeDialog>
 			</div>
 		</div>
 		<div slot='description'>
-			基础拖拽 点击mask可关闭
+			基础拖拽 点击Mask不可以关闭
 		</div>
 	</DemoBlock>
 	<hr>
@@ -72,8 +72,8 @@
 		<div slot='source'>
 			<div class='demo-list'>
 				<BeButton size="normal" type="primary" on:click={openDialog3}>限制拖拽范围</BeButton>
-				<BeDialog bind:visible={visible3} closeOnClickModal={false} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
-					<p>这里是对话框内容</p>
+				<BeDialog bind:visible={visible3} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
+					<p>限制拖拽范围</p>
 				</BeDialog>
 			</div>
 		</div>
@@ -86,13 +86,13 @@
 		<div slot='source'>
 			<div class='demo-list'>
 				<BeButton size="normal" type="primary" on:click={openDialog4}>完全自由</BeButton>
-				<BeDialog bind:visible={visible4} closeOnClickModal={false} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
-					<p>这里是对话框内容</p>
+				<BeDialog bind:visible={visible4} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
+					<p>拖拽完全自由</p>
 				</BeDialog>
 			</div>
 		</div>
 		<div slot='description'>
-			完全自由
+			拖拽完全自由
 		</div>
 	</DemoBlock>
 </div>

@@ -51,19 +51,19 @@
     flex-direction: column;
     cursor: pointer;
     border-radius: 6px;
-		&:hover {background: var(--bg-color-card-hover)}
+		&:hover {background: var(--bg-color-demo-hover)}
 	}
 	.demo-more {
 		border: 1px solid var(--border-level-1-color);
 		color: var(--text-color-primary);
-		background: var(--bg-color-card);
+		background: var(--bg-color-demo);
 		text-align: center;
 		line-height: 40px;
 		cursor: pointer;
 		&:hover {
-      background: var(--bg-color-card-hover);
+      background: var(--bg-color-demo-hover);
 		}
 	}
-	.demo-icon {padding-bottom: 30px;}
-	.demo-list {display: flex;flex-wrap: wrap;}
+	.demo-icon {padding-bottom: 30px;color: var(--text-color-primary);}
+	.demo-list {display: flex;flex-wrap: wrap;color: var(--text-color-primary);}
 </style>
