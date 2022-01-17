@@ -12,11 +12,13 @@
     display: inline-block;
     overflow: hidden;
     z-index: 0;
-    transition: .3s;
   }
 
+  .is-in-stage {z-index: 1;cursor: pointer;}
+  .is-animating {transition: .4s ease-in-out;}
+  .is-active{z-index: 2;}
   &--card {
-    .be-carousel__item {width: 50%;transition: transform .4s ease-in-out;}
+    .be-carousel__item {width: 50%;transition: .3s ease-in-out;}
   }
   &__arrow {
     border: none;

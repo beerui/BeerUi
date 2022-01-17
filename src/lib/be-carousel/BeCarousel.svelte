@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { filterClass } from '$lib/utils/beerui';
+	import { addClass, filterClass, removeClass } from '$lib/utils/beerui';
   import { onMount } from 'svelte';
   import BeIcon from '$lib/be-icon/BeIcon.svelte';
 
@@ -33,8 +33,7 @@
   let timer = null;
   let list = []
   let len = 0
-  let inStage = false
-	const transX = []
+  let oldIndex = null
   const CARD_SCALE = 0.83;
 
   onMount(() => {
@@ -60,7 +59,7 @@
 	  const distance = element[direction === 'vertical' ? 'offsetHeight' : 'offsetWidth'];
 	  return distance * (index - initialIndex);
   }
-  const calcCardTranslate = (index) => {
+  const calcCardTranslate = (index, inStage) => {
 	  const parentWidth = element.offsetWidth;
 	  if (inStage) {
 		  return parentWidth * ((2 - CARD_SCALE) * (index - initialIndex) + 1) / 4;
@@ -80,31 +79,42 @@
 	}
 	// 切换轮播
 	const changeCarousel = () => {
-	  console.log('initialIndex', initialIndex);
 	  if (timer) clearTimeout(timer);
 	  if (autoplay) autoplayHandle()
 	  list.forEach((el, index) => {
-				if (type === 'none') {
-					index !== initialIndex ? el.style.display = 'none' : el.style.display = 'block';
-				} else if (type === 'card') {
-					if (direction === 'vertical') {
-						console.warn('[Beerui Warn][Carousel]vertical direction is not supported in card mode');
-					}
-					inStage = Math.round(Math.abs(index - initialIndex)) <= 1;
-					let active = index === initialIndex;
-					let transX = calcCardTranslate(index);
-					let scale = active ? 1 : CARD_SCALE;
-					console.log(transX, scale);
-					el.style = `transform: ${translateType}(${transX}px) scale(${scale});z-index: ${inStage ? 2 : 1}`
-				} else {
-					let _index = index
-					if (index !== initialIndex && len > 2 && loop) {
-						_index = processIndex(index);
-					}
-					let transX = calcTranslate(_index)
-					el.style.transform = `${translateType}(${transX}px) scale(1)`
+			let active = index === initialIndex;
+			let animating
+			if (oldIndex !== undefined) {
+				animating = index === initialIndex || index === oldIndex;
+			}
+			removeClass(el, 'is-in-stage is-active is-animating')
+			animating ? addClass(el, 'is-animating') : ''
+			active ? addClass(el, 'is-active') : ''
+			if (type === 'none') {
+				index !== initialIndex ? el.style.display = 'none' : el.style.display = 'block';
+			} else if (type === 'card') {
+				if (direction === 'vertical') {
+					console.warn('[Beerui Warn][Carousel]vertical direction is not supported in card mode');
 				}
+				if (index !== initialIndex && len > 2 && loop) {
+					index = processIndex(index);
+				}
+				let inStage = Math.round(Math.abs(index - initialIndex)) <= 1;
+				let transX = calcCardTranslate(index, inStage);
+				let scale = active ? 1 : CARD_SCALE;
+				inStage ? addClass(el, 'is-in-stage') : ''
+				active ? addClass(el, 'is-active') : ''
+				el.style = `transform: ${translateType}(${transX}px) scale(${scale});}`
+			} else {
+				console.log('index, initialIndex, oldIndex', index, initialIndex, oldIndex);
+				if (index !== initialIndex && len > 2 && loop) {
+					index = processIndex(index);
+				}
+				let transX = calcTranslate(index)
+				el.style.transform = `${translateType}(${transX}px) scale(1)`
+			}
 		})
+		oldIndex = initialIndex
 	}
 	// 执行上一张
 	const doPrevHandle = () => {

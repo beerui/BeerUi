@@ -8,27 +8,24 @@
 </script>
 <div class='page-container'>
 	<BeCarousel items={items.slice(0, 2)} height="450px" autoplay={false} direction='horizontal' arrow='always' trigger='hover'>
-		{#each items.slice(0, 2) as item, i}
-		<BeCarouselItem>
-			<img style='height: 100%;' src={item} alt={item}>
-		</BeCarouselItem>
-		{/each}
-		<h1>213213</h1>
-	</BeCarousel>
-	<BeCarousel {items} height="450px" direction='horizontal' arrow='always' trigger='hover' type='none'>
 		{#each items as item, i}
 		<BeCarouselItem>
-			<img style='height: 100%;' src={item} alt={item}>
+			<img style='height: 100%;width: 100%;' src={item} alt={item}>
 		</BeCarouselItem>
 		{/each}
-		<h1>213213</h1>
+	</BeCarousel>
+	<BeCarousel {items} height="450px" autoplay={false} direction='horizontal' arrow='always' trigger='hover' type='none'>
+		{#each items as item, i}
+		<BeCarouselItem>
+			<img style='height: 100%;width: 100%;' src={item} alt={item}>
+		</BeCarouselItem>
+		{/each}
 	</BeCarousel>
 	<BeCarousel height="450px" direction='horizontal' autoplay={false} trigger='click' type='card'>
 		{#each items as item, i}
 		<BeCarouselItem>
-			<img style='height: 100%;' src={item} alt={item}>
+			<img style='height: 100%;width: 100%;' src={item} alt={item}>
 		</BeCarouselItem>
 		{/each}
-		<h1>213213</h1>
 	</BeCarousel>
 </div>
