@@ -12,6 +12,11 @@
     display: inline-block;
     overflow: hidden;
     z-index: 0;
+    transition: .3s;
+  }
+
+  &--card {
+    .be-carousel__item {width: 50%;transition: transform .4s ease-in-out;}
   }
   &__arrow {
     border: none;
@@ -56,8 +61,8 @@
   &__indicator {
     background-color: transparent;
     cursor: pointer;
-    &:hover {opacity: 0.72}
-    &.is-active {opacity: 1;}
+    &:hover {button {opacity: .72;}}
+    &.active {button {opacity: 1;}}
     &--horizontal {
       display: inline-block;
       padding: 12px 4px;
