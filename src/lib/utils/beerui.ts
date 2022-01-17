@@ -320,9 +320,9 @@ export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: () =
  * 计算class
  * @param props 组件传入值
  * @param prefix 类名前缀
+ * @param preClass 类名前缀
  */
-export const filterClass = (props: Object, prefix: string): string[] => {
-	const preClass = ['type', 'size', 'round', 'loading', 'disabled']
+export const filterClass = (props: Object, prefix: string, preClass:string[]): string[] => {
 	let r1 = []
 	let r2 = []
 	for (let key in props) {
