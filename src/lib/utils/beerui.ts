@@ -16,7 +16,7 @@ const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEF
  * @param {string[]} list 图片数组
  * @param {function} cb 图片切换后 监听的回调
  */
-
+``
 export const previewImages = (src: string, list?: string[], cb?: () => void):PreviewImage => new PreviewImage(src, list, cb)
 
 class PreviewImage {
