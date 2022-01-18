@@ -288,34 +288,6 @@ export const getAttach = (node: any): HTMLElement => {
 	return document.body;
 };
 
-export function containerDom(parent: Element | Iterable<any> | ArrayLike<any>, child: any): boolean {
-	if (parent && child) {
-		let pNode = child;
-		while (pNode) {
-			if (parent === pNode) {
-				return true;
-			}
-			const { parentNode } = pNode;
-			pNode = parentNode;
-		}
-	}
-	return false;
-}
-
-export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: () => void): void => {
-	on(document, 'click', (event: { target: Element }) => {
-		if (Array.isArray(els)) {
-			const isFlag = Array.from(els).every((item) => containerDom(item, event.target) === false);
-			isFlag && cb && cb();
-		} else {
-			if (containerDom(els, event.target)) {
-				return false;
-			}
-			cb && cb();
-		}
-	});
-}
-
 /**
  * 计算class
  * @param props 组件传入值

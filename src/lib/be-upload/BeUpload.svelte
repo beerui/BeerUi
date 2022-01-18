@@ -84,8 +84,7 @@
 
 	})
 </script>
-<div class='be-uploader'></div>
-<div class='uploader'>
+<div class='be-uploader'>
 	<div style='display: none;' class='dragme'></div>
 	<h2>上传文件</h2>
 	<p>仅接受 .png, .jpg, .svg</p>

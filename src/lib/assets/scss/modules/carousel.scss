@@ -1,7 +1,7 @@
 .be-carousel {
-  position: relative;
-  &--horizontal {overflow-x: hidden;}
-  &--vertical {overflow-y: hidden;}
+  position: relative;overflow-x: hidden;
+  &--horizontal {overflow-x: hidden;overflow-y: auto;}
+  &--vertical {overflow-y: hidden;overflow-x: auto;}
 
   &__item {
     position: absolute;
@@ -59,6 +59,10 @@
   &__indicators {
     position: absolute;list-style: none;margin: 0;padding: 0;z-index: 2;
     &--horizontal {bottom: 0;left: 50%;transform: translateX(-50%);}
+    &--vertical {
+      right: 0;top: 50%;transform: translateY(-50%);
+      .be-carousel__button {width: 2px;height: 15px;}
+    }
   }
   &__indicator {
     background-color: transparent;
@@ -68,6 +72,9 @@
     &--horizontal {
       display: inline-block;
       padding: 12px 4px;
+    }
+    &--vertical {
+      padding: 4px 12px;
     }
   }
 }

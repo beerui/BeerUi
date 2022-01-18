@@ -5,25 +5,31 @@
 <section class='nav-container'>
 	<div class='nav-container__scroll'>
 		<ul>
+			<li><a class:active={$page.url.pathname === '/components'} href='/components'>快速开始</a></li>
+			<li><span class='base'>基本</span></li>
 			<li><a class:active={$page.url.pathname === '/components/icons'} href='/components/icons'>Icons 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/button'} href='/components/button'>Button 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/dialog'} href='/components/dialog'>Dialog 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/alert'} href='/components/alert'>Alert 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/switch'} href='/components/switch'>Switch 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/datePicker'} href='/components/datePicker'>date-picker 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/select'} href='/components/select'>Select 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/tabs'} href='/components/tabs'>Tabs 示例</a></li>
+			<li><span class='base'>表单</span></li>
 			<li><a class:active={$page.url.pathname === '/components/input'} href='/components/input'>Input 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/switch'} href='/components/switch'>Switch 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/select'} href='/components/select'>Select 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/upload'} href='/components/upload'>Upload 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/datePicker'} href='/components/datePicker'>date-picker 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/drag'} href='/components/drag'>Drag 示例</a></li>
+			<li><span class='base'>数据</span></li>
+			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/progress'} href='/components/progress'>progress 示例</a></li>
+			<li><span class='base'>提示</span></li>
+			<li><a class:active={$page.url.pathname === '/components/dialog'} href='/components/dialog'>Dialog 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/alert'} href='/components/alert'>Alert 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/notice'} href='/components/notice'>Notice 示例</a></li>
+			<li><span class='base'>导航 Navigation</span></li>
+			<li><a class:active={$page.url.pathname === '/components/tabs'} href='/components/tabs'>Tabs 示例</a></li>
+			<li><span class='base'>其它 Others</span></li>
 			<li><a class:active={$page.url.pathname === '/components/clock'} href='/components/clock'>Clock 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/scrollbar'} href='/components/scrollbar'>Scrollbar 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/drag'} href='/components/drag'>Drag 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/upload'} href='/components/upload'>Upload 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/notification'} href='/components/notification'>Notification 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/carousel'} href='/components/carousel'>Carousel 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/preview'} href='/components/preview'>PreviewImage 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/progress'} href='/components/progress'>progress 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/notice'} href='/components/notice'>Notice 示例</a></li>
 		</ul>
 	</div>
 </section>
@@ -39,6 +45,8 @@
 		padding: 20px 0;
     border-right: 1px solid var(--border-level-1-color);
 		z-index: 9;
+		font-size: 14px;
+		.base {color: var(--text-secondary);padding: 5px 10px;font-size: 12px;}
     /* 设置滚动条的样式 */
     &::-webkit-scrollbar {
       width: 8px;

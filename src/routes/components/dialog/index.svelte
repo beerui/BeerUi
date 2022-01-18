@@ -37,7 +37,7 @@
 	`
 </script>
 <div class='page-container'>
-	<h2>Dialog 对话框</h2>
+	<h2>BeDialog 对话框</h2>
 	<p class='desc'>在保留当前页面状态的情况下，告知用户并承载相关操作。</p>
 	<h3>基本用法</h3>
 	<DemoBlock {code} {js}>

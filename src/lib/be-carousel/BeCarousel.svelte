@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addClass, filterClass, removeClass } from '$lib/utils/beerui';
+	import { addClass, filterClass, off, on, once, removeClass } from '$lib/utils/beerui';
   import { onMount } from 'svelte';
   import BeIcon from '$lib/be-icon/BeIcon.svelte';
 
@@ -56,11 +56,11 @@
 	  return index;
   }
   const calcTranslate = (index) => {
-	  const distance = element[direction === 'vertical' ? 'offsetHeight' : 'offsetWidth'];
+	  const distance = element && element[direction === 'vertical' ? 'offsetHeight' : 'offsetWidth'];
 	  return distance * (index - initialIndex);
   }
   const calcCardTranslate = (index, inStage) => {
-	  const parentWidth = element.offsetWidth;
+	  const parentWidth = element && element.offsetWidth;
 	  if (inStage) {
 		  return parentWidth * ((2 - CARD_SCALE) * (index - initialIndex) + 1) / 4;
 	  } else if (index < initialIndex) {
@@ -90,31 +90,44 @@
 			removeClass(el, 'is-in-stage is-active is-animating')
 			animating ? addClass(el, 'is-animating') : ''
 			active ? addClass(el, 'is-active') : ''
+
+			// 循环开启的索引
+			if (index !== initialIndex && len > 2 && loop) {
+				index = processIndex(index);
+			}
 			if (type === 'none') {
 				index !== initialIndex ? el.style.display = 'none' : el.style.display = 'block';
 			} else if (type === 'card') {
 				if (direction === 'vertical') {
 					console.warn('[Beerui Warn][Carousel]vertical direction is not supported in card mode');
 				}
-				if (index !== initialIndex && len > 2 && loop) {
-					index = processIndex(index);
-				}
 				let inStage = Math.round(Math.abs(index - initialIndex)) <= 1;
 				let transX = calcCardTranslate(index, inStage);
 				let scale = active ? 1 : CARD_SCALE;
 				inStage ? addClass(el, 'is-in-stage') : ''
 				active ? addClass(el, 'is-active') : ''
+		  	el.setAttribute('data-index', String(index))
+		  	onceHandle(el, 'click', handleItemClick);
 				el.style = `transform: ${translateType}(${transX}px) scale(${scale});}`
 			} else {
-				console.log('index, initialIndex, oldIndex', index, initialIndex, oldIndex);
-				if (index !== initialIndex && len > 2 && loop) {
-					index = processIndex(index);
-				}
 				let transX = calcTranslate(index)
 				el.style.transform = `${translateType}(${transX}px) scale(1)`
 			}
 		})
 		oldIndex = initialIndex
+	}
+  const onceHandle = (el, type, handler) => {
+	  const callback = () => {
+			handler(el);
+		  el.removeEventListener(type, callback)
+	  };
+	  el.addEventListener(type, callback)
+	}
+	const handleItemClick = (el) => {
+	  const value = el.getAttribute('data-index')
+		if (!value) console.warn('[Beerui Warn][Carousel]getAttribute failed in card mode');
+	  if (value > initialIndex) doNextHandle()
+	  if (value < initialIndex) doPrevHandle()
 	}
 	// 执行上一张
 	const doPrevHandle = () => {
@@ -143,14 +156,16 @@
 </script>
 <div class={_class} on:mouseenter={enterCarousel} on:mouseleave={leaveCarousel} bind:this={element}>
 	<div class='be-carousel__container' style:height>
+		{#if direction !== 'vertical'}
 		<button type="button" on:click={doPrevHandle} class="be-carousel__arrow be-carousel__arrow--left" style:display={arrowDisplay}><BeIcon width='35' height='22' name='chevron-left' /></button>
 		<button type="button" on:click={doNextHandle} class="be-carousel__arrow be-carousel__arrow--right" style:display={arrowDisplay}><BeIcon width='35' height='22' name='chevron-right' /></button>
+		{/if}
 		<slot></slot>
 	</div>
-	<ul class="be-carousel__indicators be-carousel__indicators--horizontal">
+	<ul class="be-carousel__indicators be-carousel__indicators--{direction === 'vertical' ? 'vertical' : 'horizontal'}">
 		{#each list as item, i}
 		<li
-			class="be-carousel__indicator be-carousel__indicator--horizontal"
+			class="be-carousel__indicator be-carousel__indicator--{direction === 'vertical' ? 'vertical' : 'horizontal'}"
 			class:active={i === initialIndex}
 			on:click={() => { doIndicatorHandle(i) }}
 			on:mouseenter={() => { doIndicatorHandle(i)}}

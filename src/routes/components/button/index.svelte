@@ -42,6 +42,7 @@
 `
 </script>
 <div class='page-container'>
+	<h2>BeButton 按钮</h2>
 	<DemoBlock {code} {js}>
 		<div slot='source'>
 			<div class='demo-list'>
