@@ -1,3 +1,39 @@
 .be-table {
-  position: relative;overflow-x: hidden;
+  position: relative;overflow: hidden;box-sizing: border-box;flex: 1;width: 100%;max-width: 100%;
+  background-color: var(--bg-color-container);font-size: 14px;color: var(--text-color-primary);
+  &:before {
+    content: "";position: absolute;background-color: var(--bg-color-secondarycontainer);z-index: 1;
+    left: 0;bottom: 0;width: 100%;height: 1px;
+  }
+  &--fit {border-right: 0;border-bottom: 0;}
+  &__footer-wrapper, &__header-wrapper {overflow: hidden;}
+  &-wrapper {width: 100%;}
+  &__body {
+    table-layout: fixed;border-collapse: collapse;
+    &-wrapper {width: 100%;overflow: hidden;position: relative;}
+  }
+  tr {
+    background-color: var(--bg-color-container);
+  }
+  &__cell {
+    padding: 12px 0;min-width: 0;box-sizing: border-box;text-overflow: ellipsis;
+    vertical-align: middle;position: relative;text-align: left;transition: background-color .25s ease;
+  }
+  &__cell, th.be-table__cell.is-leaf {border-bottom: 1px solid #ebeef5;}
+  .cell {
+    box-sizing: border-box;overflow: hidden;text-overflow: ellipsis;white-space: normal;
+    word-break: break-all;line-height: 23px;padding-left: 10px;padding-right: 10px;
+  }
+  &__row {
+    &:hover {
+      background-color: var(--bg-color-secondarycontainer-hover);
+      td.be-table__cell {background-color: var(--bg-color-secondarycontainer-hover);}
+    }
+    &--striped {
+      td.be-table__cell {background-color: var(--bg-color-secondarycontainer);}
+    }
+  }
+  &--striped {
+    td.be-table__cell {background-color: var(--bg-color-secondarycontainer);}
+  }
 }

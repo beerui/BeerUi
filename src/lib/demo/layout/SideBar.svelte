@@ -17,6 +17,7 @@
 			<li><a class:active={$page.url.pathname === '/components/datePicker'} href='/components/datePicker'>date-picker 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/drag'} href='/components/drag'>Drag 示例</a></li>
 			<li><span class='base'>数据</span></li>
+			<li><a class:active={$page.url.pathname === '/components/table'} href='/components/table'>Table 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/progress'} href='/components/progress'>progress 示例</a></li>
 			<li><span class='base'>提示</span></li>

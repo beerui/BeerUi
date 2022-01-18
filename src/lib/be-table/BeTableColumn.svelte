@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { svgList } from '$lib/utils/svgList';
-
-  export let name = ''
-  export let color = 'none'
-  export let width = '16'
-  export let height = '16'
+  export let prop:string = ''
+  export let label:string = ''
+  export let width:string = '180'
 </script>
-<div class='be-icon' style='width: {width}px;height: {height}px;'>
+<div class='be-table__column' data-prop={prop} data-label={label} data-width={width}>
 	<slot></slot>
 </div>

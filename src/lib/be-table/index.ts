@@ -1,1 +1,3 @@
-export { default as default } from './BeTable.svelte';
+import BeTable from './BeTable.svelte';
+import BeTableColumn from './BeTableColumn.svelte';
+export { BeTable, BeTableColumn };
