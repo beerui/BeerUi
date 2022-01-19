@@ -1,13 +1,19 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { filterClass } from '$lib/utils/beerui';
+  import { addClass, filterClass } from '$lib/utils/beerui';
   export let data: any[] = [] // 用户数据
-	export let striped: boolean = false // 斑马纹 false/true
+	export let stripe: boolean = false // 斑马纹 false/true
+	export let border: boolean = false // 边框 false/true
+	export let showHeader: boolean = true // 显示表头 true/false
+	export let height: string = '' // 定义了height属性，即可实现固定表头的表格
+	export let rowClassName: Function = null // 为 Table 中的某一行添加 class {row, rowIndex}/string
 
   const preClass = ['type']
   const normalClass = ['be-table']
 
-  if (striped) normalClass.push('el-table--striped')
+  if (stripe) normalClass.push('be-table--striped')
+  if (border) normalClass.push('be-table--border')
+  if (height) normalClass.push('be-table--scrollable-y')
 	const _class = [...normalClass, ...filterClass($$props, 'be-table--', preClass)].join(' ')
   export {_class as class};
 
@@ -16,20 +22,30 @@
   let element = null;
   let elements = null;
 
-  let tableData = []
+  let tableColumnData = []
+  let rowsData = []
 
   onMount(() => {
 	  element && initTable()
 	})
 	const initTable = () => {
-	  tableData = []
+	  tableColumnData = []
+	  rowsData = []
 	  elements = element.querySelectorAll('.be-table__column')
 	  elements.forEach((el, i) => {
-			tableData.push({ ...getAttrs(el.dataset), data: data[i] })
+			tableColumnData.push(getAttrs(el.dataset))
 		})
-	  console.log(tableData);
+		data.forEach((el, i) => {
+			let className
+			// 额外的类名
+			if (rowClassName) className = doRowClassName({ row: el, rowIndex: i })
+			rowsData.push({ ...el, className })
+		})
+	  console.log('tableColumnData', tableColumnData);
+	  console.log('rowsData', rowsData);
 	}
 
+	const doRowClassName = (options) => rowClassName(options)
 	// 整理子组件的数据
 	const getAttr = (el: Element, value: string) => el.getAttribute(value)
 	const getAttrs = (items: DOMStringMap) => {
@@ -38,39 +54,47 @@
 	  return result
   }
 </script>
-<div class={_class} bind:this={element}>
+<div class={_class} bind:this={element} style={$$props.style}>
+	<div style='visibility: hidden;position: absolute;z-index: -1;'><slot></slot></div>
+	{#if showHeader}
 	<div class='be-table__header-wrapper'>
-		<table class="be-table__body" style="width: 820px;">
+		<table class="be-table__body" style={$$props.style}>
 			<colgroup>
-				<slot></slot>
+				{#each tableColumnData as col, i}
+					<col width={col.width}>
+				{/each}
 			</colgroup>
 			<thead class="has-gutter">
 				<tr class="">
-					{#each tableData as cols, i}
+					{#each tableColumnData as col, i}
 					<th
-						class="be-table_1_column_{i} is-leaf be-table__cell"
-						style='width: {cols.width}px;'
+						class="be-table__cell"
+						style='width: {col.width}px;'
 					>
-						<div class="cell">{cols.label}</div>
+						<div class="cell">{col.label}</div>
 					</th>
 					{/each}
 				</tr>
 				</thead>
 		</table>
 	</div>
-	<div class='be-table__body-wrapper'>
-		<table class="be-table__body" style="width: 820px;">
+	{/if}
+	<div class='be-table__body-wrapper be-table--scrollable-x be-scroll-format' style:height>
+		<table class="be-table__body">
 			<colgroup>
-				{#each tableData as cols, i}
-					<col name="be-table_1_column_{i}" width={cols.width}>
+				{#each tableColumnData as col, i}
+					<col width={col.width}>
 				{/each}
 			</colgroup>
 			<tbody>
-			{#each data as cols, index}
-			<tr class="be-table__row {striped && index%2 === 1 ? 'be-table__row--striped' : ''}">
-				{#each tableData as rows, i}
-				<td class="be-table_1_column_{i} be-table__cell">
-					<div class="cell">{cols[rows.prop]}</div>
+			{#each rowsData as row, index}
+			<tr
+				class="be-table__row {row.className || ''} {stripe && index%2 === 1 ? 'be-table__row--striped' : ''}"
+				style={row.styles}
+			>
+				{#each tableColumnData as col, i}
+				<td class="be-table__cell">
+					<div class="cell">{row[col.prop] || ''}</div>
 				</td>
 				{/each}
 			</tr>
