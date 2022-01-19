@@ -1,4 +1,3 @@
-import isString from 'lodash/isString'
 import { browser } from '$app/env';
 if (browser) {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -279,7 +278,8 @@ export const getAttach = (node: any): HTMLElement => {
 	if (!attachNode) {
 		return document.body;
 	}
-	if (isString(attachNode)) {
+	// TODO isString
+	if (typeof attachNode == 'string') {
 		return document.querySelector(attachNode);
 	}
 	if (attachNode instanceof HTMLElement) {

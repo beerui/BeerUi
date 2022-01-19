@@ -1,5 +1,7 @@
 import preprocess from 'svelte-preprocess';
+import vercel from '@sveltejs/adapter-vercel';
 import path from 'path';
+
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
@@ -12,6 +14,7 @@ const config = {
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
+		adapter: vercel(),
 		package: {
 			files(filepath) {
 				return !filepath.endsWith('.stories.svelte');

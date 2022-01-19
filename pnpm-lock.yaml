@@ -6,13 +6,13 @@ importers:
     specifiers:
       '@babel/core': 7.16.7
       '@babel/preset-env': 7.16.7
-      '@novacbn/svelte-codejar': ^0.1.1
       '@storybook/addon-actions': 6.4.9
       '@storybook/addon-essentials': 6.4.9
       '@storybook/addon-links': 6.4.9
       '@storybook/addon-storyshots': 6.4.9
       '@storybook/addon-svelte-csf': 1.1.0
       '@storybook/svelte': 6.4.9
+      '@sveltejs/adapter-vercel': 1.0.0-next.37
       '@sveltejs/kit': 1.0.0-next.216
       '@testing-library/cypress': 8.0.2
       '@typescript-eslint/eslint-plugin': 5.9.0
@@ -50,13 +50,13 @@ importers:
     devDependencies:
       '@babel/core': 7.16.7
       '@babel/preset-env': 7.16.7_@babel+core@7.16.7
-      '@novacbn/svelte-codejar': 0.1.1
       '@storybook/addon-actions': 6.4.9
       '@storybook/addon-essentials': 6.4.9_bf693b2ffb6540f688f048198682d368
       '@storybook/addon-links': 6.4.9
       '@storybook/addon-storyshots': 6.4.9_6d28297f86f838a516685f64d0324923
       '@storybook/addon-svelte-csf': 1.1.0_df358937d1718700e53397cc56150d42
       '@storybook/svelte': 6.4.9_527df05c09bb833c6d7e187c2da1e133
+      '@sveltejs/adapter-vercel': 1.0.0-next.37
       '@sveltejs/kit': 1.0.0-next.216_sass@1.45.2+svelte@3.46.2
       '@testing-library/cypress': 8.0.2_cypress@9.2.0
       '@typescript-eslint/eslint-plugin': 5.9.0_bd2fd93dbcc607ad2f21b784bccfe0c8
@@ -1843,13 +1843,6 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
-    dev: true
-
-  /@novacbn/svelte-codejar/0.1.1:
-    resolution: {integrity: sha512-/Kfc5JwOCcxF3WgjWSfNGoqPsjL3Rr8bwEBoNCZHothVS1Xs+UY7Z7VrqnX//d1JiM1wp/fCoyS5QYNI7qoJuw==}
-    dependencies:
-      codejar: 3.5.0
-      svelte: 3.46.2
     dev: true
 
   /@npmcli/fs/1.1.0:
@@ -4085,6 +4078,12 @@ packages:
       - '@types/react'
     dev: true
 
+  /@sveltejs/adapter-vercel/1.0.0-next.37:
+    resolution: {integrity: sha512-SfaaakXjk6sBmSGozdrUQIsB3cFdo47ZFFEHMlPOScvXuAY8VPc1jCbGEQPadKW9Txf9xDuu6trm41OYztC+RA==}
+    dependencies:
+      esbuild: 0.13.15
+    dev: true
+
   /@sveltejs/kit/1.0.0-next.216_sass@1.45.2+svelte@3.46.2:
     resolution: {integrity: sha512-FKg7PPlymsZ2aU8DteY1BH217M2dIAgfWzm8OVqazQn2uLbw25WbVqSJ5KdgW83mLYoxSWUNPrJX3TJNEG6jVg==}
     engines: {node: '>=14.13'}
@@ -5818,10 +5817,6 @@ packages:
   /clsx/1.1.1:
     resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
     engines: {node: '>=6'}
-    dev: true
-
-  /codejar/3.5.0:
-    resolution: {integrity: sha512-uXrFZZ+yb23YY7+WtTux2Yyokt+Lty/kBnW/OhhEGp8IW8/lrJw5Gs1wwCyt2vpMfsVdudLmV5xAgYqsZY/49A==}
     dev: true
 
   /collapse-white-space/1.0.6:
