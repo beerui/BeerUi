@@ -107,6 +107,14 @@ svg {user-select: none;}
     color: #606266;
     text-align: justify;
   }
+  .be-notice__close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    color: #909399;
+    font-size: 16px;
+  }
 }
 
 .be-notify-fade{
