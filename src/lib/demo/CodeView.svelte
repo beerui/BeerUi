@@ -22,8 +22,12 @@
 >
 	<pre>
 		<code>
+			{#if highlightedCodeJS}
 			{@html highlightedCodeJS}
+			{/if}
+			{#if highlightedCode}
 			{@html highlightedCode}
+			{/if}
 		</code>
 	</pre>
 </div>

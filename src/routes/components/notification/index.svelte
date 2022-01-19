@@ -32,9 +32,6 @@
 	console.log('mergeObject', mergeObject(obj1, obj2));
 
 	onMount(() => {
-		addEventListener('#list', 'click', function(e) {
-			console.log(this.innerHTML);
-		}, 'li')
 	})
 
 	const pid = BeerPS.subscribe('talk', data => {

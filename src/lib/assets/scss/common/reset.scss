@@ -334,3 +334,20 @@ button, input, select, textarea {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+.be-scroll-format {
+  /* 设置滚动条的样式 */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* 滚动槽 */
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: var(--scrollbar-color);
+    border-radius: 6px;
+  }
+  /* 滚动条滑块 */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: var(--scrollbar-color);
+  }
+}

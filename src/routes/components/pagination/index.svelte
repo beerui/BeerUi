@@ -142,6 +142,7 @@ function changePage(item) {
 	}
 </script>
 <div class='page-container'>
+	<h2>BePagination 分页</h2>
 	<DemoBlock {code} {js}>
 		<div slot='source'>
 			<div class='demo-list'>

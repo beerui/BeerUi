@@ -28,5 +28,3 @@
 	onDestroy(() => timer && clearInterval(timer))
 </script>
 <div class={classes('be-timer', _class)}>{timerShow}</div>
-<style>
-</style>

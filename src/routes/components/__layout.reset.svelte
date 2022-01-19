@@ -82,6 +82,7 @@
       padding: 20px;box-sizing: border-box;font-size: 14px;
       line-height: 22px;color: var(--text-color-primary);word-break: break-word;background-color: var(--bg-color-container);
     }
+		table,tr,th,td {color: var(--text-color-primary);}
   }
   .demo-code-container {padding: 20px;}
   .pt-0 {padding-top: 0;}

@@ -1,2 +1,3 @@
 import BeCarousel from './BeCarousel.svelte';
-export default BeCarousel;
+import BeCarouselItem from './BeCarouselItem.svelte';
+export { BeCarousel, BeCarouselItem };

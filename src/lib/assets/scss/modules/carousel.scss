@@ -1,7 +1,7 @@
 .be-carousel {
-  position: relative;
-  &--horizontal {overflow-x: hidden;}
-  &--vertical {overflow-y: hidden;}
+  position: relative;overflow-x: hidden;
+  &--horizontal {overflow-x: hidden;overflow-y: auto;}
+  &--vertical {overflow-y: hidden;overflow-x: auto;}
 
   &__item {
     position: absolute;
@@ -12,11 +12,13 @@
     display: inline-block;
     overflow: hidden;
     z-index: 0;
-    transition: .3s;
   }
 
+  .is-in-stage {z-index: 1;cursor: pointer;}
+  .is-animating {transition: .4s ease-in-out;}
+  .is-active{z-index: 2;}
   &--card {
-    .be-carousel__item {width: 50%;transition: transform .4s ease-in-out;}
+    .be-carousel__item {width: 50%;transition: .3s ease-in-out;}
   }
   &__arrow {
     border: none;
@@ -57,6 +59,10 @@
   &__indicators {
     position: absolute;list-style: none;margin: 0;padding: 0;z-index: 2;
     &--horizontal {bottom: 0;left: 50%;transform: translateX(-50%);}
+    &--vertical {
+      right: 0;top: 50%;transform: translateY(-50%);
+      .be-carousel__button {width: 2px;height: 15px;}
+    }
   }
   &__indicator {
     background-color: transparent;
@@ -66,6 +72,9 @@
     &--horizontal {
       display: inline-block;
       padding: 12px 4px;
+    }
+    &--vertical {
+      padding: 4px 12px;
     }
   }
 }

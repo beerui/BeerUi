@@ -18,6 +18,7 @@
   }
 </script>
 <div class='page-container'>
+	<h2>BeIcon 图标</h2>
 	<DemoBlock {code} {js}>
 		<div slot='source'>
 			<div class='demo-list'>
