@@ -17,6 +17,6 @@ export const svgList = {
 	${filesCtx.join(',')}
 }
 `
-fs.writeFileSync('./list.js', fileCtx)
+fs.writeFileSync('./list.render.js', fileCtx)
 console.log('svg 导入已更新！')
 
