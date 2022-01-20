@@ -17,33 +17,113 @@
 	const _class = [...normalClass, ...filterClass($$props, 'be-table--', preClass)].join(' ')
   export {_class as class};
 
-  console.log($$props);
-  console.log($$slots);
+  // console.log($$props);
+  // console.log($$slots);
   let element = null;
   let elements = null;
+  let columnDom = null; // slot中的dom
 
-  let tableColumnData = []
-  let rowsData = []
+  let columnData = [] // 列数据
+  let rowsData = [] // 行数据
+  let headerData = [] // 头部数据
+  let headerOriginData = [] // 头部数据
 
   onMount(() => {
 	  element && initTable()
 	})
 	const initTable = () => {
-	  tableColumnData = []
+	  columnData = []
 	  rowsData = []
+	  // 获取表头 DOM
+	  headerOriginData = initTableHeader()
+	  console.log(getAllColumns(headerData));
+	  headerData = convertToRows(headerOriginData);
+	  console.log('headerData', headerData);
 	  elements = element.querySelectorAll('.be-table__column')
 	  elements.forEach((el, i) => {
-			tableColumnData.push(getAttrs(el.dataset))
+			columnData.push(getAttrs(el.dataset))
 		})
+		// 加工数据
 		data.forEach((el, i) => {
 			let className
 			// 额外的类名
 			if (rowClassName) className = doRowClassName({ row: el, rowIndex: i })
 			rowsData.push({ ...el, className })
 		})
-	  console.log('tableColumnData', tableColumnData);
-	  console.log('rowsData', rowsData);
 	}
+  const getAllColumns = (columns) => {
+	  const result = [];
+	  columns.forEach((column) => {
+		  if (column.children) {
+			  result.push(column);
+			  result.push.apply(result, getAllColumns(column.children));
+		  } else {
+			  result.push(column);
+		  }
+	  });
+	  return result;
+  };
+  const convertToRows = (originColumns) => {
+	  console.log('originColumns', originColumns);
+	  let maxLevel = 1;
+	  const traverse = (column, parent?) => {
+		  if (parent) {
+			  column.level = parent.level + 1;
+			  if (maxLevel < column.level) {
+				  maxLevel = column.level;
+			  }
+		  }
+		  if (column.children) {
+			  let colSpan = 0;
+			  column.children.forEach((subColumn) => {
+				  traverse(subColumn, column);
+				  colSpan += subColumn.colSpan;
+			  });
+			  column.colSpan = colSpan;
+		  } else {
+			  column.colSpan = 1;
+		  }
+	  };
+
+	  originColumns.forEach((column) => {
+		  column.level = 1;
+			traverse(column);
+	  });
+
+	  const rows = [];
+	  for (let i = 0; i < maxLevel; i++) {
+		  rows.push([]);
+	  }
+
+	  const allColumns = getAllColumns(originColumns);
+
+	  allColumns.forEach((column) => {
+		  if (!column.children) {
+			  column.rowSpan = maxLevel - column.level + 1;
+		  } else {
+			  column.rowSpan = 1;
+		  }
+		  rows[column.level - 1].push(column);
+	  });
+
+	  return rows;
+  };
+  const initTableHeader = () => {
+		if (!columnDom || columnDom.children.length === 0) throw new Error('[Beerui] cant find element.')
+		return computedTableHeader(columnDom);
+  }
+  const computedTableHeader = (dom) => {
+	  let result = []
+	  Object.entries(dom.children).forEach(el => {
+		  const _item = el[1]
+		  const child = { children:[], ...getAttrs(_item.dataset) }
+		  if(_item && _item.children.length > 0) {
+			  child.children = computedTableHeader(_item)
+		  }
+		  result.push(child)
+	  })
+	  return result
+  }
 
 	const doRowClassName = (options) => rowClassName(options)
 	// 整理子组件的数据
@@ -55,34 +135,33 @@
   }
 </script>
 <div class={_class} bind:this={element} style={$$props.style}>
-	<div style='visibility: hidden;position: absolute;z-index: -1;'><slot></slot></div>
+	<div id='aaa' bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'><slot></slot></div>
 	{#if showHeader}
 	<div class='be-table__header-wrapper'>
 		<table class="be-table__body" style={$$props.style}>
 			<colgroup>
-				{#each tableColumnData as col, i}
+				{#each headerData as col, i}
 					<col width={col.width}>
 				{/each}
 			</colgroup>
 			<thead class="has-gutter">
-				<tr class="">
-					{#each tableColumnData as col, i}
-					<th
-						class="be-table__cell"
-						style='width: {col.width}px;'
-					>
-						<div class="cell">{col.label}</div>
-					</th>
-					{/each}
-				</tr>
+				{#each headerData as col, i}
+					<tr class="">
+						{#each col as rows}
+							<th class="be-table__cell" style='width: {rows.width}px;' rowspan={rows.rowSpan} colspan={rows.colSpan}>
+								<div class="cell">{rows.label}</div>
+							</th>
+						{/each}
+					</tr>
+				{/each}
 				</thead>
 		</table>
 	</div>
 	{/if}
-	<div class='be-table__body-wrapper be-table--scrollable-x be-scroll-format' style:height>
+	<div class='be-table__body-wrapper be-table--scrollable-x' style:height>
 		<table class="be-table__body">
 			<colgroup>
-				{#each tableColumnData as col, i}
+				{#each columnData as col, i}
 					<col width={col.width}>
 				{/each}
 			</colgroup>
@@ -92,7 +171,7 @@
 				class="be-table__row {row.className || ''} {stripe && index%2 === 1 ? 'be-table__row--striped' : ''}"
 				style={row.styles}
 			>
-				{#each tableColumnData as col, i}
+				{#each columnData as col, i}
 				<td class="be-table__cell">
 					<div class="cell">{row[col.prop] || ''}</div>
 				</td>

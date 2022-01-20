@@ -19,7 +19,6 @@ const config = {
 			files(filepath) {
 				const isFlag = filepath.indexOf('/assets/scss/node_modules') !== -1;
 				const isRoute = filepath.indexOf('/src/routes') !== -1;
-				console.log('isFlag', isFlag);
 				return !filepath.endsWith('.stories.svelte') || isFlag || isRoute;
 			},
 		},
