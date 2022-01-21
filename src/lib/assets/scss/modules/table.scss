@@ -1,5 +1,5 @@
 .be-table {
-  position: relative;overflow: hidden;box-sizing: border-box;flex: 1;width: 100%;max-width: 100%;
+  position: relative;overflow: hidden;box-sizing: content-box;flex: 1;width: 100%;
   background-color: var(--bg-color-container);font-size: 14px;color: var(--text-color-primary);
   &:before {
     content: "";position: absolute;background-color: var(--bg-color-secondarycontainer);z-index: 1;
@@ -58,6 +58,9 @@
     .be-table__cell {
       border-right: 1px solid #ebeef5;
     }
+    th.be-table__cell.gutter:last-of-type {
+       border-bottom: 1px solid #EBEEF5;
+    }
   }
   &--border:after, &--group:after, &:before {
     content: "";
@@ -70,4 +73,10 @@
     box-shadow: 0 0 10px rgb(0 0 0 / 12%);
   }
   &__fixed-right {top: 0;left: auto;right: 0;}
+  .gutter {
+    width: 15px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    padding: 0;
+  }
 }

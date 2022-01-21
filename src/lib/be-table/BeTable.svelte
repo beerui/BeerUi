@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
   import { addClass, filterClass } from '$lib/utils/beerui';
   export let data: any[] = [] // 用户数据
 	export let stripe: boolean = false // 斑马纹 false/true
@@ -11,38 +11,44 @@
   const preClass = ['type']
   const normalClass = ['be-table']
 
+	// 条纹
   if (stripe) normalClass.push('be-table--striped')
+	// 边框
   if (border) normalClass.push('be-table--border')
+	// 定死高度
   if (height) normalClass.push('be-table--scrollable-y')
 	const _class = [...normalClass, ...filterClass($$props, 'be-table--', preClass)].join(' ')
   export {_class as class};
 
   // console.log($$props);
   // console.log($$slots);
-  let element = null;
-  let elements = null;
+  let warpElement = null; // 顶层元素
+  let tbody = null; // tbody元素
+  let gutter = 0; // tbody元素
+  let columnElement = null; //
   let columnDom = null; // slot中的dom
 
   let columnData = [] // 列数据
+  let columnPropData = [] // 列的Key
   let rowsData = [] // 行数据
-  let headerData = [] // 头部数据
-  let headerOriginData = [] // 头部数据
+  let headerData = [] // 表头 可渲染Dom Tree
+  let headerOriginData = [] // 表头 原始Tree
 
   onMount(() => {
-	  element && initTable()
+	  warpElement && initTable()
 	})
 	const initTable = () => {
 	  columnData = []
 	  rowsData = []
 	  // 获取表头 DOM
-	  headerOriginData = initTableHeader()
-	  console.log(getAllColumns(headerData));
-	  headerData = convertToRows(headerOriginData);
-	  console.log('headerData', headerData);
-	  elements = element.querySelectorAll('.be-table__column')
-	  elements.forEach((el, i) => {
+	  initTableHeader()
+	  columnElement = warpElement.querySelectorAll('.be-table__column')
+	  columnElement.forEach((el, i) => {
 			columnData.push(getAttrs(el.dataset))
 		})
+	  columnPropData = columnData.filter(el => el['prop'])
+	  console.log('columnData', columnData);
+	  console.log('columnPropData', columnPropData);
 		// 加工数据
 		data.forEach((el, i) => {
 			let className
@@ -64,7 +70,6 @@
 	  return result;
   };
   const convertToRows = (originColumns) => {
-	  console.log('originColumns', originColumns);
 	  let maxLevel = 1;
 	  const traverse = (column, parent?) => {
 		  if (parent) {
@@ -108,17 +113,22 @@
 
 	  return rows;
   };
-  const initTableHeader = () => {
+  // 把Dom 清洗成Tree
+  const initTableHeader = async () => {
 		if (!columnDom || columnDom.children.length === 0) throw new Error('[Beerui] cant find element.')
-		return computedTableHeader(columnDom);
+	  headerOriginData = computedTableHeader(columnDom);
+	  headerData = convertToRows(headerOriginData);
+	  await tick()
+		console.log('warpElement.clientWidth', warpElement.clientWidth, tbody.clientWidth);
+	  gutter = warpElement.clientWidth - tbody.clientWidth
   }
   const computedTableHeader = (dom) => {
 	  let result = []
 	  Object.entries(dom.children).forEach(el => {
 		  const _item = el[1]
-		  const child = { children:[], ...getAttrs(_item.dataset) }
+		  const child = getAttrs(_item.dataset)
 		  if(_item && _item.children.length > 0) {
-			  child.children = computedTableHeader(_item)
+			  child['children'] = computedTableHeader(_item)
 		  }
 		  result.push(child)
 	  })
@@ -134,24 +144,26 @@
 	  return result
   }
 </script>
-<div class={_class} bind:this={element} style={$$props.style}>
+<div class={_class} bind:this={warpElement} style={$$props.style}>
 	<div id='aaa' bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'><slot></slot></div>
 	{#if showHeader}
 	<div class='be-table__header-wrapper'>
 		<table class="be-table__body" style={$$props.style}>
 			<colgroup>
-				{#each headerData as col, i}
+				{#each columnPropData as col, i}
 					<col width={col.width}>
 				{/each}
+				<col width={gutter}>
 			</colgroup>
 			<thead class="has-gutter">
 				{#each headerData as col, i}
 					<tr class="">
 						{#each col as rows}
-							<th class="be-table__cell" style='width: {rows.width}px;' rowspan={rows.rowSpan} colspan={rows.colSpan}>
+							<th class="be-table__cell" rowspan={rows.rowSpan} colspan={rows.colSpan}>
 								<div class="cell">{rows.label}</div>
 							</th>
 						{/each}
+						<th class="el-table__cell gutter" style="width: {gutter}px;"></th>
 					</tr>
 				{/each}
 				</thead>
@@ -161,17 +173,17 @@
 	<div class='be-table__body-wrapper be-table--scrollable-x' style:height>
 		<table class="be-table__body">
 			<colgroup>
-				{#each columnData as col, i}
+				{#each columnPropData as col, i}
 					<col width={col.width}>
 				{/each}
 			</colgroup>
-			<tbody>
+			<tbody bind:this={tbody}>
 			{#each rowsData as row, index}
 			<tr
 				class="be-table__row {row.className || ''} {stripe && index%2 === 1 ? 'be-table__row--striped' : ''}"
 				style={row.styles}
 			>
-				{#each columnData as col, i}
+				{#each columnPropData as col, i}
 				<td class="be-table__cell">
 					<div class="cell">{row[col.prop] || ''}</div>
 				</td>

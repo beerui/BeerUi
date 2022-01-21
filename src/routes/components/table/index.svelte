@@ -147,20 +147,20 @@ let mutilTableData = [{
 <!--					<BeTableColumn prop="address" label="地址" />-->
 <!--				</BeTable>-->
 <!--			</div>-->
-<!--			<h1>固定表头</h1>-->
-<!--			<div class='demo-list'>-->
-<!--				<BeTable data={[...tableData, ...tableData]} height="250px" style="width: 100%">-->
-<!--					<BeTableColumn prop="name" label="姓名" />-->
-<!--					<BeTableColumn prop="date" label="日期" fixed />-->
-<!--					<BeTableColumn prop="address" label="地址" />-->
-<!--				</BeTable>-->
-<!--				<div class='demo-desc'>-->
-<!--					只要在be-table元素中定义了height属性，即可实现固定表头的表格，而不需要额外的代码。-->
-<!--				</div>-->
-<!--			</div>-->
+			<h1>固定表头</h1>
+			<div class='demo-list'>
+				<BeTable data={[...tableData, ...tableData]} height="250px" style="width: 100%">
+					<BeTableColumn prop="name" label="姓名" />
+					<BeTableColumn prop="date" label="日期" fixed />
+					<BeTableColumn prop="address" label="地址" />
+				</BeTable>
+				<div class='demo-desc'>
+					只要在be-table元素中定义了height属性，即可实现固定表头的表格，而不需要额外的代码。
+				</div>
+			</div>
 			<h1>固定列</h1>
 			<div class='demo-list'>
-				<BeTable data={mutilTableData} height="250px" style="width: 500px;">
+				<BeTable data={mutilTableData} height="250px" border>
 					<BeTableColumn prop='date' label='日期' width='150' />
 					<BeTableColumn label="配送信息">
 						<BeTableColumn prop='name' label='姓名' width='120' />
