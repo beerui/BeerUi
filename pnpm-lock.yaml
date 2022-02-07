@@ -6,7 +6,6 @@ importers:
     specifiers:
       '@babel/core': 7.16.7
       '@babel/preset-env': 7.16.7
-      '@beerui/beerui': workspace:1.0.19
       '@storybook/addon-actions': 6.4.9
       '@storybook/addon-essentials': 6.4.9
       '@storybook/addon-links': 6.4.9
@@ -51,7 +50,6 @@ importers:
     devDependencies:
       '@babel/core': 7.16.7
       '@babel/preset-env': 7.16.7_@babel+core@7.16.7
-      '@beerui/beerui': 'link:'
       '@storybook/addon-actions': 6.4.9
       '@storybook/addon-essentials': 6.4.9_e5746c21c0359f394281c52481842d5e
       '@storybook/addon-links': 6.4.9

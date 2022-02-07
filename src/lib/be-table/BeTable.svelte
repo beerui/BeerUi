@@ -120,7 +120,9 @@
 	  headerData = convertToRows(headerOriginData);
 	  await tick()
 		console.log('warpElement.clientWidth', warpElement.clientWidth, tbody.clientWidth);
+		console.log('headerData', headerData);
 	  gutter = warpElement.clientWidth - tbody.clientWidth
+		console.log('gutter', gutter);
   }
   const computedTableHeader = (dom) => {
 	  let result = []
@@ -144,7 +146,7 @@
 	  return result
   }
 </script>
-<div class={_class} bind:this={warpElement} style={$$props.style}>
+<div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id}>
 	<div id='aaa' bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'><slot></slot></div>
 	{#if showHeader}
 	<div class='be-table__header-wrapper'>

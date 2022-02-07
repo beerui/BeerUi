@@ -160,7 +160,7 @@ let mutilTableData = [{
 			</div>
 			<h1>固定列</h1>
 			<div class='demo-list'>
-				<BeTable data={mutilTableData} height="250px" border>
+				<BeTable id='beTable' data={mutilTableData} height="250px" border>
 					<BeTableColumn prop='date' label='日期' width='150' />
 					<BeTableColumn label="配送信息">
 						<BeTableColumn prop='name' label='姓名' width='120' />
@@ -168,7 +168,7 @@ let mutilTableData = [{
 							<BeTableColumn prop='province' label='省份' width='120' />
 							<BeTableColumn prop='city' label='市区' width='120' />
 							<BeTableColumn prop='address' label='地址' width='300' />
-							<BeTableColumn prop='zip' label='邮编' width='120' />
+							<BeTableColumn prop='zip' label='邮编' />
 						</BeTableColumn>
 					</BeTableColumn>
 				</BeTable>
