@@ -2,6 +2,7 @@
 import BeTable from '$lib/be-table/BeTable.svelte';
 import BeTableColumn from '$lib/be-table/BeTableColumn.svelte';
 import DemoBlock from '$lib/demo/DemoBlock.svelte';
+import BeButton from '$lib/be-button/BeButton.svelte';
 
 const  tableData = [{
 	date: '2016-05-02',
@@ -147,35 +148,48 @@ let mutilTableData = [{
 <!--					<BeTableColumn prop="address" label="地址" />-->
 <!--				</BeTable>-->
 <!--			</div>-->
-			<h1>固定表头</h1>
-			<div class='demo-list'>
-				<BeTable data={[...tableData, ...tableData]} height="250px" style="width: 100%">
-					<BeTableColumn prop="name" label="姓名" />
-					<BeTableColumn prop="date" label="日期" fixed />
-					<BeTableColumn prop="address" label="地址" />
-				</BeTable>
-				<div class='demo-desc'>
-					只要在be-table元素中定义了height属性，即可实现固定表头的表格，而不需要额外的代码。
-				</div>
-			</div>
-			<h1>固定列</h1>
-			<div class='demo-list'>
-				<BeTable id='beTable' data={mutilTableData} height="250px" border>
-					<BeTableColumn prop='date' label='日期' width='150' />
-					<BeTableColumn label="配送信息">
-						<BeTableColumn prop='name' label='姓名' width='120' />
-						<BeTableColumn label="地址">
-							<BeTableColumn prop='province' label='省份' width='120' />
-							<BeTableColumn prop='city' label='市区' width='120' />
-							<BeTableColumn prop='address' label='地址' width='300' />
-							<BeTableColumn prop='zip' label='邮编' />
-						</BeTableColumn>
-					</BeTableColumn>
-				</BeTable>
-				<div class='demo-desc'>
-					固定列需要使用fixed属性，它接受 Boolean 值或者left/right，表示左边固定还是右边固定。
-				</div>
-			</div>
+<!--			<h1>固定表头</h1>-->
+<!--			<div class='demo-list'>-->
+<!--				<BeTable data={[...tableData, ...tableData]} style="width: 100%">-->
+<!--					<BeTableColumn prop="name" width='120' label="姓名" />-->
+<!--					<BeTableColumn prop="date" label="日期" fixed />-->
+<!--					<BeTableColumn prop="address" label="地址" />-->
+<!--				</BeTable>-->
+<!--				<div class='demo-desc'>-->
+<!--					只要在be-table元素中定义了height属性，即可实现固定表头的表格，而不需要额外的代码。-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<h1>固定列</h1>-->
+<!--			<div class='demo-list' style="width: 900px">-->
+<!--				<BeTable data={mutilTableData} height="250px" border>-->
+<!--					<BeTableColumn prop='date' label='日期' width='150' />-->
+<!--					<BeTableColumn label="配送信息">-->
+<!--						<BeTableColumn prop='name' label='姓名' width='120' />-->
+<!--						<BeTableColumn label="地址">-->
+<!--							<BeTableColumn prop='province' label='省份' width='120' />-->
+<!--							<BeTableColumn prop='city' label='市区' width='120' />-->
+<!--							<BeTableColumn prop='address' label='地址' width='300' />-->
+<!--							<BeTableColumn prop='zip' label='邮编' />-->
+<!--						</BeTableColumn>-->
+<!--					</BeTableColumn>-->
+<!--				</BeTable>-->
+<!--				<div class='demo-desc'>-->
+<!--					固定列需要使用fixed属性，它接受 Boolean 值或者left/right，表示左边固定还是右边固定。-->
+<!--				</div>-->
+<!--			</div>-->
+					<h1>自定义样式</h1>
+					<div class='demo-list'>
+						<BeTable data={tableData}>
+							<BeTableColumn prop="name" label="姓名" />
+							<BeTableColumn prop="date" label="日期" />
+							<BeTableColumn prop="address" label="操作">
+								<temp slot-scope="scope">
+									<BeButton>默认</BeButton>
+									<BeButton>默认</BeButton>
+								</temp>
+							</BeTableColumn>
+						</BeTable>
+					</div>
 		</div>
 	</DemoBlock>
 </div>

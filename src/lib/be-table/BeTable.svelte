@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount, tick } from 'svelte';
-  import { addClass, filterClass } from '$lib/utils/beerui';
+	import { onDestroy, onMount, tick } from 'svelte';
+	import { addClass, filterClass, off, on } from '$lib/utils/beerui';
   export let data: any[] = [] // 用户数据
 	export let stripe: boolean = false // 斑马纹 false/true
 	export let border: boolean = false // 边框 false/true
@@ -23,8 +23,12 @@
   // console.log($$props);
   // console.log($$slots);
   let warpElement = null; // 顶层元素
+  let tableHeaderWrapper = null; // 表格头元素
+  let tableWrapper = null; // 表格元素
   let tbody = null; // tbody元素
   let gutter = 0; // tbody元素
+  let scrollLeft = 0; // scrollLeft
+  let tableWidth = '0px'; // table width宽度
   let columnElement = null; //
   let columnDom = null; // slot中的dom
 
@@ -37,25 +41,98 @@
   onMount(() => {
 	  warpElement && initTable()
 	})
-	const initTable = () => {
-	  columnData = []
-	  rowsData = []
+	onDestroy(() => {
+		off(tableWrapper, 'scroll', tableHeaderScroll)
+	})
+	const tableHeaderScroll = (evt) => {
+		tableHeaderWrapper.scrollLeft = evt.target.scrollLeft
+	}
+	// 计算滚动条宽度
+	const getScrollbarWidth = () => {
+		const scrollDiv = document.createElement("div");
+		scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
+		document.body.appendChild(scrollDiv);
+		const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+		document.body.removeChild(scrollDiv);
+		return scrollbarWidth;
+	}
+	// 是否存在滚动条
+	function eleCanScroll(ele) {
+		if (!ele instanceof HTMLElement) return;
+		if (ele.scrollTop > 0) return true
+		ele.scrollTop++;
+		// 元素不能滚动的话，scrollTop 设置不会生效，还会置为 0
+		const top = ele.scrollTop;
+		// 重置滚动位置
+		top && (ele.scrollTop = 0);
+		return top > 0;
+	}
+
+	// 计算每一格的宽度
+	const computedColumnWidth = (emptyNum, userWidth) => {
+		const domWidth = warpElement.clientWidth - userWidth
+		// 取余
+		const surplus = domWidth % emptyNum
+		if (surplus === 0) return { surplus, width: domWidth / emptyNum }
+		const width = (domWidth - surplus) / emptyNum
+		return { surplus, width }
+	}
+	const initTable = async () => {
 	  // 获取表头 DOM
-	  initTableHeader()
-	  columnElement = warpElement.querySelectorAll('.be-table__column')
-	  columnElement.forEach((el, i) => {
-			columnData.push(getAttrs(el.dataset))
+		await initTableHeader()
+	  // 加工行数据
+		computedColumnData()
+		// 加工列数据
+		computedRowsData()
+		// DOM渲染完毕 计算滚动条宽度
+		await tick()
+		// 绑定横向滚动的头部联动
+		bindHeaderScroll()
+	}
+	// 加工行数据
+	const computedColumnData = () => {
+		columnData = []
+		columnElement = warpElement.querySelectorAll('.be-table__column')
+		columnElement.forEach(el => columnData.push(getAttrs(el.dataset)))
+		// 整理数据 [{prop: 'name', label: '姓名', width: ''}]
+		// 取出用户展示字段 存在prop
+		columnPropData = columnData.filter(el => el['prop'])
+		let emptyNum = 0 // 没有设置宽度的数量
+		let userWidth = 0 // 用户设置的宽度总数
+		columnPropData.forEach((el, i) => {
+			el.width === '' ? emptyNum++ : userWidth += Number(el.width);
+			el.index = i
 		})
-	  columnPropData = columnData.filter(el => el['prop'])
-	  console.log('columnData', columnData);
-	  console.log('columnPropData', columnPropData);
-		// 加工数据
+		// 计算没有赋值的宽度
+		if (emptyNum > 0) {
+			// 列宽
+			const { surplus, width } = computedColumnWidth(emptyNum, userWidth)
+			// 没有设置宽度的数组
+			const emptyWidthArr = columnPropData.filter(el => el.width === '')
+			// 设置宽度
+			emptyWidthArr.forEach((el, i) => columnPropData[el.index]['width'] = i === emptyWidthArr.length-1 ? String(width + surplus) : String(width))
+		}
+		// 计算表格宽度
+		const columnPropDataWidth = []
+		columnPropData.filter(el => columnPropDataWidth.push(Number(el['width'])))
+		tableWidth = columnPropDataWidth.reduce((total, num) => total + num) + 'px'
+	}
+	// 加工列数据 类名 style
+	const computedRowsData = () => {
+		rowsData = []
 		data.forEach((el, i) => {
 			let className
 			// 额外的类名
 			if (rowClassName) className = doRowClassName({ row: el, rowIndex: i })
 			rowsData.push({ ...el, className })
 		})
+	}
+	// 绑定横向滚动的头部联动
+	const bindHeaderScroll = () => {
+		if (eleCanScroll(tableWrapper)) {
+			gutter = getScrollbarWidth();
+			on(tableWrapper, 'scroll', tableHeaderScroll, { passive: true });
+		}
 	}
   const getAllColumns = (columns) => {
 	  const result = [];
@@ -114,24 +191,26 @@
 	  return rows;
   };
   // 把Dom 清洗成Tree
-  const initTableHeader = async () => {
+  const initTableHeader = () => {
 		if (!columnDom || columnDom.children.length === 0) throw new Error('[Beerui] cant find element.')
 	  headerOriginData = computedTableHeader(columnDom);
 	  headerData = convertToRows(headerOriginData);
-	  await tick()
-		console.log('warpElement.clientWidth', warpElement.clientWidth, tbody.clientWidth);
 		console.log('headerData', headerData);
-	  gutter = warpElement.clientWidth - tbody.clientWidth
-		console.log('gutter', gutter);
   }
   const computedTableHeader = (dom) => {
 	  let result = []
 	  Object.entries(dom.children).forEach(el => {
 		  const _item = el[1]
 		  const child = getAttrs(_item.dataset)
-		  if(_item && _item.children.length > 0) {
-			  child['children'] = computedTableHeader(_item)
+			if(_item && _item.children.length > 0) {
+				console.log(_item.children[0].children[0]);
+				if (_item.children[0].tagName === 'TEMP') {
+					child['temp'] = _item.children[0].innerHTML
+				} else {
+					child['children'] = computedTableHeader(_item)
+				}
 		  }
+			console.log('child', child);
 		  result.push(child)
 	  })
 	  return result
@@ -149,8 +228,8 @@
 <div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id}>
 	<div id='aaa' bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'><slot></slot></div>
 	{#if showHeader}
-	<div class='be-table__header-wrapper'>
-		<table class="be-table__body" style={$$props.style}>
+	<div class='be-table__header-wrapper' bind:this={tableHeaderWrapper}>
+		<table class="be-table__body" style:width={tableWidth}>
 			<colgroup>
 				{#each columnPropData as col, i}
 					<col width={col.width}>
@@ -165,15 +244,15 @@
 								<div class="cell">{rows.label}</div>
 							</th>
 						{/each}
-						<th class="el-table__cell gutter" style="width: {gutter}px;"></th>
+						<th class="be-table__cell gutter" style="width: {gutter}px;"></th>
 					</tr>
 				{/each}
 				</thead>
 		</table>
 	</div>
 	{/if}
-	<div class='be-table__body-wrapper be-table--scrollable-x' style:height>
-		<table class="be-table__body">
+	<div class='be-table__body-wrapper' bind:this={tableWrapper} style:height>
+		<table class="be-table__body" style:width={tableWidth}>
 			<colgroup>
 				{#each columnPropData as col, i}
 					<col width={col.width}>
@@ -186,9 +265,15 @@
 				style={row.styles}
 			>
 				{#each columnPropData as col, i}
-				<td class="be-table__cell">
-					<div class="cell">{row[col.prop] || ''}</div>
-				</td>
+					{#if row[col.temp]}
+						<td class="be-table__cell">
+							<div class="cell">{row[col.temp] || ''}</div>
+						</td>
+					{:else}
+						<td class="be-table__cell">
+							<div class="cell">{row[col.prop] || ''}</div>
+						</td>
+					{/if}
 				{/each}
 			</tr>
 			{/each}
