@@ -1,7 +1,7 @@
 import preprocess from 'svelte-preprocess';
 import vercel from '@sveltejs/adapter-vercel';
 import path from 'path';
-
+// 如果需要打包发布到 vercel 打开注释即可
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
