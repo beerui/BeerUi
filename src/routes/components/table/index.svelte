@@ -315,10 +315,10 @@ let clickBtn2 = () => {
 		</div>
 		<div slot='description'>
 			<ol>
-				<li>传入prop为 tableSlot</li>
-				<li>提供了 slot/插槽对应到不同的自定义列中</li>
-				<li>只提供了 tableSlot1 - tableSlot10(待优化)</li>
-				<li>let:prop绑定的是 当前表格行的数据</li>
+                <li>传入prop为 tableSlot</li>
+                <li>提供了 slot/插槽对应到不同的自定义列中</li>
+                <li>只提供了 tableSlot1 - tableSlot10(待优化)</li>
+                <li>let:prop绑定的是 当前表格行的数据</li>
 			</ol>
 		</div>
 	</DemoBlock>
