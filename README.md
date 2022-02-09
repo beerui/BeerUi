@@ -4,6 +4,9 @@
 ## Important 必看
 > 本项目的状态为开发中，不保证结构不变动，谨慎使用！
 
+## Document
+[Online Vercel](https://beer-ui.vercel.app/)
+
 ## 你需要知道的
 - 使用 `pnpm`
 - 使用 `Tailwind CSS`
