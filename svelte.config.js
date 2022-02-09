@@ -1,5 +1,5 @@
 import preprocess from 'svelte-preprocess';
-// import vercel from '@sveltejs/adapter-vercel';
+import vercel from '@sveltejs/adapter-vercel';
 import path from 'path';
 
 const config = {
@@ -13,7 +13,7 @@ const config = {
 
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
-		// adapter: vercel(),
+		adapter: vercel(),
 		package: {
 			files(filepath) {
 				const isFlag = filepath.indexOf('/assets/scss/node_modules') !== -1;
