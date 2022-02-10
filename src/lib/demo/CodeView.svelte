@@ -22,19 +22,12 @@
 >
 	<pre>
 		<code>
+			{#if highlightedCodeJS}
 			{@html highlightedCodeJS}
+			{/if}
+			{#if highlightedCode}
 			{@html highlightedCode}
+			{/if}
 		</code>
 	</pre>
 </div>
-
-<style lang='scss'>
-	.high-code {
-		width: 100%;background: var(--bg-color-code);padding: 16px;border-radius: 6px;
-    :global(.hljs-tag) {color: #878787;}
-		code {
-      background-color: transparent;line-height: 1.5;font-size: 14px;
-		}
-		* {margin: 0;padding: 0;border: 0;width: 100%;height: 100%;display: block;}
-	}
-</style>

@@ -1,170 +1,177 @@
-<script>
-	import { flip } from 'svelte/animate';
-	import { createEventDispatcher, onDestroy } from 'svelte';
-	export let images;
-	export let imageWidth = 300;
-	export let imageSpacing = 20;
-	export let speed = 500;
-	export let controlColor= '#444';
-	export let controlScale = '0.5';
-	export let autoplay = false;
-	export let autoplaySpeed = 5000;
-	export let displayControls = true;
-	let interval;
-	const rotateLeft = e => {
-		const transitioningImage = images[images.length - 1]
-		document.getElementById(transitioningImage.id).style.opacity = 0;
-		images = [images[images.length -1],...images.slice(0, images.length - 1)]
-		setTimeout(() => (document.getElementById(transitioningImage.id).style.opacity = 1), speed);
+<script lang="ts">
+	import { addClass, filterClass, off, on, once, removeClass } from '$lib/utils/beerui';
+  import { onMount } from 'svelte';
+  import BeIcon from '$lib/be-icon/BeIcon.svelte';
+
+  const preClass = ['direction', 'type']
+  const _class = ['be-carousel', ...filterClass($$props, 'be-carousel--', preClass)].join(' ')
+	export {_class as class};
+
+  export let direction:string = 'horizontal' // 走马灯展示的方向 vertical
+  export let loop:boolean = true // 是否循环显示
+  export let type:string = '' // 走马灯的类型 ''/none/card
+  export let arrow:string = 'hover' // 切换箭头的显示时机 always/hover/never
+  export let indicatorPosition:string = 'none' // 指示器的位置 outside/none
+  export let interval:number = 3000 // 自动切换的时间间隔，单位为毫秒
+  export let autoplay:boolean = true // 是否自动切换 true/false
+  export let trigger:string = 'click' // 指示器的触发方式 click/hover
+  export let initialIndex:number = 0 // 初始状态激活的幻灯片的索引，从 0 开始
+	export let height:string = '' // 走马灯的高度 300px
+
+	// 按钮显示和事件触发
+	let arrowDisplay = 'none'
+	let isHover = false
+
+	if (arrow === 'hover') isHover = true
+	if (arrow === 'always') arrowDisplay = 'block'
+  const leaveCarousel = () => isHover ? arrowDisplay = 'none' : '';
+  const enterCarousel = () => isHover ? arrowDisplay = 'block' : '';
+
+  // 切换动画定义
+  const translateType = direction === 'vertical' ? 'translateY' : 'translateX';
+  let element = null;
+  let timer = null;
+  let list = []
+  let len = 0
+  let oldIndex = null
+  const CARD_SCALE = 0.83;
+
+  onMount(() => {
+	  list = element.querySelectorAll('.be-carousel__item')
+		if (list.length === 0) throw new Error('Carousel Must Have Child Elements!')
+	  len = list.length
+	  changeCarousel()
+	})
+
+  const processIndex = (index) => {
+	  if (initialIndex === 0 && index === len - 1) {
+		  return -1;
+	  } else if (initialIndex === len - 1 && index === 0) {
+		  return len;
+	  } else if (index < initialIndex - 1 && initialIndex - index >= len / 2) {
+		  return len + 1;
+	  } else if (index > initialIndex + 1 && index - initialIndex >= len / 2) {
+		  return -2;
+	  }
+	  return index;
+  }
+  const calcTranslate = (index) => {
+	  const distance = element && element[direction === 'vertical' ? 'offsetHeight' : 'offsetWidth'];
+	  return distance * (index - initialIndex);
+  }
+  const calcCardTranslate = (index, inStage) => {
+	  const parentWidth = element && element.offsetWidth;
+	  if (inStage) {
+		  return parentWidth * ((2 - CARD_SCALE) * (index - initialIndex) + 1) / 4;
+	  } else if (index < initialIndex) {
+		  return -(1 + CARD_SCALE) * parentWidth / 4;
+	  } else {
+		  return (3 + CARD_SCALE) * parentWidth / 4;
+	  }
+  }
+	// 自动播放
+	const autoplayHandle = () => {
+	  timer = setTimeout(() => {
+			initialIndex++
+			if (initialIndex >= list.length) initialIndex = 0
+			changeCarousel()
+		}, interval)
 	}
-	const rotateRight = e => {
-		const transitioningImage = images[0]
-		document.getElementById(transitioningImage.id).style.opacity = 0;
-		images = [...images.slice(1, images.length), images[0]]
-		setTimeout(() => (document.getElementById(transitioningImage.id).style.opacity = 1), speed);
-	}
-	const startAutoPlay = () => {
-		if(autoplay){
-			interval = setInterval(rotateRight, autoplaySpeed)
-		}
-	}
-	const stopAutoPlay = () => {
-		clearInterval(interval)
-	}
-	if(autoplay){
-		startAutoPlay()
-	}
-	onDestroy(()=>{stopAutoPlay()})
-	const dispatch = createEventDispatcher()
-	//图片放大
-	const initPicShow = (path) => {
-		const html = `
-			<div id="outerdiv" style="text-align: center;position: fixed;z-index: 9999;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(28,28,28,0.9);">
-				<img id="bigimg" style="max-height: 800px;max-width: 100%;border: 0;margin: auto;position: absolute;top: 0;bottom: 0;left: 0;right: 0;" src=${path} />
-			</div>
-		`
-		document.body.append(html)
-		addEventListener('#outerdiv', () => {
-			document.querySelector('#outerdiv').style.display = "none";
+	// 切换轮播
+	const changeCarousel = () => {
+	  if (timer) clearTimeout(timer);
+	  if (autoplay) autoplayHandle()
+	  list.forEach((el, index) => {
+			let active = index === initialIndex;
+			let animating
+			if (oldIndex !== undefined) {
+				animating = index === initialIndex || index === oldIndex;
+			}
+			removeClass(el, 'is-in-stage is-active is-animating')
+			animating ? addClass(el, 'is-animating') : ''
+			active ? addClass(el, 'is-active') : ''
+
+			// 循环开启的索引
+			if (index !== initialIndex && len > 2 && loop) {
+				index = processIndex(index);
+			}
+			if (type === 'none') {
+				index !== initialIndex ? el.style.display = 'none' : el.style.display = 'block';
+			} else if (type === 'card') {
+				if (direction === 'vertical') {
+					console.warn('[Beerui Warn][Carousel]vertical direction is not supported in card mode');
+				}
+				let inStage = Math.round(Math.abs(index - initialIndex)) <= 1;
+				let transX = calcCardTranslate(index, inStage);
+				let scale = active ? 1 : CARD_SCALE;
+				inStage ? addClass(el, 'is-in-stage') : ''
+				active ? addClass(el, 'is-active') : ''
+		  	el.setAttribute('data-index', String(index))
+		  	onceHandle(el, 'click', handleItemClick);
+				el.style = `transform: ${translateType}(${transX}px) scale(${scale});}`
+			} else {
+				let transX = calcTranslate(index)
+				el.style.transform = `${translateType}(${transX}px) scale(1)`
+			}
 		})
+		oldIndex = initialIndex
 	}
-	let previewImage = {
-		isShow: false,
-		path: '',
-		images: images,
-		index: 0
+  const onceHandle = (el, type, handler) => {
+	  const callback = () => {
+			handler(el);
+		  el.removeEventListener(type, callback)
+	  };
+	  el.addEventListener(type, callback)
 	}
-	function imageClicked(path) {
-		dispatch('imageClicked', path)
-		previewImage.isShow = true
-		previewImage.path = path
+	const handleItemClick = (el) => {
+	  const value = el.getAttribute('data-index')
+		if (!value) console.warn('[Beerui Warn][Carousel]getAttribute failed in card mode');
+	  if (value > initialIndex) doNextHandle()
+	  if (value < initialIndex) doPrevHandle()
 	}
-
-	let closePreviewImage = (e) => {
-		previewImage.isShow = false
-		previewImage.path = ''
-	};
-	let clickImageHandle = (evt, type) => {
-		evt.preventDefault()
-		evt.stopPropagation()
-		console.log(previewImage);
-		console.log(previewImage.images.findIndex(findImgIndex(previewImage.path)));
-		if (type === 'prev') {
-			console.log('prev');
+	// 执行上一张
+	const doPrevHandle = () => {
+	  initialIndex--
+		if (initialIndex < 0) initialIndex = list.length - 1
+	  changeCarousel()
+	}
+	// 执行下一张
+	const doNextHandle = () => {
+	  initialIndex++
+	  if (initialIndex >= list.length) initialIndex = 0
+	  changeCarousel()
+	}
+	// 点击索引点
+	const doIndicatorHandle = (i) => {
+	  initialIndex = i
+	  changeCarousel()
+	}
+  // 鼠标移入索引点
+	const doIndicatorHoverHandle = (i) => {
+	  if (trigger === 'hover') {
+			initialIndex = i
+			changeCarousel()
 		}
-		if (type === 'next') {
-			console.log('next');
-		}
-	};
-
-	const findImgIndex = (value) => console.log(value)
-
+	}
 </script>
-{#if previewImage.isShow}
-<div style="text-align: center;position: fixed;z-index: 9999;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(28,28,28,0.9);" on:click={closePreviewImage}>
-	<div on:click={(e) => clickImageHandle(e, 'prev')} style="position: fixed;z-index: 9999;top: 0;left: 0;width: 100px;height: 100px;background-color: #fff;">left</div>
-	<img on:click={clickImageHandle} style="max-height: 800px;max-width: 100%;border: 0;margin: auto;position: absolute;top: 0;bottom: 0;left: 0;right: 0;" src={previewImage.path} />
-	<div on:click={(e) => clickImageHandle(e, 'next')} style="position: fixed;z-index: 9999;top: 0;right: 0;width: 100px;height: 100px;background-color: #fff;">right</div>
-</div>
-{/if}
-<div id="carousel-container">
-	<div id="carousel-images">
-		{#each images as image, index}
-			<img
-				src={image}
-				alt={image}
-				style={`width:${imageWidth}px; margin: 0 ${imageSpacing}px;`}
-				on:mouseover={stopAutoPlay}
-				on:mouseout={startAutoPlay}
-				on:click={() => imageClicked(image, index)}
-			/>
-		{/each}
+<div class={_class} on:mouseenter={enterCarousel} on:mouseleave={leaveCarousel} bind:this={element}>
+	<div class='be-carousel__container' style:height>
+		{#if direction !== 'vertical'}
+		<button type="button" on:click={doPrevHandle} class="be-carousel__arrow be-carousel__arrow--left" style:display={arrowDisplay}><BeIcon width='35' height='22' name='chevron-left' /></button>
+		<button type="button" on:click={doNextHandle} class="be-carousel__arrow be-carousel__arrow--right" style:display={arrowDisplay}><BeIcon width='35' height='22' name='chevron-right' /></button>
+		{/if}
+		<slot></slot>
 	</div>
-	{#if displayControls}
-		<button id="left" on:click={rotateLeft}>
-			<slot name="left-control">
-				<svg width="39px" height="110px" id="svg8" transform={`scale(${controlScale})`}>
-					<g id="layer1" transform="translate(-65.605611,-95.36949)">
-						<path
-							style={`fill:none;stroke:${controlColor};stroke-width:9.865;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1`}
-							d="m 99.785711,100.30199 -23.346628,37.07648 c -7.853858,12.81098 -7.88205,12.81098 0,24.78902 l 23.346628,37.94647"
-							id="path1412" />
-					</g>
-				</svg>
-			</slot>
-		</button>
-		<button id="right" on:click={rotateRight}>
-			<slot name="right-control">
-				<svg width="39px" height="110px" id="svg8" transform={`rotate(180) scale(${controlScale})`}>
-					<g id="layer1" transform="translate(-65.605611,-95.36949)">
-						<path
-							style={`fill:none;stroke:${controlColor};stroke-width:9.865;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1`}
-							d="m 99.785711,100.30199 -23.346628,37.07648 c -7.853858,12.81098 -7.88205,12.81098 0,24.78902 l 23.346628,37.94647"
-							id="path1412" />
-					</g>
-				</svg>
-			</slot>
-		</button>
-	{/if}
+	<ul class="be-carousel__indicators be-carousel__indicators--{direction === 'vertical' ? 'vertical' : 'horizontal'}">
+		{#each list as item, i}
+		<li
+			class="be-carousel__indicator be-carousel__indicator--{direction === 'vertical' ? 'vertical' : 'horizontal'}"
+			class:active={i === initialIndex}
+			on:click={() => { doIndicatorHandle(i) }}
+			on:mouseenter={() => { doIndicatorHandle(i)}}
+		>
+			<button class="be-carousel__button"></button>
+		</li>
+		{/each}
+	</ul>
 </div>
-
-<style>
-    #carousel-container {
-        width: 100%;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        overflow-x: hidden;
-    }
-    #carousel-images {
-        display: flex;
-        justify-content: center;
-        flex-wrap: nowrap;
-        mask: linear-gradient(
-                to right,
-                transparent,
-                black 40%,
-                black 60%,
-                transparent
-        );
-    }
-    button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: none;
-    }
-    button:focus {
-        outline: auto;
-    }
-    #left {
-        left: 10px;
-    }
-    #right {
-        right: 10px;
-    }
-</style>

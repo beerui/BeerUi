@@ -12,7 +12,7 @@ function openInfo():void{
  notice.setNotice({
     title: '相思',
     message: '红豆生南国，春来发几枝',
-    duration:0,
+    duration:3000,
   })
 }
 
@@ -80,7 +80,18 @@ function onClose(){
   alert('知我相思苦')
 }
 
-
+function openNotice2(){
+  notice.setNotice({
+    title: '木兰花·拟古决绝词柬友',
+    message: '人生若只如初见，何事秋风悲画扇。',
+    duration:0,
+    onClick: onClick
+  })
+}
+function onClick(e){
+  // console.log(e)
+  alert('你好Beer UI')
+}
 
 </script>
 
@@ -88,12 +99,12 @@ function onClose(){
 	<h2>notice</h2>
 	<p>显示全局的通知提醒消息</p>
 	<h3>基本用法</h3>
-  <div class="demo-block demo-notice">
+  <div class=" demo-notice">
     <BeButton size="normal" type="default" on:click={openInfo}>点击弹出消息</BeButton>
   </div>
   <h3>指定位置</h3>
   <p>默认为<code>top-right</code>可选择<code>bottom-right</code><code>top-left</code><code>bottom-left</code></p>
-  <div class="demo-block demo-notice">
+  <div class=" demo-notice">
     <BeButton size="normal" type="default" on:click={() =>openPosInfo('top-right')}>右上角</BeButton>
     <BeButton size="normal" type="default" on:click={() =>openPosInfo('bottom-right')}>右下角</BeButton>
     <BeButton size="normal" type="default" on:click={() =>openPosInfo('top-left')}>左上角</BeButton>
@@ -115,5 +126,11 @@ function onClose(){
   <p>添加参数<code>onClose</code>类型为<code>Function</code></p>
   <div>
     <BeButton size="normal" type="default" on:click={openNotice1}>弹出</BeButton>
+  </div>
+
+  <h3>点击事件</h3>
+  <p>添加参数<code>onClick</code>类型为<code>Function</code></p>
+  <div>
+    <BeButton size="normal" type="default" on:click={openNotice2}>弹出</BeButton>
   </div>
 </div>

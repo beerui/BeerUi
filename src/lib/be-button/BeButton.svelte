@@ -10,25 +10,28 @@
 	export let autofocus = false;
 	export let disabled = false;
 	export let loading = false;
+	export let icon = '';
 
-  const _class = ['be-button', ...filterClass($$props, 'be-button--')].join(' ')
+  const preClass = ['type', 'size', 'round', 'loading', 'disabled']
+  const _class = ['be-button', ...filterClass($$props, 'be-button--', preClass)].join(' ')
 
 	const dispatch = createEventDispatcher();
-	const handleClick = (evt: MouseEvent) => {
-		dispatch('click', evt);
-	};
 </script>
 <button
 	{autofocus}
 	class={_class}
 	{style}
-	on:click={handleClick}
+	on:click
+	on:dblclick
+	on:focusin
+	on:focusout
+	on:keydown
+	on:keyup
 	type={nativeType}
 >
-	<!--    <beer-icon></beer-icon>-->
 	<span>
-        <slot></slot>
-    </span>
+			<slot></slot>
+	</span>
 </button>
 <style lang='scss'>
   @import '../assets/scss/modules/button';

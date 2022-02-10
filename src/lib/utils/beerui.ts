@@ -1,4 +1,3 @@
-import isString from 'lodash/isString'
 import { browser } from '$app/env';
 if (browser) {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -16,7 +15,7 @@ const trim = (str: string): string => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEF
  * @param {string[]} list 图片数组
  * @param {function} cb 图片切换后 监听的回调
  */
-
+``
 export const previewImages = (src: string, list?: string[], cb?: () => void):PreviewImage => new PreviewImage(src, list, cb)
 
 class PreviewImage {
@@ -279,7 +278,8 @@ export const getAttach = (node: any): HTMLElement => {
 	if (!attachNode) {
 		return document.body;
 	}
-	if (isString(attachNode)) {
+	// TODO isString
+	if (typeof attachNode == 'string') {
 		return document.querySelector(attachNode);
 	}
 	if (attachNode instanceof HTMLElement) {
@@ -288,41 +288,13 @@ export const getAttach = (node: any): HTMLElement => {
 	return document.body;
 };
 
-export function containerDom(parent: Element | Iterable<any> | ArrayLike<any>, child: any): boolean {
-	if (parent && child) {
-		let pNode = child;
-		while (pNode) {
-			if (parent === pNode) {
-				return true;
-			}
-			const { parentNode } = pNode;
-			pNode = parentNode;
-		}
-	}
-	return false;
-}
-
-export const clickOut = (els: Element | Iterable<any> | ArrayLike<any>, cb: () => void): void => {
-	on(document, 'click', (event: { target: Element }) => {
-		if (Array.isArray(els)) {
-			const isFlag = Array.from(els).every((item) => containerDom(item, event.target) === false);
-			isFlag && cb && cb();
-		} else {
-			if (containerDom(els, event.target)) {
-				return false;
-			}
-			cb && cb();
-		}
-	});
-}
-
 /**
  * 计算class
  * @param props 组件传入值
  * @param prefix 类名前缀
+ * @param preClass 类名前缀
  */
-export const filterClass = (props: Object, prefix: string): string[] => {
-	const preClass = ['type', 'size', 'round', 'loading', 'disabled']
+export const filterClass = (props: Object, prefix: string, preClass:string[]): string[] => {
 	let r1 = []
 	let r2 = []
 	for (let key in props) {
