@@ -30,36 +30,36 @@
     </ol>
 	<h3>基础用法</h3>
 	<p>单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。</p>
-<!--    <DemoBlock code={`-->
-<!--<BeCheckbox {checked}>备选项</BeCheckbox>`} js={`-->
-<!--import { BeCheckbox, BeTableColumn} from '@beerui/beerui'-->
-<!--let checked = false;-->
-<!--    `}>-->
-<!--        <div slot='source'>-->
-<!--            <div class='demo-list'>-->
-<!--	            <BeCheckbox {checked}>备选项</BeCheckbox>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </DemoBlock>-->
-<!--	<h3>禁用状态</h3>-->
-<!--	<p>多选框不可用状态。</p>-->
-<!--    <DemoBlock-->
-<!--	    code={`-->
-<!--<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>-->
-<!--<BeCheckbox {checked} disabled>备选项</BeCheckbox>-->
-<!--`} js={`-->
-<!--let checked = false;-->
-<!--`}>-->
-<!--        <div slot='source'>-->
-<!--            <div class='demo-list'>-->
-<!--	            <BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>-->
-<!--	            <BeCheckbox {checked} disabled>备选项</BeCheckbox>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--	    <div slot="description">-->
-<!--		    设置disabled属性即可。-->
-<!--	    </div>-->
-<!--    </DemoBlock>-->
+    <DemoBlock code={`
+<BeCheckbox {checked}>备选项</BeCheckbox>`} js={`
+import { BeCheckbox, BeTableColumn} from '@beerui/beerui'
+let checked = false;
+    `}>
+        <div slot='source'>
+            <div class='demo-list'>
+	            <BeCheckbox {checked}>备选项</BeCheckbox>
+            </div>
+        </div>
+    </DemoBlock>
+	<h3>禁用状态</h3>
+	<p>多选框不可用状态。</p>
+    <DemoBlock
+	    code={`
+<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>
+<BeCheckbox {checked} disabled>备选项</BeCheckbox>
+`} js={`
+let checked = false;
+`}>
+        <div slot='source'>
+            <div class='demo-list'>
+	            <BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>
+	            <BeCheckbox {checked} disabled>备选项</BeCheckbox>
+            </div>
+        </div>
+	    <div slot="description">
+		    设置disabled属性即可。
+	    </div>
+    </DemoBlock>
 	<h3>多选框组</h3>
 	<p>适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。</p>
     <DemoBlock
