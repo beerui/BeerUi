@@ -34,14 +34,14 @@
 	const trailPathStyle = `
 		stroke-dasharray: ${perimeter * rate }px, ${perimeter}px;
 		stroke-dashoffset: ${strokeDashoffset};
-		stroke: ${background}
+		${background ? ('stroke:' + background + ';') : ''}
 	`
 
 	$:circlePathStyle = `
 		stroke-dasharray: ${perimeter * rate * (percentage / 100) }px, ${perimeter}px;
 		stroke-dashoffset: ${strokeDashoffset};
-		stroke: ${color};
 		transition: stroke-dasharray 0.6s ease;
+		${color ? ('stroke: '+ color + ';') : ''}
 		`
 	// const trailPathStyle = `
 	// 	stroke-dasharray: ${perimeter * rate }px, ${perimeter - perimeter * rate}px;
@@ -55,9 +55,7 @@
 	// 	stroke: ${color};
 	// 	transition: stroke-dasharray 0.6s ease;
 	// 	`
-setTimeout(() => {
-	percentage = 100
-}, 2000);
+
 </script>
 
 <div class='be-progress be-progress_{type}' bind:this={progress}>
