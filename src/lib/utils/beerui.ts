@@ -304,4 +304,93 @@ export const filterClass = (props: Object, prefix: string, preClass:string[]): s
 	return [...r1, ...r2]
 }
 
+type IPropPrimitive = boolean | null | number | string | undefined;
 
+/**
+ * Represents props passable to HTML elements that can be stringified
+ */
+export type IProps = Record<string, IPropPrimitive | IPropPrimitive[]>;
+/**
+ * Returns the mapped the input [[props]] to output props, filtering out props with
+ * falsy values or not matched against the input [[set]] of valid props. Also prefixes
+ * attributes with the given [[prefix]] string if available
+ *
+ * @param props
+ * @param set
+ * @param prefix
+ * @returns
+ */
+export function mapAttributes(props: IProps, set?: Set<string>, prefix: string = ""): IProps {
+  let entries = Object.entries(props).filter((entry) => {
+    let [attribute, value] = entry;
+
+    if (set && !set.has(attribute)) return false;
+    return Array.isArray(value) ? value.length > 0 : is_truthy(value);
+  });
+
+  entries = entries.map((entry) => {
+    let [attribute, value] = entry;
+
+    return [
+      prefix ? prefix + attribute : attribute,
+      Array.isArray(value) ? value.join(" ") : value,
+    ];
+  });
+
+  return Object.fromEntries(entries);
+}
+/**
+ * Returns if the value is not undefined or empty string
+ * @param value
+ * @returns
+ */
+function is_truthy(value: any): boolean {
+  return value !== undefined && value !== "" && value !== false;
+}
+
+type BeerPublishSubscribe = {
+  id: number,
+  callbacks: {},
+  subscribe?: Function,
+  publish?: Function,
+  unsubscribe?: Function,
+}
+export const BeerPS: BeerPublishSubscribe = {
+  id: 1,
+  callbacks: {}
+}
+// 订阅
+BeerPS.subscribe = function(channel, callback) {
+  let token = 'token_' + this.id++
+
+  if (this.callbacks[channel]) {
+    this.callbacks[channel][token] = callback
+  } else {
+    this.callbacks[channel] = {
+      [token]: callback
+    }
+  }
+  return token
+}
+// 发布
+BeerPS.publish = function(channel, data) {
+  if (this.callbacks[channel]) {
+    Object.values(this.callbacks[channel]).forEach(cb => publishCallback(cb, data))
+    // Object.values(this.callbacks[channel]).forEach(callback => callback(data))
+  }
+}
+const publishCallback = (callback, data) => callback(data)
+// 清空
+BeerPS.unsubscribe = function(flag) {
+  if (flag === undefined) {
+    this.callbacks = {}
+  } else if (typeof flag === 'string') {
+    if (flag.indexOf('token_') === 0) {
+      let callbackObj = Object.values(this.callbacks).find(obj => Object.prototype.hasOwnProperty.call(obj, flag))
+      if (callbackObj) delete callbackObj[flag]
+    } else {
+      this.callbacks && delete this.callbacks[flag]
+    }
+
+  }
+}

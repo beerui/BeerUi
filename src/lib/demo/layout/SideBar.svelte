@@ -11,6 +11,7 @@
 			<li><a class:active={$page.url.pathname === '/components/button'} href='/components/button'>Button 示例</a></li>
 			<li><span class='base'>表单</span></li>
 			<li><a class:active={$page.url.pathname === '/components/input'} href='/components/input'>Input 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/checkbox'} href='/components/checkbox'>Checkbox 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/switch'} href='/components/switch'>Switch 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/select'} href='/components/select'>Select 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/upload'} href='/components/upload'>Upload 示例</a></li>

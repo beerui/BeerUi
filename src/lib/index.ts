@@ -14,6 +14,7 @@ import BeDrag from './be-drag/BeDrag.svelte'
 import BeProgress from './be-progress-bar/BeProgress.svelte'
 import BeUpload from './be-upload/BeUpload.svelte'
 import BeNotification from './be-notification/BeNotification.svelte'
+import { BeCheckbox, BeCheckboxGroup } from './be-checkbox'
 export {
 	BeButton,
 	BeAlert,
@@ -30,5 +31,7 @@ export {
 	BeScrollbar,
 	BeProgress,
 	BeUpload,
-	BeNotification
+	BeNotification,
+  BeCheckbox,
+  BeCheckboxGroup
 }
