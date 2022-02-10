@@ -1,5 +1,5 @@
 .be-table {
-  position: relative;overflow: hidden;box-sizing: border-box;flex: 1;width: 100%;max-width: 100%;
+  position: relative;overflow: hidden;box-sizing: content-box;flex: 1;
   background-color: var(--bg-color-container);font-size: 14px;color: var(--text-color-primary);
   &:before {
     content: "";position: absolute;background-color: var(--bg-color-secondarycontainer);z-index: 1;
@@ -7,10 +7,10 @@
   }
   &--fit {border-right: 0;border-bottom: 0;}
   &__footer-wrapper, &__header-wrapper {overflow: hidden;}
-  &-wrapper {width: 100%;}
+  //&-wrapper {width: 100%;}
   &__body {
-    table-layout: fixed;border-collapse: collapse;width: 100%;
-    &-wrapper {width: 100%;overflow: hidden;position: relative;}
+    table-layout: fixed;border-collapse: collapse;
+    &-wrapper {overflow: hidden;position: relative;}
   }
   &--scrollable {
     &-y {
@@ -52,11 +52,20 @@
   &--border, &--group {
     border: 1px solid #ebeef5;
   }
+  .gutter {
+    width: 15px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    padding: 0;
+  }
   &--border {
     border-right: none;
     border-bottom: none;
     .be-table__cell {
       border-right: 1px solid #ebeef5;
+      &.gutter:last-of-type {
+        border-bottom: 1px solid #EBEEF5;
+      }
     }
   }
   &--border:after, &--group:after, &:before {

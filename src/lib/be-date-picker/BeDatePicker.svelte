@@ -31,13 +31,7 @@
 		visible = false;
 	}
 </script>
-<!--<svelte:body on:click={handleCloseDatePopper} />-->
-<div class='be-date' on:click|stopPropagation={()=>{}} use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
-	<!-- <div on:click|stopPropagation={handleShowDatePopper}> -->
-		<BeInput on:change={handleChange} bind:value={value} on:focus={handleShowDatePopper} bind:this={input}/>
-	<!-- </div> -->
-	<Date {disabledDate} {value} bind:visible={visible} on:pick={confirmPick} {selectMode} {format}/>
+<div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
+	<BeInput on:change={handleChange} {value} on:focus={handleShowDatePopper} bind:this={input}/>
+	<Date {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />
 </div>
-<style lang="scss" global>
-  // @import '../assets/scss/modules/datePicker';
-</style>

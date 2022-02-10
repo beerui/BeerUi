@@ -21,13 +21,9 @@
 	style={style ? style : ''}
 >
 	<pre>
-		<code>
-			{#if highlightedCodeJS}
-			{@html highlightedCodeJS}
-			{/if}
-			{#if highlightedCode}
-			{@html highlightedCode}
-			{/if}
-		</code>
+		{#if highlightedCodeJS || highlightedCode}
+		{@html highlightedCodeJS}
+		{@html highlightedCode}
+		{/if}
 	</pre>
 </div>

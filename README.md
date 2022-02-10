@@ -4,6 +4,9 @@
 ## Important 必看
 > 本项目的状态为开发中，不保证结构不变动，谨慎使用！
 
+## Document
+[Online Vercel](https://beer-ui.vercel.app/)
+
 ## 你需要知道的
 - 使用 `pnpm`
 - 使用 `Tailwind CSS`
@@ -29,12 +32,15 @@ svelte & svelte-kit
 - [x] <a href="#Pagination">Pagination 分页</a>
 - [x] <a href="#Alert">Alert 提示</a>
 - [x] <a href="#DatePicker">DatePicker 时间选择框</a>
+    - [ ] 范围选择
     - [ ] 时分秒
 - [x] <a href="#Select">Select 下拉选择</a>
+- [x] <a href="#Switch">Switch 切换</a>
 - [x] <a href="#Tabs">Tabs 切换</a>
 - [x] <a href="#Input">Input 输入框</a>
 - [x] <a href="#Clock">Clock 倒计时</a>
 - [x] <a href="#Scrollbar">Scrollbar 滚动条</a>
+- [x] <a href="#Progress">Progress 进度条</a>
 - [ ] <a href="#Upload">Upload 拖拽上传</a>
 - [ ] <a href="#Carousel">Carousel 轮播图</a>
 - [x] <a href="#PreviewImage">PreviewImage 图片预览</a>

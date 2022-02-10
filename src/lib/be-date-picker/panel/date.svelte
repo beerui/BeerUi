@@ -15,25 +15,25 @@ export let selectMode
 export let disabledDate: Function
 
 const times = new FormatTime(format)
-$:currentView = selectMode === 'day' ? 'date' : selectMode
-
 let yearLabel = ''
 
-$:date = value ? new Date(value) : new Date()
-
+$:currentView = selectMode === 'day' ? 'date' : selectMode
+$:year = date.getFullYear()
+$:month = String(date.getMonth() + 1).padStart(2, '0')
+$:date = resetDate(value)
+// 打开弹窗初始化日期
 $: if(!visible) {
-  date =  value ? new Date(value) : new Date()
-  if(selectMode == 'day') {
-    currentView = 'date'
-  }
-  if(selectMode == 'month') {
-    currentView = 'month'
-  }
-  if(selectMode == 'year') {
-    currentView = 'year'
-  }
+  date = resetDate(value)
+  currentView = selectMode === 'day' ? 'date' : selectMode
+}
+$: if (currentView === 'year') {
+  const startYear = Math.floor(year / 10) * 10;
+  yearLabel = startYear + ' - ' + (startYear + 9);
 }
 
+function resetDate(val) {
+  return val ? new Date(val) : new Date()
+}
 
 function handlePrevMonth() {
   date = prevMonth(date)
@@ -56,22 +56,13 @@ function handleNextYear() {
   }
 }
 
-$:year = date.getFullYear()
-
-$:month = String(date.getMonth() + 1).padStart(2, '0')
-
-$: if (currentView === 'year') {
-  const startYear = Math.floor(year / 10) * 10;
-  yearLabel = startYear + ' - ' + (startYear + 9);
-}
-
-function confirmPick(e) {
+function confirmDatePick(e) {
   value = e.detail
   dispatch('pick', formatDate(e.detail))
 }
 
 function confirmMonthPick(e) {
-  if(selectMode=='day') {
+  if(selectMode === 'day') {
     date = e.detail
     currentView = 'date'
   } else {
@@ -79,7 +70,7 @@ function confirmMonthPick(e) {
   }
 }
 function confirmYearPick(e) {
-  if(selectMode=='month' || selectMode=='day') {
+  if(selectMode === 'month' || selectMode === 'day') {
     date = e.detail
     currentView = 'month'
   } else {
@@ -110,10 +101,10 @@ function zoomIn(node, params) {
   <div class="be-picker-panel__body-wrapper">
     <div class="be-picker-panel__body">
       <div class="be-date-picker__header">
-          <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click|stopPropagation={handlePrevYear}></span>
           {#if currentView === 'date'}
-            <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click|stopPropagation={handlePrevMonth}></span>
+            <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth}></span>
           {/if}
+          <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear}></span>
           {#if currentView !== 'year'}
             <span class="be-date-picker__header-label" on:click={() => currentView = 'year'}>{year} 年</span>
           {/if}
@@ -123,14 +114,14 @@ function zoomIn(node, params) {
           {#if currentView === 'date'}
             <span class="be-date-picker__header-label" on:click={() => currentView = 'month'}>{month} 月</span>
           {/if}
-          <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click|stopPropagation={handleNextYear}></span>
           {#if currentView === 'date'}
-            <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click|stopPropagation={handleNextMonth}></span>
+            <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth}></span>
           {/if}
+          <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear}></span>
       </div>
       <div class="be-picker-panel__content">
         {#if currentView === 'date'}
-          <DateTable disabledDate={disabledDate} date={date} on:pick={confirmPick} value={value}/>
+          <DateTable disabledDate={disabledDate} date={date} on:pick={confirmDatePick} value={value}/>
         {/if}
         {#if currentView === 'month'}
           <MonthTable disabledDate={disabledDate} date={date} on:pick={confirmMonthPick} value={value}/>
@@ -144,4 +135,3 @@ function zoomIn(node, params) {
   <div class="popper__arrow"></div>
 </div>
 {/if}
-
