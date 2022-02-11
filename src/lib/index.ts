@@ -34,7 +34,7 @@ export {
 	BeProgress,
 	BeUpload,
 	BeNotification,
-	BeLoading
+	BeLoading,
   BeCheckbox,
   BeCheckboxGroup,
 	BeMenu,
