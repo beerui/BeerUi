@@ -1,21 +1,18 @@
-<script lang='ts'>
-	import { createEventDispatcher } from 'svelte'
-  import { filterClass } from '$lib/utils/beerui';
+<script lang="ts">
+  import { filterClass } from "$lib/utils/beerui";
 
-  export let style = null
-	export let type = '';
-	export let size = '';
-	export let round = '';
-	export let nativeType = 'button';
-	export let autofocus = false;
-	export let disabled = false;
-	export let loading = false;
-	export let icon = '';
+  export let style = null;
+  export let type = "";
+  export let size = "";
+  export let round = "";
+  export let nativeType = "button";
+  export let autofocus = false;
+  export let disabled = false;
+  export let loading = false;
+  export let icon = "";
 
-  const preClass = ['type', 'size', 'round', 'loading', 'disabled']
-  const _class = ['be-button', ...filterClass($$props, 'be-button--', preClass)].join(' ')
-
-	const dispatch = createEventDispatcher();
+  const preClass = ["type", "size", "round", "loading", "disabled"];
+  const _class = ["be-button", ...filterClass($$props, "be-button--", preClass)].join(" ");
 </script>
 <button
 	{autofocus}
@@ -33,6 +30,6 @@
 			<slot></slot>
 	</span>
 </button>
-<style lang='scss'>
+<style lang="scss">
   @import '../assets/scss/modules/button';
 </style>

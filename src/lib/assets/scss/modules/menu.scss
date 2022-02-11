@@ -1,0 +1,99 @@
+.be-menu {
+  border-right: 1px solid #e6e6e6;
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  background-color: #fff;
+  &--horizontal {
+    border-right: none;border-bottom: 1px solid #e6e6e6;
+    &>.be-menu-item {
+      float: left;
+      height: 60px;
+      line-height: 60px;
+      margin: 0;
+      border-bottom: 2px solid transparent;
+      color: #909399;
+      &.is-active {
+        border-bottom: 2px solid #409eff;
+        color: #303133;
+      }
+    }
+    &>.be-submenu {
+      float: left;
+      & .be-submenu__title {
+        height: 60px;
+        line-height: 60px;
+        border-bottom: 2px solid transparent;
+        color: #909399;
+      }
+      & .be-submenu__icon-arrow {
+        position: static;
+        vertical-align: middle;
+        margin-left: 8px;
+        margin-top: -3px;
+      }
+    }
+  }
+  &:after, &:before {
+    display: table;
+    content: "";
+    clear: both;
+  }
+  &-item {
+    height: 56px;
+    line-height: 56px;
+    font-size: 14px;
+    color: #303133;
+    padding: 0 20px;
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    transition: border-color .3s,background-color .3s,color .3s;
+    box-sizing: border-box;
+    white-space: nowrap;
+    &.is-active {
+      color: #409eff;
+    }
+    &.is-disabled {
+      opacity: .25;
+      cursor: not-allowed;
+      background: none!important;
+    }
+    &-group {
+      &>ul {padding: 0;}
+      &__title {
+        padding: 7px 0 7px 20px;
+        line-height: normal;
+        font-size: 12px;
+        color: #909399;
+      }
+    }
+  }
+}
+.be-submenu {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  &__title {
+    height: 56px;
+    line-height: 56px;
+    font-size: 14px;
+    color: #303133;
+    padding: 0 20px;
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    transition: border-color .3s,background-color .3s,color .3s;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  &__icon-arrow {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    margin-top: -7px;
+    transition: transform .3s;
+    font-size: 12px;
+  }
+}

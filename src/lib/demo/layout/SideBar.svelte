@@ -11,14 +11,15 @@
 			<li><a class:active={$page.url.pathname === '/components/button'} href='/components/button'>Button 示例</a></li>
 			<li><span class='base'>表单</span></li>
 			<li><a class:active={$page.url.pathname === '/components/input'} href='/components/input'>Input 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/checkbox'} href='/components/checkbox'>Checkbox 多选框</a></li>
 			<li><a class:active={$page.url.pathname === '/components/switch'} href='/components/switch'>Switch 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/select'} href='/components/select'>Select 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/upload'} href='/components/upload'>Upload 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/datePicker'} href='/components/datePicker'>date-picker 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/drag'} href='/components/drag'>Drag 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/drag'} href='/components/drag'>Drag 拖动排序</a></li>
 			<li><span class='base'>数据</span></li>
-			<li><a class:active={$page.url.pathname === '/components/table'} href='/components/table'>Table 示例</a></li>
-			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/table'} href='/components/table'>Table 表格</a></li>
+			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 分页</a></li>
 			<li><a class:active={$page.url.pathname === '/components/progress'} href='/components/progress'>progress 示例</a></li>
 			<li><span class='base'>提示</span></li>
 			<li><a class:active={$page.url.pathname === '/components/loading'} href='/components/loading'>Loading 示例</a></li>
@@ -26,7 +27,8 @@
 			<li><a class:active={$page.url.pathname === '/components/alert'} href='/components/alert'>Alert 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/notice'} href='/components/notice'>Notice 示例</a></li>
 			<li><span class='base'>导航 Navigation</span></li>
-			<li><a class:active={$page.url.pathname === '/components/tabs'} href='/components/tabs'>Tabs 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/tabs'} href='/components/tabs'>Tabs 标签页</a></li>
+			<li><a class:active={$page.url.pathname === '/components/menu'} href='/components/menu'>NavMenu 导航菜单</a></li>
 			<li><span class='base'>其它 Others</span></li>
 			<li><a class:active={$page.url.pathname === '/components/clock'} href='/components/clock'>Clock 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/scrollbar'} href='/components/scrollbar'>Scrollbar 示例</a></li>
