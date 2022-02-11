@@ -14,16 +14,18 @@
   export let label = "";
 
   let checkedList: String[] = initData?._checked || [];
-
-  label && (checkedList.length > 0) && checkedList.includes(label) ? checked = true : checked = false;
-
+  // 接收 选中数据
   const _setCheckedList = BeerPS.subscribe("setCheckedList", (items) => {
     setSelectList(items)
   });
   // 设置传入的选入参数
   const setSelectList = (items) => {
+    // 判断选中状态
     label && items.length > 0 && items.includes(label) ? checked = true : checked = false;
   }
+  // 设置初始值
+  setSelectList(checkedList)
+
   onDestroy(() => {
     BeerPS.unsubscribe(_setCheckedList)
   })

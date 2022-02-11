@@ -19,23 +19,23 @@
 `}>
         <div slot='source'>
             <div class='demo-list'>
-							<BeMenu class="be-menu-demo" mode="horizontal">
-								<BeMenuItem index="1">处理中心</BeMenuItem>
-<!--								<BeSubMenu index="2">-->
-<!--									<template slot="title">我的工作台</template>-->
-<!--									<BeMenuItem index="2-1">选项1</BeMenuItem>-->
-<!--									<BeMenuItem index="2-2">选项2</BeMenuItem>-->
-<!--									<BeMenuItem index="2-3">选项3</BeMenuItem>-->
-<!--									<BeSubMenu index="2-4">-->
-<!--										<template slot="title">选项4</template>-->
-<!--										<BeMenuItem index="2-4-1">选项1</BeMenuItem>-->
-<!--										<BeMenuItem index="2-4-2">选项2</BeMenuItem>-->
-<!--										<BeMenuItem index="2-4-3">选项3</BeMenuItem>-->
-<!--									</BeSubMenu>-->
-<!--								</BeSubMenu>-->
-								<BeMenuItem index="3" disabled>消息中心</BeMenuItem>
-								<BeMenuItem index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></BeMenuItem>
-							</BeMenu>
+				<BeMenu class="be-menu-demo" active="1" mode="horizontal">
+					<BeMenuItem index="1">处理中心</BeMenuItem>
+					<BeSubMenu index="2">
+						<div slot="title">我的工作台</div>
+						<BeMenuItem index="2-1">选项1</BeMenuItem>
+						<BeMenuItem index="2-2">选项2</BeMenuItem>
+						<BeMenuItem index="2-3">选项3</BeMenuItem>
+						<BeSubMenu index="2-4">
+							<div slot="title">选项4</div>
+							<BeMenuItem index="2-4-1">选项1</BeMenuItem>
+							<BeMenuItem index="2-4-2">选项2</BeMenuItem>
+							<BeMenuItem index="2-4-3">选项3</BeMenuItem>
+						</BeSubMenu>
+					</BeSubMenu>
+					<BeMenuItem index="3" disabled>消息中心</BeMenuItem>
+					<BeMenuItem index="4">订单管理</BeMenuItem>
+				</BeMenu>
             </div>
         </div>
 	    <div slot="description">

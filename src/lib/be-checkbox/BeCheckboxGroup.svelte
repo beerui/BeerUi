@@ -4,6 +4,7 @@
     import { BeerPS } from "$lib/utils/beerui";
 
     const dispatch = createEventDispatcher()
+
     export let checked:String[] = []
     // 初始化数据
     setContext('checkGroupInit', { _checked: checked })
@@ -16,11 +17,13 @@
         const index = checked.findIndex(el => label === el)
         checked.splice(index, 1)
       }
-      dispatch('onChange', checked)
+      dispatch('change', checked)
     })
+
     onDestroy(() => {
       BeerPS.unsubscribe(checkGroupHandle)
     })
+
     // 设置选中数据
     export const setCheckedList = (items) => {
       checked = items;
