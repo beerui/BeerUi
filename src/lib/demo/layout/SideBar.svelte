@@ -22,7 +22,8 @@
 			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 分页</a></li>
 			<li><a class:active={$page.url.pathname === '/components/progress'} href='/components/progress'>progress 示例</a></li>
 			<li><span class='base'>提示</span></li>
-			<li><a class:active={$page.url.pathname === '/components/dialog'} href='/components/dialog'>Dialog 对话框</a></li>
+			<li><a class:active={$page.url.pathname === '/components/loading'} href='/components/loading'>Loading 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/dialog'} href='/components/dialog'>Dialog 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/alert'} href='/components/alert'>Alert 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/notice'} href='/components/notice'>Notice 示例</a></li>
 			<li><span class='base'>导航 Navigation</span></li>

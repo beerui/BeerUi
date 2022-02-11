@@ -14,6 +14,7 @@ import BeDrag from './be-drag/BeDrag.svelte'
 import BeProgress from './be-progress-bar/BeProgress.svelte'
 import BeUpload from './be-upload/BeUpload.svelte'
 import BeNotification from './be-notification/BeNotification.svelte'
+import BeLoading from './be-loading/BeLoading.svelte'
 import { BeCheckbox, BeCheckboxGroup } from './be-checkbox'
 import { BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu } from './be-menu'
 export {
@@ -33,6 +34,7 @@ export {
 	BeProgress,
 	BeUpload,
 	BeNotification,
+	BeLoading,
   BeCheckbox,
   BeCheckboxGroup,
 	BeMenu,

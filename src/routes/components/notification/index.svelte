@@ -50,7 +50,7 @@
 		age: 25,
 		weight: 140
 	})
-	BeerPS.unsubscribe(pid)
+	// BeerPS.unsubscribe(pid)
 	console.log('pid', pid);
 	console.log('BeerPS', BeerPS);
 </script>
