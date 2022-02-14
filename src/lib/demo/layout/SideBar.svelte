@@ -21,6 +21,7 @@
 			<li><a class:active={$page.url.pathname === '/components/table'} href='/components/table'>Table 表格</a></li>
 			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 分页</a></li>
 			<li><a class:active={$page.url.pathname === '/components/progress'} href='/components/progress'>progress 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/empty'} href='/components/empty'>Empty 空状态</a></li>
 			<li><span class='base'>提示</span></li>
 			<li><a class:active={$page.url.pathname === '/components/loading'} href='/components/loading'>Loading 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/dialog'} href='/components/dialog'>Dialog 示例</a></li>
