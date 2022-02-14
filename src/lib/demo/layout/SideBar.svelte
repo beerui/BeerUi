@@ -17,8 +17,9 @@
 			<li><a class:active={$page.url.pathname === '/components/upload'} href='/components/upload'>Upload 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/datePicker'} href='/components/datePicker'>date-picker 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/drag'} href='/components/drag'>Drag 拖动排序</a></li>
-			<li><span class='base'>数据</span></li>
+			<li><span class='base'>data 数据</span></li>
 			<li><a class:active={$page.url.pathname === '/components/table'} href='/components/table'>Table 表格</a></li>
+			<li><a class:active={$page.url.pathname === '/components/tree'} href='/components/tree'>Tree 树形控件</a></li>
 			<li><a class:active={$page.url.pathname === '/components/pagination'} href='/components/pagination'>Pagination 分页</a></li>
 			<li><a class:active={$page.url.pathname === '/components/progress'} href='/components/progress'>progress 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/empty'} href='/components/empty'>Empty 空状态</a></li>
