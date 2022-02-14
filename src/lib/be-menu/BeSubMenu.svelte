@@ -1,34 +1,37 @@
 <script lang="ts">
-import { onMount } from "svelte";
 import { BeerPS } from "$lib/utils/beerui";
 
 export let index:String = ''
 
-let hovered = true;
-let isOpen = false;
-let isActive = false;
+let submenu = null
+let hovered = true
+let isOpen = false
+let isActive = false
+let timeout = null
 
 BeerPS.subscribe('MenuActiveChange', (item) => {
-  console.log('isSameLevel', index.split('-').length > item.split('-').length);
-  if (item.split('-').length > index.split('-').length) isActive = item.indexOf(index) > -1;
+  if (item.split('-').length > index.split('-').length) isActive = item.indexOf(index) > -1
   else isActive = false
 })
 
 const enterMenu = () => {
-  if (hovered) {
-    isOpen = true
-  }
-};
+  let isFlag: boolean = false
+  if (hovered) isFlag = true
+  changeActive(isFlag)
+}
 const leaveMenu = () => {
-  if (hovered) {
-    isOpen = false
-  }
-};
+  let isFlag: boolean = true
+  if (hovered) isFlag = false
+  changeActive(isFlag)
+}
 
-let submenu = null
-onMount(() => {
-  // console.log(submenu);
-})
+const changeActive = (isFlag: boolean, handleTime: number = 300) => {
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    isOpen = isFlag
+  }, handleTime)
+}
+
 </script>
 <li role="menuitem"
     aria-haspopup="true"
@@ -43,7 +46,7 @@ onMount(() => {
 	<div class="be-submenu__title">
 		<slot name="title"></slot>
 	</div>
-	<ul class="be-submenu__content">
+	<ul class="be-submenu__content" style:display={isOpen ? 'block' : 'none'}>
 		<slot></slot>
 	</ul>
 </li>
