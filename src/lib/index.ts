@@ -17,6 +17,7 @@ import BeNotification from './be-notification/BeNotification.svelte'
 import BeLoading from './be-loading/BeLoading.svelte'
 import { BeCheckbox, BeCheckboxGroup } from './be-checkbox'
 import { BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu } from './be-menu'
+import { BeBreadcrumb, BeBreadcrumbItem } from './be-breadcrumb'
 export {
 	BeButton,
 	BeAlert,
@@ -40,5 +41,7 @@ export {
 	BeMenu,
 	BeMenuItem,
 	BeMenuItemGroup,
-	BeSubMenu
+	BeSubMenu,
+  BeBreadcrumb,
+  BeBreadcrumbItem
 }

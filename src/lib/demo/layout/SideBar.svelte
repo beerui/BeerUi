@@ -29,6 +29,7 @@
 			<li><span class='base'>导航 Navigation</span></li>
 			<li><a class:active={$page.url.pathname === '/components/tabs'} href='/components/tabs'>Tabs 标签页</a></li>
 			<li><a class:active={$page.url.pathname === '/components/menu'} href='/components/menu'>NavMenu 导航菜单</a></li>
+			<li><a class:active={$page.url.pathname === '/components/breadcrumb'} href='/components/breadcrumb'>Breadcrumb 面包屑</a></li>
 			<li><span class='base'>其它 Others</span></li>
 			<li><a class:active={$page.url.pathname === '/components/clock'} href='/components/clock'>Clock 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/scrollbar'} href='/components/scrollbar'>Scrollbar 示例</a></li>
