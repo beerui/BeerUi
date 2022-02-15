@@ -77,12 +77,55 @@
   .demo-block {
     border: 1px solid var(--border-level-1-color);border-radius: 3px;transition: .2s;
     .source {padding: 24px;}
-    .meta {background: var(--bg-color-code);border-top: 1px solid var(--border-level-2-color);transition: height .2s;}
+    .meta {background: var(--bg-color-code);border-top: 1px solid var(--border-level-2-color);transition: height .2s;overflow-y: hidden;}
     .description {
       padding: 20px;box-sizing: border-box;font-size: 14px;
       line-height: 22px;color: var(--text-color-primary);word-break: break-word;background-color: var(--bg-color-container);
     }
 		table,tr,th,td {color: var(--text-color-primary);}
+		&-control {
+			border-top: solid 1px #eaeefb;
+      height: 44px;
+      box-sizing: border-box;
+      background-color: #fff;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+      text-align: center;
+      margin-top: -1px;
+      color: #d3dce6;
+      cursor: pointer;
+      position: relative;
+			user-select: none;
+			> span {
+        font-size: 14px;
+        line-height: 44px;
+        transition: .3s;
+        display: inline-block;
+      }
+			.triangle {
+				margin-right: 10px;
+				width:0; 
+        height:0;
+				transition: .3s;
+				transform-origin: center;
+				border-left: 6px solid transparent;
+				border-right: 6px solid transparent;
+				border-bottom: 8px solid #d3dce6;
+				&-down {
+					transform: rotate(180deg);
+				}
+			}
+      &:hover {
+        color: #409EFF;
+        background-color: #f9fafc;
+				.triangle {
+					border-color:transparent transparent #409EFF transparent;
+				}
+      }
+		}
   }
   .demo-code-container {padding: 20px;}
   .pt-0 {padding-top: 0;}
@@ -91,8 +134,8 @@
     width: 100%;background: var(--bg-color-code);border-radius: 6px;
     .hljs-tag {color: #878787;}
     code {
-      background-color: transparent;font-size: 14px;
+      background-color: transparent;font-size: 14px;font-weight: bold;
     }
-    & * {margin: 0;padding: 0;border: 0;line-height: 1.3;}
+    & * {margin: 0;padding: 0;border: 0;line-height: 2;}
   }
 </style>

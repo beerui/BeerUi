@@ -1,37 +1,54 @@
+import { addClass, removeClass, setStyle, isString } from '$lib/utils/beerui';
+
 const loadingNode:HTMLElement = document.createElement('div');
 addClass(loadingNode, 'be-loading-mask')
 loadingNode.innerHTML = `<div class="be-loading-spinner">
   <svg class="circular" viewBox="25 25 50 50">
     <circle class="path" cx="50" cy="50" r="20" fill="none"/>
   </svg>
-</div>`
+  <p class="loading-text"></p>
+</div>
+`
 
 
 type options = {
   target?: Element | String,
-  fullscreen?: Boolean,
-  background?: string
+  // fullscreen?: Boolean,
+  background?: string,
+  customClass?:string
+  text?:string
 }
 
 export class loadingSerive {
   target: Element
-  fullscreen: Boolean
+  // fullscreen: Boolean
   background: string
+  // color:string
+  text:string
+  customClass:string
   node: Node
   constructor(option?: options) {
     // this.target = option.target || document.body
-    this.fullscreen = option?.fullscreen || true
+    // this.fullscreen = option?.fullscreen || true
     this.background = option?.background ||  ''
+    this.text = option?.text ||  '拼命加载中'
+    this.customClass = option?.customClass ||  ''
+    // this.color = option?.color ||  ''
     if(isString(option?.target)) {
-      this.target = document.querySelector(<string>option?.target)
+      this.target = document.querySelector(String(option?.target))
     } else {
-      this.target = <Element>option?.target || document.body
+      this.target = <HTMLElement>option?.target || document.body
     }
     this.node = loadingNode.cloneNode(true)
   }
   show() {
     addClass(this.target, 'be-loading-position')
     this.target.appendChild(this.node)
+    const mask = this.target.querySelector('.be-loading-mask')
+    if(this.customClass) addClass(mask, this.customClass)
+    setStyle(<HTMLElement>mask, 'background', this.background)
+    const textNode = <HTMLElement>(<HTMLElement>this.target.lastChild).querySelector('.loading-text')
+    textNode.innerText = this.text
   }
   close() {
     removeClass(this.target, 'be-loading-position')
@@ -42,16 +59,26 @@ export class loadingSerive {
 export function loading(node, loading) {
   // node已挂载在DOM中
   const nodeDom = loadingNode.cloneNode(true)
-  if(loading) {
+  const loadingText = node.getAttribute('loading-text') 
+  const backgroundColor = node.getAttribute('loading-background')
+  const customClass = node.getAttribute('loading-class')
+  function setNode() {
     addClass(node, 'be-loading-position')
     node.appendChild(nodeDom)
+    const mask = node.querySelector('.be-loading-mask')
+    if(customClass) addClass(mask, customClass)
+    setStyle(mask, 'background', backgroundColor)
+    const textNode = node.querySelector('.loading-text')
+    textNode.innerText = loadingText
+  }
+  if(loading) {
+    setNode()
   }
   return {
     update(loading) {
       // `bar` 已发生变更
       if(loading) {
-        addClass(node, 'be-loading-position')
-        node.appendChild(nodeDom)
+        setNode()
       }
       if(!loading)  node.removeChild(nodeDom)
       
@@ -63,64 +90,4 @@ export function loading(node, loading) {
     }
   };
 }
-/* istanbul ignore next */
-function hasClass(el, cls) {
-  if (!el || !cls) return false;
-  if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
-  if (el.classList) {
-    return el.classList.contains(cls);
-  } else {
-    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
-  }
-};
-/* istanbul ignore next */
-function addClass(el, cls) {
-  if (!el) return;
-  var curClass = el.className;
-  var classes = (cls || '').split(' ');
 
-  for (var i = 0, j = classes.length; i < j; i++) {
-    var clsName = classes[i];
-    if (!clsName) continue;
-
-    if (el.classList) {
-      el.classList.add(clsName);
-    } else if (!hasClass(el, clsName)) {
-      curClass += ' ' + clsName;
-    }
-  }
-  if (!el.classList) {
-    el.setAttribute('class', curClass);
-  }
-};
-
-/* istanbul ignore next */
-function removeClass(el, cls) {
-  if (!el || !cls) return;
-  var classes = cls.split(' ');
-  var curClass = ' ' + el.className + ' ';
-
-  for (var i = 0, j = classes.length; i < j; i++) {
-    var clsName = classes[i];
-    if (!clsName) continue;
-
-    if (el.classList) {
-      el.classList.remove(clsName);
-    } else if (hasClass(el, clsName)) {
-      curClass = curClass.replace(' ' + clsName + ' ', ' ');
-    }
-  }
-  if (!el.classList) {
-    el.setAttribute('class', trim(curClass));
-  }
-};
-const trim = function(string) {
-  return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
-};
-
-function isHtmlElement(node) {
-  return node && node.nodeType === Node.ELEMENT_NODE;
-}
-function isString(obj) {
-  return Object.prototype.toString.call(obj) === '[object String]';
-}
