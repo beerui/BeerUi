@@ -64,14 +64,14 @@ let checked = false;
 	<p>适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。</p>
     <DemoBlock
 	    code={`
-<BeCheckboxGroup bind:this={checkboxGroup} checked={checkedCities} on:onChange={onChange}>
-	<BeCheckbox label="上海" />
-	<BeCheckbox label="北京" />
-	<BeCheckbox label="广州" />
-	<BeCheckbox label="深圳" />
-</BeCheckboxGroup>
 <BeButton on:click={selectItem}>选中 上海</BeButton>
-<BeButton on:click={setCheckedList}>{indeterminate ? '全选' : '取消全选'}</BeButton>
+<BeButton on:click={setCheckedList}>{indeterminate ? '取消全选' : '全选'}</BeButton>
+<BeCheckboxGroup bind:this={checkboxGroup} checked={checkedCities} on:change={onChange}>
+  <BeCheckbox label="上海" />
+  <BeCheckbox label="北京" />
+  <BeCheckbox label="广州" />
+  <BeCheckbox label="深圳" />
+</BeCheckboxGroup>
 `} js={`
 let checkedCities = []
 const cityOptions = ['上海', '北京', '广州', '深圳'];
@@ -87,7 +87,7 @@ let checkboxGroup;
 	        <BeButton on:click={selectItem}>选中 上海</BeButton>
 	        <BeButton on:click={setCheckedList}>{indeterminate ? '取消全选' : '全选'}</BeButton>
             <div class='demo-list'>
-	            <BeCheckboxGroup bind:this={checkboxGroup} checked={checkedCities} on:onChange={onChange}>
+	            <BeCheckboxGroup bind:this={checkboxGroup} checked={checkedCities} on:change={onChange}>
 		            <BeCheckbox label="上海" />
 		            <BeCheckbox label="北京" />
 		            <BeCheckbox label="广州" />

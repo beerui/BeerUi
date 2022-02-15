@@ -19,3 +19,9 @@ export type IOptions = {
 };
 
 export type IHighlightElement = (element: HTMLElement) => void;
+
+type NavMenu = {
+  setMenuActive: Function,
+  change: Function,
+  active: String
+}
