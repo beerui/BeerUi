@@ -1,6 +1,5 @@
 <script lang="ts">
   import { BeDatePicker } from '$lib';
-  import { BeTimePicker } from '$lib';
 
   let value = ''
   $:{
@@ -23,5 +22,4 @@
   <p class='desc'>datePicker 年份选择</p>
   <BeDatePicker value={'2021'} selectMode={"year"} format={"yyyy"} />
   <p class='desc'>timePicker 时间选择</p>
-  <BeTimePicker />
 </div>
