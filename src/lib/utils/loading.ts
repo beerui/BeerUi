@@ -1,14 +1,17 @@
 import { addClass, removeClass, setStyle, isString } from '$lib/utils/beerui';
+import { browser } from '$app/env';
 
-const loadingNode:HTMLElement = document.createElement('div');
-addClass(loadingNode, 'be-loading-mask')
-loadingNode.innerHTML = `<div class="be-loading-spinner">
-  <svg class="circular" viewBox="25 25 50 50">
-    <circle class="path" cx="50" cy="50" r="20" fill="none"/>
-  </svg>
-  <p class="loading-text"></p>
-</div>
-`
+if (browser) {
+  const loadingNode:HTMLElement = document.createElement('div');
+  addClass(loadingNode, 'be-loading-mask')
+  loadingNode.innerHTML = `<div class="be-loading-spinner">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none"/>
+    </svg>
+    <p class="loading-text"></p>
+  </div>
+  `
+}
 
 
 type options = {
@@ -59,7 +62,7 @@ export class loadingSerive {
 export function loading(node, loading) {
   // node已挂载在DOM中
   const nodeDom = loadingNode.cloneNode(true)
-  const loadingText = node.getAttribute('loading-text') 
+  const loadingText = node.getAttribute('loading-text')
   const backgroundColor = node.getAttribute('loading-background')
   const customClass = node.getAttribute('loading-class')
   function setNode() {
@@ -81,7 +84,7 @@ export function loading(node, loading) {
         setNode()
       }
       if(!loading)  node.removeChild(nodeDom)
-      
+
       console.log('已发生变更', node,loading)
     },
     destroy(loading) {
