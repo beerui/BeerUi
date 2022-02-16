@@ -4,6 +4,7 @@ import BeDialog from './be-dialog/BeDialog.svelte'
 import BePagination from './be-pagination/BePagination.svelte'
 import BeSwitch from './be-switch/BeSwitch.svelte'
 import BeDatePicker from './be-date-picker/BeDatePicker.svelte'
+import BeTimePicker from './be-date-picker/BeTimePicker.svelte'
 import BeTabs from './be-tabs/BeTabs.svelte'
 import BeTabPane from './be-tabs/BeTabPane.svelte'
 import BeSelect from './be-select/BeSelect.svelte'
@@ -31,6 +32,7 @@ export {
 	BeSelect,
 	BeInput,
 	BeDatePicker,
+	BeTimePicker,
 	BeClock,
 	BeDrag,
 	BeScrollbar,

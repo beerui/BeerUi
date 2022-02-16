@@ -1,5 +1,7 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
+import BeButton from '$lib/be-button/BeButton.svelte';
+import BeInput from '$lib/be-input/BeInput.svelte';
 import DateTable from '../basic/date-table.svelte'
 import MonthTable from '../basic/month-table.svelte'
 import YearTable from '../basic/year-table.svelte'
@@ -100,6 +102,9 @@ function zoomIn(node, params) {
 <div class="be-picker-panel be-date-picker be-popper" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__body-wrapper">
     <div class="be-picker-panel__body">
+      <div class="be-date-picker__time-header">
+        <BeInput placeholder='选择时间' size="mini"/>
+      </div>
       <div class="be-date-picker__header">
           {#if currentView === 'date'}
             <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth}></span>
@@ -131,6 +136,9 @@ function zoomIn(node, params) {
         {/if}
       </div>
     </div>
+  </div>
+  <div class="be-picker-panel__footer">
+    <BeButton type="default" size="mini">确认</BeButton>
   </div>
   <div class="popper__arrow"></div>
 </div>
