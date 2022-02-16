@@ -3,7 +3,7 @@
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
   import BeIcon from '$lib/be-icon/BeIcon.svelte';
 
-  let js = `import { BeButton } from '@beerui/beerui'`
+  let js = `import { BeButton } from '@brewer/beerui'`
   let code = `
 <div class='demo-list'>
 	<BeButton size="normal" type="default">默认按钮</BeButton>

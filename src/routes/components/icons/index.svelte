@@ -3,7 +3,7 @@
   import BeIcon from '$lib/be-icon/BeIcon.svelte';
   import { svgNameList } from '$lib/utils/svgList.js';
   import { tick } from 'svelte';
-  let js = `import { BeIcon } from '@beerui/beerui'`
+  let js = `import { BeIcon } from '@brewer/beerui'`
 
   let list = svgNameList.slice(0, 50)
   let code =

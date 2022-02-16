@@ -90,6 +90,3 @@ It will show up on hover.
 	</div>
 {/if}
 
-<style lang="scss">
-  @import '../assets/scss/modules/dialog';
-</style>

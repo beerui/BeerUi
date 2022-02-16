@@ -25,7 +25,7 @@
 	<p class='desc'>选项卡切换。</p>
 	<h3>基本用法</h3>
 	<DemoBlock {code} js={`
-import { BePagination } from '@beerui/beerui'
+import { BePagination } from '@brewer/beerui'
 let active = 'u1'
 const tabClick = (evt) => {
 	active = evt.detail

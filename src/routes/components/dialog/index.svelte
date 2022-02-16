@@ -15,7 +15,7 @@
 	const beforeClose3 = (evt) => console.log('beforeClose3', evt.detail)
 	const beforeClose4 = (evt) => console.log('beforeClose4', evt.detail)
 
-	let js = `import { BeButton, BeDialog } from '@beerui/beerui'`
+	let js = `import { BeButton, BeDialog } from '@brewer/beerui'`
 	let code = `
 <BeDialog bind:visible={visible1} on:beforeClose={beforeClose1}>
 	<p>基础 Dialog</p>

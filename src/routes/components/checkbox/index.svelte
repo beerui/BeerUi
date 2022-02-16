@@ -32,7 +32,7 @@
 	<p>单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。</p>
     <DemoBlock code={`
 <BeCheckbox {checked}>备选项</BeCheckbox>`} js={`
-import { BeCheckbox, BeTableColumn} from '@beerui/beerui'
+import { BeCheckbox, BeTableColumn} from '@brewer/beerui'
 let checked = false;
     `}>
         <div slot='source'>

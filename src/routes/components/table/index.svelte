@@ -143,7 +143,7 @@
 	<BeTableColumn prop="address" label="地址" />
 </BeTable>`}
                js={`
-import { BeTable, BeTableColumn} from '@beerui/beerui'
+import { BeTable, BeTableColumn} from '@brewer/beerui'
 const tableData = [{
 	date: '2016-05-02',
 	name: '王小虎',

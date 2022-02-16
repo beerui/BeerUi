@@ -11,4 +11,3 @@ cypress/videos
 storybook-static
 
 /src/lib/assets/scss/node_modules
-/src/lib/assets/scss/dist

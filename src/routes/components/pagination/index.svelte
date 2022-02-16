@@ -5,7 +5,7 @@
 	import { FormatTime } from '$lib/utils/beerui';
 
 	let js = `
-import { BePagination } from '@beerui/beerui'
+import { BePagination } from '@brewer/beerui'
 const query = { limit: 11, name: "", page: 1 }
 const options = {
 	card: true,

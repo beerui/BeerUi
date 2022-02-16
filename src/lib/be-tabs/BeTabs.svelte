@@ -50,6 +50,3 @@ function tabClick(key, i) {
 	</div>
 </div>
 
-<style lang="scss">
-  @import '../assets/scss/modules/tabs';
-</style>

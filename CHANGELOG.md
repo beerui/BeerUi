@@ -1,6 +1,6 @@
 # BeerUi 
 
-## 1.0.20
+## 1.0.3
 
 - 更新`svelte`版本
 - 更新`@sveltejs/kit`版本

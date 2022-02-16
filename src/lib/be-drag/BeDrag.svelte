@@ -61,6 +61,3 @@
 	{/each}
 </div>
 
-<style lang='scss'>
-  @import '../assets/scss/modules/drag';
-</style>

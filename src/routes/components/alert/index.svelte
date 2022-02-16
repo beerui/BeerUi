@@ -24,6 +24,3 @@ import { BeAlert } from '$lib';
   </p>
 </div>
 
-<style>
-	/* @import '../../../static/scss/index.scss'; */
-</style>

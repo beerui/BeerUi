@@ -10,7 +10,7 @@
 <BeClock class='m-timer' async defaultTime="2022年10月01日 00:00:00" formatTime="yyyy_MM_dd HH:mm:ss" />
 <BeClock class='m-timer' async defaultTime="2022年10月01日 00:00:00" formatTime="yyyyyyyyMM_dd HH:mm:ss" />
 	`
-	const js = `import { BeClock } from '@beerui/beerui'`
+	const js = `import { BeClock } from '@brewer/beerui'`
 </script>
 
 <div class='page-container'>

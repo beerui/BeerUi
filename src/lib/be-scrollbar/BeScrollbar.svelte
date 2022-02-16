@@ -1,13 +1,13 @@
 <script lang="ts">
   /**
    * this is scrollbar component
-   * 
+   *
   */
   import {onMount } from 'svelte'
   let beScroll
   let scrollContent;
   let thumb = 0
-  let maxToTop = 0 
+  let maxToTop = 0
   let top = 0
   let drag = false
   let moveTop = null
@@ -47,7 +47,7 @@
       if(moveTop) {
         let speed = e.clientY - boxToTop - moveTop
         let topHeight = top + speed
-        scrollThumb(topHeight) 
+        scrollThumb(topHeight)
       }
       moveTop= e.clientY - boxToTop;
       e.preventDefault()
@@ -88,7 +88,3 @@
   </div>
   {/if}
 </div>
-
-<style lang="scss">
-  @import '../assets/scss/modules/scrollbar';
-</style>

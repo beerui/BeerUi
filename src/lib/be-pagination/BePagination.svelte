@@ -200,7 +200,5 @@
 </div>
 
 <style lang="scss">
-  @import '../assets/scss/modules/pagination';
   .svg-icon {display: flex;justify-content: center;align-items: center;height: 100%;}
-
 </style>

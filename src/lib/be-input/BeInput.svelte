@@ -63,6 +63,3 @@
   {/if}
 </div>
 
-<style lang="scss">
-  @import '../assets/scss/modules/input';
-</style>

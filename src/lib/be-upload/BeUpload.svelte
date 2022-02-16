@@ -99,7 +99,3 @@
 		{/each}
 	</div>
 </div>
-
-<style lang="scss">
-  @import '../assets/scss/modules/upload';
-</style>

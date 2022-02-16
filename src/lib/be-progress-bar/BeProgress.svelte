@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	
+
 	export let percentage = 97
 	export let showText = true
 	export let type = 'line'
@@ -18,9 +18,9 @@
 	if(percentage > 100) percentage = 100
 
 	let rate = type == 'dashboard' ? 0.75 : 1
-	
+
 	let circleRadius = (width - strokWidth * 2) / 2
-	
+
 	let perimeter = 2 * Math.PI * circleRadius
 
 	let strokeDashoffset = -1 * perimeter * (1 - rate) / 2
@@ -84,6 +84,3 @@
 	{/if}
 </div>
 
-<style lang='scss'>
-	  @import '../assets/scss/modules/progress';
-</style>

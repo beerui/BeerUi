@@ -1,8 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, getContext, onDestroy } from "svelte";
-  import { filterClass } from "$lib/utils/beerui";
-  import { mapAttributes } from "$lib/utils/beerui.ts";
-  import { BeerPS } from "$lib/utils/beerui";
+  import { BeerPS, filterClass, mapAttributes } from "$lib/utils/beerui";
 
   const dispatch = createEventDispatcher()
   const initData = getContext('checkGroupInit')

@@ -17,7 +17,7 @@ const getDrag = (evt) => {
 }
 
 const js = `
-import { BeDrag } from '@beerui/beerui'
+import { BeDrag } from '@brewer/beerui'
 const list = [
 	{ key: 1, label: 'write some docs' },
 	{ key: 2, label: 'start writing JSConf talk' },

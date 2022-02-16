@@ -8,8 +8,8 @@
 		console.log(e.detail)
 	}
 
-	let js = `import { BeCarousel, BeCarouselItem } from '@beerui/beerui'`
-	let js1 = `import { previewImages } from '@beerui/beerui'`
+	let js = `import { BeCarousel, BeCarouselItem } from '@brewer/beerui'`
+	let js1 = `import { previewImages } from '@brewer/beerui'`
   let code = `
 <BeCarousel>
 	{#each items as item, i}

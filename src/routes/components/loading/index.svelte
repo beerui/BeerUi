@@ -36,7 +36,7 @@
     let loadingInstance1 = new loadingSerive({
       target: '.test2',
       text:'loading',
-      // background: 'rgba(0, 0, 0, 0.8)' 
+      // background: 'rgba(0, 0, 0, 0.8)'
     })
     loadingInstance1.show()
     // setTimeout(() => {
@@ -62,7 +62,7 @@
       </BeTable>
     </div>`}
     js={`
-    import { BeTable, BeTableColumn } from '@beerui/beerui'
+    import { BeTable, BeTableColumn } from '@brewer/beerui'
     import {loading} from '$lib/utils/loading'
     const load = true
     const tableData = [{
@@ -98,7 +98,7 @@
         BeerUi 提供了两种调用 Loading 的方法：指令和服务。对于指令标签use:loading，只需要绑定Boolean即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点。
       </div>
   </DemoBlock>
-  
+
   <!-- <div class="test" use:loading={load} loading-text="拼命加载中" loading-background='rgba(0, 0, 0, 0.8)' style="height:300px;" >111111111111111111111111111111111111111111111111</div> -->
 
   <!-- <div class="test2" style="height:300px;" >1111111111</div> -->

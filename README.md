@@ -19,7 +19,7 @@
 ## 怎样使用
 svelte & svelte-kit
 
-- `npm i @beerui/beerui -D`
+- `npm i @brewer/beerui -D`
 - `npm i sass -D`
 
 ### Concat Us `beerui2021@gmail.com`

@@ -50,7 +50,3 @@
   <!--  {checked ? 'border-color:' + activeColor + ';background-color:' + activeColor : 'border-color:' + inactiveColor + ';background-color:' + inactiveColor}  -->
   <span class="be-switch__core" style="width: {width}px;{switchColor}"></span>
 </div>
-
-<style lang="scss">
-  @import '../assets/scss/modules/switch';
-</style>
