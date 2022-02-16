@@ -3,6 +3,41 @@
   cursor: default;
   background: #fff;
   color: #606266;
+  &-loading {
+    animation: rotate360 1s infinite linear;
+  }
+  &-checkbox {
+    &.indeterminate {
+      position: relative;
+      &:after {
+        content: '';
+        display: block;
+        width: 40%;
+        height: 1px;
+        background: #f1f1f1;
+        position: absolute;
+        top: 50%;
+        margin-left: 30%;
+        z-index: 2;
+      }
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #409eff;
+        border-radius: 4px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+    }
+  }
+  @keyframes rotate360 {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+  }
   &-node {
     white-space: nowrap;
     outline: none;
@@ -11,7 +46,11 @@
       background-color: #f5f7fa;
     }
     &.is_show {
-      .be-icon {transform: rotate(90deg);}
+    }
+    &.is_expanded {
+      &>.be-tree-node__content {
+        .be-icon {transform: rotate(90deg);}
+      }
     }
     &__label {
       font-size: 14px;

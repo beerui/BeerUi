@@ -53,8 +53,8 @@
 	    class="be-checkbox__original"
 	    value={label}
 	    {checked}
-	    on:change={onChange}
-	    on:click
+	    on:change|stopPropagation={onChange}
+	    on:click|stopPropagation
 	    on:contextmenu
 	    on:dblclick
 	    on:focusin
@@ -68,7 +68,6 @@
 	    on:pointermove
 	    on:pointerout
 	    on:pointerup
-	    on:change
 	    on:input
     >
   </span>
