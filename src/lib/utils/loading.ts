@@ -1,8 +1,8 @@
 import { addClass, removeClass, setStyle, isString } from '$lib/utils/beerui';
 import { browser } from '$app/env';
-
+let loadingNode:HTMLElement
 if (browser) {
-  const loadingNode:HTMLElement = document.createElement('div');
+  loadingNode = document.createElement('div');
   addClass(loadingNode, 'be-loading-mask')
   loadingNode.innerHTML = `<div class="be-loading-spinner">
     <svg class="circular" viewBox="25 25 50 50">
