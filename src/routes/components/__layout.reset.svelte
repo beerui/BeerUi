@@ -99,6 +99,11 @@
       cursor: pointer;
       position: relative;
 			user-select: none;
+			&.is-fixed {
+        position: fixed;
+        bottom: 0;
+        width: 992px;
+      }
 			> span {
         font-size: 14px;
         line-height: 44px;
@@ -134,8 +139,8 @@
     width: 100%;background: var(--bg-color-code);border-radius: 6px;
     .hljs-tag {color: #878787;}
     code {
-      background-color: transparent;font-size: 14px;font-weight: bold;
+      background-color: transparent;
     }
-    & * {margin: 0;padding: 0;border: 0;line-height: 2;}
+    & * {margin: 0;padding: 0;border: 0;line-height: 2;font-family:Menlo,Monaco,Consolas,Courier,monospace;font-size: 12px;}
   }
 </style>

@@ -71,16 +71,16 @@
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
       date: '2016-05-04',
-       name: '王小虎',
-       address: '上海市普陀区金沙江路 1517 弄'
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1517 弄'
     }, {
       date: '2016-05-03',
-       name: '王小虎',
-       address: '上海市普陀区金沙江路 1519 弄'
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1519 弄'
     }, {
       date: '2016-05-01',
-       name: '王小虎',
-       address: '上海市普陀区金沙江路 1519 弄'
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1519 弄'
     }]`
     }
         >
@@ -98,6 +98,7 @@
         BeerUi 提供了两种调用 Loading 的方法：指令和服务。对于指令标签use:loading，只需要绑定Boolean即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点。
       </div>
   </DemoBlock>
+  
   <!-- <div class="test" use:loading={load} loading-text="拼命加载中" loading-background='rgba(0, 0, 0, 0.8)' style="height:300px;" >111111111111111111111111111111111111111111111111</div> -->
 
   <!-- <div class="test2" style="height:300px;" >1111111111</div> -->
