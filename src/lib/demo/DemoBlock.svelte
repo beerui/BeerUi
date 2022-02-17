@@ -7,6 +7,7 @@
 	let isExpanden = false
 	let clientHeight = 0
 	let fixedControl = false
+	let codeWidth
 	onMount(async () => {
 		await tick()
 		clientHeight = demoBlcok.clientHeight
@@ -24,7 +25,9 @@
 		}, 200);
 	}
 	const scrollHandler = () => {
-		const { top, bottom } = demoBlcok.getBoundingClientRect();
+		const { top, bottom, width } = demoBlcok.getBoundingClientRect();
+		codeWidth = width + 'px'
+		document.querySelector('.demo-block-control').style.width = width
 		fixedControl = bottom > document.documentElement.clientHeight &&
 			top + 44 <= document.documentElement.clientHeight;
 	}
@@ -44,7 +47,7 @@
 			{/if}
 		</div>
 	</div>
-	<div class="demo-block-control" class:is-fixed={fixedControl} on:click={() => {expandedCode(!isExpanden)}}>
+	<div class="demo-block-control" style:width={codeWidth} class:is-fixed={fixedControl} on:click={() => {expandedCode(!isExpanden)}}>
 		<div class="triangle" class:triangle-down = {!isExpanden}></div>
 		<span>{ controlText }</span>
 	</div>
