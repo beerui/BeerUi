@@ -75,7 +75,7 @@
   },
   "prettier": {
     "singleQuote": true,
-    "tabWidth": 2,
+    "tabWidth": 4,
     "useTabs": true
   },
   "bugs": {
