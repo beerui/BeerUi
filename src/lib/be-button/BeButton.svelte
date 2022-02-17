@@ -2,20 +2,12 @@
   import { filterClass } from "$lib/utils/beerui";
 
   export let style = null;
-  export let type = "";
-  export let size = "";
-  export let round = "";
   export let nativeType = "button";
-  export let autofocus = false;
-  export let disabled = false;
-  export let loading = false;
-  export let icon = "";
 
   const preClass = ["type", "size", "round", "loading", "disabled"];
   const _class = ["be-button", ...filterClass($$props, "be-button--", preClass)].join(" ");
 </script>
 <button
-	{autofocus}
 	class={_class}
 	{style}
 	on:click

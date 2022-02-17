@@ -154,7 +154,7 @@
 		}
 	}
 </script>
-<div class={_class} on:mouseenter={enterCarousel} on:mouseleave={leaveCarousel} bind:this={element}>
+<div class={_class} class:indicatorPosition={indicatorPosition} on:mouseenter={enterCarousel} on:mouseleave={leaveCarousel} bind:this={element}>
 	<div class='be-carousel__container' style:height>
 		{#if direction !== 'vertical'}
 		<button type="button" on:click={doPrevHandle} class="be-carousel__arrow be-carousel__arrow--left" style:display={arrowDisplay}><BeIcon width='35' height='22' name='chevron-left' /></button>

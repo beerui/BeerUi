@@ -20,6 +20,3 @@
 	<BeUpload />
 </div>
 
-<style lang='scss'>
-.mt-10 {margin-top: 1rem;}
-</style>

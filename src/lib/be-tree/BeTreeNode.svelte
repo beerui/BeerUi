@@ -8,10 +8,8 @@ const dispatch = createEventDispatcher()
 let handleContextMenu
 export let node
 let treeNode = null
-export let tree = null
 export let showCheckbox = null
 export let props = null
-export let key = null
 export let renderContent: Function
 export let renderAfterExpand = true
 
