@@ -220,6 +220,9 @@
   const resetChecked = () => {
     theTree.setCheckedKeys([]);
   };
+  let checkChangeHandle = evt => {
+    console.log('checkChangeHandle', evt);
+  };
 </script>
 <div class="page-container">
 	<h2>Tree 树形控件</h2>
@@ -579,6 +582,7 @@ const resetChecked = () => {
 		            nodeKey="id"
 		            defaultExpandAll
 		            highlightCurrent
+		            on:checkChange={checkChangeHandle}
 		            defaultExpandedKeys={[2, 3]}
 		            defaultCheckedKeys={[5]}
 	            />

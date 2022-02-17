@@ -45,9 +45,12 @@ const expandedHandle = async () => {
 const handleExpandIconClick = () => {
   expandedHandle()
 }
-const handleCheckChange = () => {
-  node.checked = !node.checked
-  dispatch("checkChange", { data: node.data, checked: node.checked, indeterminate: node.indeterminate });
+const handleCheckChange = (evt) => {
+  console.log('handleCheckChange BeTreeNode');
+  node.setChecked(evt.target.checked, true);
+  node = node
+  // TODO: 此处增加发布 通知上一级发布给用户
+  dispatch("checkChange", { data: node.data, checked: node.checked, level: node.level });
 }
 const getNodeKeyHandle = (child): void => {
   return getNodeKey(nodeKey, child);
@@ -56,6 +59,18 @@ const destroyNode = (evt) => {
   evt.detail.expanded = false
   evt.detail.checked = false
 }
+let oldChecked = node.checked
+let oldIndeterminate = node.indeterminate
+const handleSelectChange = () => {
+  if (oldChecked !== node.checked && oldIndeterminate !== node.indeterminate) {
+    console.log('handleSelectChange');
+    dispatch('checkChange', { data: node.data, checked: node.checked, indeterminate: node.indeterminate})
+  }
+  oldChecked = node.checked;
+  node.indeterminate = node.indeterminate;
+}
+
+$: if (node.checked || node.indeterminate) handleSelectChange()
 
 onDestroy(() => {
   dispatch('destroyNode', node)
@@ -91,8 +106,8 @@ onDestroy(() => {
 				type="checkbox"
 				checked={node.checked}
 				disabled={node.disabled}
-				on:change={handleCheckChange}
 				on:click|stopPropagation
+				on:change={handleCheckChange}
 			>
 		{/if}
 		{#if node.loading}
