@@ -87,3 +87,68 @@ export const nextYear = function(date, amount = 1) {
   const month = date.getMonth();
   return changeYearMonthAndClampDate(date, year + amount, month);
 };
+const newArray = function(start, end) {
+  let result = [];
+  for (let i = start; i <= end; i++) {
+    result.push(i);
+  }
+  return result;
+};
+export const getRangeHours = function(ranges) {
+  const hours = [];
+  let disabledHours = [];
+
+  (ranges || []).forEach(range => {
+    const value = range.map(date => date.getHours());
+
+    disabledHours = disabledHours.concat(newArray(value[0], value[1]));
+  });
+
+  if (disabledHours.length) {
+    for (let i = 0; i < 24; i++) {
+      hours[i] = disabledHours.indexOf(i) === -1;
+    }
+  } else {
+    for (let i = 0; i < 24; i++) {
+      hours[i] = false;
+    }
+  }
+
+  return hours;
+};
+function setRangeData(arr, start, end, value) {
+  for (let i = start; i < end; i++) {
+    arr[i] = value;
+  }
+}
+
+export const getRangeMinutes = function(ranges, hour) {
+  const minutes = new Array(60);
+
+  if (ranges && ranges.length > 0) {
+    ranges.forEach(range => {
+      const start = range[0];
+      const end = range[1];
+      const startHour = start.getHours();
+      const startMinute = start.getMinutes();
+      const endHour = end.getHours();
+      const endMinute = end.getMinutes();
+      if (startHour === hour && endHour !== hour) {
+        setRangeData(minutes, startMinute, 60, true);
+      } else if (startHour === hour && endHour === hour) {
+        setRangeData(minutes, startMinute, endMinute + 1, true);
+      } else if (startHour !== hour && endHour === hour) {
+        setRangeData(minutes, 0, endMinute + 1, true);
+      } else if (startHour < hour && endHour > hour) {
+        setRangeData(minutes, 0, 60, true);
+      }
+    });
+  } else {
+    setRangeData(minutes, 0, 60, true);
+  }
+  return minutes;
+};
+
+export const modifyTime = function(date, h, m, s) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
+};

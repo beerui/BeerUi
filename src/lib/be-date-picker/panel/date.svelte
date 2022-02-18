@@ -1,32 +1,42 @@
 <script lang="ts">
+  // TODO: 优化该组件 减少代码量
 import { createEventDispatcher } from 'svelte';
 import BeButton from '$lib/be-button/BeButton.svelte';
 import BeInput from '$lib/be-input/BeInput.svelte';
 import DateTable from '../basic/date-table.svelte'
 import MonthTable from '../basic/month-table.svelte'
 import YearTable from '../basic/year-table.svelte'
-import { cubicInOut } from 'svelte/easing';
+import clickOutside from '$lib/_actions/clickOutside';
 import { FormatTime } from '$lib/utils/beerui';
+import Time from './time.svelte';
+import { BeTimePicker } from '$lib';
+import { cubicInOut } from 'svelte/easing';
 import { nextMonth, prevMonth, prevYear, nextYear } from '../date-util.js'
 const dispatch = createEventDispatcher()
 
 export let value
 export let visible = false
 export let format
+export let valueFormat = ''
 export let selectMode
 export let disabledDate: Function
 
-const times = new FormatTime(format)
-let yearLabel = ''
+const times = new FormatTime(valueFormat.split(' ')[1])
 
-$:currentView = selectMode === 'day' ? 'date' : selectMode
+let yearLabel = ''
+let timeValue = ''
+let timeVisible = false
+let currentView
+
+
 $:year = date.getFullYear()
 $:month = String(date.getMonth() + 1).padStart(2, '0')
 $:date = resetDate(value)
+
 // 打开弹窗初始化日期
 $: if(!visible) {
   date = resetDate(value)
-  currentView = selectMode === 'day' ? 'date' : selectMode
+  resetView()
 }
 $: if (currentView === 'year') {
   const startYear = Math.floor(year / 10) * 10;
@@ -34,9 +44,18 @@ $: if (currentView === 'year') {
 }
 
 function resetDate(val) {
+  if(val instanceof Date) return val
   return val ? new Date(val) : new Date()
 }
-
+function resetView() {
+  if (selectMode === 'month') {
+    currentView = 'month';
+  } else if (selectMode === 'year') {
+    currentView = 'year';
+  } else {
+    currentView = 'date';
+  } 
+}
 function handlePrevMonth() {
   date = prevMonth(date)
 }
@@ -60,51 +79,73 @@ function handleNextYear() {
 
 function confirmDatePick(e) {
   value = e.detail
-  dispatch('pick', formatDate(e.detail))
+  console.log(e.detail);
+  
+  timeValue = getTimeValueFormat(e.detail)
+  if(selectMode != 'datetime') dispatch('pick', e.detail)
 }
 
 function confirmMonthPick(e) {
-  if(selectMode === 'day') {
+  if(selectMode === 'date' || selectMode === 'datetime') {
     date = e.detail
     currentView = 'date'
   } else {
-    dispatch('pick',  formatDate(e.detail))
+    dispatch('pick',  e.detail)
   }
 }
 function confirmYearPick(e) {
-  if(selectMode === 'month' || selectMode === 'day') {
+  if(selectMode === 'month' || selectMode === 'date' || selectMode === 'datetime') {
     date = e.detail
     currentView = 'month'
   } else {
-    dispatch('pick', formatDate(e.detail))
+    dispatch('pick', e.detail)
   }
 }
 
-function formatDate(time) {
-  return times.setTime(time)
-}
-
-function zoomIn(node, params) {
-  return {
-    duration:params.duration,
-    easing: cubicInOut,
-    css: t => {
-      return `
-        opacity: ${t};
-        transform: scaleY(${t});
-        transform-origin: center top;`
-    }
-  };
-}
+function handleShowTimePopper(e) {
+		timeVisible = true;
+		console.log('handleShowTimePopper');
+	}
+	function handleTimeChange() {
+		timeVisible = false;
+	}
+	function handleCloseTimePopper(v) {
+		timeVisible = false;
+	}
+	function confirmTimePick(e) {
+    value = e.detail
+		timeValue = getTimeValueFormat(e.detail)
+		timeVisible = false
+	}
+  function confirmDateTimePick() {
+    timeValue =  getTimeValueFormat(date)
+    dispatch('pick', date)
+  }
+  function getTimeValueFormat(value) {
+    return times.setTime(value)
+  }
+  function zoomIn(node, params) {
+    return {
+      duration:params.duration,
+      easing: cubicInOut,
+      css: t => {
+        return `
+          opacity: ${t};
+          transform: scaleY(${t});
+          transform-origin: center top;`
+      }
+    };
+  }
 </script>
 
 {#if visible}
 <div class="be-picker-panel be-date-picker be-popper" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__body-wrapper">
     <div class="be-picker-panel__body">
-      {#if currentView === 'datetime'}
-        <div class="be-date-picker__time-header">
-          <BeInput placeholder='选择时间' size="mini"/>
+      {#if selectMode === 'datetime'}
+        <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseTimePopper }} on:outside={handleCloseTimePopper}>
+          <BeInput on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
+	        <Time {date} visible={timeVisible} on:pick={confirmTimePick}/>
         </div>
       {/if}
       <div class="be-date-picker__header">
@@ -128,20 +169,20 @@ function zoomIn(node, params) {
       </div>
       <div class="be-picker-panel__content">
         {#if currentView === 'date'}
-          <DateTable disabledDate={disabledDate} date={date} on:pick={confirmDatePick} value={value}/>
+          <DateTable {disabledDate} {date} {value} on:pick={confirmDatePick} />
         {/if}
         {#if currentView === 'month'}
-          <MonthTable disabledDate={disabledDate} date={date} on:pick={confirmMonthPick} value={value}/>
+          <MonthTable {disabledDate} {date}  {value}on:pick={confirmMonthPick} />
         {/if}
         {#if currentView === 'year'}
-          <YearTable disabledDate={disabledDate} date={date} on:pick={confirmYearPick} value={value}/>
+          <YearTable {disabledDate} {date} {value} on:pick={confirmYearPick} />
         {/if}
       </div>
     </div>
   </div>
-  {#if currentView === 'datetime'}
+  {#if selectMode === 'datetime'}
     <div class="be-picker-panel__footer">
-      <BeButton type="default" size="mini">确认</BeButton>
+      <BeButton type="default" size="mini" on:click = {confirmDateTimePick}>确认</BeButton>
     </div>
   {/if}
   <div class="popper__arrow"></div>

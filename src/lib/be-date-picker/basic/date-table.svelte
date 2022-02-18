@@ -1,6 +1,6 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
-import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth } from '../date-util.js'
+import { getDayCountOfMonth, getDateTimestamp, getFirstDayOfMonth, modifyDate } from '../date-util.js'
 const dispatch = createEventDispatcher()
 const weeks = ['日','一','二','三','四','五','六']
 let rows = []
@@ -82,7 +82,8 @@ function selectDay(e, cell, index) {
   if(cell.type == 'prev-month') {
     dateMonth--
   }
-  const dateTime = new Date(year, dateMonth, cell.text)
+  // 当前输入框无值时 选中日期 时间为00:00:00, 有值时选中即为当前值(datetime)
+  const dateTime = value ? modifyDate(date, year, dateMonth, cell.text) : new Date(year, dateMonth, cell.text)
   dispatch('pick', dateTime)
 }
 function cellMatchesDate(cell) {

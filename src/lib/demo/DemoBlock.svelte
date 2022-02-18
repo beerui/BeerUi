@@ -25,7 +25,7 @@
 		}, 200);
 	}
 	const scrollHandler = () => {
-		const { top, bottom, width } = demoBlcok.getBoundingClientRect();
+		const { top, bottom, width } = demoBlcok && demoBlcok.getBoundingClientRect();
 		codeWidth = width + 'px'
 		document.querySelector('.demo-block-control').style.width = width
 		fixedControl = bottom > document.documentElement.clientHeight &&
