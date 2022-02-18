@@ -72,10 +72,9 @@ let handleChildNodeExpand = (evt) => {
 const handleClick = (evt) => {
   dispatch('nodeClick', evt.detail)
 }
-const handleCheckChange = (evt) => {
-  console.log('handleCheckChange BeTree');
+const handleCheckChange = (items) => {
   dispatch('checkChange', {
-    ...evt.detail,
+    ...items,
     checkedNodes: store.getCheckedNodes(),
     checkedKeys: store.getCheckedKeys(),
     halfCheckedNodes: store.getHalfCheckedNodes(),

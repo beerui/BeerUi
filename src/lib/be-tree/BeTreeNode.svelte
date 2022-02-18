@@ -30,28 +30,29 @@ let handleClick = () => {
 const expandedHandle = async () => {
   if (node.expanded) {
     node.collapse();
+    node = node
   } else {
-    node.expand();
+    node.expand(() => {
+	    node = node
+    });
+    node = node
   }
-  // TODO：待优化
-  const timer = setInterval(() => {
-    if (!node.loading) {
-      node = node
-      clearInterval(timer)
-    }
-  }, 100)
 }
 
 const handleExpandIconClick = () => {
   expandedHandle()
 }
+
+const handleChildCheckChange = () => {
+  dispatch("checkChange", { data: node.data, checked: node.checked, level: node.level });
+}
 const handleCheckChange = (evt) => {
-  console.log('handleCheckChange BeTreeNode');
   node.setChecked(evt.target.checked, true);
   node = node
   // TODO: 此处增加发布 通知上一级发布给用户
   dispatch("checkChange", { data: node.data, checked: node.checked, level: node.level });
 }
+
 const getNodeKeyHandle = (child): void => {
   return getNodeKey(nodeKey, child);
 }
@@ -59,18 +60,6 @@ const destroyNode = (evt) => {
   evt.detail.expanded = false
   evt.detail.checked = false
 }
-let oldChecked = node.checked
-let oldIndeterminate = node.indeterminate
-const handleSelectChange = () => {
-  if (oldChecked !== node.checked && oldIndeterminate !== node.indeterminate) {
-    console.log('handleSelectChange');
-    dispatch('checkChange', { data: node.data, checked: node.checked, indeterminate: node.indeterminate})
-  }
-  oldChecked = node.checked;
-  node.indeterminate = node.indeterminate;
-}
-
-$: if (node.checked || node.indeterminate) handleSelectChange()
 
 onDestroy(() => {
   dispatch('destroyNode', node)
@@ -131,6 +120,7 @@ onDestroy(() => {
 					{showCheckbox}
 					{renderContent}
 					{renderAfterExpand}
+					on:checkChange={handleChildCheckChange}
 					on:destroyNode={destroyNode}
 					on:nodeExpand={handleChildNodeExpand}
 					key={getNodeKeyHandle(child)}
