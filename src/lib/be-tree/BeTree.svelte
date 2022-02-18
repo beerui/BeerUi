@@ -67,13 +67,19 @@ const store = new TreeStore({
 });
 let root = store['root'];
 let handleChildNodeExpand = (evt) => {
-  console.log('handleChildNodeExpand', evt);
+  dispatch('nodeExpand', evt.detail)
 }
 const handleClick = (evt) => {
   dispatch('nodeClick', evt.detail)
 }
-const handleCheckChange = (evt) => {
-  dispatch('checkChange', evt.detail)
+const handleCheckChange = (items) => {
+  dispatch('checkChange', {
+    ...items,
+    checkedNodes: store.getCheckedNodes(),
+    checkedKeys: store.getCheckedKeys(),
+    halfCheckedNodes: store.getHalfCheckedNodes(),
+    halfCheckedKeys: store.getHalfCheckedKeys()
+  })
 }
 
 export const filter = (value) => {
@@ -118,12 +124,10 @@ export const setCheckedNodes = (nodes, leafOnly) => {
   if (!nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
   store.setCheckedNodes(nodes, leafOnly);
   root = store['root']
-  console.log('store[\'root\']', store['root']);
 }
 export const setCheckedKeys = (keys, leafOnly) => {
   if (!nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedKeys');
   store.setCheckedKeys(keys, leafOnly);
-  console.log('setCheckedKeys', store);
   root = store['root']
 }
 export const setChecked = (data, checked, deep) => {
@@ -216,6 +220,11 @@ export const handleKeydown = (ev) => {
     hasInput.click();
   }
 }
+
+const destroyNode = (evt) => {
+  evt.detail.expanded = false
+  evt.detail.checked = false
+}
 </script>
 <svelte:options accessors />
 <div class="be-tree" class:highlightCurrent role="tree" bind:this={beTree}>
@@ -227,9 +236,10 @@ export const handleKeydown = (ev) => {
         {showCheckbox}
         {renderContent}
         {renderAfterExpand}
-		on:nodeExpand={handleChildNodeExpand}
 		on:handleClick={handleClick}
 		on:checkChange={handleCheckChange}
+		on:destroyNode={destroyNode}
+		on:nodeExpand={handleChildNodeExpand}
         key={getNodeKeyHandle(child)}
 	/>
 	{/each}

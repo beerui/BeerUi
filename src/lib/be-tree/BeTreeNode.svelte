@@ -8,10 +8,8 @@ const dispatch = createEventDispatcher()
 let handleContextMenu
 export let node
 let treeNode = null
-export let tree = null
 export let showCheckbox = null
 export let props = null
-export let key = null
 export let renderContent: Function
 export let renderAfterExpand = true
 
@@ -30,25 +28,29 @@ let handleClick = () => {
 const expandedHandle = async () => {
   if (node.expanded) {
     node.collapse();
+    node = node
   } else {
-    node.expand();
+    node.expand(() => {
+	    node = node
+    });
+    node = node
   }
-  // TODO：待优化
-  const timer = setInterval(() => {
-    if (!node.loading) {
-      node = node
-      clearInterval(timer)
-    }
-  }, 100)
 }
 
 const handleExpandIconClick = () => {
   expandedHandle()
 }
-const handleCheckChange = () => {
-  node.checked = !node.checked
-  dispatch("checkChange", { data: node.data, checked: node.checked, indeterminate: node.indeterminate });
+
+const handleChildCheckChange = () => {
+  dispatch("checkChange", { data: node.data, checked: node.checked, level: node.level });
 }
+const handleCheckChange = (evt) => {
+  node.setChecked(evt.target.checked, true);
+  node = node
+  // TODO: 此处增加发布 通知上一级发布给用户
+  dispatch("checkChange", { data: node.data, checked: node.checked, level: node.level });
+}
+
 const getNodeKeyHandle = (child): void => {
   return getNodeKey(nodeKey, child);
 }
@@ -91,8 +93,8 @@ onDestroy(() => {
 				type="checkbox"
 				checked={node.checked}
 				disabled={node.disabled}
-				on:change={handleCheckChange}
 				on:click|stopPropagation
+				on:change={handleCheckChange}
 			>
 		{/if}
 		{#if node.loading}
@@ -116,6 +118,7 @@ onDestroy(() => {
 					{showCheckbox}
 					{renderContent}
 					{renderAfterExpand}
+					on:checkChange={handleChildCheckChange}
 					on:destroyNode={destroyNode}
 					on:nodeExpand={handleChildNodeExpand}
 					key={getNodeKeyHandle(child)}
