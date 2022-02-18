@@ -7,9 +7,9 @@
 	function handleShowDatePopper(e) {
 		visible = true;
 		console.log('handleShowDatePopper');
-	
+
 	}
-	
+
 	function handleChange() {
 		visible = false;
 	}
@@ -20,5 +20,5 @@
 </script>
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
 	<BeInput on:change={handleChange} on:focus={handleShowDatePopper} />
-	<Time {value} bind:visible={visible}/>
- </div>
+	<Time bind:visible={visible} />
+</div>
