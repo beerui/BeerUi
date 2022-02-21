@@ -48,6 +48,7 @@ function getMonthArray() {
       const day = dateCountOfLastMonth + offsetDay
       // let curDate =  new Date(year, month, count)
       // 数字代表的实际日期 eg: new Date(2022,0,-1) = new Date(2021,12,30)
+      // let curDate = modifyDate(date, year, month, offsetDay) 
       let curDate = new Date(year, month, offsetDay)
       // if(dateWeekOfMonth != 0 && day <= dateCountOfLastMonth) {
       if(day <= dateCountOfLastMonth) {
@@ -66,6 +67,8 @@ function getMonthArray() {
           cell.type = 'next-month';
         }
       }
+      console.log(curDate, disabledDate(curDate));
+      
       //  禁用日期
       cell.disabled = typeof disabledDate === 'function' && disabledDate(curDate);
       row.push(cell)

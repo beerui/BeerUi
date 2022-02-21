@@ -3,6 +3,7 @@
   import { BeTimePicker } from '$lib';
 
   let value = '2011-12'
+  let selectableRange = '18:30:00 - 20:30:00'
   $:{
     console.log(value)
   }
@@ -19,11 +20,11 @@
   <p class='desc'>datePicker 日期选择</p>
   <BeDatePicker value={value} selectMode={"date"} format={"yyyy-MM-dd"} valueFormat={"yyyy/MM/dd"} disabledDate={disabledDate} on:change={changeTime}/>
   <p class='desc'>datePicker 日期时间选择</p>
-  <BeDatePicker value={''} selectMode={"datetime"} on:change={changeTime}/>
+  <BeDatePicker value={''} selectMode={"datetime"} on:change={changeTime} disabledDate={disabledDate}/>
   <p class='desc'>datePicker 月份选择</p>
   <BeDatePicker value={'2021-12'} selectMode={"month"} format={"yyyy-MM"}/>
   <p class='desc'>datePicker 年份选择</p>
   <BeDatePicker value={'2021'} selectMode={"year"} format={"yyyy"} />
   <p class='desc'>timePicker 时间选择</p>
-  <BeTimePicker value={''} on:change={changeTime}/>
+  <BeTimePicker value={(new Date())} format={"HH:mm"} selectableRange={selectableRange} on:change={changeTime}/>
 </div>

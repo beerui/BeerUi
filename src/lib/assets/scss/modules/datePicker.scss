@@ -255,7 +255,8 @@
       height: 190px;
       overflow-y: auto;
       display: inline-block;
-      width: 33.3%;
+      // width: 33.3%;
+      flex: 1;
       vertical-align: top;
       position: relative;
     }
@@ -283,6 +284,7 @@
       font-size: 12px;
       color: #606266;
     }
+ 
     &__item.active:not(.disabled) {
       color: #303133;
       font-weight: 700;
@@ -292,6 +294,10 @@
       z-index: 1;
       background: #f5f7fa;
       cursor: pointer;
+    }
+    &__item.disabled {
+      color: #c0c4cc;
+      cursor: not-allowed;
     }
     &__wrapper::-webkit-scrollbar {
       width: 0;

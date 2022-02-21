@@ -1,3 +1,6 @@
+
+import fecha from './date.js';
+
 // 获取指定月份天数
 export const getDayCountOfMonth = function(year, month) {
   if (month === 3 || month === 5 || month === 8 || month === 10) {
@@ -14,7 +17,17 @@ export const getDayCountOfMonth = function(year, month) {
 
   return 31;
 };
-
+export const timeRangeParse = function(date, separator) {
+  if (!Array.isArray(date)) {
+    date = date.split(separator);
+  }
+  if (date.length === 2) {
+    const range1 = date[0];
+    const range2 = date[1];
+    return [parseDate(range1, 'HH:mm:ss'), parseDate(range2, 'HH:mm:ss')]
+  }
+  return []
+}
 export const getFirstDayOfMonth = function(date) {
   const temp = new Date(date.getTime());
   temp.setDate(1);
@@ -53,6 +66,17 @@ export const modifyDate = function(date, y, m, d) {
   return new Date(y, m, d, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 };
 
+export const parseDate = function(string, format) {
+  return fecha.parse(string, format || 'yyyy-MM-dd');
+};
+
+export const modifyWithTimeString = (date, time) => {
+  if (date == null || !time) {
+    return date;
+  }
+  time = parseDate(time, 'HH:mm:ss');
+  return modifyTime(date, time.getHours(), time.getMinutes(), time.getSeconds());
+};
 export const changeYearMonthAndClampDate = function(date, year, month) {
   // clamp date to the number of days in `year`, `month`
   // eg: (2010-1-31, 2010, 2) => 2010-2-28
@@ -94,6 +118,12 @@ const newArray = function(start, end) {
   }
   return result;
 };
+function setRangeData(arr, start, end, value) {
+  for (let i = start; i < end; i++) {
+    arr[i] = value;
+  }
+}
+
 export const getRangeHours = function(ranges) {
   const hours = [];
   let disabledHours = [];
@@ -116,12 +146,6 @@ export const getRangeHours = function(ranges) {
 
   return hours;
 };
-function setRangeData(arr, start, end, value) {
-  for (let i = start; i < end; i++) {
-    arr[i] = value;
-  }
-}
-
 export const getRangeMinutes = function(ranges, hour) {
   const minutes = new Array(60);
 
@@ -148,7 +172,35 @@ export const getRangeMinutes = function(ranges, hour) {
   }
   return minutes;
 };
-
+export const getRangeSeconds = function(ranges, hour, minutes, disabled) {
+  // 默认所有秒都可选
+  const seconds = new Array(60)
+  // 如果分钟被禁用，所有秒都禁用
+  if(!disabled) {
+    setRangeData(seconds, 0, 60, true)
+  }
+  if(ranges && ranges.length > 0) {
+      ranges.forEach(range => {
+      const start = range[0];
+      const end = range[1];
+      const startHour = start.getHours();
+      const startMinute = start.getMinutes();
+      const endHour = end.getHours();
+      const endMinute = end.getMinutes();
+      const startSecond = start.getSeconds()
+      const endSecond = end.getSeconds()
+      if(startHour == hour && endHour == hour && startMinute == minutes  && endMinute == minutes) {
+        setRangeData(seconds, 0, startSecond, true)
+        setRangeData(seconds, endSecond + 1, 60, true)
+      } else if(startHour == hour && startMinute == minutes) {
+        setRangeData(seconds, 0, startSecond, true)
+      } else if(endHour == hour && endMinute == minutes) {
+        setRangeData(seconds, endSecond + 1, 60, true)
+      }
+    })
+  }
+  return seconds
+}
 export const modifyTime = function(date, h, m, s) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
 };

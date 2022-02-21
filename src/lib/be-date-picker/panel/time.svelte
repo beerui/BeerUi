@@ -8,6 +8,9 @@ const dispatch = createEventDispatcher()
 
 export let visible = false
 export let date
+export let selectableRange
+export let format
+let dateData
 function zoomIn(node, params) {
   return {
     duration:params.duration,
@@ -20,18 +23,20 @@ function zoomIn(node, params) {
     }
   };
 }
-function PickTime(data) {
-  date = data.detail
+function PickTime(e) {
+  dateData = e.detail 
+  date = e.detail.date
 }
 function confirm() {
-  dispatch('pick',date)
+  if(dateData.disabled) throw new Error('该时间已禁用！')
+  dispatch('pick', date)
 }
 </script>
 
 {#if visible}
 <div class="be-time-panel be-popper" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="el-time-panel__content">
-    <TimeSpinner {date} on:pick={PickTime}/>
+    <TimeSpinner {selectableRange} {format} {date} on:pick={PickTime}/>
   </div>
   <div class="be-picker-panel__footer">
     <BeButton type="default" size="mini" on:click={confirm}>确认</BeButton>
