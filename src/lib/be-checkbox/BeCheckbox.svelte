@@ -41,7 +41,7 @@
   };
 </script>
 <!--is-checked-->
-<label for={name} class={'be-checkbox ' + className()} style={$$props.style}>
+<label class={'be-checkbox ' + className()} style={$$props.style}>
   <span class={'be-checkbox__input ' + className()}>
     <span class="be-checkbox__inner"></span>
     <input

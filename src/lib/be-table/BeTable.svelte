@@ -1,6 +1,7 @@
 <script lang='ts'>
     import { onDestroy, onMount, setContext, tick } from 'svelte';
     import { addClass, filterClass, off, on } from '$lib/utils/beerui';
+    import { BeCheckbox } from "$lib";
 
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
@@ -42,6 +43,7 @@
     let rowsData = []; // 行数据
     let headerData = []; // 表头 可渲染Dom Tree
     let headerOriginData = []; // 表头 原始Tree
+    let checkList = [] // 选择列表
 
     onMount(() => {
         warpElement && initTable();
@@ -108,6 +110,14 @@
         // 整理数据 [{prop: 'name', label: '姓名', width: ''}]
         // 取出用户展示字段 存在prop
         columnPropData = columnData.filter(el => el['prop']);
+        // 是否有section
+        const hasSection = columnData.some(el => el['prop'] === 'selection');
+        if (hasSection) {
+          // 增加必须有ID的提示
+          const noId = data.some(el => !el['id']);
+          if (!noId) console.warn('[BeerUi] we need a \'id\' for selection')
+        }
+      console.log('hasSection', hasSection, data);
     };
     // 计算表格宽度
     const computedColumnWidthHandle = () => {
@@ -142,6 +152,7 @@
             rowsData.push({ ...el, className });
         });
     };
+    const updateRowsData = () => data.forEach((el, i) => rowsData[i].checked = el.checked);
     // 绑定横向滚动的头部联动
     const bindHeaderScroll = () => {
         if (eleCanScroll(tableWrapper)) {
@@ -266,7 +277,15 @@
         }
         return result;
     };
-
+    // 全选事件
+    let isAllCheck = false;
+	const allCheckHandle = ({ detail }) => {
+      isAllCheck = detail
+      data.forEach(el => el.checked = isAllCheck)
+	  checkList = data
+      updateRowsData()
+      console.log('checkList', checkList, data);
+	}
 </script>
 <div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id}>
     <div bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'>
@@ -286,7 +305,13 @@
                     <tr class=''>
                         {#each col as rows}
                             <th class='be-table__cell' rowspan={rows.rowSpan} colspan={rows.colSpan}>
-                                <div class='cell'>{rows.label}</div>
+	                            {#if rows.prop === 'selection'}
+		                            <div class="cell">
+			                            <BeCheckbox checked={isAllCheck} on:change={allCheckHandle} />
+		                            </div>
+	                            {:else}
+		                            <div class="cell">{rows.label}</div>
+	                            {/if}
                             </th>
                         {/each}
                         <th class='be-table__cell gutter' style='width: {gutter}px;'></th>
@@ -336,6 +361,12 @@
                                     {/if}
                                 </div>
                             </td>
+                        {:else if col.prop === 'selection'}
+	                        <td class='be-table__cell'>
+		                        <div class='cell'>
+			                        <BeCheckbox checked={row.checked} />
+		                        </div>
+	                        </td>
                         {:else}
                             <td class='be-table__cell'>
                                 <div class='cell'>{row[col.prop] || ''}</div>
