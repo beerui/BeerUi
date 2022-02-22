@@ -17,6 +17,23 @@
     line-height: 1;
     position: relative;
     vertical-align: middle;
+    &.is-indeterminate {
+      .be-checkbox__inner {
+        background-color: #409eff;
+        border-color: #409eff;
+        &:before {
+          content: "";
+          position: absolute;
+          display: block;
+          background-color: #fff;
+          height: 2px;
+          transform: scale(.5);
+          left: 0;
+          right: 0;
+          top: 5px;
+        }
+      }
+    }
     &.is-checked .be-checkbox__inner {
       background-color: #409eff;
       border-color: #409eff;

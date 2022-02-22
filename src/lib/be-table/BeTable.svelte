@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import { onDestroy, onMount, setContext, tick } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
     import { addClass, filterClass, off, on } from '$lib/utils/beerui';
     import { BeCheckbox } from "$lib";
 
@@ -117,7 +117,6 @@
           const noId = data.some(el => !el['id']);
           if (!noId) console.warn('[BeerUi] we need a \'id\' for selection')
         }
-      console.log('hasSection', hasSection, data);
     };
     // 计算表格宽度
     const computedColumnWidthHandle = () => {
@@ -153,6 +152,7 @@
         });
     };
     const updateRowsData = () => data.forEach((el, i) => rowsData[i].checked = el.checked);
+    const updateOneRowsData = (id) => data.forEach((el, i) => id === el.id ? rowsData[i].checked = !rowsData[i].checked :'');
     // 绑定横向滚动的头部联动
     const bindHeaderScroll = () => {
         if (eleCanScroll(tableWrapper)) {
@@ -277,14 +277,79 @@
         }
         return result;
     };
+		const dispatch = createEventDispatcher()
     // 全选事件
     let isAllCheck = false;
+    let indeterminate = false; // 是否半选状态
 	const allCheckHandle = ({ detail }) => {
-      isAllCheck = detail
-      data.forEach(el => el.checked = isAllCheck)
-	  checkList = data
-      updateRowsData()
-      console.log('checkList', checkList, data);
+		data.forEach(el => el.checked = detail)
+		checkList = data
+		doCheckHandle()
+	}
+	const clickRowCheckbox = (rows) => {
+		data.forEach(el => el.id === rows.id ? el.checked = !el.checked : '')
+		doCheckHandle()
+	}
+	// 全部选框的状态
+	const allCheckboxState = () => {
+		const hasChecked = rowsData.some(el => el.checked) // 当前列表中是否有选中项
+		const hasNoChecked = rowsData.some(el => !el.checked) // 当前列表中是否有未选中项
+		if (!hasChecked) {
+			indeterminate = isAllCheck = false;
+			return
+		}
+		indeterminate = hasChecked && hasNoChecked
+		isAllCheck = !indeterminate
+	}
+	// 程序更新 推送给用户
+	const doCheckHandle = () => {
+		updateRowsData() // 更新行数据
+		allCheckboxState() // 更新选框状态
+		dispatchCheckedHandle() // 分发事件
+	}
+	// 用户手动更新不分发事件
+	const userDoCheckHandle = () => {
+		updateRowsData() // 更新行数据
+		allCheckboxState() // 更新选框状态
+	}
+	// 对外事件
+	// 设置change事件
+	const dispatchCheckedHandle = async () => {
+		const checkedList = data.filter(el => el.checked)
+		const checkedIds = checkedList.map(el => el.id)
+	  	await tick()
+		dispatch('handleSelectionChangeGetId', checkedIds)
+		dispatch('handleSelectionChangeGetRows', checkedList)
+	}
+	// 设置选中
+	export const toggleRowSelection = (rows: string|number[], selected) => {
+		if (!Array.isArray(rows)) {
+			console.warn('[Beer Ui] params must be Array string|number[1, 2]')
+		    return
+		}
+
+		if (rows.length === 0) {
+			clearSelection()
+		} else if (typeof selected === 'boolean') {
+			rows.forEach(el => data.forEach(item => String(el) === String(item.id) ? item.checked = selected : ''))
+		} else {
+			rows.forEach(el => data.forEach(item => {
+				if (String(el) === String(item.id)) {
+					item.checked = !item.checked
+				}
+			}))
+		}
+		userDoCheckHandle()
+	}
+	// 清空所有
+	export const clearSelection = () => {
+		data.forEach(el => el.checked = false)
+		userDoCheckHandle()
+	}
+	// 用于多选表格，切换所有行的选中状态
+	export const toggleAllSelection = () => {
+		data.forEach(el => el.checked = !el.checked)
+		userDoCheckHandle()
 	}
 </script>
 <div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id}>
@@ -307,7 +372,7 @@
                             <th class='be-table__cell' rowspan={rows.rowSpan} colspan={rows.colSpan}>
 	                            {#if rows.prop === 'selection'}
 		                            <div class="cell">
-			                            <BeCheckbox checked={isAllCheck} on:change={allCheckHandle} />
+			                            <BeCheckbox {indeterminate} checked={isAllCheck} on:change={allCheckHandle} />
 		                            </div>
 	                            {:else}
 		                            <div class="cell">{rows.label}</div>
@@ -364,7 +429,7 @@
                         {:else if col.prop === 'selection'}
 	                        <td class='be-table__cell'>
 		                        <div class='cell'>
-			                        <BeCheckbox checked={row.checked} />
+			                        <BeCheckbox on:click={() => clickRowCheckbox(row)} checked={row.checked} />
 		                        </div>
 	                        </td>
                         {:else}
