@@ -20,8 +20,6 @@
 svelte & svelte-kit
 
 - `npm i @brewer/beerui -D`
-- `npm i sass -D`
 
 ### Concat Us `beerui2021@gmail.com`
 
-****
