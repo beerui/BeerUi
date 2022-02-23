@@ -11,9 +11,7 @@
     let setMenuActive = (key) => MenuDom.setMenuActive(key)
     const changeMenu = (evt) => console.log('changeMenu', evt.detail)
     let collapse = true;
-	const toggleCollapse = () => {
-	  collapse = !collapse
-	}
+	const toggleCollapse = () => collapse = !collapse
 </script>
 <div class='page-container'>
     <h2>NavMenu 导航菜单</h2>
@@ -79,12 +77,30 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
     <DemoBlock
 	    code={`
 <div style="width: 200px;min-height: 200px;">
-	<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover">
+	<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover" {collapse}>
 		<BeMenuItem index="1">处理中心</BeMenuItem>
 		<BeSubMenu index="2">
+			<div slot="icon">
+				<BeIcon name="app" />
+			</div>
 			<div slot="title">我的工作台</div>
-			<BeMenuItem index="2-1">选项1</BeMenuItem>
+			<BeMenuItem index="2-1">
+				<div slot="icon">
+					<BeIcon name="app" />
+				</div>
+				选项1
+			</BeMenuItem>
+			<BeMenuItem index="2-2">选项2</BeMenuItem>
+			<BeMenuItem index="2-3">选项3</BeMenuItem>
+			<BeSubMenu index="2-4">
+				<div slot="title">选项4</div>
+				<BeMenuItem index="2-4-1">选项1</BeMenuItem>
+				<BeMenuItem index="2-4-2">选项2</BeMenuItem>
+				<BeMenuItem index="2-4-3">选项3</BeMenuItem>
+			</BeSubMenu>
 		</BeSubMenu>
+		<BeMenuItem index="3" disabled>消息中心</BeMenuItem>
+		<BeMenuItem index="4">订单管理</BeMenuItem>
 	</BeMenu>
 </div>
 `} js={`
@@ -129,6 +145,81 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
 			    <li>mode	模式	string	horizontal / vertical	vertical</li>
 			    <li>trigger	子菜单打开的触发方式(只在 mode 为 horizontal 时有效)	string	hover / click	hover</li>
 			    <li>mode为vertical时 trigger只能为click</li>
+		    </ol>
+	    </div>
+    </DemoBlock>
+	<h2>折叠</h2>
+    <DemoBlock
+	    code={`
+<BeButton on:click={toggleCollapse}>切换 collapse</BeButton>
+<div style="width: 200px;min-height: 200px;">
+	<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover" {collapse}>
+		<BeMenuItem index="1">处理中心</BeMenuItem>
+		<BeSubMenu index="2">
+			<div slot="icon">
+				<BeIcon name="app" />
+			</div>
+			<div slot="title">我的工作台</div>
+			<BeMenuItem index="2-1">
+				<div slot="icon">
+					<BeIcon name="app" />
+				</div>
+				选项1
+			</BeMenuItem>
+			<BeMenuItem index="2-2">选项2</BeMenuItem>
+			<BeMenuItem index="2-3">选项3</BeMenuItem>
+			<BeSubMenu index="2-4">
+				<div slot="title">选项4</div>
+				<BeMenuItem index="2-4-1">选项1</BeMenuItem>
+				<BeMenuItem index="2-4-2">选项2</BeMenuItem>
+				<BeMenuItem index="2-4-3">选项3</BeMenuItem>
+			</BeSubMenu>
+		</BeSubMenu>
+		<BeMenuItem index="3" disabled>消息中心</BeMenuItem>
+		<BeMenuItem index="4">订单管理</BeMenuItem>
+	</BeMenu>
+</div>
+`} js={`
+let collapse = true;
+const toggleCollapse = () => collapse = !collapse
+`}>
+        <div slot='source'>
+	        <div>
+		        <BeButton on:click={toggleCollapse}>切换 collapse</BeButton>
+	        </div>
+            <div class='demo-list'>
+	            <div style="width: 200px;min-height: 200px;">
+					<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover" {collapse}>
+						<BeMenuItem index="1">处理中心</BeMenuItem>
+						<BeSubMenu index="2">
+							<div slot="icon">
+								<BeIcon name="app" />
+							</div>
+							<div slot="title">我的工作台</div>
+							<BeMenuItem index="2-1">
+								<div slot="icon">
+									<BeIcon name="app" />
+								</div>
+								选项1
+							</BeMenuItem>
+							<BeMenuItem index="2-2">选项2</BeMenuItem>
+							<BeMenuItem index="2-3">选项3</BeMenuItem>
+							<BeSubMenu index="2-4">
+								<div slot="title">选项4</div>
+								<BeMenuItem index="2-4-1">选项1</BeMenuItem>
+								<BeMenuItem index="2-4-2">选项2</BeMenuItem>
+								<BeMenuItem index="2-4-3">选项3</BeMenuItem>
+							</BeSubMenu>
+						</BeSubMenu>
+						<BeMenuItem index="3" disabled>消息中心</BeMenuItem>
+						<BeMenuItem index="4">订单管理</BeMenuItem>
+					</BeMenu>
+	            </div>
+            </div>
+        </div>
+	    <div slot="description">
+		    <ol>
+			    <li>collapse	是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）	boolean	—	false</li>
 		    </ol>
 	    </div>
     </DemoBlock>
