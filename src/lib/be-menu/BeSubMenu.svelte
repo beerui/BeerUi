@@ -1,7 +1,7 @@
 <script lang="ts">
 import { BeerPS, hasClass } from "$lib/utils/beerui";
 import BeIcon from "$lib/be-icon/BeIcon.svelte";
-import { getContext, onMount, tick } from "svelte";
+import { getContext, onMount } from "svelte";
 
 export let index:String = ''
 const trigger = getContext('MenuTrigger')
