@@ -16,7 +16,7 @@ const config = {
 		adapter: vercel(),
 		package: {
 			files(filepath) {
-				const isFlag = filepath.indexOf('/assets/scss/node_modules') !== -1;
+				const isFlag = filepath.indexOf('/src/lib/assets/scss/node_modules') !== -1;
 				const isRoute = filepath.indexOf('/src/routes') !== -1;
 				return !filepath.endsWith('.stories.svelte') || isFlag || isRoute;
 			},

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { BeInput } from '$lib'
+    import BeInput from '$lib/be-input/BeInput.svelte'
     import { onMount } from 'svelte'
     let value = ''
     let input
