@@ -15,8 +15,9 @@
 
 	export let value;
 	export let selectMode = 'date'
-	export let format
-	export let valueFormat = DEFAULT_FORMATS[selectMode]
+	export let format = DEFAULT_FORMATS[selectMode]
+	export let valueFormat
+	if(format && !valueFormat) valueFormat = format
 	const times = new FormatTime(valueFormat)
 	const dates = new FormatTime(format)
 	export let disabledDate: Function

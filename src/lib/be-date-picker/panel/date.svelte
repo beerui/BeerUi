@@ -22,7 +22,7 @@ export let selectMode
 export let disabledDate: Function
 export let selectableRange = []
 // 时分秒格式化结构
-const times = new FormatTime('HH:mm:ss')
+const times = new FormatTime(format.substring(format.indexOf('HH'), format.length))
 
 let yearLabel = ''
 let timeVisible = false
@@ -34,7 +34,6 @@ $:month = String(date.getMonth() + 1).padStart(2, '0')
 $:date = resetDate(value)
 
 if(value) timeValue = getTimeValueFormat(resetDate(value))
-console.log('timeValue', date, value, timeValue);
 
 // 打开弹窗初始化日期
 $: if(!visible) {
@@ -148,7 +147,7 @@ function handleShowTimePopper(e) {
       {#if selectMode === 'datetime'}
         <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseTimePopper }} on:outside={handleCloseTimePopper}>
           <BeInput on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
-	        <Time {date} visible={timeVisible} {selectableRange} on:pick={confirmTimePick}/>
+	        <Time {date} {format} visible={timeVisible} {selectableRange} on:pick={confirmTimePick}/>
         </div>
       {/if}
       <div class="be-date-picker__header">
