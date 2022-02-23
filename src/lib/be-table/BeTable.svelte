@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
-    import { addClass, filterClass, off, on } from '$lib/utils/beerui';
-    import { BeCheckbox } from "$lib";
+    import { filterClass, off, on } from '$lib/utils/beerui';
+    import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
 
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
