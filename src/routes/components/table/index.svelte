@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import BeTable from '$lib/be-table/BeTable.svelte';
+	import BeTable, { toggleRowSelection } from '$lib/be-table/BeTable.svelte';
     import BeTableColumn from '$lib/be-table/BeTableColumn.svelte';
     import DemoBlock from '$lib/demo/DemoBlock.svelte';
     import BeButton from '$lib/be-button/BeButton.svelte';
@@ -128,6 +128,50 @@
     let clickBtn2 = () => {
         console.log('clickBtn2');
     };
+
+    const checkBoxTableData = [{
+      id: '1',
+      date: '2016-05-03',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      id: '2',
+      date: '2016-05-02',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      id: '3',
+      date: '2016-05-04',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      id: '4',
+      date: '2016-05-01',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      id: '5',
+      date: '2016-05-08',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      id: '6',
+      date: '2016-05-06',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      id: '7',
+      date: '2016-05-07',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }]
+	let toggleRowTable = null
+	const toggleRowSelectionHandle = (item) => {
+			console.log('toggleRowTable', toggleRowTable);
+		toggleRowTable.toggleRowSelection(item)
+	};
+	const handleSelectionChangeGetId = ({ detail }) => console.log('handleSelectionChangeGetId', detail);
+	const handleSelectionChangeGetRows = ({ detail }) => console.log('handleSelectionChangeGetRows', detail);
 </script>
 <div class='page-container'>
     <h2>BeTable 表格</h2>
@@ -268,6 +312,63 @@ let tableRowClassName = ({row, rowIndex}) => {
         </div>
         <div slot='description'>
             嵌套 BeTableColumn 。
+        </div>
+    </DemoBlock>
+	<h2>多选</h2>
+	<p>选择多行数据时使用 Checkbox。</p>
+    <DemoBlock code={`
+<BeButton on:click={() => toggleRowSelectionHandle([2, 3])}>切换第二、第三行的选中状态</BeButton>
+<BeButton on:click={() => toggleRowSelectionHandle([])}>取消选择</BeButton>
+
+<BeTable
+bind:this={toggleRowTable}
+data={checkBoxTableData}
+on:handleSelectionChangeGetId={handleSelectionChangeGetId}
+on:handleSelectionChangeGetRows={handleSelectionChangeGetRows}
+>
+	<BeTableColumn prop='selection' width="55" />
+	<BeTableColumn prop='name' label='姓名' />
+	<BeTableColumn prop='date' label='日期' />
+</BeTable>
+`}
+               js={`
+let toggleRowTable = null
+const toggleRowSelectionHandle = (item) => {
+	console.log('toggleRowTable', toggleRowTable);
+	toggleRowTable.toggleRowSelection(item)
+};
+const handleSelectionChangeGetId = ({ detail }) => console.log('handleSelectionChangeGetId', detail);
+const handleSelectionChangeGetRows = ({ detail }) => console.log('handleSelectionChangeGetRows', detail);
+`}
+    >
+        <div slot='source'>
+            <h1>自定义表格</h1>
+			<div>
+				<BeButton on:click={() => toggleRowSelectionHandle([2, 3])}>切换第二、第三行的选中状态</BeButton>
+				<BeButton on:click={() => toggleRowSelectionHandle([])}>取消选择</BeButton>
+			</div>
+            <div class='demo-list'>
+                <BeTable
+					bind:this={toggleRowTable}
+					data={checkBoxTableData}
+					on:handleSelectionChangeGetId={handleSelectionChangeGetId}
+					on:handleSelectionChangeGetRows={handleSelectionChangeGetRows}
+				>
+                    <BeTableColumn prop='selection' width="55" />
+                    <BeTableColumn prop='name' label='姓名' />
+                    <BeTableColumn prop='date' label='日期' />
+                </BeTable>
+            </div>
+        </div>
+        <div slot='description'>
+            <ol>
+                <li>toggleRowTable.toggleRowSelection(item[2, 3]) 切换第二、第三行的选中状态 传入[]等同于清空所有</li>
+                <li>handleSelectionChangeGetId 获取选中的ID</li>
+                <li>handleSelectionChangeGetRows 获取选中的行数据 rows</li>
+                <li>clearSelection	用于多选表格，清空用户的选择</li>
+                <li>toggleRowSelection(row, selected) row: [1, 2] id，切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中）</li>
+                <li>toggleAllSelection() 用于多选表格，切换所有行的选中状态</li>
+            </ol>
         </div>
     </DemoBlock>
     <DemoBlock code={`

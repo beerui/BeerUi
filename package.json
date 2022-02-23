@@ -23,7 +23,7 @@
   "devDependencies": {
     "@babel/core": "7.16.7",
     "@babel/preset-env": "7.16.7",
-    "@brewer/beerui": "workspace:^1.0.4",
+    "@brewer/beerui": "workspace:^1.0.7",
     "@storybook/addon-actions": "6.4.9",
     "@storybook/addon-essentials": "6.4.9",
     "@storybook/addon-links": "6.4.9",

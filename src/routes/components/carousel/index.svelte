@@ -129,7 +129,7 @@
 	<DemoBlock code={code3}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeCarousel height="450px" direction='horizontal' trigger='click' type='card'>
+				<BeCarousel height="450px" direction='horizontal' trigger='click' type='card' hideIndicator hideArrow>
 					{#each items as item, i}
 						<BeCarouselItem>
 							<div class="w-full h-full carousel-item" style="background: url({item}) center center / cover no-repeat;"></div>
@@ -139,7 +139,23 @@
 			</div>
 		</div>
 		<div slot='description'>
-			卡片式Carousel
+			卡片式Carousel;
+			<pre>
+				<code>
+direction： "horizontal"; // 走马灯展示的方向 vertical
+loop： true; // 是否循环显示
+type： ""; // 走马灯的类型 ''/none/card
+arrow： "hover"; // 切换箭头的显示时机 always/hover/never
+indicatorPosition： "none"; // 指示器的位置 outside/none
+hideIndicator： false; // 指示器是否显示 false/true
+hideArrow： false; // 箭头是否显示 false/true
+interval： 3000; // 自动切换的时间间隔，单位为毫秒
+autoplay： true; // 是否自动切换 true/false
+trigger： "click"; // 指示器的触发方式 click/hover
+initialIndex： 0; // 初始状态激活的幻灯片的索引，从 0 开始
+height： ""; // 走马灯的高度 300px
+				</code>
+			</pre>
 		</div>
 	</DemoBlock>
 </div>
