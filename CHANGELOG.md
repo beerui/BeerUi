@@ -1,5 +1,17 @@
 # BeerUi 
 
+## 1.0.8
+
+### Patch Changes
+
+- 新增 `table`组件 selection
+- 新增 `datePicker`组件 `timePicker` 时间选择
+- 新增 `datePicker`组件 时间禁用 文档待完善
+- 新增 `menu`组件 竖向/图标
+
+- 修改 `tree`组件 已知问题
+- 修改 `menu`组件 已知问题
+
 ## 1.0.3
 
 - 更新`svelte`版本
