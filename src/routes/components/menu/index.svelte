@@ -77,7 +77,7 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
     <DemoBlock
 	    code={`
 <div style="width: 200px;min-height: 200px;">
-	<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover" {collapse}>
+	<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="click">
 		<BeMenuItem index="1">处理中心</BeMenuItem>
 		<BeSubMenu index="2">
 			<div slot="icon">
@@ -106,12 +106,9 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
 `} js={`
 `}>
         <div slot='source'>
-	        <div>
-		        <BeButton on:click={toggleCollapse}>切换 collapse</BeButton>
-	        </div>
             <div class='demo-list'>
 	            <div style="width: 200px;min-height: 200px;">
-					<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover" {collapse}>
+					<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="click">
 						<BeMenuItem index="1">处理中心</BeMenuItem>
 						<BeSubMenu index="2">
 							<div slot="icon">
@@ -153,8 +150,13 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
 	    code={`
 <BeButton on:click={toggleCollapse}>切换 collapse</BeButton>
 <div style="width: 200px;min-height: 200px;">
-	<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover" {collapse}>
-		<BeMenuItem index="1">处理中心</BeMenuItem>
+	<BeMenu class="be-menu-demo"  key='3' active="1" mode="vertical" trigger="hover" {collapse}>
+		<BeMenuItem index="1">
+			<div slot="icon">
+				<BeIcon name="chart-bubble" />
+			</div>
+			处理中心
+		</BeMenuItem>
 		<BeSubMenu index="2">
 			<div slot="icon">
 				<BeIcon name="app" />
@@ -175,8 +177,18 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
 				<BeMenuItem index="2-4-3">选项3</BeMenuItem>
 			</BeSubMenu>
 		</BeSubMenu>
-		<BeMenuItem index="3" disabled>消息中心</BeMenuItem>
-		<BeMenuItem index="4">订单管理</BeMenuItem>
+		<BeMenuItem index="3" disabled>
+			<div slot="icon">
+				<BeIcon name="gift" />
+			</div>
+			消息中心
+		</BeMenuItem>
+		<BeMenuItem index="4">
+			<div slot="icon">
+				<BeIcon name="desktop" />
+			</div>
+			订单管理
+		</BeMenuItem>
 	</BeMenu>
 </div>
 `} js={`
@@ -189,8 +201,13 @@ const toggleCollapse = () => collapse = !collapse
 	        </div>
             <div class='demo-list'>
 	            <div style="width: 200px;min-height: 200px;">
-					<BeMenu class="be-menu-demo"  key='2' active="1" mode="vertical" trigger="hover" {collapse}>
-						<BeMenuItem index="1">处理中心</BeMenuItem>
+					<BeMenu class="be-menu-demo"  key='3' active="1" mode="vertical" trigger="hover" {collapse}>
+						<BeMenuItem index="1">
+							<div slot="icon">
+								<BeIcon name="chart-bubble" />
+							</div>
+							处理中心
+						</BeMenuItem>
 						<BeSubMenu index="2">
 							<div slot="icon">
 								<BeIcon name="app" />
@@ -211,8 +228,18 @@ const toggleCollapse = () => collapse = !collapse
 								<BeMenuItem index="2-4-3">选项3</BeMenuItem>
 							</BeSubMenu>
 						</BeSubMenu>
-						<BeMenuItem index="3" disabled>消息中心</BeMenuItem>
-						<BeMenuItem index="4">订单管理</BeMenuItem>
+						<BeMenuItem index="3" disabled>
+							<div slot="icon">
+								<BeIcon name="gift" />
+							</div>
+							消息中心
+						</BeMenuItem>
+						<BeMenuItem index="4">
+							<div slot="icon">
+								<BeIcon name="desktop" />
+							</div>
+							订单管理
+						</BeMenuItem>
 					</BeMenu>
 	            </div>
             </div>

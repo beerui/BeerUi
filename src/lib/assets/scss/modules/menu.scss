@@ -6,6 +6,7 @@
   padding-left: 0;
   background-color: #fff;
   transition: .3s;
+  user-select: none;
   &--collapse {
     width: 64px;
     .be-submenu {

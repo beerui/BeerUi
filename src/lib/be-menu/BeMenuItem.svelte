@@ -1,6 +1,7 @@
 <script lang='ts'>
   import { BeerPS, hasClass } from "$lib/utils/beerui";
   import { getContext, onMount } from "svelte";
+  const key = getContext('MenuTriggerKey')
   let collapse = getContext('MenuCollapse')
 
   export let index = ''
@@ -8,15 +9,16 @@
   const activeChange = () => BeerPS.publish('MenuActiveChange', index)
   BeerPS.subscribe('MenuActiveChange', (item) => isActive = index === item)
 
+  // 接收展开或收起的状态
+  BeerPS.subscribe(`MenuCollapse_${key}`, _collapse => collapse = _collapse)
+
   let level = 1
   const computedLevel = (els, _level = 1) => {
     if (hasClass(els, 'be-submenu__content')) _level++
     if (!hasClass(els.parentElement, 'be-menu')) return computedLevel(els.parentElement, _level)
     return _level
   }
-  onMount(() => {
-    level = computedLevel(MenuContent)
-  })
+  onMount(() => level = computedLevel(MenuContent))
   let MenuContent;
 </script>
 <li bind:this={MenuContent}
