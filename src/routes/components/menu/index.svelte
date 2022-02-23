@@ -9,7 +9,7 @@
 
     let MenuDom: NavMenu
     let setMenuActive = (key) => MenuDom.setMenuActive(key)
-    const changeMenu = (evt) => console.log('changeMenu', evt.detail)
+    const changeMenu = (evt) => {}
     let collapse = true;
 	const toggleCollapse = () => collapse = !collapse
 </script>
