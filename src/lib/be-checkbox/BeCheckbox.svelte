@@ -5,10 +5,11 @@
   const dispatch = createEventDispatcher()
   const initData = getContext('checkGroupInit')
   // 选中
-  export let checked: Boolean = false;
+  export let checked: boolean = false;
   export let id = "";
   export let disabled = "";
   export let name = "";
+  export let indeterminate: boolean = false;
   export let value = "";
   export let label = "";
 
@@ -41,8 +42,8 @@
   };
 </script>
 <!--is-checked-->
-<label for={name} class={'be-checkbox ' + className()} style={$$props.style}>
-  <span class={'be-checkbox__input ' + className()}>
+<label class={'be-checkbox ' + className()} style={$$props.style}>
+  <span class={'be-checkbox__input ' + className()} class:is-indeterminate={indeterminate}>
     <span class="be-checkbox__inner"></span>
     <input
 	    {...mapAttributes({ disabled, id, name, value })}

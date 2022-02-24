@@ -9,7 +9,6 @@ import YearTable from '../basic/year-table.svelte'
 import clickOutside from '$lib/_actions/clickOutside';
 import { FormatTime } from '$lib/utils/beerui';
 import Time from './time.svelte';
-import { BeTimePicker } from '$lib';
 import { cubicInOut } from 'svelte/easing';
 import { nextMonth, prevMonth, prevYear, nextYear } from '../date-util.js'
 const dispatch = createEventDispatcher()
@@ -56,7 +55,7 @@ function resetView() {
     currentView = 'year';
   } else {
     currentView = 'date';
-  } 
+  }
 }
 function handlePrevMonth() {
   date = prevMonth(date)
@@ -82,7 +81,7 @@ function handleNextYear() {
 function confirmDatePick(e) {
   value = e.detail
   console.log(e.detail);
-  
+
   timeValue = getTimeValueFormat(e.detail)
   if(selectMode != 'datetime') dispatch('pick', e.detail)
 }

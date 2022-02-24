@@ -20,6 +20,7 @@ import BeNotification from './be-notification/BeNotification.svelte';
 import BeLoading from './be-loading/BeLoading.svelte';
 import BeEmpty from './be-empty/BeEmpty.svelte';
 import BeTree from './be-tree/BeTree.svelte';
+import BeIcon from './be-icon/BeIcon.svelte';
 import { BeTable, BeTableColumn } from './be-table';
 import { BeCarouselItem, BeCarousel } from './be-carousel';
 import { BeCheckbox, BeCheckboxGroup } from './be-checkbox';
