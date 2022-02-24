@@ -69,6 +69,13 @@
 }
 .be-input__suffix-inner {
   pointer-events: all;
+  .input-suffix-icon {
+    transition: transform .3s;
+    transform: rotate(0deg);
+  }
+  .is-reverse {
+    transform: rotate(180deg);
+  }
 }
 .be-input__icon {
   width: 25px;

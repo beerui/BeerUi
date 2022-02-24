@@ -29,19 +29,26 @@
 		}
 	}
 	.be-select__option {
-		position: absolute;
-		border: 1px solid #e4e7ed;
-		border-radius: 4px;
-		background-color: #fff;
-		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-		box-sizing: border-box;
+    border: 1px solid #e4e7ed;
+    background-color: #fff;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    border-radius: 4px;
+    position: absolute;
+    // width: 180px;
+    left: 0;
+    z-index: 1000;
+    user-select: none;
+    box-sizing: border-box;
 		margin: 8px 0;
-		width: 100%;
 		padding: 6px 0;
-		list-style: none;
-		max-height: 274px;
-		overflow: scroll;
-		z-index: 2001;
+		width: 100%;
+		// list-style: none;
+		// max-height: 274px;
+		// overflow-y: scroll;
+		&_content {
+			margin: 0;
+			padding: 0;
+		}
 	}
 	.is_top{
 		top: -220px;
@@ -51,7 +58,7 @@
 	// }
 	/* 设置滚动条的样式 */
 	.be-select__option::-webkit-scrollbar {
-		width: 8px;
+		width: 0px;
 	}
 	/* 滚动槽 */
 	.be-select__option::-webkit-scrollbar-track {
