@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { BeerPS, hasClass, addClass, removeClass } from "$lib/utils/beerui";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { getContext, onMount, tick } from "svelte";
+	import { getContext, onDestroy, onMount, tick } from "svelte";
 
 	export let index: String = "";
 	const key = getContext("MenuTriggerKey");
@@ -16,7 +16,7 @@
 	let isActive = false;
 	let timeout = null;
 
-	BeerPS.subscribe(`MenuActiveChange_${ key }`, async items => {
+	const _MenuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, async items => {
 		if (items.type === "setting" && submenu) {
 			await tick();
 			const els = submenu.querySelector(".is_active");
@@ -31,9 +31,9 @@
 		setTimeout(() => computedActive(els.parentElement), 60);
 	};
 	// 点击外部关闭子集弹框
-	BeerPS.subscribe(`MenuCloseAll_${ key }`, () => isOpen = false);
+	const _MenuCloseAll = BeerPS.subscribe(`MenuCloseAll_${ key }`, () => isOpen = false);
 	// 接收展开或收起的状态
-	BeerPS.subscribe(`MenuCollapse_${ key }`, _collapse => {
+	const _MenuCollapse = BeerPS.subscribe(`MenuCollapse_${ key }`, _collapse => {
 		collapse = _collapse;
 		changeActive(false, 0);
 	});
@@ -68,6 +68,12 @@
 	};
 	onMount(() => {
 		level = computedLevel(submenu);
+	});
+
+	onDestroy(() => {
+		BeerPS.unsubscribe(_MenuActiveChange);
+		BeerPS.unsubscribe(_MenuCloseAll);
+		BeerPS.unsubscribe(_MenuCollapse);
 	});
 	// 打开关闭菜单动画
 	let subMenuContentHeight;
