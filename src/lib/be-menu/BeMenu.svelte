@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { BeerPS, genKey, removeClass } from "$lib/utils/beerui";
-	import { createEventDispatcher, onMount, setContext, tick } from "svelte";
+	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from "svelte";
 	import clickOutside from "$lib/_actions/clickOutside";
 
 	export let active: string = "";
@@ -22,7 +22,7 @@
 		index: active,
 		type: "setting"
 	});
-	BeerPS.subscribe(`MenuActiveChange_${ key }`, items => {
+	const _menuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, items => {
 		if (BeMenu) {
 			const allSub = BeMenu.querySelectorAll(".be-submenu");
 			allSub.forEach(el => removeClass(el, "is_active"));
@@ -37,7 +37,9 @@
 		await tick();
 		setMenuActive(active);
 	});
-
+	onDestroy(() => {
+		BeerPS.unsubscribe("_menuActiveChange");
+	})
 	const clickMenuOutside = () => mode !== "vertical" ? BeerPS.publish(`MenuCloseAll_${ key }`) : "";
 </script>
 <svelte:options accessors />

@@ -13,7 +13,7 @@
 		clientHeight = demoBlcok.clientHeight
 		expandedCode(isExpanden)
 	})
-	
+
 	$:controlText = isExpanden ? '隐藏代码' : '显示代码'
 	const expandedCode = (expanden) => {
 		isExpanden = expanden
@@ -25,7 +25,8 @@
 		}, 200);
 	}
 	const scrollHandler = () => {
-		const { top, bottom, width } = demoBlcok && demoBlcok.getBoundingClientRect();
+		if (!demoBlcok) return
+		const { top, bottom, width } = demoBlcok?.getBoundingClientRect();
 		codeWidth = width + 'px'
 		document.querySelector('.demo-block-control').style.width = width
 		fixedControl = bottom > document.documentElement.clientHeight &&
