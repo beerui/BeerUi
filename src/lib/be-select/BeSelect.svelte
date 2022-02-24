@@ -1,57 +1,38 @@
 <script lang='ts'>
+	import BeIcon from './../be-icon/BeIcon.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
 	import { cubicInOut, sineIn } from 'svelte/easing';
 	import { createEventDispatcher } from 'svelte'
+	import clickOutside from '$lib/_actions/clickOutside';
+	import { BeerPS } from "$lib/utils/beerui";
+	let dispatch = createEventDispatcher()
+
 	// export let value = '1';
 	export let options;
 	// 下拉框选中的值
 	export let value;
 	// 是否禁用
 	export let disabled = false;
-
 	// 位置
 	export let position = 'bottom'
-
-	// option选中的id
-	let checkedId;
 	// 下拉框
-	let isSelect = true;
+	let visible = false;
 	// 获取输入框
 	let input
 
-	let softFocus = false
+	BeerPS.subscribe('selectChange', data => {
+		console.log('---', data);
+		value = data.label
+		handleClosePopper()
+		dispatch('change', data.value)
+	})
+	
 
-	let dispatch = createEventDispatcher()
-
-	function rotateHandler(e) {
-		if(disabled) {
-			e.preventDefault()
-			return
-		}
-		isSelect = !isSelect;
+	function handleShowPopper() {
+			visible = true;
 	}
-	// 鼠标右键点击
-	function handleMousedown(item,e){
-		if(item.disabled){
-			e.preventDefault()
-		}
-	}
-	// 选中下拉选项
-	function selectOption(item) {
-		if(!item.disabled){
-			isSelect = true;
-			value = item.label;
-			checkedId = item.value;
-			dispatch('change',item.value)
-		}else{
-			input.getblur()
-		}
-
-	}
-	function blurHandler(e){
-		setTimeout(()=>{
-			if (!isSelect) {	isSelect = true;	}
-		},100)
+	function handleClosePopper(){
+			visible = false
 	}
 	// 箭头动画
 	function arrowsRotate(node, params) {
@@ -59,9 +40,13 @@
 			duration: 300,
 			css: (t) => {
 				const eased = sineIn(t);
-				return `transform: rotate(${ eased * (isSelect ? -45 : 135) }deg);`;
+				return `transform: rotate(${ eased * (visible ? -45 : 135) }deg);`;
 			}
 		};
+	}
+	const change = (e) => {
+		console.log(e);
+		
 	}
 	function zoomIn(node, params) {
 		return {
@@ -77,33 +62,21 @@
 	}
 </script>
 
-<div class='be-select'>
-	<!--  disabled?' is-disabled':'' -->
-	<div class={['be-select__content',disabled ? ' is-disabled':''].join('')}>
-		<div on:click={(e) => {	rotateHandler(e);}} class='w-full'>
-			<BeInput bind:value bind:this={input} readonly disabled={disabled} on:blur={(e) => { blurHandler(e) }}>
-				<div slot='suffix'>
-					{#if isSelect}
-						<div class='be-select__top_arrows' in:arrowsRotate
-							 on:click|stopPropagation={(e) => { rotateHandler(e);}} />
-					{:else}
-						<div class='be-select__bottom_arrows' in:arrowsRotate
-							 on:click|stopPropagation={(e) => {	rotateHandler(e);}} />
-					{/if}
-				</div>
-			</BeInput>
-		</div>
-	</div>
-	<div class='be-select__option_content'>
-		{#if !isSelect}
-			<ul class={['be-select__option',position === 'top'?' is_top':' '].join('')} in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 300}}">
-				{#each options as item, index}
-					<li value={item.value} on:click|preventDefault ={(e) => { selectOption(item,e);}}
-						on:mousedown={(e) => {handleMousedown(item,e)}}
-						class={['be-select-dropdown__item ',checkedId === item.value ? 'be-select__checked': '',item.disabled?'is-disabled':''].join('')}>{item.label}</li>
-				{/each}
+<div class='be-select' use:clickOutside={{ cb: handleClosePopper }}>
+	<!-- <div class={['be-select__content',disabled ? ' is-disabled':''].join('')}> -->
+		<BeInput on:focus={handleShowPopper} bind:value bind:this={input} readonly disabled={disabled}>
+			<div slot='suffix' class="input-suffix-icon" class:is-reverse = {visible}>
+				<BeIcon name='chevron-down' width='20' height='20' />
+			</div>
+		</BeInput>
+	<!-- </div> -->
+	{#if visible}
+		<div class='be-select__option' in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 300}}">
+			<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
+				<slot></slot>
 			</ul>
-		{/if}
-	</div>
-</div>
+			<div class="popper__arrow"></div>
+		</div>
+	{/if}
+</div> 
 
