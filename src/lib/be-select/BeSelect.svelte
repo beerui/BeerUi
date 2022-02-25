@@ -9,9 +9,9 @@
 	let dispatch = createEventDispatcher()
 	export let options;
 	// 下拉框选中的值
-	export let value;	
-	// const selectStore = new SelectStore({value})
-	// setContext('selectStore', selectStore)
+	export let value;
+	const selectStore = new SelectStore({ value: $$props.value })
+	setContext('selectStore', selectStore)
 	let inputValue = getContext('lable')
 	// 是否禁用
 	export let disabled = false;
@@ -21,25 +21,15 @@
 	let visible = false;
 	// 获取输入框
 	let input
-	const key = `selectChange_${ genKey() }` 
+	const key = `selectChange_${ genKey() }`
 
 	setContext('selectChangeKey', key)
 
-	$: {
-		setContext('selectValue', value)
-	}
-
-	setTimeout(() => {
-		BeerPS.publish('test','11231323')
-	}, 1010);
-
 	BeerPS.subscribe(key, items => {
-		console.log(items);
 		visible = false
 		value = items.value
 		inputValue = items.label
 	})
-
 
 
 	function handleShowPopper() {
@@ -73,13 +63,13 @@
 			</div>
 		</BeInput>
 	<!-- </div> -->
-	{#if visible}
+	<!--{#if visible}-->
 		<div class='be-select__option' in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 200}}">
 			<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
 				<slot></slot>
 			</ul>
 			<div class="popper__arrow"></div>
 		</div>
-	{/if}
-</div> 
+	<!--{/if}-->
+</div>
 
