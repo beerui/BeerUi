@@ -9,15 +9,13 @@ export let value
 // const selectStore = getContext('selectStore')
 const key = getContext("selectChangeKey");
 const selectValue = getContext("selectValue");
-console.log(BeerPS);
-  
-  BeerPS.subscribe('test', items => {
-    console.log(items)
-  })
-if(value == selectValue) setContext('lable', label)
+let itemSelect = false
+if(value == selectValue) {
+  itemSelect = true
+  BeerPS.publish(key, { label, value });
+} 
 // selectStore.setOptionList({ label,value })
 
-$: itemSelect = selectValue == value
 
 // $: console.log( selectStore, selectStore.option.value);
 

@@ -42,12 +42,20 @@
 		margin: 8px 0;
 		padding: 6px 0;
 		width: 100%;
+		opacity:0;
+		transform: scaleY(0);
+		transition: all 0.3s;
+		transform-origin: center top;
 		// list-style: none;
 		// max-height: 274px;
 		// overflow-y: scroll;
 		&_content {
 			margin: 0;
 			padding: 0;
+		}
+		&.visible {
+			opacity:1;
+			transform: scaleY(1);
 		}
 	}
 	.is_top{

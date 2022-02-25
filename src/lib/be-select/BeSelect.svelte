@@ -12,7 +12,9 @@
 	export let value;	
 	// const selectStore = new SelectStore({value})
 	// setContext('selectStore', selectStore)
-	let inputValue = getContext('lable')
+	let inputValue 
+
+	
 	// 是否禁用
 	export let disabled = false;
 	// 位置
@@ -22,16 +24,11 @@
 	// 获取输入框
 	let input
 	const key = `selectChange_${ genKey() }` 
-
+	
+	
 	setContext('selectChangeKey', key)
-
-	$: {
-		setContext('selectValue', value)
-	}
-
-	setTimeout(() => {
-		BeerPS.publish('test','11231323')
-	}, 1010);
+	setContext('selectValue', value)
+	
 
 	BeerPS.subscribe(key, items => {
 		console.log(items);
@@ -51,18 +48,6 @@
 	const change = (e) => {
 		console.log(e);
 	}
-	function zoomIn(node, params) {
-		return {
-			duration:params.duration,
-			easing: cubicInOut,
-			css: t => {
-				return `
-        opacity: ${t};
-        transform: scaleY(${t});
-        transform-origin: center ${position === 'top' ?'bottom':'top'};`
-			}
-		};
-	}
 </script>
 
 <div class='be-select' use:clickOutside={{ cb: handleClosePopper }}>
@@ -73,13 +58,11 @@
 			</div>
 		</BeInput>
 	<!-- </div> -->
-	{#if visible}
-		<div class='be-select__option' in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 200}}">
-			<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
-				<slot></slot>
-			</ul>
-			<div class="popper__arrow"></div>
-		</div>
-	{/if}
+	<div class='be-select__option' class:visible={visible}>
+		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
+			<slot></slot>
+		</ul>
+		<div class="popper__arrow"></div>
+	</div>
 </div> 
 

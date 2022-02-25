@@ -70,7 +70,7 @@
 	<div class="demo-block demo-select ">
 		<div class="source">
 			<div>
-				<BeSelect options = {options1} bind:value={value1}/>
+				<!-- <BeSelect options = {options1} bind:value={value1}/> -->
 			</div>
 		</div>
 	</div>
@@ -79,7 +79,7 @@
 	<div class="demo-block demo-select ">
 		<div class="source">
 			<div>
-				<BeSelect options = {options1} bind:value={value1} disabled/>
+				<!-- <BeSelect options = {options1} bind:value={value1} disabled/> -->
 			</div>
 		</div>
 		<h3>位置</h3>
@@ -87,7 +87,7 @@
 		<div class="demo-block demo-select ">
 			<div class="source">
 				<div>
-					<BeSelect options = {options1} bind:value={value1} position={'top'} />
+					<!-- <BeSelect options = {options1} bind:value={value1} position={'top'} /> -->
 				</div>
 			</div>
 	</div>
