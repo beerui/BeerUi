@@ -65,31 +65,31 @@
 			</div>
 		</div>
 	</div>
-	<h3>有禁用选项</h3>
-	<p>在<code>options</code>数组中设定<code>disabled</code>值为 true，即可禁用该选项</p>
-	<div class="demo-block demo-select ">
-		<div class="source">
-			<div>
-				<!-- <BeSelect options = {options1} bind:value={value1}/> -->
-			</div>
-		</div>
-	</div>
-	<h3>禁用状态</h3>
-	<p>选择器不可用状态</p>
-	<div class="demo-block demo-select ">
-		<div class="source">
-			<div>
-				<!-- <BeSelect options = {options1} bind:value={value1} disabled/> -->
-			</div>
-		</div>
-		<h3>位置</h3>
-		<p>添加<code>position</code>属性默认为<code>bottom</code> 目前仅支持<code>top,bottom</code></p>
-		<div class="demo-block demo-select ">
-			<div class="source">
-				<div>
-					<!-- <BeSelect options = {options1} bind:value={value1} position={'top'} /> -->
-				</div>
-			</div>
-	</div>
-</div>
+<!--	<h3>有禁用选项</h3>-->
+<!--	<p>在<code>options</code>数组中设定<code>disabled</code>值为 true，即可禁用该选项</p>-->
+<!--	<div class="demo-block demo-select ">-->
+<!--		<div class="source">-->
+<!--			<div>-->
+<!--				<BeSelect options = {options1} bind:value={value1}/>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--	<h3>禁用状态</h3>-->
+<!--	<p>选择器不可用状态</p>-->
+<!--	<div class="demo-block demo-select ">-->
+<!--		<div class="source">-->
+<!--			<div>-->
+<!--				<BeSelect options = {options1} bind:value={value1} disabled/>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<h3>位置</h3>-->
+<!--		<p>添加<code>position</code>属性默认为<code>bottom</code> 目前仅支持<code>top,bottom</code></p>-->
+<!--		<div class="demo-block demo-select ">-->
+<!--			<div class="source">-->
+<!--				<div>-->
+<!--					<BeSelect options = {options1} bind:value={value1} position={'top'} />-->
+<!--				</div>-->
+<!--			</div>-->
+<!--	</div>-->
+<!--</div>-->
 </div>

@@ -1,27 +1,29 @@
 <script lang="ts">
-// import { createEventDispatcher } from "svelte";
-import { BeerPS } from "$lib/utils/beerui";
-import { getContext, setContext } from "svelte";
-let disabled = false
-let hover = false
-export let label;
-export let value
-// const selectStore = getContext('selectStore')
-const key = getContext("selectChangeKey");
-const selectValue = getContext("selectValue");
-let itemSelect = false
-if(value == selectValue) {
-  itemSelect = true
-  BeerPS.publish(key, { label, value });
-} 
-// selectStore.setOptionList({ label,value })
+	// import { createEventDispatcher } from "svelte";
+	import { BeerPS } from "$lib/utils/beerui";
+	import { getContext } from "svelte";
 
+	let disabled = false;
+	let hover = false;
+	export let label;
+	export let value = '';
 
-// $: console.log( selectStore, selectStore.option.value);
+	const selectStore = getContext("selectStore");
+	console.log('selectStore value', selectStore);
+	const key = getContext("selectChangeKey");
 
-const select = () => {
-  // selectStore.setOption({ label, value })
-  BeerPS.publish(key, { label, value });
-}
+	console.log('key 2', key);
+	let isSelect = false
+	const changeCurrent = (current) => {
+		isSelect = current.value === node.value
+	}
+	selectStore.creatNode({ ...$$props, key: value, cb: changeCurrent });
+	let node = selectStore.getCurrent(value)
+	isSelect = selectStore.value === node.value
+	const handleClick = () => {
+		selectStore.setCurrent(node)
+		BeerPS.publish(key, node)
+	}
 </script>
- <li class='be-select-dropdown__item'  class:selected = {itemSelect} class:is-disabled = {disabled} class:hover = {hover} on:click={select}>{label}</li>
+<li class="be-select-dropdown__item" class:selected={isSelect} class:is-disabled={disabled} class:hover={hover}
+    on:click={handleClick}>{label}</li>

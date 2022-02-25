@@ -2,19 +2,17 @@
 	import BeIcon from './../be-icon/BeIcon.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
 	import { cubicInOut } from 'svelte/easing';
-	import { createEventDispatcher, getContext, setContext } from 'svelte'
+	import { createEventDispatcher, getContext, onMount, setContext } from "svelte";
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { BeerPS, genKey } from "$lib/utils/beerui";
 	import SelectStore from './select'
 	let dispatch = createEventDispatcher()
 	export let options;
 	// 下拉框选中的值
-	export let value;	
-	// const selectStore = new SelectStore({value})
-	// setContext('selectStore', selectStore)
-	let inputValue 
-
-	
+	export let value;
+	const selectStore = new SelectStore({ value: $$props.value })
+	setContext('selectStore', selectStore)
+	let inputValue = getContext('lable')
 	// 是否禁用
 	export let disabled = false;
 	// 位置
@@ -23,22 +21,21 @@
 	let visible = false;
 	// 获取输入框
 	let input
-	const key = `selectChange_${ genKey() }` 
-	
-	
+	const key = `selectChange_${ genKey() }`
+
 	setContext('selectChangeKey', key)
-	setContext('selectValue', value)
-	
 
 	BeerPS.subscribe(key, items => {
-		console.log(items);
 		visible = false
 		value = items.value
 		inputValue = items.label
 	})
 
 
-
+	onMount(() => {
+		let node = selectStore.getCurrent(value)
+		inputValue = node.label
+	})
 	function handleShowPopper() {
 			visible = true;
 	}
