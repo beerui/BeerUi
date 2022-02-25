@@ -32,8 +32,7 @@ export default class SelectStore {
     this.optionList.set(props.key , node)
     return this.optionList.get(props.key)
   }
-  getNodeByKey(key) {
-    console.log('this.optionList.get(key)', this.optionList.get(key), key);
+  getCurrent(key) {
     return this.optionList.get(key)
   }
   setCurrent(node) {

@@ -9,6 +9,7 @@
 	export let value = '';
 
 	const selectStore = getContext("selectStore");
+	console.log('selectStore value', selectStore);
 	const key = getContext("selectChangeKey");
 
 	console.log('key 2', key);
@@ -17,8 +18,8 @@
 		isSelect = current.value === node.value
 	}
 	selectStore.creatNode({ ...$$props, key: value, cb: changeCurrent });
-	let node = selectStore.getNodeByKey(value)
-
+	let node = selectStore.getCurrent(value)
+	isSelect = selectStore.value === node.value
 	const handleClick = () => {
 		selectStore.setCurrent(node)
 		BeerPS.publish(key, node)
