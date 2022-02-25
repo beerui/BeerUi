@@ -448,3 +448,16 @@ BeerPS.unsubscribe = function(flag) {
 
   }
 };
+
+export const publish = (name, data) => {
+	const key = `${name}_${ genKey() }`
+	BeerPS.publish(key, data);
+	return key
+}
+
+
+export const subscribe = (key) => {
+	return BeerPS.subscribe(key, items => {
+		return items
+	})
+}

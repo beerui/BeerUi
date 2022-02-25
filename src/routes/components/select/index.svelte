@@ -1,6 +1,6 @@
 <script>
 	import { BeSelect, BeOption } from '$lib';
-	let value = ''
+	let value = '1'
 	let options = [
 		{
 			value: '1',
@@ -59,8 +59,8 @@
 			<div>
 				<BeSelect bind:value={value}>
 					<BeOption label="测试" value="1"/>
-					<!-- <BeOption label="测试2" value="2"/>
-					<BeOption label="测试3" value="3"/> -->
+					<BeOption label="测试2" value="2"/>
+					<BeOption label="测试3" value="3"/>
 				</BeSelect>
 			</div>
 		</div>

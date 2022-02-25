@@ -86,6 +86,10 @@
 	line-height: 34px;
 	box-sizing: border-box;
 	cursor: pointer;
+	&.selected {
+    color: #409eff;
+    font-weight: 700;
+	}
 }
 
 .be-select-dropdown__item:hover {
