@@ -20,7 +20,7 @@
   &--small{padding: .45rem 1.8rem;}
   &--mini{padding: .35rem 1.5rem;}
 
-  &:hover {background: var(--be-primary-hover);}
+  &:hover,&:active,&:focus {background: var(--be-primary-hover);}
 
   &--circle {border-radius: 50%;padding: 1rem;}
   &--lg {border-radius: 2rem;}
