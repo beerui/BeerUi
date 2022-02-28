@@ -2,14 +2,12 @@
 	import { createEventDispatcher, onMount, tick } from "svelte";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
 	import ajax from "./ajax";
+	import previewImages from "$lib/utils/PreviewImage.ts";
+
+	onMount(() => {
+	});
 
 	const dispatch = createEventDispatcher()
-
-	interface FileListItem {
-		result: string,
-		name: string,
-		size: string
-	}
 
 	const noop = () => {}
 
@@ -61,14 +59,12 @@
 		handleOnChange(file, fileList);
 	}
 	const handleRemove = (file, raw) => {
-		console.log('---------handleRemove');
 		if (raw) {
 			file = getFile(raw);
 		}
 		let doRemove = () => {
 			abort(file);
 			fileList.splice(fileList.indexOf(file), 1);
-			fileListDom()
 			onRemove(file, fileList);
 		};
 		if (!beforeRemove) {
@@ -126,9 +122,7 @@
 	let dragOver = false
 	let draging = false
 	let tempIndex = 1
-	onMount(() => {
 
-	});
 	const isImage = (str) => {
 		return str.indexOf('image') !== -1;
 	}
@@ -249,31 +243,49 @@
 		fileList = fileList
 	}
 </script>
-<div class="be-upload">
-	<div on:click|stopPropagation={handleClick}>
-		<slot></slot>
-		<input bind:this={files} on:change={handleChange} type="file" {name} {multiple} {accept} class="be-upload__input">
-	</div>
+<div class="be-upload" style={$$props.style}>
 	<div class="be-upload__tip">
 		<slot name="tip"></slot>
 	</div>
-	<ul class="be-upload-list be-upload-list--text">
+	<ul class="be-upload-list be-upload-list--{listType}">
 		{#each fileList as file}
 		<li tabindex="0" class="be-upload-list__item is-{file.status || 'success'}">
-			<a class="be-upload-list__item-name"><BeIcon name="file" />{file.name}</a>
-			<label class="be-upload-list__item-status-label">
-				{#if file.status === 'fail'}
-					<BeIcon name="close-circle" />
-				{:else if file.status === 'ready'}
-					<BeIcon name="upload" />
-				{:else if file.status === 'uploading'}
-					<BeIcon name="loading" />
-				{:else}
-					<BeIcon name="check-circle" />
-				{/if}
-			</label>
-			<span class="be-icon-close" on:click={() => handleRemove(file, file.raw)}><BeIcon name="close" /></span>
+			{#if listType === 'picture-card'}
+				<div>
+					<img src={file.url} alt="" class="be-upload-list__item-thumbnail">
+					<span class="be-upload-list__item-actions">
+						<span class="be-upload-list__item-preview" on:click={previewImages(file.url)}>
+							<BeIcon width="20" height="20" name="zoom-in" />
+						</span>
+<!--						<span class="be-upload-list__item-delete">-->
+<!--							<BeIcon width="20" height="20" name="download" />-->
+<!--						</span>-->
+						<span class="be-upload-list__item-delete" on:click={() => handleRemove(file, file.raw)}>
+							<BeIcon width="20" height="20" name="delete" />
+						</span>
+					</span>
+				</div>
+			{:else}
+				<a class="be-upload-list__item-name">
+					<BeIcon name="file" />{file.name}</a>
+				<label class="be-upload-list__item-status-label">
+					{#if file.status === 'fail'}
+						<BeIcon name="close-circle" />
+					{:else if file.status === 'ready'}
+						<BeIcon name="upload" />
+					{:else if file.status === 'uploading'}
+						<BeIcon name="loading" />
+					{:else}
+						<BeIcon name="check-circle" />
+					{/if}
+				</label>
+				<span class="be-icon-close" on:click={() => handleRemove(file, file.raw)}><BeIcon name="close" /></span>
+			{/if}
 		</li>
 		{/each}
 	</ul>
+	<div class="be-upload--{listType}" on:click|stopPropagation={handleClick}>
+		<slot></slot>
+		<input bind:this={files} on:change={handleChange} type="file" {name} {multiple} {accept} class="be-upload__input">
+	</div>
 </div>

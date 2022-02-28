@@ -24,6 +24,11 @@ svg {user-select: none;}
     box-sizing: border-box;
     user-select: none;
   }
+  &__hide-btn {
+    .be-preview__prev, .be-preview__next {
+      display: none;
+    }
+  }
   &__close {
     top: 40px;
     right: 40px;

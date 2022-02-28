@@ -31,6 +31,7 @@
     cursor: pointer;
     line-height: 146px;
     vertical-align: top;
+    display: inline-block;
 
     i {
       font-size: 28px;
@@ -38,17 +39,17 @@
     }
 
     &:hover {
-      border-color: var(--be-default);
-      color: var(--be-default);
+      border-color: #409eff;
+      color: #409eff;
     }
   }
 
   &:focus {
-    border-color: var(--be-default);
-    color: var(--be-default);
+    border-color: #409eff;
+    color: #409eff;
 
     .be-upload-dragger {
-      border-color: var(--be-default);
+      border-color: #409eff;
     }
   }
 
