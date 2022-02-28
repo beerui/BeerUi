@@ -30,26 +30,26 @@
   &--default {
     background: var(--be-default);border: 1px solid var(--be-default-border);color: var(--be-default-text);
     span {color: var(--be-default-text)}
-    &:hover {background: var(--be-default-hover);border-color: var(--be-default-border-hover);color: var(--be-default-text-hover);}
+    &:hover,&:active,&:focus {background: var(--be-default-hover);border-color: var(--be-default-border-hover);color: var(--be-default-text-hover);}
   }
   &--primary {
     background: var(--be-primary);
-    &:hover {background: var(--be-primary-hover);}
+    &:hover,&:active,&:focus {background: var(--be-primary-hover);}
   }
   &--success {
     background: var(--be-success);
-    &:hover {background: var(--be-success-hover);}
+    &:hover,&:active,&:focus {background: var(--be-success-hover);}
   }
   &--info {
     background: var(--be-info);
-    &:hover {background: var(--be-info-hover);}
+    &:hover,&:active,&:focus {background: var(--be-info-hover);}
   }
   &--warning {
     background: var(--be-warning);
-    &:hover {background: var(--be-warning-hover);}
+    &:hover,&:active,&:focus {background: var(--be-warning-hover);}
   }
   &--danger {
     background: var(--be-danger);
-    &:hover {background: var(--be-danger-hover);}
+    &:hover,&:active,&:focus {background: var(--be-danger-hover);}
   }
 }
