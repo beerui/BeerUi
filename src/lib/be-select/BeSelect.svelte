@@ -17,10 +17,13 @@
 	export let disabled = false;
 	// 位置
 	export let position = 'bottom'
+	export let clearable = false
+	export let placeholder = '请选择'
 	// 下拉框
 	let visible = false;
 	// 获取输入框
 	let input
+	let showClose = false
 	const key = `selectChange_${ genKey() }`
 
 	setContext('selectChangeKey', key)
@@ -31,49 +34,49 @@
 		inputValue = items.label
 	})
 
-
+	$:if(visible) {
+		selectStore.setHover(value)
+	}
 	onMount(() => {
 		let node = selectStore.getCurrent(value)
-		inputValue = node.label
+		inputValue = node?.label
 	})
 	function handleShowPopper() {
-			visible = true;
+	 	visible = true;
 	}
 	function handleClosePopper(){
-			visible = false
+	 	visible = false
+	}
+	const clearValue = () => {
+		inputValue = ''
+		value = -1
+		showClose = false
+		selectStore.setCurrent({})
+		handleClosePopper()
 	}
 	const change = (e) => {
 		console.log(e);
 	}
-	function zoomIn(node, params) {
-		return {
-			duration:params.duration,
-			easing: cubicInOut,
-			css: t => {
-				return `
-        opacity: ${t};
-        transform: scaleY(${t});
-        transform-origin: center ${position === 'top' ?'bottom':'top'};`
-			}
-		};
-	}
 </script>
 
 <div class='be-select' use:clickOutside={{ cb: handleClosePopper }}>
-	<!-- <div class={['be-select__content',disabled ? ' is-disabled':''].join('')}> -->
-		<BeInput on:focus={handleShowPopper} value={inputValue} bind:this={input} readonly disabled={disabled}>
-			<div slot='suffix' class="input-suffix-icon" class:is-reverse = {visible}>
-				<BeIcon name='chevron-down' width='20' height='20' />
+	<div on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
+		<BeInput {placeholder} on:focus={handleShowPopper} value={inputValue} bind:this={input} readonly disabled={disabled}>
+			<div slot='suffix'>
+				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
+					<BeIcon name='chevron-down' width='18' height='18' />
+				</div>
+				<div on:click={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
+					<BeIcon name='close-circle' width='14' height='14'/>
+				</div>
 			</div>
 		</BeInput>
-	<!-- </div> -->
-	<!--{#if visible}-->
-		<div class='be-select__option' in:zoomIn="{{duration: 300}}" out:zoomIn="{{duration: 200}}">
-			<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
-				<slot></slot>
-			</ul>
-			<div class="popper__arrow"></div>
-		</div>
-	<!--{/if}-->
-</div>
+	</div>
+	<div class='be-select__option' class:visible={visible}>
+		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
+			<slot></slot>
+		</ul>
+		<div class="popper__arrow"></div>
+	</div>
+</div> 
 

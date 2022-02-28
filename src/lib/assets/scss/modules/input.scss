@@ -3,8 +3,20 @@
   font-size: 14px;
   display: inline-block;
   width: 100%;
-  input{
+  cursor: pointer;
+  input {
     cursor: pointer;
+    &::-webkit-input-placeholder {
+      color: var(--text-color-placeholder);
+    }
+    
+    &::-moz-placeholder {
+      color: var(--text-color-placeholder);
+    }
+    
+    &:-ms-input-placeholder {
+      color: var(--text-color-placeholder);
+    }
   }
 }
 .be-input.is-disabled .be-input__inner {
@@ -76,7 +88,11 @@
   .is-reverse {
     transform: rotate(180deg);
   }
+  .close {
+    display: none;
+  }
 }
+
 .be-input__icon {
   width: 25px;
   line-height: 40px;
