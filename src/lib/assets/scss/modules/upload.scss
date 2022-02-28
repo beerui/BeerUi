@@ -212,6 +212,24 @@
           }
         }
       }
+      &.is-fail {
+        .be-upload-list__item-status-label {
+          display: block;
+          color: var(--be-error-color);
+        }
+      }
+      &.is-ready {
+        .be-upload-list__item-status-label {
+          display: block;
+          color: var(--be-success-color-active);
+        }
+      }
+      &.is-uploading{
+        .be-upload-list__item-status-label {
+          display: block;
+          color: var(--be-success-color-active);
+        }
+      }
     }
 
     &__disabled {

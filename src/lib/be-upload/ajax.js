@@ -28,7 +28,7 @@ function getBody(xhr) {
   }
 }
 
-export default function upload(option) {
+export default function ajax(option) {
   if (typeof XMLHttpRequest === 'undefined') {
     return;
   }
