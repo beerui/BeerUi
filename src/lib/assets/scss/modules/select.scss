@@ -98,9 +98,13 @@
     color: #409eff;
     font-weight: 700;
 	}
+	&.is-disabled {
+    color: #c0c4cc;
+    cursor: not-allowed;
+	}
 }
 
-.be-select-dropdown__item:hover {
+.be-select-dropdown__item.hover:not(.is-disabled) {
 	background-color: #f5f7fa;
 }
 .be-select__checked {

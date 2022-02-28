@@ -57,7 +57,7 @@
 	<div class="demo-block demo-select ">
 		<div class="source">
 			<div>
-				<BeSelect bind:value={value}>
+				<BeSelect bind:value={value} clearable={true}>
 					<BeOption label="测试" value="1"/>
 					<BeOption label="测试2" value="2"/>
 					<BeOption label="测试3" value="3"/>
@@ -65,15 +65,19 @@
 			</div>
 		</div>
 	</div>
-<!--	<h3>有禁用选项</h3>-->
-<!--	<p>在<code>options</code>数组中设定<code>disabled</code>值为 true，即可禁用该选项</p>-->
-<!--	<div class="demo-block demo-select ">-->
-<!--		<div class="source">-->
-<!--			<div>-->
-<!--				<BeSelect options = {options1} bind:value={value1}/>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
+	<h3>有禁用选项</h3>
+	<p>在<code>options</code>数组中设定<code>disabled</code>值为 true，即可禁用该选项</p>
+	<div class="demo-block demo-select ">
+		<div class="source">
+			<div>
+				<BeSelect>
+					<BeOption label="测试" value="1" disabled={true}/>
+					<BeOption label="测试2" value="2"/>
+					<BeOption label="测试3" value="3"/>
+				</BeSelect>
+			</div>
+		</div>
+	</div>
 <!--	<h3>禁用状态</h3>-->
 <!--	<p>选择器不可用状态</p>-->
 <!--	<div class="demo-block demo-select ">-->
@@ -91,5 +95,5 @@
 <!--				</div>-->
 <!--			</div>-->
 <!--	</div>-->
-<!--</div>-->
+<!--</div> -->
 </div>

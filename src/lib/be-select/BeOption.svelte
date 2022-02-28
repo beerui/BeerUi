@@ -2,28 +2,31 @@
 	// import { createEventDispatcher } from "svelte";
 	import { BeerPS } from "$lib/utils/beerui";
 	import { getContext } from "svelte";
-
-	let disabled = false;
 	let hover = false;
-	export let label;
-	export let value = '';
-
+	export let label:any;
+	export let value:any = '';
+	export let disabled:boolean = false
 	const selectStore = getContext("selectStore");
-	console.log('selectStore value', selectStore);
 	const key = getContext("selectChangeKey");
-
-	console.log('key 2', key);
+	
 	let isSelect = false
 	const changeCurrent = (current) => {
 		isSelect = current.value === node.value
 	}
-	selectStore.creatNode({ ...$$props, key: value, cb: changeCurrent });
+	const hoverCurrent = (isHover) => {
+		hover = isHover
+	}
+	selectStore.creatNode({ ...$$props, key: value, change: changeCurrent, hover: hoverCurrent });
 	let node = selectStore.getCurrent(value)
 	isSelect = selectStore.value === node.value
+	// hover = selectStore.value === node.value
 	const handleClick = () => {
+		if(node.disabled) throw new Error('[Select] this option has been disabled')
 		selectStore.setCurrent(node)
 		BeerPS.publish(key, node)
 	}
+	const hoverItem = (e)=> {
+		selectStore.setHover(e.target.dataset.value)
+	}
 </script>
-<li class="be-select-dropdown__item" class:selected={isSelect} class:is-disabled={disabled} class:hover={hover}
-    on:click={handleClick}>{label}</li>
+<li class="be-select-dropdown__item" data-value={value} on:mouseenter={hoverItem} class:selected={isSelect} class:is-disabled={disabled} class:hover={hover} on:click={handleClick}>{label}</li>
