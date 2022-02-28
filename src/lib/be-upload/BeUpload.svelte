@@ -112,6 +112,7 @@
 	export let fileList: any[] = [] // 上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]	array
 	export let httpRequest: Function = ajax // 覆盖默认的上传行为，可以自定义上传的实现 function
 	export let disabled: boolean = false // 是否禁用	boolean
+	export let hideUpload: boolean = false // 是否隐藏上传按钮	boolean
 	export let limit: number = null // 最大允许上传个数
 	export let onExceed: Function = noop // 文件超出个数限制时的钩子	function(files, fileList)
 
@@ -242,6 +243,39 @@
 	const fileListDom = () => {
 		fileList = fileList
 	}
+	let dragover = false;
+	const onDragover = (evt) => {
+		if (!disabled) {
+			dragover = true;
+		}
+	}
+	const onDrop = (e) => {
+		if (disabled) return;
+		dragover = false;
+		const _file = [].slice.call(e.dataTransfer.files).filter(file => {
+			const { type, name } = file;
+			const extension = name.indexOf('.') > -1
+				? `.${ name.split('.').pop() }`
+				: '';
+			const baseType = type.replace(/\/.*$/, '');
+			return accept.split(',')
+				.map(type => type.trim())
+				.filter(type => type)
+				.some(acceptedType => {
+					if (/\..+$/.test(acceptedType)) {
+						return extension === acceptedType;
+					}
+					if (/\/\*$/.test(acceptedType)) {
+						return baseType === acceptedType.replace(/\/\*$/, '');
+					}
+					if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
+						return type === acceptedType;
+					}
+					return false;
+				});
+		})
+		uploadFiles(_file)
+	}
 </script>
 <div class="be-upload" style={$$props.style}>
 	<div class="be-upload__tip">
@@ -266,8 +300,7 @@
 					</span>
 				</div>
 			{:else}
-				<a class="be-upload-list__item-name">
-					<BeIcon name="file" />{file.name}</a>
+				<a class="be-upload-list__item-name"><BeIcon name="file" />{file.name}</a>
 				<label class="be-upload-list__item-status-label">
 					{#if file.status === 'fail'}
 						<BeIcon name="close-circle" />
@@ -284,7 +317,15 @@
 		</li>
 		{/each}
 	</ul>
-	<div class="be-upload--{listType}" on:click|stopPropagation={handleClick}>
+	<div
+		class="be-upload--{listType}"
+		class:be-upload-dragger={drag}
+		class:be-upload__hide={hideUpload}
+		on:click|stopPropagation={handleClick}
+		on:drop|preventDefault={onDrop}
+		on:dragover|preventDefault={onDragover}
+		on:dragleave|preventDefault={() => dragover = false}
+	>
 		<slot></slot>
 		<input bind:this={files} on:change={handleChange} type="file" {name} {multiple} {accept} class="be-upload__input">
 	</div>

@@ -4,13 +4,12 @@
   &__input {
     display: none;
   }
-
+  &__hide {display: none;}
   &__tip {
     font-size: 12px;
     color: var(--text-color-primary);
     margin-top: 7px;
   }
-
   iframe {
     position: absolute;
     z-index: -1;
@@ -53,7 +52,7 @@
     }
   }
 
-  &__upload-dragger {
+  &-dragger {
     background-color: #fff;
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -83,23 +82,22 @@
     }
 
     .be-upload__text {
-      color: var(--text-color-white);
       font-size: 14px;
       text-align: center;
 
       em {
-        color: var(--be-default);
+        color: var(--be-primary);
         font-style: normal;
       }
     }
 
     &:hover {
-      border-color: var(--be-default);
+      border-color: var(--be-primary);
     }
 
     &--dragover {
       background-color: rgba(32, 159, 255, .06);
-      border: 2px dashed var(--be-default);
+      border: 2px dashed var(--be-primary-hover);
     }
   }
 
