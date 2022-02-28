@@ -34,14 +34,12 @@
 		handleOnChange(file, fileList);
 	}
 	const handleProgress = (ev, rawFile) => {
-		console.log('----------handleProgress----------');
 		const file = getFile(rawFile);
 		onProgress(ev, file, fileList);
 		file.status = 'uploading';
 		file.percentage = ev.percent || 0;
 	}
 	const handleSuccess = (res, rawFile) => {
-		console.log('----------handleSuccess----------');
 		const file = getFile(rawFile);
 		if (file) {
 			file.status = 'success';
@@ -51,7 +49,6 @@
 		}
 	}
 	const handleError = (err, rawFile) => {
-		console.log('---------handleError');
 		const file = getFile(rawFile);
 		file.status = 'fail';
 		fileList.splice(fileList.indexOf(file), 1);
