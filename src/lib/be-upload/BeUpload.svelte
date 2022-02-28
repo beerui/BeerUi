@@ -2,7 +2,7 @@
 	import { createEventDispatcher, onMount, tick } from "svelte";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
 	import ajax from "./ajax";
-	import previewImages from "$lib/utils/PreviewImage.ts";
+	import previewImages from "$lib/utils/PreviewImage";
 
 	onMount(() => {
 	});
