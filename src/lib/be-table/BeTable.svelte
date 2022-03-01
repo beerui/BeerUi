@@ -2,7 +2,9 @@
 	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
     import { filterClass, off, on } from '$lib/utils/beerui';
     import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
+	import { throttle } from "$lib/utils/throttle";
 
+	// TODO: 1、resize 2、字段是 null/undefined 转为 '' 3、自动生成id/给用户传入id的键值
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
     export let border: boolean = false; // 边框 false/true
@@ -24,7 +26,6 @@
     const _class = [...normalClass, ...filterClass($$props, 'be-table--', preClass)].join(' ');
     export { _class as class };
 
-    // TODO: Selection
     let warpElement = null; // 顶层元素
     let tableHeaderWrapper = null; // 表格头元素
     let tableWrapper = null; // 表格元素
@@ -45,12 +46,21 @@
     let headerOriginData = []; // 表头 原始Tree
     let checkList = [] // 选择列表
 
+	let isOnMount = false
     onMount(() => {
         warpElement && initTable();
+
+	    on(window, 'resize', throttle(resizeHandle, 300), { passive: true });
+	    isOnMount = true
     });
     onDestroy(() => {
         off(tableWrapper, 'scroll', tableHeaderScroll);
+		if (isOnMount) off(window, 'resize', resizeHandle);
     });
+	const resizeHandle = () => {
+		console.log('resize');
+		initTable()
+	}
     const tableHeaderScroll = (evt) => {
         tableHeaderWrapper.scrollLeft = evt.target.scrollLeft;
     };
@@ -92,9 +102,6 @@
         computedColumnData();
         // 加工行数据
         computedRowsData();
-        // 渲染body
-        // const tbodys = render()
-        // tbody.innerHTML = tbodys
         // DOM渲染完毕 计算滚动条宽度
         await tick();
         // 绑定横向滚动的头部联动
@@ -244,40 +251,7 @@
         return result;
     };
 
-    const render = () => {
-        let result = '';
-        for (let i = 0; i < rowsData.length; i++) {
-            const row = rowsData[i];
-            const className = stripe && i % 2 === 1 ? `be-table__row--striped ${ row.className }` : row.className;
-            result += `
-			<tr class='be-table__row ${ className }' style=${ row.styles }>
-				${ renderTd(columnPropData, i, row) }
-			</tr>
-			`;
-        }
-        return result;
-    };
-    const renderTd = (data, i, row) => {
-        let result = '';
-        for (let j = 0; j < data.length; j++) {
-            const col = data[j];
-            if (col['prop'] === 'tableSlot') {
-                result += `
-				<td class='be-table__cell'>
-					<div class='cell be-table-cell__${ j }'><BeButton onclick='clickBtn1'>默认</BeButton></div>
-				</td>
-				`;
-            } else {
-                result += `
-				<td class='be-table__cell'>
-					<div class='cell be-table-cell__${ j }'>${ row[col['prop']] || '' }</div>
-				</td>
-				`;
-            }
-        }
-        return result;
-    };
-		const dispatch = createEventDispatcher()
+	const dispatch = createEventDispatcher()
     // 全选事件
     let isAllCheck = false;
     let indeterminate = false; // 是否半选状态
