@@ -116,6 +116,20 @@
     bind:this={submenu}
     on:mouseenter={enterMenu}
     on:mouseleave={leaveMenu}
+    on:contextmenu
+    on:dblclick
+    on:focusin
+    on:focusout
+    on:keydown
+    on:keyup
+    on:pointercancel
+    on:pointerdown
+    on:pointerenter
+    on:pointerleave
+    on:pointermove
+    on:pointerout
+    on:pointerup
+    on:input
     on:click|stopPropagation={triggerMenu}
     {index}
     {level}

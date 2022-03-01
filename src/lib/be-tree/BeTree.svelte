@@ -227,7 +227,23 @@ const destroyNode = (evt) => {
 }
 </script>
 <svelte:options accessors />
-<div class="be-tree" class:highlightCurrent role="tree" bind:this={beTree}>
+<div class="be-tree" class:highlightCurrent role="tree" bind:this={beTree}
+     on:click
+     on:contextmenu
+     on:dblclick
+     on:focusin
+     on:focusout
+     on:keydown
+     on:keyup
+     on:pointercancel
+     on:pointerdown
+     on:pointerenter
+     on:pointerleave
+     on:pointermove
+     on:pointerout
+     on:pointerup
+     on:input
+>
 	{#each root.childNodes as child}
 	<BeTreeNode
 		bind:node={child}

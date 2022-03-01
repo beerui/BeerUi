@@ -44,6 +44,22 @@
 </script>
 <svelte:options accessors />
 <ul role="menubar" bind:this={BeMenu} class="be-menu be-menu--{mode}" class:be-menu--collapse={collapse}
-    use:clickOutside={{ cb: clickMenuOutside }}>
+    use:clickOutside={{ cb: clickMenuOutside }}
+    on:click
+    on:contextmenu
+    on:dblclick
+    on:focusin
+    on:focusout
+    on:keydown
+    on:keyup
+    on:pointercancel
+    on:pointerdown
+    on:pointerenter
+    on:pointerleave
+    on:pointermove
+    on:pointerout
+    on:pointerup
+    on:input
+>
 	<slot></slot>
 </ul>
