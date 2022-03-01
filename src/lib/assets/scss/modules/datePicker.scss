@@ -1,6 +1,9 @@
 .be-date {
   position: relative;
-  width: 300px;
+  // width: 300px;
+  .be-input {
+    width: 220px;
+  }
 }
 @mixin right-arrow {
   position: absolute;
@@ -179,6 +182,30 @@
       transform: translateX(-50%);
       border-radius: 50%;
     }
+    &.start-date div {
+      margin-left: 5px;
+      color:#fff;
+      span {
+        color:#fff;
+      }
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    &.in-range div {
+      background-color:#f2f6fc;
+    }
+    &.end-date div {
+      color: #fff;
+      span {
+        color:#fff;
+      }
+      margin-right: 5px;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    &.end-date span, &.start-date span{
+      background-color: #409eff;
+    }
   }
   .today span {
     color: #409eff;
@@ -342,4 +369,73 @@
     height: 0;
     border: 4px solid transparent;
   }
+}
+.be-range {
+  &-input {
+    appearance: none;
+    border: none;
+    outline: none;
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 39%;
+    text-align: center;
+    font-size: 14px;
+    color: #606266;
+    cursor: pointer;
+    &::placeholder {
+      color: var(--text-color-placeholder);
+    }
+  }
+  &-separator {
+    display: inline-block;
+    height: 100%;
+    // padding: 0 5px;
+    margin: 0 5px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 14px;
+    width: 5%;
+    color: #303133;
+  }
+  &__close-icon {
+    display: none;
+    width: 25px;
+    // display: flex;
+    justify-content: right;
+    line-height: 32px;
+    cursor: pointer;
+  }
+}
+.be-date-range {
+  width: 350px;
+  &:hover {
+    .be-range__close-icon {
+      display: flex;
+    }
+  }
+  &-picker {
+    width: 646px;
+    &__header {
+      position: relative;
+      text-align: center;
+      height: 28px;
+    }
+    &__content {
+      float: left;
+      width: 50%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 16px;
+      &.is-left {
+        border-right: 1px solid #e4e4e4;
+      }
+    }
+  }
+}
+.be-date-range.be-input__inner {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
 }
