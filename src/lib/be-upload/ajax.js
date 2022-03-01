@@ -9,9 +9,9 @@ function getError(action, option, xhr) {
   }
 
   const err = new Error(msg);
-  err.status = xhr.status;
-  err.method = 'post';
-  err.url = action;
+  err['status'] = xhr.status;
+  err['method'] = 'post';
+  err['url'] = action;
   return err;
 }
 
@@ -28,7 +28,7 @@ function getBody(xhr) {
   }
 }
 
-export default function upload(option) {
+export default function ajax(option) {
   if (typeof XMLHttpRequest === 'undefined') {
     return;
   }
@@ -39,7 +39,7 @@ export default function upload(option) {
   if (xhr.upload) {
     xhr.upload.onprogress = function progress(e) {
       if (e.total > 0) {
-        e.percent = e.loaded / e.total * 100;
+        e['percent'] = e.loaded / e.total * 100;
       }
       option.onProgress(e);
     };

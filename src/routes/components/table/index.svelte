@@ -362,6 +362,7 @@ const handleSelectionChangeGetRows = ({ detail }) => console.log('handleSelectio
         </div>
         <div slot='description'>
             <ol>
+                <li>行中必须存在id字段,待优化为用户传入标识/自动生成id</li>
                 <li>toggleRowTable.toggleRowSelection(item[2, 3]) 切换第二、第三行的选中状态 传入[]等同于清空所有</li>
                 <li>handleSelectionChangeGetId 获取选中的ID</li>
                 <li>handleSelectionChangeGetRows 获取选中的行数据 rows</li>

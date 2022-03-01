@@ -30,6 +30,23 @@
 	};
 
 </script>
-<div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+<div role="group" aria-label="checkbox-group" class="el-checkbox-group"
+	on:contextmenu
+	on:dblclick
+	on:focusin
+	on:focusout
+	on:keydown
+	 on:mousedown
+	 on:mouseup
+	on:keyup
+	on:pointercancel
+	on:pointerdown
+	on:pointerenter
+	on:pointerleave
+	on:pointermove
+	on:pointerout
+	on:pointerup
+	on:input
+>
 	<slot></slot>
 </div>

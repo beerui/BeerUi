@@ -1,5 +1,16 @@
 # BeerUi 
 
+## 1.0.14
+
+### Patch Changes
+
+- 新增 `upload`组件
+
+- 修复 `datePicker`组件 已知问题
+- 修改 `button`组件 已知问题
+- 修改 `menu`组件 已知问题
+- 修改 `select`组件 已知问题
+
 ## 1.0.8
 
 ### Patch Changes
