@@ -49,7 +49,7 @@
 	}
 	const clearValue = () => {
 		inputValue = ''
-		value = -1
+		value = ''
 		showClose = false
 		selectStore.setCurrent({})
 		handleClosePopper()
