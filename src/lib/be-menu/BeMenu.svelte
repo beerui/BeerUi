@@ -50,6 +50,8 @@
     on:dblclick
     on:focusin
     on:focusout
+    on:mousedown
+    on:mouseup
     on:keydown
     on:keyup
     on:pointercancel

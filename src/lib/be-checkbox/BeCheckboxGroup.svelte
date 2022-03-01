@@ -36,6 +36,8 @@
 	on:focusin
 	on:focusout
 	on:keydown
+	 on:mousedown
+	 on:mouseup
 	on:keyup
 	on:pointercancel
 	on:pointerdown

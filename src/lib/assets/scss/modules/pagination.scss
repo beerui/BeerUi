@@ -1,5 +1,5 @@
 .be-pagination {
-  white-space: nowrap;padding: 2px 5px;color: #303133;font-weight: 700;
+  white-space: nowrap;padding: 2px 5px;color: #666666;font-weight: 700;
 
   &__container {
     user-select: none;list-style: none;vertical-align: top;font-size: 0;padding: 0;
@@ -12,11 +12,12 @@
     .disabled {color: #b7b7b7;cursor: not-allowed;}
     &_mini {}
   }
+  .m-jumper {font-size: 14px;color: #666666;padding: 0 10px;}
 }
 .be-pagination-card {
   .be-pagination__container {
     .list {
-      background: #f4f4f5;color: #606266;border-radius: 2px;min-width: 30px;
+      background: #f4f4f5;color: #666666;border-radius: 2px;min-width: 30px;
       &.active {
         background: #1492FF;cursor: default;color: #fff;
         &:hover {color: #fff;}

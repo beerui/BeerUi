@@ -48,10 +48,14 @@
 
 <div
 	class={['be-input', size?' be-input--'+ size:'', disabled?' is-disabled':''].join('')}
+	style={$$props.style}
 	on:click
 	on:contextmenu
 	on:dblclick
+	on:focus
 	on:focusin
+	on:mousedown
+	on:mouseup
 	on:focusout
 	on:keydown
 	on:keyup

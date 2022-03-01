@@ -54,6 +54,8 @@
 	    on:click|stopPropagation
 	    on:contextmenu
 	    on:dblclick
+	    on:mousedown
+	    on:mouseup
 	    on:focusin
 	    on:focusout
 	    on:keydown

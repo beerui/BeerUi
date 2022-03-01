@@ -231,6 +231,8 @@ const destroyNode = (evt) => {
      on:click
      on:contextmenu
      on:dblclick
+     on:mousedown
+     on:mouseup
      on:focusin
      on:focusout
      on:keydown

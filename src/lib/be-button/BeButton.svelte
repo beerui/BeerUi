@@ -14,6 +14,8 @@
 	on:contextmenu
 	on:dblclick
 	on:focusin
+	on:mousedown
+	on:mouseup
 	on:focusout
 	on:keydown
 	on:keyup
