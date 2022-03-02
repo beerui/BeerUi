@@ -1,8 +1,38 @@
 .be-date {
   position: relative;
-  // width: 300px;
-  .be-input {
-    width: 220px;
+  width: 220px;
+  &.be-range {
+    width: 100%
+  }
+  .be-input__inner {
+    padding: 0 30px;
+  }
+  &:hover {
+    .clearable {
+      display: flex;
+    }
+  }
+  &__prefix {
+    position: absolute;
+    left: 5px;
+    top: 0;
+    height: 100%;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__suffix {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    width: 25px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
   }
 }
 @mixin right-arrow {
@@ -64,6 +94,9 @@
     display: table;
     width: 100%;
     box-sizing: border-box;
+    .be-input {
+      width: 100%;
+    }
   }
   &__header {
     margin: 12px;
@@ -226,6 +259,10 @@
   font-size: 12px;
   border-collapse: collapse;
   border-spacing: 0;
+  .today .cell {
+    color: #409eff;
+    font-weight: 700;
+  }
   td {
     text-align: center;
     padding: 8px 0;
@@ -247,10 +284,30 @@
       margin: 0 auto;
       border-radius: 18px;
     }
-  }
-  .today .cell {
-    color: #409eff;
-    font-weight: 700;
+    &.start-date div {
+      margin-left: 5px;
+      color:#fff;
+      .cell {
+        color:#fff;
+      }
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    &.in-range div {
+      background-color:#f2f6fc;
+    }
+    &.end-date div {
+      color: #fff;
+      .cell {
+        color:#fff;
+      }
+      margin-right: 5px;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    &.end-date span, &.start-date span{
+      background-color: #409eff;
+    }
   }
   .current:not(.disabled) .cell {
     color: #409eff;
@@ -401,15 +458,50 @@
   }
   &__close-icon {
     display: none;
-    width: 25px;
+    // width: 20px;
+    flex: 1;
     // display: flex;
     justify-content: right;
     line-height: 32px;
     cursor: pointer;
   }
 }
-.be-date-range {
+.be-range-daterange {
   width: 350px;
+  &:hover {
+    .clearable {
+      display: flex;
+    }
+  }
+  &-picker {
+    width: 646px;
+    &__header {
+      position: relative;
+      text-align: center;
+      height: 28px;
+    }
+    &__content {
+      float: left;
+      width: 50%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 16px;
+      &.is-left {
+        border-right: 1px solid #e4e4e4;
+      }
+    }
+  }
+  &.be-input__inner {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    &.active {
+      border-color: #409eff;
+    }
+  }
+}
+.be-range-monthrange {
+  width: 300px;
   &:hover {
     .be-range__close-icon {
       display: flex;
@@ -433,9 +525,12 @@
       }
     }
   }
-}
-.be-date-range.be-input__inner {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
+  &.be-input__inner {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    &.active {
+      border-color: #409eff;
+    }
+  }
 }
