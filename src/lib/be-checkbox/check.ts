@@ -8,6 +8,10 @@ export default class CheckStore {
 		console.log('options', options);
 	}
 
+	subscribeHandle(cb) {
+		cb(this.optionList)
+	}
+
 	setSelectList(arr) {
 		console.log('setSelectList', arr);
 		if (arr.length === 0) {

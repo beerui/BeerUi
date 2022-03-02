@@ -18,6 +18,10 @@
 	export { _class as class };
 
 	let isChecked = store.isChecked(label)
+	const handleChange = (item) => {
+
+	}
+	store.subscribeHandle(handleChange)
 
 	const handleClick = (evt) => {
 		dispatch('click', evt);
