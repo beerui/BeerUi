@@ -53,7 +53,7 @@ let checked = false;
 		<div slot="source">
 			<div class="demo-list">
 				<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>
-				<BeCheckbox {checked} disabled>备选项</BeCheckbox>
+				<BeCheckbox {checked}>备选项</BeCheckbox>
 			</div>
 		</div>
 		<div slot="description">

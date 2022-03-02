@@ -31,7 +31,7 @@
 		const normalClass = [];
 		if (checked) normalClass.push("is-checked");
 		if (disabled) normalClass.push("is-disabled");
-		return [...normalClass, ...filterClass($$props, "be-table--", [""])].join(" ");
+		return [...normalClass, ...filterClass($$props, "be-checkbox--", [""])].join(" ");
 	};
 	const onChange = (event) => {
 		checked = event.target.checked;
