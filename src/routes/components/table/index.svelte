@@ -6,15 +6,15 @@
 
     const tableData = [{
         date: '2016-05-02',
-        name: '王小虎',
+        name: 0,
         address: '上海市普陀区金沙江路 1518 弄'
     }, {
         date: '2016-05-04',
-        name: '王小虎',
+        name: false,
         address: '上海市普陀区金沙江路 1517 弄'
     }, {
         date: '2016-05-03',
-        name: '王小虎',
+        name: 'undefined',
         address: '上海市普陀区金沙江路 1519 弄'
     }, {
         date: '2016-05-01',
@@ -172,17 +172,17 @@
 	};
 	const handleSelectionChangeGetId = ({ detail }) => console.log('handleSelectionChangeGetId', detail);
 	const handleSelectionChangeGetRows = ({ detail }) => console.log('handleSelectionChangeGetRows', detail);
+	const placeholderRegexHandle = (v) => v === undefined || v === 'undefined'
 </script>
 <div class='page-container'>
     <h2>BeTable 表格</h2>
     <ol>
-        <li>TODO：优化自定义表格列</li>
-        <li>TODO：新增 index 序号</li>
-        <li>TODO：新增 selection 多选框</li>
+        <li>TODO：优化自定义表格列 / 无法动态添加 slot</li>
     </ol>
     <DemoBlock code={`
-<BeTable data={tableData}>
+<BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle}>
 	<BeTableColumn prop="name" label="姓名" />
+	<BeTableColumn prop='placeholder' label='placeholder' />
 	<BeTableColumn prop="date" label="日期" />
 	<BeTableColumn prop="address" label="地址" />
 </BeTable>`}
@@ -204,16 +204,23 @@ const tableData = [{
 	date: '2016-05-01',
 	 name: '王小虎',
 	 address: '上海市普陀区金沙江路 1519 弄'
-}]`
+}]
+const placeholderRegexHandle = (v) => v === undefined || v === 'undefined'
+`
 }
     >
         <div slot='source'>
             <h1>基础表格</h1>
+	        <ol>
+		        <li>placeholder 无数据的时候 替代的标识 默认为''</li>
+		        <li>placeholderRegex 无数据的时候回调函数 Boolean</li>
+	        </ol>
             <div class='demo-list'>
-                <BeTable data={tableData}>
-                    <BeTableColumn prop='name' label='姓名' />
-                    <BeTableColumn prop='date' label='日期' />
-                    <BeTableColumn prop='address' label='地址' />
+                <BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle}>
+                    <BeTableColumn width="355" prop='name' label='姓名' />
+                    <BeTableColumn width="355" prop='placeholder' label='placeholder' />
+                    <BeTableColumn width="355" prop='date' label='日期' />
+                    <BeTableColumn width="355" prop='address' label='地址' />
                 </BeTable>
             </div>
         </div>

@@ -33,11 +33,10 @@
     class="be-menu-item"
     class:is_active={isActive}
     on:click|stopPropagation={activeChange}
-    on:dblclick
-    on:mousedown
-    on:mouseup
-    on:keydown
-    on:keyup
+    on:click|stopPropagation
+    on:dblclick|stopPropagation
+    on:mousedown|stopPropagation
+    on:mouseup|stopPropagation
     {index}
     {level}
     style:padding-left={level*20 + 'px'}
