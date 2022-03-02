@@ -1,12 +1,14 @@
 <script lang='ts'>
 	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
-    import { filterClass, off, on } from '$lib/utils/beerui';
+	import { addClass, filterClass, off, on } from "$lib/utils/beerui";
     import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
 	import { throttle } from "$lib/utils/throttle";
 
 	// TODO: 1、resize 2、字段是 null/undefined 转为 '' 3、自动生成id/给用户传入id的键值
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
+    export let placeholder: string = ''; // 无数据的时候展示的字段
+    export let placeholderRegex: Function = (v) => isUndefined(v); // 无数据的判断
     export let border: boolean = false; // 边框 false/true
     export let showHeader: boolean = true; // 显示表头 true/false
     export let height: string = ''; // 定义了height属性，即可实现固定表头的表格
@@ -50,18 +52,16 @@
     onMount(() => {
         warpElement && initTable();
 
-	    on(window, 'resize', throttle(resizeHandle, 300), { passive: true });
+	    on(window, 'resize', throttle(resizeHandle, 30), { passive: true });
 	    isOnMount = true
     });
     onDestroy(() => {
         off(tableWrapper, 'scroll', tableHeaderScroll);
 		if (isOnMount) off(window, 'resize', resizeHandle);
     });
-	const resizeHandle = () => {
-		console.log('resize');
-		initTable()
-	}
+	const resizeHandle = () => initTable()
     const tableHeaderScroll = (evt) => {
+	    console.log('evt.target.scrollLeft', evt.target.scrollLeft);
         tableHeaderWrapper.scrollLeft = evt.target.scrollLeft;
     };
     // 计算滚动条宽度
@@ -145,7 +145,13 @@
         // 计算表格宽度
         const columnPropDataWidth = [];
         columnPropData.filter(el => columnPropDataWidth.push(Number(el['width'])));
-        tableWidth = columnPropDataWidth.reduce((total, num) => total + num) + 'px';
+        const _tableWidth = columnPropDataWidth.reduce((total, num) => total + num);
+	    tableWidth =  _tableWidth + 'px'
+		// 是否需要滚动
+		if (tableWrapper.offsetWidth < _tableWidth) {
+			addClass(warpElement, 'be-table--scrollable-y')
+			bindWarpHeaderScroll()
+		}
     };
 
     // 加工行数据 类名 style
@@ -162,10 +168,15 @@
     const updateOneRowsData = (id) => data.forEach((el, i) => id === el.id ? rowsData[i].checked = !rowsData[i].checked :'');
     // 绑定横向滚动的头部联动
     const bindHeaderScroll = () => {
+	    console.log('eleCanScroll(tableWrapper)', eleCanScroll(tableWrapper));
         if (eleCanScroll(tableWrapper)) {
             gutter = getScrollbarWidth();
             on(tableWrapper, 'scroll', tableHeaderScroll, { passive: true });
         }
+    };
+    const bindWarpHeaderScroll = () => {
+        gutter = getScrollbarWidth();
+        on(tableWrapper, 'scroll', tableHeaderScroll, { passive: true });
     };
     const getAllColumns = (columns) => {
         const result = [];
@@ -325,6 +336,12 @@
 		data.forEach(el => el.checked = !el.checked)
 		userDoCheckHandle()
 	}
+	// 格式化表格中的数据
+	const isUndefined = (v) => v === undefined || v === null
+	const computedCell = (val) => {
+		if (placeholderRegex(val)) return placeholder
+		return val
+	}
 </script>
 <div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id}>
     <div bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'>
@@ -408,7 +425,7 @@
 	                        </td>
                         {:else}
                             <td class='be-table__cell'>
-                                <div class='cell'>{row[col.prop] || ''}</div>
+                                <div class='cell'>{computedCell(row[col.prop])}</div>
                             </td>
                         {/if}
                     {/each}
