@@ -127,11 +127,10 @@ function selectDay(e, cell, index) {
         dispatch('pick', {minDate: newDate, maxDate: minDate, close: true});
       }
     }
-    console.log('rangeState.selecting', rangeState.selecting); 
   }
   else {
     // 当前输入框无值时 选中日期 时间为00:00:00, 有值时选中即为当前值(datetime)
-    const dateTime = value ? modifyDate(date, year, dateMonth, cell.text) : new Date(year, dateMonth, cell.text)
+    const dateTime = value ? modifyDate(date, year, dateMonth, cell.text) : newDate
     dispatch('pick', dateTime)
   }
 }
@@ -170,7 +169,6 @@ function getCellClasses(cell) {
   return classes.join(' ');
 }
 const handleMouseMove = (event) => {
-  
   if (!rangeState.selecting) return;
   let target = event.target;
   if (target.tagName === 'SPAN') {
