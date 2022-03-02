@@ -60,6 +60,9 @@
       color: #c0c4cc;
       cursor: not-allowed;
     }
+    &.is-disabled.is-checked .be-radio__inner:after {
+      background-color: #c0c4cc;
+    }
   }
   &__label {
     font-size: 14px;

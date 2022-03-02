@@ -1,7 +1,6 @@
 <script lang='ts'>
 	import BeIcon from './../be-icon/BeIcon.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
-	import { cubicInOut } from 'svelte/easing';
 	import { createEventDispatcher, getContext, onMount, setContext } from "svelte";
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { BeerPS, genKey } from "$lib/utils/beerui";
@@ -78,5 +77,5 @@
 		</ul>
 		<div class="popper__arrow"></div>
 	</div>
-</div> 
+</div>
 

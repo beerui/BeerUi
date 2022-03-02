@@ -2,6 +2,7 @@
 	import DemoBlock from "$lib/demo/DemoBlock.svelte";
 	import { BeCheckbox, BeCheckboxGroup } from "$lib";
 	import BeButton from "$lib/be-button/BeButton.svelte";
+	import logs from '../../logs.svelte';
 
 	type CheckboxGroup = {
 		setCheckedList?: Function
@@ -12,7 +13,7 @@
 	let onChange = (evt) => {
 		console.log(evt.detail);
 	};
-	let checkedCities = [];
+	let checkedCities = ["上海"];
 	const cityOptions = ["上海", "北京", "广州", "深圳"];
 	let indeterminate = false;
 	let selectItem = () => checkboxGroup.setCheckedList(["上海"]);
@@ -21,47 +22,51 @@
 		indeterminate ? checkboxGroup.setCheckedList(["上海", "北京", "广州", "深圳"]) : checkboxGroup.setCheckedList([]);
 	};
 	let checkboxGroup: CheckboxGroup;
+	let clickHandle = (evt) => {
+		console.log('clickHandle', evt);
+	};
+	let changeHandle = (evt) => {
+		console.log('changeHandle', evt);
+	};
 </script>
 <div class="page-container">
 	<h2>Checkbox 多选框</h2>
 	<p>一组备选项中进行多选</p>
-	<ol>
-		<li></li>
-	</ol>
+
 	<h3>基础用法</h3>
 	<p>单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。</p>
-	<DemoBlock code={`
-<BeCheckbox {checked}>备选项</BeCheckbox>`} js={`
-import { BeCheckbox, BeTableColumn} from '@brewer/beerui'
-let checked = false;
-    `}>
-		<div slot="source">
-			<div class="demo-list">
-				<BeCheckbox {checked}>备选项</BeCheckbox>
-			</div>
-		</div>
-	</DemoBlock>
-	<h3>禁用状态</h3>
-	<p>多选框不可用状态。</p>
-	<DemoBlock
-		code={`
-<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>
-<BeCheckbox {checked} disabled>备选项</BeCheckbox>
-`} js={`
-let checked = false;
-`}>
-		<div slot="source">
-			<div class="demo-list">
-				<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>
-				<BeCheckbox {checked}>备选项</BeCheckbox>
-			</div>
-		</div>
-		<div slot="description">
-			设置disabled属性即可。
-		</div>
-	</DemoBlock>
-	<h3>多选框组</h3>
-	<p>适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。</p>
+<!--	<DemoBlock code={`-->
+<!--<BeCheckbox {checked} on:change={changeHandle} on:click={clickHandle}>备选项</BeCheckbox>`} js={`-->
+<!--import { BeCheckbox, BeTableColumn} from '@brewer/beerui'-->
+<!--let checked = false;-->
+<!--    `}>-->
+<!--		<div slot="source">-->
+<!--			<div class="demo-list">-->
+<!--				<BeCheckbox {checked} on:change={changeHandle} on:click={clickHandle}>备选项</BeCheckbox>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</DemoBlock>-->
+<!--	<h3>禁用状态</h3>-->
+<!--	<p>多选框不可用状态。</p>-->
+<!--	<DemoBlock-->
+<!--		code={`-->
+<!--<BeCheckbox checked={checked} disabled>备选项</BeCheckbox>-->
+<!--<BeCheckbox checked disabled>备选项</BeCheckbox>-->
+<!--`} js={`-->
+<!--let checked = false;-->
+<!--`}>-->
+<!--		<div slot="source">-->
+<!--			<div class="demo-list">-->
+<!--				<BeCheckbox {checked} disabled>备选项</BeCheckbox>-->
+<!--				<BeCheckbox checked disabled>备选项</BeCheckbox>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div slot="description">-->
+<!--			设置disabled属性即可。-->
+<!--		</div>-->
+<!--	</DemoBlock>-->
+<!--	<h3>多选框组</h3>-->
+<!--	<p>适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。</p>-->
 	<DemoBlock
 		code={`
 <BeButton on:click={selectItem}>选中 上海</BeButton>
