@@ -1,6 +1,7 @@
 .be-select {
   position: relative;
 
+  &--disabled {pointer-events: none;}
   &--mini {
     .be-input__inner {
       height: 28px;

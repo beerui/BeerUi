@@ -20,9 +20,10 @@
 	export let clearable = false
 	export let placeholder = '请选择'
 
-	const preClass = ["size", "disabled"];
+	const preClass = ["size"];
 	const _class = ["be-select", ...filterClass($$props, "be-select--", preClass)].join(" ");
 
+	console.log('_class', _class);
 	// 下拉框
 	let visible = false;
 	// 获取输入框
@@ -62,6 +63,7 @@
 
 <div
 	class={_class}
+	class:be-select--disabled={disabled}
 	style={$$props.style}
 	use:clickOutside={{ cb: () => visible = false }}
 	on:click
