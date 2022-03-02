@@ -4,7 +4,7 @@
     import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
 	import { throttle } from "$lib/utils/throttle";
 
-	// TODO: 1、resize 2、字段是 null/undefined 转为 '' 3、自动生成id/给用户传入id的键值
+	// TODO: 自动生成id/给用户传入id的键值
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
     export let placeholder: string = ''; // 无数据的时候展示的字段
