@@ -32,10 +32,10 @@ $:year = date.getFullYear()
 $:month = String(date.getMonth() + 1).padStart(2, '0')
 $:date = resetDate(value)
 
-if(value) timeValue = getTimeValueFormat(resetDate(value))
 
 // 打开弹窗初始化日期
 $: if(!visible) {
+  timeValue = value ? getTimeValueFormat(resetDate(value)) : ''
   date = resetDate(value)
   resetView()
 }
@@ -145,7 +145,7 @@ function handleShowTimePopper(e) {
     <div class="be-picker-panel__body">
       {#if selectMode === 'datetime'}
         <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseTimePopper }} on:outside={handleCloseTimePopper}>
-          <BeInput on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
+          <BeInput placeholder="选择时间" on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
 	        <Time {date} {format} visible={timeVisible} {selectableRange} on:pick={confirmTimePick}/>
         </div>
       {/if}

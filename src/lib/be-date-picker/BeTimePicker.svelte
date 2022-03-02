@@ -15,6 +15,7 @@
 	export let selectableRange = []
 	export let format = DEFAULT_FORMATS['time']
 	export let clearable = true
+	export let placeholder = '选择时间'
 	if(value && typeof value == 'string') {
 		value = modifyWithTimeString(new Date(), value)
 	} 
@@ -45,7 +46,7 @@
 	}
 </script>
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
-	<BeInput on:change={handleChange} {value} on:focus={handleShowDatePopper} />
+	<BeInput {placeholder} on:change={handleChange} {value} on:focus={handleShowDatePopper} />
 	<div class="be-date__prefix">
 		<BeIcon name="time"/>
 	</div>

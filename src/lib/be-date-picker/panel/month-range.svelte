@@ -2,7 +2,7 @@
   import { cubicInOut } from 'svelte/easing';
   import { nextMonth, prevMonth, prevYear, nextYear, modifyWithTimeString, isDate } from '../date-util.js'
   import MonthTable from '../basic/month-table.svelte';
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount, tick } from 'svelte';
   const dispatch = createEventDispatcher()
   export let visible = false
   export let value = []
@@ -20,8 +20,17 @@
   $:rightLabel =  rightDate.getFullYear() + '年'
   let minDate = isDate(value[0]) ? new Date(value[0]) : null;
   let maxDate = isDate(value[1]) ? new Date(value[1]) : null;
+  let rangeRect
+  let popperArrow
 
   $:if(visible) {
+    // 处理右边边界问题
+    const clientWidth = document.body.clientWidth
+    const clientRect = rangeRect && rangeRect.getBoundingClientRect()
+    if(clientRect && clientRect.right > clientWidth) {
+      rangeRect.style.left = clientWidth - clientRect.right - 10 + 'px'
+      popperArrow.style.left = clientRect.right - clientWidth + 35 + 'px'
+    }
     rangeState.selecting = false
     rangeState.endDate = null
     minDate = isDate(value[0]) ? new Date(value[0]) : null
@@ -94,7 +103,7 @@ const isValidValue = (value) => {
 
 
 {#if visible}
-<div class="be-picker-panel be-date-picker be-range-daterange-picker be-popper" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
+<div class="be-picker-panel be-date-picker be-range-daterange-picker be-popper" bind:this={rangeRect} in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
       <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear}></span>
@@ -113,6 +122,6 @@ const isValidValue = (value) => {
     </div>
     <MonthTable date = {rightDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
   </div>
-  <div class="popper__arrow"></div>
+  <div class="popper__arrow" bind:this={popperArrow}></div>
 </div>
 {/if}

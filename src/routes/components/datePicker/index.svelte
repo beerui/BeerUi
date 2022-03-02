@@ -1,8 +1,18 @@
 <script lang="ts">
   import { BeDatePicker } from '$lib';
   import { BeTimePicker } from '$lib';
-
-  let value = '2011-12'
+  import DemoBlock from '$lib/demo/DemoBlock.svelte';
+  let value = ''
+  let value0 = ''
+  let value1 = ''
+  let value2 = ''
+  let value3 = ''
+  let value4 = ''
+  let value5 = ''
+  let value6 = ''
+  let value7 = ''
+  let value8 = ''
+  let value9 = ''
   let selectableRange = '18:30:00 - 20:30:00'
   $:{
     console.log(value)
@@ -15,20 +25,190 @@
   }
 </script>
 <div class='page-container'>
-  <h2>datePicker组件</h2>
-  <h3>基本用法</h3>
-  <p class='desc'>datePicker 日期选择</p>
-  <BeDatePicker value={value} selectMode={"date"} format={"yyyy-MM-dd"} valueFormat={"yyyy/MM/dd"} disabledDate={disabledDate} on:change={changeTime}/>
-  <p class='desc'>datePicker 日期范围选择</p>
-  <BeDatePicker selectMode={"daterange"} value={['2022-03-01','2022-03-03']} format={"yyyy-MM-dd"} valueFormat={"yyyy/MM/dd"} disabledDate={disabledDate}/>
-  <p class='desc'>datePicker 日期时间选择</p>
-  <BeDatePicker value={''} selectMode={"datetime"} format={"yyyy-MM-dd HH:mm"} on:change={changeTime}/>
-  <p class='desc'>datePicker 月份选择</p>
-  <BeDatePicker value={'2021-12'} selectMode={"month"} format={"yyyy-MM"}/>
-  <p class='desc'>datePicker 月份范围选择</p>
-  <BeDatePicker selectMode={"monthrange"} format={"yyyy-MM"} on:change={changeTime}/>
-  <p class='desc'>datePicker 年份选择</p>
-  <BeDatePicker value={'2021'} selectMode={"year"} format={"yyyy"} />
-  <p class='desc'>timePicker 时间选择</p>
-  <BeTimePicker value='' format={"HH:mm"} {selectableRange} on:change={changeTime}/>
+  <h3>TODO:</h3>
+  <li>增加时间日期范围选择</li>
+  <li>增加年份范围选择</li>
+  <li>增加多选日期功能</li>
+  <li>是否需要周选择器?</li>
+  <h2>DatePicker 日期选择器</h2>
+  <span>用于选择或输入日期</span>
+  <h3>选择日</h3>
+  <p class='desc'>以「日」为基本单位，基础的日期选择控件</p>
+  <DemoBlock code={`
+    <div class="flex column align-center">
+      <span class="demonstration">默认</span>
+      <BeDatePicker bind:value={value} placeholder='选择日期' selectMode="date" />
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">无清除按钮</span>
+      <BeDatePicker bind:value={value0} placeholder='选择日期' clearable={false} selectMode="date" />
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">禁用日期</span>
+      <BeDatePicker bind:value={value1} placeholder='选择日期' {disabledDate} clearable={false} selectMode="date" />
+    </div>
+    `}
+    js={`
+    import { BeDatePicker } from '@brewer/beerui'
+    let value = ''
+    let value0 = ''
+    let value1 = ''
+    const disabledDate = (time) => {
+      return time.getTime() > Date.now()
+    }`
+    }>
+      <div slot='source'>
+        <div class="flex justify-around">
+          <div class="flex column align-center">
+            <span class="demonstration">默认</span>
+            <BeDatePicker bind:value={value} placeholder='选择日期' selectMode="date" />
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">无清除按钮</span>
+            <BeDatePicker bind:value={value0} placeholder='选择日期' clearable={false} selectMode="date" />
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">禁用日期</span>
+            <BeDatePicker bind:value={value1} placeholder='选择日期' {disabledDate} selectMode="date" />
+          </div>
+        </div>
+      </div>
+      <div slot='description'>
+        基本单位由selectMode属性指定，通过clearable指定是否需要清除安按钮，disabledDate设置日期的禁用状态
+      </div>
+  </DemoBlock>
+  <h3>其他日期单位</h3>
+  <p class='desc'>通过扩展基础的日期选择，可以选择日期时间、月、年</p>
+  <DemoBlock code={`
+    <div class="flex column align-center">
+      <span class="demonstration">日期时间</span>
+      <BeDatePicker bind:value={value2} placeholder='选择日期时间' selectMode="datetime" />
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">月</span>
+      <BeDatePicker bind:value={value3} placeholder='选择月' selectMode="month" />
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">月</span>
+      <BeDatePicker bind:value={value4} placeholder='选择年' selectMode="year" />
+    </div>
+    `}
+    js={`
+    import { BeDatePicker } from '@brewer/beerui'
+    let value2 = ''
+    let value3 = ''
+    let value4 = ''`
+    }>
+      <div slot='source'>
+        <div class="flex justify-around">
+          <div class="flex column align-center">
+            <span class="demonstration">日期时间</span>
+            <BeDatePicker bind:value={value2} placeholder='选择日期时间' selectMode="datetime" />
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">月</span>
+            <BeDatePicker bind:value={value3} placeholder='选择月' selectMode="month" />
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">年</span>
+            <BeDatePicker bind:value={value4} placeholder='选择年' selectMode="year" />
+          </div>
+        </div>
+      </div>
+  </DemoBlock>
+  <h3>选择日期范围</h3>
+  <p class='desc'>可在一个选择器中便捷地选择一个时间范围</p>
+  <DemoBlock code={`
+    <div class="flex column align-center">
+      <span class="demonstration">默认</span>
+      <BeDatePicker bind:value={value5} selectMode="daterange"  />
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">月份范围</span>
+      <BeDatePicker bind:value={value6} selectMode="monthrange"  />
+    </div>
+    `}
+    js={`
+    import { BeDatePicker } from '@brewer/beerui'
+    let value5 = ''
+    let value6 = ''`
+    }>
+      <div slot='source'>
+        <div class="flex justify-around">
+          <div class="flex column align-center">
+            <span class="demonstration">默认</span>
+            <BeDatePicker bind:value={value5} selectMode="daterange"  />
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">月份范围</span>
+            <BeDatePicker bind:value={value6} selectMode="monthrange"  />
+          </div>
+        </div>
+      </div>
+  </DemoBlock>
+  <h3>时间选择</h3>
+  <p class='desc'>可在一个选择器中便捷地选择一个时间</p>
+  <DemoBlock code={`
+     <div class="flex column align-center">
+      <span class="demonstration">默认</span>
+      <BeTimePicker bind:value={value7}/>
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">显示时分</span>
+      <BeTimePicker bind:value={value8}  format="HH:mm" />
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">禁用选项</span>
+      <BeTimePicker bind:value={value9} {selectableRange} />
+    </div>
+    `}
+    js={`
+    import { BeTimePicker } from '@brewer/beerui'
+    let value7 = ''
+    let value8 = ''
+    let value9 = ''
+    const selectableRange = '18:30:00 - 20:30:00'`
+    }>
+      <div slot='source'>
+        <div class="flex justify-around">
+          <div class="flex column align-center">
+            <span class="demonstration">默认</span>
+            <BeTimePicker bind:value={value7}/>
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">显示时分</span>
+            <BeTimePicker bind:value={value8}  format="HH:mm" />
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">禁用选项</span>
+            <BeTimePicker bind:value={value9} {selectableRange} />
+          </div>
+        </div>
+      </div>
+      <div slot='description'>
+        可通过format指定显示时间,通过selectableRange设置禁用范围
+      </div>
+  </DemoBlock>
 </div>
+
+<style lang="scss">
+  .flex {
+    display: flex;
+  }
+  .column {
+    flex-direction: column;
+  }
+  .align-center {
+    align-items: center;
+  }
+  .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+   
+  }
+  .justify-around {
+    justify-content: space-around;
+  }
+</style>

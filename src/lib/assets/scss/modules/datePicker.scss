@@ -466,8 +466,7 @@
     cursor: pointer;
   }
 }
-.be-range-daterange {
-  width: 350px;
+@mixin rangeSelect {
   &:hover {
     .clearable {
       display: flex;
@@ -500,37 +499,11 @@
     }
   }
 }
+.be-range-daterange {
+  width: 350px;
+  @include rangeSelect
+}
 .be-range-monthrange {
   width: 300px;
-  &:hover {
-    .be-range__close-icon {
-      display: flex;
-    }
-  }
-  &-picker {
-    width: 646px;
-    &__header {
-      position: relative;
-      text-align: center;
-      height: 28px;
-    }
-    &__content {
-      float: left;
-      width: 50%;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 16px;
-      &.is-left {
-        border-right: 1px solid #e4e4e4;
-      }
-    }
-  }
-  &.be-input__inner {
-    display: inline-flex;
-    align-items: center;
-    padding: 3px 10px;
-    &.active {
-      border-color: #409eff;
-    }
-  }
+  @include rangeSelect
 }
