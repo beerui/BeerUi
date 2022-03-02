@@ -60,10 +60,7 @@
 		if (isOnMount) off(window, 'resize', resizeHandle);
     });
 	const resizeHandle = () => initTable()
-    const tableHeaderScroll = (evt) => {
-	    console.log('evt.target.scrollLeft', evt.target.scrollLeft);
-        tableHeaderWrapper.scrollLeft = evt.target.scrollLeft;
-    };
+    const tableHeaderScroll = (evt) => tableHeaderWrapper.scrollLeft = evt.target.scrollLeft;
     // 计算滚动条宽度
     const getScrollbarWidth = () => {
         const scrollDiv = document.createElement('div');
@@ -168,7 +165,6 @@
     const updateOneRowsData = (id) => data.forEach((el, i) => id === el.id ? rowsData[i].checked = !rowsData[i].checked :'');
     // 绑定横向滚动的头部联动
     const bindHeaderScroll = () => {
-	    console.log('eleCanScroll(tableWrapper)', eleCanScroll(tableWrapper));
         if (eleCanScroll(tableWrapper)) {
             gutter = getScrollbarWidth();
             on(tableWrapper, 'scroll', tableHeaderScroll, { passive: true });
