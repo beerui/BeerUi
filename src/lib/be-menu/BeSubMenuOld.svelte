@@ -1,45 +1,46 @@
 <script lang="ts">
-	import { genKey, hasClass } from '$lib/utils/beerui';
+	import { BeerPS, hasClass, addClass } from "$lib/utils/beerui";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { getContext, onMount, tick } from "svelte";
+	import { getContext, onDestroy, onMount, tick } from "svelte";
 
 	export let index: String = "";
-	const store = getContext("menuStore");
-	let collapse = store.collapse
+	const key = getContext("MenuTriggerKey");
+	const trigger = getContext(`MenuTrigger_${ key }`);
+	const mode = getContext(`MenuMode_${ key }`);
+	let collapse = getContext(`MenuCollapse_${ key }`);
 
-	const key = genKey(2);
 	let submenu = null;
 	let subMenuContent = null;
-	let hovered = store.trigger;
+	let hovered = trigger === "hover";
 	let isOpen = false;
 	let isActive = false;
 	let timeout = null;
-	//
-	// const _MenuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, async items => {
-	// 	if (items.type === "setting" && submenu) {
-	// 		await tick();
-	// 		const els = submenu.querySelector(".is_active");
-	// 		computedActive(els);
-	// 	} else {
-	// 		computedActive(items.els);
-	// 	}
-	// });
-	// const computedActive = (els) => {
-	// 	if (!els || hasClass(els, "be-menu")) return;
-	// 	if (hasClass(els.parentElement, "be-submenu")) {
-	// 		addClass(els.parentElement, 'is_active');
-	// 		if (mode === "vertical" && !collapse) isActive = true
-	// 	}
-	// 	setTimeout(() => computedActive(els.parentElement), 60);
-	// };
-	// // 点击外部关闭子集弹框
-	// const _MenuCloseAll = BeerPS.subscribe(`MenuCloseAll_${ key }`, () => isOpen = false);
-	// // 接收展开或收起的状态
-	// const _MenuCollapse = BeerPS.subscribe(`MenuCollapse_${ key }`, _collapse => {
-	// 	collapse = _collapse;
-	// 	changeActive(false, 0);
-	// });
-	//
+
+	const _MenuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, async items => {
+		if (items.type === "setting" && submenu) {
+			await tick();
+			const els = submenu.querySelector(".is_active");
+			computedActive(els);
+		} else {
+			computedActive(items.els);
+		}
+	});
+	const computedActive = (els) => {
+		if (!els || hasClass(els, "be-menu")) return;
+		if (hasClass(els.parentElement, "be-submenu")) {
+			addClass(els.parentElement, 'is_active');
+			if (mode === "vertical" && !collapse) isActive = true
+		}
+		setTimeout(() => computedActive(els.parentElement), 60);
+	};
+	// 点击外部关闭子集弹框
+	const _MenuCloseAll = BeerPS.subscribe(`MenuCloseAll_${ key }`, () => isOpen = false);
+	// 接收展开或收起的状态
+	const _MenuCollapse = BeerPS.subscribe(`MenuCollapse_${ key }`, _collapse => {
+		collapse = _collapse;
+		changeActive(false, 0);
+	});
+
 	const enterMenu = () => {
 		let isFlag: boolean = false;
 		if (hovered || collapse) {
@@ -71,19 +72,19 @@
 	onMount(() => {
 		level = computedLevel(submenu);
 	});
-	//
-	// onDestroy(() => {
-	// 	BeerPS.unsubscribe(_MenuActiveChange);
-	// 	BeerPS.unsubscribe(_MenuCloseAll);
-	// 	BeerPS.unsubscribe(_MenuCollapse);
-	// });
+
+	onDestroy(() => {
+		BeerPS.unsubscribe(_MenuActiveChange);
+		BeerPS.unsubscribe(_MenuCloseAll);
+		BeerPS.unsubscribe(_MenuCollapse);
+	});
 	// 打开关闭菜单动画
 	let subMenuContentHeight;
 	const triggerMenu = async () => {
 		let _isOpen = isOpen;
 		if (!_isOpen) isOpen = !isOpen;
 		subMenuContentHeight = subMenuContent.children.length * 50 + 10 + "px";
-		if (store.mode === "vertical") {
+		if (mode === "vertical") {
 			subMenuContent.style.overflow = "hidden";
 			const animate = subMenuContent.animate([
 				{ height: _isOpen ? subMenuContentHeight : "0px", opacity: _isOpen ? "1" : "0" },
@@ -109,7 +110,6 @@
 			if (_isOpen) isOpen = !isOpen;
 		}
 	};
-
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>
@@ -125,7 +125,6 @@
     on:mousedown|stopPropagation
     on:mouseup|stopPropagation
     on:click|stopPropagation={triggerMenu}
-    {key}
     {index}
     {level}
 >
