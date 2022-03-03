@@ -1,10 +1,14 @@
 <script lang='ts'>
 	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
-    import { filterClass, off, on } from '$lib/utils/beerui';
+	import { addClass, filterClass, off, on } from "$lib/utils/beerui";
     import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
+	import { throttle } from "$lib/utils/throttle";
 
+	// TODO: 自动生成id/给用户传入id的键值
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
+    export let placeholder: string = ''; // 无数据的时候展示的字段
+    export let placeholderRegex: Function = (v) => isUndefined(v); // 无数据的判断
     export let border: boolean = false; // 边框 false/true
     export let showHeader: boolean = true; // 显示表头 true/false
     export let height: string = ''; // 定义了height属性，即可实现固定表头的表格
@@ -24,7 +28,6 @@
     const _class = [...normalClass, ...filterClass($$props, 'be-table--', preClass)].join(' ');
     export { _class as class };
 
-    // TODO: Selection
     let warpElement = null; // 顶层元素
     let tableHeaderWrapper = null; // 表格头元素
     let tableWrapper = null; // 表格元素
@@ -45,15 +48,19 @@
     let headerOriginData = []; // 表头 原始Tree
     let checkList = [] // 选择列表
 
+	let isOnMount = false
     onMount(() => {
         warpElement && initTable();
+
+	    on(window, 'resize', throttle(resizeHandle, 30), { passive: true });
+	    isOnMount = true
     });
     onDestroy(() => {
         off(tableWrapper, 'scroll', tableHeaderScroll);
+		if (isOnMount) off(window, 'resize', resizeHandle);
     });
-    const tableHeaderScroll = (evt) => {
-        tableHeaderWrapper.scrollLeft = evt.target.scrollLeft;
-    };
+	const resizeHandle = () => initTable()
+    const tableHeaderScroll = (evt) => tableHeaderWrapper.scrollLeft = evt.target.scrollLeft;
     // 计算滚动条宽度
     const getScrollbarWidth = () => {
         const scrollDiv = document.createElement('div');
@@ -92,9 +99,6 @@
         computedColumnData();
         // 加工行数据
         computedRowsData();
-        // 渲染body
-        // const tbodys = render()
-        // tbody.innerHTML = tbodys
         // DOM渲染完毕 计算滚动条宽度
         await tick();
         // 绑定横向滚动的头部联动
@@ -138,7 +142,13 @@
         // 计算表格宽度
         const columnPropDataWidth = [];
         columnPropData.filter(el => columnPropDataWidth.push(Number(el['width'])));
-        tableWidth = columnPropDataWidth.reduce((total, num) => total + num) + 'px';
+        const _tableWidth = columnPropDataWidth.reduce((total, num) => total + num);
+	    tableWidth =  _tableWidth + 'px'
+		// 是否需要滚动
+		if (tableWrapper.offsetWidth < _tableWidth) {
+			addClass(warpElement, 'be-table--scrollable-y')
+			bindWarpHeaderScroll()
+		}
     };
 
     // 加工行数据 类名 style
@@ -159,6 +169,10 @@
             gutter = getScrollbarWidth();
             on(tableWrapper, 'scroll', tableHeaderScroll, { passive: true });
         }
+    };
+    const bindWarpHeaderScroll = () => {
+        gutter = getScrollbarWidth();
+        on(tableWrapper, 'scroll', tableHeaderScroll, { passive: true });
     };
     const getAllColumns = (columns) => {
         const result = [];
@@ -244,40 +258,7 @@
         return result;
     };
 
-    const render = () => {
-        let result = '';
-        for (let i = 0; i < rowsData.length; i++) {
-            const row = rowsData[i];
-            const className = stripe && i % 2 === 1 ? `be-table__row--striped ${ row.className }` : row.className;
-            result += `
-			<tr class='be-table__row ${ className }' style=${ row.styles }>
-				${ renderTd(columnPropData, i, row) }
-			</tr>
-			`;
-        }
-        return result;
-    };
-    const renderTd = (data, i, row) => {
-        let result = '';
-        for (let j = 0; j < data.length; j++) {
-            const col = data[j];
-            if (col['prop'] === 'tableSlot') {
-                result += `
-				<td class='be-table__cell'>
-					<div class='cell be-table-cell__${ j }'><BeButton onclick='clickBtn1'>默认</BeButton></div>
-				</td>
-				`;
-            } else {
-                result += `
-				<td class='be-table__cell'>
-					<div class='cell be-table-cell__${ j }'>${ row[col['prop']] || '' }</div>
-				</td>
-				`;
-            }
-        }
-        return result;
-    };
-		const dispatch = createEventDispatcher()
+	const dispatch = createEventDispatcher()
     // 全选事件
     let isAllCheck = false;
     let indeterminate = false; // 是否半选状态
@@ -350,6 +331,12 @@
 	export const toggleAllSelection = () => {
 		data.forEach(el => el.checked = !el.checked)
 		userDoCheckHandle()
+	}
+	// 格式化表格中的数据
+	const isUndefined = (v) => v === undefined || v === null
+	const computedCell = (val) => {
+		if (placeholderRegex(val)) return placeholder
+		return val
 	}
 </script>
 <div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id}>
@@ -434,7 +421,7 @@
 	                        </td>
                         {:else}
                             <td class='be-table__cell'>
-                                <div class='cell'>{row[col.prop] || ''}</div>
+                                <div class='cell'>{computedCell(row[col.prop])}</div>
                             </td>
                         {/if}
                     {/each}

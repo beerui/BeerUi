@@ -6,7 +6,7 @@
 
 	let js = `
 import { BePagination } from '@brewer/beerui'
-const query = { limit: 11, name: "", page: 1 }
+const query = { limit: 10, name: "", page: 1 }
 const options = {
 	card: true,
 	showNumber: 6,
@@ -45,8 +45,6 @@ function changePage(item) {
 	currentPage=1
 	pageSize={query.limit}
 	{total}
-	async
-	layouts="prev, pager, next"
 	on:changePage={changePage}
 	{options}
 />
@@ -82,7 +80,7 @@ function changePage(item) {
 />
 `
 
-	const query = { limit: 11, name: "", page: 1 }
+	const query = { limit: 10, name: "", page: 1 }
 	const options = {
 		card: true,
 		showNumber: 6,
@@ -111,9 +109,9 @@ function changePage(item) {
 		}
 	}
 	let list = []
-	let total = 11 // 总条数
+	let total = 41 // 总条数
 	const feedBackList = async () => {
-		total = 11
+		total = 41
 		const defaultItem = {
 			name: '',
 			age: 11,
@@ -168,7 +166,7 @@ function changePage(item) {
 						</tbody>
 					</table>
 				</div>
-				<BePagination currentPage=1 pageSize={query.limit} {total} async layouts="prev, pager, next" on:changePage={changePage} {options} />
+				<BePagination currentPage=1 pageSize={query.limit} {total} on:changePage={changePage} {options} />
 			</div>
 			<div class='demo-list'>
 				<BePagination currentPage=1 pageSize={query.limit} total=200 async layouts="prev, pager, next" on:changePage={changePage} {options} />
@@ -182,6 +180,47 @@ function changePage(item) {
 		</div>
 		<div slot='description'>
 			使用options配置分页的显示样式，card:是否是卡片 showNumber:显示数目 低于5条时不展示... icon: 大小和颜色
+		</div>
+	</DemoBlock>
+
+	<h2>附加功能</h2>
+
+	<DemoBlock code={`
+<BePagination currentPage=1 pageSize={query.limit} {total} async layouts="prev, pager, next, sizes, jumper, info" on:changePage={changePage} {options} />
+`}>
+		<div slot='source'>
+			<div class='demo-list'>
+				<div class="overflow-x-auto">
+					<table class="table w-full table-zebra">
+						<thead>
+						<tr>
+							<td>序号</td>
+							<td>姓名</td>
+							<td>年龄</td>
+							<td>创建时间</td>
+						</tr>
+						</thead>
+						<tbody>
+						{#each list as item, index}
+							<tr>
+								<td>{index + 1 + (query.page - 1) * query.limit}</td>
+								<td>{item.name + getRandomInt(1, 99)}</td>
+								<td>{getRandomInt(10, 60)}</td>
+								<td>{times}</td>
+							</tr>
+						{/each}
+						</tbody>
+					</table>
+				</div>
+				<BePagination currentPage=1 pageSize={query.limit} {total} async layouts="prev, pager, next, sizes, jumper, info, all" on:changePage={changePage} {options} />
+			</div>
+		</div>
+		<div slot='description'>
+			<ol>
+				<li>layouts prev, pager, next, sizes, jumper, info, all 展示不同的区块</li>
+				<li>changePage 监听页码改变</li>
+				<li>pageSizeChange 监听页数改变</li>
+			</ol>
 		</div>
 	</DemoBlock>
 </div>

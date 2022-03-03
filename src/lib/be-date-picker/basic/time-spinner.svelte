@@ -33,6 +33,11 @@
   })
   
   const selectTime = (type, index) => {
+
+    // TODO:需要处理用户赋予禁用的时间为默认值
+    // if(selectableRange && selectableRange.length > 0 && type == 'hours' && hoursList[index]) {
+    //   index = canSelectTime(hoursList)
+    // }
     timeSelect[type] = index
     timeDom[type].scrollTop = index * itemHeight
     sendEmit()
@@ -46,6 +51,11 @@
     const value = timeSelect[type] * itemHeight
     timeDom[type].scrollTop = value
     sendEmit()
+  }
+  const canSelectTime = (list) => {
+    return list.findIndex((item)=>{
+      return !item
+    })
   }
   const sendEmit = () => {
     dispatch('pick', {date: modifyTime(date, timeSelect.hours, timeSelect.minutes, timeSelect.seconds), disabled: secondsList[timeSelect.seconds]})

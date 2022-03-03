@@ -11,11 +11,22 @@
 	class={_class}
 	{style}
 	on:click
+	on:contextmenu
 	on:dblclick
 	on:focusin
+	on:mousedown
+	on:mouseup
 	on:focusout
 	on:keydown
 	on:keyup
+	on:pointercancel
+	on:pointerdown
+	on:pointerenter
+	on:pointerleave
+	on:pointermove
+	on:pointerout
+	on:pointerup
+	on:input
 	type={nativeType}
 >
 	<span>

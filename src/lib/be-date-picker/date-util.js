@@ -69,7 +69,12 @@ export const modifyDate = function(date, y, m, d) {
 export const parseDate = function(string, format) {
   return fecha.parse(string, format || 'yyyy-MM-dd');
 };
-
+export const isDate = function(date) {
+  if (date === null || date === undefined) return false;
+  if (isNaN(new Date(date).getTime())) return false;
+  if (Array.isArray(date)) return false; // deal with `new Date([ new Date() ]) -> new Date()`
+  return true;
+};
 export const modifyWithTimeString = (date, time) => {
   if (date == null || !time) {
     return date;

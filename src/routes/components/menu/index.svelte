@@ -78,7 +78,7 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
 	<DemoBlock
 		code={`
 <div style="width: 200px;min-height: 200px;">
-	<BeMenu class="be-menu-demo"  key="2" active="1" mode="vertical" trigger="click">
+	<BeMenu class="be-menu-demo"  key="2" active="2-1" mode="vertical" trigger="click">
 		<BeMenuItem index="1">处理中心</BeMenuItem>
 		<BeSubMenu index="2">
 			<div slot="icon">
@@ -109,7 +109,7 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
 		<div slot="source">
 			<div class="demo-list">
 				<div style="width: 200px;min-height: 200px;">
-					<BeMenu class="be-menu-demo" key="2" active="1" mode="vertical" trigger="click">
+					<BeMenu class="be-menu-demo" key="2" active="2-1" mode="vertical" trigger="click">
 						<BeMenuItem index="1">处理中心</BeMenuItem>
 						<BeSubMenu index="2">
 							<div slot="icon">
@@ -202,7 +202,7 @@ const toggleCollapse = () => collapse = !collapse
 			</div>
 			<div class="demo-list">
 				<div style="width: 200px;min-height: 200px;">
-					<BeMenu class="be-menu-demo" key="3" active="1" mode="vertical" trigger="hover" {collapse}>
+					<BeMenu class="be-menu-demo" key="3" active="2-1" mode="vertical" trigger="hover" {collapse}>
 						<BeMenuItem index="1">
 							<div slot="icon">
 								<BeIcon name="chart-bubble" />

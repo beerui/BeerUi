@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BeerPS, hasClass, addClass, removeClass } from "$lib/utils/beerui";
+	import { BeerPS, hasClass, addClass } from "$lib/utils/beerui";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
 	import { getContext, onDestroy, onMount, tick } from "svelte";
 
@@ -27,7 +27,10 @@
 	});
 	const computedActive = (els) => {
 		if (!els || hasClass(els, "be-menu")) return;
-		if (hasClass(els.parentElement, "be-submenu")) addClass(els.parentElement, "is_active");
+		if (hasClass(els.parentElement, "be-submenu")) {
+			addClass(els.parentElement, 'is_active');
+			if (mode === "vertical" && !collapse) isActive = true
+		}
 		setTimeout(() => computedActive(els.parentElement), 60);
 	};
 	// 点击外部关闭子集弹框
@@ -114,10 +117,13 @@
     aria-haspopup="true"
     class="be-submenu {_class}"
     class:is_active={isActive}
-    class:is_opened={isOpen}
+    class:is_opened={(isActive || isOpen)}
     bind:this={submenu}
     on:mouseenter={enterMenu}
     on:mouseleave={leaveMenu}
+    on:dblclick|stopPropagation
+    on:mousedown|stopPropagation
+    on:mouseup|stopPropagation
     on:click|stopPropagation={triggerMenu}
     {index}
     {level}
@@ -137,8 +143,10 @@
 			</div>
 		{/if}
 	</div>
-	<ul class="be-submenu__content be-submenu__{level}" bind:this={subMenuContent}
-	    style:display={isOpen ? 'block' : 'none'}>
+	<ul class="be-submenu__content be-submenu__{level}"
+	    bind:this={subMenuContent}
+	    style:display={(isActive || isOpen) ? 'block' : 'none'}
+	>
 		<slot></slot>
 	</ul>
 </li>

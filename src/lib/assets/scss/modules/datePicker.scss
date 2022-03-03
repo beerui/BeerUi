@@ -1,6 +1,39 @@
 .be-date {
   position: relative;
-  width: 300px;
+  width: 220px;
+  &.be-range {
+    width: 100%
+  }
+  .be-input__inner {
+    padding: 0 30px;
+  }
+  &:hover {
+    .clearable {
+      display: flex;
+    }
+  }
+  &__prefix {
+    position: absolute;
+    left: 5px;
+    top: 0;
+    height: 100%;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__suffix {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    width: 25px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+  }
 }
 @mixin right-arrow {
   position: absolute;
@@ -61,6 +94,9 @@
     display: table;
     width: 100%;
     box-sizing: border-box;
+    .be-input {
+      width: 100%;
+    }
   }
   &__header {
     margin: 12px;
@@ -179,6 +215,30 @@
       transform: translateX(-50%);
       border-radius: 50%;
     }
+    &.start-date div {
+      margin-left: 5px;
+      color:#fff;
+      span {
+        color:#fff;
+      }
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    &.in-range div {
+      background-color:#f2f6fc;
+    }
+    &.end-date div {
+      color: #fff;
+      span {
+        color:#fff;
+      }
+      margin-right: 5px;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    &.end-date span, &.start-date span{
+      background-color: #409eff;
+    }
   }
   .today span {
     color: #409eff;
@@ -199,6 +259,10 @@
   font-size: 12px;
   border-collapse: collapse;
   border-spacing: 0;
+  .today .cell {
+    color: #409eff;
+    font-weight: 700;
+  }
   td {
     text-align: center;
     padding: 8px 0;
@@ -220,10 +284,30 @@
       margin: 0 auto;
       border-radius: 18px;
     }
-  }
-  .today .cell {
-    color: #409eff;
-    font-weight: 700;
+    &.start-date div {
+      margin-left: 5px;
+      color:#fff;
+      .cell {
+        color:#fff;
+      }
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    &.in-range div {
+      background-color:#f2f6fc;
+    }
+    &.end-date div {
+      color: #fff;
+      .cell {
+        color:#fff;
+      }
+      margin-right: 5px;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    &.end-date span, &.start-date span{
+      background-color: #409eff;
+    }
   }
   .current:not(.disabled) .cell {
     color: #409eff;
@@ -342,4 +426,84 @@
     height: 0;
     border: 4px solid transparent;
   }
+}
+.be-range {
+  &-input {
+    appearance: none;
+    border: none;
+    outline: none;
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 39%;
+    text-align: center;
+    font-size: 14px;
+    color: #606266;
+    cursor: pointer;
+    &::placeholder {
+      color: var(--text-color-placeholder);
+    }
+  }
+  &-separator {
+    display: inline-block;
+    height: 100%;
+    // padding: 0 5px;
+    margin: 0 5px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 14px;
+    width: 5%;
+    color: #303133;
+  }
+  &__close-icon {
+    display: none;
+    // width: 20px;
+    flex: 1;
+    // display: flex;
+    justify-content: right;
+    line-height: 32px;
+    cursor: pointer;
+  }
+}
+@mixin rangeSelect {
+  &:hover {
+    .clearable {
+      display: flex;
+    }
+  }
+  &-picker {
+    width: 646px;
+    &__header {
+      position: relative;
+      text-align: center;
+      height: 28px;
+    }
+    &__content {
+      float: left;
+      width: 50%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 16px;
+      &.is-left {
+        border-right: 1px solid #e4e4e4;
+      }
+    }
+  }
+  &.be-input__inner {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    &.active {
+      border-color: #409eff;
+    }
+  }
+}
+.be-range-daterange {
+  width: 350px;
+  @include rangeSelect
+}
+.be-range-monthrange {
+  width: 300px;
+  @include rangeSelect
 }

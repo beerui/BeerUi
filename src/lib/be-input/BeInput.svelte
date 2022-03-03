@@ -46,7 +46,28 @@
   }
 </script>
 
-<div class={['be-input', size?' be-input--'+ size:'', disabled?' is-disabled':''].join('')}>
+<div
+	class={['be-input', size?' be-input--'+ size:'', disabled?' is-disabled':''].join('')}
+	style={$$props.style}
+	on:click
+	on:contextmenu
+	on:dblclick
+	on:focus
+	on:focusin
+	on:mousedown
+	on:mouseup
+	on:focusout
+	on:keydown
+	on:keyup
+	on:pointercancel
+	on:pointerdown
+	on:pointerenter
+	on:pointerleave
+	on:pointermove
+	on:pointerout
+	on:pointerup
+	on:input
+>
   <input type="text" placeholder={placeholder} bind:value class="be-input__inner" {readonly} {disabled} on:blur={(e)=>{blur(e)}} on:focus={(e)=>{focus(e)}} on:change={(e)=>{change(e)}} on:input={(e)=>{oninput(e)}} bind:this={input}>
   {#if getSuffixVisible()}
   <span class={['be-input__suffix',disabled ? ' is-disabled':''].join('')}>

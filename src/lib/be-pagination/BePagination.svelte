@@ -6,7 +6,7 @@
 	 * @params currentPage 当前页
 	 * @params pageSize 显示条数
 	 * @params pagerCount 显示多少个
-	 * @params layouts 最大页码按钮数 TODO：上一页 下一页 隐藏
+	 * @params layouts 最大页码按钮数
 	 * @params async 后续是否更新 异步接口需要开启 必须在初始状态就设置
 	 *
 	 * 格式
@@ -14,18 +14,22 @@
 	 * II. 1  ...5 6 7 8 9 ... 100
 	 * III. 1  ....5 6 7 8 9 10 11 12
 	 */
-	import { beforeUpdate, createEventDispatcher, onMount } from 'svelte'
+	import { beforeUpdate, createEventDispatcher, onDestroy, onMount } from "svelte";
 	import { filterMidArray } from '$lib/utils';
+	import BeSelect from "$lib/be-select/BeSelect.svelte";
+	import BeOption from "$lib/be-select/BeOption.svelte";
+	import BeInput from "$lib/be-input/BeInput.svelte";
+	import Notice from '$lib/utils/notice'
 	const dispatch = createEventDispatcher()
 
 	export let total = 0 // 总条数
 	export let type = 'normal' // 类别 mini/normal
 	export let currentPage = 1 // 当前页
-	export let pageSize = 15 // 显示条数
+	export let pageSize = 10 // 显示条数
 	export let layouts = 'prev, pager, next' // 最大页码按钮数
 	export let async = false // 后续是否更新
+	export let pageSizes = [10, 15, 20] // 后续是否更新
 
-	console.log('currentPage', typeof currentPage);
 	// 其它设置
 	export let options = {
 		card: false, // 是否是块状
@@ -37,6 +41,8 @@
 	$: totalpages = Math.ceil(total / pageSize) // 总页数
 	$: pageList = []
 
+	const components = layouts.split(',').map((item) => item.trim());
+
 	let icon = {
 		width: 12,
 		height: 12,
@@ -44,6 +50,8 @@
 	}
 	let isCard = options.card || false
 	let pagerCount = options.showNumber || 8
+	let jumpPage:string|number = ''
+
 	if (options.icon) {
 		icon = Object.assign(icon, options.icon)
 	}
@@ -53,9 +61,14 @@
 			pageList = computePageList() // 计算页码
 		})
 	}
+	let notice = null
 	// 初始值调用
 	onMount(() => {
 		pageList = computePageList() // 计算页码
+		notice = new Notice()
+	})
+	onDestroy(() => {
+		notice = null
 	})
 	function computePageList() {
 		let pages:any[]
@@ -126,6 +139,7 @@
 	// 取中间值
 	const roundNum = (n1, n2) => Math.round((Number(n1) + Number(n2)) / 2)
 	function changePage(page) {
+		console.log('changePage');
 		// 解决点击上一页/下一页 page会为0的问题/age会超出最大值的问题
 		if (page <= 0 || page > totalpages) return
 		// 设置当前选中的元素
@@ -138,7 +152,27 @@
 			document.body.scrollIntoView({ behavior: "smooth" });
 		}
 	}
+	$: if (pageSize) dispatch('pageSizeChange', pageSize)
+	const keydownHandle = (evt) => {
+		if (evt.keyCode === 13) {
+			if (jumpPage > pageSize || jumpPage <= 0) {
+				openPosInfo('提示', '页码不正确！')
+				return
+			}
+			changePage(jumpPage)
+		}
+	}
 
+	function openPosInfo(title:string = '提示', message:string = ''):void{
+		notice.setNotice({
+			title,
+			message,
+			position: 'top-right',
+			duration: 3000,
+			titleColor: "#ee933b",
+			messageColor: "#f0a373"
+		})
+	}
 </script>
 <div class="{isCard ? 'be-pagination be-pagination-card' : 'be-pagination'}" >
 	{#if type === 'mini'}
@@ -153,22 +187,23 @@
 	{/if}
 	{#if type === 'normal'}
 	<div class='be-pagination__container'>
-		{#if layouts}
+		{#if components.includes('info')}
 			<div class='be-pagination__analyze'>
 				<p class="text-sm text-gray-700">
+					{#if components.includes('all')}
 					显示
 					<span class="font-medium">{pageSize}条 </span>
 					当前在
-					<span class="font-medium">第{+currentPage}页 </span>
-					共有
-					<span class="font-medium">{total}</span>
-					条结果
-					<span class="font-medium"> {totalpages}</span>
-					页
+					<span class="font-medium">第{+currentPage} / {totalpages}页</span>
+					{/if}
+					共
+					<span class="font-medium"> {total}</span>
+					条
 				</p>
 			</div>
 		{/if}
 		<div class='be-pagination__container'>
+			{#if components.includes('prev')}
 			<div on:click={() => changePage(+currentPage - 1)} class="list" class:disabled={+currentPage === 1}>
 				<div class="sr-only pointer-events-none svg-icon">
 					<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
@@ -176,6 +211,7 @@
 					</svg>
 				</div>
 			</div>
+			{/if}
 			{#each pageList as item, index}
 				{#if item.type === 'ellipsis'}
 					<div on:click={() => changePage(item.n)} class="list" class:active={+currentPage === item.n}>
@@ -187,6 +223,7 @@
 					</div>
 				{/if}
 			{/each}
+			{#if components.includes('next')}
 			<div on:click={() => changePage(+currentPage + 1)} class="list" class:disabled={+currentPage === totalpages}>
 				<div class="sr-only pointer-events-none svg-icon">
 					<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
@@ -194,6 +231,21 @@
 					</svg>
 				</div>
 			</div>
+			{/if}
+			{#if components.includes('sizes')}
+				<BeSelect style="width: 100px" bind:value={pageSize} size="mini" placeholder="">
+					{#each pageSizes as size}
+					<BeOption label={size+'条/页'} value={size}/>
+					{/each}
+				</BeSelect>
+			{/if}
+			{#if components.includes('jumper')}
+				<div class="m-jumper">
+					<span>跳至</span>
+					<BeInput style="width: 50px" on:keydown={keydownHandle} bind:value={jumpPage} size="mini" placeholder="" />
+					<span>页</span>
+				</div>
+			{/if}
 		</div>
 	</div>
 	{/if}
