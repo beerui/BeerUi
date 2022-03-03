@@ -35,6 +35,7 @@
 			isChecked = store.isChecked(label)
 		} else {
 			isChecked = !isChecked
+			dispatch('change', { label, checked: isChecked });
 		}
 	};
 </script>
