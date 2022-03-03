@@ -41,8 +41,9 @@ import { BeCheckbox, BeTableColumn} from '@brewer/beerui'
 let checked = false;
     `}>
 		<div slot="source">
+			<div>checked: {checked}</div>
 			<div class="demo-list">
-				<BeCheckbox {checked} on:change={changeHandle} on:click={clickHandle}>备选项</BeCheckbox>
+				<BeCheckbox bind:checked={checked} on:change={changeHandle} on:click={clickHandle}>备选项</BeCheckbox>
 			</div>
 		</div>
 	</DemoBlock>
@@ -89,10 +90,13 @@ const setCheckedListHandle = () => {
 let checkboxGroup;
 `}>
 		<div slot="source">
-			<BeButton on:click={selectItem}>选中 上海</BeButton>
-			<BeButton on:click={setCheckedListHandle}>{indeterminate ? '取消全选' : '全选'}</BeButton>
+			<div>
+				<BeButton on:click={selectItem}>选中 上海</BeButton>
+				<BeButton on:click={setCheckedListHandle}>{indeterminate ? '取消全选' : '全选'}</BeButton>
+			</div>
+			<p>checked: {checkedCities}</p>
 			<div class="demo-list">
-				<BeCheckboxGroup bind:this={checkboxGroup} checked={checkedCities} on:change={onChange}>
+				<BeCheckboxGroup bind:this={checkboxGroup} bind:checked={checkedCities} on:change={onChange}>
 					<BeCheckbox label="上海" />
 					<BeCheckbox label="北京" />
 					<BeCheckbox label="广州" />

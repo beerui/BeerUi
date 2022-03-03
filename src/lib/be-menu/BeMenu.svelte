@@ -41,9 +41,12 @@
 		BeerPS.unsubscribe("_menuActiveChange");
 	})
 	const clickMenuOutside = () => mode !== "vertical" ? BeerPS.publish(`MenuCloseAll_${ key }`) : "";
+
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
 <svelte:options accessors />
-<ul role="menubar" bind:this={BeMenu} class="be-menu be-menu--{mode}" class:be-menu--collapse={collapse}
+<ul role="menubar" bind:this={BeMenu} class="be-menu be-menu--{mode} {_class}" class:be-menu--collapse={collapse}
     use:clickOutside={{ cb: clickMenuOutside }}>
 	<slot></slot>
 </ul>

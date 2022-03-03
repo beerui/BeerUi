@@ -107,10 +107,12 @@
 			if (_isOpen) isOpen = !isOpen;
 		}
 	};
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
 <li role="menuitem"
     aria-haspopup="true"
-    class="be-submenu"
+    class="be-submenu {_class}"
     class:is_active={isActive}
     class:is_opened={isOpen}
     bind:this={submenu}

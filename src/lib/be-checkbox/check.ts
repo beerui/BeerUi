@@ -1,7 +1,7 @@
 export default class CheckStore {
 	optionList = [];
 	private readonly dispatch: <EventKey extends Extract<keyof any, string>>(type: EventKey, detail?: any) => void;
-	private subscribe: Function[] = []; // 订阅方法
+	subscribe: Function[] = []; // 订阅方法
 
 	constructor(options) {
 		this.optionList = options.checked;

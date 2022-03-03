@@ -1,35 +1,27 @@
 <script lang="ts">
 	// 选中的列表
-	import { createEventDispatcher, onDestroy, setContext } from "svelte";
-	import { BeerPS, genKey } from "$lib/utils/beerui";
-
-	const key = genKey();
-	setContext("CheckboxKey", key);
+	import { createEventDispatcher, setContext } from 'svelte';
+	import RadioStore from './radio'
 	const dispatch = createEventDispatcher();
-	export let checked: String[] = [];
-	// 初始化数据
-	setContext(`checkGroupInit_${ key }`, { _checked: checked });
-
-	// 监听选项改变
-	const checkGroupHandle = BeerPS.subscribe(`checkGroupChange_${ key }`, ({ label, isChecked }) => {
-		if (isChecked) {
-			checked.push(label);
-		} else {
-			const index = checked.findIndex(el => label === el);
-			checked.splice(index, 1);
-		}
-		dispatch("change", checked);
-	});
-
-	onDestroy(() => BeerPS.unsubscribe(checkGroupHandle));
+	export let checked: string = '';
+	const store = new RadioStore({ checked, dispatch })
+	setContext('radioStore', store)
 
 	// 设置选中数据
-	export const setCheckedList = (items) => {
-		checked = items;
-		BeerPS.publish(`setCheckedList_${ key }`, checked);
-	};
+	export const setChecked = (items) => store.setChecked(items)
+	export const clear = () => store.clear()
 
+	const subscribeHandle = () => {
+		checked = store.current
+		console.log('subscribeHandle', checked);
+	}
+	store.subscribe.push(subscribeHandle)
+
+	let _class: $$props["class"] = "";
+	export {_class as class};
+
+	$: if (checked) setChecked(checked)
 </script>
-<div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+<div role="group" aria-label="checkbox-group" class='be-radio-group {_class}' style={$$props.style}>
 	<slot></slot>
 </div>

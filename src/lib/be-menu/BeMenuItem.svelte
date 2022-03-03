@@ -26,11 +26,13 @@
 		BeerPS.unsubscribe("_menuActiveChange");
 		BeerPS.unsubscribe("_menuCollapse");
 	})
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
 <li bind:this={MenuContent}
     role="menuitem"
     tabindex="0"
-    class="be-menu-item"
+    class="be-menu-item {_class}"
     class:is_active={isActive}
     on:click|stopPropagation={activeChange}
     {index}

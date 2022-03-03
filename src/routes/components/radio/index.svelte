@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DemoBlock from "$lib/demo/DemoBlock.svelte";
 	import { BeRadio, BeRadioGroup } from "$lib";
-	import BeButton from "$lib/be-button/BeButton.svelte";
+	import BeButton from '$lib/be-button/BeButton.svelte';
 
 	type CheckboxGroup = {
 		setCheckedList?: Function
@@ -9,9 +9,15 @@
 
 	let radio = '1';
 	let radio2 = '1';
-	$: {
-		console.log('radio', radio);
+	let radio3 = '1';
+
+	const handleChange = (evt) => {
+		console.log('handleChange', evt);
 	}
+	let changeRadio = () => {
+		radio3 = '2'
+		console.log('changeRadio', radio3);
+	};
 </script>
 <div class="page-container">
 	<h2>Radio 单选框</h2>
@@ -25,6 +31,7 @@ import { BeRadio, BeRadioGroup} from '@brewer/beerui'
 let radio = '1';
     `}>
 		<div slot="source">
+			<div>radio: {radio}</div>
 			<div class="demo-list">
 				<BeRadio bind:checked={radio} label='1'>备选项1</BeRadio>
 				<BeRadio bind:checked={radio} label='2'>备选项2</BeRadio>
@@ -40,68 +47,33 @@ import { BeRadio, BeRadioGroup} from '@brewer/beerui'
 let radio = '1';
     `}>
 		<div slot="source">
+			<div>radio2: {radio2}</div>
 			<div class="demo-list">
 				<BeRadio bind:checked={radio2} label='1' disabled>备选项1</BeRadio>
 				<BeRadio bind:checked={radio2} label='2'>备选项2</BeRadio>
 			</div>
 		</div>
 	</DemoBlock>
-<!--	<DemoBlock-->
-<!--		code={`-->
-<!--<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>-->
-<!--<BeCheckbox {checked} disabled>备选项</BeCheckbox>-->
-<!--`} js={`-->
-<!--let checked = false;-->
-<!--`}>-->
-<!--		<div slot="source">-->
-<!--			<div class="demo-list">-->
-<!--				<BeRadio value={radio} label='1'>备选项</BeRadio>-->
-<!--				<BeRadio value={radio} label='2'>备选项</BeRadio>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div slot="description">-->
-<!--			设置disabled属性即可。-->
-<!--		</div>-->
-<!--	</DemoBlock>-->
-<!--	<h3>多选框组</h3>-->
-<!--	<p>适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。</p>-->
-<!--	<DemoBlock-->
-<!--		code={`-->
-<!--<BeButton on:click={selectItem}>选中 上海</BeButton>-->
-<!--<BeButton on:click={setCheckedListHandle}>{indeterminate ? '取消全选' : '全选'}</BeButton>-->
-<!--<BeCheckboxGroup bind:this={checkboxGroup} checked={checkedCities} on:change={onChange}>-->
-<!--  <BeCheckbox label="上海" />-->
-<!--  <BeCheckbox label="北京" />-->
-<!--  <BeCheckbox label="广州" />-->
-<!--  <BeCheckbox label="深圳" />-->
-<!--</BeCheckboxGroup>-->
-<!--`} js={`-->
-<!--let checkedCities = []-->
-<!--const cityOptions = ['上海', '北京', '广州', '深圳'];-->
-<!--let indeterminate = false-->
-<!--let selectItem = () => checkboxGroup.setCheckedList(['上海'])-->
-<!--const setCheckedListHandle = () => {-->
-<!--  indeterminate = !indeterminate-->
-<!--  indeterminate ? checkboxGroup.setCheckedList(['上海', '北京', '广州', '深圳']) : checkboxGroup.setCheckedList([])-->
-<!--}-->
-<!--let checkboxGroup;-->
-<!--`}>-->
-<!--		<div slot="source">-->
-<!--			<BeButton on:click={selectItem}>选中 上海</BeButton>-->
-<!--			<BeButton on:click={setCheckedListHandle}>{indeterminate ? '取消全选' : '全选'}</BeButton>-->
-<!--			<div class="demo-list">-->
-<!--				<BeRadioGroup bind:this={checkboxGroup} checked={checkedCities} on:change={onChange}>-->
-<!--					<BeRadio label="上海" />-->
-<!--					<BeRadio label="北京" />-->
-<!--					<BeRadio label="广州" />-->
-<!--					<BeRadio label="深圳" />-->
-<!--				</BeRadioGroup>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div slot="description">-->
-<!--			使用 setCheckedList 方法可设置选中数据。-->
-<!--		</div>-->
-<!--	</DemoBlock>-->
+	<h3>单选框组</h3>
+	<p>适用于在多个互斥的选项中选择的场景。</p>
+	<DemoBlock code={`
+<BeRadio bind:checked={radio} label='1'>备选项1</BeRadio>
+<BeRadio bind:checked={radio} label='2'>备选项2</BeRadio>`} js={`
+import { BeRadio, BeRadioGroup} from '@brewer/beerui'
+let radio = '1';
+    `}>
+		<div slot="source">
+			<div>
+				<BeButton on:click={changeRadio}>setChecked('2')</BeButton>
+				{radio3}
+			</div>
+			<div class="demo-list">
+				<BeRadioGroup bind:checked={radio3} on:change={handleChange}>
+					<BeRadio label='1'>备选项</BeRadio>
+					<BeRadio label='2'>备选项</BeRadio>
+					<BeRadio label='3'>备选项</BeRadio>
+				</BeRadioGroup>
+			</div>
+		</div>
+	</DemoBlock>
 </div>
-<style lang="scss">
-</style>

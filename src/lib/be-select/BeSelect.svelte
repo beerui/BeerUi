@@ -56,9 +56,11 @@
 	const change = (e) => {
 		console.log(e);
 	}
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
 
-<div class='be-select' use:clickOutside={{ cb: handleClosePopper }}>
+<div class='be-select {_class}' use:clickOutside={{ cb: handleClosePopper }}>
 	<div on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
 		<BeInput {placeholder} on:focus={handleShowPopper} value={inputValue} bind:this={input} readonly disabled={disabled}>
 			<div slot='suffix'>

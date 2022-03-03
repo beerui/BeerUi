@@ -17,12 +17,10 @@
 
 	export { _class as class };
 
-	let isChecked = checked
-
 	// group的时候
 	if (store) {
-		isChecked = store.isChecked(label)
-		const subscribeHandle = () => isChecked = store.isChecked(label)
+		checked = store.isChecked(label)
+		const subscribeHandle = () => checked = store.isChecked(label)
 		store.subscribe.push(subscribeHandle)
 	}
 
@@ -32,22 +30,22 @@
 		// group的时候
 		if (store) {
 			store.setChecked(label)
-			isChecked = store.isChecked(label)
+			checked = store.isChecked(label)
 		} else {
-			isChecked = !isChecked
-			dispatch('change', { label, checked: isChecked });
+			checked = !checked
+			dispatch('change', { label, checked: checked });
 		}
 	};
 </script>
 <label class={_class}
        style={$$props.style}
-       class:is-checked={isChecked}
+       class:is-checked={checked}
        class:is-disabled={disabled}
        on:click|preventDefault={handleClick}
 >
   <span class='be-checkbox__input'
         class:is-indeterminate={indeterminate}
-        class:is-checked={isChecked}
+        class:is-checked={checked}
         class:is-disabled={disabled}
   >
     <span class='be-checkbox__inner'></span>

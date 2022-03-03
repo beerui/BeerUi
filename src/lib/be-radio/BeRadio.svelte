@@ -1,31 +1,43 @@
 <script lang="ts">
-	import { createEventDispatcher, getContext, setContext } from "svelte";
+	import { createEventDispatcher, getContext } from "svelte";
 	import { mapAttributes } from "$lib/utils/beerui";
 
-	const key = getContext("CheckboxKey");
-	setContext('CheckboxKey', key);
+	const store = getContext("radioStore");
 	const dispatch = createEventDispatcher();
-	const initData = getContext(`checkGroupInit_${ key }`);
 	// 选中
 	export let id = "";
 	export let disabled = "";
 	export let name = "";
-	export let indeterminate: boolean = false;
 	export let checked = "";
 	export let label = "";
-	const _class = ['be-radio']
 
-	export { _class as class };
+	let _class: $$props["class"] = "";
+	export {_class as class};
 
-	$: isChecked = checked === label;
+	let isChecked: boolean;
 
+	if (store) {
+		isChecked = store.isChecked(label)
+		const subscribeHandle = () => isChecked = store.isChecked(label)
+		store.subscribe.push(subscribeHandle)
+	}
+	$: {
+		if (!store) isChecked = checked === label
+	}
 	const handleClick = (evt) => {
+		dispatch('click', evt);
 		if (disabled) return
-		checked = label
-		dispatch("change", checked);
+		// group的时候
+		if (store) {
+			store.setChecked(label)
+			isChecked = store.isChecked(label)
+		} else {
+			checked = label
+			dispatch("change", checked);
+		}
 	}
 </script>
-<label class={_class}
+<label class='be-radio {_class}'
        class:is-checked={isChecked}
        class:is-disabled={disabled}
        style={$$props.style}
@@ -34,7 +46,6 @@
   <span class="be-radio__input"
         class:is-checked={isChecked}
         class:is-disabled={disabled}
-        class:is-indeterminate={indeterminate}
   >
     <span class="be-radio__inner"></span>
     <input
