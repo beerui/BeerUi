@@ -5,11 +5,12 @@
 
 	const dispatch = createEventDispatcher();
 	export let checked: String[] = [];
+
 	const store = new CheckStore({ checked, dispatch })
 	setContext('checkStore', store)
 
 	// 设置选中数据
-	export const setCheckedList = (items) => store.setSelectList(items)
+	export const setCheckedList = (items) => store.setCheckedList(items)
 
 </script>
 <div role="group" aria-label="checkbox-group" class="el-checkbox-group">

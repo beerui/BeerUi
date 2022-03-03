@@ -11,7 +11,7 @@
 	let checked = false;
 	let checkedList = ["选中且禁用", "复选框 A"];
 	let onChange = (evt) => {
-		console.log(evt.detail);
+		console.log('onChange', evt.detail);
 	};
 	let checkedCities = ["上海"];
 	const cityOptions = ["上海", "北京", "广州", "深圳"];

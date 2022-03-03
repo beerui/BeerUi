@@ -1,6 +1,6 @@
 <script lang='ts'>
-	import { createEventDispatcher, getContext, onDestroy, onMount, setContext } from 'svelte';
-	import { BeerPS, filterClass, genKey, mapAttributes } from '$lib/utils/beerui';
+	import { createEventDispatcher, getContext } from 'svelte';
+	import { mapAttributes } from '$lib/utils/beerui';
 
 	const store = getContext('checkStore')
 	const dispatch = createEventDispatcher();
@@ -18,13 +18,15 @@
 	export { _class as class };
 
 	let isChecked = store.isChecked(label)
-	const handleChange = (item) => {
-
+	const subscribeHandle = list => {
+		console.log('list', list, label);
+		isChecked = store.isChecked(label)
 	}
-	store.subscribeHandle(handleChange)
+	store.subscribe.push(subscribeHandle)
 
 	const handleClick = (evt) => {
-		dispatch('click', evt);
+		store.dispatch('change', store.optionList);
+		// dispatch('click', evt);
 		if (disabled) return
 		// checked = !checked;
 		store.setChecked(label)

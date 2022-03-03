@@ -1,47 +1,52 @@
 export default class CheckStore {
 	optionList = [];
-	private dispatch: <EventKey extends Extract<keyof any, string>>(type: EventKey, detail?: any) => void;
+	private readonly dispatch: <EventKey extends Extract<keyof any, string>>(type: EventKey, detail?: any) => void;
+	private subscribe: Function[] = []; // 订阅方法
 
 	constructor(options) {
 		this.optionList = options.checked;
 		this.dispatch = options.dispatch;
-		console.log('options', options);
+		this.subscribe = options.subscribe || [];
 	}
 
-	subscribeHandle(cb) {
-		cb(this.optionList)
-	}
-
-	setSelectList(arr) {
-		console.log('setSelectList', arr);
+	// 设置选中多个
+	setCheckedList(arr) {
 		if (arr.length === 0) {
 			this.clearList();
 			return
 		}
-		this.optionList = [...this.optionList, ...arr]
-		console.log('this.optionList', this.optionList);
+		this.optionList = [...new Set([...this.optionList, ...arr])]
+		this.publishHandle()
 	}
 
+	// 设置单个选中
 	setChecked(label) {
 		if (this.isChecked(label)) {
 			this.deleteChecked(label)
 		} else {
 			this.optionList.push(label)
 		}
+		this.publishHandle()
 	}
 
+	// 是否选中
 	isChecked(label) {
 		return this.optionList.some(el => el === label);
 	}
 
 	deleteChecked(label) {
 		const index = this.optionList.findIndex(el => label === el)
-		console.log('deleteChecked', index);
 		this.optionList.splice(index, 1)
-		this.dispatch('change', this.optionList);
 	}
 
+	// 通知集合改变
+	publishHandle() {
+		this.subscribe.forEach(el => el(this.optionList))
+		this.dispatch('change', this.optionList)
+	}
+	// 清空
 	clearList() {
 		this.optionList = [];
+		this.publishHandle()
 	}
 }
