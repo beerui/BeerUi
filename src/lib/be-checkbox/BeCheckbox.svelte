@@ -17,20 +17,25 @@
 
 	export { _class as class };
 
-	let isChecked = store.isChecked(label)
-	const subscribeHandle = list => {
-		console.log('list', list, label);
+	let isChecked = checked
+
+	// group的时候
+	if (store) {
 		isChecked = store.isChecked(label)
+		const subscribeHandle = () => isChecked = store.isChecked(label)
+		store.subscribe.push(subscribeHandle)
 	}
-	store.subscribe.push(subscribeHandle)
 
 	const handleClick = (evt) => {
-		store.dispatch('change', store.optionList);
-		// dispatch('click', evt);
+		dispatch('click', evt);
 		if (disabled) return
-		// checked = !checked;
-		store.setChecked(label)
-		isChecked = store.isChecked(label)
+		// group的时候
+		if (store) {
+			store.setChecked(label)
+			isChecked = store.isChecked(label)
+		} else {
+			isChecked = !isChecked
+		}
 	};
 </script>
 <label class={_class}

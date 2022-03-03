@@ -41,7 +41,7 @@ export default class CheckStore {
 
 	// 通知集合改变
 	publishHandle() {
-		this.subscribe.forEach(el => el(this.optionList))
+		this.subscribe.forEach(cb => cb(this.optionList))
 		this.dispatch('change', this.optionList)
 	}
 	// 清空
