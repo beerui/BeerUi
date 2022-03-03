@@ -10,9 +10,7 @@
 
 	let checked = false;
 	let checkedList = ["选中且禁用", "复选框 A"];
-	let onChange = (evt) => {
-		console.log('onChange', evt.detail);
-	};
+	let onChange = (evt) => console.log('onChange', evt.detail);
 	let checkedCities = ["上海"];
 	const cityOptions = ["上海", "北京", "广州", "深圳"];
 	let indeterminate = false;
@@ -83,6 +81,7 @@ let checkedCities = []
 const cityOptions = ['上海', '北京', '广州', '深圳'];
 let indeterminate = false
 let selectItem = () => checkboxGroup.setCheckedList(['上海'])
+let onChange = (evt) => console.log('onChange', evt.detail);
 const setCheckedListHandle = () => {
   indeterminate = !indeterminate
   indeterminate ? checkboxGroup.setCheckedList(['上海', '北京', '广州', '深圳']) : checkboxGroup.setCheckedList([])
