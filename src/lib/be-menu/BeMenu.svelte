@@ -10,15 +10,15 @@
 	export let collapse: boolean = false;
 	const dispatch = createEventDispatcher();
 	let BeMenu = null;
-	const store = new MenuStore({ active, mode, trigger, collapse, dispatch })
+	const store = new MenuStore({ active, mode, trigger, collapse, dispatch})
 	setContext('menuStore', store)
 
 	const subscribeHandle = () => {
 		active = store.active
-		console.log('subscribeHandle', active);
 	}
 	store.subscribe.push(subscribeHandle)
 
+	console.log('store', store);
 	// if (trigger === "click" || mode === "vertical") trigger = "click";
 	// const key = genKey();
 	// setContext(`MenuTriggerKey`, key);
@@ -51,7 +51,7 @@
 	// onDestroy(() => {
 	// 	BeerPS.unsubscribe("_menuActiveChange");
 	// })
-	// const clickMenuOutside = () => mode !== "vertical" ? BeerPS.publish(`MenuCloseAll_${ key }`) : "";
+	const clickMenuOutside = () => mode !== "vertical" ? store.closeMenu() : "";
 
 	let _class: $$props["class"] = "";
 	export {_class as class};
@@ -60,7 +60,7 @@
     bind:this={BeMenu}
     class="be-menu be-menu--{mode} {_class}"
     class:be-menu--collapse={collapse}
+    use:clickOutside={{ cb: clickMenuOutside }}
 >
-<!--    use:clickOutside={{ cb: clickMenuOutside }}-->
 	<slot></slot>
 </ul>

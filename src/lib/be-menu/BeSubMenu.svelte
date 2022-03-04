@@ -5,15 +5,29 @@
 
 	export let index: String = "";
 	const store = getContext("menuStore");
+
+	const subscribeHandle = item => {
+		if (item.status === 'done') {
+			node = item.data[key]
+		}
+		if (item.status === 'update') {
+			node = item.data[key]
+		}
+		if (item.status === 'close') {
+			node = item.data[key]
+		}
+	}
+	store.subscribe.push(subscribeHandle)
 	let collapse = store.collapse
 
-	const key = genKey(2);
+	const key = genKey();
 	let submenu = null;
 	let subMenuContent = null;
 	let hovered = store.trigger;
 	let isOpen = false;
 	let isActive = false;
 	let timeout = null;
+	let node = { level: 1, id: 0 };
 	//
 	// const _MenuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, async items => {
 	// 	if (items.type === "setting" && submenu) {
@@ -110,27 +124,32 @@
 		}
 	};
 
+	const handleClick = () => {
+		store.setActive(node)
+	}
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>
 <li role="menuitem"
     aria-haspopup="true"
     class="be-submenu {_class}"
-    class:is_active={isActive}
-    class:is_opened={(isActive || isOpen)}
+    class:is_active={node.active}
+    class:is_opened={node.open}
     bind:this={submenu}
     on:mouseenter={enterMenu}
     on:mouseleave={leaveMenu}
     on:dblclick|stopPropagation
     on:mousedown|stopPropagation
     on:mouseup|stopPropagation
-    on:click|stopPropagation={triggerMenu}
+    on:click|stopPropagation={handleClick}
     {key}
-    {index}
-    {level}
+    data-type='submenu'
+    data-index={node.index}
+    data-level={node.level}
 >
-	<div class="be-submenu__title" style:padding-left={level*20 + 'px'}>
-		{#if collapse && level === 1}
+<!--	triggerMenu-->
+	<div class="be-submenu__title" style:padding-left={node.level*20 + 'px'}>
+		{#if collapse && node.level === 1}
 			<slot name="icon"></slot>
 		{:else}
 			<div class="be-menu__icon">
@@ -144,9 +163,9 @@
 			</div>
 		{/if}
 	</div>
-	<ul class="be-submenu__content be-submenu__{level}"
+	<ul class="be-submenu__content be-submenu__{node.level}"
 	    bind:this={subMenuContent}
-	    style:display={(isActive || isOpen) ? 'block' : 'none'}
+	    style:display={node.open ? 'block' : 'none'}
 	>
 		<slot></slot>
 	</ul>
