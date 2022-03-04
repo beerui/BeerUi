@@ -6,6 +6,7 @@
 	import { BeerPS, genKey } from "$lib/utils/beerui";
 	import SelectStore from './select'
 	let dispatch = createEventDispatcher()
+
 	export let options;
 	// 下拉框选中的值
 	export let value;
@@ -46,6 +47,10 @@
 	function handleClosePopper(){
 	 	visible = false
 	}
+	const toggleVisible = () => {
+		console.log('visible', visible);
+		visible = !visible
+	}
 	const clearValue = () => {
 		inputValue = ''
 		value = -1
@@ -54,15 +59,15 @@
 		handleClosePopper()
 	}
 	const change = (e) => {
-		console.log(e);
+		dispatch('change', selectStore.value)
 	}
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>
 
 <div class='be-select {_class}' use:clickOutside={{ cb: handleClosePopper }}>
-	<div on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
-		<BeInput {placeholder} on:focus={handleShowPopper} value={inputValue} bind:this={input} readonly disabled={disabled}>
+	<div on:click|stopPropagation={toggleVisible} on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
+		<BeInput {placeholder} value={inputValue} bind:this={input} readonly disabled={disabled}>
 			<div slot='suffix'>
 				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
 					<BeIcon name='chevron-down' width='18' height='18' />

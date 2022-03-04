@@ -3,7 +3,7 @@ export default class SelectStore {
   optionList = new Map()
   private currentNode: null;
   private currentNodeKey: null;
-  private value: null;
+  public value: null;
   constructor(options) {
     // this.option = options
     // this.label = options.label
@@ -20,7 +20,7 @@ export default class SelectStore {
   }
   creatNode(props) {
     // console.log(props);
-    
+
     let len = this.optionList.size
     const node = {
       label: props.label,
