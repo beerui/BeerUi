@@ -1,7 +1,7 @@
 {
   "name": "@brewer/beerui",
-  "version": "1.0.18",
-  "description": "A Svelte ui components",
+  "version": "1.0.20",
+  "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
     "build": "svelte-kit build",
