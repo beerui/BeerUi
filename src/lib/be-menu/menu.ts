@@ -6,8 +6,6 @@ export default class MenuStore {
 	public active: string;
 	public nodeIdSeed: number = 0;
 	public mode: string = 'vertical';
-	public trigger: string = 'hover';
-	public collapse: boolean = false;
 	public isOnlyOne: boolean = false;
 	public nodesMap: any = {};
 	public root: {
@@ -17,13 +15,17 @@ export default class MenuStore {
 		level: number;
 		store: any
 	};
+	private _collapse: boolean;
+	private _trigger: string;
+	private _triggerHistory: string;
 
 	constructor(options) {
-		for (let option in options) {
-			if (options.hasOwnProperty(option)) {
-				this[option] = options[option];
-			}
-		}
+		this.active = options.active
+		this.mode = options.mode
+		this.isOnlyOne = options.isOnlyOne
+		this._collapse = options.collapse
+		this._trigger = options.trigger
+		this._triggerHistory = options.trigger
 		this.nodeIdSeed = 0
 		this.root = {
 			level: 0,
@@ -32,6 +34,26 @@ export default class MenuStore {
 			store: this,
 			parent: null
 		};
+		// 竖向 未缩起来 触发被用户设置为hover => 强制转为click
+		if (this.mode === 'vertical' && this.collapse) {
+			this._trigger = 'click';
+		}
+	}
+	get trigger() {
+		return this._trigger
+	}
+	get collapse() {
+		return this._collapse
+	}
+	set collapse(v) {
+		console.log('collapse');
+		this._collapse = v
+		this.closeNode(this.root.children)
+		this.publishHandle({ status: 'close', data: this.nodesMap })
+		if (this.mode === 'vertical') {
+			this._trigger = 'click';
+			if (this._collapse) this._trigger = 'hover'
+		}
 	}
 	initTree(els) {
 		if (!els) return
@@ -40,6 +62,7 @@ export default class MenuStore {
 		this.convertToMap(els, this.root)
 		this.convertToTree(this.root, this.nodesMap, key, [])
 		this.publishHandle({ status: 'done', data: this.nodesMap })
+		this.setActiveKey(this.active)
 	}
 	// 转为树
 	convertToTree(tree, list, pkey, keys) {
@@ -87,11 +110,20 @@ export default class MenuStore {
 	getAttr(el: Element, value: string) {
 		return el.getAttribute(value)
 	}
+	// 根据用户index来设置选中
+	setActiveKey(index) {
+		for (const key in this.nodesMap) {
+			if (this.nodesMap[key].index === index) {
+				this.setActive(this.nodesMap[key])
+				return
+			}
+		}
+	}
 	// 设置选中
 	setActive(node) {
-		this.active = node.key
+		this.active = node.index
 		this.setTreeActive(node)
-		this.publishHandle({ status: 'update', data: this.nodesMap })
+		this.publishHandle({ status: 'update', data: this.nodesMap, menu: this.nodesMap[node.key] })
 	}
 	// 设置选中状态
 	setTreeActive(node) {
@@ -113,6 +145,10 @@ export default class MenuStore {
 	changeParentNode(parent, keys) {
 		parent.active = true
 		keys.push(parent)
+		// 设置默认选中时 菜单的展开
+		if (parent.type === 'submenu' && this.mode === 'vertical' && !this.collapse && !parent.open) {
+			parent.open = true
+		}
 		if (parent.level > 1) this.changeParentNode(parent.parent, keys)
 	}
 	// 清除选中
@@ -120,6 +156,7 @@ export default class MenuStore {
 		list.forEach(el => {
 			if (!nodes.includes(el)) {
 				el.active = false
+				// 打开一个 收起其它
 				if (el.type === 'submenu' && this.isOnlyOne) el.open = false
 			}
 			if (el.children.length > 0) {
@@ -128,6 +165,7 @@ export default class MenuStore {
 		})
 	}
 	closeMenu() {
+		if (this.mode === 'vertical') return;
 		this.closeNode(this.root.children)
 		this.publishHandle({ status: 'close', data: this.nodesMap })
 	}

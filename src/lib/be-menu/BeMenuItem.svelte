@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { genKey, hasClass } from '$lib/utils/beerui';
-	import { getContext, onMount } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 
 	export let index:string = ''
 	const store = getContext("menuStore");
@@ -17,23 +17,15 @@
 		}
 	}
 	store.subscribe.push(subscribeHandle)
-	const key = genKey()
+	const key = genKey(5)
 	let MenuContent;
 	let node = { level: 1, id: 0 }
 	let isActive = index === store.active;
 	let collapse = store.collapse;
-	// const activeChange = () => BeerPS.publish(`MenuActiveChange_${ key }`, { els: MenuContent, index });
-	// const _menuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, items => {
-	// 	isActive = index === items.index;
-	// });
-	//
-	// // 接收展开或收起的状态
-	// const _menuCollapse = BeerPS.subscribe(`MenuCollapse_${ key }`, _collapse => collapse = _collapse);
-	//
-	// onDestroy(() => {
-	// 	BeerPS.unsubscribe("_menuActiveChange");
-	// 	BeerPS.unsubscribe("_menuCollapse");
-	// })
+
+	onDestroy(() => {
+		node = null
+	})
 	let _class: $$props["class"] = "";
 	export {_class as class};
 
@@ -45,6 +37,7 @@
     role="menuitem"
     tabindex="0"
     {key}
+    {index}
     class="be-menu-item {_class}"
     class:is_active={node.active}
     on:click|stopPropagation={handleClick}
@@ -56,7 +49,9 @@
     style:padding-left={node.level*20 + 'px'}
 >
 	{#if collapse && node.level === 1}
-		<slot name="icon"></slot>
+		<span class="icon-left">
+			<slot name="icon"></slot>
+		</span>
 		<div class="be-tooltip">
 			<slot></slot>
 		</div>

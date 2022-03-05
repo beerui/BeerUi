@@ -8,30 +8,23 @@
 	export let mode: string = "vertical";
 	export let trigger: string = "hover";
 	export let collapse: boolean = false;
+	export let isOnlyOne: boolean = false;
 	const dispatch = createEventDispatcher();
 	let BeMenu = null;
-	const store = new MenuStore({ active, mode, trigger, collapse, dispatch})
+	let store = new MenuStore({ active, mode, trigger, collapse, dispatch})
 	setContext('menuStore', store)
 
-	const subscribeHandle = () => {
-		active = store.active
+	const subscribeHandle = item => {
+		if (item.status === 'update' && item.menu.type !== 'submenu') {
+			console.log('change', item.menu);
+		}
 	}
 	store.subscribe.push(subscribeHandle)
 
-	console.log('store', store);
-	// if (trigger === "click" || mode === "vertical") trigger = "click";
-	// const key = genKey();
-	// setContext(`MenuTriggerKey`, key);
-	// setContext(`MenuTrigger_${ key }`, trigger);
-	// setContext(`MenuMode_${ key }`, mode);
-	// setContext(`MenuCollapse_${ key }`, collapse);
 	// // 发起展开或收起的状态
-	// $: if (collapse || !collapse) BeerPS.publish(`MenuCollapse_${ key }`, collapse);
-	// // 设置选中
-	// export const setMenuActive = active => BeerPS.publish(`MenuActiveChange_${ key }`, {
-	// 	index: active,
-	// 	type: "setting"
-	// });
+	$: if (collapse || !collapse) store.collapse = collapse;
+	// 设置选中
+	export const setMenuActive = active => store.setActiveKey(active);
 	// const _menuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, items => {
 	// 	if (BeMenu) {
 	// 		const allSub = BeMenu.querySelectorAll(".be-submenu");
@@ -46,11 +39,10 @@
 		// 初始化
 		await tick();
 		store.initTree(BeMenu)
-		// setMenuActive(active);
 	});
-	// onDestroy(() => {
-	// 	BeerPS.unsubscribe("_menuActiveChange");
-	// })
+	onDestroy(() => {
+		store = null
+	})
 	const clickMenuOutside = () => mode !== "vertical" ? store.closeMenu() : "";
 
 	let _class: $$props["class"] = "";

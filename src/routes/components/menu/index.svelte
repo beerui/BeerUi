@@ -44,7 +44,7 @@ const changeMenu = (evt) => console.log('changeMenu', evt.detail)
 		<div slot="source">
 			<BeButton on:click={() => setMenuActive('2-1')}>设置 我的工作台 选项1</BeButton>
 			<div class="demo-list">
-				<BeMenu class="be-menu-demo" key="1" active="1" mode="horizontal" trigger="click" bind:this={MenuDom}
+				<BeMenu class="be-menu-demo" key="1" active="1" mode="horizontal" trigger="hover" bind:this={MenuDom}
 				        on:change={changeMenu}>
 					<BeMenuItem index="1">处理中心</BeMenuItem>
 					<BeSubMenu index="2">

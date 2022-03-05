@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { genKey, hasClass } from '$lib/utils/beerui';
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { getContext, onMount, tick } from "svelte";
+	import { getContext, onDestroy, onMount, tick } from 'svelte';
 
 	export let index: String = "";
 	const store = getContext("menuStore");
 
 	const subscribeHandle = item => {
+		console.log('subscribeHandle', item);
 		if (item.status === 'done') {
 			node = item.data[key]
 		}
@@ -18,52 +19,23 @@
 		}
 	}
 	store.subscribe.push(subscribeHandle)
-	let collapse = store.collapse
 
-	const key = genKey();
+	const key = genKey(4);
 	let submenu = null;
 	let subMenuContent = null;
-	let hovered = store.trigger;
-	let isOpen = false;
-	let isActive = false;
 	let timeout = null;
-	let node = { level: 1, id: 0 };
-	//
-	// const _MenuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, async items => {
-	// 	if (items.type === "setting" && submenu) {
-	// 		await tick();
-	// 		const els = submenu.querySelector(".is_active");
-	// 		computedActive(els);
-	// 	} else {
-	// 		computedActive(items.els);
-	// 	}
-	// });
-	// const computedActive = (els) => {
-	// 	if (!els || hasClass(els, "be-menu")) return;
-	// 	if (hasClass(els.parentElement, "be-submenu")) {
-	// 		addClass(els.parentElement, 'is_active');
-	// 		if (mode === "vertical" && !collapse) isActive = true
-	// 	}
-	// 	setTimeout(() => computedActive(els.parentElement), 60);
-	// };
-	// // 点击外部关闭子集弹框
-	// const _MenuCloseAll = BeerPS.subscribe(`MenuCloseAll_${ key }`, () => isOpen = false);
-	// // 接收展开或收起的状态
-	// const _MenuCollapse = BeerPS.subscribe(`MenuCollapse_${ key }`, _collapse => {
-	// 	collapse = _collapse;
-	// 	changeActive(false, 0);
-	// });
-	//
+	let node = { level: 1, id: 0, open: false };
+
 	const enterMenu = () => {
 		let isFlag: boolean = false;
-		if (hovered || collapse) {
+		if (store.trigger === 'hover' || store.collapse) {
 			isFlag = true;
 			changeActive(isFlag);
 		}
 	};
 	const leaveMenu = () => {
 		let isFlag: boolean = true;
-		if (hovered || collapse) {
+		if (store.trigger === 'hover' || store.collapse) {
 			isFlag = false;
 			changeActive(isFlag);
 		}
@@ -72,7 +44,7 @@
 	const changeActive = (isFlag: boolean, handleTime: number = 300) => {
 		clearTimeout(timeout);
 		timeout = setTimeout(() => {
-			isOpen = isFlag;
+			node.open = isFlag;
 		}, handleTime);
 	};
 	// 计算层级
@@ -85,17 +57,15 @@
 	onMount(() => {
 		level = computedLevel(submenu);
 	});
-	//
-	// onDestroy(() => {
-	// 	BeerPS.unsubscribe(_MenuActiveChange);
-	// 	BeerPS.unsubscribe(_MenuCloseAll);
-	// 	BeerPS.unsubscribe(_MenuCollapse);
-	// });
+
+	onDestroy(() => {
+		node = null
+	});
 	// 打开关闭菜单动画
 	let subMenuContentHeight;
 	const triggerMenu = async () => {
-		let _isOpen = isOpen;
-		if (!_isOpen) isOpen = !isOpen;
+		let _isOpen = node.open;
+		if (!_isOpen) node.open = !node.open;
 		subMenuContentHeight = subMenuContent.children.length * 50 + 10 + "px";
 		if (store.mode === "vertical") {
 			subMenuContent.style.overflow = "hidden";
@@ -106,7 +76,7 @@
 				duration: 120
 			});
 			await animate.finished;
-			if (_isOpen) isOpen = !isOpen;
+			if (_isOpen) node.open = !node.open;
 			subMenuContentHeight = "auto";
 			subMenuContent.style.overflow = "";
 		} else {
@@ -120,7 +90,7 @@
 				});
 			});
 			await tick();
-			if (_isOpen) isOpen = !isOpen;
+			if (_isOpen) node.open = !node.open;
 		}
 	};
 
@@ -143,13 +113,14 @@
     on:mouseup|stopPropagation
     on:click|stopPropagation={handleClick}
     {key}
+    {index}
     data-type='submenu'
     data-index={node.index}
     data-level={node.level}
 >
 <!--	triggerMenu-->
 	<div class="be-submenu__title" style:padding-left={node.level*20 + 'px'}>
-		{#if collapse && node.level === 1}
+		{#if store.collapse && node.level === 1}
 			<slot name="icon"></slot>
 		{:else}
 			<div class="be-menu__icon">
