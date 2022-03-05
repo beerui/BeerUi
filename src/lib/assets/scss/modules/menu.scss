@@ -27,9 +27,9 @@
     }
     .be-menu-item {
       position: relative;
-      .be-tooltip {display: none;}
+      .be-menu-tooltip {display: none;}
       &:hover {
-        .be-tooltip {
+        .be-menu-tooltip {
           display: block;
           position: absolute;
           left: 74px;

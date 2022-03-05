@@ -52,13 +52,15 @@
 		<span class="icon-left">
 			<slot name="icon"></slot>
 		</span>
-		<div class="be-tooltip">
+		<div class="be-menu-tooltip">
 			<slot></slot>
 		</div>
 	{:else}
-		<span class="icon-left">
-			<slot name="icon"></slot>
-		</span>
+		{#if $$slots.icon}
+			<span class="icon-left">
+				<slot name="icon"></slot>
+			</span>
+		{/if}
 		<slot></slot>
 	{/if}
 </li>

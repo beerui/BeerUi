@@ -114,9 +114,11 @@
 			<slot name="icon"></slot>
 		{:else}
 			<div class="be-menu__icon">
-			<span class="icon-left">
-				<slot name="icon"></slot>
-			</span>
+				{#if $$slots.icon}
+					<span class="icon-left">
+						<slot name="icon"></slot>
+					</span>
+				{/if}
 				<slot name="title"></slot>
 			</div>
 			<div class="icon-right">
