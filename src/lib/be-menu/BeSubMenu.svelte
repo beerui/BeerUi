@@ -40,7 +40,8 @@
 	onDestroy(() => node = null)
 	// 打开关闭菜单动画
 	let subMenuContentHeight;
-	const triggerMenu = async () => {
+	const triggerMenu = async evt => {
+		if (evt.which !== 1) return
 		if (store.trigger === 'hover') return
 		let _isOpen = node.open;
 		if (!_isOpen) node.open = !node.open;
@@ -72,7 +73,7 @@
 		}
 	};
 
-	const handleClick = () => store.setActive(node)
+	const handleClick = evt => evt.which === 1 && store.setActive(node)
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>
@@ -85,9 +86,9 @@
     on:mouseenter={enterMenu}
     on:mouseleave={leaveMenu}
     on:dblclick|stopPropagation
-    on:mousedown|stopPropagation
+    on:mousedown|stopPropagation={triggerMenu}
     on:mouseup|stopPropagation
-    on:click|stopPropagation={triggerMenu}
+    on:click|stopPropagation
     {key}
     {index}
     data-type='submenu'

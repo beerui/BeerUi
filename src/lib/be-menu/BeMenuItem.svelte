@@ -14,9 +14,7 @@
 	let _class: $$props["class"] = "";
 	export {_class as class};
 
-	const handleClick = () => {
-		store.setActive(node)
-	}
+	const handleClick = (evt) => evt.which === 1 && store.setActive(node)
 </script>
 <li role="menuitem"
     tabindex="0"
@@ -24,9 +22,9 @@
     {index}
     class="be-menu-item {_class}"
     class:is_active={node.active}
-    on:click|stopPropagation={handleClick}
+    on:click|stopPropagation
     on:dblclick|stopPropagation
-    on:mousedown|stopPropagation
+    on:mousedown|stopPropagation={handleClick}
     on:mouseup|stopPropagation
     data-id={node.id}
     data-level={node.level}

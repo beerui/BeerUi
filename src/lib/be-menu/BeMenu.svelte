@@ -14,8 +14,10 @@
 	setContext('menuStore', store)
 
 	const subscribeHandle = item => {
-		if (item.status === 'update' && item.menu.type !== 'submenu') {
-			dispatch('change', item.menu)
+		if (active !== store.active) {
+			dispatch('change', store.active)
+			active = store.active
+			console.log('item', item);
 		}
 	}
 	store.subscribe.push(subscribeHandle)
