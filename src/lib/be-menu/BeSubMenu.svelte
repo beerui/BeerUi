@@ -6,17 +6,7 @@
 	export let index: String = "";
 	const store = getContext("menuStore");
 
-	const subscribeHandle = item => {
-		if (item.status === 'done') {
-			node = item.data[key]
-		}
-		if (item.status === 'update') {
-			node = item.data[key]
-		}
-		if (item.status === 'close') {
-			node = item.data[key]
-		}
-	}
+	const subscribeHandle = item => node = item.data[key]
 	store.subscribe.push(subscribeHandle)
 
 	const key = genKey(6)
@@ -47,9 +37,7 @@
 		}, handleTime);
 	};
 
-	onDestroy(() => {
-		node = null
-	});
+	onDestroy(() => node = null)
 	// 打开关闭菜单动画
 	let subMenuContentHeight;
 	const triggerMenu = async () => {
@@ -84,9 +72,7 @@
 		}
 	};
 
-	const handleClick = () => {
-		store.setActive(node)
-	}
+	const handleClick = () => store.setActive(node)
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>
@@ -108,7 +94,6 @@
     data-index={node.index}
     data-level={node.level}
 >
-<!--	triggerMenu-->
 	<div class="be-submenu__title" style:padding-left={node.level*20 + 'px'}>
 		{#if store.collapse && node.level === 1}
 			<slot name="icon"></slot>
