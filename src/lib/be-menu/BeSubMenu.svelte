@@ -19,7 +19,7 @@
 	}
 	store.subscribe.push(subscribeHandle)
 
-	const key = genKey(4);
+	const key = genKey(6);
 	let submenu = null;
 	let subMenuContent = null;
 	let timeout = null;

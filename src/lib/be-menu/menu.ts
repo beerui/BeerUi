@@ -1,7 +1,6 @@
-import { genKey, hasClass } from '$lib/utils/beerui';
+import { genKey } from '$lib/utils/beerui';
 
 export default class MenuStore {
-	private readonly dispatch: <EventKey extends Extract<keyof any, string>>(type: EventKey, detail?: any) => void;
 	subscribe: Function[] = []; // 订阅方法
 	public active: string;
 	public nodeIdSeed: number = 0;
@@ -56,7 +55,7 @@ export default class MenuStore {
 	}
 	initTree(els) {
 		if (!els) return
-		const key = genKey()
+		const key = genKey(4)
 		this.root.key = key
 		this.convertToMap(els, this.root)
 		this.convertToTree(this.root, this.nodesMap, key, [])
