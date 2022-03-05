@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { genKey, hasClass } from '$lib/utils/beerui';
+	import { genKey } from '$lib/utils/beerui';
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { getContext, onDestroy, onMount, tick } from 'svelte';
+	import { getContext, onDestroy, tick } from 'svelte';
 
 	export let index: String = "";
 	const store = getContext("menuStore");
 
 	const subscribeHandle = item => {
-		console.log('subscribeHandle', item);
 		if (item.status === 'done') {
 			node = item.data[key]
 		}
@@ -47,16 +46,6 @@
 			node.open = isFlag;
 		}, handleTime);
 	};
-	// 计算层级
-	let level = 1;
-	const computedLevel = (els, _level = 1) => {
-		if (hasClass(els.parentElement, "be-submenu__content")) _level++;
-		if (!hasClass(els.parentElement, "be-menu")) return computedLevel(els.parentElement, _level);
-		return _level;
-	};
-	onMount(() => {
-		level = computedLevel(submenu);
-	});
 
 	onDestroy(() => {
 		node = null
@@ -64,6 +53,7 @@
 	// 打开关闭菜单动画
 	let subMenuContentHeight;
 	const triggerMenu = async () => {
+		if (store.trigger === 'hover') return
 		let _isOpen = node.open;
 		if (!_isOpen) node.open = !node.open;
 		subMenuContentHeight = subMenuContent.children.length * 50 + 10 + "px";
@@ -111,7 +101,7 @@
     on:dblclick|stopPropagation
     on:mousedown|stopPropagation
     on:mouseup|stopPropagation
-    on:click|stopPropagation={handleClick}
+    on:click|stopPropagation={triggerMenu}
     {key}
     {index}
     data-type='submenu'

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { genKey, hasClass } from '$lib/utils/beerui';
-	import { getContext, onDestroy, onMount } from 'svelte';
+	import { genKey } from '$lib/utils/beerui';
+	import { getContext, onDestroy } from 'svelte';
 
 	export let index:string = ''
 	const store = getContext("menuStore");
