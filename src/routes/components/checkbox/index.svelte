@@ -2,7 +2,6 @@
 	import DemoBlock from "$lib/demo/DemoBlock.svelte";
 	import { BeCheckbox, BeCheckboxGroup } from "$lib";
 	import BeButton from "$lib/be-button/BeButton.svelte";
-	import logs from '../../logs.svelte';
 
 	type CheckboxGroup = {
 		setCheckedList?: Function
