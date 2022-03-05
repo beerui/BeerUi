@@ -17,7 +17,6 @@
 		if (active !== store.active) {
 			dispatch('change', store.active)
 			active = store.active
-			console.log('item', item);
 		}
 	}
 	store.subscribe.push(subscribeHandle)
