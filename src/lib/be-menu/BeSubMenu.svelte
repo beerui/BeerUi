@@ -19,11 +19,11 @@
 	}
 	store.subscribe.push(subscribeHandle)
 
-	const key = genKey(6);
-	let submenu = null;
-	let subMenuContent = null;
-	let timeout = null;
-	let node = { level: 1, id: 0, open: false };
+	const key = genKey(6)
+	let submenu = null
+	let subMenuContent = null
+	let timeout = null
+	let node = { level: 1, id: 0, open: false }
 
 	const enterMenu = () => {
 		let isFlag: boolean = false;
