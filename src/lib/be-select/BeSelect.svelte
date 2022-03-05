@@ -8,6 +8,7 @@
 	let dispatch = createEventDispatcher()
 
 	export let options;
+	export let size;
 	// 下拉框选中的值
 	export let value;
 	const selectStore = new SelectStore({ value: $$props.value })
@@ -65,7 +66,7 @@
 	export {_class as class};
 </script>
 
-<div class='be-select {_class}' use:clickOutside={{ cb: handleClosePopper }}>
+<div class='be-select be-select--{size} {_class}' use:clickOutside={{ cb: handleClosePopper }}>
 	<div on:click|stopPropagation={toggleVisible} on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
 		<BeInput {placeholder} value={inputValue} bind:this={input} readonly disabled={disabled}>
 			<div slot='suffix'>
