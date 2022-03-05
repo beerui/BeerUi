@@ -420,7 +420,7 @@
 			                        <BeCheckbox on:click={() => clickRowCheckbox(row)} checked={row.checked} />
 		                        </div>
 	                        </td>
-                        {:else if col.type === 'index'}
+                        {:else if col.prop === 'index'}
 	                        <td class='be-table__cell'>
 		                        <div class='cell'>
 			                        {indexMethod(index)}
