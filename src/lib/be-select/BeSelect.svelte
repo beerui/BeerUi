@@ -8,9 +8,9 @@
 	let dispatch = createEventDispatcher()
 
 	export let options;
-	export let size;
 	// 下拉框选中的值
 	export let value;
+	export let size = 'normal';
 	const selectStore = new SelectStore({ value: $$props.value })
 	setContext('selectStore', selectStore)
 	let inputValue = getContext('lable')
@@ -43,10 +43,10 @@
 		inputValue = node?.label
 	})
 	function handleShowPopper() {
-	 	visible = true;
+		visible = true;
 	}
 	function handleClosePopper(){
-	 	visible = false
+		visible = false
 	}
 	const toggleVisible = () => {
 		console.log('visible', visible);
