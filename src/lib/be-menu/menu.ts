@@ -46,7 +46,6 @@ export default class MenuStore {
 		return this._collapse
 	}
 	set collapse(v) {
-		console.log('collapse');
 		this._collapse = v
 		this.closeNode(this.root.children)
 		this.publishHandle({ status: 'close', data: this.nodesMap })
