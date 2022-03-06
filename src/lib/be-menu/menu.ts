@@ -163,14 +163,14 @@ export default class MenuStore {
 		})
 	}
 	closeMenu() {
-		if (this.mode === 'vertical') return;
+		if (this.mode === 'vertical' && !this.collapse) return;
 		this.closeNode(this.root.children)
 		this.publishHandle({ status: 'close', data: this.nodesMap })
 	}
 	// 关闭所有节点
 	closeNode(list) {
 		list.forEach(el => {
-			if (el.open)  el.open = false
+			if (el.open) el.open = false
 			if (el.children.length > 0) this.closeNode(el.children)
 		})
 	}
