@@ -1,42 +1,39 @@
 import { genKey } from '$lib/utils/beerui';
+import { deepClone } from '$lib/utils';
 
 export default class MenuStore {
 	subscribe: Function[] = []; // 订阅方法
 	public active: string;
-	public nodeIdSeed: number = 0;
 	public mode: string = 'vertical';
 	public isOnlyOne: boolean = false;
 	public nodesMap: any = {};
 	public root: {
 		children: [];
-		key: string;
-		parent: null;
-		level: number;
-		store: any
+		store: any;
+		data: any[];
 	};
 	private _collapse: boolean;
 	private _trigger: string;
-	private _triggerHistory: string;
+	public data: any[];
 
 	constructor(options) {
 		this.active = options.active
 		this.mode = options.mode
+		this.data = deepClone(options.data)
 		this.isOnlyOne = options.isOnlyOne
 		this._collapse = options.collapse
 		this._trigger = options.trigger
-		this._triggerHistory = options.trigger
-		this.nodeIdSeed = 0
+
 		this.root = {
-			level: 0,
-			key: '',
-			children: [],
+			data: this.data,
 			store: this,
-			parent: null
-		};
+			children: []
+		}
 		// 竖向 未缩起来 触发被用户设置为hover => 强制转为click
 		if (this.mode === 'vertical' && this.collapse) {
 			this._trigger = 'click';
 		}
+		this.initTree()
 	}
 	get trigger() {
 		return this._trigger
@@ -53,65 +50,111 @@ export default class MenuStore {
 			if (this._collapse) this._trigger = 'hover'
 		}
 	}
-	initTree(els) {
-		if (!els) return
-		const key = genKey(4)
-		this.root.key = key
-		this.convertToMap(els, this.root)
-		this.convertToTree(this.root, this.nodesMap, key, [])
-		this.publishHandle({ status: 'done', data: this.nodesMap })
-		this.setActiveKey(this.active)
-	}
-	// 转为树
-	convertToTree(tree, list, pkey, keys) {
-		keys.push(pkey)
+	convertToTree(tree, list, pid, keys, init?) {
+		keys.push(pid)
 		const result = [];
 		for (const key in list) {
-			if (list[key].pkey === pkey) {
+			if (list[key].pid === pid) {
 				const item = list[key]
-				item.parent = tree
+				item.parent = init ? null : tree
 				result.push(item);
 			}
 		}
 		tree['children'] = result
 		for (const key in list) {
-			if (!keys.includes(list[key].key)) this.convertToTree(list[key], list, list[key].key, keys)
+			if (!keys.includes(list[key].id)) this.convertToTree(list[key], list, list[key].id, keys)
 		}
 	}
-	// 清洗数据
-	convertToMap(els: Element, parent) {
-		Object.entries(els.children).forEach(el => {
-			const _item = el[1];
-			const key = this.getAttr(_item, 'key')
-			const index = this.getAttr(_item, 'index')
-			const type = this.getAttr(_item, 'data-type')
-			const child = {
-				key: key || parent.key,
-				index,
+	computedNodesMap(list, parent) {
+		list.forEach(el => {
+			el.level = parent.level
+			if (el.children && el.children.length > 0) {
+				++el.level
+				el.type = 'submenu'
+				this.computedNodesMap(el.children, { id: el.id, level: el.level })
+			}
+			this.nodesMap[el.id] = {
+				id: el.id,
+				path: el.path,
+				title: el.title,
+				icon: el.icon,
+				type: el.children.length > 0 ? 'submenu' : '',
+				children: el.children,
 				level: parent.level,
-				pid: parent.id,
 				open: false,
 				active: false,
-				type: type || 'menuitem',
-				pkey: parent.key
+				pid: parent.id
 			}
-			if (key) {
-				child['level'] = ++child.level;
-				child['id'] = ++this.nodeIdSeed;
-			}
-			if (_item && _item.children.length > 0) {
-				this.convertToMap(_item, child)
-			}
-			if (key) this.nodesMap[key] = child
-		});
+		})
 	}
-	getAttr(el: Element, value: string) {
-		return el.getAttribute(value)
+	initTree() {
+		this.computedNodesMap(this.root.data, {
+			level: 1,
+			id: -1
+		})
+		this.convertToTree(this.root, this.nodesMap, -1, [], true)
+		this.publishHandle({ status: 'done', data: this.nodesMap })
+		this.setActiveKey(this.active)
 	}
+	// initTree(els) {
+	// 	if (!els) return
+	// 	const key = genKey(4)
+	// 	this.root.key = key
+	// 	this.convertToMap(els, this.root)
+	// 	this.convertToTree(this.root, this.nodesMap, key, [])
+	// 	this.publishHandle({ status: 'done', data: this.nodesMap })
+	// 	this.setActiveKey(this.active)
+	// }
+	// 转为树
+	// convertToTree(tree, list, pkey, keys) {
+	// 	keys.push(pkey)
+	// 	const result = [];
+	// 	for (const key in list) {
+	// 		if (list[key].pkey === pkey) {
+	// 			const item = list[key]
+	// 			item.parent = tree
+	// 			result.push(item);
+	// 		}
+	// 	}
+	// 	tree['children'] = result
+	// 	for (const key in list) {
+	// 		if (!keys.includes(list[key].key)) this.convertToTree(list[key], list, list[key].key, keys)
+	// 	}
+	// }
+	// // 清洗数据
+	// convertToMap(els: Element, parent) {
+	// 	Object.entries(els.children).forEach(el => {
+	// 		const _item = el[1];
+	// 		const key = this.getAttr(_item, 'key')
+	// 		const index = this.getAttr(_item, 'index')
+	// 		const type = this.getAttr(_item, 'data-type')
+	// 		const child = {
+	// 			key: key || parent.key,
+	// 			index,
+	// 			level: parent.level,
+	// 			pid: parent.id,
+	// 			open: false,
+	// 			active: false,
+	// 			type: type || 'menuitem',
+	// 			pkey: parent.key
+	// 		}
+	// 		if (key) {
+	// 			child['level'] = ++child.level;
+	// 			child['id'] = ++this.nodeIdSeed;
+	// 		}
+	// 		if (_item && _item.children.length > 0) {
+	// 			this.convertToMap(_item, child)
+	// 		}
+	// 		if (key) this.nodesMap[key] = child
+	// 	});
+	// }
+	// getAttr(el: Element, value: string) {
+	// 	return el.getAttribute(value)
+	// }
 	// 根据用户index来设置选中
-	setActiveKey(index) {
+	setActiveKey(id) {
 		for (const key in this.nodesMap) {
-			if (this.nodesMap[key].index === index) {
+			if (this.nodesMap[key].id === id) {
 				this.setActive(this.nodesMap[key])
 				return
 			}
@@ -119,9 +162,9 @@ export default class MenuStore {
 	}
 	// 设置选中
 	setActive(node) {
-		this.active = node.index
+		this.active = node.id
 		this.setTreeActive(node)
-		this.publishHandle({ status: 'update', data: this.nodesMap, menu: this.nodesMap[node.key] })
+		this.publishHandle({ status: 'update', data: this.nodesMap, menu: this.nodesMap[node.id] })
 	}
 	// 设置选中状态
 	setTreeActive(node) {
@@ -162,6 +205,9 @@ export default class MenuStore {
 			}
 		})
 	}
+	changeType(id) {
+		if (this.nodesMap[id]) this.nodesMap[id].type = 'submenu'
+	}
 	closeMenu() {
 		if (this.mode === 'vertical' && !this.collapse) return;
 		this.closeNode(this.root.children)
@@ -185,23 +231,5 @@ export default class MenuStore {
 	// 通知集合改变
 	publishHandle(item) {
 		this.subscribe.forEach(cb => cb(item))
-	}
-	registerNode(node) {
-		const key = node.key;
-		if (!key || !node || !node.data) return;
-
-		const nodeKey = node.key;
-		if (nodeKey !== undefined) this.nodesMap[node.key] = node;
-	}
-
-	deregisterNode(node) {
-		const key = node.key;
-		if (!key || !node || !node.data) return;
-
-		node.childNodes.forEach(child => {
-			this.deregisterNode(child);
-		});
-
-		delete this.nodesMap[node.key];
 	}
 }

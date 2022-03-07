@@ -27,6 +27,7 @@
     }
     .be-menu-item {
       position: relative;
+      transition: 3s;
       .be-menu-tooltip {display: none;}
       &:hover {
         .be-menu-tooltip {
@@ -149,7 +150,8 @@
       border-radius: 2px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
       background-color: #fff;
-      display: none;
+      //display: none;
+      transition: .3s;
       .be-submenu__content {
         left: 205px;top: 0;
         &:before {
@@ -196,7 +198,7 @@
   &__content {
     padding: 5px 0;
     border-radius: 2px;
-    display: none;
+    //display: none;
     .be-submenu__content {
       &:before {
         content: '';display: block;position: absolute;width: 5px;left: -5px;top: 0;height: 100%;
@@ -207,7 +209,6 @@
     &>.be-submenu__title {color: #409eff;}
   }
   &.is_opened {
-    &>.be-submenu__content {display: block;}
     &>.be-submenu__title {
       .icon-right {
         .be-icon {transform: rotate(180deg)}

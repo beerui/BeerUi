@@ -1,16 +1,17 @@
 <script lang="ts">
-	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from "svelte";
+	import { beforeUpdate, createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
 	import clickOutside from "$lib/_actions/clickOutside";
 	import MenuStore from './menu'
 
 	export let active: string = "";
 	export let mode: string = "vertical";
 	export let trigger: string = "hover";
+	export let data: any[] = [];
 	export let collapse: boolean = false;
 	export let isOnlyOne: boolean = false;
 	const dispatch = createEventDispatcher();
 	let BeMenu = null;
-	let store = new MenuStore({ active, mode, trigger, collapse, dispatch})
+	let store = new MenuStore({ data, active, mode, trigger, collapse, dispatch})
 	setContext('menuStore', store)
 
 	const subscribeHandle = item => {
@@ -26,11 +27,6 @@
 	// 设置选中
 	export const setMenuActive = active => store.setActiveKey(active);
 
-	onMount(async () => {
-		// 初始化
-		await tick();
-		store.initTree(BeMenu)
-	});
 	onDestroy(() => {
 		store = null
 	})

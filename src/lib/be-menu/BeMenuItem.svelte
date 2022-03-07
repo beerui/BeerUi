@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { genKey } from '$lib/utils/beerui';
 	import { getContext, onDestroy } from 'svelte';
 
-	export let index:string = ''
+	export let id: string = "";
 	const store = getContext("menuStore");
 
-	const subscribeHandle = item => node = item.data[key]
+	const subscribeHandle = item => node = item.data[id]
 	store.subscribe.push(subscribeHandle)
-	const key = genKey(5)
-	let node = { level: 1, id: 0 }
+	let node = store.nodesMap[id] || { level: 1, id: 0 }
 
 	onDestroy(() => node = null)
 	let _class: $$props["class"] = "";
@@ -18,16 +16,12 @@
 </script>
 <li role="menuitem"
     tabindex="0"
-    {key}
-    {index}
     class="be-menu-item {_class}"
     class:is_active={node.active}
     on:click|stopPropagation
     on:dblclick|stopPropagation
     on:mousedown|stopPropagation={handleClick}
     on:mouseup|stopPropagation
-    data-id={node.id}
-    data-level={node.level}
     style:padding-left={node.level*20 + 'px'}
 >
 	{#if store.collapse && node.level === 1}

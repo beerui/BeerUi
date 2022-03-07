@@ -1,19 +1,17 @@
 <script lang="ts">
-	import { genKey } from '$lib/utils/beerui';
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { getContext, onDestroy, tick } from 'svelte';
+	import { getContext, onDestroy, onMount, tick } from 'svelte';
+	import { fade, fly } from 'svelte/transition';
+	import { cubicInOut } from 'svelte/easing';
 
-	export let index: String = "";
+	export let id: String = "";
 	const store = getContext("menuStore");
 
-	const subscribeHandle = item => node = item.data[key]
+	const subscribeHandle = item => node = item.data[id];
 	store.subscribe.push(subscribeHandle)
 
-	const key = genKey(6)
-	let submenu = null
-	let subMenuContent = null
 	let timeout = null
-	let node = { level: 1, id: 0, open: false }
+	let node = store.nodesMap[id] || { level: 1, id: 0, open: false }
 
 	const enterMenu = () => {
 		let isFlag: boolean = false;
@@ -38,62 +36,53 @@
 	};
 
 	onDestroy(() => node = null)
-	// 打开关闭菜单动画
-	let subMenuContentHeight;
-	const triggerMenu = async evt => {
-		if (evt.which !== 1) return
-		if (store.trigger === 'hover') return
-		let _isOpen = node.open;
-		if (!_isOpen) node.open = !node.open;
-		subMenuContentHeight = subMenuContent.children.length * 50 + 10 + "px";
-		if (store.mode === "vertical") {
-			subMenuContent.style.overflow = "hidden";
-			const animate = subMenuContent.animate([
-				{ height: _isOpen ? subMenuContentHeight : "0px", opacity: _isOpen ? "1" : "0" },
-				{ height: _isOpen ? "0px" : subMenuContentHeight, opacity: _isOpen ? "0" : "1" }
-			], {
-				duration: 120
-			});
-			await animate.finished;
-			if (_isOpen) node.open = !node.open;
-			subMenuContentHeight = "auto";
-			subMenuContent.style.overflow = "";
-		} else {
-			const child = submenu.querySelectorAll(".be-submenu__content > .be-menu-item");
-			child.forEach(el => {
-				el.animate([
-					{ height: _isOpen ? "50px" : "0px", opacity: _isOpen ? "1" : "0" },
-					{ height: _isOpen ? "0px" : "50px", opacity: _isOpen ? "0" : "1" }
-				], {
-					duration: 120
-				});
-			});
-			await tick();
-			if (_isOpen) node.open = !node.open;
-		}
-	};
 
 	const handleClick = evt => evt.which === 1 && store.setActive(node)
 	let _class: $$props["class"] = "";
 	export {_class as class};
+
+	function slideIn(node, params) {
+		return {
+			duration:params.duration,
+			easing: cubicInOut,
+			css: t => {
+				return `
+				height: ${node.offsetHeight * t}px;
+				overflow: hidden;
+				display: block;
+				`
+			}
+		};
+	}
+	function slideOut(node, params) {
+		return {
+			duration: params.duration,
+			easing: cubicInOut,
+			css: t => {
+				return `
+				height: ${node.offsetHeight * t}px;
+				overflow: hidden;
+				display: none;
+				`
+			}
+		};
+	}
+
+	$: {
+		console.log('node----open', node.open);
+	}
 </script>
 <li role="menuitem"
     aria-haspopup="true"
     class="be-submenu {_class}"
     class:is_active={node.active}
     class:is_opened={node.open}
-    bind:this={submenu}
     on:mouseenter={enterMenu}
     on:mouseleave={leaveMenu}
     on:dblclick|stopPropagation
-    on:mousedown|stopPropagation={triggerMenu}
+    on:mousedown|stopPropagation={handleClick}
     on:mouseup|stopPropagation
     on:click|stopPropagation
-    {key}
-    {index}
-    data-type='submenu'
-    data-index={node.index}
-    data-level={node.level}
 >
 	<div class="be-submenu__title" style:padding-left={node.level*20 + 'px'}>
 		{#if store.collapse && node.level === 1}
@@ -112,10 +101,23 @@
 			</div>
 		{/if}
 	</div>
-	<ul class="be-submenu__content be-submenu__{node.level}"
-	    bind:this={subMenuContent}
-	    style:display={node.open ? 'block' : 'none'}
-	>
-		<slot></slot>
-	</ul>
+	{#if store.mode === 'horizontal'}
+		{#if node.open}
+			<ul class="be-submenu__content be-submenu__{node.level}"
+			    in:fly="{{ y: -10, duration: 160 }}"
+			    out:fade
+			>
+				<slot></slot>
+			</ul>
+		{/if}
+	{:else}
+		{#if node.open}
+			<ul class="be-submenu__content be-submenu__{node.level}"
+			    in:slideIn={{duration: 160}}
+			    out:slideOut={{duration: 120}}
+			>
+				<slot></slot>
+			</ul>
+		{/if}
+	{/if}
 </li>
