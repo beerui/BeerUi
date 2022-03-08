@@ -164,14 +164,3 @@ const submitHandle = () => {
 		</div>
 	</DemoBlock>
 </div>
-<style lang="scss">
-	.upload-card {width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;color: #8c939d;}
-	.upload-card__drag {
-		width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;flex-wrap: wrap;
-		padding: 20px;
-		.be-icon {text-align: center}
-	}
-	.upload-card__icon {
-		display: flex;justify-content: center;color: #565656;width: 100%;
-	}
-</style>
