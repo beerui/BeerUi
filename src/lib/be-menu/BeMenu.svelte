@@ -29,7 +29,6 @@
 
 	onMount(() => {
 		if (!store.collapse && mode === 'vertical') setMenuActive(active)
-		console.log('active', active);
 	})
 	onDestroy(() => {
 		store = null
