@@ -2,6 +2,7 @@
 	import { createEventDispatcher, onDestroy, onMount, setContext } from 'svelte';
 	import clickOutside from "$lib/_actions/clickOutside";
 	import MenuStore from './menu'
+	import { id } from '$lib/be-menu/BeSubMenu.svelte';
 
 	export let active: string = "";
 	export let mode: string = "vertical";
@@ -16,7 +17,7 @@
 
 	const subscribeHandle = item => {
 		if (active !== store.active) {
-			dispatch('change', store.active)
+			dispatch('change', item.data[id])
 			active = store.active
 		}
 	}

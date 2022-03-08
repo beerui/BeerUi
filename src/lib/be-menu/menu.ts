@@ -67,18 +67,20 @@ export default class MenuStore {
 	computedNodesMap(list, parent) {
 		list.forEach(el => {
 			el.level = parent.level
-			if (el.children && el.children.length > 0) {
+			const hasChild = el.children && el.children.length > 0
+			if (hasChild) {
 				++el.level
 				el.type = 'submenu'
 				this.computedNodesMap(el.children, { id: el.id, level: el.level })
 			}
 			this.nodesMap[el.id] = {
+				...el,
 				id: el.id,
 				path: el.path,
 				title: el.title,
 				icon: el.icon,
-				type: el.children.length > 0 ? 'submenu' : '',
-				children: el.children,
+				type: hasChild ? 'submenu' : '',
+				children: el.children || [],
 				level: parent.level,
 				open: false,
 				active: false,
@@ -199,7 +201,7 @@ export default class MenuStore {
 				// 打开一个 收起其它
 				if (el.type === 'submenu' && this.isOnlyOne) el.open = false
 			}
-			if (el.children.length > 0) {
+			if (el.children && el.children.length > 0) {
 				this.clearNodeStatus(el.children, nodes)
 			}
 		})
@@ -216,7 +218,7 @@ export default class MenuStore {
 	closeNode(list) {
 		list.forEach(el => {
 			if (el.open) el.open = false
-			if (el.children.length > 0) this.closeNode(el.children)
+			if (el.children && el.children.length > 0) this.closeNode(el.children)
 		})
 	}
 	getNode(key) {
