@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { beforeUpdate, createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount, setContext } from 'svelte';
 	import clickOutside from "$lib/_actions/clickOutside";
 	import MenuStore from './menu'
 
@@ -27,6 +27,10 @@
 	// 设置选中
 	export const setMenuActive = active => store.setActiveKey(active);
 
+	onMount(() => {
+		if (!store.collapse && mode === 'vertical') setMenuActive(active)
+		console.log('active', active);
+	})
 	onDestroy(() => {
 		store = null
 	})

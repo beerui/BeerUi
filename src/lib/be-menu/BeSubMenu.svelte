@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { getContext, onDestroy, onMount, tick } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 
@@ -66,10 +66,6 @@
 				`
 			}
 		};
-	}
-
-	$: {
-		console.log('node----open', node.open);
 	}
 </script>
 <li role="menuitem"
