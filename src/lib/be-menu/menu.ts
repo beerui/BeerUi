@@ -67,7 +67,7 @@ export default class MenuStore {
 	computedNodesMap(list, parent) {
 		list.forEach(el => {
 			el.level = parent.level
-			const hasChild = el.children && el.children.length > 0
+			const hasChild = el.children && el.children.length > 0 && !el.children.some(el => el.hidden);
 			if (hasChild) {
 				++el.level
 				el.type = 'submenu'
