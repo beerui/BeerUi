@@ -32,7 +32,7 @@ function tabClick(key, i) {
 	dispatcher('tabClick', key)
 }
 </script>
-<div class={classes('tab', _class)}>
+<div class={classes('be-tab', _class)}>
 	<div class="be-tabs-pane">
 		<div class='be-tabs__header'>
 			<div class='be-tabs__nav-wrap'>

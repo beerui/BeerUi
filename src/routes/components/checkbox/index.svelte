@@ -9,10 +9,8 @@
 
 	let checked = false;
 	let checkedList = ["选中且禁用", "复选框 A"];
-	let onChange = (evt) => {
-		console.log(evt.detail);
-	};
-	let checkedCities = [];
+	let onChange = (evt) => console.log('onChange', evt.detail);
+	let checkedCities = ["上海"];
 	const cityOptions = ["上海", "北京", "广州", "深圳"];
 	let indeterminate = false;
 	let selectItem = () => checkboxGroup.setCheckedList(["上海"]);
@@ -21,23 +19,28 @@
 		indeterminate ? checkboxGroup.setCheckedList(["上海", "北京", "广州", "深圳"]) : checkboxGroup.setCheckedList([]);
 	};
 	let checkboxGroup: CheckboxGroup;
+	let clickHandle = (evt) => {
+		console.log('clickHandle', evt);
+	};
+	let changeHandle = (evt) => {
+		console.log('changeHandle', evt);
+	};
 </script>
 <div class="page-container">
 	<h2>Checkbox 多选框</h2>
 	<p>一组备选项中进行多选</p>
-	<ol>
-		<li></li>
-	</ol>
+
 	<h3>基础用法</h3>
 	<p>单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。</p>
 	<DemoBlock code={`
-<BeCheckbox {checked}>备选项</BeCheckbox>`} js={`
+<BeCheckbox {checked} on:change={changeHandle} on:click={clickHandle}>备选项</BeCheckbox>`} js={`
 import { BeCheckbox, BeTableColumn} from '@brewer/beerui'
 let checked = false;
     `}>
 		<div slot="source">
+			<div>checked: {checked}</div>
 			<div class="demo-list">
-				<BeCheckbox {checked}>备选项</BeCheckbox>
+				<BeCheckbox bind:checked={checked} on:change={changeHandle} on:click={clickHandle}>备选项</BeCheckbox>
 			</div>
 		</div>
 	</DemoBlock>
@@ -45,15 +48,15 @@ let checked = false;
 	<p>多选框不可用状态。</p>
 	<DemoBlock
 		code={`
-<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>
-<BeCheckbox {checked} disabled>备选项</BeCheckbox>
+<BeCheckbox checked={checked} disabled>备选项</BeCheckbox>
+<BeCheckbox checked disabled>备选项</BeCheckbox>
 `} js={`
 let checked = false;
 `}>
 		<div slot="source">
 			<div class="demo-list">
-				<BeCheckbox checked={!checked} disabled>备选项</BeCheckbox>
 				<BeCheckbox {checked} disabled>备选项</BeCheckbox>
+				<BeCheckbox checked disabled>备选项</BeCheckbox>
 			</div>
 		</div>
 		<div slot="description">
@@ -77,6 +80,7 @@ let checkedCities = []
 const cityOptions = ['上海', '北京', '广州', '深圳'];
 let indeterminate = false
 let selectItem = () => checkboxGroup.setCheckedList(['上海'])
+let onChange = (evt) => console.log('onChange', evt.detail);
 const setCheckedListHandle = () => {
   indeterminate = !indeterminate
   indeterminate ? checkboxGroup.setCheckedList(['上海', '北京', '广州', '深圳']) : checkboxGroup.setCheckedList([])
@@ -84,10 +88,13 @@ const setCheckedListHandle = () => {
 let checkboxGroup;
 `}>
 		<div slot="source">
-			<BeButton on:click={selectItem}>选中 上海</BeButton>
-			<BeButton on:click={setCheckedListHandle}>{indeterminate ? '取消全选' : '全选'}</BeButton>
+			<div>
+				<BeButton on:click={selectItem}>选中 上海</BeButton>
+				<BeButton on:click={setCheckedListHandle}>{indeterminate ? '取消全选' : '全选'}</BeButton>
+			</div>
+			<p>checked: {checkedCities}</p>
 			<div class="demo-list">
-				<BeCheckboxGroup bind:this={checkboxGroup} checked={checkedCities} on:change={onChange}>
+				<BeCheckboxGroup bind:this={checkboxGroup} bind:checked={checkedCities} on:change={onChange}>
 					<BeCheckbox label="上海" />
 					<BeCheckbox label="北京" />
 					<BeCheckbox label="广州" />

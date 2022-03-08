@@ -1,15 +1,16 @@
 <script lang='ts'>
-	import BeIcon from '$lib/be-icon/BeIcon.svelte';
-	import BeInput from '$lib/be-input/BeInput.svelte';
+	import BeIcon from './../be-icon/BeIcon.svelte';
+	import BeInput from '../be-input/BeInput.svelte';
 	import { createEventDispatcher, getContext, onMount, setContext } from "svelte";
 	import clickOutside from '$lib/_actions/clickOutside';
-	import { BeerPS, filterClass, genKey } from "$lib/utils/beerui";
+	import { BeerPS, genKey } from "$lib/utils/beerui";
 	import SelectStore from './select'
 	let dispatch = createEventDispatcher()
+
 	export let options;
 	// 下拉框选中的值
 	export let value;
-	export let size;
+	export let size = 'normal';
 	const selectStore = new SelectStore({ value: $$props.value })
 	setContext('selectStore', selectStore)
 	let inputValue = getContext('lable')
@@ -19,11 +20,6 @@
 	export let position = 'bottom'
 	export let clearable = false
 	export let placeholder = '请选择'
-
-	const preClass = ["size"];
-	const _class = ["be-select", ...filterClass($$props, "be-select--", preClass)].join(" ");
-
-	console.log('_class', _class);
 	// 下拉框
 	let visible = false;
 	// 获取输入框
@@ -39,44 +35,39 @@
 		inputValue = items.label
 	})
 
-	$:if(visible) selectStore.setHover(value);
-	let isOnMount = false
+	$:if(visible) {
+		selectStore.setHover(value)
+	}
 	onMount(() => {
 		let node = selectStore.getCurrent(value)
 		inputValue = node?.label
-		isOnMount = true
 	})
-	const clearValue = () => {
-		inputValue = ''
-		value = ''
-		showClose = false
-		selectStore.setCurrent({})
+	function handleShowPopper() {
+		visible = true;
+	}
+	function handleClosePopper(){
 		visible = false
 	}
-	const change = (e) => {
-		dispatch('onChange', e)
-	}
-	const mousedownHandle = () => {
+	const toggleVisible = () => {
+		console.log('visible', visible);
 		visible = !visible
 	}
+	const clearValue = () => {
+		inputValue = ''
+		value = -1
+		showClose = false
+		selectStore.setCurrent({})
+		handleClosePopper()
+	}
+	const change = (e) => {
+		dispatch('change', selectStore.value)
+	}
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
 
-<div
-	class={_class}
-	class:be-select--disabled={disabled}
-	style={$$props.style}
-	use:clickOutside={{ cb: () => visible = false }}
-	on:click
-	on:contextmenu
-	on:dblclick
-	on:focusin
-	on:mousedown
-	on:mouseup={mousedownHandle}
-	on:focusout
-	on:keydown
-	on:keyup
->
-	<div on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
+<div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
+	<div on:click|stopPropagation={toggleVisible} on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
 		<BeInput {placeholder} value={inputValue} bind:this={input} readonly disabled={disabled}>
 			<div slot='suffix'>
 				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
@@ -88,7 +79,7 @@
 			</div>
 		</BeInput>
 	</div>
-	<div class='be-select__option' class:is-ready={isOnMount} class:visible={visible}>
+	<div class='be-select__option' class:visible={visible}>
 		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
 			<slot></slot>
 		</ul>

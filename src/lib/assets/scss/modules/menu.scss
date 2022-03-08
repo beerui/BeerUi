@@ -27,9 +27,10 @@
     }
     .be-menu-item {
       position: relative;
-      .be-tooltip {display: none;}
+      transition: 3s;
+      .be-menu-tooltip {display: none;}
       &:hover {
-        .be-tooltip {
+        .be-menu-tooltip {
           display: block;
           position: absolute;
           left: 74px;
@@ -39,6 +40,7 @@
           color: #909399;
           padding: 0 12px;
           border-radius: 8px;
+          z-index: 99999;
         }
       }
     }
@@ -72,11 +74,11 @@
       float: left;
       &.is_active {
         //border-bottom: 2px solid #409eff;
-        color: #303133;
+        color: #409eff;
         //& .be-submenu__title {color: #303133;border-bottom: 2px solid #409eff;}
       }
       & .be-submenu__content .be-submenu__title {
-        &:hover {color: #303133;}
+        &:hover {color: #409eff;}
         border-bottom-color: transparent;
       }
       & .be-submenu__title {
@@ -84,7 +86,7 @@
         line-height: 36px;
         border-bottom: 2px solid transparent;
         color: #909399;
-        &:hover {color: #303133;}
+        &:hover {color: #409eff;}
       }
       & .be-submenu__icon-arrow {
         position: static;
@@ -119,7 +121,7 @@
     align-items: center;
     .icon-left {padding-right: 5px;}
 
-    &:hover {outline: none;background-color: #ecf5ff;}
+    &:hover {outline: none;background-color: #ecf5ff;color: #409eff;}
     &.is_active {color: #409eff;}
     &.is-disabled {
       opacity: .25;
@@ -148,7 +150,8 @@
       border-radius: 2px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
       background-color: #fff;
-      display: none;
+      //display: none;
+      transition: .3s;
       .be-submenu__content {
         left: 205px;top: 0;
         &:before {
@@ -195,7 +198,7 @@
   &__content {
     padding: 5px 0;
     border-radius: 2px;
-    display: none;
+    //display: none;
     .be-submenu__content {
       &:before {
         content: '';display: block;position: absolute;width: 5px;left: -5px;top: 0;height: 100%;
@@ -206,7 +209,6 @@
     &>.be-submenu__title {color: #409eff;}
   }
   &.is_opened {
-    &>.be-submenu__content {display: block;}
     &>.be-submenu__title {
       .icon-right {
         .be-icon {transform: rotate(180deg)}

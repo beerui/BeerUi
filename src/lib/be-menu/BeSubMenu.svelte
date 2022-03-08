@@ -1,56 +1,28 @@
 <script lang="ts">
-	import { BeerPS, hasClass, addClass } from "$lib/utils/beerui";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { getContext, onDestroy, onMount, tick } from "svelte";
+	import { getContext, onDestroy } from 'svelte';
+	import { fade, fly } from 'svelte/transition';
+	import { cubicInOut } from 'svelte/easing';
 
-	export let index: String = "";
-	const key = getContext("MenuTriggerKey");
-	const trigger = getContext(`MenuTrigger_${ key }`);
-	const mode = getContext(`MenuMode_${ key }`);
-	let collapse = getContext(`MenuCollapse_${ key }`);
+	export let id: String = "";
+	const store = getContext("menuStore");
 
-	let submenu = null;
-	let subMenuContent = null;
-	let hovered = trigger === "hover";
-	let isOpen = false;
-	let isActive = false;
-	let timeout = null;
+	const subscribeHandle = item => node = item.data[id];
+	store.subscribe.push(subscribeHandle)
 
-	const _MenuActiveChange = BeerPS.subscribe(`MenuActiveChange_${ key }`, async items => {
-		if (items.type === "setting" && submenu) {
-			await tick();
-			const els = submenu.querySelector(".is_active");
-			computedActive(els);
-		} else {
-			computedActive(items.els);
-		}
-	});
-	const computedActive = (els) => {
-		if (!els || hasClass(els, "be-menu")) return;
-		if (hasClass(els.parentElement, "be-submenu")) {
-			addClass(els.parentElement, 'is_active');
-			if (mode === "vertical" && !collapse) isActive = true
-		}
-		setTimeout(() => computedActive(els.parentElement), 60);
-	};
-	// 点击外部关闭子集弹框
-	const _MenuCloseAll = BeerPS.subscribe(`MenuCloseAll_${ key }`, () => isOpen = false);
-	// 接收展开或收起的状态
-	const _MenuCollapse = BeerPS.subscribe(`MenuCollapse_${ key }`, _collapse => {
-		collapse = _collapse;
-		changeActive(false, 0);
-	});
+	let timeout = null
+	let node = store.nodesMap[id] || { level: 1, id: 0, open: false }
 
 	const enterMenu = () => {
 		let isFlag: boolean = false;
-		if (hovered || collapse) {
+		if (store.trigger === 'hover' || store.collapse) {
 			isFlag = true;
 			changeActive(isFlag);
 		}
 	};
 	const leaveMenu = () => {
 		let isFlag: boolean = true;
-		if (hovered || collapse) {
+		if (store.trigger === 'hover' || store.collapse) {
 			isFlag = false;
 			changeActive(isFlag);
 		}
@@ -59,81 +31,65 @@
 	const changeActive = (isFlag: boolean, handleTime: number = 300) => {
 		clearTimeout(timeout);
 		timeout = setTimeout(() => {
-			isOpen = isFlag;
+			node.open = isFlag;
 		}, handleTime);
 	};
-	// 计算层级
-	let level = 1;
-	const computedLevel = (els, _level = 1) => {
-		if (hasClass(els.parentElement, "be-submenu__content")) _level++;
-		if (!hasClass(els.parentElement, "be-menu")) return computedLevel(els.parentElement, _level);
-		return _level;
-	};
-	onMount(() => {
-		level = computedLevel(submenu);
-	});
 
-	onDestroy(() => {
-		BeerPS.unsubscribe(_MenuActiveChange);
-		BeerPS.unsubscribe(_MenuCloseAll);
-		BeerPS.unsubscribe(_MenuCollapse);
-	});
-	// 打开关闭菜单动画
-	let subMenuContentHeight;
-	const triggerMenu = async () => {
-		let _isOpen = isOpen;
-		if (!_isOpen) isOpen = !isOpen;
-		subMenuContentHeight = subMenuContent.children.length * 50 + 10 + "px";
-		if (mode === "vertical") {
-			subMenuContent.style.overflow = "hidden";
-			const animate = subMenuContent.animate([
-				{ height: _isOpen ? subMenuContentHeight : "0px", opacity: _isOpen ? "1" : "0" },
-				{ height: _isOpen ? "0px" : subMenuContentHeight, opacity: _isOpen ? "0" : "1" }
-			], {
-				duration: 120
-			});
-			await animate.finished;
-			if (_isOpen) isOpen = !isOpen;
-			subMenuContentHeight = "auto";
-			subMenuContent.style.overflow = "";
-		} else {
-			const child = submenu.querySelectorAll(".be-submenu__content > .be-menu-item");
-			child.forEach(el => {
-				el.animate([
-					{ height: _isOpen ? "50px" : "0px", opacity: _isOpen ? "1" : "0" },
-					{ height: _isOpen ? "0px" : "50px", opacity: _isOpen ? "0" : "1" }
-				], {
-					duration: 120
-				});
-			});
-			await tick();
-			if (_isOpen) isOpen = !isOpen;
-		}
-	};
+	onDestroy(() => node = null)
+
+	const handleClick = evt => evt.which === 1 && store.setActive(node)
+	let _class: $$props["class"] = "";
+	export {_class as class};
+
+	function slideIn(node, params) {
+		return {
+			duration:params.duration,
+			easing: cubicInOut,
+			css: t => {
+				return `
+				height: ${node.offsetHeight * t}px;
+				overflow: hidden;
+				display: block;
+				`
+			}
+		};
+	}
+	function slideOut(node, params) {
+		return {
+			duration: params.duration,
+			easing: cubicInOut,
+			css: t => {
+				return `
+				height: ${node.offsetHeight * t}px;
+				overflow: hidden;
+				display: none;
+				`
+			}
+		};
+	}
 </script>
 <li role="menuitem"
     aria-haspopup="true"
-    class="be-submenu"
-    class:is_active={isActive}
-    class:is_opened={(isActive || isOpen)}
-    bind:this={submenu}
+    class="be-submenu {_class}"
+    class:is_active={node.active}
+    class:is_opened={node.open}
     on:mouseenter={enterMenu}
     on:mouseleave={leaveMenu}
     on:dblclick|stopPropagation
-    on:mousedown|stopPropagation
+    on:mousedown|stopPropagation={handleClick}
     on:mouseup|stopPropagation
-    on:click|stopPropagation={triggerMenu}
-    {index}
-    {level}
+    on:click|stopPropagation
 >
-	<div class="be-submenu__title" style:padding-left={level*20 + 'px'}>
-		{#if collapse && level === 1}
+	<div class="be-submenu__title" style:padding-left={node.level*20 + 'px'}>
+		{#if store.collapse && node.level === 1}
 			<slot name="icon"></slot>
 		{:else}
 			<div class="be-menu__icon">
-			<span class="icon-left">
-				<slot name="icon"></slot>
-			</span>
+				{#if $$slots.icon}
+					<span class="icon-left">
+						<slot name="icon"></slot>
+					</span>
+				{/if}
 				<slot name="title"></slot>
 			</div>
 			<div class="icon-right">
@@ -141,10 +97,23 @@
 			</div>
 		{/if}
 	</div>
-	<ul class="be-submenu__content be-submenu__{level}"
-	    bind:this={subMenuContent}
-	    style:display={(isActive || isOpen) ? 'block' : 'none'}
-	>
-		<slot></slot>
-	</ul>
+	{#if store.mode === 'horizontal'}
+		{#if node.open}
+			<ul class="be-submenu__content be-submenu__{node.level}"
+			    in:fly="{{ y: -10, duration: 160 }}"
+			    out:fade
+			>
+				<slot></slot>
+			</ul>
+		{/if}
+	{:else}
+		{#if node.open}
+			<ul class="be-submenu__content be-submenu__{node.level}"
+			    in:slideIn={{duration: 160}}
+			    out:slideOut={{duration: 120}}
+			>
+				<slot></slot>
+			</ul>
+		{/if}
+	{/if}
 </li>

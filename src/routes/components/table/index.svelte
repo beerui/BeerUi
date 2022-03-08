@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import BeTable, { toggleRowSelection } from '$lib/be-table/BeTable.svelte';
+	import BeTable from '$lib/be-table/BeTable.svelte';
     import BeTableColumn from '$lib/be-table/BeTableColumn.svelte';
     import DemoBlock from '$lib/demo/DemoBlock.svelte';
     import BeButton from '$lib/be-button/BeButton.svelte';
@@ -173,6 +173,9 @@
 	const handleSelectionChangeGetId = ({ detail }) => console.log('handleSelectionChangeGetId', detail);
 	const handleSelectionChangeGetRows = ({ detail }) => console.log('handleSelectionChangeGetRows', detail);
 	const placeholderRegexHandle = (v) => v === undefined || v === 'undefined'
+	const indexMethod = (index) => {
+		return index * 2;
+	}
 </script>
 <div class='page-container'>
     <h2>BeTable 表格</h2>
@@ -180,7 +183,8 @@
         <li>TODO：优化自定义表格列 / 无法动态添加 slot</li>
     </ol>
     <DemoBlock code={`
-<BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle}>
+<BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle} indexMethod={indexMethod}>
+	<BeTableColumn width="600" type="index" prop='index' label='索引' />
 	<BeTableColumn prop="name" label="姓名" />
 	<BeTableColumn prop='placeholder' label='placeholder' />
 	<BeTableColumn prop="date" label="日期" />
@@ -216,7 +220,8 @@ const placeholderRegexHandle = (v) => v === undefined || v === 'undefined'
 		        <li>placeholderRegex 无数据的时候回调函数 Boolean</li>
 	        </ol>
             <div class='demo-list'>
-                <BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle}>
+                <BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle} indexMethod={indexMethod}>
+                    <BeTableColumn width="60" prop='index' label='' />
                     <BeTableColumn width="355" prop='name' label='姓名' />
                     <BeTableColumn width="355" prop='placeholder' label='placeholder' />
                     <BeTableColumn width="355" prop='date' label='日期' />
@@ -224,6 +229,11 @@ const placeholderRegexHandle = (v) => v === undefined || v === 'undefined'
                 </BeTable>
             </div>
         </div>
+	    <div slot='description'>
+		    通过给 prop=index 的列传入 index 属性，可以自定义索引。
+		    该属性传入数字时，将作为索引的起始值（从 1 开始）。
+		    也可以传入一个方法，它提供当前行的行号（从 0 开始）作为参数，返回值将作为索引展示。
+	    </div>
     </DemoBlock>
     <DemoBlock
             code={
@@ -251,6 +261,7 @@ let tableRowClassName = ({row, rowIndex}) => {
             <h1>带斑马纹/带边框/带状态表格</h1>
             <div class='demo-list'>
                 <BeTable data={tableData} stripe border>
+	                <BeTableColumn width="60" prop='index' label='索引' />
                     <BeTableColumn prop='name' label='姓名' />
                     <BeTableColumn prop='date' label='日期' />
                     <BeTableColumn prop='address' label='地址' />

@@ -176,81 +176,81 @@
 </script>
 <div class="{isCard ? 'be-pagination be-pagination-card' : 'be-pagination'}" >
 	{#if type === 'mini'}
-	<div class="be-pagination__container_mini">
-		<div on:click={() => changePage(+currentPage - 1)} class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {+currentPage === 1 ? 'bg-gray-300' : ''}">
-			上一页
+		<div class="be-pagination__container_mini">
+			<div on:click={() => changePage(+currentPage - 1)} class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {+currentPage === 1 ? 'bg-gray-300' : ''}">
+				上一页
+			</div>
+			<div on:click={() => changePage(+currentPage + 1)} class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {+currentPage === totalpages ? 'bg-gray-300' : ''}">
+				下一页
+			</div>
 		</div>
-		<div on:click={() => changePage(+currentPage + 1)} class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-300 {+currentPage === totalpages ? 'bg-gray-300' : ''}">
-			下一页
-		</div>
-	</div>
 	{/if}
 	{#if type === 'normal'}
-	<div class='be-pagination__container'>
-		{#if components.includes('info')}
-			<div class='be-pagination__analyze'>
-				<p class="text-sm text-gray-700">
-					{#if components.includes('all')}
-					显示
-					<span class="font-medium">{pageSize}条 </span>
-					当前在
-					<span class="font-medium">第{+currentPage} / {totalpages}页</span>
-					{/if}
-					共
-					<span class="font-medium"> {total}</span>
-					条
-				</p>
-			</div>
-		{/if}
 		<div class='be-pagination__container'>
-			{#if components.includes('prev')}
-			<div on:click={() => changePage(+currentPage - 1)} class="list" class:disabled={+currentPage === 1}>
-				<div class="sr-only pointer-events-none svg-icon">
-					<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
-						<path fill={icon.color} d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path>
-					</svg>
+			{#if components.includes('info')}
+				<div class='be-pagination__analyze'>
+					<p class="text-sm text-gray-700">
+						{#if components.includes('all')}
+							显示
+							<span class="font-medium">{pageSize}条 </span>
+							当前在
+							<span class="font-medium">第{+currentPage} / {totalpages}页</span>
+						{/if}
+						共
+						<span class="font-medium"> {total}</span>
+						条
+					</p>
 				</div>
-			</div>
 			{/if}
-			{#each pageList as item, index}
-				{#if item.type === 'ellipsis'}
-					<div on:click={() => changePage(item.n)} class="list" class:active={+currentPage === item.n}>
-						...
-					</div>
-				{:else}
-					<div on:click={() => changePage(item.n)} class="list" class:active={+currentPage === item.n}>
-						{item.n}
+			<div class='be-pagination__container'>
+				{#if components.includes('prev')}
+					<div on:click={() => changePage(+currentPage - 1)} class="list" class:disabled={+currentPage === 1}>
+						<div class="sr-only pointer-events-none svg-icon">
+							<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
+								<path fill={icon.color} d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path>
+							</svg>
+						</div>
 					</div>
 				{/if}
-			{/each}
-			{#if components.includes('next')}
-			<div on:click={() => changePage(+currentPage + 1)} class="list" class:disabled={+currentPage === totalpages}>
-				<div class="sr-only pointer-events-none svg-icon">
-					<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
-						<path fill={icon.color} d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path>
-					</svg>
-				</div>
+				{#each pageList as item, index}
+					{#if item.type === 'ellipsis'}
+						<div on:click={() => changePage(item.n)} class="list" class:active={+currentPage === item.n}>
+							...
+						</div>
+					{:else}
+						<div on:click={() => changePage(item.n)} class="list" class:active={+currentPage === item.n}>
+							{item.n}
+						</div>
+					{/if}
+				{/each}
+				{#if components.includes('next')}
+					<div on:click={() => changePage(+currentPage + 1)} class="list" class:disabled={+currentPage === totalpages}>
+						<div class="sr-only pointer-events-none svg-icon">
+							<svg class="icon" viewBox="0 0 1024 1024" width={icon.width} height={icon.height}>
+								<path fill={icon.color} d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path>
+							</svg>
+						</div>
+					</div>
+				{/if}
+				{#if components.includes('sizes')}
+					<BeSelect style="width: 100px" bind:value={pageSize} size="mini" placeholder="">
+						{#each pageSizes as size}
+							<BeOption label={size+'条/页'} value={size}/>
+						{/each}
+					</BeSelect>
+				{/if}
+				{#if components.includes('jumper')}
+					<div class="m-jumper">
+						<span>跳至</span>
+						<BeInput style="width: 50px" on:keydown={keydownHandle} bind:value={jumpPage} size="mini" placeholder="" />
+						<span>页</span>
+					</div>
+				{/if}
 			</div>
-			{/if}
-			{#if components.includes('sizes')}
-				<BeSelect style="width: 100px" bind:value={pageSize} size="mini" placeholder="">
-					{#each pageSizes as size}
-					<BeOption label={size+'条/页'} value={size}/>
-					{/each}
-				</BeSelect>
-			{/if}
-			{#if components.includes('jumper')}
-				<div class="m-jumper">
-					<span>跳至</span>
-					<BeInput style="width: 50px" on:keydown={keydownHandle} bind:value={jumpPage} size="mini" placeholder="" />
-					<span>页</span>
-				</div>
-			{/if}
 		</div>
-	</div>
 	{/if}
 </div>
 
 <style lang="scss">
-  .svg-icon {display: flex;justify-content: center;align-items: center;height: 100%;}
+	.svg-icon {display: flex;justify-content: center;align-items: center;height: 100%;}
 </style>

@@ -8,7 +8,7 @@
 	export let disabled:boolean = false
 	const selectStore = getContext("selectStore");
 	const key = getContext("selectChangeKey");
-	
+
 	let isSelect = false
 	const changeCurrent = (current) => {
 		isSelect = current.value === node.value
@@ -28,5 +28,8 @@
 	const hoverItem = (e)=> {
 		selectStore.setHover(e.target.dataset.value)
 	}
+
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
-<li class="be-select-dropdown__item" data-value={value} on:mouseenter={hoverItem} class:selected={isSelect} class:is-disabled={disabled} class:hover={hover} on:click={handleClick}>{label}</li>
+<li class="be-select-dropdown__item {_class}" data-value={value} on:mouseenter={hoverItem} class:selected={isSelect} class:is-disabled={disabled} class:hover={hover} on:click={handleClick}>{label}</li>

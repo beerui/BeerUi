@@ -1,6 +1,22 @@
 # BeerUi 
 
-## 1.0.14
+## 1.0.19 `2022/3/5`
+
+### Patch Changes
+
+- 新增 `radio`组件
+- 新增 `table`组件 `prop=index` 序号
+- 新增 `button`组件 `focus` 的状态样式
+- 新增 `table`组件 浏览器宽度改变后的监听 `onresize`
+- 重写 `menu`组件 使用类来维护一个`menu` `key`待优化
+- 重写 `select`组件 使用类来维护一个`select` 级联多选待增加
+
+- 修复 `datePicker`组件 已知问题
+- 修复 `menu`组件 已知问题
+- 修复 `select`组件 已知问题
+
+## 1.0.14 `2022/2/28`
+
 
 ### Patch Changes
 

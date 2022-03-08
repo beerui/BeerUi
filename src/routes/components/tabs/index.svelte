@@ -33,7 +33,7 @@ const tabClick = (evt) => {
 let items:TabItem[] = [{ key: 'u1', label: '用户管理' }, { key: 'u2', label: '配置管理' }, { key: 'u3', label: '角色管理' }, { key: 'u4', label: '定时任务补偿' } ]
 	`}>
 		<div slot='source'>
-			<BeTabs bind:active={active} {items} on:tabClick={tabClick}>
+			<BeTabs class='aaa' bind:active={active} {items} on:tabClick={tabClick}>
 				{#each items as item, index}
 				<BeTabPane {active} {...item}>
 					<p>选项卡内容{index}</p>
