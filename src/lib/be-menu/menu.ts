@@ -1,5 +1,4 @@
-import { genKey } from '$lib/utils/beerui';
-import { deepClone } from '$lib/utils';
+import { deepClone } from '../utils';
 
 export default class MenuStore {
 	subscribe: Function[] = []; // 订阅方法
