@@ -14,6 +14,7 @@
 			<li><a class:active={$page.url.pathname === '/components/checkbox'} href='/components/checkbox'>Checkbox 多选框</a></li>
 			<li><a class:active={$page.url.pathname === '/components/switch'} href='/components/switch'>Switch 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/select'} href='/components/select'>Select 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/cascader'} href='/components/cascader'>Cascader 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/upload'} href='/components/upload'>Upload 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/datePicker'} href='/components/datePicker'>date-picker 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/drag'} href='/components/drag'>Drag 拖动排序</a></li>
