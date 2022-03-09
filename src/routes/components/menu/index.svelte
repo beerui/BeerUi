@@ -4,241 +4,256 @@
 	import BeMenuItem from "$lib/be-menu/BeMenuItem.svelte";
 	import BeSubMenu from "$lib/be-menu/BeSubMenu.svelte";
 	import BeButton from "$lib/be-button/BeButton.svelte";
-	import type { NavMenu } from "$lib/common";
+	import NavMenu from "$lib/demo/NavMenu.svelte";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { menu, routers } from "$lib/stores";
 
-	let MenuDom: NavMenu;
+	let MenuDom;
 	let setMenuActive = (key) => MenuDom.setMenuActive(key);
 	const changeMenu = evt => console.log(evt)
 	let collapse = true;
 	const toggleCollapse = () => collapse = !collapse;
 
-	const routers = [
-		{
-			path: '/admin',
-			id: '1',
-			title: '首页',
-			icon: 'home',
-			children: []
-		},
-		{
-			path: '/admin/water',
-			title: '水域管理',
-			id: '2',
-			icon: 'water',
-			children: [
-				{
-					path: '/admin/water/river',
-					title: '河道管理',
-					id: '2-1'
-				},
-				{
-					path: '/admin/water/lakeChief',
-					title: '河湖长管理',
-					id: '2-2',
-					icon: '',
-					meta: {},
-					children: []
-				},
-				{
-					path: '/admin/water/riverTour',
-					title: '巡河管理',
-					id: '2-3',
-					icon: '',
-					meta: {},
-					children: []
-				},
-				{
-					path: '/admin/water/waterLevel',
-					title: '水位管理',
-					id: '2-4',
-					icon: '',
-					meta: {},
-					children: []
-				},
-				{
-					path: '/admin/water/waterQuality',
-					title: '水质管理',
-					id: '2-5',
-					icon: '',
-					meta: {},
-					children: []
-				}
-			]
-		},
-		{
-			path: '/admin/problem',
-			id: '3',
-			title: '问题管理',
-			icon: 'problem',
-			children: [
-				{
-					path: '/admin/problem/management',
-					title: '问题管理',
-					id: '3-1',
-					icon: '',
-					meta: {},
-					children: []
-				}
-			]
-		},
-		{
-			path: '/admin/pollution',
-			id: '4',
-			title: '污水零直排区',
-			icon: 'pollution',
-			children: [
-				{
-					path: '/admin/pollution/engineering',
-					title: '工程信息管理',
-					id: '4-1',
-					icon: '',
-					meta: {},
-					children: []
-				}
-			]
-		},
-		{
-			path: '/admin/pump',
-			id: '5',
-			title: '泵闸站',
-			icon: 'pump',
-			children: [
-				{
-					path: '/admin/pump/pumpStation',
-					title: '泵站管理',
-					id: '5-1',
-					icon: '',
-					meta: {},
-					children: []
-				},
-				{
-					path: '/admin/pump/sluiceGateStation',
-					title: '闸站管理',
-					id: '5-2',
-					icon: '',
-					meta: {},
-					children: []
-				},
-				{
-					path: '/admin/pump/waterWorks',
-					title: '水厂管理',
-					id: '5-3',
-					icon: '',
-					meta: {},
-					children: []
-				},
-				{
-					path: '/admin/pump/operation',
-					title: '运维管理',
-					id: '5-4',
-					icon: '',
-					meta: {},
-					children: []
-				}
-			]
-		},
-		{
-			path: '/admin/send',
-			id: '6',
-			title: '传感设备',
-			icon: 'send',
-			children: [
-				{
-					path: '/admin/send/monitoring',
-					title: '视频监控',
-					id: '6-1',
-					icon: '',
-					meta: {},
-					children: []
-				},
-				{
-					path: '/admin/send/airport',
-					title: '无人机机场管理',
-					id: '6-2',
-					icon: '',
-					meta: {},
-					children: [
-						{
-							path: '/admin/send/airport/airport',
-							title: '机场管理',
-							id: '6-2-1',
-							icon: '',
-							meta: {},
-							children: []
-						},
-						{
-							path: '/admin/send/airport/airline',
-							title: '航线查看',
-							id: '6-2-2',
-							icon: '',
-							meta: {},
-							children: []
-						}
-					]
-				},
-				{
-					path: '/admin/send/waterLevel',
-					title: '水位传感设备',
-					id: '6-3',
-					icon: '',
-					meta: {},
-					children: []
-				},
-			]
-		},
-		{
-			path: '/admin/adjust',
-			id: '7',
-			title: '调度管理',
-			icon: 'adjust',
-			children: []
-		},
-		{
-			path: '/admin/system',
-			title: '系统管理',
-			id: '8',
-			icon: 'system',
-			children: [
-				{
-					path: '/admin/system/menu',
-					title: '菜单管理',
-					id: '8-1',
-					icon: '',
-					children: []
-				},
-				{
-					path: '/admin/system/interface',
-					title: '接口管理',
-					id: '8-2',
-					icon: '',
-					children: []
-				},
-				{
-					path: '/admin/system/user',
-					title: '用户管理',
-					id: '8-3',
-					icon: '',
-					children: []
-				},
-				{
-					path: '/admin/system/role',
-					title: '角色管理',
-					id: '8-4',
-					icon: '',
-					children: []
-				},
-				{
-					path: '/admin/system/project',
-					title: '项目管理',
-					id: '8-5',
-					icon: '',
-					children: []
-				}
-			]
-		}
-	]
+	// const routers = [
+	// 	{
+	// 		path: '/admin',
+	// 		id: '1',
+	// 		title: '首页',
+	// 		icon: 'home',
+	// 		children: []
+	// 	},
+	// 	{
+	// 		path: '/admin/water/river',
+	// 		title: '水域管理',
+	// 		id: '2',
+	// 		icon: 'water',
+	// 		redirect: true,
+	// 		children: [
+	// 			{
+	// 				path: '/admin/water/river',
+	// 				title: '河道管理',
+	// 				id: '2-1',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: [{
+	// 					path: '/admin/water/river/detail',
+	// 					title: '河道详情',
+	// 					id: '2-1-1',
+	// 					icon: '',
+	// 					hidden: true,
+	// 					meta: {},
+	// 					children: []
+	// 				}]
+	// 			},
+	// 			{
+	// 				path: '/admin/water/lakeChief',
+	// 				title: '河湖长管理',
+	// 				id: '2-2',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/water/riverTour',
+	// 				title: '巡河管理',
+	// 				id: '2-3',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/water/waterLevel',
+	// 				title: '水位管理',
+	// 				id: '2-4',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/water/waterQuality',
+	// 				title: '水质管理',
+	// 				id: '2-5',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			}
+	// 		]
+	// 	},
+	// 	{
+	// 		path: '/admin/problem',
+	// 		id: '3',
+	// 		title: '问题管理',
+	// 		icon: 'problem',
+	// 		children: [
+	// 			{
+	// 				path: '/admin/problem/management',
+	// 				title: '问题管理',
+	// 				id: '3-1',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			}
+	// 		]
+	// 	},
+	// 	{
+	// 		path: '/admin/pollution',
+	// 		id: '4',
+	// 		title: '污水零直排区',
+	// 		icon: 'pollution',
+	// 		children: [
+	// 			{
+	// 				path: '/admin/pollution/engineering',
+	// 				title: '工程信息管理',
+	// 				id: '4-1',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			}
+	// 		]
+	// 	},
+	// 	{
+	// 		path: '/admin/pump',
+	// 		id: '5',
+	// 		title: '泵闸站',
+	// 		icon: 'pump',
+	// 		children: [
+	// 			{
+	// 				path: '/admin/pump/pumpStation',
+	// 				title: '泵站管理',
+	// 				id: '5-1',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/pump/sluiceGateStation',
+	// 				title: '闸站管理',
+	// 				id: '5-2',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/pump/waterWorks',
+	// 				title: '水厂管理',
+	// 				id: '5-3',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/pump/operation',
+	// 				title: '运维管理',
+	// 				id: '5-4',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			}
+	// 		]
+	// 	},
+	// 	{
+	// 		path: '/admin/send',
+	// 		id: '6',
+	// 		title: '传感设备',
+	// 		icon: 'send',
+	// 		children: [
+	// 			{
+	// 				path: '/admin/send/monitoring',
+	// 				title: '视频监控',
+	// 				id: '6-1',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/send/airport',
+	// 				title: '无人机机场管理',
+	// 				id: '6-2',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: [
+	// 					{
+	// 						path: '/admin/send/airport/airport',
+	// 						title: '机场管理',
+	// 						id: '6-2-1',
+	// 						icon: '',
+	// 						meta: {},
+	// 						children: []
+	// 					},
+	// 					{
+	// 						path: '/admin/send/airport/airline',
+	// 						title: '航线查看',
+	// 						id: '6-2-2',
+	// 						icon: '',
+	// 						meta: {},
+	// 						children: []
+	// 					}
+	// 				]
+	// 			},
+	// 			{
+	// 				path: '/admin/send/waterLevel',
+	// 				title: '水位传感设备',
+	// 				id: '6-3',
+	// 				icon: '',
+	// 				meta: {},
+	// 				children: []
+	// 			},
+	// 		]
+	// 	},
+	// 	{
+	// 		path: '/admin/adjust',
+	// 		id: '7',
+	// 		title: '调度管理',
+	// 		icon: 'adjust',
+	// 		hidden: true,
+	// 		children: []
+	// 	},
+	// 	{
+	// 		path: '/admin/system',
+	// 		title: '系统管理',
+	// 		id: '8',
+	// 		icon: 'system',
+	// 		hidden: true,
+	// 		children: [
+	// 			{
+	// 				path: '/admin/system/menu',
+	// 				title: '菜单管理',
+	// 				id: '8-1',
+	// 				icon: '',
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/system/interface',
+	// 				title: '接口管理',
+	// 				id: '8-2',
+	// 				icon: '',
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/system/user',
+	// 				title: '用户管理',
+	// 				id: '8-3',
+	// 				icon: '',
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/system/role',
+	// 				title: '角色管理',
+	// 				id: '8-4',
+	// 				icon: '',
+	// 				children: []
+	// 			},
+	// 			{
+	// 				path: '/admin/system/project',
+	// 				title: '项目管理',
+	// 				id: '8-5',
+	// 				icon: '',
+	// 				children: []
+	// 			}
+	// 		]
+	// 	}
+	// ]
 	const data1 = [
 		{
 			id: '1',
@@ -298,34 +313,41 @@
 			children: []
 		},
 	]
+	let active = '2-1'
+	const changeActive = () => {
+		active = '2-2'
+		BeMenuDom.setMenuActive(active)
+	}
+	let menus = []
+	let BeMenuDom = null
+	routers.subscribe(items => menus = items)
+	menu.subscribe(item => {
+		if (BeMenuDom && item.type === 'update') BeMenuDom.setMenuActive(item.active)
+	})
+
+	// 展示隐藏
+	const toggleCollapse1 = () => menu.set({ collapse: !$menu.collapse })
+	let menuChange = ({ detail }) => {
+		if (detail.type !== 'submenu') {
+			// goto(detail.path)
+			menu.set({ active: detail.id })
+		}
+	};
 </script>
 <div class="page-container">
 	<h2>NavMenu 导航菜单</h2>
 	<p>为网站提供导航功能的菜单。</p>
 	<h3>基础用法</h3>
-<!--	<BeMenu active="1" data={routers} mode="horizontal" bind:this={MenuDom} on:change={changeMenu}>-->
-<!--		{#each routers as item}-->
-<!--			{#if item.children && item.children.length > 0}-->
-<!--				<BeSubMenu id={item.id}>-->
-<!--					<div slot="title">{item.title}</div>-->
-<!--					{#each item.children as child}-->
-<!--						{#if child.children && child.children.length > 0}-->
-<!--							<BeSubMenu id={child.id}>-->
-<!--								<div slot="title">{child.title}</div>-->
-<!--								{#each child.children as child2}-->
-<!--									<BeMenuItem id={child2.id}>{child2.title}</BeMenuItem>-->
-<!--								{/each}-->
-<!--							</BeSubMenu>-->
-<!--						{:else}-->
-<!--							<BeMenuItem id={child.id}>{child.title}</BeMenuItem>-->
-<!--						{/if}-->
-<!--					{/each}-->
-<!--				</BeSubMenu>-->
-<!--			{:else}-->
-<!--				<BeMenuItem id={item.id}>{item.title}</BeMenuItem>-->
-<!--			{/if}-->
-<!--		{/each}-->
-<!--	</BeMenu>-->
+<!--	<div style='width: 240px;'>-->
+<!--		<div>-->
+<!--			<BeButton on:click={toggleCollapse1}>切换 collapse</BeButton>-->
+<!--			<BeButton on:click={changeActive}>changeActive</BeButton>-->
+<!--		</div>-->
+<!--		{active}-->
+<!--		<BeMenu bind:this={BeMenuDom} on:change={menuChange} data={menus} bind:active={active} mode="vertical" trigger="click" bind:collapse={$menu.collapse}>-->
+<!--			<NavMenu {menus}/>-->
+<!--		</BeMenu>-->
+<!--	</div>-->
 	<DemoBlock
 		code={`
 <BeMenu class="be-menu-demo" active="1" mode="horizontal" bind:this={MenuDom} on:change={changeMenu}>

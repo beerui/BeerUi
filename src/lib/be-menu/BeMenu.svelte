@@ -22,14 +22,12 @@
 	}
 	store.subscribe.push(subscribeHandle)
 
+	$: if (data) store.initTree();
 	// // 发起展开或收起的状态
 	$: if (collapse || !collapse) store.collapse = collapse;
 	// 设置选中
 	export const setMenuActive = active => store.setActiveKey(active);
 
-	onMount(() => {
-		if (!store.collapse && mode === 'vertical') setMenuActive(active)
-	})
 	onDestroy(() => {
 		store = null
 	})
