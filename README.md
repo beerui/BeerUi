@@ -13,13 +13,10 @@
 ## 你需要知道的
 - 使用 `pnpm`
 - 使用 `Node 16+`
-- 使用 `SCSS`
-- 使用 `be-icon` `be-button` 命名方式
 
 ## 怎样使用 How To Use
 svelte & svelte-kit
 
 - `npm i @brewer/beerui -D`
-- `npm i sass -D`
 
 ### 联系我们 Concat Us `beerui2021@gmail.com`
