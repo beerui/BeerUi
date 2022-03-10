@@ -49,7 +49,7 @@
 		visible = false
 	}
 	const toggleVisible = () => {
-		console.log('visible', visible);
+		if (disabled) return
 		visible = !visible
 	}
 	const clearValue = () => {

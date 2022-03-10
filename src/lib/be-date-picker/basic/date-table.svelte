@@ -8,7 +8,7 @@ let rows = []
 export let date
 export let value
 export let selectMode
-export let minDate 
+export let minDate
 export let maxDate
 export let disabledDate: Function
 export let rangeState = {
@@ -57,7 +57,7 @@ function getMonthArray() {
       const day = dateCountOfLastMonth + offsetDay
       // let curDate =  new Date(year, month, count)
       // 数字代表的实际日期 eg: new Date(2022,0,-1) = new Date(2021,12,30)
-      // let curDate = modifyDate(date, year, month, offsetDay) 
+      // let curDate = modifyDate(date, year, month, offsetDay)
       let curDate = new Date(year, month, offsetDay)
       const time = getDateTimestamp(curDate)
       cell.inRange = time >= getDateTimestamp(minDate) && time <= getDateTimestamp(maxDate);
@@ -94,7 +94,7 @@ const markRange = (minDate, maxDate) => {
     const row = rows[i];
     for (let j = 0, l = row.length; j < l; j++) {
       const cell = row[j];
-      const index = i * 7 + j 
+      const index = i * 7 + j
       const offsetDay = - offset + 1 + index
       let curDate = new Date(year, month, offsetDay)
       const time = getDateTimestamp(curDate)
@@ -106,7 +106,7 @@ const markRange = (minDate, maxDate) => {
   rows = rows
 }
 function selectDay(e, cell, index) {
-  if(cell.disabled) throw new Error('该日期已禁用！')
+  if(cell.disabled) return
   let dateMonth = month
   if(cell.type == 'next-month') {
     dateMonth++
@@ -153,7 +153,7 @@ function getCellClasses(cell) {
   if ((cell.type === 'normal' || cell.type === 'today') && cellMatchesDate(cell)) {
     classes.push('current');
   }
-  
+
   if (cell.inRange && (cell.type === 'normal' || cell.type === 'today')) {
     classes.push('in-range');
     if (cell.start) {
@@ -180,7 +180,7 @@ const handleMouseMove = (event) => {
   if (target.tagName !== 'TD') return;
   const row = target.parentNode.rowIndex - 1;
   const column = target.cellIndex;
-  const index = row * 7 + column 
+  const index = row * 7 + column
   const offsetDay = - offset + 1 + index
   let newDate = new Date(year, month, offsetDay)
   if (rows[row][column].disabled) return;

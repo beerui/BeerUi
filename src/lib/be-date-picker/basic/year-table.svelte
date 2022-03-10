@@ -6,14 +6,14 @@
 	export let disabledDate: Function
 
   const dispatch = createEventDispatcher()
-  $:startYear = Math.floor(date.getFullYear() / 10) * 10 
+  $:startYear = Math.floor(date.getFullYear() / 10) * 10
   function isDisabled(date) {
     return typeof disabledDate === 'function' && disabledDate(date)
   }
   function selectYear(e) {
     const year = e.target.outerText
     const dateTime = new Date(year)
-    if(isDisabled(dateTime)) throw new Error('该日期已禁用！')
+    if(isDisabled(dateTime)) return
     dispatch('pick', dateTime)
   }
   function getCellClasses(year) {

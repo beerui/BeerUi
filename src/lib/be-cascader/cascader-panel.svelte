@@ -28,7 +28,7 @@ $: {
   }
 }
 const subscribeHandle = items =>{
-  if(items.disabled) throw new Error('该选项已被禁用!')
+  if(items.disabled) return
   if(items.children && items.children.length) {
     store.level = items.level
     store.setMenu(items.children)

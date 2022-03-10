@@ -7,7 +7,7 @@ const now = getMonthTimestamp(new Date());
 export let date
 export let value
 export let selectMode
-export let minDate 
+export let minDate
 export let maxDate
 export let disabledDate: Function
 export let rangeState = {
@@ -57,7 +57,7 @@ function ininMonth(date) {
   }
 }
 function selectMonth(e, cell) {
-  if(cell.disabled) throw new Error('该日期已禁用！')
+  if(cell.disabled) return
   const year = date.getFullYear()
   const dateTime = new Date(year, cell.text, 1)
   if(selectMode === 'range') {
@@ -93,7 +93,7 @@ const markRange = (minDate, maxDate) => {
     const row = rows[i];
     for (let j = 0, l = row.length; j < l; j++) {
       const cell = row[j];
-      const index = i * 4 + j 
+      const index = i * 4 + j
       let curDate = new Date(date.getFullYear(), index)
       const time = getDateTimestamp(curDate)
       cell.inRange = minDate && time >= minDate && time <= maxDate;
@@ -142,7 +142,7 @@ const handleMouseMove = (event) => {
   if (target.tagName !== 'TD') return;
   const row = target.parentNode.rowIndex;
   const column = target.cellIndex;
-  const index = row * 4 + column 
+  const index = row * 4 + column
   let newDate = new Date(date.getFullYear(), index)
   if (rows[row][column].disabled) return;
   dispatch('changerange', {

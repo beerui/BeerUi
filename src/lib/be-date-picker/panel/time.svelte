@@ -24,11 +24,11 @@ function zoomIn(node, params) {
   };
 }
 function PickTime(e) {
-  dateData = e.detail 
+  dateData = e.detail
   date = e.detail.date
 }
 function confirm() {
-  if(dateData.disabled) throw new Error('该时间已禁用！')
+  if(dateData.disabled) return
   dispatch('pick', date)
 }
 </script>

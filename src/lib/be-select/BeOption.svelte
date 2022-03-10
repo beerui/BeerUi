@@ -21,7 +21,7 @@
 	isSelect = selectStore.value === node.value
 	// hover = selectStore.value === node.value
 	const handleClick = () => {
-		if(node.disabled) throw new Error('[Select] this option has been disabled')
+		if(node.disabled) return
 		selectStore.setCurrent(node)
 		BeerPS.publish(key, node)
 	}
