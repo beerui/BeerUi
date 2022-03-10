@@ -264,7 +264,7 @@
     let isAllCheck = false;
     let indeterminate = false; // 是否半选状态
 	const allCheckHandle = ({ detail }) => {
-		data.forEach(el => el.checked = detail)
+		data.forEach(el => el.checked = detail.checked)
 		checkList = data
 		doCheckHandle()
 	}
@@ -360,7 +360,7 @@
                             <th class='be-table__cell' rowspan={rows.rowSpan} colspan={rows.colSpan}>
 	                            {#if rows.prop === 'selection'}
 		                            <div class="cell">
-			                            <BeCheckbox {indeterminate} checked={isAllCheck} on:change={allCheckHandle} />
+			                            <BeCheckbox {indeterminate} bind:checked={isAllCheck} on:change={allCheckHandle} />
 		                            </div>
 	                            {:else}
 		                            <div class="cell">{rows.label}</div>
@@ -417,7 +417,7 @@
                         {:else if col.prop === 'selection'}
 	                        <td class='be-table__cell'>
 		                        <div class='cell'>
-			                        <BeCheckbox on:click={() => clickRowCheckbox(row)} checked={row.checked} />
+			                        <BeCheckbox on:click={() => clickRowCheckbox(row)} bind:checked={row.checked} />
 		                        </div>
 	                        </td>
                         {:else if col.prop === 'index'}
