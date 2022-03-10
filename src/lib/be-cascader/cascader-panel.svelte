@@ -1,21 +1,34 @@
 <script>
 import CascaderMenu from "./cascader-menu.svelte";
-import { BeerPS, genKey } from "$lib/utils/beerui";
 import Store from "./store";
-import { createEventDispatcher, setContext } from "svelte";
+import { createEventDispatcher } from "svelte";
 const dispatch = createEventDispatcher()
 export let options = []
 export let visible = false
-const store = new Store(options)
+export let defaultValue
+export let expandTrigger
+const store = new Store(options, defaultValue)
 let menus = store.getMenus()
 let value = store.value
+let cascaderRect
+let popperArrow
+let cascaderWidth
 $:if(visible) {
-  console.log(Array.isArray(menus), menus, value)
+   menus = store.getMenus()
+   value = store.value
 }
-const key = `cascaderChange_${ genKey() }`
-setContext('cascaderChangeKey', key)
-
-BeerPS.subscribe(key, items => {
+$: {
+  // 处理右边边界问题
+  const clientWidth = document.body.clientWidth
+  const clientRect = cascaderRect && cascaderRect.getBoundingClientRect()
+  if(clientRect && cascaderWidth) {
+    const left = cascaderRect.offsetLeft + clientWidth - clientRect.right
+    cascaderRect.style.left = (left < 0 ? left : 0) + 'px'
+    popperArrow.style.left = (left < 0 ? 35 - left : 35) + 'px'
+  }
+}
+const subscribeHandle = items =>{
+  if(items.disabled) throw new Error('该选项已被禁用!')
   if(items.children && items.children.length) {
     store.level = items.level
     store.setMenu(items.children)
@@ -26,15 +39,32 @@ BeerPS.subscribe(key, items => {
     store.setCurrent(items)
     value = store.value
     menus = store.menus.slice(0, items.level)
-    dispatch('change', {value: store.value, label: store.label})
+    dispatch('change', {value: store.value, label: store.label, store: store})
   }
-})
+} 
+store.subscribe.push(subscribeHandle)
+// const key = `cascaderChange_${ genKey() }`
+// setContext('cascaderChangeKey', key)
+// BeerPS.subscribe(key, items => {
+//   if(items.children && items.children.length) {
+//     store.level = items.level
+//     store.setMenu(items.children)
+//     menus = store.getMenus()
+//     store.setCurrent(items)
+//     value = store.value
+//   } else {
+//     store.setCurrent(items)
+//     value = store.value
+//     menus = store.menus.slice(0, items.level)
+//     dispatch('change', {value: store.value, label: store.label, store: store})
+//   }
+// })
 </script>
 
 
-<div class='be-cascader-panel' class:visible={visible}>
+<div class='be-cascader-panel' bind:this={cascaderRect} bind:clientWidth={cascaderWidth} class:visible={visible}>
   {#each menus as menu, index}
-  <CascaderMenu {menu} value = {value[index]}/>
+  <CascaderMenu {expandTrigger} {menu} value = {value[index] || defaultValue[index] } {store}/>
   {/each}
-  <div class="popper__arrow"></div>
+  <div class="popper__arrow" bind:this={popperArrow}></div>
 </div>
