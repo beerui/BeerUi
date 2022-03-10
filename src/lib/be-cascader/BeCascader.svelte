@@ -4,7 +4,9 @@
 	import { createEventDispatcher, getContext, onMount, setContext } from "svelte";
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { BeerPS, filterClass, genKey } from "$lib/utils/beerui";
-	export let options;
+	import CascaderPanel from './cascader-panel.svelte';
+	
+	export let options
 	// 下拉框选中的值
 	export let value;
 	export let size;
@@ -17,8 +19,7 @@
 	export let placeholder = '请选择'
 
 	const preClass = ["size"];
-	const _class = ["be-select", ...filterClass($$props, "be-select--", preClass)].join(" ");
-
+	const _class = ["be-cascader", ...filterClass($$props, "be-cascader--", preClass)].join(" ");
 	console.log('_class', _class);
 	// 下拉框
 	let visible = false;
@@ -34,7 +35,11 @@
 		visible = false
 	}
 	const mousedownHandle = () => {
-		visible = !visible
+		visible = true
+	}
+	const change = (e) => {
+		inputValue = e.detail.label.join('/')
+		visible = false
 	}
 </script>
 
@@ -65,9 +70,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<div class='be-select__option' class:visible={visible}>
-		
-		<div class="popper__arrow"></div>
-	</div>
+	<CascaderPanel {visible} {options} on:change={change}/>
 </div>
 
