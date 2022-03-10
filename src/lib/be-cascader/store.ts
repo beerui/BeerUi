@@ -4,7 +4,7 @@ export default class Store {
   level: number = 0
   hasChildren: boolean = true
   defaultValue : Array<any> = []
-  value: Array<any> = []
+  _value: Array<any> = []
   label: Array<any> = []
   menus: Array<object> = []
   constructor(data, defaultValue) {
@@ -15,8 +15,20 @@ export default class Store {
     }
     this.setMenu(data)
   }
+  get value() {
+	  return this._value
+  }
+  set value(v) {
+	  this._value = v
+	  // this.menus = []
+	  this.updateMenu()
+  }
+  updateMenu() {
+	  this.level = this._value.length - 2
+	  this.setMenu([])
+  }
   initLabel(arrs, level = 0) {
-    for(let i = 0; i < arrs.length; i++) { 
+    for(let i = 0; i < arrs.length; i++) {
       const item = arrs[i]
       if(item.value == this.defaultValue[level]) {
         this.label.push(item.label)
@@ -47,11 +59,11 @@ export default class Store {
     // this.label = this.label.slice(0, this.level - step)
     // this.value.push(items.value)
     // this.label.push(items.label)
-    this.value.splice(this.level - step, this.value.length - 1, items.value)
+    this._value.splice(this.level - step, this._value.length - 1, items.value)
     this.label.splice(this.level - step, this.label.length - 1, items.label)
   }
   clear() {
-    this.value = []
+    this._value = []
     this.label = []
     this.level = 0
     this.setMenu(this.options)

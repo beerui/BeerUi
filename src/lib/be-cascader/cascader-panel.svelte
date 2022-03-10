@@ -41,7 +41,7 @@ const subscribeHandle = items =>{
     menus = store.menus.slice(0, items.level)
     dispatch('change', {value: store.value, label: store.label, store: store})
   }
-} 
+}
 store.subscribe.push(subscribeHandle)
 // const key = `cascaderChange_${ genKey() }`
 // setContext('cascaderChangeKey', key)

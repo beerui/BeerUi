@@ -1,10 +1,11 @@
 <script>
   import { BeCascader } from '$lib';
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
+  import BeButton from '$lib/be-button/BeButton.svelte';
   let value = ['zhinan', 'daohang', 'dingbudaohang']
   let value1 = []
   let expandTrigger = 'hover'
- 
+
   let options =  [{
           value: 'zhinan',
           label: '指南',
@@ -208,14 +209,11 @@
           }]
         }]
 
-  
-  
-  
-  
-  
-  
   const change = (e) => {
     console.log(e);
+  }
+  const changeValue = () => {
+	  value = ['zhinan']
   }
   </script>
 <div class="page-container content">
@@ -223,6 +221,10 @@
 	<p>当一个数据集合有清晰的层级结构时，可通过级联选择器逐级查看并选择</p>
 	<h3>基本用法</h3>
 
+	<div>
+		<BeButton on:click={changeValue}>修改当前值</BeButton>
+		{value}
+	</div>
 	<DemoBlock code={`
   <BeCascader bind:value={value} {options} on:change={change}/>
   <BeCascader bind:value={value1} {options} {expandTrigger}/>`}
