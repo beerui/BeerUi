@@ -19,6 +19,7 @@
 			dispatch('change', item.data[store.active])
 			active = store.active
 		}
+		dispatch('click', item.data[store.active])
 	}
 	store.subscribe.push(subscribeHandle)
 
