@@ -1,9 +1,13 @@
 <script>
+	import { BeRadio } from '$lib';
 	import { BeCascader } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
-	let value = ['zhinan', 'daohang', 'dingbudaohang'];
-	let value1 = [];
+	let value = 'dingbudaohang';
+	let showAllLevels = true
+	let checkStrictly = true
+	let value1 = ''
+	let value2 = 'daohang'
 	let expandTrigger = 'hover';
 
 	let options = [{
@@ -207,7 +211,7 @@
 			value: 'jiaohu',
 			label: '组件交互文档'
 		}]
-	}];
+	}]
 	const change = (e) => {
 		console.log(e);
 	};
@@ -433,7 +437,8 @@
 	>
 		<div slot='source'>
 			<div class='flex justify-around'>
-				<BeCascader bind:value={value} {options} on:change={change} />
+				<BeCascader bind:value={value} {showAllLevels} {options} on:change={change} />
+				<BeCascader bind:value={value2} {checkStrictly} {options} on:change={change} />
 				<BeCascader bind:value={value1} {options} {expandTrigger} />
 			</div>
 		</div>

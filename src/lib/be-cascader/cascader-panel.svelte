@@ -1,20 +1,23 @@
 <script>
 import CascaderMenu from "./cascader-menu.svelte";
-import Store from "./store";
-import { createEventDispatcher } from "svelte";
+import { createEventDispatcher, getContext } from "svelte";
 const dispatch = createEventDispatcher()
 export let options = []
 export let visible = false
-export let defaultValue
+export let checkStrictly
+export let showAllLevels
 export let expandTrigger
-const store = new Store(options, defaultValue)
-let menus = store.getMenus()
-let value = store.value
+// const store = new Store(options, $$props)
+const store = getContext('store')
+let menus = []
+let value = []
 let cascaderRect
 let popperArrow
 let cascaderWidth
+let selectValue = Array.isArray(store.defaultValue) ? store.defaultValue[store.defaultValue.length - 1] : store.defaultValue
 $:if(visible) {
    menus = store.getMenus()
+   console.log(menus);
    value = store.value
 }
 $: {
@@ -39,7 +42,16 @@ const subscribeHandle = items =>{
     store.setCurrent(items)
     value = store.value
     menus = store.menus.slice(0, items.level)
-    dispatch('change', {value: store.value, label: store.label, store: store})
+    let params = {
+      value: store.value,
+      label: store.label,
+      store: store
+    }
+    if(!checkStrictly) dispatch('change', params)
+  }
+  if(checkStrictly && items.type == 'radio') {
+    selectValue = items.value
+    dispatch('change', {selectValue, value: store.value, label: store.label, store: store})
   }
 }
 store.subscribe.push(subscribeHandle)
@@ -64,7 +76,7 @@ store.subscribe.push(subscribeHandle)
 
 <div class='be-cascader-panel' bind:this={cascaderRect} bind:clientWidth={cascaderWidth} class:visible={visible}>
   {#each menus as menu, index}
-  <CascaderMenu {expandTrigger} {menu} value = {value[index] || defaultValue[index] } {store}/>
+  <CascaderMenu {expandTrigger} {selectValue} {menu} {checkStrictly} value = { value[index] || selectValue } {store}/>
   {/each}
   <div class="popper__arrow" bind:this={popperArrow}></div>
 </div>
