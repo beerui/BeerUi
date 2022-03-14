@@ -33,7 +33,7 @@
       <div class="be-cascader-node__prefix"><BeIcon name="check" color="#409eff" width="16" height="16"/></div>
       {/if}
       {#if checkStrictly}
-      <BeRadio bind:checked={selectValue} label={item.value} on:click={() => clickNodes(item, 'radio')}/>
+      <BeRadio bind:checked={selectValue} disabled={item.disabled} label={item.value} on:click={() => clickNodes(item, 'radio')}/>
       {/if}
       <span class="be-cascader-node__label">{item.label}</span>
       {#if item.children && item.children.length}

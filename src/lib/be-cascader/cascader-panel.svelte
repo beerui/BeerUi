@@ -17,7 +17,6 @@ let cascaderWidth
 let selectValue = Array.isArray(store.defaultValue) ? store.defaultValue[store.defaultValue.length - 1] : store.defaultValue
 $:if(visible) {
    menus = store.getMenus()
-   console.log(menus);
    value = store.value
 }
 $: {
