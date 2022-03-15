@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte';
 	import { addClass, filterClass, off, on } from "$lib/utils/beerui";
     import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
 	import { throttle } from "$lib/utils/throttle";
@@ -13,10 +13,7 @@
     export let showHeader: boolean = true; // 显示表头 true/false
     export let height: string = ''; // 定义了height属性，即可实现固定表头的表格
     export let rowClassName: Function = null; // 为 Table 中的某一行添加 class {row, rowIndex}/string
-    export let indexMethod: Function = (index) => index+1; // 为 Table 中的type为index的添加序号
-    setContext('data', {
-        data: data
-    });
+
     const preClass = ['type'];
     const normalClass = ['be-table'];
 
@@ -50,6 +47,7 @@
     let checkList = [] // 选择列表
 
 	let isOnMount = false
+	$: if (isOnMount && data) initTable()
     onMount(() => {
         warpElement && initTable();
 
