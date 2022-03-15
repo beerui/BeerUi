@@ -1,10 +1,12 @@
 <script>
+  import BeRadio from '$lib/be-radio/BeRadio.svelte';
 	import BeIcon from './../be-icon/BeIcon.svelte';
-	import { getContext } from "svelte";
   export let menu
   export let value
   export let store
   export let expandTrigger 
+  export let checkStrictly
+  export let selectValue
   const hoverNodes = (item) => {
     if(expandTrigger == 'click') return
     if(expandTrigger == 'hover' && (!item.children || !item.children.length)) {
@@ -13,19 +15,25 @@
       store.publishHandle(item)
     }
   }
-  const clickNodes = (item) => {
+  const clickNodes = (item, type = 'default') => {
     // BeerPS.publish(key, item)
-    store.publishHandle(item)
+    const params ={
+      ...item,
+      type
+    }
+    store.publishHandle(params)
   }
-  
 </script>
 
 <div class="be-cascader-menu">
   <ul class="be-cascader-menu__list">
     {#each menu as item, index}
     <li class="be-cascader-node" tabindex="-1" class:in-active-path={value == item.value} class:is-disabled = {item.disabled} on:click={() => clickNodes(item)}  on:mouseenter={() => hoverNodes(item)}>
-      {#if (!item.children || !item.children.length) && value == item.value}
+      {#if (!item.children || !item.children.length) && value == item.value && !checkStrictly}
       <div class="be-cascader-node__prefix"><BeIcon name="check" color="#409eff" width="16" height="16"/></div>
+      {/if}
+      {#if checkStrictly}
+      <BeRadio bind:checked={selectValue} disabled={item.disabled} label={item.value} on:click={() => clickNodes(item, 'radio')}/>
       {/if}
       <span class="be-cascader-node__label">{item.label}</span>
       {#if item.children && item.children.length}

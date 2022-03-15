@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	export let percentage = 97
+	export let percentage = 0
 	export let showText = true
 	export let type = 'line'
 	// 环形进度条画布宽度（只在 type 为 circle 或 dashboard 时可用）
@@ -12,6 +12,7 @@
 	export let status = 'primary'
 	export let color
 	export let background
+	//类型路径两端的形状（只在 type 为 circle 或 dashboard 时可用）
 	export let strokeLinecap = 'round'
 	let progress
 

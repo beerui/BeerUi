@@ -43,6 +43,8 @@
 .be-progress {
   width: 100%;
   &-bar {
+    display: flex;
+    align-items: center;
     width: 100%;
     &_outer {
       width: 100%;
@@ -83,6 +85,7 @@
       color: #606266;
       display: inline-block;
       vertical-align: middle;
+      margin: 0 5px;
       // margin-left: 10px;
       line-height: 1;
     }
