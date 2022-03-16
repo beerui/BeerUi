@@ -13,6 +13,7 @@
     export let showHeader: boolean = true; // 显示表头 true/false
     export let height: string = ''; // 定义了height属性，即可实现固定表头的表格
     export let rowClassName: Function = null; // 为 Table 中的某一行添加 class {row, rowIndex}/string
+	export let indexMethod: Function = (index) => index+1; // 为 Table 中的type为index的添加序号
 
     const preClass = ['type'];
     const normalClass = ['be-table'];
