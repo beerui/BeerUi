@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { BeButton } from '$lib';
   import { BeDatePicker } from '$lib';
   import { BeTimePicker } from '$lib';
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
@@ -14,9 +15,7 @@
   let value8 = ''
   let value9 = ''
   let selectableRange = '18:30:00 - 20:30:00'
-  $:{
-    console.log(value)
-  }
+    
   function changeTime(value) {
     console.log(value)
   }
@@ -61,7 +60,7 @@
         <div class="flex justify-around">
           <div class="flex column align-center">
             <span class="demonstration">默认</span>
-            <BeDatePicker bind:value={value} placeholder='选择日期' selectMode="date" />
+            <BeDatePicker bind:value={value} placeholder='选择日期' selectMode="date" />            
           </div>
           <div class="flex column align-center">
             <span class="demonstration">无清除按钮</span>

@@ -39,26 +39,31 @@
  	let input
 	let ranged = selectMode.indexOf('range') > -1;
 	// 日期格式化
-	if(value) {
-		if(ranged) {
-			if(Array.isArray(value)) {
-				let start
-				let end
-				start = new Date(value[0])
-				end = new Date(value[1])
-				if(start == 'Invalid Date') start = ''
-				if(end == 'Invalid Date') end = ''
-				displayValue = [formatDate(start), formatDate(end)]
+	$: initValue(value)
+	function initValue(value) {
+		if(value) {
+			if(ranged) {
+				if(Array.isArray(value)) {
+					let start
+					let end
+					start = new Date(value[0])
+					end = new Date(value[1])
+					if(start == 'Invalid Date') start = ''
+					if(end == 'Invalid Date') end = ''
+					displayValue = [formatDate(start), formatDate(end)]
+				} else {
+					throw new Error('需为数组格式的时间！')
+				}
 			} else {
-				throw new Error('需为数组格式的时间！')
+				value = new Date(value)
+				if(value == 'Invalid Date') value = ''
+				value = formatDate(value)
 			}
 		} else {
-			value = new Date(value)
-			if(value == 'Invalid Date') value = ''
-			value = formatDate(value)
+			value = ''
+			displayValue = []
 		}
 	}
-
 	function confirmPick(e) {
 		value = formatDate(e.detail);
 		visible = false
@@ -93,6 +98,7 @@
 	const confirmRangePick = (val) => {
 		const dates = [formatDate(val.detail[0]), formatDate(val.detail[1])]
 		displayValue = dates
+		value = dates
 		handleCloseDatePopper()
 		dispatch('change', dates)
 	}
