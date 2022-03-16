@@ -39,26 +39,31 @@
  	let input
 	let ranged = selectMode.indexOf('range') > -1;
 	// 日期格式化
-	if(value) {
-		if(ranged) {
-			if(Array.isArray(value)) {
-				let start
-				let end
-				start = new Date(value[0])
-				end = new Date(value[1])
-				if(start == 'Invalid Date') start = ''
-				if(end == 'Invalid Date') end = ''
-				displayValue = [formatDate(start), formatDate(end)]
+	$: initValue(value)
+	function initValue(value) {
+		if(value) {
+			if(ranged) {
+				if(Array.isArray(value)) {
+					let start
+					let end
+					start = new Date(value[0])
+					end = new Date(value[1])
+					if(start == 'Invalid Date') start = ''
+					if(end == 'Invalid Date') end = ''
+					displayValue = [formatDate(start), formatDate(end)]
+				} else {
+					throw new Error('需为数组格式的时间！')
+				}
 			} else {
-				throw new Error('需为数组格式的时间！')
+				value = new Date(value)
+				if(value == 'Invalid Date') value = ''
+				value = formatDate(value)
 			}
 		} else {
-			value = new Date(value)
-			if(value == 'Invalid Date') value = ''
-			value = formatDate(value)
+			value = ''
+			displayValue = []
 		}
 	}
-
 	function confirmPick(e) {
 		value = formatDate(e.detail);
 		visible = false
@@ -93,6 +98,7 @@
 	const confirmRangePick = (val) => {
 		const dates = [formatDate(val.detail[0]), formatDate(val.detail[1])]
 		displayValue = dates
+		value = dates
 		handleCloseDatePopper()
 		dispatch('change', dates)
 	}
@@ -100,6 +106,7 @@
 		displayValue = []
 		value = null
 		handleCloseDatePopper()
+		dispatch('change',  value)
 	}
 </script>
 {#if ranged}
@@ -109,7 +116,7 @@
 		<input autocomplete="off" placeholder={startPlaceholder} bind:value={displayValue[0]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
 		<span class="be-range-separator">{separator}</span>
 		<input autocomplete="off" placeholder={endPlaceholder} bind:value={displayValue[1]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
-		<div class="be-range__close-icon" class:clearable={clearable}  on:click|stopPropagation={handlerClear}>
+		<div class="be-range__close-icon" class:clearable={clearable && displayValue && displayValue.length > 0}  on:click|stopPropagation={handlerClear}>
 			<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 		</div>
 	</div>
@@ -125,7 +132,7 @@
 	<div class="be-date__prefix">
 		<BeIcon name="calendar"/>
 	</div>
-	<div class="be-date__suffix" class:clearable={clearable} on:click|stopPropagation={handlerClear}>
+	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
 	<Dates {valueFormat} {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />

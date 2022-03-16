@@ -31,8 +31,10 @@
 
 	BeerPS.subscribe(key, items => {
 		visible = false
+		if(!selectStore.isChange) return
 		value = items.value
 		inputValue = items.label
+		change()
 	})
 
 	$:if(visible) {
@@ -54,12 +56,12 @@
 	}
 	const clearValue = () => {
 		inputValue = ''
-		value = -1
+		value = ''
 		showClose = false
 		selectStore.setCurrent({})
 		handleClosePopper()
 	}
-	const change = (e) => {
+	function change() {
 		dispatch('change', selectStore.value)
 	}
 	let _class: $$props["class"] = "";
@@ -73,7 +75,7 @@
 				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
 					<BeIcon name='chevron-down' width='18' height='18' />
 				</div>
-				<div on:click={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
+				<div on:click|stopPropagation={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
 					<BeIcon name='close-circle' width='14' height='14'/>
 				</div>
 			</div>

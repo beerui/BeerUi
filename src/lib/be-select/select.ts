@@ -4,6 +4,7 @@ export default class SelectStore {
   private currentNode: null;
   private currentNodeKey: null;
   public value: null;
+  public isChange: boolean = true
   constructor(options) {
     // this.option = options
     // this.label = options.label
@@ -49,6 +50,7 @@ export default class SelectStore {
   setCurrent(node) {
     this.currentNode = node
     this.currentNodeKey = node.key
+    this.isChange = !(this.value == node.value)
     this.value = node.value
     this.optionList.forEach(el => el.change({ label: node.label, value: node.value, currentNode: node, currentNodeKey: node.key }))
   }

@@ -16,14 +16,22 @@
 	export let format = DEFAULT_FORMATS['time']
 	export let clearable = true
 	export let placeholder = '选择时间'
-	if(value && typeof value == 'string') {
-		value = modifyWithTimeString(new Date(), value)
-	} 
-	let date = value || new Date()
 	let visible;
+	let date
 	const times = new FormatTime(format)
-	
-	if(value) value = times.setTime(value)
+	$:initValue(value)
+	function initValue(value) {
+		if(value)  {
+			if(typeof value == 'string') {
+				value = modifyWithTimeString(new Date(), value)
+			}
+			date = value
+			value = times.setTime(value)
+		} else {
+			value = ''
+			date = new Date()
+		}
+	}
 	function handleShowDatePopper(e) {
 		visible = true;
 		console.log('handleShowDatePopper');
@@ -43,6 +51,7 @@
 		value = null
 		date = new Date()
 		visible = false
+		dispatch('change',  value)
 	}
 </script>
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
@@ -50,7 +59,7 @@
 	<div class="be-date__prefix">
 		<BeIcon name="time"/>
 	</div>
-	<div class="be-date__suffix" class:clearable={clearable} on:click|stopPropagation={handlerClear}>
+	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
 	<Time {date} {format} {selectableRange} bind:visible={visible} on:pick={confirmPick}/>
