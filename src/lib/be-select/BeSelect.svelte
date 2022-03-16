@@ -73,7 +73,7 @@
 				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
 					<BeIcon name='chevron-down' width='18' height='18' />
 				</div>
-				<div on:click={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
+				<div on:click|stopPropagation={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
 					<BeIcon name='close-circle' width='14' height='14'/>
 				</div>
 			</div>
