@@ -43,6 +43,7 @@
 		value = null
 		date = new Date()
 		visible = false
+		dispatch('change',  value)
 	}
 </script>
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>

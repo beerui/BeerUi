@@ -100,6 +100,7 @@
 		displayValue = []
 		value = null
 		handleCloseDatePopper()
+		dispatch('change',  value)
 	}
 </script>
 {#if ranged}
@@ -109,7 +110,7 @@
 		<input autocomplete="off" placeholder={startPlaceholder} bind:value={displayValue[0]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
 		<span class="be-range-separator">{separator}</span>
 		<input autocomplete="off" placeholder={endPlaceholder} bind:value={displayValue[1]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
-		<div class="be-range__close-icon" class:clearable={clearable}  on:click|stopPropagation={handlerClear}>
+		<div class="be-range__close-icon" class:clearable={clearable && displayValue && displayValue.length > 0}  on:click|stopPropagation={handlerClear}>
 			<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 		</div>
 	</div>
@@ -125,7 +126,7 @@
 	<div class="be-date__prefix">
 		<BeIcon name="calendar"/>
 	</div>
-	<div class="be-date__suffix" class:clearable={clearable} on:click|stopPropagation={handlerClear}>
+	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
 	<Dates {valueFormat} {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />
