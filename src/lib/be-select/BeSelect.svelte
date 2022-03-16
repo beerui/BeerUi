@@ -31,8 +31,10 @@
 
 	BeerPS.subscribe(key, items => {
 		visible = false
+		if(!selectStore.isChange) return
 		value = items.value
 		inputValue = items.label
+		change()
 	})
 
 	$:if(visible) {
@@ -59,7 +61,7 @@
 		selectStore.setCurrent({})
 		handleClosePopper()
 	}
-	const change = (e) => {
+	function change() {
 		dispatch('change', selectStore.value)
 	}
 	let _class: $$props["class"] = "";
