@@ -96,7 +96,11 @@
 	</div>
 	<div class='be-select__option' class:visible={visible}>
 		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
+			{#if $$slots.default}
 			<slot></slot>
+			{:else}
+			<div class="be-select-dropdown__empty">无数据</div>
+			{/if}
 		</ul>
 		<div class="popper__arrow"></div>
 	</div>

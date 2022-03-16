@@ -641,7 +641,7 @@
 	>
 		<div slot='source'>
 			<div class='flex justify-around'>
-				<BeCascader bind:value={value} {options} />
+				<BeCascader bind:value={value} options={[]} />
 				<!-- <BeCascader bind:value={value} {showAllLevels} {options} on:change={change} /> -->
 				<!-- <BeCascader bind:value={value2} {checkStrictly} {options} on:change={change} /> -->
 				<BeCascader bind:value={value1} {options} {expandTrigger} />
