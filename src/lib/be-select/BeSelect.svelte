@@ -13,7 +13,7 @@
 	export let size = 'normal';
 	const selectStore = new SelectStore({ value: $$props.value })
 	setContext('selectStore', selectStore)
-	let inputValue = getContext('lable')
+	let inputValue = ''
 	// 是否禁用
 	export let disabled = false;
 	// 位置
@@ -25,10 +25,9 @@
 	// 获取输入框
 	let input
 	let showClose = false
+	$:initValue(value)
 	const key = `selectChange_${ genKey() }`
-
 	setContext('selectChangeKey', key)
-
 	BeerPS.subscribe(key, items => {
 		visible = false
 		if(!selectStore.isChange) return
@@ -36,9 +35,22 @@
 		inputValue = items.label
 		change()
 	})
-
 	$:if(visible) {
 		selectStore.setHover(value)
+	}
+	function initValue(value) {
+		if(value) {
+			let node = selectStore.getCurrent(value)
+			if(node) {
+				selectStore.setCurrent(node)
+				inputValue = node.label
+			}
+		} else {
+			inputValue = ''
+			value = ''
+			showClose = false
+			selectStore.setCurrent({})
+		}
 	}
 	onMount(() => {
 		let node = selectStore.getCurrent(value)
@@ -60,6 +72,7 @@
 		showClose = false
 		selectStore.setCurrent({})
 		handleClosePopper()
+		dispatch('change', '')
 	}
 	function change() {
 		dispatch('change', selectStore.value)
