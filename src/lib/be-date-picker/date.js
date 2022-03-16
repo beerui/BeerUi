@@ -81,6 +81,7 @@
     monthNames: monthNames,
     amPm: ['am', 'pm'],
     DoFn: function DoFn(D) {
+		// @ts-ignore
       return D + ['th', 'st', 'nd', 'rd'][D % 10 > 3 ? 0 : (D - D % 10 !== 10) * D % 10];
     }
   };
@@ -221,6 +222,7 @@
       var parts = (v + '').match(/([+-]|\d\d)/gi), minutes;
 
       if (parts) {
+		  // @ts-ignore
         minutes = +(parts[1] * 60) + parseInt(parts[2], 10);
         d.timezoneOffset = parts[0] === '+' ? minutes : -minutes;
       }
@@ -352,5 +354,5 @@
     }
     return date;
   };
-  
+
 export default fecha
