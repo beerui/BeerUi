@@ -75,7 +75,7 @@ svg {user-select: none;}
 
 .be-notify{
   display: flex;
-  width: 330px;
+  min-width: 330px;
   padding: 14px 26px 14px 13px;
   border-radius: 8px;
   box-sizing: border-box;
@@ -86,6 +86,15 @@ svg {user-select: none;}
   transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
   overflow: hidden;
   cursor: pointer;
+  &-toast {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%)!important;
+    display: flex;
+    .be-notify__title {display: none;}
+    .be-notify__content {margin: 0;line-height: 24px;min-width: 220px;}
+    .be-notice__close {top: 18px;}
+  }
   &.right {
    transform: translateX(100%);
     right: 16px;

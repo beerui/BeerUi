@@ -2,6 +2,7 @@
  * this is notice component
  */
 interface options {
+	toast: boolean;
 	type: string;
 	title: string,
 	message: string,
@@ -53,7 +54,8 @@ export default class Notice {
 
 		const container: HTMLElement = document.createElement('div');
 		container.classList.add('be-notify');
-		container.classList.add(this.setPositionClass(this.position));
+		if (options.toast) container.classList.add('be-notify-toast');
+		else container.classList.add(this.setPositionClass(this.position));
 		container.innerHTML = `
 		${this.computedType()}
 		<div class='be-notify__group'>

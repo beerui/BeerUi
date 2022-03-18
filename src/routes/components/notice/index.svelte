@@ -100,11 +100,12 @@
 		alert('你好Beer UI');
 	}
 
-	const openTypeNotice = (type) => {
+	const openTypeNotice = (type, toast) => {
 		notice.setNotice({
 			title: '提示',
+			toast: toast,
 			message: type,
-			duration: 3000,
+			duration: 30000,
 			type
 		});
 	}
@@ -146,17 +147,18 @@ let notice;
 onMount(() => {
 	notice = new Notice();
 });
-const openTypeNotice = (type) => {
+const openTypeNotice = (type, toast) => {
 	notice.setNotice({
 		title: '提示',
+		toast: toast,
 		message: type,
-		duration: 3000,
+		duration: 30000,
 		type
 	});
 }
 	`}
 	code={`
-	<BeButton size='normal' type='default' on:click={() => openTypeNotice('success')}>
+	<BeButton size='normal' type='default' on:click={() => openTypeNotice('success', true)}>
 		<div style='display: flex'>
 			<BeIcon name='check-circle-filled' color='#67c23a' /> <span style='padding-left: 5px;'>成功</span>
 		</div>
@@ -178,7 +180,7 @@ const openTypeNotice = (type) => {
 	</BeButton>`}
 	>
 		<div slot='source'>
-			<BeButton size='normal' type='default' on:click={() => openTypeNotice('success')}>
+			<BeButton size='normal' type='default' on:click={() => openTypeNotice('success', true)}>
 				<div style='display: flex'>
 					<BeIcon name='check-circle-filled' color='#67c23a' /> <span style='padding-left: 5px;'>成功</span>
 				</div>
@@ -198,6 +200,15 @@ const openTypeNotice = (type) => {
 					<BeIcon name='close-circle-filled' color='#f56c6c' /> <span style='padding-left: 5px;'>错误</span>
 				</div>
 			</BeButton>
+		</div>
+		<div slot='description'>
+			<ol>
+				<li>title: string 标题</li>
+				<li>toast: boolean 居中展示的提示。标题不显示 只展示message</li>
+				<li>message: string 展示信息</li>
+				<li>duration: number 持续时间</li>
+				<li>type: number => success warning info error带图标的提示</li>
+			</ol>
 		</div>
 	</DemoBlock>
 
