@@ -59,6 +59,7 @@
 		let doRemove = () => {
 			abort(file);
 			fileList.splice(fileList.indexOf(file), 1);
+			fileListDom()
 			onRemove(file, fileList);
 		};
 		if (!beforeRemove) {
