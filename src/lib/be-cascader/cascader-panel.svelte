@@ -74,8 +74,12 @@ store.subscribe.push(subscribeHandle)
 
 
 <div class='be-cascader-panel' bind:this={cascaderRect} bind:clientWidth={cascaderWidth} class:visible={visible}>
+  {#if menus && menus.length > 0}
   {#each menus as menu, index}
   <CascaderMenu {expandTrigger} {selectValue} {menu} {checkStrictly} value = { value[index] || selectValue } {store}/>
   {/each}
+  {:else}
+  <div class="be-cascader-dropdown__empty">暂无数据</div>
+  {/if}
   <div class="popper__arrow" bind:this={popperArrow}></div>
 </div>
