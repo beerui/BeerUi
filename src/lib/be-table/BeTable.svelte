@@ -12,6 +12,7 @@
     export let border: boolean = false; // 边框 false/true
     export let showHeader: boolean = true; // 显示表头 true/false
     export let height: string = ''; // 定义了height属性，即可实现固定表头的表格
+    export let label: string = 'id'; // 定义了selection默认取值
     export let rowClassName: Function = null; // 为 Table 中的某一行添加 class {row, rowIndex}/string
 	export let indexMethod: Function = (index) => index+1; // 为 Table 中的type为index的添加序号
 
@@ -118,7 +119,7 @@
         const hasSection = columnData.some(el => el['prop'] === 'selection');
         if (hasSection) {
           // 增加必须有ID的提示
-          const noId = data.some(el => !el['id']);
+          const noId = data.some(el => !el[label]);
           if (!noId) console.warn('[BeerUi] we need a \'id\' for selection')
         }
     };
@@ -162,7 +163,7 @@
         });
     };
     const updateRowsData = () => data.forEach((el, i) => rowsData[i].checked = el.checked);
-    const updateOneRowsData = (id) => data.forEach((el, i) => id === el.id ? rowsData[i].checked = !rowsData[i].checked :'');
+    const updateOneRowsData = (id) => data.forEach((el, i) => id === el[label] ? rowsData[i].checked = !rowsData[i].checked :'');
     // 绑定横向滚动的头部联动
     const bindHeaderScroll = () => {
         if (eleCanScroll(tableWrapper)) {
@@ -268,7 +269,7 @@
 		doCheckHandle()
 	}
 	const clickRowCheckbox = (rows) => {
-		data.forEach(el => el.id === rows.id ? el.checked = !el.checked : '')
+		data.forEach(el => el[label] === rows[label] ? el.checked = !el.checked : '')
 		doCheckHandle()
 	}
 	// 全部选框的状态
@@ -297,7 +298,7 @@
 	// 设置change事件
 	const dispatchCheckedHandle = async () => {
 		const checkedList = data.filter(el => el.checked)
-		const checkedIds = checkedList.map(el => el.id)
+		const checkedIds = checkedList.map(el => el[label])
 	  	await tick()
 		dispatch('handleSelectionChangeGetId', checkedIds)
 		dispatch('handleSelectionChangeGetRows', checkedList)
@@ -312,10 +313,10 @@
 		if (rows.length === 0) {
 			clearSelection()
 		} else if (typeof selected === 'boolean') {
-			rows.forEach(el => data.forEach(item => String(el) === String(item.id) ? item.checked = selected : ''))
+			rows.forEach(el => data.forEach(item => String(el) === String(item[label]) ? item.checked = selected : ''))
 		} else {
 			rows.forEach(el => data.forEach(item => {
-				if (String(el) === String(item.id)) {
+				if (String(el) === String(item[label])) {
 					item.checked = !item.checked
 				}
 			}))

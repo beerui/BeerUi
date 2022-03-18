@@ -130,37 +130,37 @@
     };
 
     const checkBoxTableData = [{
-      id: '1',
+      ids: '1',
       date: '2016-05-03',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
-      id: '2',
+      ids: '2',
       date: '2016-05-02',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
-      id: '3',
+      ids: '3',
       date: '2016-05-04',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
-      id: '4',
+      ids: '4',
       date: '2016-05-01',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
-      id: '5',
+      ids: '5',
       date: '2016-05-08',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
-      id: '6',
+      ids: '6',
       date: '2016-05-06',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
-      id: '7',
+      ids: '7',
       date: '2016-05-07',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
@@ -368,6 +368,7 @@ const handleSelectionChangeGetRows = ({ detail }) => console.log('handleSelectio
             <div class='demo-list'>
                 <BeTable
 					bind:this={toggleRowTable}
+					label='ids'
 					data={checkBoxTableData}
 					on:handleSelectionChangeGetId={handleSelectionChangeGetId}
 					on:handleSelectionChangeGetRows={handleSelectionChangeGetRows}
@@ -380,7 +381,7 @@ const handleSelectionChangeGetRows = ({ detail }) => console.log('handleSelectio
         </div>
         <div slot='description'>
             <ol>
-                <li>行中必须存在id字段,待优化为用户传入标识/自动生成id</li>
+                <li>行中必须存在id字段,用户传入标识`label=ids` 默认label为id(待优化 自动生成id)</li>
                 <li>toggleRowTable.toggleRowSelection(item[2, 3]) 切换第二、第三行的选中状态 传入[]等同于清空所有</li>
                 <li>handleSelectionChangeGetId 获取选中的ID</li>
                 <li>handleSelectionChangeGetRows 获取选中的行数据 rows</li>
