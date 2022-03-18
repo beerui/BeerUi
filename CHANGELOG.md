@@ -1,11 +1,12 @@
 # BeerUi 
 
-## @brewer/beerui@1.0.30-next.9 `2022/3/18`
+## @brewer/beerui@1.0.30-next.10 `2022/3/18`
 
 ### Patch Changes
 
 - 新增 `Cascader` 组件
 - 新增 `Notice` 组件 `Type` 可以根据状态进行弹框提示
+- 新增 `Notice` 组件 `toast` 可以居中轻提示
 
 - 修复 `selcet`组件 已知问题
 - 修复 `menu`组件 已知问题
