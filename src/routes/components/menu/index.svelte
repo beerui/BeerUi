@@ -4,10 +4,9 @@
 	import BeMenuItem from "$lib/be-menu/BeMenuItem.svelte";
 	import BeSubMenu from "$lib/be-menu/BeSubMenu.svelte";
 	import BeButton from "$lib/be-button/BeButton.svelte";
-	import NavMenu from "$lib/demo/NavMenu.svelte";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
-	import { goto } from '$app/navigation';
-	import { menu, routers } from "$lib/stores";
+	// import { goto } from '$app/navigation';
+	// import { menu, routers } from "$lib/stores";
 
 	let MenuDom;
 	let setMenuActive = (key) => MenuDom.setMenuActive(key);
@@ -320,19 +319,19 @@
 	}
 	let menus = []
 	let BeMenuDom = null
-	routers.subscribe(items => menus = items)
-	menu.subscribe(item => {
-		if (BeMenuDom && item.type === 'update') BeMenuDom.setMenuActive(item.active)
-	})
-
-	// 展示隐藏
-	const toggleCollapse1 = () => menu.set({ collapse: !$menu.collapse })
-	let menuChange = ({ detail }) => {
-		if (detail.type !== 'submenu') {
-			// goto(detail.path)
-			menu.set({ active: detail.id })
-		}
-	};
+	// routers.subscribe(items => menus = items)
+	// menu.subscribe(item => {
+	// 	if (BeMenuDom && item.type === 'update') BeMenuDom.setMenuActive(item.active)
+	// })
+	//
+	// // 展示隐藏
+	// const toggleCollapse1 = () => menu.set({ collapse: !$menu.collapse })
+	// let menuChange = ({ detail }) => {
+	// 	if (detail.type !== 'submenu') {
+	// 		// goto(detail.path)
+	// 		menu.set({ active: detail.id })
+	// 	}
+	// };
 </script>
 <div class="page-container">
 	<h2>NavMenu 导航菜单</h2>
