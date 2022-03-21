@@ -6,7 +6,7 @@
   "scripts": {
     "build": "svelte-kit build",
     "build-storybook": "build-storybook",
-    "build-scss": "cd src\/lib\/assets\/scss\/ && npm i && npm run build",
+    "build-scss": "cd src/lib/assets/scss/ && npm i && npm run build",
     "publish": "cd package && npm publish",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",

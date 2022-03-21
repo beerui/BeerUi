@@ -167,7 +167,6 @@
     }]
 	let toggleRowTable = null
 	const toggleRowSelectionHandle = (item) => {
-			console.log('toggleRowTable', toggleRowTable);
 		toggleRowTable.toggleRowSelection(item)
 	};
 	const handleSelectionChangeGetId = ({ detail }) => console.log('handleSelectionChangeGetId', detail);
@@ -182,6 +181,7 @@
     <ol>
         <li>TODO：优化自定义表格列 / 无法动态添加 slot</li>
     </ol>
+
     <DemoBlock code={`
 <BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle} indexMethod={indexMethod}>
 	<BeTableColumn width="600" type="index" prop='index' label='索引' />

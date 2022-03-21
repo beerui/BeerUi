@@ -2,7 +2,8 @@
 	import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte';
 	import { addClass, filterClass, off, on } from "$lib/utils/beerui";
     import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
-	import { throttle } from "$lib/utils/throttle";
+	import { deepClone } from '$lib/utils';
+	import { debounce, throttle } from '$lib/utils/throttle';
 
 	// TODO: 自动生成id/给用户传入id的键值
     export let data: any[] = []; // 用户数据
@@ -43,24 +44,26 @@
 
     let columnData = []; // 列数据
     let columnPropData = []; // 列的Key
+	let _columnPropData = [] // 列的源Key
     let rowsData = []; // 行数据
     let headerData = []; // 表头 可渲染Dom Tree
     let headerOriginData = []; // 表头 原始Tree
     let checkList = [] // 选择列表
+	let clientTableWidth = 0; // 没有设置宽度的数量
 
 	let isOnMount = false
+	let isInit = false
 	$: if (isOnMount && data) initTable()
+	$: if (isOnMount && isInit && clientTableWidth) computedColumnWidthHandle();
+
     onMount(() => {
         warpElement && initTable();
 
-	    on(window, 'resize', throttle(resizeHandle, 30), { passive: true });
 	    isOnMount = true
     });
     onDestroy(() => {
         off(tableWrapper, 'scroll', tableHeaderScroll);
-		if (isOnMount) off(window, 'resize', resizeHandle);
     });
-	const resizeHandle = () => initTable()
     const tableHeaderScroll = (evt) => tableHeaderWrapper.scrollLeft = evt.target.scrollLeft;
     // 计算滚动条宽度
     const getScrollbarWidth = () => {
@@ -105,7 +108,8 @@
         // 绑定横向滚动的头部联动
         bindHeaderScroll();
         // 计算表格宽度
-        computedColumnWidthHandle();
+        // computedColumnWidthHandle();
+	    isInit = true
     };
     // 加工行数据
     const computedColumnData = () => {
@@ -114,7 +118,8 @@
         columnElement.forEach(el => columnData.push(getAttrs(el.dataset)));
         // 整理数据 [{prop: 'name', label: '姓名', width: ''}]
         // 取出用户展示字段 存在prop
-        columnPropData = columnData.filter(el => el['prop']);
+	    _columnPropData = columnData.filter(el => el['prop']);
+	    // _columnPropData = <Array<any>>deepClone(columnPropData)
         // 是否有section
         const hasSection = columnData.some(el => el['prop'] === 'selection');
         if (hasSection) {
@@ -122,14 +127,17 @@
           const noId = data.some(el => !el[label]);
           if (!noId) console.warn('[BeerUi] we need a \'id\' for selection')
         }
+
     };
     // 计算表格宽度
-    const computedColumnWidthHandle = () => {
+    const computedColumnWidthHandle = debounce(() => {
         emptyNum = 0; // 没有设置宽度的数量
         userWidth = 0; // 用户设置的宽度总数
-        columnPropData.forEach((el, i) => {
-            el.width === '' ? emptyNum++ : userWidth += Number(el.width);
-            el.index = i;
+	    columnPropData = <Array<any>>deepClone(_columnPropData)
+	    _columnPropData.forEach((el, i) => {
+			const item = columnPropData[i]
+		    item.width === '' ? emptyNum++ : userWidth += Number(item.width);
+		    item.index = i;
         });
         // 计算没有赋值的宽度
         if (emptyNum > 0) {
@@ -150,7 +158,7 @@
 			addClass(warpElement, 'be-table--scrollable-y')
 			bindWarpHeaderScroll()
 		}
-    };
+    });
 
     // 加工行数据 类名 style
     const computedRowsData = () => {
@@ -340,7 +348,7 @@
 		return val
 	}
 </script>
-<div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id}>
+<div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id} bind:clientWidth={clientTableWidth}>
     <div bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'>
         <slot></slot>
     </div>
