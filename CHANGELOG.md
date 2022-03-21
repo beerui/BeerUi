@@ -1,6 +1,6 @@
 # BeerUi 
 
-## @brewer/beerui@1.0.30-next.10 `2022/3/18`
+## @brewer/beerui@1.0.30-next.11 `2022/3/18`
 
 ### Patch Changes
 
@@ -10,6 +10,7 @@
 
 - 修复 `selcet`组件 已知问题
 - 修复 `menu`组件 已知问题
+- 修复 `upload`组件 已知问题
 - 修复 `table`组件 `selection` 的传入用户自定 `id`的问题
 
 

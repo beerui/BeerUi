@@ -1,60 +1,67 @@
 export default class SelectStore {
-  option:object = {}
-  optionList = new Map()
-  private currentNode: null;
-  private currentNodeKey: null;
-  public value: null;
-  public isChange: boolean = true
-  constructor(options) {
-    // this.option = options
-    // this.label = options.label
-    // this.value = options.value
-    // this.select = options.select
-    this.currentNode = null;
-    this.currentNodeKey = null;
-    this.value = null;
-    for (let option in options) {
-      if (options.hasOwnProperty(option)) {
-        this[option] = options[option];
-      }
-    }
-  }
-  creatNode(props) {
-    // console.log(props);
+	optionList = new Map(); // 数据集合
+	subscribe: Function[] = []; // 订阅方法
+	public value: string; // 当前选中的值
+	public isChange: boolean = true;
 
-    let len = this.optionList.size
-    const node = {
-      label: props.label,
-      value: props.value,
-      disabled: props.disabled,
-      index: ++len,
-      key: props.key,
-      change: props.change,
-      hover: props.hover
-    }
-    this.optionList.set(props.key , node)
-    return this.optionList.get(props.key)
-  }
-  setHover(value) {
-    this.optionList.forEach(el => {
-      if(el.key == value) {
-        el.hover(true)
-      } else {
-        el.hover(false)
-      }
-    })
-  }
-  getCurrent(key) {
-    return this.optionList.get(key)
-  }
-  setCurrent(node) {
-    this.currentNode = node
-    this.currentNodeKey = node.key
-    this.isChange = !(this.value == node.value)
-    this.value = node.value
-    this.optionList.forEach(el => el.change({ label: node.label, value: node.value, currentNode: node, currentNodeKey: node.key }))
-  }
-  clearList() {
-    this.optionList.clear()
-  }
+	constructor(options) {
+		this.value = null;
+		for (let option in options) {
+			if (options.hasOwnProperty(option)) {
+				this[option] = options[option];
+			}
+		}
+	}
+
+	// 创建Node并存储
+	creatNode(props) {
+		let len = this.optionList.size;
+		const node = {
+			label: props.label,
+			value: String(props.value),
+			disabled: props.disabled,
+			index: ++len,
+			key: props.key,
+			hover: props.hover
+		};
+		this.optionList.set(props.key, node);
+		return this.optionList.get(props.key);
+	}
+
+	setHover(value) {
+		this.optionList.forEach(el => {
+			if (el.key == value) {
+				el.hover(true);
+			} else {
+				el.hover(false);
+			}
+		});
+	}
+
+	// 获取当前Node
+	getCurrent(key) {
+		if (!String(key)) {
+			this.value = ''
+			this.publishHandle({ label: '', value: '' })
+			return false
+		}
+		return this.optionList.get(key);
+	}
+
+	// 设置当前Node
+	setCurrent(node) {
+		// 判断选中了相同项
+		this.isChange = !(this.value == node.value);
+		this.value = node.value;
+		this.publishHandle({ label: node.label, value: this.value })
+	}
+
+	clearList() {
+		this.optionList.clear();
+	}
+
+	// 通知集合改变
+	publishHandle(item) {
+		this.subscribe.forEach(cb => cb(item));
+	}
 }

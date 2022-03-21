@@ -1,9 +1,8 @@
 <script lang='ts'>
 	import BeIcon from './../be-icon/BeIcon.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
-	import { createEventDispatcher, getContext, onMount, setContext } from "svelte";
+	import { createEventDispatcher, onMount, setContext, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
-	import { BeerPS, genKey } from "$lib/utils/beerui";
 	import SelectStore from './select'
 	let dispatch = createEventDispatcher()
 
@@ -11,72 +10,58 @@
 	// 下拉框选中的值
 	export let value;
 	export let size = 'normal';
-	const selectStore = new SelectStore({ value: $$props.value })
-	setContext('selectStore', selectStore)
+	const store = new SelectStore({ value: $$props.value })
+	setContext('selectStore', store)
+
+	const subscribeHandle = async item => {
+		if (store.isChange) {
+			dispatch('change', store.value) // 值发生改变的时候发送给用户
+			inner = true // 内部更新值
+			value = store.value // 设置value
+			inputValue = item.label // 设置输入框的值
+			await tick()
+			inner = false
+		}
+		handleClosePopper()
+	}
+	store.subscribe.push(subscribeHandle)
+
 	let inputValue = ''
-	// 是否禁用
-	export let disabled = false;
-	// 位置
-	export let position = 'bottom'
+	export let disabled = false // 是否禁用
+	export let position = 'bottom' // 位置
 	export let clearable = false
 	export let placeholder = '请选择'
-	// 下拉框
-	let visible = false;
-	// 获取输入框
-	let input
+	let visible = false // 下拉框
+	let input // 获取输入框
 	let showClose = false
 	$:initValue(value)
-	const key = `selectChange_${ genKey() }`
-	setContext('selectChangeKey', key)
-	BeerPS.subscribe(key, items => {
-		visible = false
-		if(!selectStore.isChange) return
-		value = items.value
-		inputValue = items.label
-		change()
-	})
-	$:if(visible) {
-		selectStore.setHover(value)
-	}
+
+	$:if(visible) store.setHover(value)
+
+	let inner = false; // 是否是内部改变的值
 	function initValue(value) {
-		if(value) {
-			let node = selectStore.getCurrent(value)
-			if(node) {
-				selectStore.setCurrent(node)
-				inputValue = node.label
-			}
-		} else {
-			inputValue = ''
-			value = ''
-			showClose = false
-			selectStore.setCurrent({})
-		}
+		if (inner) return
+		let node = store.getCurrent(value)
+		if (node) store.setCurrent(node)
 	}
 	onMount(() => {
-		let node = selectStore.getCurrent(value)
+		let node = store.getCurrent(value)
 		inputValue = node?.label
 	})
-	function handleShowPopper() {
-		visible = true;
-	}
-	function handleClosePopper(){
-		visible = false
-	}
+	// 打开关闭下拉功能
+	const handleShowPopper = () => visible = true
+	const handleClosePopper = () => visible = false
 	const toggleVisible = () => {
 		if (disabled) return
 		visible = !visible
 	}
 	const clearValue = () => {
-		inputValue = ''
-		value = ''
+		store.setCurrent({ label: '', value: '' })
 		showClose = false
-		selectStore.setCurrent({})
 		handleClosePopper()
 		dispatch('change', '')
 	}
-	function change() {
-		dispatch('change', selectStore.value)
-	}
+
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>

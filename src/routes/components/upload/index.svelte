@@ -133,10 +133,15 @@ const submitHandle = () => {
 <BeUpload
 	style="width: 480px;"
 	action="https://jsonplaceholder.typicode.com/posts/"
-	multiple
 	drag
 	fileList={fileList3}>
-	<div class="upload-card"><BeIcon name="add" width="40" height="40" /></div>
+	<div class="upload-card__drag">
+		<div class="upload-card__icon">
+			<BeIcon name="upload" width="40" height="40" />
+		</div>
+		<div class="be-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+	</div>
+	<p slot="tip">只能上传jpg/png文件，且不超过500kb</p>
 </BeUpload>
 `} js={`
 `}>

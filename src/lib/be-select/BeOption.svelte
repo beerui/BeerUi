@@ -1,33 +1,32 @@
 <script lang="ts">
-	// import { createEventDispatcher } from "svelte";
-	import { BeerPS } from "$lib/utils/beerui";
 	import { getContext } from "svelte";
+
 	let hover = false;
 	export let label:any;
 	export let value:any = '';
 	export let disabled:boolean = false
-	const selectStore = getContext("selectStore");
-	const key = getContext("selectChangeKey");
 
+	const store = getContext("selectStore");
+
+	// 订阅值的改变
+	const subscribeHandle = item => isSelect = item.value === node.value
+	store.subscribe.push(subscribeHandle)
+
+	// 是否选中当前
 	let isSelect = false
-	const changeCurrent = (current) => {
-		isSelect = current.value === node.value
-	}
-	const hoverCurrent = (isHover) => {
-		hover = isHover
-	}
-	selectStore.creatNode({ ...$$props, key: value, change: changeCurrent, hover: hoverCurrent });
-	let node = selectStore.getCurrent(value)
-	isSelect = selectStore.value === node.value
-	// hover = selectStore.value === node.value
+	// 鼠标移入
+	const hoverCurrent = flag => hover = flag
+	// 初始化创建节点
+	let node = store.creatNode({ ...$$props, key: value, hover: hoverCurrent });
+	isSelect = store.value === node.value
+
+	// 点击设置当前
 	const handleClick = () => {
 		if(node.disabled) return
-		selectStore.setCurrent(node)
-		BeerPS.publish(key, node)
+		store.setCurrent(node)
 	}
-	const hoverItem = (e)=> {
-		selectStore.setHover(e.target.dataset.value)
-	}
+	// 移入改变样式
+	const hoverItem = (e)=> store.setHover(e.target.dataset.value)
 
 	let _class: $$props["class"] = "";
 	export {_class as class};
