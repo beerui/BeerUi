@@ -115,7 +115,7 @@
     // 加工行数据
     const computedColumnData = () => {
         columnData = [];
-        columnElement = warpElement.querySelectorAll('.be-table__column');
+        columnElement = warpElement.querySelectorAll('.be-table__source__column');
         columnElement.forEach(el => columnData.push(getAttrs(el.dataset)));
         // 整理数据 [{prop: 'name', label: '姓名', width: ''}]
         // 取出用户展示字段 存在prop
@@ -350,7 +350,7 @@
 	}
 </script>
 <div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id} bind:clientWidth={clientTableWidth}>
-    <div bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;'>
+    <div bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;display: none;'>
         <slot></slot>
     </div>
     {#if showHeader}
@@ -363,22 +363,22 @@
                     <col width={gutter}>
                 </colgroup>
                 <thead class='has-gutter'>
-                {#each headerData as col, i}
-                    <tr class=''>
-                        {#each col as rows}
-                            <th class='be-table__cell' rowspan={rows.rowSpan} colspan={rows.colSpan}>
-	                            {#if rows.prop === 'selection'}
-		                            <div class="cell">
-			                            <BeCheckbox {indeterminate} bind:checked={isAllCheck} on:change={allCheckHandle} />
-		                            </div>
-	                            {:else}
-		                            <div class="cell">{rows.label}</div>
-	                            {/if}
-                            </th>
-                        {/each}
-                        <th class='be-table__cell gutter' style='width: {gutter}px;'></th>
-                    </tr>
-                {/each}
+	                {#each headerData as col, i}
+	                    <tr>
+	                        {#each col as rows}
+	                            <th class='be-table__cell' rowspan={rows.rowSpan} colspan={rows.colSpan}>
+		                            {#if rows.prop === 'selection'}
+			                            <div class="cell">
+				                            <BeCheckbox {indeterminate} bind:checked={isAllCheck} on:change={allCheckHandle} />
+			                            </div>
+		                            {:else}
+			                            <div class="cell header-cell">{rows.label}</div>
+		                            {/if}
+	                            </th>
+	                        {/each}
+	                        <th class='be-table__cell gutter' style='width: {gutter}px;'></th>
+	                    </tr>
+	                {/each}
                 </thead>
             </table>
         </div>
@@ -452,6 +452,11 @@
 			    </span>
 		    </div>
 	    {/if}
+	    <div class="be-table__empty-block" style="height: 100%; width: 100%;">
+			    <span class="be-table__empty-text">
+				    <slot name='empty'>{emptyText}</slot>
+			    </span>
+	    </div>
     </div>
 </div>
 

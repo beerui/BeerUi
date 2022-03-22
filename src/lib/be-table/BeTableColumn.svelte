@@ -5,6 +5,6 @@
   export let name: string = "";
   export let type: string = "";
 </script>
-<div class="be-table__column" data-prop={prop} data-type={type} data-label={label} data-name={name} data-width={width}>
+<div style='display: none;' class="be-table__source__column" data-prop={prop} data-type={type} data-label={label} data-name={name} data-width={width}>
 	<slot></slot>
 </div>
