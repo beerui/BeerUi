@@ -3,12 +3,13 @@
 	import { addClass, filterClass, off, on } from "$lib/utils/beerui";
     import BeCheckbox from "$lib/be-checkbox/BeCheckbox.svelte";
 	import { deepClone } from '$lib/utils';
-	import { debounce, throttle } from '$lib/utils/throttle';
+	import { debounce } from '$lib/utils/throttle';
 
 	// TODO: 自动生成id/给用户传入id的键值
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
     export let placeholder: string = ''; // 无数据的时候展示的字段
+    export let emptyText: string = '暂无数据'; // 无数据的时候展示的字段
     export let placeholderRegex: Function = (v) => isUndefined(v); // 无数据的判断
     export let border: boolean = false; // 边框 false/true
     export let showHeader: boolean = true; // 显示表头 true/false
@@ -444,6 +445,13 @@
             {/each}
             </tbody>
         </table>
+	    {#if rowsData.length === 0}
+		    <div class="be-table__empty-block" style="height: 100%; width: 100%;">
+			    <span class="be-table__empty-text">
+				    <slot name='empty'>{emptyText}</slot>
+			    </span>
+		    </div>
+	    {/if}
     </div>
 </div>
 

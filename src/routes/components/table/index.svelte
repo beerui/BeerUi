@@ -180,6 +180,7 @@
     <h2>BeTable 表格</h2>
     <ol>
         <li>TODO：优化自定义表格列 / 无法动态添加 slot</li>
+	    <li>emptyText:String;空数据时显示的文本内容，也可以通过 slot="empty"设置; 默认：暂无数据</li>
     </ol>
 
     <DemoBlock code={`
