@@ -85,7 +85,7 @@
 		fileListDom()
 		onChange(file, fileList);
 	}
-	export let accept: string = 'image/*' // 接受上传的文件类型（thumbnail-mode 模式下此参数无效）
+	export let accept: string // 接受上传的文件类型（thumbnail-mode 模式下此参数无效）
 	export let multiple: boolean = true // 是否支持多选文件	boolean
 	export let name: string = 'file' // 上传的文件字段名 默认 file
 	export let data: object = null // 上传时附带的额外参数
@@ -143,6 +143,7 @@
 	}
 	const upload = (rawFile) => {
 		files.value = null;
+		console.log('beforeUpload()', beforeUpload);
 		if (!beforeUpload) {
 			return post(rawFile);
 		}
@@ -247,6 +248,10 @@
 	const onDrop = (e) => {
 		if (disabled) return;
 		dragover = false;
+		if (!accept || accept === '*') {
+			uploadFiles([].slice.call(e.dataTransfer.files))
+			return;
+		}
 		const _file = [].slice.call(e.dataTransfer.files).filter(file => {
 			const { type, name } = file;
 			const extension = name.indexOf('.') > -1

@@ -15,12 +15,12 @@
 
 	const subscribeHandle = async item => {
 		if (store.isChange) {
-			dispatch('change', store.value) // 值发生改变的时候发送给用户
 			inner = true // 内部更新值
 			value = store.value // 设置value
 			inputValue = item.label // 设置输入框的值
 			await tick()
 			inner = false
+			dispatch('change', store.value) // 值发生改变的时候发送给用户
 		}
 		handleClosePopper()
 	}

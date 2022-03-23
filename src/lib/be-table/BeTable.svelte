@@ -366,7 +366,13 @@
 	                {#each headerData as col, i}
 	                    <tr>
 	                        {#each col as rows}
-	                            <th class='be-table__cell' rowspan={rows.rowSpan} colspan={rows.colSpan}>
+	                            <th class='be-table__cell'
+	                                class:is-center={col.headerAlign ? col.headerAlign === 'center' : col.align === 'center'}
+	                                class:is-left={col.headerAlign ? col.headerAlign === 'left' : col.align === 'left'}
+	                                class:is-right={col.headerAlign ? col.headerAlign === 'right' : col.align === 'right'}
+	                                rowspan={rows.rowSpan}
+	                                colspan={rows.colSpan}
+	                            >
 		                            {#if rows.prop === 'selection'}
 			                            <div class="cell">
 				                            <BeCheckbox {indeterminate} bind:checked={isAllCheck} on:change={allCheckHandle} />
@@ -398,7 +404,11 @@
                 >
                     {#each columnPropData as col, i}
                         {#if col.prop === 'tableSlot'}
-                            <td class='be-table__cell'>
+                            <td class='be-table__cell'
+                                class:is-center={col.align === 'center'}
+                                class:is-right={col.align === 'right'}
+                                class:is-left={col.align === 'left'}
+                            >
                                 <div class='cell be-table-cell__{i}'>
                                     {#if col.name === 'tableSlot1'}
                                         <slot name='tableSlot1' prop={row}></slot>
@@ -424,19 +434,31 @@
                                 </div>
                             </td>
                         {:else if col.prop === 'selection'}
-	                        <td class='be-table__cell'>
+	                        <td class='be-table__cell'
+	                            class:is-center={col.align === 'center'}
+	                            class:is-right={col.align === 'right'}
+	                            class:is-left={col.align === 'left'}
+	                        >
 		                        <div class='cell'>
 			                        <BeCheckbox on:click={() => clickRowCheckbox(row)} bind:checked={row.checked} />
 		                        </div>
 	                        </td>
                         {:else if col.prop === 'index'}
-	                        <td class='be-table__cell'>
+	                        <td class='be-table__cell'
+	                            class:is-center={col.align === 'center'}
+	                            class:is-right={col.align === 'right'}
+	                            class:is-left={col.align === 'left'}
+	                        >
 		                        <div class='cell'>
 			                        {indexMethod(index)}
 		                        </div>
 	                        </td>
                         {:else}
-                            <td class='be-table__cell'>
+                            <td class='be-table__cell'
+                                class:is-center={col.align === 'center'}
+                                class:is-right={col.align === 'right'}
+                                class:is-left={col.align === 'left'}
+                            >
                                 <div class='cell'>{computedCell(row[col.prop])}</div>
                             </td>
                         {/if}
