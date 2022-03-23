@@ -144,16 +144,26 @@ const submitHandle = () => {
 	drag
 	multiple
 	accept='application/pdf,application/doc,application/docx'
-	fileList={fileList3}>
+	fileList={fileList3}
+	beforeUpload={beforeUpload}
+>
 	<div class="upload-card__drag">
 		<div class="upload-card__icon">
 			<BeIcon name="upload" width="40" height="40" />
 		</div>
 		<div class="be-upload__text">将文件拖到此处，或<em>点击上传</em></div>
 	</div>
-	<p slot="tip">只能上传jpg/png文件，且不超过2MB</p>
+	<p slot="tip">application/pdf,application/doc,application/docx 只能上传jpg/png文件，且不超过2MB</p>
 </BeUpload>
 `} js={`
+const beforeUpload = (file) => {
+	const isLt2M = file.size / 1024 / 1024 < 2;
+	if (!isLt2M) {
+		console.log('上传头像图片大小不能超过 2MB!');
+	}
+	console.log('isLt2M', isLt2M);
+	return isLt2M;
+}
 `}>
 		<div slot="source">
 			<div class="demo-list">
