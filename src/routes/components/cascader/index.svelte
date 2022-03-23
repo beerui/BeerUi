@@ -6,11 +6,16 @@
 	let value = 'dingbudaohang';
 	let showAllLevels = false
 	let checkStrictly = true
+	let config= {
+		value: 'id',
+		label: 'value'
+	}
 	let value1 = ''
 	let value2 = ''
 	let value3 = ''
 	let value4 = ''
 	let value5 = ''
+	let value6 = ''
 	let expandTrigger = 'hover';
 
 	let options = [{
@@ -417,6 +422,208 @@
 			label: '组件交互文档'
 		}]
 	}]
+	let options2 = [{
+		id: 'zhinan',
+		value: '指南',
+		children: [{
+			id: 'shejiyuanze',
+			// disabled: true,
+			value: '设计原则',
+			children: [{
+				id: 'yizhi',
+				value: '一致'
+			}, {
+				id: 'fankui',
+				value: '反馈'
+			}, {
+				id: 'xiaolv',
+				value: '效率'
+			}, {
+				id: 'kekong',
+				value: '可控'
+			}]
+		}, {
+			id: 'daohang',
+			value: '导航',
+			children: [{
+				id: 'cexiangdaohang',
+				value: '侧向导航',
+				children: [
+					{
+						id: 'cexiangdaohang22',
+						value: '侧向导航22'
+					}
+				]
+			}, {
+				id: 'dingbudaohang',
+				value: '顶部导航'
+			}]
+		}]
+	}, {
+		id: 'zujian',
+		value: '组件',
+		children: [{
+			id: 'basic',
+			value: 'Basic',
+			children: [{
+				id: 'layout',
+				value: 'Layout 布局'
+			}, {
+				id: 'color',
+				value: 'Color 色彩'
+			}, {
+				id: 'typography',
+				value: 'Typography 字体'
+			}, {
+				id: 'icon',
+				value: 'Icon 图标'
+			}, {
+				id: 'button',
+				value: 'Button 按钮'
+			}]
+		}, {
+			id: 'form',
+			value: 'Form',
+			children: [{
+				id: 'radio',
+				value: 'Radio 单选框'
+			}, {
+				id: 'checkbox',
+				value: 'Checkbox 多选框'
+			}, {
+				id: 'input',
+				value: 'Input 输入框'
+			}, {
+				id: 'input-number',
+				value: 'InputNumber 计数器'
+			}, {
+				id: 'select',
+				value: 'Select 选择器'
+			}, {
+				id: 'cascader',
+				value: 'Cascader 级联选择器'
+			}, {
+				id: 'switch',
+				value: 'Switch 开关'
+			}, {
+				id: 'slider',
+				value: 'Slider 滑块'
+			}, {
+				id: 'time-picker',
+				value: 'TimePicker 时间选择器'
+			}, {
+				id: 'date-picker',
+				value: 'DatePicker 日期选择器'
+			}, {
+				id: 'datetime-picker',
+				value: 'DateTimePicker 日期时间选择器'
+			}, {
+				id: 'upload',
+				value: 'Upload 上传'
+			}, {
+				id: 'rate',
+				value: 'Rate 评分'
+			}, {
+				id: 'form',
+				value: 'Form 表单'
+			}]
+		}, {
+			id: 'data',
+			value: 'Data',
+			children: [{
+				id: 'table',
+				value: 'Table 表格'
+			}, {
+				id: 'tag',
+				value: 'Tag 标签'
+			}, {
+				id: 'progress',
+				value: 'Progress 进度条'
+			}, {
+				id: 'tree',
+				value: 'Tree 树形控件'
+			}, {
+				id: 'pagination',
+				value: 'Pagination 分页'
+			}, {
+				id: 'badge',
+				value: 'Badge 标记'
+			}]
+		}, {
+			id: 'notice',
+			value: 'Notice',
+			children: [{
+				id: 'alert',
+				value: 'Alert 警告'
+			}, {
+				id: 'loading',
+				value: 'Loading 加载'
+			}, {
+				id: 'message',
+				value: 'Message 消息提示'
+			}, {
+				id: 'message-box',
+				value: 'MessageBox 弹框'
+			}, {
+				id: 'notification',
+				value: 'Notification 通知'
+			}]
+		}, {
+			id: 'navigation',
+			value: 'Navigation',
+			children: [{
+				id: 'menu',
+				value: 'NavMenu 导航菜单'
+			}, {
+				id: 'tabs',
+				value: 'Tabs 标签页'
+			}, {
+				id: 'breadcrumb',
+				value: 'Breadcrumb 面包屑'
+			}, {
+				id: 'dropdown',
+				value: 'Dropdown 下拉菜单'
+			}, {
+				id: 'steps',
+				value: 'Steps 步骤条'
+			}]
+		}, {
+			id: 'others',
+			value: 'Others',
+			children: [{
+				id: 'dialog',
+				value: 'Dialog 对话框'
+			}, {
+				id: 'tooltip',
+				value: 'Tooltip 文字提示'
+			}, {
+				id: 'popover',
+				value: 'Popover 弹出框'
+			}, {
+				id: 'card',
+				value: 'Card 卡片'
+			}, {
+				id: 'carousel',
+				value: 'Carousel 走马灯'
+			}, {
+				id: 'collapse',
+				value: 'Collapse 折叠面板'
+			}]
+		}]
+	}, {
+		id: 'ziyuan',
+		value: '资源',
+		children: [{
+			id: 'axure',
+			value: 'Axure Components'
+		}, {
+			id: 'sketch',
+			value: 'Sketch Templates'
+		}, {
+			id: 'jiaohu',
+			value: '组件交互文档'
+		}]
+	}]
 	const change = (e) => {
 		console.log(e);
 	};
@@ -641,7 +848,7 @@
 	>
 		<div slot='source'>
 			<div class='flex justify-around'>
-				<BeCascader bind:value={value} {options} />
+				<BeCascader bind:value={value} options = {options}/>
 				<!-- <BeCascader bind:value={value} {showAllLevels} {options} on:change={change} /> -->
 				<!-- <BeCascader bind:value={value2} {checkStrictly} {options} on:change={change} /> -->
 				<BeCascader bind:value={value1} {options} {expandTrigger} />
@@ -869,14 +1076,12 @@
 					<BeCascader bind:value={value3} options = {options} clearable/>
 				</div>
 			</div>
-			<!-- <div slot='description'>
-				通过 clearable 设置输入框可清空
-			</div> -->
 		</DemoBlock>
 	<h3>显示最后一级</h3>
 	<p>可以仅在输入框中显示选中项最后一级的标签，而不是选中项所在的完整路径。</p>
 	<DemoBlock code={`
-		<BeCascader bind:value={value} {options} {showAllLevels}/>`}
+		<BeCascader bind:value={value} {options} {showAllLevels}/>
+		<BeCascader bind:value={value2} {options2} {config}/>`}
 		js={`
 			let value = []
 			let showAllLevels = false
@@ -1081,6 +1286,7 @@
 					label: '组件交互文档'
 				}]
 			}]
+			
 		`}
 			>
 		<div slot='source'>
@@ -1089,7 +1295,7 @@
 			</div>
 		</div>
 		<div slot='description'>
-			属性showAllLevels定义了是否显示完整的路径，将其赋值为false则仅显示最后一级
+			属性showAllLevels定义了是否显示完整的路径，将其赋值为false则仅显示最后一级,也可通过config配置value和label
 		</div>
 	</DemoBlock>
 	<h3>选择任意一级选项</h3>
@@ -1309,6 +1515,230 @@
 		</div>
 		<div slot='description'>
 			通过checkStrictly 来设置父子节点取消选中关联，从而达到选择任意一级选项的目的。
+		</div>
+	</DemoBlock>
+	<h3>自定义value和label</h3>
+	<p> 指定选项的值和选项标签为选项对象的某个属性值</p>
+	<DemoBlock code={`
+		<BeCascader bind:value={value} {options} {config}/>`}
+		js={`
+			let value = []
+			let config = {
+				value: 'id',
+				label: 'value',
+				children: 'children'
+			}
+			let options = [{
+				id: 'zhinan',
+				value: '指南',
+				children: [{
+					id: 'shejiyuanze',
+					// disabled: true,
+					value: '设计原则',
+					children: [{
+						id: 'yizhi',
+						value: '一致'
+					}, {
+						id: 'fankui',
+						value: '反馈'
+					}, {
+						id: 'xiaolv',
+						value: '效率'
+					}, {
+						id: 'kekong',
+						value: '可控'
+					}]
+				}, {
+					id: 'daohang',
+					value: '导航',
+					children: [{
+						id: 'cexiangdaohang',
+						value: '侧向导航',
+						children: [
+							{
+								id: 'cexiangdaohang22',
+								value: '侧向导航22'
+							}
+						]
+					}, {
+						id: 'dingbudaohang',
+						value: '顶部导航'
+					}]
+				}]
+			}, {
+				id: 'zujian',
+				value: '组件',
+				children: [{
+					id: 'basic',
+					value: 'Basic',
+					children: [{
+						id: 'layout',
+						value: 'Layout 布局'
+					}, {
+						id: 'color',
+						value: 'Color 色彩'
+					}, {
+						id: 'typography',
+						value: 'Typography 字体'
+					}, {
+						id: 'icon',
+						value: 'Icon 图标'
+					}, {
+						id: 'button',
+						value: 'Button 按钮'
+					}]
+				}, {
+					id: 'form',
+					value: 'Form',
+					children: [{
+						id: 'radio',
+						value: 'Radio 单选框'
+					}, {
+						id: 'checkbox',
+						value: 'Checkbox 多选框'
+					}, {
+						id: 'input',
+						value: 'Input 输入框'
+					}, {
+						id: 'input-number',
+						value: 'InputNumber 计数器'
+					}, {
+						id: 'select',
+						value: 'Select 选择器'
+					}, {
+						id: 'cascader',
+						value: 'Cascader 级联选择器'
+					}, {
+						id: 'switch',
+						value: 'Switch 开关'
+					}, {
+						id: 'slider',
+						value: 'Slider 滑块'
+					}, {
+						id: 'time-picker',
+						value: 'TimePicker 时间选择器'
+					}, {
+						id: 'date-picker',
+						value: 'DatePicker 日期选择器'
+					}, {
+						id: 'datetime-picker',
+						value: 'DateTimePicker 日期时间选择器'
+					}, {
+						id: 'upload',
+						value: 'Upload 上传'
+					}, {
+						id: 'rate',
+						value: 'Rate 评分'
+					}, {
+						id: 'form',
+						value: 'Form 表单'
+					}]
+				}, {
+					id: 'data',
+					value: 'Data',
+					children: [{
+						id: 'table',
+						value: 'Table 表格'
+					}, {
+						id: 'tag',
+						value: 'Tag 标签'
+					}, {
+						id: 'progress',
+						value: 'Progress 进度条'
+					}, {
+						id: 'tree',
+						value: 'Tree 树形控件'
+					}, {
+						id: 'pagination',
+						value: 'Pagination 分页'
+					}, {
+						id: 'badge',
+						value: 'Badge 标记'
+					}]
+				}, {
+					id: 'notice',
+					value: 'Notice',
+					children: [{
+						id: 'alert',
+						value: 'Alert 警告'
+					}, {
+						id: 'loading',
+						value: 'Loading 加载'
+					}, {
+						id: 'message',
+						value: 'Message 消息提示'
+					}, {
+						id: 'message-box',
+						value: 'MessageBox 弹框'
+					}, {
+						id: 'notification',
+						value: 'Notification 通知'
+					}]
+				}, {
+					id: 'navigation',
+					value: 'Navigation',
+					children: [{
+						id: 'menu',
+						value: 'NavMenu 导航菜单'
+					}, {
+						id: 'tabs',
+						value: 'Tabs 标签页'
+					}, {
+						id: 'breadcrumb',
+						value: 'Breadcrumb 面包屑'
+					}, {
+						id: 'dropdown',
+						value: 'Dropdown 下拉菜单'
+					}, {
+						id: 'steps',
+						value: 'Steps 步骤条'
+					}]
+				}, {
+					id: 'others',
+					value: 'Others',
+					children: [{
+						id: 'dialog',
+						value: 'Dialog 对话框'
+					}, {
+						id: 'tooltip',
+						value: 'Tooltip 文字提示'
+					}, {
+						id: 'popover',
+						value: 'Popover 弹出框'
+					}, {
+						id: 'card',
+						value: 'Card 卡片'
+					}, {
+						id: 'carousel',
+						value: 'Carousel 走马灯'
+					}, {
+						id: 'collapse',
+						value: 'Collapse 折叠面板'
+					}]
+				}]
+			}, {
+				id: 'ziyuan',
+				value: '资源',
+				children: [{
+					id: 'axure',
+					value: 'Axure Components'
+				}, {
+					id: 'sketch',
+					value: 'Sketch Templates'
+				}, {
+					id: 'jiaohu',
+					value: '组件交互文档'
+				}]
+			}]
+		`}
+			>
+		<div slot='source'>
+			<div class='flex justify-around'>
+				<BeCascader bind:value={value6} options = {options2} {config}/>
+			</div>
+		</div>
+		<div slot='description'>
+			通过config 来设置自定义选项的值。默认取对象中的value和label
 		</div>
 	</DemoBlock>
 </div>
