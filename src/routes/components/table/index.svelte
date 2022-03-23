@@ -219,11 +219,12 @@ const placeholderRegexHandle = (v) => v === undefined || v === 'undefined'
 	        <ol>
 		        <li>placeholder 无数据的时候 替代的标识 默认为''</li>
 		        <li>placeholderRegex 无数据的时候回调函数 Boolean</li>
-		        <li>align='center' 对齐方式	String	left/center/right	默认 left</li>
-		        <li>headeralign='left' 表头对齐方式，若不设置该项，则使用表格的对齐方式	String	left/center/right	默认 ''</li>
+		        <li>BeTable align='center' 对齐方式	String	left/center/right	默认 left</li>
+		        <li>BeTableColumn align='center' 对齐方式	String	left/center/right	默认 left</li>
+		        <li>BeTableColumn headeralign='left' 表头对齐方式，若不设置该项，则使用表格的对齐方式	String	left/center/right	默认 ''</li>
 	        </ol>
             <div class='demo-list'>
-                <BeTable data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle} indexMethod={indexMethod}>
+                <BeTable align='center' data={tableData} placeholder="-" placeholderRegex={placeholderRegexHandle} indexMethod={indexMethod}>
                     <BeTableColumn width="60" prop='index' label='' />
                     <BeTableColumn align='center' headeralign='left' width="355" prop='name' label='姓名' />
                     <BeTableColumn width="355" prop='placeholder' label='placeholder' />

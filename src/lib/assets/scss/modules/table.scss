@@ -1,6 +1,15 @@
 .be-table {
-  position: relative;overflow: hidden;box-sizing: content-box;flex: 1;
+  position: relative;overflow: hidden;box-sizing: content-box;flex: 1;text-align: left;
   background-color: var(--bg-color-container);font-size: 14px;color: var(--text-color-primary);
+  &.is-center {
+    text-align: center;
+  }
+  &.is-left {
+    text-align: left;
+  }
+  &.is-right {
+    text-align: right;
+  }
   &:before {
     content: "";position: absolute;background-color: var(--bg-color-secondarycontainer);z-index: 1;
     left: 0;bottom: 0;width: 100%;height: 1px;
@@ -52,7 +61,7 @@
   }
   &__cell {
     padding: 12px 0;min-width: 0;box-sizing: border-box;text-overflow: ellipsis;
-    vertical-align: middle;position: relative;text-align: left;transition: background-color .25s ease;
+    vertical-align: middle;position: relative;transition: background-color .25s ease;
     &.is-center {text-align: center;}
     &.is-left {text-align: left;}
     &.is-right {text-align: right;}

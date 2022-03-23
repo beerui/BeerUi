@@ -9,6 +9,7 @@
     export let data: any[] = []; // 用户数据
     export let stripe: boolean = false; // 斑马纹 false/true
     export let placeholder: string = ''; // 无数据的时候展示的字段
+    export let align: string = ''; // 对齐方式
     export let emptyText: string = '暂无数据'; // 无数据的时候展示的字段
     export let placeholderRegex: Function = (v) => isUndefined(v); // 无数据的判断
     export let border: boolean = false; // 边框 false/true
@@ -349,7 +350,15 @@
 		return val
 	}
 </script>
-<div class={_class} bind:this={warpElement} style={$$props.style} id={$$props.id} bind:clientWidth={clientTableWidth}>
+<div class={_class}
+     bind:this={warpElement}
+     style={$$props.style}
+     id={$$props.id}
+     bind:clientWidth={clientTableWidth}
+     class:is-center={align === 'center'}
+     class:is-left={align === 'left'}
+     class:is-right={align === 'right'}
+>
     <div bind:this={columnDom} style='visibility: hidden;position: absolute;z-index: -1;display: none;'>
         <slot></slot>
     </div>
@@ -376,7 +385,6 @@
 	                                rowspan={rows.rowSpan}
 	                                colspan={rows.colSpan}
 	                            >
-		                            {JSON.stringify(rows)}
 		                            {#if rows.prop === 'selection'}
 			                            <div class="cell">
 				                            <BeCheckbox {indeterminate} bind:checked={isAllCheck} on:change={allCheckHandle} />
