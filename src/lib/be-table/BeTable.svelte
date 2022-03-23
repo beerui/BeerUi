@@ -367,12 +367,16 @@
 	                    <tr>
 	                        {#each col as rows}
 	                            <th class='be-table__cell'
-	                                class:is-center={col.headerAlign ? col.headerAlign === 'center' : col.align === 'center'}
-	                                class:is-left={col.headerAlign ? col.headerAlign === 'left' : col.align === 'left'}
-	                                class:is-right={col.headerAlign ? col.headerAlign === 'right' : col.align === 'right'}
+	                                class:is-center={rows.align === 'center'}
+	                                class:is-left={rows.align === 'left'}
+	                                class:is-right={rows.align === 'right'}
+	                                class:is-header-center={rows['headeralign'] === 'center'}
+	                                class:is-header-left={rows['headeralign'] === 'left'}
+	                                class:is-header-right={rows['headeralign'] === 'right'}
 	                                rowspan={rows.rowSpan}
 	                                colspan={rows.colSpan}
 	                            >
+		                            {JSON.stringify(rows)}
 		                            {#if rows.prop === 'selection'}
 			                            <div class="cell">
 				                            <BeCheckbox {indeterminate} bind:checked={isAllCheck} on:change={allCheckHandle} />
