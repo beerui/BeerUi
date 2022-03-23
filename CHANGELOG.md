@@ -1,5 +1,15 @@
 # BeerUi 
 
+## @brewer/beerui@1.0.30-next.11 `2022/3/23`
+
+### Patch Changes
+
+- 新增 `table` 组件 align/headeralign center/left/right
+
+- 修复 `select`组件 已知问题
+- 修复 `menu`组件 已知问题
+- 修复 `upload`组件 已知问题
+
 ## @brewer/beerui@1.0.30-next.11 `2022/3/18`
 
 ### Patch Changes
@@ -8,7 +18,7 @@
 - 新增 `Notice` 组件 `Type` 可以根据状态进行弹框提示
 - 新增 `Notice` 组件 `toast` 可以居中轻提示
 
-- 修复 `selcet`组件 已知问题
+- 修复 `select`组件 已知问题
 - 修复 `menu`组件 已知问题
 - 修复 `upload`组件 已知问题
 - 修复 `table`组件 `selection` 的传入用户自定 `id`的问题
