@@ -12,7 +12,7 @@
 	let _class: $$props["class"] = "";
 	export {_class as class};
 
-	const handleClick = (evt) => evt.which === 1 && store.setActive(node)
+	const handleClick = (evt) => evt.which === 1 && store.setActive(node, 'click')
 </script>
 <li role="menuitem"
     tabindex="0"

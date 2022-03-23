@@ -37,7 +37,7 @@
 
 	onDestroy(() => node = null)
 
-	const handleClick = evt => evt.which === 1 && store.setActive(node)
+	const handleClick = evt => evt.which === 1 && store.setActive(node, 'click')
 	let _class: $$props["class"] = "";
 	export {_class as class};
 

@@ -452,11 +452,6 @@
 			    </span>
 		    </div>
 	    {/if}
-	    <div class="be-table__empty-block" style="height: 100%; width: 100%;">
-			    <span class="be-table__empty-text">
-				    <slot name='empty'>{emptyText}</slot>
-			    </span>
-	    </div>
     </div>
 </div>
 

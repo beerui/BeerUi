@@ -533,7 +533,7 @@ const toggleCollapse = () => collapse = !collapse
 			</div>
 			<div class="demo-list">
 				<div style="width: 200px;min-height: 200px;">
-					<BeMenu class="be-menu-demo" data={data1} active="2-1" mode="vertical" trigger="hover" {collapse}>
+					<BeMenu on:change={() => console.log('change')} on:click={() => console.log('click')} class="be-menu-demo" data={data1} active="2-1" mode="vertical" trigger="hover" {collapse}>
 						<BeMenuItem id="1">
 							<div slot="icon">
 								<BeIcon name="chart-bubble" />

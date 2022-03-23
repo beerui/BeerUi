@@ -162,10 +162,10 @@ export default class MenuStore {
 		}
 	}
 	// 设置选中
-	setActive(node) {
+	setActive(node, type: string = 'normal') {
 		this.active = node.id
 		this.setTreeActive(node)
-		this.publishHandle({ status: 'update', data: this.nodesMap, menu: this.nodesMap[node.id] })
+		this.publishHandle({ status: 'update', type: type, data: this.nodesMap, menu: this.nodesMap[node.id] })
 	}
 	// 设置选中状态
 	setTreeActive(node) {

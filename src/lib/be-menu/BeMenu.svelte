@@ -2,6 +2,7 @@
 	import { createEventDispatcher, onDestroy, onMount, setContext } from 'svelte';
 	import clickOutside from "$lib/_actions/clickOutside";
 	import MenuStore from './menu'
+	import { debounce } from '$lib/utils/throttle';
 
 	export let active: string = "";
 	export let mode: string = "vertical";
@@ -11,16 +12,14 @@
 	export let isOnlyOne: boolean = false;
 	const dispatch = createEventDispatcher();
 	let BeMenu = null;
-	let store = new MenuStore({ data, active, mode, trigger, collapse, dispatch})
+	let store = new MenuStore({ data, active, mode, trigger, collapse, dispatch })
 	setContext('menuStore', store)
 
-	const subscribeHandle = item => {
-		if (active !== store.active) {
-			dispatch('change', item.data[store.active])
-			active = store.active
-		}
-		dispatch('click', item.data[store.active])
-	}
+	const subscribeHandle = debounce(item => {
+		if (active !== store.active) active = store.active
+		if (item.type === 'click') dispatch('click', item.data[store.active])
+		dispatch('change', item.data[store.active])
+	}, 60)
 	store.subscribe.push(subscribeHandle)
 
 	$: if (data) store.initTree();
