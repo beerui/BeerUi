@@ -24,10 +24,7 @@
 	}
 	store.subscribe.push(subscribeHandle)
 	let optionSize = 0
-	const getSize = (size) => {
-		optionSize = size
-		console.log(optionSize);
-	}
+	const getSize = size => optionSize = size
 	store.sizeSubscribe.push(getSize)
 	let inputValue = ''
 	export let disabled = false // 是否禁用
@@ -41,7 +38,7 @@
 	$:if(visible) store.setHover(value)
 
 
-	
+
 	let inner = false; // 是否是内部改变的值
 	function initValue(value) {
 		if (inner) return
