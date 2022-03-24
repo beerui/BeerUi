@@ -16,6 +16,12 @@
 	export let showAllLevels = true
 	// 是否取消父子关联
 	export let checkStrictly = false
+	// 配置选项
+	export let config = {
+		value: 'value',
+		label: 'label',
+		children: 'children'
+	}
 	// 是否禁用
 	export let disabled = false;
 	// 位置
@@ -32,35 +38,20 @@
 	let visible = false;
 	// 获取输入框
 	let showClose = false
-	// 初始化输入框值
-	// const initInputValue = (arr, level = 0) => {
-	// 	for(let i = 0; i < arr.length; i++) {
-  //     const item = arr[i]
-  //     if(item.value == value[level]) {
-	// 			inputValue.push(item.label)
-  //       if(item.children && item.children.length) {
-	// 				hasChildren = true
-  //         initInputValue(item.children, ++level)
-  //       } else {
-	// 				hasChildren = false
-  //         return
-  //       }
-  //     }
-  //   }
-	// }
+	config = store.config
 	const findPathByValue = (list, val) => {
 		if(!list || list.length === 0) return false
     for(let i = 0; i < list.length; i++) {
       const item = list[i]
-      if(item.value === val) {
+      if(item[config.value] === val) {
 				// 如果是父子不关联的 赋值找到的最后一个值
-				if(checkStrictly) value = [item.value]
-				hasChildren = item.children && item.children.length
-				inputValue.push(item.label)
+				if(checkStrictly) value = [item[config.value]]
+				hasChildren = item[config.children] && item[config.children].length
+				inputValue.push(item[config.label])
         return true
       }
-      if(findPathByValue(item.children, val)) {
-				inputValue.unshift(item.label)
+      if(findPathByValue(item[config.children], val)) {
+				inputValue.unshift(item[config.label])
         return true
       }
     }
@@ -73,6 +64,7 @@
 			findPathByValue(options, value)
 		}
 		if(!showAllLevels) inputValue = inputValue.slice(inputValue.length - 1, inputValue.length)
+		
 		if(hasChildren && !checkStrictly) inputValue = []
 	}
 	const clearValue = () => {
@@ -124,6 +116,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {options} {expandTrigger} {checkStrictly} {showAllLevels} on:change={change}/>
+	<CascaderPanel {visible} {options} {config} {expandTrigger} {checkStrictly} {showAllLevels} on:change={change}/>
 </div>
 

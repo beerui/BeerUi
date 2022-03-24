@@ -5,14 +5,12 @@
 	import clickOutside from '$lib/_actions/clickOutside';
 	import SelectStore from './select'
 	let dispatch = createEventDispatcher()
-
 	export let options;
 	// 下拉框选中的值
 	export let value;
 	export let size = 'normal';
 	const store = new SelectStore({ value: $$props.value })
 	setContext('selectStore', store)
-
 	const subscribeHandle = async item => {
 		if (store.isChange) {
 			inner = true // 内部更新值
@@ -25,7 +23,12 @@
 		handleClosePopper()
 	}
 	store.subscribe.push(subscribeHandle)
-
+	let optionSize = 0
+	const getSize = (size) => {
+		optionSize = size
+		console.log(optionSize);
+	}
+	store.sizeSubscribe.push(getSize)
 	let inputValue = ''
 	export let disabled = false // 是否禁用
 	export let position = 'bottom' // 位置
@@ -35,9 +38,10 @@
 	let input // 获取输入框
 	let showClose = false
 	$:initValue(value)
-
 	$:if(visible) store.setHover(value)
 
+
+	
 	let inner = false; // 是否是内部改变的值
 	function initValue(value) {
 		if (inner) return
@@ -81,9 +85,8 @@
 	</div>
 	<div class='be-select__option' class:visible={visible}>
 		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
-			{#if $$slots.default}
 			<slot></slot>
-			{:else}
+			{#if optionSize == 0}
 			<div class="be-select-dropdown__empty">无数据</div>
 			{/if}
 		</ul>
