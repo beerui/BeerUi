@@ -7,7 +7,6 @@
 	export let disabled:boolean = false
 
 	const store = getContext("selectStore");
-
 	// 订阅值的改变
 	const subscribeHandle = item => isSelect = item.value === node.value
 	store.subscribe.push(subscribeHandle)

@@ -1,9 +1,9 @@
 export default class SelectStore {
 	optionList = new Map(); // 数据集合
 	subscribe: Function[] = []; // 订阅方法
+	sizeSubscribe: Function[] = []; // 订阅方法
 	public value: string; // 当前选中的值
 	public isChange: boolean = true;
-
 	constructor(options) {
 		this.value = null;
 		for (let option in options) {
@@ -25,6 +25,7 @@ export default class SelectStore {
 			hover: props.hover
 		};
 		this.optionList.set(props.key, node);
+		this.sizeHandle(this.optionList.size)
 		return this.optionList.get(props.key);
 	}
 
@@ -59,9 +60,11 @@ export default class SelectStore {
 	clearList() {
 		this.optionList.clear();
 	}
-
 	// 通知集合改变
 	publishHandle(item) {
 		this.subscribe.forEach(cb => cb(item));
+	}
+	sizeHandle(size) {
+		this.sizeSubscribe.forEach(cb => cb(size));
 	}
 }
