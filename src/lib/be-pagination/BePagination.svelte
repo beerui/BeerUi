@@ -139,7 +139,6 @@
 	// 取中间值
 	const roundNum = (n1, n2) => Math.round((Number(n1) + Number(n2)) / 2)
 	function changePage(page) {
-		console.log('changePage');
 		// 解决点击上一页/下一页 page会为0的问题/age会超出最大值的问题
 		if (page <= 0 || page > totalpages) return
 		// 设置当前选中的元素

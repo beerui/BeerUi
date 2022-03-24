@@ -193,6 +193,9 @@
 </BeTable>`}
                js={`
 import { BeTable, BeTableColumn} from '@brewer/beerui'
+const indexMethod = (index) => {
+	return index * 2;
+}
 const tableData = [{
 	date: '2016-05-02',
 	name: '王小虎',

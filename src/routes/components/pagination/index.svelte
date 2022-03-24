@@ -3,6 +3,8 @@
 	import { BePagination } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 	import { FormatTime } from '$lib/utils/beerui';
+	import BeTable from '$lib/be-table/BeTable.svelte';
+	import BeTableColumn from '$lib/be-table/BeTableColumn.svelte';
 
 	let js = `
 import { BePagination } from '@brewer/beerui'
@@ -118,7 +120,7 @@ function changePage(item) {
 			time: new Date()
 		}
 		let temp = []
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < query.limit; i++) {
 			temp.push(Object.assign(defaultItem, { name: 'Mr.' }))
 		}
 		list = temp
@@ -136,7 +138,15 @@ function changePage(item) {
 	// 切换页面
 	function changePage(item) {
 		query.page = Number(item.detail)
+		console.log('query.page', query.page);
 		feedBackList()
+	}
+	const pageSizeChange = ({ detail }) => {
+		query.limit = detail
+		feedBackList()
+	}
+	const indexMethod = (index) => {
+	  return Math.random()
 	}
 </script>
 <div class='page-container'>
@@ -175,6 +185,12 @@ function changePage(item) {
 				<BePagination currentPage=1 pageSize={query.limit} total=300 async layouts="prev, pager, next" on:changePage={changePage} options={options1} />
 			</div>
 			<div class='demo-list'>
+				<BeTable align='center' data={list} indexMethod={indexMethod}>
+					<BeTableColumn width="60" prop='index' label='' />
+					<BeTableColumn prop='name' label='姓名' />
+					<BeTableColumn prop='age' label='age' />
+					<BeTableColumn prop='time' label='日期' />
+				</BeTable>
 				<BePagination currentPage=1 pageSize={query.limit} total=50 async layouts="prev, pager, next" on:changePage={changePage} options={options2} />
 			</div>
 		</div>
@@ -186,8 +202,23 @@ function changePage(item) {
 	<h2>附加功能</h2>
 
 	<DemoBlock code={`
-<BePagination currentPage=1 pageSize={query.limit} {total} async layouts="prev, pager, next, sizes, jumper, info" on:changePage={changePage} {options} />
-`}>
+<BePagination
+	currentPage=1
+    pageSize={query.limit}
+    {total}
+    async
+    layouts="prev, pager, next, sizes, jumper, info, all"
+    on:changePage={changePage}
+    on:pageSizeChange={pageSizeChange}
+    {options}
+/>
+`}
+js={`
+const pageSizeChange = ({ detail }) => {
+	query.limit = detail
+	feedBackList()
+}`}
+	>
 		<div slot='source'>
 			<div class='demo-list'>
 				<div class="overflow-x-auto">
@@ -212,7 +243,16 @@ function changePage(item) {
 						</tbody>
 					</table>
 				</div>
-				<BePagination currentPage=1 pageSize={query.limit} {total} async layouts="prev, pager, next, sizes, jumper, info, all" on:changePage={changePage} {options} />
+				<BePagination
+					currentPage=1
+	                pageSize={query.limit}
+	                {total}
+	                async
+	                layouts="prev, pager, next, sizes, jumper, info, all"
+	                on:changePage={changePage}
+	                on:pageSizeChange={pageSizeChange}
+	                {options}
+				/>
 			</div>
 		</div>
 		<div slot='description'>
