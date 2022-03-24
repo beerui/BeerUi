@@ -125,6 +125,7 @@ const submitHandle = () => {
 					limit={9}
 					fileList={fileList2}>
 					<div class="upload-card"><BeIcon name="add" width="40" height="40" /></div>
+					<p slot="tip">只能上传jpg/png文件，且不超过500kb</p>
 				</BeUpload>
 			</div>
 		</div>
@@ -172,7 +173,7 @@ const beforeUpload = (file) => {
 					action="https://jsonplaceholder.typicode.com/posts/"
 					drag
 					multiple
-					accept='application/pdf,application/doc,application/docx'
+					accept=".pdf,.doc,.docx"
 					fileList={fileList3}
 					beforeUpload={beforeUpload}
 				>

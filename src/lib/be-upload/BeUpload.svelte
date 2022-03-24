@@ -143,7 +143,6 @@
 	}
 	const upload = (rawFile) => {
 		files.value = null;
-		console.log('beforeUpload()', beforeUpload);
 		if (!beforeUpload) {
 			return post(rawFile);
 		}
@@ -278,9 +277,23 @@
 	}
 </script>
 <div class="be-upload" style={$$props.style}>
-	<div class="be-upload__tip">
-		<slot name="tip"></slot>
-	</div>
+	{#if drag}
+		<div
+			class="be-upload--{listType}"
+			class:be-upload-dragger={drag}
+			class:be-upload__hide={hideUpload}
+			on:click|stopPropagation={handleClick}
+			on:drop|preventDefault={onDrop}
+			on:dragover|preventDefault={onDragover}
+			on:dragleave|preventDefault={() => dragover = false}
+		>
+			<slot></slot>
+			<input bind:this={files} on:change={handleChange} type="file" {name} {multiple} {accept} class="be-upload__input">
+		</div>
+		<div class="be-upload__tip">
+			<slot name="tip"></slot>
+		</div>
+	{/if}
 	<ul class="be-upload-list be-upload-list--{listType}">
 		{#each fileList as file}
 		<li tabindex="0" class="be-upload-list__item is-{file.status || 'success'}">
@@ -317,16 +330,21 @@
 		</li>
 		{/each}
 	</ul>
-	<div
-		class="be-upload--{listType}"
-		class:be-upload-dragger={drag}
-		class:be-upload__hide={hideUpload}
-		on:click|stopPropagation={handleClick}
-		on:drop|preventDefault={onDrop}
-		on:dragover|preventDefault={onDragover}
-		on:dragleave|preventDefault={() => dragover = false}
-	>
-		<slot></slot>
-		<input bind:this={files} on:change={handleChange} type="file" {name} {multiple} {accept} class="be-upload__input">
-	</div>
+	{#if !drag}
+		<div
+			class="be-upload--{listType}"
+			class:be-upload-dragger={drag}
+			class:be-upload__hide={hideUpload}
+			on:click|stopPropagation={handleClick}
+			on:drop|preventDefault={onDrop}
+			on:dragover|preventDefault={onDragover}
+			on:dragleave|preventDefault={() => dragover = false}
+		>
+			<slot></slot>
+			<input bind:this={files} on:change={handleChange} type="file" {name} {multiple} {accept} class="be-upload__input">
+		</div>
+		<div class='be-upload__tip'>
+			<slot name='tip'></slot>
+		</div>
+	{/if}
 </div>
