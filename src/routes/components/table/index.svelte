@@ -181,6 +181,7 @@
     <ol>
         <li>TODO：优化自定义表格列 / 无法动态添加 slot</li>
 	    <li>emptyText:String;空数据时显示的文本内容，也可以通过 slot="empty"设置; 默认：暂无数据</li>
+	    <li>fullUpdate false/true 全量更新 在动态改变table dom的时候使用</li>
     </ol>
 
     <DemoBlock code={`
