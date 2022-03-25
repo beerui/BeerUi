@@ -163,7 +163,7 @@ export default class MenuStore {
 	}
 	// 设置选中
 	setActive(node, type: string = 'normal') {
-		this.active = node.id
+		if (node.type !== 'submenu') this.active = node.id
 		this.setTreeActive(node)
 		this.publishHandle({ status: 'update', type: type, data: this.nodesMap, menu: this.nodesMap[node.id] })
 	}
