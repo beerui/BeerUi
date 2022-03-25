@@ -145,9 +145,7 @@ function changePage(item) {
 		query.limit = detail
 		feedBackList()
 	}
-	const indexMethod = (index) => {
-	  return Math.random()
-	}
+	const indexMethod = index => index + 1 + (query.page - 1) * query.limit
 </script>
 <div class='page-container'>
 	<h2>BePagination 分页</h2>

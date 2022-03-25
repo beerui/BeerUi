@@ -17,7 +17,7 @@
     export let height: string = ''; // 定义了height属性，即可实现固定表头的表格
     export let label: string = 'id'; // 定义了selection默认取值
     export let rowClassName: Function = null; // 为 Table 中的某一行添加 class {row, rowIndex}/string
-	export let indexMethod: Function = (index) => index+1; // 为 Table 中的type为index的添加序号
+	export let indexMethod: Function = index => index + 1; // 为 Table 中的type为index的添加序号
 
     const preClass = ['type'];
     const normalClass = ['be-table'];
@@ -99,6 +99,7 @@
         return { surplus, width };
     };
     const initTable = async () => {
+	    console.log('initTable');
         // 获取表头 DOM
         await initTableHeader();
         // 加工列数据
@@ -169,8 +170,9 @@
             let className;
             // 额外的类名
             if (rowClassName) className = doRowClassName({ row: el, rowIndex: i });
-            rowsData.push({ ...el, className });
+            rowsData.push({ ...el, className, index: indexMethod(i) });
         });
+	    console.log('rowsData', rowsData);
     };
     const updateRowsData = () => data.forEach((el, i) => rowsData[i].checked = el.checked);
     const updateOneRowsData = (id) => data.forEach((el, i) => id === el[label] ? rowsData[i].checked = !rowsData[i].checked :'');
