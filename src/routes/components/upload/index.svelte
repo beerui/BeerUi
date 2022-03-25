@@ -77,6 +77,7 @@ let fileList1 =  [{name: 'food.jpg', url: 'https://fuss10.elemecdn.com/3/63/4e7f
 					action="https://jsonplaceholder.typicode.com/posts/"
 					multiple
 					limit={9}
+					hideUpload={true}
 					fileList={fileList1}>
 					<BeButton size="small" type="primary">点击上传</BeButton>
 					<p slot="tip">只能上传jpg/png文件，且不超过500kb</p>
@@ -104,6 +105,7 @@ let fileList1 =  [{name: 'food.jpg', url: 'https://fuss10.elemecdn.com/3/63/4e7f
 	multiple
 	listType="picture-card"
 	limit={9}
+	hideUpload={true}
 	fileList={fileList2}>
 	<div class="upload-card"><BeIcon name="add" width="40" height="40" /></div>
 </BeUpload>
@@ -123,6 +125,7 @@ const submitHandle = () => {
 					multiple
 					listType="picture-card"
 					limit={9}
+					hideUpload={true}
 					fileList={fileList2}>
 					<div class="upload-card"><BeIcon name="add" width="40" height="40" /></div>
 					<p slot="tip">只能上传jpg/png文件，且不超过500kb</p>
@@ -131,6 +134,7 @@ const submitHandle = () => {
 		</div>
 		<div slot="description">
 			<ol>
+				<li>hideUpload 在超出限制个数后 隐藏上传按钮</li>
 				<li><a href="https://element.eleme.cn/#/zh-CN/component/upload" target="_blank">Element Ui Upload</a></li>
 			</ol>
 		</div>
@@ -144,7 +148,8 @@ const submitHandle = () => {
 	action="https://jsonplaceholder.typicode.com/posts/"
 	drag
 	multiple
-	accept='application/pdf,application/doc,application/docx'
+	limit={3}
+	accept='.pdf,.doc,.docx'
 	fileList={fileList3}
 	beforeUpload={beforeUpload}
 >
@@ -173,7 +178,8 @@ const beforeUpload = (file) => {
 					action="https://jsonplaceholder.typicode.com/posts/"
 					drag
 					multiple
-					accept=".pdf,.doc,.docx"
+					accept='.pdf,.doc,.docx'
+					limit={3}
 					fileList={fileList3}
 					beforeUpload={beforeUpload}
 				>

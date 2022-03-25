@@ -39,7 +39,7 @@
     line-height: 146px;
     vertical-align: top;
     display: inline-block;
-
+    &.be-upload__hide {display: none;}
     i {
       font-size: 28px;
       color: #8c939d;

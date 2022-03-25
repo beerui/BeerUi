@@ -59,6 +59,7 @@
 		let doRemove = () => {
 			abort(file);
 			fileList.splice(fileList.indexOf(file), 1);
+			hideUploadHandle([])
 			fileListDom()
 			onRemove(file, fileList);
 		};
@@ -107,7 +108,8 @@
 	export let fileList: any[] = [] // 上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]	array
 	export let httpRequest: Function = ajax // 覆盖默认的上传行为，可以自定义上传的实现 function
 	export let disabled: boolean = false // 是否禁用	boolean
-	export let hideUpload: boolean = false // 是否隐藏上传按钮	boolean
+	export let hideUpload: boolean = false // 是否自动隐藏上传按钮	boolean
+	export let isHideUpload: boolean = false // 是否隐藏上传按钮	boolean
 	export let limit: number = null // 最大允许上传个数
 	export let onExceed: Function = noop // 文件超出个数限制时的钩子	function(files, fileList)
 
@@ -128,7 +130,13 @@
 			files.click();
 		}
 	}
+	// 隐藏上传按钮
+	const hideUploadHandle = (files) => {
+		if (hideUpload) isHideUpload = fileList.length + files.length === limit;
+	}
 	const uploadFiles = (files) => {
+		hideUploadHandle(files)
+		console.log('files');
 		if (limit && fileList.length + files.length > limit) {
 			onExceed && onExceed(files, fileList);
 			return;
@@ -225,6 +233,7 @@
 		return target;
 	}
 	export const clearFiles = () => {
+		hideUploadHandle([])
 		fileList = [];
 	}
 	export const submit = () => {
@@ -247,11 +256,13 @@
 	const onDrop = (e) => {
 		if (disabled) return;
 		dragover = false;
+		console.log('files', [].slice.call(e.dataTransfer.files));
+		const _files = [].slice.call(e.dataTransfer.files)
 		if (!accept || accept === '*') {
-			uploadFiles([].slice.call(e.dataTransfer.files))
+			uploadFiles(_files)
 			return;
 		}
-		const _file = [].slice.call(e.dataTransfer.files).filter(file => {
+		const _file = _files.filter(file => {
 			const { type, name } = file;
 			const extension = name.indexOf('.') > -1
 				? `.${ name.split('.').pop() }`
@@ -281,7 +292,7 @@
 		<div
 			class="be-upload--{listType}"
 			class:be-upload-dragger={drag}
-			class:be-upload__hide={hideUpload}
+			class:be-upload__hide={isHideUpload}
 			on:click|stopPropagation={handleClick}
 			on:drop|preventDefault={onDrop}
 			on:dragover|preventDefault={onDragover}
@@ -334,7 +345,7 @@
 		<div
 			class="be-upload--{listType}"
 			class:be-upload-dragger={drag}
-			class:be-upload__hide={hideUpload}
+			class:be-upload__hide={isHideUpload}
 			on:click|stopPropagation={handleClick}
 			on:drop|preventDefault={onDrop}
 			on:dragover|preventDefault={onDragover}
