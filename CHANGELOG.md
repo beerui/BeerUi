@@ -1,11 +1,13 @@
 # BeerUi 
 
-## @brewer/beerui@1.0.30-next.17 `2022/3/23`
+## @brewer/beerui@1.0.30-next.19 `2022/3/25`
 
 ### Patch Changes
 
 - 新增 `table` 组件 align/headeralign center/left/right
+- 新增 `upload` 组件 hideUpload 超出限制后，隐藏上传框
 
+- 修复 `table`组件 indexMethod 不刷新问题
 - 修复 `select`组件 已知问题
 - 修复 `menu`组件 已知问题
 - 修复 `upload`组件 已知问题
