@@ -13,6 +13,7 @@
     export let emptyText: string = '暂无数据'; // 无数据的时候展示的字段
     export let placeholderRegex: Function = (v) => isUndefined(v); // 无数据的判断
     export let border: boolean = false; // 边框 false/true
+    export let fullUpdate: boolean = false; // 全量更新 false/true
     export let showHeader: boolean = true; // 显示表头 true/false
     export let height: string = ''; // 定义了height属性，即可实现固定表头的表格
     export let label: string = 'id'; // 定义了selection默认取值
@@ -55,7 +56,7 @@
 
 	let isOnMount = false
 	let isInit = false
-	$: if (isOnMount && data) initTable()
+	$: if (isOnMount && isInit && data) updateTableData()
 	$: if (isOnMount && isInit && clientTableWidth) computedColumnWidthHandle();
 
     onMount(() => {
@@ -98,6 +99,19 @@
         const width = (domWidth - surplus) / emptyNum;
         return { surplus, width };
     };
+	// data数据改变调用
+	const updateTableData = () => {
+		// 是否全量更新 dom重新获取 全部重新计算
+		if (fullUpdate) {
+			initTable()
+			return;
+		}
+		if (!isInit) return
+		// 加工行数据
+		computedRowsData();
+		// 每次更新数据 更新选中状态
+		doCheckHandle()
+	}
     const initTable = async () => {
         // 获取表头 DOM
         await initTableHeader();
