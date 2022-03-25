@@ -112,6 +112,8 @@
         // 计算表格宽度
         // computedColumnWidthHandle();
 	    isInit = true
+	    // 每次更新数据 更新选中状态
+	    doCheckHandle()
     };
     // 加工行数据
     const computedColumnData = () => {
