@@ -132,11 +132,10 @@
 	}
 	// 隐藏上传按钮
 	const hideUploadHandle = (files) => {
-		if (hideUpload) isHideUpload = fileList.length + files.length === limit;
+		if (hideUpload) isHideUpload = fileList.length + files.length >= limit;
 	}
 	const uploadFiles = (files) => {
 		hideUploadHandle(files)
-		console.log('files');
 		if (limit && fileList.length + files.length > limit) {
 			onExceed && onExceed(files, fileList);
 			return;
@@ -256,13 +255,11 @@
 	const onDrop = (e) => {
 		if (disabled) return;
 		dragover = false;
-		console.log('files', [].slice.call(e.dataTransfer.files));
-		const _files = [].slice.call(e.dataTransfer.files)
 		if (!accept || accept === '*') {
-			uploadFiles(_files)
+			uploadFiles([].slice.call(e.dataTransfer.files))
 			return;
 		}
-		const _file = _files.filter(file => {
+		const _file = [].slice.call(e.dataTransfer.files).filter(file => {
 			const { type, name } = file;
 			const extension = name.indexOf('.') > -1
 				? `.${ name.split('.').pop() }`
