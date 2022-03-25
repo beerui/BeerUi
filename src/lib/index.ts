@@ -21,6 +21,7 @@ import BeTree from './be-tree/BeTree.svelte';
 import BeIcon from './be-icon/BeIcon.svelte';
 import BeCascader from './be-cascader/BeCascader.svelte';
 import previewImages from './utils/PreviewImage';
+import BeDrawer from './be-drawer/BeDrawer.svelte';
 
 import { BeTable, BeTableColumn } from './be-table';
 import { BeSelect, BeOption } from './be-select';
@@ -29,4 +30,4 @@ import { BeCheckbox, BeCheckboxGroup } from './be-checkbox';
 import { BeRadio, BeRadioGroup } from './be-radio';
 import { BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu } from './be-menu';
 import { BeBreadcrumb, BeBreadcrumbItem } from './be-breadcrumb';
-export { BeCascader, BeRadio, BeRadioGroup, BeButton, previewImages, BeIcon, BeTable, BeTableColumn, BeCarouselItem, BeCarousel, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker, BeClock, BeDrag, BeScrollbar, BeProgress, BeUpload, BeNotification, BeLoading, BeCheckbox, BeCheckboxGroup, BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu, BeBreadcrumb, BeBreadcrumbItem, BeTree, BeEmpty, BeTimePicker, BeOption };
+export { BeDrawer, BeCascader, BeRadio, BeRadioGroup, BeButton, previewImages, BeIcon, BeTable, BeTableColumn, BeCarouselItem, BeCarousel, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker, BeClock, BeDrag, BeScrollbar, BeProgress, BeUpload, BeNotification, BeLoading, BeCheckbox, BeCheckboxGroup, BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu, BeBreadcrumb, BeBreadcrumbItem, BeTree, BeEmpty, BeTimePicker, BeOption };

@@ -1,98 +1,38 @@
 <script lang="ts">
-	import { BeButton, BeDialog } from '$lib';
+	import { BeButton, BeDrawer, BeRadio, BeRadioGroup } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
 	let visible1 = false
-	let visible2 = false
-	let visible3 = false
-	let visible4 = false
-	let openDialog1 = () => visible1 = true
-	let openDialog2 = () => visible2 = true
-	let openDialog3 = () => visible3 = true
-	let openDialog4 = () => visible4 = true
-	const beforeClose1 = (evt) => console.log('beforeClose1', evt.detail)
-	const beforeClose2 = (evt) => console.log('beforeClose2', evt.detail)
-	const beforeClose3 = (evt) => console.log('beforeClose3', evt.detail)
-	const beforeClose4 = (evt) => console.log('beforeClose4', evt.detail)
+	let direction = 'rtl'
 
-	let js = `import { BeButton, BeDialog } from '@brewer/beerui'`
-	let code = `
-<BeDialog bind:visible={visible1} on:beforeClose={beforeClose1}>
-	<p>基础 Dialog</p>
-</BeDialog>`
-	const code1 = `
-<BeDialog bind:visible={visible2} closeOnClickModal={false} on:beforeClose={beforeClose2} isDrag={true}>
-	<p>点击Mask不可以关闭</p>
-</BeDialog>
-	`
-	const code3 = `
-<BeDialog bind:visible={visible3} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
-	<p>限制拖拽范围</p>
-</BeDialog>
-	`
-	const code2 = `
-<BeDialog bind:visible={visible4} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
-	<p>拖拽完全自由</p>
-</BeDialog>
-	`
+	let js = `import { BeDrawer } from '@brewer/beerui'`
 </script>
 <div class='page-container'>
-	<h2>BeDialog 对话框</h2>
-	<p class='desc'>在保留当前页面状态的情况下，告知用户并承载相关操作。</p>
+	<h2>BeDrawer 抽屉</h2>
+	<p class='desc'>有些时候, Dialog 组件并不满足我们的需求, 比如你的表单很长, 亦或是你需要临时展示一些文档, Drawer 拥有和 Dialog 几乎相同的 API, 在 UI 上带来不一样的体验.</p>
 	<h3>基本用法</h3>
-	<DemoBlock {code} {js}>
+	<p>呼出一个临时的侧边栏, 可以从多个方向呼出</p>
+	<DemoBlock {js}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeButton size="normal" type="primary" on:click={openDialog1} nativeType='submit'>打开 Dialog</BeButton>
-				<BeDialog bind:visible={visible1} on:beforeClose={beforeClose1}>
+				<BeButton on:click={() => visible1 = !visible1}>Click Me</BeButton>
+				<hr>
+				<BeRadioGroup bind:checked={direction}>
+					<BeRadio label='ltr'>left to right</BeRadio>
+					<BeRadio label='rtl'>right to left</BeRadio>
+					<BeRadio label='ttb'>top to bottom</BeRadio>
+					<BeRadio label='btt'>bottom to top</BeRadio>
+				</BeRadioGroup>
+				<BeDrawer
+					bind:visible={visible1}
+					bind:direction={direction}
+				>
 					<p>基础 Dialog</p>
-				</BeDialog>
+				</BeDrawer>
 			</div>
 		</div>
 		<div slot='description'>
-			基础 Dialog
-		</div>
-	</DemoBlock>
-	<hr>
-	<DemoBlock code={code1}>
-		<div slot='source'>
-			<div class='demo-list'>
-				<BeButton size="normal" type="primary" on:click={openDialog2} autofocus>打开 Dialog</BeButton>
-				<BeDialog bind:visible={visible2} closeOnClickModal={false} on:beforeClose={beforeClose2} isDrag={true}>
-					<p>点击Mask不可以关闭</p>
-				</BeDialog>
-			</div>
-		</div>
-		<div slot='description'>
-			基础拖拽 点击Mask不可以关闭
-		</div>
-	</DemoBlock>
-	<hr>
-	<DemoBlock code={code2}>
-		<div slot='source'>
-			<div class='demo-list'>
-				<BeButton size="normal" type="primary" on:click={openDialog3}>限制拖拽范围</BeButton>
-				<BeDialog bind:visible={visible3} on:beforeClose={beforeClose3} isDrag={true} isLimit={true}>
-					<p>限制拖拽范围</p>
-				</BeDialog>
-			</div>
-		</div>
-		<div slot='description'>
-			限制拖拽范围
-		</div>
-	</DemoBlock>
-	<hr>
-	<DemoBlock code={code3}>
-		<div slot='source'>
-			<div class='demo-list'>
-				<BeButton size="normal" type="primary" on:click={openDialog4}>完全自由</BeButton>
-				<BeDialog bind:visible={visible4} on:beforeClose={beforeClose4} isDrag={true} isFree={true}>
-					<p>拖拽完全自由</p>
-				</BeDialog>
-			</div>
-		</div>
-		<div slot='description'>
-			拖拽完全自由
+			需要设置 visible 属性，它的类型是 boolean,当为 true 时显示 Drawer。Drawer 分为两个部分：title 和 body，title 需要具名为 title 的 slot, 也可以通过 title 属性来定义，默认值为空。需要注意的是, Drawer 默认是从右往左打开, 当然可以设置对应的 direction, 详细请参考 direction 用法 最后，本例还展示了 before-close 的用法
 		</div>
 	</DemoBlock>
 </div>

@@ -1,4 +1,38 @@
 .be-drawer {
+  position: absolute;
+  box-sizing: border-box;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 10px -5px rgb(0 0 0 / 20%), 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%);
+  overflow: hidden;
+  outline: 0;
+  &.rtl {
+    right: 0;
+    height: 100%;
+    width: 30%;
+    top: 0;
+    bottom: 0;
+  }
+  &.ttd {
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  &.ttd {
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  &.ltr {
+    left: 0;
+    width: 30%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+  }
   &__wrapper {
     position: fixed;
     top: 0;
@@ -7,6 +41,7 @@
     left: 0;
     overflow: hidden;
     margin: 0;
+    z-index: 2000;
   }
   &__container {
     position: relative;
@@ -16,5 +51,53 @@
     bottom: 0;
     height: 100%;
     width: 100%;
+  }
+  &__open &.rtl {
+    animation: rtl-drawer-in .3s 1ms;
+  }
+  &__open &.ttb {
+    animation: ttb-drawer-in .3s 1ms;
+  }
+  &__open &.btt {
+    animation: btt-drawer-in .3s 1ms;
+  }
+  &__open &.ltr {
+    animation: ltr-drawer-in .3s 1ms;
+  }
+  &__header {
+    align-items: center;
+    color: #72767b;
+    display: flex;
+    margin-bottom: 32px;
+    padding: 20px 20px 0;
+    &>:first-child {flex: 1;}
+  }
+  &__close-btn {
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: inherit;
+    background-color: transparent;
+  }
+  &__body {
+    flex: 1;
+    overflow: auto;
+    &>* {box-sizing: border-box;}
+  }
+  @keyframes rtl-drawer-in {
+    0% {transform: translate(100%);}
+    100% {transform: translate(0);}
+  }
+  @keyframes ttb-drawer-in {
+    0% {transform: translateY(-100%);}
+    100% {transform: translate(0);}
+  }
+  @keyframes bbt-drawer-in {
+    0% {transform: translateY(100%);}
+    100% {transform: translate(0);}
+  }
+  @keyframes ltr-drawer-in {
+    0% {transform: translate(-100%);}
+    100% {transform: translate(0);}
   }
 }

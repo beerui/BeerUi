@@ -4,17 +4,14 @@
 	import BeButton from '../be-button/BeButton.svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import DragEvent from '$lib/_actions/drag';
+	import BeIcon from '../be-icon/BeIcon.svelte';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
-	export let isDrag = false // 是否需要拖拽
-	export let isLimit = false // 限制拖拽
-	export let isFree = false // 限制拖拽
 	export let visible = true // 是否显示 Dialog
 	export let title = '提示' // 标题文字
 	export let closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog
 
-	let dragStatus = false
 	const handle_close = () => {
 		if (closeOnClickModal) {
 			close();
@@ -41,61 +38,45 @@
 		dispatch('beforeClose')
 		visible = false;
 	}
-	// 拖动状态
-	const isInDragHandle = (evt) => dragStatus = evt.detail
 </script>
-<!--
-@component
-import { BeDialog } from "@brewer/beerui";
-
-### Props
-- mask: true // 是否需要遮罩层
-- isDrag: false // 是否需要拖拽
-- isLimit: false // 限制拖拽
-- isFree: false // 限制拖拽
-- visible: true // 是否显示 Dialog
-- title: '提示' // 标题文字
-- closeOnClickModal: true // 是否可以通过点击 modal 关闭 Dialog
-
-### Event
-- beforeClose
-
-- Usage:
-  ```javascript
-	let visible = false
-	let openDialog = () => {
-		visible = true
-	}
-	const beforeClose = ({ detail }) => {
-		console.log(detail)
-	}
-  ```
--->
 <svelte:window on:keydown={handle_keydown}/>
 {#if visible}
-	<div class='be-dialog' style={$$props.style} use:clickOutside|stop={ { isInDrag: dragStatus } } on:outside={close}>
-		{#if mask}
-		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>
-		{/if}
-		<div class="be-dialog__container relative z-50" use:DragEvent|stopPropagation={ { isLimit, isDrag, isFree, els: '.drag' } } on:isInDrag={isInDragHandle} role="dialog" aria-modal="true" transition:fade="{{delay: 0, duration: 300}}">
-			<slot name='header'>
-				<div class='be-dialog__header' class:drag={isDrag}>
-					<span class='be-dialog__title'>{title}</span>
-					<div class='be-dialog__close' on:click={close}>×</div>
-				</div>
-			</slot>
-			<div class="be-dialog__body">
-				<slot></slot>
+	<div class='be-drawer__wrapper'>
+		<div class='be-drawer__container' class:be-drawer__open={visible}>
+			<div class='be-drawer rtl'>
+				<header class='be-drawer__header'>
+					<span role="heading" title="我是标题">我是标题</span>
+					<div on:click={close}>
+						<BeIcon class='be-drawer__close-btn' name='close' />
+					</div>
+				</header>
+				<section class="be-drawer__body"><span>我来啦!</span></section>
 			</div>
-			<slot name='footer'>
-				<div class='be-dialog__footer'>
-					<span class='be-dialog-footer'>
-						<BeButton type='default' on:click={() => handle_confirm('cancel')}>取消</BeButton>
-						<BeButton type='primary' on:click={() => handle_confirm('confirm')}>确定</BeButton>
-					</span>
-				</div>
-			</slot>
 		</div>
 	</div>
+<!--	<div class='be-dialog' style={$$props.style} on:outside={close}>-->
+<!--		{#if mask}-->
+<!--		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>-->
+<!--		{/if}-->
+<!--		<div class="be-dialog__container relative z-50" role="dialog" aria-modal="true" transition:fade="{{delay: 0, duration: 300}}">-->
+<!--			<slot name='header'>-->
+<!--				<div class='be-dialog__header'>-->
+<!--					<span class='be-dialog__title'>{title}</span>-->
+<!--					<div class='be-dialog__close' on:click={close}>×</div>-->
+<!--				</div>-->
+<!--			</slot>-->
+<!--			<div class="be-dialog__body">-->
+<!--				<slot></slot>-->
+<!--			</div>-->
+<!--			<slot name='footer'>-->
+<!--				<div class='be-dialog__footer'>-->
+<!--					<span class='be-dialog-footer'>-->
+<!--						<BeButton type='default' on:click={() => handle_confirm('cancel')}>取消</BeButton>-->
+<!--						<BeButton type='primary' on:click={() => handle_confirm('confirm')}>确定</BeButton>-->
+<!--					</span>-->
+<!--				</div>-->
+<!--			</slot>-->
+<!--		</div>-->
+<!--	</div>-->
 {/if}
 

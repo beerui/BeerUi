@@ -1,6 +1,6 @@
 {
   "name": "@brewer/beerui",
-  "version": "1.0.30-next.17",
+  "version": "1.0.30-next.21",
   "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
