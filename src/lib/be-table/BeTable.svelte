@@ -99,7 +99,6 @@
         return { surplus, width };
     };
     const initTable = async () => {
-	    console.log('initTable');
         // 获取表头 DOM
         await initTableHeader();
         // 加工列数据
@@ -172,7 +171,6 @@
             if (rowClassName) className = doRowClassName({ row: el, rowIndex: i });
             rowsData.push({ ...el, className, index: indexMethod(i) });
         });
-	    console.log('rowsData', rowsData);
     };
     const updateRowsData = () => data.forEach((el, i) => rowsData[i].checked = el.checked);
     const updateOneRowsData = (id) => data.forEach((el, i) => id === el[label] ? rowsData[i].checked = !rowsData[i].checked :'');
@@ -463,9 +461,7 @@
 	                            class:is-right={col.align === 'right'}
 	                            class:is-left={col.align === 'left'}
 	                        >
-		                        <div class='cell'>
-			                        {indexMethod(index)}
-		                        </div>
+		                        <div class='cell'>{row.index}</div>
 	                        </td>
                         {:else}
                             <td class='be-table__cell'
