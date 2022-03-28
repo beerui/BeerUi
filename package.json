@@ -1,6 +1,6 @@
 {
   "name": "@brewer/beerui",
-  "version": "1.0.30-next.21",
+  "version": "1.0.30-next.22",
   "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "chromatic": "chromatic --exit-zero-on-changes",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "dev": "svelte-kit dev --port 3333",
+    "dev": "svelte-kit dev --port 3333 --host",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "lint": "eslint --ignore-path .gitignore .",
     "package": "svelte-kit package",

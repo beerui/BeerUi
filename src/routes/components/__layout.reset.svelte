@@ -32,8 +32,10 @@
 				<div class='list'>
 					<div class='list-item'><span>Github</span></div>
 					<div class='list-item'><a href='https://github.com/beerui/BeerUi'>组件 BeerUi</a></div>
-					<div class='list-item'><a href='https://github.com/beerui/Svelte-Beerui-admin'>系统
-						Svelte-BeerUi-Admin</a></div>
+					<div class='list-item'>
+						系统 Svelte-BeerUi-Admin
+<!--						<a href='https://github.com/beerui/Svelte-Beerui-admin'>系统 Svelte-BeerUi-Admin</a>-->
+					</div>
 				</div>
 			</div>
 		</div>
