@@ -13,7 +13,6 @@
 
 	const subscribeHandle = () => {
 		checked = store.current
-		console.log('subscribeHandle', checked);
 	}
 	store.subscribe.push(subscribeHandle)
 

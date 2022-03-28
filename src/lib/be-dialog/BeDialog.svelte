@@ -13,6 +13,7 @@
 	export let visible = true // 是否显示 Dialog
 	export let title = '提示' // 标题文字
 	export let closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog
+	export let beforeClose = null // 是否可以通过点击 modal 关闭 Dialog 传入函数 接收返回值true/false false时不执行关闭操作
 
 	let dragStatus = false
 	const handle_close = () => {
@@ -22,12 +23,12 @@
 	}
 	const handle_confirm = (type: string) => {
 		if (type === 'cancel') {
-			dispatch('beforeClose', type)
-			visible = false;
+			dispatch('confirmHandle', type)
+			close(type);
 		}
 		if (type === 'confirm') {
-			dispatch('beforeClose', type)
-			visible = false;
+			dispatch('confirmHandle', type)
+			close(type);
 		}
 	}
 
@@ -37,9 +38,12 @@
 			return;
 		}
 	}
-	const close = () => {
-		dispatch('beforeClose')
-		visible = false;
+	const close = (type = '') => {
+		if (beforeClose) {
+			if (beforeClose(type)) visible = false
+		} else {
+			visible = false
+		}
 	}
 	// 拖动状态
 	const isInDragHandle = (evt) => dragStatus = evt.detail

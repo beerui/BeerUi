@@ -1,82 +1,82 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import BeButton from '../be-button/BeButton.svelte';
-	import clickOutside from '$lib/_actions/clickOutside';
-	import DragEvent from '$lib/_actions/drag';
 	import BeIcon from '../be-icon/BeIcon.svelte';
+	import { linear, quintOut } from 'svelte/easing';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
 	export let visible = true // 是否显示 Dialog
 	export let title = '提示' // 标题文字
+	export let direction = 'rtl' // 方向
+	export let size = '30%' // 窗体的大小, 请传入 'x%'/'100px'
+	export let isShowHeader = true // 是否显示头部
+	export let isShowClose = true // 是否显示关闭按钮
 	export let closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog
+	export let beforeClose = null // 是否可以通过点击 modal 关闭 Dialog 传入函数 接收返回值true/false false时不执行关闭操作
+	export let isCloseEscape = true // 是否可以通过按下 ESC 关闭 Drawer
 
-	const handle_close = () => {
-		if (closeOnClickModal) {
-			close();
-		}
-	}
-	const handle_confirm = (type: string) => {
-		if (type === 'cancel') {
-			dispatch('beforeClose', type)
-			visible = false;
-		}
-		if (type === 'confirm') {
-			dispatch('beforeClose', type)
-			visible = false;
-		}
-	}
+	const handleClose = () => closeOnClickModal && close();
+	onDestroy(() => {
+		dispatch('destroyOnClose')
+		dispatch('close')
+	})
+	onMount(() => {
+		dispatch('open')
+	})
 
-	const handle_keydown = e => {
-		if (e.key === 'Escape') {
-			close();
-			return;
-		}
-	}
+	const handleKeydown = e => isCloseEscape && e.key === 'Escape' && close();
 	const close = () => {
-		dispatch('beforeClose')
-		visible = false;
+		if (beforeClose) {
+			if (beforeClose()) visible = false
+		} else {
+			visible = false
+		}
+	}
+	function whoosh(node, params) {
+		const dir = ['rtl', 'btt'].includes(direction)  ? 1 : -1
+		return {
+			delay: params.delay || 0,
+			duration: params.duration || 100,
+			easing: params.easing || linear,
+			css: (t, u) => ['rtl', 'ltr'].includes(direction) ? `transform: translate(${ dir*100 * u }%)` : `transform: translateY(${ dir*100 * u }%)`
+		};
 	}
 </script>
-<svelte:window on:keydown={handle_keydown}/>
+<svelte:window on:keydown={handleKeydown}/>
 {#if visible}
-	<div class='be-drawer__wrapper'>
-		<div class='be-drawer__container' class:be-drawer__open={visible}>
-			<div class='be-drawer rtl'>
-				<header class='be-drawer__header'>
-					<span role="heading" title="我是标题">我是标题</span>
-					<div on:click={close}>
-						<BeIcon class='be-drawer__close-btn' name='close' />
-					</div>
-				</header>
-				<section class="be-drawer__body"><span>我来啦!</span></section>
+	<div
+		class='be-drawer__wrapper'
+		style={$$props.style}
+	>
+		<div class='be-drawer__container'>
+			<div
+				class='be-drawer {direction}'
+				in:whoosh={{ name: 'in', easing: linear }}
+				out:whoosh={{ name: 'out', easing: quintOut }}
+				style:width={['rtl', 'ltr'].includes(direction) ? size : '100%'}
+				style:height={['rtl', 'ltr'].includes(direction) ? '100%' : size}
+			>
+				{#if isShowHeader}
+					<header class='be-drawer__header'>
+						<span role="heading" {title}>
+							<slot name='title'>{title}</slot>
+						</span>
+						{#if isShowClose}
+							<div on:click={close}>
+								<BeIcon class='be-drawer__close-btn' name='close' />
+							</div>
+						{/if}
+					</header>
+				{/if}
+				<section class="be-drawer__body">
+					<slot></slot>
+				</section>
 			</div>
+			{#if mask}
+				<div class="be-drawer__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handleClose}></div>
+			{/if}
 		</div>
 	</div>
-<!--	<div class='be-dialog' style={$$props.style} on:outside={close}>-->
-<!--		{#if mask}-->
-<!--		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>-->
-<!--		{/if}-->
-<!--		<div class="be-dialog__container relative z-50" role="dialog" aria-modal="true" transition:fade="{{delay: 0, duration: 300}}">-->
-<!--			<slot name='header'>-->
-<!--				<div class='be-dialog__header'>-->
-<!--					<span class='be-dialog__title'>{title}</span>-->
-<!--					<div class='be-dialog__close' on:click={close}>×</div>-->
-<!--				</div>-->
-<!--			</slot>-->
-<!--			<div class="be-dialog__body">-->
-<!--				<slot></slot>-->
-<!--			</div>-->
-<!--			<slot name='footer'>-->
-<!--				<div class='be-dialog__footer'>-->
-<!--					<span class='be-dialog-footer'>-->
-<!--						<BeButton type='default' on:click={() => handle_confirm('cancel')}>取消</BeButton>-->
-<!--						<BeButton type='primary' on:click={() => handle_confirm('confirm')}>确定</BeButton>-->
-<!--					</span>-->
-<!--				</div>-->
-<!--			</slot>-->
-<!--		</div>-->
-<!--	</div>-->
 {/if}
 

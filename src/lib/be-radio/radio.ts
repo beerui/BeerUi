@@ -11,7 +11,6 @@ export default class RadioStore {
 
 	// 设置选中
 	setChecked(item) {
-		console.log('setChecked', item);
 		this.current = item
 		this.publishHandle()
 	}
