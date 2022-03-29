@@ -55,7 +55,6 @@ class PreviewImage {
     } else {
       this.container = document.createElement("div");
       this.container.classList.add("be-preview");
-      console.log('this.len', this.len);
       if (this.len <= 1) {
         this.container.classList.add("be-preview__hide-btn");
       }
