@@ -54,6 +54,7 @@
 	<h3>消息提示</h3>
 	<DemoBlock
 	js={`
+import { messageBox } from '@brewer/beerui'
 const openMessage = () => {
 	messageBox({
 		title: 'i am title',
