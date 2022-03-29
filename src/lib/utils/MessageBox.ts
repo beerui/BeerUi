@@ -3,13 +3,14 @@
  * @description 模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
  */
 let messageBox = null;
-let zIndex: number = 2000;
+let BEER_UI_Z_INDEX: number = 2000;
 export default messageBox = (options): MessageBox => new MessageBox(options);
 
 class MessageBox {
 	private readonly body: HTMLElement = document.body;
 	private container: HTMLElement; // 生成的元素
 	private style: string; // body样式恢复
+	private id: string;
 	private readonly confirm: Function;
 	private readonly cancel: Function;
 	private type: string = ''; // 消息类型，用于显示图标 success / info / warning / error
@@ -26,6 +27,7 @@ class MessageBox {
 	private beforeClose: Function = null; // MessageBox 关闭前的回调，会暂停实例的关闭
 	private complete: Function = null; // 渲染完成的回调
 	private closed: Function = null; // 关闭后的回调
+	private node: Element;
 
 	constructor(options) {
 		for (let option in options) {
@@ -37,10 +39,12 @@ class MessageBox {
 	}
 
 	init() {
+		this.id = `MessageBoxWrapper_${BEER_UI_Z_INDEX}`
 		this.container = document.createElement('div');
 		this.container.classList.add('be-message-box__wrapper');
 		if (this.customClass) this.container.classList.add(this.customClass);
-		this.container.style.zIndex = String(zIndex)
+		this.container.style.zIndex = String(BEER_UI_Z_INDEX)
+		this.container.setAttribute('id', this.id)
 		this.container.setAttribute('tabindex', '-1')
 		this.container.setAttribute('role', 'dialog')
 		this.container.setAttribute('aria-modal', 'true')
@@ -73,6 +77,7 @@ class MessageBox {
 
 	renderDom() {
 		// 获取节点
+		this.node = this.container.querySelector('.be-message-box'); // 底部遮照层
 		const maskDom = this.container.querySelector('.be-message-box__mask'); // 底部遮照层
 		const closeDom = this.container.querySelector(".be-message-box__headerbtn"); // 关闭
 		const cancelDom = this.container.querySelector(".be-button-cancel"); // 取消按钮
@@ -82,13 +87,13 @@ class MessageBox {
 		closeDom && closeDom.addEventListener("click", () => this._beforeClose());
 		cancelDom && cancelDom.addEventListener("click", () => this.cancelHandle());
 		confirmDom && confirmDom.addEventListener("click", () => this.confirmHandle());
-		zIndex++
+		BEER_UI_Z_INDEX++
 	}
 	renderCancelBtn() {
-		return this.showCancelButton ? `<button class="be-button-confirm be-button be-button--normal be-button--default" type="submit"><span>${this.cancelButtonText}</span></button>` : ''
+		return this.showCancelButton ? `<button class="be-button-cancel be-button be-button--normal be-button--default" type="submit"><span>${this.cancelButtonText}</span></button>` : ''
 	}
 	renderConfirmBtn() {
-		return this.showConfirmButton ? `<button class="be-button-cancel be-button be-button--normal be-button--primary" type="submit"><span>${this.confirmButtonText}</span></button>` : ''
+		return this.showConfirmButton ? `<button class="be-button-confirm be-button be-button--normal be-button--primary" type="submit"><span>${this.confirmButtonText}</span></button>` : ''
 	}
 	renderCloseBtn() {
 		return this.showClose ? `
@@ -117,11 +122,11 @@ class MessageBox {
 		return ''
 	}
 	cancelHandle() {
-		this.cancel()
+		this.cancel && this.cancel()
 		this._beforeClose()
 	}
 	confirmHandle() {
-		this.confirm()
+		this.confirm && this.confirm()
 		this._beforeClose()
 	}
 
@@ -134,10 +139,20 @@ class MessageBox {
 		}
 	}
 	close() {
-		this.recoveryScroll();
-		this.body.removeChild(this.container);
-		zIndex = 2000
-		this.closed()
+		this.doAnimate()
+		let timer = setTimeout(() => {
+			this.recoveryScroll();
+			this.body.removeChild(this.container);
+			BEER_UI_Z_INDEX = 2000
+			if (this.closed) this.closed() // 回调
+			clearTimeout(timer)
+		}, 200)
+	}
+
+	doAnimate() {
+		this.node.classList.add('be-message-box__out')
+		const dom = document.querySelector(`#${this.id}`)
+		dom.classList.add('message-slide-out')
 	}
 
 	// 禁用 / 释放滚动条

@@ -21,6 +21,13 @@
 			}
 		})
 	}
+	const openTypeMessage = () => {
+		messageBox({
+			type: 'success',
+			title: 'i am title',
+			message: 'i am message content!'
+		})
+	}
 </script>
 <div class='page-container'>
 	<h2>MessageBox 弹框</h2>
@@ -45,14 +52,40 @@
 		<li>closed: Function = null; // 关闭后的回调</li>
 	</ol>
 	<h3>消息提示</h3>
-	<DemoBlock>
+	<DemoBlock
+	js={`
+const openMessage = () => {
+	messageBox({
+		title: 'i am title',
+		message: 'i am message content!',
+		beforeClose() {
+			return true
+		},
+		complete() {
+			console.log('complete');
+		},
+		confirm() {
+			console.log('confirm');
+		},
+		cancel() {
+			console.log('cancel');
+		}
+	})
+}
+const openTypeMessage = () => {
+	messageBox({
+		type: 'success',
+		title: 'i am title',
+		message: 'i am message content!'
+	})
+}
+	`}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeButton size="normal" type="primary" on:click={openMessage} nativeType='submit'>打开 Dialog</BeButton>
+				<BeButton size="normal" type="primary" on:click={openMessage}>打开 messageBox</BeButton>
+				<hr>
+				<BeButton size="normal" type="success" on:click={openTypeMessage}>打开 messageBox 带有类型</BeButton>
 			</div>
-		</div>
-		<div slot='description'>
-			基础 Dialog
 		</div>
 	</DemoBlock>
 	<hr>

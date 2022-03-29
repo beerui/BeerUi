@@ -171,7 +171,11 @@ svg {user-select: none;}
   text-align: left;
   overflow: hidden;
   backface-visibility: hidden;
-  &__mask {position: absolute;width: 100%;height: 100%;top: 0;left: 0;opacity: .5;background: #000;z-index: -1;}
+  animation: slideIn .2s linear;
+  &__out {
+    animation: slideOut .2s linear;
+  }
+  &__mask {position: absolute;width: 100%;height: 100%;top: 0;left: 0;opacity: .5;background: #000;z-index: -1;transition: .2s;}
   &__wrapper {
     position: fixed;
     top: 0;
@@ -179,6 +183,12 @@ svg {user-select: none;}
     left: 0;
     right: 0;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.message-slide-out {
+      .be-message-box__mask {opacity: 0;}
+    }
   }
   &__status {
     position: absolute;
@@ -226,5 +236,13 @@ svg {user-select: none;}
   &__btns {
     padding: 5px 15px 0;
     text-align: right;
+  }
+  @keyframes slideIn {
+    0% {transform: translateY(-100%)}
+    100% {transform: translateY(0)}
+  }
+  @keyframes slideOut {
+    0% {transform: translateY(0)}
+    100% {transform: translateY(-100%)}
   }
 }
