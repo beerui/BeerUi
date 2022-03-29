@@ -20,6 +20,7 @@ export let valueFormat = ''
 export let selectMode
 export let disabledDate: Function
 export let selectableRange = []
+export let direction
 // 时分秒格式化结构
 const times = new FormatTime(format.substring(format.indexOf('HH'), format.length))
 
@@ -140,15 +141,10 @@ function handleShowTimePopper(e) {
 </script>
 
 {#if visible}
-<div class="be-picker-panel be-date-picker be-popper" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
+<div class="be-picker-panel be-date-picker be-popper be-{selectMode}-{direction}" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__body-wrapper">
     <div class="be-picker-panel__body">
-      {#if selectMode === 'datetime'}
-        <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseTimePopper }} on:outside={handleCloseTimePopper}>
-          <BeInput placeholder="选择时间" on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
-	        <Time {date} {format} visible={timeVisible} {selectableRange} on:pick={confirmTimePick}/>
-        </div>
-      {/if}
+    
       <div class="be-date-picker__header">
           {#if currentView === 'date'}
             <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth}></span>
@@ -182,10 +178,19 @@ function handleShowTimePopper(e) {
     </div>
   </div>
   {#if selectMode === 'datetime'}
-    <div class="be-picker-panel__footer">
+    <div class="be-picker-panel__footer be-picker-panel__footer-datetime">
+      <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseTimePopper }} on:outside={handleCloseTimePopper}>
+        <BeInput placeholder="选择时间" on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
+        <Time {date} direction='top' {format} visible={timeVisible} {selectableRange} on:pick={confirmTimePick}/>
+      </div>
       <BeButton type="default" size="mini" on:click = {confirmDateTimePick}>确认</BeButton>
     </div>
   {/if}
+  {#if direction=='bottom'}
   <div class="popper__arrow"></div>
+  {/if}
+  {#if direction=='top'}
+  <div class="popper__arrow_top"></div>
+  {/if}
 </div>
 {/if}

@@ -72,11 +72,16 @@
   }
   &__footer {
     border-top: 1px solid #e4e4e4;
-    padding: 4px;
-    text-align: right;
+    padding: 4px 10px;
     background-color: #fff;
     position: relative;
     font-size: 0;
+    &-datetime {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    text-align: right;
   }
 }
 .be-date-picker {
@@ -88,11 +93,16 @@
   // height: 350px;
   &__time-header {
     position: relative;
-    border-bottom: 1px solid #e4e4e4;
+    // border-bottom: 1px solid #e4e4e4;
     font-size: 12px;
-    padding: 8px 10px 5px 10px;
+    padding: 8px 10px 5px 0px;
     display: table;
-    width: 100%;
+    .be-input input{
+      height: 30px;
+      line-height: 30px;
+      padding: 0 10px;
+    }
+    width: 120px;
     box-sizing: border-box;
     .be-input {
       width: 100%;
@@ -427,6 +437,28 @@
     border: 4px solid transparent;
   }
 }
+.popper__arrow_top {
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid #e4e7ed;
+  border-bottom: 1px solid #e4e7ed;
+  background-color: transparent;
+  transform: rotate(45deg);
+  position: absolute;
+  bottom: -4px;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
+  left: 35px;
+  // border: 1px solid #e4e7ed;
+  &::after {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 0;
+    background-color: #fff;
+    height: 0;
+    border: 4px solid transparent;
+  }
+}
 .be-range {
   &-input {
     appearance: none;
@@ -506,4 +538,25 @@
 .be-range-monthrange {
   width: 300px;
   @include rangeSelect
+}
+.be-date-range-top {
+  top: -350px;
+}
+.be-month-range-top {
+  top: -275px;
+}
+.be-date-top{
+  top: -406px;
+}
+.be-month-top{
+  top: -285px;
+}
+.be-year-top{
+  top: -285px;
+}
+.be-datetime-top{
+  top: -415px;
+}
+.be-time-top{
+  top: -240px;
 }

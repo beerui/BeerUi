@@ -35,9 +35,20 @@
 	const valueFormats = new FormatTime(valueFormat)
 	const formats = new FormatTime(format)
 	export let disabledDate: Function
+	let inputRect
+	let direction = 'bottom'
 	let visible;
  	let input
 	let ranged = selectMode.indexOf('range') > -1;
+	// 临时用，存储各个类型的日期容器高度
+	let temporaryHeight = {
+		'date': 343,
+		'month': 266,
+		'year': 266,
+		'datetime': 380,
+		'daterange': 331,
+		'monthrange': 254
+	}
 	// 日期格式化
 	$: initValue(value)
 	function initValue(value) {
@@ -62,6 +73,16 @@
 		} else {
 			value = ''
 			displayValue = []
+		}
+	}
+	$:if(visible) {
+		const clientRect = inputRect && inputRect.getBoundingClientRect()
+		const clientHeight = document.body.clientHeight
+		console.log(inputRect, clientRect, clientHeight);
+		if(clientRect && clientRect.bottom + temporaryHeight[selectMode] > clientHeight) {
+			direction = 'top'
+		} else {
+			direction = 'bottom'
 		}
 	}
 	function confirmPick(e) {
@@ -111,7 +132,7 @@
 </script>
 {#if ranged}
 <div class='be-date be-range' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
-	<div class='be-input__inner be-range-{selectMode}' class:active={active} on:click={handleShowDatePopper}>
+	<div class='be-input__inner be-range-{selectMode}' class:active={active} on:click={handleShowDatePopper} bind:this={inputRect}>
 		<BeIcon name="calendar"/>
 		<input autocomplete="off" placeholder={startPlaceholder} bind:value={displayValue[0]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
 		<span class="be-range-separator">{separator}</span>
@@ -121,13 +142,13 @@
 		</div>
 	</div>
 	{#if selectMode == 'daterange'}
-	<DateRange bind:visible={visible} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
+	<DateRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
 	{:else}
-	<MonthRange bind:visible={visible} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
+	<MonthRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
 	{/if}
 </div>
 {:else}
-<div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
+<div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper} bind:this={inputRect}>
 	<BeInput on:change={handleChange} {value} {placeholder} on:focus={handleShowDatePopper} bind:this={input}/>
 	<div class="be-date__prefix">
 		<BeIcon name="calendar"/>
@@ -135,6 +156,6 @@
 	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
-	<Dates {valueFormat} {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />
+	<Dates {valueFormat} {direction} {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />
 </div>
 {/if}

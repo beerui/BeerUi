@@ -16,6 +16,7 @@
 	export let format = DEFAULT_FORMATS['time']
 	export let clearable = true
 	export let placeholder = '选择时间'
+	let direction = 'bottom'
 	let visible;
 	let date
 	const times = new FormatTime(format)
@@ -62,5 +63,5 @@
 	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
-	<Time {date} {format} {selectableRange} bind:visible={visible} on:pick={confirmPick}/>
+	<Time {date} {format} direction='bottom' {selectableRange} bind:visible={visible} on:pick={confirmPick}/>
  </div>

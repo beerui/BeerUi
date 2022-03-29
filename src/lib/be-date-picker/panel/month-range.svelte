@@ -7,6 +7,7 @@
   export let visible = false
   export let value = []
   export let disabledDate: Function
+  export let direction
   let rangeState = {
     endDate: null,
     selecting: false,
@@ -103,7 +104,7 @@ const isValidValue = (value) => {
 
 
 {#if visible}
-<div class="be-picker-panel be-date-picker be-range-daterange-picker be-popper" bind:this={rangeRect} in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
+<div class="be-picker-panel be-date-picker be-range-daterange-picker be-popper be-month-range-{direction}" bind:this={rangeRect} in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
       <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear}></span>
@@ -122,6 +123,11 @@ const isValidValue = (value) => {
     </div>
     <MonthTable date = {rightDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
   </div>
+  {#if direction=='bottom'}
   <div class="popper__arrow" bind:this={popperArrow}></div>
+  {/if}
+  {#if direction=='top'}
+  <div class="popper__arrow_top" bind:this={popperArrow}></div>
+  {/if}
 </div>
 {/if}

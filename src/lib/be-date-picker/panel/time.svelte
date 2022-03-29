@@ -10,6 +10,7 @@ export let visible = false
 export let date
 export let selectableRange
 export let format
+export let direction
 let dateData
 function zoomIn(node, params) {
   return {
@@ -34,13 +35,18 @@ function confirm() {
 </script>
 
 {#if visible}
-<div class="be-time-panel be-popper" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
+<div class="be-time-panel be-popper be-time-{direction}" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="el-time-panel__content">
     <TimeSpinner {selectableRange} {format} {date} on:pick={PickTime}/>
   </div>
   <div class="be-picker-panel__footer">
     <BeButton type="default" size="mini" on:click={confirm}>确认</BeButton>
   </div>
+  {#if direction=='bottom'}
   <div class="popper__arrow"></div>
+  {/if}
+  {#if direction=='top'}
+  <div class="popper__arrow_top"></div>
+  {/if}
 </div>
 {/if}
