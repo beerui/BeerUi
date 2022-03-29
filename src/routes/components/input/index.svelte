@@ -58,7 +58,8 @@ let value = ''
 	<h3>类型</h3>
 	<p>通过<code>type</code> 属性指定</p>
 	<DemoBlock code={`
-<BeInput placeholder="请输入内容" disabled />
+<BeInput bind:value={number} type='number' placeholder="请输入数字" />
+<BeInput bind:value={password} type='password' placeholder="请输入密码" />
 `}>
 		<div slot="source">
 			<div class="demo-list">
