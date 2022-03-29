@@ -33,7 +33,6 @@ class MessageBox {
 				this[option] = options[option];
 			}
 		}
-		console.log(this);
 		this.init();
 	}
 

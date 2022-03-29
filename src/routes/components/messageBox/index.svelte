@@ -42,6 +42,7 @@
 		<li>closeOnClickModal: boolean = true; // 是否可通过点击遮罩关闭 MessageBox</li>
 		<li>lockScroll: boolean = true; // 是否在 MessageBox 出现时将 body 滚动锁定</li>
 		<li>beforeClose: Function = null; // MessageBox 关闭前的回调，会暂停实例的关闭</li>
+		<li>closed: Function = null; // 关闭后的回调</li>
 	</ol>
 	<h3>消息提示</h3>
 	<DemoBlock>
