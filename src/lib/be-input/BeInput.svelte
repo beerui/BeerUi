@@ -10,6 +10,7 @@
   export let disabled = false;
   // 是否显示清除按钮
   export let clearable = false;
+  export let type = 'text';
   // 右侧icon
   export let suffixIcon = ''
   // let showClear = false;
@@ -41,7 +42,7 @@
     dispatch('change', event.target.value)
   }
   // 在 input 值改变时触发
-  function oninput(event){
+  function onInput(event){
     dispatch('input', event.target.value)
   }
 </script>
@@ -68,7 +69,19 @@
 	on:pointerup
 	on:input
 >
-  <input type="text" placeholder={placeholder} bind:value class="be-input__inner" {readonly} {disabled} on:blur={(e)=>{blur(e)}} on:focus={(e)=>{focus(e)}} on:change={(e)=>{change(e)}} on:input={(e)=>{oninput(e)}} bind:this={input}>
+  <input
+	  {type}
+     {placeholder}
+	  bind:value
+	  class="be-input__inner"
+	  {readonly}
+	  {disabled}
+	  on:blur={blur}
+	  on:focus={focus}
+	  on:change={change}
+	  on:input={onInput}
+	  bind:this={input}
+  >
   {#if getSuffixVisible()}
   <span class={['be-input__suffix',disabled ? ' is-disabled':''].join('')}>
     <span class="be-input__suffix-inner ">

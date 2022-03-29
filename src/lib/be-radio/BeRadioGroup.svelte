@@ -2,18 +2,28 @@
 	// 选中的列表
 	import { createEventDispatcher, setContext } from 'svelte';
 	import RadioStore from './radio'
+	import { debounce } from '../utils/throttle';
 	const dispatch = createEventDispatcher();
 	export let checked: string = '';
-	const store = new RadioStore({ checked, dispatch })
+	const store = new RadioStore({ checked })
 	setContext('radioStore', store)
 
 	// 设置选中数据
-	export const setChecked = (items) => store.setChecked(items)
+	export const setChecked = item => {
+		if (store.current !== item) {
+			store.setChecked(item)
+			dispatch('change', item)
+		}
+	}
 	export const clear = () => store.clear()
 
-	const subscribeHandle = () => {
-		checked = store.current
-	}
+	const subscribeHandle = debounce(current => {
+		if (checked !== current) {
+			checked = current
+			dispatch('change', current)
+		}
+		dispatch('clickRadio', current)
+	}, 60)
 	store.subscribe.push(subscribeHandle)
 
 	let _class: $$props["class"] = "";

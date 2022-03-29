@@ -52,7 +52,7 @@ let direction = 'rtl'`
 				<li>mask = true  是否需要遮罩层</li>
 				<li>visible = true  是否显示 Drawer</li>
 				<li>title = '提示'  标题文字 slot=title</li>
-				<li>direction = 'rtl'  方向</li>
+				<li>direction = 'rtl'  方向 ltr/rtl/ttb/btt</li>
 				<li>size = '30%'  窗体的大小, 请传入 'x%'/'100px'</li>
 				<li>isShowHeader = true  是否显示头部</li>
 				<li>isShowClose = true  是否显示关闭按钮</li>
