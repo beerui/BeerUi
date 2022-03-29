@@ -42,11 +42,14 @@
 			css: (t, u) => ['rtl', 'ltr'].includes(direction) ? `transform: translate(${ dir*100 * u }%)` : `transform: translateY(${ dir*100 * u }%)`
 		};
 	}
+
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
 <svelte:window on:keydown={handleKeydown}/>
 {#if visible}
 	<div
-		class='be-drawer__wrapper'
+		class='be-drawer__wrapper {_class}'
 		style={$$props.style}
 	>
 		<div class='be-drawer__container'>

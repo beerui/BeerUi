@@ -1,5 +1,14 @@
 # BeerUi 
 
+## @brewer/beerui@1.0.30-next.21 `2022/3/28`
+
+### Patch Changes
+
+- 新增 `Drawer` 组件
+
+- 修复 `menu`组件 已知问题
+- 修复 `pagination`组件 已知问题
+
 ## @brewer/beerui@1.0.30-next.19 `2022/3/25`
 
 ### Patch Changes

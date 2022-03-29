@@ -23,7 +23,6 @@ export default class RadioStore {
 	// 通知集合改变
 	publishHandle() {
 		this.subscribe.forEach(cb => cb(this.current))
-		this.dispatch('change', this.current)
 	}
 	// 清空
 	clear() {

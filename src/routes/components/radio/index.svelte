@@ -9,6 +9,8 @@
 
 	const handleChange = (evt) => console.log('handleChange', evt);
 	const changeRadio = () => radio3 = '2'
+	let checkedDom = null
+	const clearChecked = () => checkedDom.clear()
 </script>
 <div class="page-container">
 	<h2>Radio 单选框</h2>
@@ -48,22 +50,25 @@ let radio2 = '1';
 	<p>适用于在多个互斥的选项中选择的场景。</p>
 	<DemoBlock code={`
 <BeButton on:click={changeRadio}>setChecked('2')</BeButton>
-<BeRadioGroup bind:checked={radio3} on:change={handleChange}>
+<BeRadioGroup bind:this={checkedDom} bind:checked={radio3} on:change={handleChange}>
 	<BeRadio label='1'>备选项</BeRadio>
 	<BeRadio label='2'>备选项</BeRadio>
 	<BeRadio label='3'>备选项</BeRadio>
 </BeRadioGroup>`} js={`
 let radio3 = '1';
+let checkedDom = null
 const handleChange = (evt) => console.log('handleChange', evt);
 const changeRadio = () => radio3 = '2'
+const clearChecked = () => checkedDom.clear()
     `}>
 		<div slot="source">
 			<div>
+				<span>radio3: {radio3}</span>
 				<BeButton on:click={changeRadio}>setChecked('2')</BeButton>
-				{radio3}
+				<BeButton on:click={clearChecked}>clearChecked()</BeButton>
 			</div>
 			<div class="demo-list">
-				<BeRadioGroup bind:checked={radio3} on:change={handleChange}>
+				<BeRadioGroup bind:this={checkedDom} bind:checked={radio3} on:change={handleChange}>
 					<BeRadio label='1'>备选项</BeRadio>
 					<BeRadio label='2'>备选项</BeRadio>
 					<BeRadio label='3'>备选项</BeRadio>
