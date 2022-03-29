@@ -50,7 +50,7 @@ let direction = 'rtl'`
 			需要设置 visible 属性，它的类型是 boolean,当为 true 时显示 Drawer。Drawer 分为两个部分：title 和 body，title 需要具名为 title 的 slot, 也可以通过 title 属性来定义，默认值为空。需要注意的是, Drawer 默认是从右往左打开
 			<ol>
 				<li>mask = true  是否需要遮罩层</li>
-				<li>visible = true  是否显示 Dialog</li>
+				<li>visible = true  是否显示 Drawer</li>
 				<li>title = '提示'  标题文字 slot=title</li>
 				<li>direction = 'rtl'  方向</li>
 				<li>size = '30%'  窗体的大小, 请传入 'x%'/'100px'</li>
