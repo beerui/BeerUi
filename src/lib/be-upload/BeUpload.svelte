@@ -302,7 +302,8 @@
 			<slot name="tip"></slot>
 		</div>
 	{/if}
-	<ul class="be-upload-list be-upload-list--{listType}">
+	{#if showFileList}
+		<ul class="be-upload-list be-upload-list--{listType}">
 		{#each fileList as file}
 		<li tabindex="0" class="be-upload-list__item is-{file.status || 'success'}">
 			{#if listType === 'picture-card'}
@@ -338,6 +339,7 @@
 		</li>
 		{/each}
 	</ul>
+	{/if}
 	{#if !drag}
 		<div
 			class="be-upload--{listType}"
