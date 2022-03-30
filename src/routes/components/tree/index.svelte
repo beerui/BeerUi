@@ -238,10 +238,6 @@
 <div class="page-container">
 	<h2>Tree 树形控件</h2>
 	<p>用清晰的层级结构展示信息，可展开或折叠。</p>
-	<ol>
-		<li>TODO: filter</li>
-	</ol>
-
 	<h3>基础用法</h3>
 	<p>基础的树形结构展示。</p>
     <DemoBlock
