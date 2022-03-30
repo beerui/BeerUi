@@ -67,7 +67,6 @@
      role='treeitem'
      tabindex='-1'
      aria-expanded={node.expanded}
-     aria-key={node.key}
      aria-disabled={node.disabled}
      aria-checked={node.checked}
 >
