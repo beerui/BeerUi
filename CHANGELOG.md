@@ -1,5 +1,18 @@
 # BeerUi 
 
+## @brewer/beerui@1.0.30-next.26 `2022/3/30`
+
+### Patch Changes
+
+- 新增 Add `messageBox` 方法 用于轻提示
+- 新增 Add `BeTree` filter方法 用于过滤数据
+
+- 修复 Fixed `BeInput`组件 type传入不生效的问题
+- 修复 Fixed `BePagination`组件 已知问题
+- 修复 Fixed `BeUpload` showFileList
+- 修复 Fixed `BeDatePicker` 上下方向的自适应
+
+
 ## @brewer/beerui@1.0.30-next.21 `2022/3/28`
 
 ### Patch Changes
