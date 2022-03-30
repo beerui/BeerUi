@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import BeIcon from '$lib/be-icon/BeIcon.svelte';
-	import { createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import { getNodeKey } from '$lib/be-tree/model/util';
 	import BeCheckbox from '../be-checkbox/BeCheckbox.svelte';
 
@@ -28,12 +28,12 @@
 	};
 	const expandedHandle = async () => {
 		if (node.expanded) {
-			node.collapse();
+			node.collapse(node);
 			node = node;
 		} else {
 			node.expand(() => {
 				node = node;
-			});
+			}, node.parent);
 			node = node;
 		}
 	};
@@ -47,41 +47,34 @@
 	};
 	const handleCheckChange = () => {
 		node.setChecked(node.checked, true);
-		node = node;
+		node = node
 		dispatch('checkChange', { data: node.data, checked: node.checked, level: node.level });
 	};
 
 	const getNodeKeyHandle = (child): void => {
 		return getNodeKey(nodeKey, child);
 	};
-	const destroyNode = (evt) => {
-		evt.detail.expanded = false;
-		evt.detail.checked = false;
-	};
-
-	onDestroy(() => {
-		dispatch('destroyNode', node);
-	});
 </script>
 <div class='be-tree-node'
      bind:this={treeNode}
-     class:is_show={node.visible}
-     class:is_expanded={node.expanded}
-     class:is_current={node.isCurrent}
-     class:is_hidden={!node.visible}
-     class:is_focusable={!node.disabled}
-     class:is_checked={!node.disabled && node.checked}
+     class:is-show={node.visible}
+     class:is-expanded={node.expanded}
+     class:is-current={node.isCurrent}
+     class:is-hidden={!node.visible}
+     class:is-focusable={!node.disabled}
+     class:is-checked={!node.disabled && node.checked}
      on:contextmenu={handleContextMenu}
      role='treeitem'
      tabindex='-1'
      aria-expanded={node.expanded}
+     aria-key={node.key}
      aria-disabled={node.disabled}
      aria-checked={node.checked}
 >
 <!--	on:click|stopPropagation={handleClick}-->
 	<div class='be-tree-node__content' style={ 'padding-left: ' + (node.level - 1) * indent + 'px' }>
 		<span on:click|stopPropagation={handleExpandIconClick}
-		      class:is_leaf={node.isLeaf}
+		      class:is-leaf={node.isLeaf}
 		      class:expanded={!node.isLeaf && node.expanded}
 		>
 			<BeIcon name='caret-right-small' />
@@ -116,7 +109,6 @@
 					{renderContent}
 					{renderAfterExpand}
 					on:checkChange={handleChildCheckChange}
-					on:destroyNode={destroyNode}
 					on:nodeExpand={handleChildNodeExpand}
 					key={getNodeKeyHandle(child)}
 				/>

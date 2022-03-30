@@ -45,9 +45,9 @@
     &:focus>.be-tree-node__content {
       background-color: #f5f7fa;
     }
-    &.is_show {
-    }
-    &.is_expanded {
+    &.is-hidden {display: none;}
+    &.is-show {display: block;}
+    &.is-expanded {
       &>.be-tree-node__content {
         .be-icon {transform: rotate(90deg);}
       }
@@ -66,7 +66,7 @@
       &>.be-tree-node__expand-icon {
         padding: 6px;
       }
-      .is_leaf {
+      .is-leaf {
         .be-icon {opacity: 0;}
       }
     }

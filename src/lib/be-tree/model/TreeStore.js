@@ -304,7 +304,6 @@ export default class TreeStore {
 
   setChecked(data, checked, deep) {
     const node = this.getNode(data);
-
     if (node) {
       node.setChecked(!!checked, deep);
     }

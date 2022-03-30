@@ -11,6 +11,7 @@
 	export let isLimit = false // 限制拖拽
 	export let isFree = false // 限制拖拽
 	export let visible = true // 是否显示 Dialog
+	export let isHideFooter = false // 是否显示 footer
 	export let title = '提示' // 标题文字
 	export let closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog
 	export let beforeClose = null // 是否可以通过点击 modal 关闭 Dialog 传入函数 接收返回值true/false false时不执行关闭操作
@@ -91,6 +92,7 @@ import { BeDialog } from "@brewer/beerui";
 			<div class="be-dialog__body">
 				<slot></slot>
 			</div>
+			{#if !isHideFooter}
 			<slot name='footer'>
 				<div class='be-dialog__footer'>
 					<span class='be-dialog-footer'>
@@ -99,6 +101,7 @@ import { BeDialog } from "@brewer/beerui";
 					</span>
 				</div>
 			</slot>
+			{/if}
 		</div>
 	</div>
 {/if}

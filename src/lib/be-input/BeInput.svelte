@@ -66,7 +66,6 @@
 	on:click
 	on:contextmenu
 	on:dblclick
-	on:focus
 	on:focusin
 	on:mousedown
 	on:mouseup
@@ -80,7 +79,6 @@
 	on:pointermove
 	on:pointerout
 	on:pointerup
-	on:input
 >
 	<input
 		use:typeAction

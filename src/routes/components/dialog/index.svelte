@@ -40,6 +40,17 @@
 	<h2>BeDialog 对话框</h2>
 	<p class='desc'>在保留当前页面状态的情况下，告知用户并承载相关操作。</p>
 	<h3>基本用法</h3>
+	<ol>
+		<li>mask = true // 是否需要遮罩层</li>
+		<li>isDrag = false // 是否需要拖拽</li>
+		<li>isLimit = false // 限制拖拽</li>
+		<li>isFree = false // 限制拖拽</li>
+		<li>visible = true // 是否显示 Dialog</li>
+		<li>isHideFooter = false // 是否显示 footer</li>
+		<li>title = '提示' // 标题文字</li>
+		<li>closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog</li>
+		<li>beforeClose = null // 关闭 Dialog前触发 接收返回值true/false false时不执行关闭操作</li>
+	</ol>
 	<DemoBlock {code} {js}>
 		<div slot='source'>
 			<div class='demo-list'>
