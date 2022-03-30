@@ -602,7 +602,8 @@ const resetChecked = () => {
 		    通过disabled设置禁用状态。
 	    </div>
     </DemoBlock>
-
+	<h3>节点过滤</h3>
+	<p>通过关键字过滤树节点</p>
 	<DemoBlock
 		js={`
   let theFilterTree = null
@@ -648,7 +649,7 @@ const resetChecked = () => {
 			</div>
 		</div>
 		<div slot="description">
-			通过disabled设置禁用状态。
+			在需要对节点进行过滤时，调用 Tree 实例的filter方法，参数为关键字。需要注意的是，此时需要设置filterNodeMethod，值为过滤函数。
 		</div>
 	</DemoBlock>
 </div>
