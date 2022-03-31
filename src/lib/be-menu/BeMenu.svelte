@@ -12,7 +12,7 @@
 	export let isOnlyOne: boolean = false;
 	const dispatch = createEventDispatcher();
 	let BeMenu = null;
-	let store = new MenuStore({ data, active, mode, trigger, collapse, dispatch })
+	let store = new MenuStore({ data, active, mode, trigger, collapse, dispatch, isOnlyOne })
 	setContext('menuStore', store)
 
 	const subscribeHandle = debounce(item => {

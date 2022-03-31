@@ -11,6 +11,7 @@
 - 修复 Fixed `BePagination`组件 已知问题
 - 修复 Fixed `BeUpload` showFileList
 - 修复 Fixed `BeDatePicker` 上下方向的自适应
+- 修复 Fixed `BeTree` 下级选框展开未选中的问题
 
 
 ## @brewer/beerui@1.0.30-next.21 `2022/3/28`

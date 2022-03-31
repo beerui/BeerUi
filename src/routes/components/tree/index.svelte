@@ -238,10 +238,6 @@
 <div class="page-container">
 	<h2>Tree 树形控件</h2>
 	<p>用清晰的层级结构展示信息，可展开或折叠。</p>
-	<ol>
-		<li>TODO: filter</li>
-	</ol>
-
 	<h3>基础用法</h3>
 	<p>基础的树形结构展示。</p>
     <DemoBlock
@@ -602,7 +598,8 @@ const resetChecked = () => {
 		    通过disabled设置禁用状态。
 	    </div>
     </DemoBlock>
-
+	<h3>节点过滤</h3>
+	<p>通过关键字过滤树节点</p>
 	<DemoBlock
 		js={`
   let theFilterTree = null
@@ -648,7 +645,7 @@ const resetChecked = () => {
 			</div>
 		</div>
 		<div slot="description">
-			通过disabled设置禁用状态。
+			在需要对节点进行过滤时，调用 Tree 实例的filter方法，参数为关键字。需要注意的是，此时需要设置filterNodeMethod，值为过滤函数。
 		</div>
 	</DemoBlock>
 </div>
