@@ -8,6 +8,7 @@ export let checkStrictly
 export let showAllLevels
 export let expandTrigger
 export let config
+export let left
 // const store = new Store(options, $$props)
 const store = getContext('store')
 let menus = []
@@ -25,9 +26,15 @@ $: {
   const clientWidth = document.body.clientWidth
   const clientRect = cascaderRect && cascaderRect.getBoundingClientRect()
   if(clientRect && cascaderWidth) {
-    const left = cascaderRect.offsetLeft + clientWidth - clientRect.right
-    cascaderRect.style.left = (left < 0 ? left : 0) + 'px'
-    popperArrow.style.left = (left < 0 ? 35 - left : 35) + 'px'
+      const distance =  left + cascaderWidth - clientWidth + 10
+      if(distance > 0) {
+        const curleft = left - distance
+        cascaderRect.style.left = curleft + 'px'
+        popperArrow.style.left = distance + 35 + 'px'
+      } else {
+        cascaderRect.style.left = left + 'px'
+        popperArrow.style.left = '35px'
+      }
   }
 }
 const subscribeHandle = items =>{

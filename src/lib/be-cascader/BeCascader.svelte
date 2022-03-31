@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import BeIcon from '$lib/be-icon/BeIcon.svelte';
 	import BeInput from '$lib/be-input/BeInput.svelte';
-	import { createEventDispatcher, setContext } from "svelte";
+	import { createEventDispatcher, onMount, setContext } from "svelte";
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { filterClass } from "$lib/utils/beerui";
 	import CascaderPanel from './cascader-panel.svelte';
@@ -36,6 +36,8 @@
 	const _class = ["be-cascader", ...filterClass($$props, "be-cascader--", preClass)].join(" ");
 	// 下拉框
 	let visible = false;
+	let cascaderRect
+	let left
 	// 获取输入框
 	let showClose = false
 	config = store.config
@@ -77,6 +79,10 @@
 	const mousedownHandle = () => {
 		visible = true
 	}
+	onMount(() => {
+		const clientRect = cascaderRect.getBoundingClientRect()
+		left = clientRect.left
+	})
 	const change = (e) => {
 		// cascaderStore = e.detail.store
 		inputValue = showAllLevelsData(e.detail.label)
@@ -93,6 +99,7 @@
 	class={_class}
 	class:be-select--disabled={disabled}
 	style={$$props.style}
+	bind:this={cascaderRect}
 	use:clickOutside={{ cb: () => visible = false }}
 	on:click
 	on:contextmenu
@@ -116,6 +123,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {options} {config} {expandTrigger} {checkStrictly} {showAllLevels} on:change={change}/>
+	<CascaderPanel {visible} {options} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels} on:change={change}/>
 </div>
 
