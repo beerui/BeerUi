@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import BeIcon from "$lib/be-icon/BeIcon.svelte";
 	import ajax from "./ajax";
-	import { previewImages } from "$lib";
+	import previewImages from "../utils/PreviewImage";
 
 	const dispatch = createEventDispatcher()
 
