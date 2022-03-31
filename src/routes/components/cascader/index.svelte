@@ -1,4 +1,5 @@
 <script>
+	import BeDrawer from './../../../lib/be-drawer/BeDrawer.svelte';
 	import { BeRadio } from '$lib';
 	import { BeCascader } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
@@ -627,9 +628,17 @@
 	const change = (e) => {
 		console.log(e);
 	};
+	let visible = false
 </script>
 <div class='page-container content'>
-	<h2>Cascader 级联选择器</h2>
+	
+	<BeDrawer
+	bind:visible={visible}
+  width="30%"
+	direction='rtl'
+  title="新增角色"
+>	<BeCascader bind:value={value5} options = {options} {checkStrictly}/></BeDrawer>
+	<h2 on:click={() => visible = true}>Cascader 级联选择器</h2>
 	<p>当一个数据集合有清晰的层级结构时，可通过级联选择器逐级查看并选择</p>
 	<h3>基本用法</h3>
 	<p>有两种触发子菜单的方式</p>
@@ -849,8 +858,6 @@
 		<div slot='source'>
 			<div class='flex justify-around'>
 				<BeCascader bind:value={value} options = {options}/>
-				<!-- <BeCascader bind:value={value} {showAllLevels} {options} on:change={change} /> -->
-				<!-- <BeCascader bind:value={value2} {checkStrictly} {options} on:change={change} /> -->
 				<BeCascader bind:value={value1} {options} {expandTrigger} />
 			</div>
 		</div>

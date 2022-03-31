@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import BeIcon from '$lib/be-icon/BeIcon.svelte';
 	import BeInput from '$lib/be-input/BeInput.svelte';
-	import { createEventDispatcher, onMount, setContext } from "svelte";
+	import { createEventDispatcher, onMount, setContext, tick } from "svelte";
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { filterClass } from "$lib/utils/beerui";
 	import CascaderPanel from './cascader-panel.svelte';
@@ -79,10 +79,16 @@
 	const mousedownHandle = () => {
 		visible = true
 	}
-	onMount(() => {
-		const clientRect = cascaderRect.getBoundingClientRect()
-		left = clientRect.left
-	})
+	window.onresize = function() {
+		getLeft()
+	};
+	$:if(visible){
+		getLeft()
+	}
+	const getLeft = () => {
+		const clientRect =  cascaderRect.getBoundingClientRect();
+		left = clientRect.left;
+	}
 	const change = (e) => {
 		// cascaderStore = e.detail.store
 		inputValue = showAllLevelsData(e.detail.label)
