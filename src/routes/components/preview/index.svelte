@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { previewImages } from '$lib/utils/beerui';
+  import { previewImages } from '$lib';
   const src = '/images/1.jpg'
 	const list = ['/images/1.jpg', '/images/2.jpg', '/images/3.jpg', '/images/4.jpg', '/images/5.jpg', '/images/6.jpg']
   const clickImage = (src: string) => {

@@ -2,7 +2,7 @@
 	import BeCarousel from '$lib/be-carousel/BeCarousel.svelte';
   import BeCarouselItem from '$lib/be-carousel/BeCarouselItem.svelte';
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
-  import { previewImages } from '$lib/utils/beerui';
+  import { previewImages } from '$lib';
 	const items = ['/images/1.jpg', '/images/2.jpg', '/images/3.jpg', '/images/4.jpg', '/images/5.jpg', '/images/6.jpg']
 	const handleImageClicked = e => {
 		console.log(e.detail)
