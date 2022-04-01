@@ -13,7 +13,6 @@
 
   span {color: var(--text-color-white)}
 
-  &--disabled{background: var(--be-disabled);}
   &--large{padding: .8rem 3rem;font-size: 1.15rem;}
   &--medium{padding: .75rem 2.2rem;font-size: 1rem;}
   &--normal{padding: .5rem 2rem;}
@@ -51,5 +50,11 @@
   &--danger {
     background: var(--be-danger);
     &:hover,&:active,&:focus {background: var(--be-danger-hover);}
+  }
+  &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
+    color: #c0c4cc;
+    cursor: not-allowed;
+    background-image: none;
+    border-color: #ebeef5;
   }
 }
