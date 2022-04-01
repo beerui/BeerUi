@@ -28,7 +28,6 @@
 </script>
 <div class='page-container'>
   <h3>TODO:</h3>
-  <li>增加年份范围选择</li>
   <li>增加多选日期功能</li>
   <li>是否需要周选择器?</li>
   <h2>DatePicker 日期选择器</h2>
