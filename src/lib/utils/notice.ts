@@ -22,21 +22,36 @@ interface instanceType extends options {
 	verticalProperty: string,
 	close?: () => void
 }
+let NoticeInstance = null
+// 显示消息提示
+export const showNotice = (options) => {
+	if (!NoticeInstance) {
+		NoticeInstance = new Notice(options);
+		return NoticeInstance.id
+	} else {
+		NoticeInstance.setNotice(options)
+		return NoticeInstance.id
+	}
+}
+// 关闭所有弹框
+export const closeALlNotice = () => NoticeInstance && NoticeInstance.closeAll()
+// 关闭单个弹框
+export const closeNotice = (id, cb = () => {}) => NoticeInstance && NoticeInstance.close(id, cb)
 
-export default class Notice {
+class Notice {
 	title: string; // 标题
 	message: string; // 内容
 	duration: number; // 间隔
 	position: string; // 位置
 	private _body: HTMLElement = document.body; // 私有属性 获取body
 	instances: Array<instanceType> = [];  // 储存弹窗信息
-	// instance = <instanceType>{};
 	seed = 0;
 	id: number;
 	titleColor: string;
 	messageColor: string;
-	// constructor(){
-	// }
+	constructor(options?){
+		if (options) this.setNotice(options)
+	}
 
 	// 生成弹窗
 	private type: string;
@@ -140,7 +155,7 @@ export default class Notice {
 		return ''
 	}
 	// 关闭
-	close(id: number, userOnClose): void {
+	close(id: number, userOnClose?): void {
 		let index = -1;
 		const len = this.instances.length;
 		const instance = this.instances.filter((instance, i) => {
