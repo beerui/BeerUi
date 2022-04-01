@@ -304,41 +304,41 @@
 	{/if}
 	{#if showFileList}
 		<ul class="be-upload-list be-upload-list--{listType}">
-		{#each fileList as file}
-		<li tabindex="0" class="be-upload-list__item is-{file.status || 'success'}">
-			{#if listType === 'picture-card'}
-				<div>
-					<img src={file.url} alt="" class="be-upload-list__item-thumbnail">
-					<span class="be-upload-list__item-actions">
-						<span class="be-upload-list__item-preview" on:click={previewImages(file.url)}>
-							<BeIcon width="20" height="20" name="zoom-in" />
+			{#each fileList as file}
+			<li tabindex="0" class="be-upload-list__item is-{file.status || 'success'}">
+				{#if listType === 'picture-card'}
+					<div>
+						<img src={file.url} alt="" class="be-upload-list__item-thumbnail">
+						<span class="be-upload-list__item-actions">
+							<span class="be-upload-list__item-preview" on:click={previewImages(file.url)}>
+								<BeIcon width="20" height="20" name="zoom-in" />
+							</span>
+	<!--						<span class="be-upload-list__item-delete">-->
+	<!--							<BeIcon width="20" height="20" name="download" />-->
+	<!--						</span>-->
+							<span class="be-upload-list__item-delete" on:click={() => handleRemove(file, file.raw)}>
+								<BeIcon width="20" height="20" name="delete" />
+							</span>
 						</span>
-<!--						<span class="be-upload-list__item-delete">-->
-<!--							<BeIcon width="20" height="20" name="download" />-->
-<!--						</span>-->
-						<span class="be-upload-list__item-delete" on:click={() => handleRemove(file, file.raw)}>
-							<BeIcon width="20" height="20" name="delete" />
-						</span>
-					</span>
-				</div>
-			{:else}
-				<a class="be-upload-list__item-name"><BeIcon name="file" />{file.name}</a>
-				<label class="be-upload-list__item-status-label">
-					{#if file.status === 'fail'}
-						<BeIcon name="close-circle" />
-					{:else if file.status === 'ready'}
-						<BeIcon name="upload" />
-					{:else if file.status === 'uploading'}
-						<BeIcon name="loading" />
-					{:else}
-						<BeIcon name="check-circle" />
-					{/if}
-				</label>
-				<span class="be-icon-close" on:click={() => handleRemove(file, file.raw)}><BeIcon name="close" /></span>
-			{/if}
-		</li>
-		{/each}
-	</ul>
+					</div>
+				{:else}
+					<a class="be-upload-list__item-name"><BeIcon name="file" />{file.name}</a>
+					<label class="be-upload-list__item-status-label">
+						{#if file.status === 'fail'}
+							<BeIcon name="close-circle" />
+						{:else if file.status === 'ready'}
+							<BeIcon name="upload" />
+						{:else if file.status === 'uploading'}
+							<BeIcon name="loading" />
+						{:else}
+							<BeIcon name="check-circle" />
+						{/if}
+					</label>
+					<span class="be-icon-close" on:click={() => handleRemove(file, file.raw)}><BeIcon name="close" /></span>
+				{/if}
+			</li>
+			{/each}
+		</ul>
 	{/if}
 	{#if !drag}
 		<div
