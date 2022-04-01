@@ -56,11 +56,11 @@ class Notice {
 	// 生成弹窗
 	private type: string;
 	setNotice(options: options): instanceType {
-		this.title = options.title;
-		this.message = options.message;
+		this.title = options.title || '提示';
+		this.message = options.message || '';
 		this.type = options.type;
 		this.position = options.position || 'top-right';
-		this.duration = options.duration || 0;
+		this.duration = options.duration || 3000;
 		this.titleColor = options.titleColor;
 		this.messageColor = options.messageColor;
 		const userOnClose = options.onClose;
