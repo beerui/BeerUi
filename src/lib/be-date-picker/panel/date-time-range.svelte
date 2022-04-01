@@ -43,6 +43,7 @@
       rangeRect.style.left = clientWidth - clientRect.right - 10 + 'px'
       popperArrow.style.left = clientRect.right - clientWidth + 35 + 'px'
     }
+    disabledBtn = false
     rangeState.selecting = false
     rangeState.endDate = null
     const leftDate =  isDate(value[0]) ? new Date(value[0]) : null
@@ -103,7 +104,7 @@ const handleRangePick = (val) => {
   minDate = minDate1;
   timeValue = getTimeValueFormat(minDate)
   timeRightValue = getTimeValueFormat(minDate)
-  disabledBtn = val.detail.close
+  disabledBtn = !val.detail.close
 }
 const handleChangeRange = (val) => {
   minDate = val.detail.minDate;
