@@ -1,9 +1,11 @@
 <script lang="ts">
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 	import { BeCollapse, BeCollapseItem } from '$lib';
+	import BeIcon from '$lib/be-icon/BeIcon.svelte';
 
 	let active = ['1']
 	let active1 = '1'
+	let active3 = '1'
 
 	const handleChange = (val) => {
 		console.log(val);
@@ -116,6 +118,67 @@ let active1 = '1'
 			</ol>
 		</div>
 	</DemoBlock>
+	<h3>自定义样式</h3>
+	<DemoBlock code={`
+<BeCollapse bind:value={active3} accordion>
+	<BeCollapseItem title="一致性 Consistency" name="1">
+		<div class='m-list__header' slot='title' let:prop={node}>
+			<div class='m-list__title'>{node.title}</div>
+			{#if node.active}
+				<div class='m-list__icon'>
+					<BeIcon name='remove' />
+				</div>
+			{:else}
+				<div class='m-list__icon'>
+					<BeIcon name='add' />
+				</div>
+			{/if}
+		</div>
+		<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+	</BeCollapseItem>
+	<BeCollapseItem title="反馈 Feedback" name="2">
+		<div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+		<div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+	</BeCollapseItem>
+</BeCollapse>
+`}>
+		<div slot='source'>
+			<div class='demo-list'>
+				<BeCollapse bind:value={active3} accordion>
+					<BeCollapseItem title="自定义样式标题1" name="1">
+						<div class='m-list__header' slot='title' let:prop={node}>
+							<div class='m-list__title'>{node.title}</div>
+							{#if node.active}
+								<div class='m-list__icon'>
+									<BeIcon name='remove' />
+								</div>
+							{:else}
+								<div class='m-list__icon'>
+									<BeIcon name='add' />
+								</div>
+							{/if}
+						</div>
+						<div class='m-list__content'>使用Css和自定义布局打造自己喜爱的风格</div>
+					</BeCollapseItem>
+					<BeCollapseItem title="自定义样式标题2" name="2">
+						<div class='m-list__header' slot='title' let:prop={node}>
+							<div class='m-list__title'>{node.title}</div>
+							{#if node.active}
+								<div class='m-list__icon'>
+									<BeIcon name='remove' />
+								</div>
+							{:else}
+								<div class='m-list__icon'>
+									<BeIcon name='add' />
+								</div>
+							{/if}
+						</div>
+						<div class='m-list__content'>使用Css和自定义布局打造自己喜爱的风格</div>
+					</BeCollapseItem>
+				</BeCollapse>
+			</div>
+		</div>
+	</DemoBlock>
 </div>
 
 <style lang='scss' global>
@@ -123,4 +186,7 @@ let active1 = '1'
   .demo-list {
     margin: 16px 0;
   }
+  .m-list__title {flex: 1;}
+  .m-list__header {display: flex;justify-content: space-between;width: 100%;align-items: center;background: #c1c1c1;padding: 0 24px;}
+  .m-list__content {padding: 24px;}
 </style>

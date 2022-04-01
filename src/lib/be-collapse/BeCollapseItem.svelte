@@ -29,7 +29,7 @@
 			class:is-active={node.active}
 			on:click={handlerClick}
 		>
-			<slot name='title'>
+			<slot name='title' prop={node}>
 				{node.title}
 				<div class='be-collapse-item__arrow'>
 					<BeIcon name='chevron-down' />
