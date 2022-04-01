@@ -21,6 +21,12 @@
 	<BeButton size="normal" round='lg' type="warning">警告按钮</BeButton>
 	<BeButton size="normal" round='lg' type="danger">危险按钮</BeButton>
 </div>
+<BeButton class='demo-button' disabled size="normal" round='lg' type="default">圆角按钮</BeButton>
+<BeButton class='demo-button' disabled size="normal" round='lg' type="primary">主要按钮</BeButton>
+<BeButton class='demo-button' disabled size="normal" round='lg' type="success">成功按钮</BeButton>
+<BeButton class='demo-button' disabled size="normal" round='lg' type="info">信息按钮</BeButton>
+<BeButton class='demo-button' disabled size="normal" round='lg' type="warning">警告按钮</BeButton>
+<BeButton class='demo-button' disabled size="normal" round='lg' type="danger">危险按钮</BeButton>
 <BeButton class='demo-button' size="normal" round='circle' icon='IconActivity' type="default">
 	<BeIcon name='add' color='#000' />
 </BeButton>
