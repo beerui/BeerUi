@@ -38,6 +38,7 @@
 			<li><span class='base'>其它 Others</span></li>
 			<li><a class:active={$page.url.pathname === '/components/clock'} href='/components/clock'>Clock 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/drawer'} href='/components/drawer'>Drawer 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/collapse'} href='/components/collapse'>Collapse 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/scrollbar'} href='/components/scrollbar'>Scrollbar 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/carousel'} href='/components/carousel'>Carousel 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/preview'} href='/components/preview'>PreviewImage 示例</a></li>

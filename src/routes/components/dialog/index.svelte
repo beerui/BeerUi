@@ -17,7 +17,7 @@
 	const beforeClose1 = (type) => type !== 'cancel'
 	`
 	let code = `
-<BeDialog bind:visible={visible1} beforeClose={beforeClose1}>
+<BeDialog width='30%' bind:visible={visible1} beforeClose={beforeClose1}>
 	<p>基础 Dialog</p>
 </BeDialog>`
 	const code1 = `
@@ -42,6 +42,7 @@
 	<h3>基本用法</h3>
 	<ol>
 		<li>mask = true // 是否需要遮罩层</li>
+		<li>width = '50%' // 对话框宽度</li>
 		<li>isDrag = false // 是否需要拖拽</li>
 		<li>isLimit = false // 限制拖拽</li>
 		<li>isFree = false // 限制拖拽</li>
@@ -55,13 +56,13 @@
 		<div slot='source'>
 			<div class='demo-list'>
 				<BeButton size="normal" type="primary" on:click={openDialog1} nativeType='submit'>打开 Dialog</BeButton>
-				<BeDialog bind:visible={visible1} beforeClose={beforeClose1}>
+				<BeDialog width='30%' bind:visible={visible1} beforeClose={beforeClose1}>
 					<p>基础 Dialog</p>
 				</BeDialog>
 			</div>
 		</div>
 		<div slot='description'>
-			基础 Dialog
+			width='30%'
 		</div>
 	</DemoBlock>
 	<hr>

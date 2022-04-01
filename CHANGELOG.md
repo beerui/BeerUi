@@ -1,12 +1,17 @@
 # BeerUi 
 
-## @brewer/beerui@1.0.30-next.26 `2022/3/30`
+## @brewer/beerui@1.0.30-next.32 `2022/4/1`
 
 ### Patch Changes
 
 - 新增 Add `messageBox` 方法 用于轻提示
 - 新增 Add `BeTree` filter方法 用于过滤数据
+- 新增 Add `BeCollapse` 用于展示数据
+- 新增 Add `PreviewImage` 预览 放大 缩小 拖拽
 
+- 修改 change `Notice` 暴露除`showNotice, closeALlNotice, closeNotice`方法现在更容易使用
+
+- 修复 Fixed `BeButton`组件 增加disabled样式
 - 修复 Fixed `BeInput`组件 type传入不生效的问题
 - 修复 Fixed `BePagination`组件 已知问题
 - 修复 Fixed `BeUpload` showFileList

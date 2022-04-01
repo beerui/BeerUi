@@ -8,6 +8,7 @@
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
 	export let isDrag = false // 是否需要拖拽
+	export let width = '50%' // Dialog 的宽度拖拽
 	export let isLimit = false // 限制拖拽
 	export let isFree = false // 限制拖拽
 	export let visible = true // 是否显示 Dialog
@@ -82,7 +83,15 @@ import { BeDialog } from "@brewer/beerui";
 		{#if mask}
 		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>
 		{/if}
-		<div class="be-dialog__container relative z-50" use:DragEvent|stopPropagation={ { isLimit, isDrag, isFree, els: '.drag' } } on:isInDrag={isInDragHandle} role="dialog" aria-modal="true" transition:fade="{{delay: 0, duration: 300}}">
+		<div
+			class="be-dialog__container relative z-50"
+		    use:DragEvent|stopPropagation={ { isLimit, isDrag, isFree, els: '.drag' } }
+		    on:isInDrag={isInDragHandle}
+		    role="dialog"
+		    aria-modal="true"
+		    transition:fade="{{delay: 0, duration: 300}}"
+			style:width={width}
+		>
 			<slot name='header'>
 				<div class='be-dialog__header' class:drag={isDrag}>
 					<span class='be-dialog__title'>{title}</span>

@@ -3,8 +3,9 @@
 
   export let style = null;
   export let nativeType = "button";
+  export let disabled = false;
 
-  const preClass = ["type", "size", "round", "loading", "disabled"];
+  const preClass = ["type", "size", "round", "loading"];
   const _class = ["be-button", ...filterClass($$props, "be-button--", preClass)].join(" ");
 </script>
 <button
@@ -27,9 +28,11 @@
 	on:pointerout
 	on:pointerup
 	on:input
+	class:is-disabled={disabled}
+	{disabled}
 	type={nativeType}
 >
 	<span>
-			<slot></slot>
+		<slot></slot>
 	</span>
 </button>

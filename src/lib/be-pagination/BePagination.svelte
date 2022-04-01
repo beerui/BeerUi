@@ -19,7 +19,7 @@
 	import BeSelect from "$lib/be-select/BeSelect.svelte";
 	import BeOption from "$lib/be-select/BeOption.svelte";
 	import BeInput from "$lib/be-input/BeInput.svelte";
-	import Notice from '$lib/utils/notice'
+	import { showNotice } from '$lib'
 	const dispatch = createEventDispatcher()
 
 	export let total = 0 // 总条数
@@ -65,10 +65,6 @@
 	// 初始值调用
 	onMount(() => {
 		pageList = computePageList() // 计算页码
-		notice = new Notice()
-	})
-	onDestroy(() => {
-		notice = null
 	})
 	function computePageList() {
 		let pages:any[]
@@ -163,7 +159,7 @@
 	}
 
 	function openPosInfo(title:string = '提示', message:string = ''):void{
-		notice.setNotice({
+		showNotice({
 			title,
 			message,
 			position: 'top-right',

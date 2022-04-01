@@ -1,18 +1,14 @@
 <script lang='ts'>
-	import Notice from '$lib/utils/notice';
-	import { onMount } from 'svelte';
 
 	import { BeButton } from '$lib';
 	import BeIcon from '$lib/be-icon/BeIcon.svelte';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
+	import { showNotice, closeALlNotice, closeNotice } from '$lib';
 
-	let notice;
-	onMount(() => {
-		notice = new Notice();
-	});
 
+	let noticeInstance;
 	function openInfo(): void {
-		notice.setNotice({
+		noticeInstance = showNotice({
 			title: '相思',
 			message: '红豆生南国，春来发几枝',
 			duration: 3000
@@ -35,7 +31,7 @@
 			title = '长恨歌';
 			message = '在天愿作比翼鸟，在地愿为连理枝。天长地久有时尽，此恨绵绵无绝期。';
 		}
-		notice.setNotice({
+		showNotice({
 			title,
 			message,
 			position,
@@ -44,7 +40,7 @@
 	}
 
 	function openColorNotice() {
-		notice.setNotice({
+		showNotice({
 			title: '上邪',
 			message: '山无陵，江水为竭，冬雷震震，夏雨雪，天地合，乃敢与君绝。',
 			duration: 3000,
@@ -53,10 +49,9 @@
 		});
 	}
 
-	let closeNotice;
 
 	function openNotice() {
-		closeNotice = notice.setNotice({
+		showNotice({
 			title: '滕王阁序',
 			message: '落霞与孤鹜齐飞,秋水共长天一色',
 			duration: 0
@@ -64,15 +59,15 @@
 	}
 
 	function closeOne() {
-		closeNotice.close();
+		closeNotice(noticeInstance);
 	}
 
 	function closeAll() {
-		notice.closeAll();
+		closeALlNotice();
 	}
 
 	function openNotice1() {
-		notice.setNotice({
+		showNotice({
 			title: '三五七言',
 			message: '入我相思门',
 			duration: 3000,
@@ -85,7 +80,7 @@
 	}
 
 	function openNotice2() {
-		notice.setNotice({
+		showNotice({
 			title: '木兰花·拟古决绝词柬友',
 			message: '人生若只如初见，何事秋风悲画扇。',
 			duration: 0,
@@ -93,17 +88,16 @@
 		});
 	}
 
-	function onClick(e) {
-		// console.log(e)
+	function onClick() {
 		alert('你好Beer UI');
 	}
 
 	const openTypeNotice = (type, toast) => {
-		notice.setNotice({
+		showNotice({
 			title: '提示',
 			toast: toast,
 			message: type,
-			duration: 30000,
+			duration: 3000,
 			type
 		});
 	}
@@ -113,7 +107,12 @@
 	<h2>notice</h2>
 	<p>显示全局的通知提醒消息</p>
 	<h3>基本用法</h3>
-
+	<ol>
+		<li>showNotice(options) 显示消息弹框</li>
+		<li>closeALlNotice 关闭所有消息弹框</li>
+		<li>closeNotice(id, cb) 关闭单个消息弹框</li>
+	</ol>
+	<h4>options</h4>
 	<ol>
 		<li>title 标题 </li>
 		<li>toast false 是否居中显示 只展示message内容 </li>
@@ -128,14 +127,11 @@
 		<li>close()</li>
 	</ol>
 	<DemoBlock js={`
-import Notice from "@brewer/beerui/utils/notice";
-let notice;
-onMount(() => {
-	notice = new Notice();
-});
-
+import { showNotice, closeALlNotice, closeNotice } from '@brewer/beerui';
+let noticeInstance;
 function openInfo(): void {
-	notice.setNotice({
+	// 如需手动关闭需要接收返回的id 调用closeNotice(id) 指定去关闭
+	noticeInstance = showNotice({
 		title: '相思',
 		message: '红豆生南国，春来发几枝',
 		duration: 3000
@@ -158,7 +154,7 @@ function openPosInfo(position: string): void {
 		title = '长恨歌';
 		message = '在天愿作比翼鸟，在地愿为连理枝。天长地久有时尽，此恨绵绵无绝期。';
 	}
-	notice.setNotice({
+	showNotice({
 		title,
 		message,
 		position,
@@ -167,7 +163,7 @@ function openPosInfo(position: string): void {
 }
 
 function openColorNotice() {
-	notice.setNotice({
+	showNotice({
 		title: '上邪',
 		message: '山无陵，江水为竭，冬雷震震，夏雨雪，天地合，乃敢与君绝。',
 		duration: 3000,
@@ -176,10 +172,9 @@ function openColorNotice() {
 	});
 }
 
-let closeNotice;
 
 function openNotice() {
-	closeNotice = notice.setNotice({
+	showNotice({
 		title: '滕王阁序',
 		message: '落霞与孤鹜齐飞,秋水共长天一色',
 		duration: 0
@@ -187,15 +182,15 @@ function openNotice() {
 }
 
 function closeOne() {
-	closeNotice.close();
+	closeNotice(noticeInstance);
 }
 
 function closeAll() {
-	notice.closeAll();
+	closeALlNotice();
 }
 
 function openNotice1() {
-	notice.setNotice({
+	showNotice({
 		title: '三五七言',
 		message: '入我相思门',
 		duration: 3000,
@@ -208,7 +203,7 @@ function onClose() {
 }
 
 function openNotice2() {
-	notice.setNotice({
+	showNotice({
 		title: '木兰花·拟古决绝词柬友',
 		message: '人生若只如初见，何事秋风悲画扇。',
 		duration: 0,
@@ -216,20 +211,10 @@ function openNotice2() {
 	});
 }
 
-function onClick(e) {
-	// console.log(e)
+function onClick() {
 	alert('你好Beer UI');
 }
 
-const openTypeNotice = (type, toast) => {
-	notice.setNotice({
-		title: '提示',
-		toast: toast,
-		message: type,
-		duration: 30000,
-		type
-	});
-}
 `}>
 		<div slot='source'>
 			<div class='demo-list'>
@@ -264,17 +249,12 @@ const openTypeNotice = (type, toast) => {
 	<p>带有 icon，常用来显示「成功 <span>success</span>、警告 <span>warning</span>、消息 <span>info</span>、错误 <span>error</span>」类的系统消息</p>
 	<DemoBlock
 	js={`
-import Notice from "@brewer/beerui/utils/notice";
-let notice;
-onMount(() => {
-	notice = new Notice();
-});
 const openTypeNotice = (type, toast) => {
-	notice.setNotice({
+	showNotice({
 		title: '提示',
 		toast: toast,
 		message: type,
-		duration: 30000,
+		duration: 3000,
 		type
 	});
 }
