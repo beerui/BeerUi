@@ -14,12 +14,12 @@
 	 * II. 1  ...5 6 7 8 9 ... 100
 	 * III. 1  ....5 6 7 8 9 10 11 12
 	 */
-	import { beforeUpdate, createEventDispatcher, onDestroy, onMount } from "svelte";
+	import { beforeUpdate, createEventDispatcher, onMount } from "svelte";
 	import { filterMidArray } from '$lib/utils';
 	import BeSelect from "$lib/be-select/BeSelect.svelte";
 	import BeOption from "$lib/be-select/BeOption.svelte";
 	import BeInput from "$lib/be-input/BeInput.svelte";
-	import { showNotice } from '$lib'
+	import { showNotice } from '../index'
 	const dispatch = createEventDispatcher()
 
 	export let total = 0 // 总条数
