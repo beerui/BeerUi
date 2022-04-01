@@ -108,6 +108,9 @@
       width: 100%;
     }
   }
+  &__range-time-header {
+    width: 50%;
+  }
   &__header {
     margin: 12px;
     text-align: center;
@@ -535,7 +538,15 @@
   width: 350px;
   @include rangeSelect
 }
+.be-range-datetimerange {
+  width: 400px;
+  @include rangeSelect
+}
 .be-range-monthrange {
+  width: 300px;
+  @include rangeSelect
+}
+.be-range-yearrange {
   width: 300px;
   @include rangeSelect
 }
@@ -544,6 +555,9 @@
 }
 .be-month-range-top {
   top: -275px;
+}
+.be-datetime-range-top {
+  top: -400px;
 }
 .be-date-top{
   top: -406px;

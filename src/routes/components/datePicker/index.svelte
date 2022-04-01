@@ -9,11 +9,14 @@
   let value2 = ''
   let value3 = ''
   let value4 = ''
+  // ['2022-04-01 13:38:45', '2022-05-10 14:51:12']
   let value5 = ''
   let value6 = ''
   let value7 = ''
   let value8 = ''
   let value9 = ''
+  let value10 = ''
+  let value11 = ''
   let selectableRange = '18:30:00 - 20:30:00'
     
   function changeTime(value) {
@@ -25,7 +28,6 @@
 </script>
 <div class='page-container'>
   <h3>TODO:</h3>
-  <li>增加时间日期范围选择</li>
   <li>增加年份范围选择</li>
   <li>增加多选日期功能</li>
   <li>是否需要周选择器?</li>
@@ -123,13 +125,23 @@
       <BeDatePicker bind:value={value5} selectMode="daterange"  />
     </div>
     <div class="flex column align-center">
+      <span class="demonstration">时间日期范围</span>
+      <BeDatePicker bind:value={value10} selectMode="datetimerange"  />
+    </div>
+    <div class="flex column align-center">
       <span class="demonstration">月份范围</span>
       <BeDatePicker bind:value={value6} selectMode="monthrange"  />
+    </div>
+    <div class="flex column align-center">
+      <span class="demonstration">年份范围</span>
+      <BeDatePicker bind:value={value11} selectMode="yearrange" />
     </div>
     `}
     js={`
     import { BeDatePicker } from '@brewer/beerui'
     let value5 = ''
+    let value10 = ''
+    let value11 = ''
     let value6 = ''`
     }>
       <div slot='source'>
@@ -138,9 +150,20 @@
             <span class="demonstration">默认</span>
             <BeDatePicker bind:value={value5} selectMode="daterange"  />
           </div>
+        
           <div class="flex column align-center">
             <span class="demonstration">月份范围</span>
             <BeDatePicker bind:value={value6} selectMode="monthrange"  />
+          </div>
+        </div>
+        <div class="flex justify-around" style="margin-top:20px">
+          <div class="flex column align-center">
+            <span class="demonstration">时间日期范围</span>
+            <BeDatePicker bind:value={value10} selectMode="datetimerange"  />
+          </div>
+          <div class="flex column align-center">
+            <span class="demonstration">年份范围</span>
+            <BeDatePicker bind:value={value11} selectMode="yearrange" />
           </div>
         </div>
       </div>

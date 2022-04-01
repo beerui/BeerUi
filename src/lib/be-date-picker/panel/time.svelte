@@ -8,7 +8,7 @@ const dispatch = createEventDispatcher()
 
 export let visible = false
 export let date
-export let selectableRange
+export let selectableRange = []
 export let format
 export let direction
 let dateData

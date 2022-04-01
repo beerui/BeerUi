@@ -1,8 +1,10 @@
 <script lang='ts'>
 	import BeIcon  from '../be-icon/BeIcon.svelte';
 	import Dates from './panel/date.svelte';
+	import DateTimeRange from './panel/date-time-range.svelte';
 	import DateRange from './panel/date-range.svelte';
 	import MonthRange from './panel/month-range.svelte';
+	import YearRange from './panel/year-range.svelte';
 	import BeInput from '../be-input/BeInput.svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { FormatTime } from '$lib/utils/beerui';
@@ -14,13 +16,16 @@
 		month: 'yyyy-MM',
 		daterange: 'yyyy-MM-dd',
 		datetime: 'yyyy-MM-dd HH:mm:ss',
+		datetimerange: 'yyyy-MM-dd HH:mm:ss',
 		monthrange: 'yyyy-MM',
-		year: 'yyyy'
+		year: 'yyyy',
+		yearrange: 'yyyy'
 	}
 
 	export let value;
 	export let selectMode = 'date'
 	export let format = DEFAULT_FORMATS[selectMode]
+	export let selectableRange = []
 	export let valueFormat
 	export let placeholder = '选择日期'
 	export let startPlaceholder = '开始时间'
@@ -47,7 +52,8 @@
 		'year': 266,
 		'datetime': 380,
 		'daterange': 331,
-		'monthrange': 254
+		'monthrange': 254,
+		'datetimerange': 384
 	}
 	// 日期格式化
 	$: initValue(value)
@@ -57,8 +63,8 @@
 				if(Array.isArray(value)) {
 					let start
 					let end
-					start = new Date(value[0])
-					end = new Date(value[1])
+					start = new Date(String(value[0]))
+					end = new Date(String(value[1]))
 					if(start == 'Invalid Date') start = ''
 					if(end == 'Invalid Date') end = ''
 					displayValue = [formatDate(start), formatDate(end)]
@@ -78,7 +84,6 @@
 	$:if(visible) {
 		const clientRect = inputRect && inputRect.getBoundingClientRect()
 		const clientHeight = document.body.clientHeight
-		console.log(inputRect, clientRect, clientHeight);
 		if(clientRect && clientRect.bottom + temporaryHeight[selectMode] > clientHeight) {
 			direction = 'top'
 		} else {
@@ -141,10 +146,14 @@
 			<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 		</div>
 	</div>
-	{#if selectMode == 'daterange'}
-	<DateRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
-	{:else}
+	{#if selectMode == 'datetimerange'}
+	<DateTimeRange bind:visible={visible} {direction} {format} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
+	{:else if selectMode == 'monthrange'}
 	<MonthRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
+	{:else if selectMode == 'yearrange'}
+	<YearRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
+	{:else}
+	<DateRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
 	{/if}
 </div>
 {:else}
@@ -156,6 +165,6 @@
 	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
-	<Dates {valueFormat} {direction} {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />
+	<Dates {valueFormat} {direction} {selectableRange} {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />
 </div>
 {/if}
