@@ -8,9 +8,11 @@
 
 	let handleContextMenu;
 	export let node;
+	export let value: string[] | number[] = [];
 	export let key;
 	let treeNode = null;
 	export let showCheckbox = null;
+	export let highlightCurrent: boolean = false;
 	export let props = null;
 	export let renderContent: Function;
 	export let renderAfterExpand = true;
@@ -56,6 +58,7 @@
 		dispatch('checkChange', { data: node.data, checked: node.checked, level: node.level });
 	};
 
+	$: isSelected = value.includes(node.data[nodeKey])
 	const getNodeKeyHandle = (child): string => getNodeKey(nodeKey, child);
 </script>
 <div class='be-tree-node'
@@ -66,6 +69,7 @@
      class:is-hidden={!node.visible}
      class:is-focusable={!node.disabled}
      class:is-checked={!node.disabled && node.checked}
+     class:is-selected={isSelected}
      on:contextmenu={handleContextMenu}
      role='treeitem'
      tabindex='-1'
@@ -115,6 +119,8 @@
 					{nodeKey}
 					{props}
 					{showCheckbox}
+					{highlightCurrent}
+					{value}
 					{renderContent}
 					{renderAfterExpand}
 					{clickLabelIsExpanded}

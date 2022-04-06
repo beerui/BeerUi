@@ -45,7 +45,8 @@
     &:focus>.be-tree-node__content {
       background-color: #f5f7fa;
     }
-    &.is-checked>.be-tree-node__content {background: aliceblue;}
+    //&.is-checked>.be-tree-node__content {background: aliceblue;}
+    &.is-selected>.be-tree-node__content {background: aliceblue;}
     &.is-hidden {display: none;}
     &.is-show {display: block;}
     &.is-expanded {

@@ -39,7 +39,7 @@
 			}]
 		}
 	];
-	let value = [1];
+	let value = [];
 
 	const handleChange = (val) => {
 		console.log(val);
@@ -74,7 +74,7 @@ const handleChange = (val) => {
 				<li>placeholder=请选择 // 默认提示</li>
 				<li>change // value改变的回调</li>
 				<li>nodeKey // label的指向</li>
-				<li>export let defaultProps = { children: 'children', label: 'label' }</li>
+				<li><pre><code>{@html `defaultProps = { children: 'children', label: 'label' }`}</code></pre></li>
 			</ol>
 		</div>
 	</DemoBlock>

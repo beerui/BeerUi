@@ -97,6 +97,7 @@
 					<BeTree
 						bind:this={theFilter}
 						bind:data={data}
+						bind:value={value}
 						props={defaultProps}
 						on:nodeClick={handleNodeClick}
 						on:checkChange={checkChange}
