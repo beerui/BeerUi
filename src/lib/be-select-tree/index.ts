@@ -1,3 +1,2 @@
-import BeSelect from './BeSelect.svelte';
-import BeOption from './BeOption.svelte';
-export { BeSelect, BeOption };
+import BeSelectTree from './BeSelectTree.svelte';
+export default BeSelectTree;

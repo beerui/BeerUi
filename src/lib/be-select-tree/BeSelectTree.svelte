@@ -8,7 +8,6 @@
 	// 下拉框选中的值
 	export let value = [];
 
-	export let position = 'bottom' // 位置
 	export let clearable = true
 	export let nodeKey = 'label'
 	export let placeholder = '请选择'
@@ -98,6 +97,7 @@
 					<BeTree
 						bind:this={theFilter}
 						bind:data={data}
+						bind:value={value}
 						props={defaultProps}
 						on:nodeClick={handleNodeClick}
 						on:checkChange={checkChange}

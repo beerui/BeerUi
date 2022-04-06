@@ -33,6 +33,7 @@
 	export let currentNodeKey: [String, Number] = [];
 	export let renderContent: Function = null;
 	export let filterNodeMethod: Function = null;
+	export let value: string[] | number[] = []; // SelectTree
 
 	export let props: DefaultProps = {
 		label: 'label',
@@ -175,7 +176,6 @@
 	export const handleNodeExpand = (nodeData, node, instance) => {
 		// this.broadcast('ElTreeNode', 'tree-node-expand', node);
 		// this.$emit('node-expand', nodeData, node, instance);
-		console.log('handleNodeExpand', nodeData, node, instance);
 		dispatch('nodeExpand', { nodeData, node, instance });
 	};
 	export const updateKeyChildren = (key, data) => {
@@ -242,6 +242,7 @@
 			bind:node={child}
 			{clickLabelIsExpanded}
 			{nodeKey}
+			{value}
 			{props}
 			{showCheckbox}
 			{highlightCurrent}
