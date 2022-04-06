@@ -39,7 +39,7 @@
 			}]
 		}
 	];
-	let value = '';
+	let value = [1];
 
 	const handleChange = (val) => {
 		console.log(val);
@@ -51,20 +51,19 @@
 	<h3>基本用法</h3>
 	<p>可同时展开多个面板，面板之间不影响</p>
 	<DemoBlock js={`
-import { BeCollapse, BeCollapseItem } from '@brewer/beerui'
+import BeSelectTree from '@brewer/beerui'
 `} code={
 	`
 
 `}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeSelectTree bind:data={data} bind:value={value} on:change={handleChange} />
+				<BeSelectTree bind:data={data} bind:value={value} on:change={handleChange} nodeKey='id' />
 			</div>
 		</div>
 		<div slot='description'>
 			<ol>
-				<li>export let value: string | string[] = [''] // 当前激活的面板(如果是手风琴模式，绑定值类型需要为string，否则为array)</li>
-				<li>export let accordion: boolean = false // 是否手风琴模式</li>
+				<li>export let value: string[] = ['1']</li>
 			</ol>
 		</div>
 	</DemoBlock>

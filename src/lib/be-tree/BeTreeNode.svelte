@@ -1,18 +1,21 @@
 <script lang='ts'>
-	import BeIcon from '$lib/be-icon/BeIcon.svelte';
+	import BeIcon from '../be-icon/BeIcon.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { getNodeKey } from '$lib/be-tree/model/util';
+	import { getNodeKey } from './model/util';
 	import BeCheckbox from '../be-checkbox/BeCheckbox.svelte';
 
 	const dispatch = createEventDispatcher();
 
 	let handleContextMenu;
 	export let node;
+	export let key;
 	let treeNode = null;
 	export let showCheckbox = null;
 	export let props = null;
 	export let renderContent: Function;
 	export let renderAfterExpand = true;
+	export let clickLabelIsExpanded = true
+	export let showCount = false
 
 	let indent = 18;
 	let iconClass = '';
@@ -22,9 +25,11 @@
 		dispatch('nodeExpand', evt);
 	};
 
+	const dispatchClick = (data) => dispatch('dispatchClick', data);
 	let handleClick = () => {
-		expandedHandle();
-		dispatch('handleClick', node.data);
+		// 点击label是否展开
+		if (clickLabelIsExpanded) expandedHandle();
+		dispatchClick(node.data);
 	};
 	const expandedHandle = async () => {
 		if (node.expanded) {
@@ -51,9 +56,7 @@
 		dispatch('checkChange', { data: node.data, checked: node.checked, level: node.level });
 	};
 
-	const getNodeKeyHandle = (child): void => {
-		return getNodeKey(nodeKey, child);
-	};
+	const getNodeKeyHandle = (child): string => getNodeKey(nodeKey, child);
 </script>
 <div class='be-tree-node'
      bind:this={treeNode}
@@ -91,9 +94,16 @@
 				<BeIcon name='loading' />
 			</div>
 		{/if}
-		<span class='be-tree-node__label' on:click|stopPropagation={handleClick}>{ node.label }</span>
+		<span class='be-tree-node__label' on:click|stopPropagation={handleClick}>
+			{ node.label }
+			{#if showCount && node.childNodes.length}
+				<span class='be-tree-node__label-num'>
+					({node.childNodes.length || 0})
+				</span>
+			{/if}
+		</span>
 	</div>
-	{#if !renderAfterExpand || node.expanded}
+	{#if !renderAfterExpand || node.expanded }
 		<div class='el-tree-node__children'
 		     class:expanded={node.expanded}
 		     role='group'
@@ -107,9 +117,12 @@
 					{showCheckbox}
 					{renderContent}
 					{renderAfterExpand}
+					{clickLabelIsExpanded}
+					{showCount}
 					on:checkChange={handleChildCheckChange}
 					on:nodeExpand={handleChildNodeExpand}
-					key={getNodeKeyHandle(child)}
+					on:dispatchClick
+					key={getNodeKeyHandle(child) || ''}
 				/>
 			{/each}
 		</div>

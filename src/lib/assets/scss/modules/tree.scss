@@ -45,6 +45,7 @@
     &:focus>.be-tree-node__content {
       background-color: #f5f7fa;
     }
+    &.is-checked>.be-tree-node__content {background: aliceblue;}
     &.is-hidden {display: none;}
     &.is-show {display: block;}
     &.is-expanded {
@@ -54,6 +55,9 @@
     }
     &__label {
       font-size: 14px;
+      &-num {
+        color: #bdbdbd;
+      }
     }
     &__content {
       display: flex;
