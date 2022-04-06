@@ -42,6 +42,7 @@
 			<li><a class:active={$page.url.pathname === '/components/collapse'} href='/components/collapse'>Collapse 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/scrollbar'} href='/components/scrollbar'>Scrollbar 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/carousel'} href='/components/carousel'>Carousel 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/countTo'} href='/components/countTo'>CountTo 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/preview'} href='/components/preview'>PreviewImage 示例</a></li>
 		</ul>
 	</div>

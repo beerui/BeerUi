@@ -84,12 +84,10 @@ export function loading(node, loading) {
         setNode()
       }
       if(!loading)  node.removeChild(nodeDom)
-
-      console.log('已发生变更', node,loading)
     },
     destroy(loading) {
       // node已从DOM中移除
-      console.log('node已从DOM中移除', loading)
+      // console.log('node已从DOM中移除', loading)
     }
   };
 }
