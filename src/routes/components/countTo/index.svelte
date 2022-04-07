@@ -6,7 +6,7 @@
   let start = 0
   let end = 2022
   let duration = 4000
-  let decimal = 0
+  let decimals = 0
 </script>
 
 
@@ -25,14 +25,14 @@
     let decimal = 0`}>
 		<div slot='source'>
       <div class="count-to-example-num">
-        <BeCountTo {start} {end} {duration} bind:this={countTo} />
+        <BeCountTo {start} {end} {duration} {decimals} bind:this={countTo} />
       </div>
       
       <div class="count-to-example">
         <div class="count-to-example-input">start： <BeInput type="number" bind:value={start}/></div>
         <div class="count-to-example-input">end： <BeInput type="number" bind:value={end}/></div>
         <div class="count-to-example-input">duration： <BeInput type="number" bind:value={duration}/></div>
-        <div class="count-to-example-input">decimals： <BeInput type="number" bind:value={decimal}/></div>
+        <div class="count-to-example-input">decimals： <BeInput type="number" bind:value={decimals}/></div>
       </div>
       <div class="count-to-example">
         <BeButton style="margin-right:10px" on:click={countTo.startHandler()}>开始</BeButton>

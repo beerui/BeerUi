@@ -68,7 +68,7 @@
     num += '';
     const x = num.split('.');
     let x1 = x[0];
-    const x2 = x.length > 1 ? decimals + x[1] : '';
+    const x2 = x.length > 1 ? '.' + x[1] : '';
     const rgx = /(\d+)(\d{3})/;
     if (separator && !isNumber(separator)) {
       while (rgx.test(x1)) {
