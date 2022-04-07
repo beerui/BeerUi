@@ -3,7 +3,7 @@
 	import { BeButton } from '$lib';
   import BeTable from '$lib/be-table/BeTable.svelte';
   import BeTableColumn from '$lib/be-table/BeTableColumn.svelte';
-  import {loading , loadingSerive} from '$lib/utils/loading'
+  import {loading , loadingSerive} from '$lib'
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
   const tableData = [{
         date: '2016-05-02',
