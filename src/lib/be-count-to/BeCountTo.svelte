@@ -7,7 +7,7 @@
   export let autoplay:boolean = true
   export let useEasing:boolean = true 
   export let decimals:number = 0
-  export let separator:string = ''
+  export let separator:string = ','
   let startTime
   let currentValue = Number(start)
   let localStart = Number(start)
@@ -83,6 +83,6 @@
 </script>
 
 
-<div>
+<span>
   {formatNumber(currentValue)}
-</div>
+</span>
