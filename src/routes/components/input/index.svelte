@@ -1,12 +1,9 @@
 <script lang="ts">
     import BeInput from '$lib/be-input/BeInput.svelte'
-    import { onMount } from 'svelte'
     import DemoBlock from '$lib/demo/DemoBlock.svelte';
     let value = ''
     let input
-    onMount(()=>{
-      console.log(input)
-    })
+    let maxlength;
     let number;
     let password;
     let email;
@@ -63,7 +60,9 @@ let value = ''
 `}>
 		<div slot="source">
 			<div class="demo-list">
-				number：{number}<BeInput bind:value={number} type='number' placeholder="请输入数字" />
+				maxlength maxlength=1：{maxlength}<BeInput bind:value={maxlength} maxlength='1' placeholder="请输入数字" />
+				<hr>
+				number：{number}<BeInput bind:value={number} type='number' maxlength='1' placeholder="请输入数字" />
 				<hr>
 				password：{password}<BeInput bind:value={password} type='password' placeholder="请输入密码" />
 			</div>
