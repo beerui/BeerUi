@@ -6,12 +6,13 @@
   export let duration:number = 2000
   export let autoplay:boolean = true
   export let useEasing:boolean = true 
-  export let decimal:number = 0
+  export let decimals:number = 0
+  export let separator:string = ','
   let startTime
-  let currentValue = start 
-  $:isCountDown = start > end
+  let currentValue = Number(start)
+  let localStart = Number(start)
+  let isCountDown = start > end
   let RAF = null
-
   function count(timestamp) {
     if (!startTime) startTime = timestamp;
     // 当前动画已经执行的时间
@@ -19,39 +20,39 @@
     if(useEasing) {
       // 开始数字大于结束数字
       if(isCountDown) {
-        currentValue = start - easingFn(elapsed, 0, start - end, duration);
+        currentValue = localStart - easingFn(elapsed, 0, localStart - end, duration);
       } else {
-        currentValue = easingFn(elapsed, start, end - start, duration);
+        currentValue = easingFn(elapsed, localStart, end - localStart, duration);
       }
     } else {
       if(isCountDown) {
-        currentValue = start - (start - end) * (elapsed / duration)
+        currentValue = localStart - (localStart - end) * (elapsed / duration)
       } else {
-        currentValue = start +  (end - start) * (elapsed / duration)
+        currentValue = localStart +  (end - localStart) * (elapsed / duration)
       }
     }
     currentValue = isCountDown ? (currentValue < end ? end : currentValue) : (currentValue > end ? end : currentValue)
-    currentValue = Number(currentValue.toFixed(decimal))
     if (elapsed < duration) {
       RAF = requestAnimationFrame(count);
     }
   }
   export const startHandler = () => {
     startTime = null;
-    currentValue = start
+    localStart = Number(start)
+    isCountDown = start > end
     RAF = requestAnimationFrame(count);
   }
   export const pauseHandler = () => {
     cancelAnimationFrame(RAF)
   }
   export const resumeHandler = () => {
-    // start = currentValue
+    localStart = currentValue
     startTime = null
-    requestAnimationFrame(count);
+    RAF = requestAnimationFrame(count);
   }
   export const resetHandler = () => {
     startTime = null
-    currentValue = start
+    currentValue = Number(start)
     cancelAnimationFrame(RAF)
   }
   if(autoplay) startHandler()
@@ -59,12 +60,29 @@
   const easingFn = (t, b, c, d) => {
     return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
   }
+  const isNumber = (val) => {
+    return !isNaN(parseFloat(val))
+  }
+  const formatNumber = (num) => {
+    num = Number(num).toFixed(decimals);
+    num += '';
+    const x = num.split('.');
+    let x1 = x[0];
+    const x2 = x.length > 1 ? '.' + x[1] : '';
+    const rgx = /(\d+)(\d{3})/;
+    if (separator && !isNumber(separator)) {
+      while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + separator + '$2');
+      }
+    }
+    return x1 + x2
+  }
   onDestroy(() => {
     cancelAnimationFrame(RAF)
 	});
 </script>
 
 
-<div>
-  {currentValue}
-</div>
+<span>
+  {formatNumber(currentValue)}
+</span>
