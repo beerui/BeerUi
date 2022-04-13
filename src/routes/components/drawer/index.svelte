@@ -4,18 +4,16 @@
 
 	let visible = false
 	let direction = 'rtl'
-
-	let js = `
-import { BeDrawer } from '@brewer/beerui'
-let visible = false
-let direction = 'rtl'`
 </script>
 <div class='page-container'>
 	<h2>BeDrawer 抽屉</h2>
 	<p class='desc'>有些时候, Dialog 组件并不满足我们的需求, 比如你的表单很长, 亦或是你需要临时展示一些文档, Drawer 拥有和 Dialog 几乎相同的 API, 在 UI 上带来不一样的体验.</p>
 	<h3>基本用法</h3>
 	<p>呼出一个临时的侧边栏, 可以从多个方向呼出</p>
-	<DemoBlock {js} code={
+	<DemoBlock js={`
+import { BeDrawer } from '@brewer/beerui'
+let visible = false
+let direction = 'rtl'`} code={
 	`
 <BeDrawer
 	bind:visible={visible}
