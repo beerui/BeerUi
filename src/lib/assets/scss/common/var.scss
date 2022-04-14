@@ -1,0 +1,32 @@
+// Typography
+$--font-size-small: 12px !default;
+$--font-size-base: 14px !default;
+$--font-size-medium: 16px !default;
+$--font-weight-primary: 500 !default;
+$--font-weight-bold: 600 !default;
+
+// Border
+$--border-radius-base: 4px !default;
+$--border-radius-small: 2px !default;
+
+// Button
+$--button-font-size: $--font-size-base !default;
+$--button-font-weight: $--font-weight-bold !default;
+$--button-border-radius: $--border-radius-base !default;
+$--button-padding-vertical: 12px !default;
+$--button-padding-horizontal: 20px !default;
+
+$--button-medium-font-size: $--font-size-base !default;
+$--button-medium-font-weight: $--font-weight-bold !default;
+$--button-medium-padding-vertical: 10px !default;
+$--button-medium-padding-horizontal: 20px !default;
+
+$--button-small-font-size: $--font-size-small !default;
+$--button-small-font-weight: $--font-weight-bold !default;
+$--button-small-padding-vertical: 9px !default;
+$--button-small-padding-horizontal: 15px !default;
+
+$--button-mini-font-size: $--font-size-small !default;
+$--button-mini-font-weight: $--font-weight-bold !default;
+$--button-mini-padding-vertical: 7px !default;
+$--button-mini-padding-horizontal: 15px !default;
