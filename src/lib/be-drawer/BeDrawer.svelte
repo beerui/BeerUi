@@ -3,6 +3,8 @@
 	import { fade } from 'svelte/transition';
 	import BeIcon from '../be-icon/BeIcon.svelte';
 	import { linear, quintOut } from 'svelte/easing';
+	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';
+	import { get_current_component } from 'svelte/internal';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
@@ -15,7 +17,6 @@
 	export let closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog
 	export let beforeClose = null // 是否可以通过点击 modal 关闭 Dialog 传入函数 接收返回值true/false false时不执行关闭操作
 	export let isCloseEscape = true // 是否可以通过按下 ESC 关闭 Drawer
-
 	const handleClose = () => closeOnClickModal && close();
 	onDestroy(() => {
 		dispatch('destroyOnClose')
@@ -43,6 +44,7 @@
 		};
 	}
 
+	$: if (!visible) dispatch('close', visible);
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>
