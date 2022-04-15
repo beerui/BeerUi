@@ -1,5 +1,3 @@
-<script lang='ts'>
-</script>
 <h3 class='title'>怎么来的？</h3>
 <div class='m-content'>
 	<div class='content'>

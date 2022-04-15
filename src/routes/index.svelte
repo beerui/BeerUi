@@ -1,6 +1,6 @@
 <script lang='ts'>
 import BeIcon from '$lib/be-icon/BeIcon.svelte';
-import { showNotice } from '$lib';
+import { showNotice } from '$lib/utils/notice';
 import Clipboard from '$utils/Clipboard';
 
 const ClipboardHandle = icon => {
@@ -41,19 +41,6 @@ const ClipboardHandle = icon => {
 				text-shadow: 0 4px 4px rgb(0 0 0 / 45%);box-shadow: 0 0 15px 1px rgb(25 65 115 / 19%);transition: .6s;
 			}
 		}
-	}
-	.code {
-		background-color: #000000;
-		margin-top: 80px;
-		margin-bottom: 80px;
-		padding: 5px 15px;
-		border: 0;
-		display: flex;
-		align-items: center;
-		border-radius: 4px;
-		cursor: pointer;
-		justify-content: space-between;
-		box-shadow: 9px 7px 15px 1px rgb(25 65 115 / 19%);
 	}
 	.icon {
 		margin-left: 15px;

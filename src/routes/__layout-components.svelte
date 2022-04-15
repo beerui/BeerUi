@@ -18,9 +18,9 @@
 		<SideBar />
 		<div class='be-main'>
 			<slot></slot>
+			<LayoutFooter />
 		</div>
 	</div>
-	<LayoutFooter />
 </div>
 <style lang='scss' global>
 	.be-warp {
