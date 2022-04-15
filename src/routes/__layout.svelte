@@ -2,19 +2,18 @@
 	import  '$lib/assets/scss/index.scss'
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
+	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
 
 </script>
 <div class='be-warp'>
 	<LayoutHeader menu={$page.url.pathname} />
 	<div class='be-container'>
 		<slot></slot>
+		<LayoutFooter />
 	</div>
 </div>
 <style lang='scss'>
 	.be-warp {
-	  height: 100%;overflow: hidden;
-		background-image: radial-gradient(#B7C4CD 2px, transparent 2px),radial-gradient(#B7C4CD 2px, transparent 2px);
-		background-size: calc(20 * 2px) calc(20 * 2px);
-		background-position: 0 0,calc(10 * 2px) calc(10 * 2px);
+	  background: rgb(107, 132, 173);
 	}
 </style>
