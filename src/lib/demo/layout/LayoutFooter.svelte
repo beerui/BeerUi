@@ -1,4 +1,4 @@
-<div class='be-main__footer'>
+<div class='be-main__footer' style={$$props.style}>
 	<div class='list'>
 		<div class='list-item'><span>Contributors</span></div>
 		<div class='list-item'><a href='https://github.com/beerui/BeerUi'>BeerUi</a></div>

@@ -17,8 +17,10 @@
 	<div class='be-container'>
 		<SideBar />
 		<div class='be-main'>
-			<slot></slot>
-			<LayoutFooter />
+			<div class='be-main-container'>
+				<slot></slot>
+			</div>
+			<LayoutFooter style='margin-left: 240px;background: #6b84ad;' />
 		</div>
 	</div>
 </div>
@@ -29,6 +31,7 @@
 		background: var(--bg-color-container);
 	}
 
+	.be-main-container {min-height: calc(100vh - 60px);}
 	.be-container, .be-main {
 		height: calc(100vh - 60px);
 		overflow-x: hidden;

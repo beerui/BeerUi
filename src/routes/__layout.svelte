@@ -3,7 +3,6 @@
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
 	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
-
 </script>
 <div class='be-warp'>
 	<LayoutHeader menu={$page.url.pathname} />

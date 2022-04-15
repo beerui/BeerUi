@@ -3,7 +3,8 @@
 This is a Svelte Ui Components,`@brewer/beerui`.
 
 ## Important 必看
-> 本项目的状态为开发中，不保证结构不变动，谨慎使用！
+
+本项目的状态为开发中，不保证结构不变动，谨慎使用！
 
 ## 文档 Document
 [Online Vercel](https://beer-ui.vercel.app/)
