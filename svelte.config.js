@@ -8,7 +8,10 @@ const config = {
 	preprocess: [
 		preprocess({
 			postcss: true,
-		}),
+			scss: {
+				prependData: '@use "src/app.scss" as *;'
+			}
+		})
 	],
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html

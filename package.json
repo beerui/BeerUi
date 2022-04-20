@@ -5,54 +5,38 @@
   "main": "index.js",
   "scripts": {
     "build": "svelte-kit build",
-    "build-storybook": "build-storybook",
     "build-scss": "cd src/lib/assets/scss/ && npm i && npm run build",
     "publish": "cd package && npm publish",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-    "chromatic": "chromatic --exit-zero-on-changes",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
     "dev": "svelte-kit dev --port 3333 --host",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "lint": "eslint --ignore-path .gitignore .",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
-    "storybook": "start-storybook -p 6006",
     "preinstall": "npx only-allow pnpm",
     "test": "start-server-and-test storybook http://localhost:6006 cy:run"
   },
   "devDependencies": {
     "@babel/core": "7.16.7",
     "@babel/preset-env": "7.16.7",
-    "@storybook/addon-actions": "6.4.9",
-    "@storybook/addon-essentials": "6.4.9",
-    "@storybook/addon-links": "6.4.9",
-    "@storybook/addon-storyshots": "6.4.9",
-    "@storybook/addon-svelte-csf": "1.1.0",
-    "@storybook/svelte": "6.4.9",
     "@sveltejs/adapter-vercel": "^1.0.0-next.47",
     "@sveltejs/kit": "^1.0.0-next.311",
-    "@testing-library/cypress": "8.0.2",
     "@tsconfig/svelte": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "5.9.0",
     "@typescript-eslint/parser": "5.9.0",
     "babel-loader": "8.2.3",
-    "chromatic": "6.3.3",
-    "cypress": "9.2.0",
     "eslint": "8.6.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-storybook": "^0.5.5",
     "eslint-plugin-svelte3": "3.2.1",
     "highlight.js": "^11.4.0",
-    "husky": "7.0.4",
-    "lint-staged": "12.1.5",
-    "lodash": "^4.17.21",
     "prettier": "2.5.1",
     "prettier-plugin-svelte": "2.5.1",
+    "postcss": "^8.3.9",
+    "postcss-load-config": "^3.1.1",
     "sass": "^1.45.2",
-    "start-server-and-test": "1.14.0",
     "svelte": "^3.47.0",
     "svelte-check": "2.2.11",
     "svelte-loader": "3.1.2",
@@ -62,19 +46,6 @@
     "typescript": "4.5.4"
   },
   "homepage": "https://github.com/beerui/BeerUi",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js, ts, svelte}": [
-      "eslint --fix"
-    ],
-    "*.{svelte, html, css, scss, stylus, js, ts, json, yml, yaml, md}": [
-      "prettier --write --plugin-search-dir=."
-    ]
-  },
   "prettier": {
     "singleQuote": true,
     "tabWidth": 4,
@@ -93,7 +64,6 @@
   "author": "",
   "dependencies": {
     "autoprefixer": "^10.4.1",
-    "cssnano": "^5.0.14",
-    "postcss-load-config": "^3.1.1"
+    "cssnano": "^5.0.14"
   }
 }

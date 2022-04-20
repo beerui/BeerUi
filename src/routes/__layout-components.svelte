@@ -3,6 +3,7 @@
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
 	import SideBar from '$lib/demo/layout/SideBar.svelte';
+	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
 
 	$:formatUrl = () => {
 		if ($page.url.pathname.indexOf('/svg') !== -1) {
@@ -16,28 +17,10 @@
 	<div class='be-container'>
 		<SideBar />
 		<div class='be-main'>
-			<slot></slot>
-			<div class='be-main__footer'>
-				<div class='list'>
-					<div class='list-item'><span>Contributors</span></div>
-					<div class='list-item'><a href='https://github.com/beerui/BeerUi'>BeerUi</a></div>
-				</div>
-				<div class='list'>
-					<div class='list-item'><span>Resource</span></div>
-					<div class='list-item'><a href='https://svelte.dev/'>svelte</a></div>
-					<div class='list-item'><a href='https://kit.svelte.dev/'>svelteKit</a></div>
-					<div class='list-item'><a href='https://www.npmjs.com/package/@brewer/beerui'>@brewer/beerui</a>
-					</div>
-				</div>
-				<div class='list'>
-					<div class='list-item'><span>Github</span></div>
-					<div class='list-item'><a href='https://github.com/beerui/BeerUi'>组件 BeerUi</a></div>
-					<div class='list-item'>
-						系统 Svelte-BeerUi-Admin
-<!--						<a href='https://github.com/beerui/Svelte-Beerui-admin'>系统 Svelte-BeerUi-Admin</a>-->
-					</div>
-				</div>
+			<div class='be-main-container'>
+				<slot></slot>
 			</div>
+			<LayoutFooter style='margin-left: 240px;background: #6b84ad;' />
 		</div>
 	</div>
 </div>
@@ -48,6 +31,7 @@
 		background: var(--bg-color-container);
 	}
 
+	.be-main-container {min-height: calc(100vh - 60px);}
 	.be-container, .be-main {
 		height: calc(100vh - 60px);
 		overflow-x: hidden;
@@ -69,29 +53,6 @@
 			border-radius: 6px;
 			background: rgba(0, 0, 0, 0.1);
 			-webkit-box-shadow: var(--scrollbar-color);
-		}
-	}
-
-	.be-main__footer {
-		margin-left: 240px;
-		padding: 15px;
-		background: var(--bg-color-footer);
-		display: flex;
-		justify-content: space-around;
-
-		.list {
-			&-item {
-				margin: 5px;
-				display: block;
-			}
-		}
-
-		span {
-			color: var(--text-secondary)
-		}
-
-		a {
-			color: var(--text-primary)
 		}
 	}
 
