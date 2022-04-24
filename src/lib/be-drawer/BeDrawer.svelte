@@ -3,8 +3,6 @@
 	import { fade } from 'svelte/transition';
 	import BeIcon from '../be-icon/BeIcon.svelte';
 	import { linear, quintOut } from 'svelte/easing';
-	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';
-	import { get_current_component } from 'svelte/internal';
 
 	const dispatch = createEventDispatcher()
 	export let mask = true // 是否需要遮罩层
