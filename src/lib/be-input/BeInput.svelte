@@ -60,8 +60,6 @@
 	function typeAction(node) {
 		node.type = type;
 	}
-
-		console.log($$restProps);
 </script>
 
 <div
