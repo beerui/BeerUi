@@ -4,12 +4,16 @@
   export let style = null;
   export let nativeType = "button";
   export let disabled = false;
+	export let circle = false;
+	export let round = false;
 
   const preClass = ["type", "size", "round", "loading"];
-  const _class = ["be-button", ...filterClass($$props, "be-button--", preClass)].join(" ");
+  const _class = ["be-button",...filterClass($$props, "be-button--", preClass)].join(" ");
 </script>
 <button
 	class={_class}
+	class:is-circle={circle}
+	class:is-round={round}
 	{style}
 	on:click
 	on:contextmenu

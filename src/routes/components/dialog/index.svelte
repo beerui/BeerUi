@@ -12,10 +12,7 @@
 	let openDialog4 = () => visible4 = true
 	const beforeClose1 = (type) => type !== 'cancel'
 
-	let js = `
-	import { BeButton, BeDialog } from '@brewer/beerui';
-	const beforeClose1 = (type) => type !== 'cancel'
-	`
+
 	let code = `
 <BeDialog width='30%' bind:visible={visible1} beforeClose={beforeClose1}>
 	<p>基础 Dialog</p>
@@ -52,7 +49,10 @@
 		<li>closeOnClickModal = true // 是否可以通过点击 modal 关闭 Dialog</li>
 		<li>beforeClose = null // 关闭 Dialog前触发 接收返回值true/false false时不执行关闭操作</li>
 	</ol>
-	<DemoBlock {code} {js}>
+	<DemoBlock {code} js={`
+	           import { BeButton, BeDialog } from '@brewer/beerui';
+	const beforeClose1 = (type) => type !== 'cancel'
+	`}>
 		<div slot='source'>
 			<div class='demo-list'>
 				<BeButton size="normal" type="primary" on:click={openDialog1} nativeType='submit'>打开 Dialog</BeButton>

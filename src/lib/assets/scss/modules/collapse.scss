@@ -15,8 +15,8 @@
     &__header {
       display: flex;
       align-items: center;
-      height: 48px;
-      line-height: 48px;
+      min-height: 48px;
+      line-height: 1.4;
       background-color: #fff;
       color: #303133;
       cursor: pointer;
@@ -25,6 +25,7 @@
       font-weight: 500;
       transition: border-bottom-color .3s;
       outline: none;
+      padding: 5px 0;
       &.is-active {
         border-bottom-color: transparent;
       }

@@ -1,10 +1,12 @@
 ## BeerUi
-> This is a Svelte Ui Components,`@brewer/beerui`.
+
+This is a Svelte Ui Components,`@brewer/beerui`.
 
 ## Important 必看
-> 本项目的状态为开发中，不保证结构不变动，谨慎使用！
 
-## 在线文档 Document Online
+本项目的状态为开发中，不保证结构不变动，谨慎使用！
+
+## 文档 Document
 [Online Vercel](https://beer-ui.vercel.app/)
 
 ## 更新日志 ChangeLogs
@@ -19,4 +21,5 @@ svelte & svelte-kit
 
 - `npm i @brewer/beerui -D`
 
-### 联系我们 Concat Us `beerui2021@gmail.com`
+### 联系我们 Concat Us 
+`beerui2021@gmail.com`

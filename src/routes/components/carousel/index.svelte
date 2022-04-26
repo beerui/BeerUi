@@ -1,24 +1,25 @@
 <script>
 	import BeCarousel from '$lib/be-carousel/BeCarousel.svelte';
-  import BeCarouselItem from '$lib/be-carousel/BeCarouselItem.svelte';
-  import DemoBlock from '$lib/demo/DemoBlock.svelte';
-  import { previewImages } from '$lib';
-	const items = ['/images/1.jpg', '/images/2.jpg', '/images/3.jpg', '/images/4.jpg', '/images/5.jpg', '/images/6.jpg']
-	const handleImageClicked = e => {
-		console.log(e.detail)
-	}
+	import BeCarouselItem from '$lib/be-carousel/BeCarouselItem.svelte';
+	import DemoBlock from '$lib/demo/DemoBlock.svelte';
+	import { previewImages } from '$lib';
 
-	let js = `import { BeCarousel, BeCarouselItem } from '@brewer/beerui'`
-	let js1 = `import { previewImages } from '@brewer/beerui'`
-  let code = `
+	const items = ['/images/1.jpg', '/images/2.jpg', '/images/3.jpg', '/images/4.jpg', '/images/5.jpg', '/images/6.jpg'];
+	const handleImageClicked = e => {
+		console.log(e.detail);
+	};
+
+	let js = `import { BeCarousel, BeCarouselItem } from '@brewer/beerui'`;
+	let js1 = `import { previewImages } from '@brewer/beerui'`;
+	let code = `
 <BeCarousel>
 	{#each items as item, i}
 	<BeCarouselItem>
-		<div class="w-full h-full carousel-item" style="background: url({item}) center center / cover no-repeat;"></div>
+		<div class='w-full h-full carousel-item' style='background: url({item}) center center / cover no-repeat;'></div>
 	</BeCarouselItem>
 	{/each}
 </BeCarousel>
-`
+`;
 	let code1 = `
 <BeCarousel autoplay={false} direction='vertical' trigger='hover'>
 	{#each items as item, i}
@@ -27,7 +28,7 @@
 	</BeCarouselItem>
 	{/each}
 </BeCarousel>
-`
+`;
 	const code2 = `
 <BeCarousel height="450px" autoplay={false} direction='horizontal' arrow='always' trigger='hover' type='none'>
 	{#each items as item, i}
@@ -36,16 +37,16 @@
 	</BeCarouselItem>
 	{/each}
 </BeCarousel>
-`
+`;
 	const code3 = `
-<BeCarousel height="450px" direction='horizontal' trigger='click' type='card'>
+<BeCarousel height='450px' direction='horizontal' trigger='click' type='card'>
 	{#each items as item, i}
 	<BeCarouselItem>
-		<div class="w-full h-full carousel-item" style="background: url({item}) center center / cover no-repeat;"></div>
+		<div class='w-full h-full carousel-item' style='background: url({item}) center center / cover no-repeat;'></div>
 	</BeCarouselItem>
 	{/each}
 </BeCarousel>
-`
+`;
 	const code4 = `
 <BeCarousel autoplay={false}>
 	{#each items as item, i}
@@ -54,7 +55,7 @@
 	</BeCarouselItem>
 	{/each}
 </BeCarousel>
-`
+`;
 </script>
 <div class='page-container'>
 	<h2>BeCarousel 轮播图</h2>
@@ -64,7 +65,8 @@
 				<BeCarousel autoplay={false}>
 					{#each items as item, i}
 						<BeCarouselItem {item} let:initialIndex={thing}>
-							<div class="w-full h-full carousel-item" data-thing={thing} style="background: url({item}) center center / cover no-repeat;"></div>
+							<div class='w-full h-full carousel-item' data-thing={thing}
+							     style='background: url({item}) center center / cover no-repeat;'></div>
 						</BeCarouselItem>
 					{/each}
 				</BeCarousel>
@@ -81,7 +83,8 @@
 				<BeCarousel autoplay={false}>
 					{#each items as item, i}
 						<BeCarouselItem {item}>
-							<div on:click={() => {previewImages(item, items)}} class="w-full h-full carousel-item" style="background: url({item}) center center / cover no-repeat;"></div>
+							<div on:click={() => {previewImages(item, items)}} class='w-full h-full carousel-item'
+							     style='background: url({item}) center center / cover no-repeat;'></div>
 						</BeCarouselItem>
 					{/each}
 				</BeCarousel>
@@ -98,7 +101,8 @@
 				<BeCarousel autoplay={false} direction='vertical' trigger='hover'>
 					{#each items.slice(0, 3) as item, i}
 						<BeCarouselItem>
-							<div class="w-full h-full carousel-item" style="background: url({item}) center center / cover no-repeat;"></div>
+							<div class='w-full h-full carousel-item'
+							     style='background: url({item}) center center / cover no-repeat;'></div>
 						</BeCarouselItem>
 					{/each}
 				</BeCarousel>
@@ -112,10 +116,12 @@
 	<DemoBlock code={code2}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeCarousel height="450px" autoplay={false} direction='horizontal' arrow='always' trigger='hover' type='none'>
+				<BeCarousel height='450px' autoplay={false} direction='horizontal' arrow='always' trigger='hover'
+				            type='none'>
 					{#each items as item, i}
 						<BeCarouselItem>
-							<div class="w-full h-full carousel-item" style="background: url({item}) center center / cover no-repeat;"></div>
+							<div class='w-full h-full carousel-item'
+							     style='background: url({item}) center center / cover no-repeat;'></div>
 						</BeCarouselItem>
 					{/each}
 				</BeCarousel>
@@ -129,10 +135,11 @@
 	<DemoBlock code={code3}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeCarousel height="450px" direction='horizontal' trigger='click' type='card' hideIndicator hideArrow>
+				<BeCarousel height='450px' direction='horizontal' trigger='click' type='card' hideIndicator hideArrow>
 					{#each items as item, i}
 						<BeCarouselItem>
-							<div class="w-full h-full carousel-item" style="background: url({item}) center center / cover no-repeat;"></div>
+							<div class='w-full h-full carousel-item'
+							     style='background: url({item}) center center / cover no-repeat;'></div>
 						</BeCarouselItem>
 					{/each}
 				</BeCarousel>
@@ -160,5 +167,7 @@ height： ""; // 走马灯的高度 300px
 	</DemoBlock>
 </div>
 <style lang='scss'>
-  .demo-list {margin: 16px 0;}
+	.demo-list {
+		margin: 16px 0;
+	}
 </style>

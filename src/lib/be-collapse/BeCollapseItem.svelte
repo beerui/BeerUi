@@ -10,6 +10,11 @@
 	const subscribeHandle = () => node = node
 	let node = store.creatNode({ name, title, disabled, handler: subscribeHandle });
 	const handlerClick = () => store.clickNode(node)
+	$: {
+		if (title !== node.title) node.title = title
+		if (name !== node.name) node.name = name
+		if (disabled !== node.disabled) node.disabled = disabled
+	}
 </script>
 <div
 	class='be-collapse-item'

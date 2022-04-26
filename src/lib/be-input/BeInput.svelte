@@ -3,7 +3,9 @@
 	 * this is input component
 	 */
 	import { createEventDispatcher } from 'svelte';
-
+	import { get_current_component } from 'svelte/internal';
+	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';
+	const forwardEvents = forwardEventsBuilder(get_current_component());
 	export let value = '';
 	export let placeholder = '';
 	export let size = '';
@@ -92,6 +94,8 @@
 		on:change={change}
 		on:input={onInput}
 		bind:this={input}
+		{...$$restProps}
+		use:forwardEvents
 	/>
 	{#if getSuffixVisible()}
 	  <span class={['be-input__suffix',disabled ? ' is-disabled':''].join('')}>
