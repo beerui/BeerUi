@@ -9,6 +9,7 @@ export let showAllLevels
 export let expandTrigger
 export let config
 export let left
+export let bottom
 // const store = new Store(options, $$props)
 const store = getContext('store')
 let menus = []
@@ -20,7 +21,9 @@ let selectValue = Array.isArray(store.defaultValue) ? store.defaultValue[store.d
 $:if(visible) {
    menus = store.getMenus()
    value = store.value
+   cascaderRect.style.top = bottom + 'px'
 }
+
 $: {
   // 处理右边边界问题
   const clientWidth = document.body.clientWidth

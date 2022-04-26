@@ -3,7 +3,7 @@
 	import BeInput from '$lib/be-input/BeInput.svelte';
 	import { createEventDispatcher, onMount, setContext, tick } from "svelte";
 	import clickOutside from '$lib/_actions/clickOutside';
-	import { filterClass } from "$lib/utils/beerui";
+	import { filterClass, getScrollContainer } from "$lib/utils/beerui";
 	import CascaderPanel from './cascader-panel.svelte';
 	import Store from './store';
 	const dispatch = createEventDispatcher()
@@ -38,6 +38,9 @@
 	let visible = false;
 	let cascaderRect
 	let left
+	let bottom
+	let clientRect
+	let scrollDom
 	// 获取输入框
 	let showClose = false
 	config = store.config
@@ -85,9 +88,19 @@
 	$:if(visible){
 		getLeft()
 	}
+	onMount(() => {
+		scrollDom = getScrollContainer(cascaderRect, true)
+		if(scrollDom) {
+			scrollDom.addEventListener('scroll', () => {
+				clientRect = cascaderRect.getBoundingClientRect();
+				bottom = clientRect.bottom;
+			})
+		}
+	})
 	const getLeft = () => {
-		const clientRect =  cascaderRect.getBoundingClientRect();
+		clientRect = cascaderRect.getBoundingClientRect();
 		left = clientRect.left;
+		bottom = clientRect.bottom;
 	}
 	const change = (e) => {
 		// cascaderStore = e.detail.store
@@ -100,7 +113,6 @@
 		return showAllLevels ?  data : data.slice(data.length - 1, data.length)
 	}
 </script>
-
 <div
 	class={_class}
 	class:be-select--disabled={disabled}
@@ -129,6 +141,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {options} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels} on:change={change}/>
+	<CascaderPanel {visible} {options} {bottom} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels} on:change={change}/>
 </div>
 
