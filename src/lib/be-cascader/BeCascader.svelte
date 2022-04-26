@@ -1,117 +1,118 @@
 <script lang='ts'>
 	import BeIcon from '$lib/be-icon/BeIcon.svelte';
 	import BeInput from '$lib/be-input/BeInput.svelte';
-	import { createEventDispatcher, onMount, setContext, tick } from "svelte";
+	import { createEventDispatcher, onMount, setContext, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
-	import { filterClass, getScrollContainer } from "$lib/utils/beerui";
+	import { filterClass, getScrollContainer } from '$lib/utils/beerui';
 	import CascaderPanel from './cascader-panel.svelte';
 	import Store from './store';
-	const dispatch = createEventDispatcher()
-	export let options
-	export let expandTrigger = 'click'
+
+	const dispatch = createEventDispatcher();
+	export let options;
+	export let expandTrigger = 'click';
 	// 下拉框选中的值
 	export let value = [];
 	export let size;
 	// 是否显示所有层级
-	export let showAllLevels = true
+	export let showAllLevels = true;
 	// 是否取消父子关联
-	export let checkStrictly = false
+	export let checkStrictly = false;
 	// 配置选项
 	export let config = {
 		value: 'value',
 		label: 'label',
 		children: 'children'
-	}
+	};
 	// 是否禁用
 	export let disabled = false;
 	// 位置
-	export let clearable = true
-	export let placeholder = '请选择'
-	const store = new Store(options, $$props)
-	setContext('store', store)
-	let inputValue = []
+	export let clearable = true;
+	export let placeholder = '请选择';
+	const store = new Store(options, $$props);
+	setContext('store', store);
+	let inputValue = [];
 	// let cascaderStore
-	let hasChildren = false
-	const preClass = ["size"];
-	const _class = ["be-cascader", ...filterClass($$props, "be-cascader--", preClass)].join(" ");
+	let hasChildren = false;
+	const preClass = ['size'];
+	const _class = ['be-cascader', ...filterClass($$props, 'be-cascader--', preClass)].join(' ');
 	// 下拉框
 	let visible = false;
-	let cascaderRect
-	let left
-	let bottom
-	let clientRect
-	let scrollDom
+	let cascaderRect;
+	let left;
+	let bottom;
+	let clientRect;
+	let scrollDom;
 	// 获取输入框
-	let showClose = false
-	config = store.config
+	let showClose = false;
+	config = store.config;
 	const findPathByValue = (list, val) => {
-		if(!list || list.length === 0) return false
-    for(let i = 0; i < list.length; i++) {
-      const item = list[i]
-      if(item[config.value] === val) {
+		if (!list || list.length === 0) return false;
+		for (let i = 0; i < list.length; i++) {
+			const item = list[i];
+			if (item[config.value] === val) {
 				// 如果是父子不关联的 赋值找到的最后一个值
-				if(checkStrictly) value = [item[config.value]]
-				hasChildren = item[config.children] && item[config.children].length
-				inputValue.push(item[config.label])
-        return true
-      }
-      if(findPathByValue(item[config.children], val)) {
-				inputValue.unshift(item[config.label])
-        return true
-      }
-    }
-    return false
-	}
-	if(value && value.length) {
-		if(Array.isArray(value)) {
-			findPathByValue(options, value[value.length - 1])
-		} else {
-			findPathByValue(options, value)
+				if (checkStrictly) value = [item[config.value]];
+				hasChildren = item[config.children] && item[config.children].length;
+				inputValue.push(item[config.label]);
+				return true;
+			}
+			if (findPathByValue(item[config.children], val)) {
+				inputValue.unshift(item[config.label]);
+				return true;
+			}
 		}
-		if(!showAllLevels) inputValue = inputValue.slice(inputValue.length - 1, inputValue.length)
-		
-		if(hasChildren && !checkStrictly) inputValue = []
+		return false;
+	};
+	if (value && value.length) {
+		if (Array.isArray(value)) {
+			findPathByValue(options, value[value.length - 1]);
+		} else {
+			findPathByValue(options, value);
+		}
+		if (!showAllLevels) inputValue = inputValue.slice(inputValue.length - 1, inputValue.length);
+
+		if (hasChildren && !checkStrictly) inputValue = [];
 	}
 	const clearValue = () => {
-		inputValue = []
-		value = []
-		showClose = false
-		visible = false
-		store.clear()
-	}
-	const mousedownHandle = () => {
-		visible = true
-	}
-	window.onresize = function() {
-		getLeft()
+		inputValue = [];
+		value = [];
+		showClose = false;
+		visible = false;
+		store.clear();
 	};
-	$:if(visible){
-		getLeft()
+	const mousedownHandle = () => {
+		visible = true;
+	};
+	window.onresize = function() {
+		getLeft();
+	};
+	$:if (visible) {
+		getLeft();
 	}
 	onMount(() => {
-		scrollDom = getScrollContainer(cascaderRect, true)
-		if(scrollDom) {
+		scrollDom = getScrollContainer(cascaderRect, true);
+		if (scrollDom) {
 			scrollDom.addEventListener('scroll', () => {
 				clientRect = cascaderRect.getBoundingClientRect();
-				bottom = clientRect.bottom;
-			})
+				bottom = { status: 'scroll', value: clientRect.bottom };
+			});
 		}
-	})
+	});
 	const getLeft = () => {
 		clientRect = cascaderRect.getBoundingClientRect();
 		left = clientRect.left;
-		bottom = clientRect.bottom;
-	}
+		bottom = { status: 'update', value: clientRect.bottom };
+	};
 	const change = (e) => {
 		// cascaderStore = e.detail.store
-		inputValue = showAllLevelsData(e.detail.label)
-		value = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value)
-		if(!checkStrictly) visible = false
-		dispatch('change', value)
-	}
+		inputValue = showAllLevelsData(e.detail.label);
+		value = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
+		if (!checkStrictly) visible = false;
+		dispatch('change', value);
+	};
 	const showAllLevelsData = (data) => {
-		return showAllLevels ?  data : data.slice(data.length - 1, data.length)
-	}
+		return showAllLevels ? data : data.slice(data.length - 1, data.length);
+	};
 </script>
 <div
 	class={_class}
@@ -129,18 +130,22 @@
 	on:keydown
 	on:keyup
 >
-	<div on:mouseover={() => {if(clearable && inputValue.length) showClose = true}} on:mouseleave={() => {if(clearable && inputValue.length) showClose = false}}>
+	<div on:mouseover={() => {if(clearable && inputValue.length) showClose = true}}
+	     on:mouseleave={() => {if(clearable && inputValue.length) showClose = false}}>
 		<BeInput {placeholder} value={inputValue.join('/')} readonly disabled={disabled}>
 			<div slot='suffix'>
-				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
+				<div class='input-suffix-icon' class:is-reverse={visible && !showClose}
+				     style="display:{!showClose ? 'block' : 'none'}">
 					<BeIcon name='chevron-down' width='18' height='18' />
 				</div>
-				<div on:click={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
-					<BeIcon name='close-circle' width='14' height='14'/>
+				<div on:click={clearValue} class:close={showClose}
+				     style="display:{showClose ? 'block' : 'none'};margin-right:2px">
+					<BeIcon name='close-circle' width='14' height='14' />
 				</div>
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {options} {bottom} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels} on:change={change}/>
+	<CascaderPanel {visible} {options} {bottom} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels}
+	               on:change={change} />
 </div>
 
