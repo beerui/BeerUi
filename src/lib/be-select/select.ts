@@ -21,12 +21,12 @@ export default class SelectStore {
 			value: String(props.value),
 			disabled: props.disabled,
 			index: ++len,
-			key: props.key,
+			key: String(props.key),
 			hover: props.hover
 		};
-		this.optionList.set(props.key, node);
+		this.optionList.set(node.key, node);
 		this.sizeHandle(this.optionList.size)
-		return this.optionList.get(props.key);
+		return this.optionList.get(node.key);
 	}
 
 	setHover(value) {

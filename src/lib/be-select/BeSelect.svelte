@@ -40,6 +40,10 @@
 	let showClose = false
 	$:initValue(value)
 	$:if(visible) store.setHover(value)
+	$:if(value) {
+		store.value = value
+		setCurrentValue();
+	}
 
 	let inner = false; // 是否是内部改变的值
 	function initValue(value) {
@@ -48,10 +52,11 @@
 		if (node) store.setCurrent(node)
 	}
 	const setCurrentValue = () => {
-		let node = store.getCurrent(value)
+		let node = store.getCurrent(String(value))
 		inputValue = node?.label
 	}
-	onMount(() => {
+	onMount(async() => {
+		await tick()
 		setCurrentValue()
 	})
 	// 打开关闭下拉功能

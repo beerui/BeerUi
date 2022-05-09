@@ -121,6 +121,7 @@
 	let draging = false
 	let tempIndex = 1
 
+	$: if (limit || fileList) hideUploadHandle([])
 	const isImage = (str) => {
 		return str.indexOf('image') !== -1;
 	}
@@ -285,7 +286,6 @@
 	}
 </script>
 <div class="be-upload" style={$$props.style}>
-	fileList {fileList.length}
 	{#if drag}
 		<div
 			class="be-upload--{listType}"

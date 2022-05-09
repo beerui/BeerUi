@@ -4,7 +4,6 @@
 	import clickOutside from '$lib/_actions/clickOutside';
 	import BeIcon from '../be-icon/BeIcon.svelte';
 	import { slide } from 'svelte/transition';
-	import { getCurrentNode } from '$lib/be-tree/BeTree.svelte';
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
 	export let value = [];

@@ -124,7 +124,7 @@ const submitHandle = () => {
 					action="https://jsonplaceholder.typicode.com/posts/"
 					multiple
 					listType="picture-card"
-					limit={9}
+					limit={2}
 					hideUpload={true}
 					fileList={fileList2}>
 					<div class="upload-card"><BeIcon name="add" width="40" height="40" /></div>
