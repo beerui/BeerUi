@@ -1,9 +1,10 @@
 <script lang='ts'>
 	import BeTree from '../be-tree/BeTree.svelte';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import BeIcon from '../be-icon/BeIcon.svelte';
 	import { slide } from 'svelte/transition';
+	import { getCurrentNode } from '$lib/be-tree/BeTree.svelte';
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
 	export let value = [];
@@ -13,12 +14,37 @@
 	export let placeholder = '请选择'
 	// Tree
 	export let data = []
-	export let defaultProps = { children: 'children', label: 'label' }
+	export let defaultProps = { children: 'children', label: 'label', id: 'id' }
 
 	let visible = false // 选框是否展示
 	let inputVal = '' // 输入框的值
 	let isFocus = false // 输入框是否聚焦
 	let theFilter = null
+
+	onMount(async () => {
+		await tick()
+		setCurrentValue()
+	})
+	// set init value
+	let initChecked = {
+		label: ''
+	}
+	const setCurrentValue = () => {
+		filterInitChecked(value[0], data)
+		inputVal = initChecked?.label || ''
+	}
+
+	const filterInitChecked = (value, data) => {
+		for (let i = 0; i < data.length; i++) {
+			if (data[i].children && data[i].children.length > 0) {
+				filterInitChecked(value, data[i].children)
+			}
+			if (data[i][defaultProps.id] === value) {
+				initChecked = { label: data[i][defaultProps.label], id: data[i][defaultProps.id] }
+				return
+			}
+		}
+	}
 
 	const handleNodeClick = ({ detail }) => {
 		// id: 9 label: "三级 1-1-1"

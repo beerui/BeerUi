@@ -39,7 +39,7 @@
 			}]
 		}
 	];
-	let value = [];
+	let value = [5];
 
 	const handleChange = (val) => {
 		console.log(val);
