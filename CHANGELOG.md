@@ -1,6 +1,6 @@
 # BeerUi 
 
-## @brewer/beerui@1.0.30-next.45 `2022/5/9`
+## @brewer/beerui@1.0.30-next.46 `2022/5/9`
 
 ### Patch Changes
 
