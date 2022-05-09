@@ -1,22 +1,19 @@
 # BeerUi 
 
-## @brewer/beerui@1.0.30-next.44 `2022/5/9`
+## @brewer/beerui@1.0.30-next.45 `2022/5/9`
 
 ### Patch Changes
 
-- 新增 Add `messageBox` 方法 用于轻提示
-- 新增 Add `BeTree` filter方法 用于过滤数据
-- 新增 Add `BeCollapse` 用于展示数据
-- 新增 Add `PreviewImage` 预览 放大 缩小 拖拽
+- 新增 Add `BeCarousel` 增加滑动切换
+- 新增 Add `BeIcon` 增加点击复制名称
 
-- 修改 change `Notice` 暴露除`showNotice, closeALlNotice, closeNotice`方法现在更容易使用
+- 修改 Change `BeButton` 样式统一
 
-- 修复 Fixed `BeButton`组件 增加disabled样式
-- 修复 Fixed `BeInput`组件 type传入不生效的问题
-- 修复 Fixed `BePagination`组件 已知问题
-- 修复 Fixed `BeUpload` showFileList
-- 修复 Fixed `BeDatePicker` 上下方向的自适应
-- 修复 Fixed `BeTree` 下级选框展开未选中的问题
+- 修复 Fixed `BeSelectTree`组件 初始化不赋值
+- 修复 Fixed `BeSelect`组件 在异步加载值和option的时候 未设置值
+- 修复 Fixed `BeUpload` 异步设置limit时 设置hideUpload=true的情况下 新增按钮不隐藏
+- 修复 Fixed `BeCascader` 定位滚动的问题
+- 修复 Fixed `BeDrawer` 删除不必要的dispatch
 
 
 ## @brewer/beerui@1.0.30-next.32 `2022/4/1`
@@ -28,7 +25,7 @@
 - 新增 Add `BeCollapse` 用于展示数据
 - 新增 Add `PreviewImage` 预览 放大 缩小 拖拽
 
-- 修改 change `Notice` 暴露除`showNotice, closeALlNotice, closeNotice`方法现在更容易使用
+- 修改 Change `Notice` 暴露除`showNotice, closeALlNotice, closeNotice`方法现在更容易使用
 
 - 修复 Fixed `BeButton`组件 增加disabled样式
 - 修复 Fixed `BeInput`组件 type传入不生效的问题
