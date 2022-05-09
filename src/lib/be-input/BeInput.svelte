@@ -60,10 +60,15 @@
 	function typeAction(node) {
 		node.type = type;
 	}
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
-
 <div
-	class={['be-input', size?' be-input--'+ size:'', disabled?' is-disabled':''].join('')}
+	class='be-input {_class}'
+	class:is-disabled={disabled}
+	class:be-input--medium={size === 'medium'}
+	class:be-input--small={size === 'small'}
+	class:be-input--mini={size === 'mini'}
 	style={$$props.style}
 	on:click
 	on:contextmenu
@@ -83,6 +88,7 @@
 	on:pointerup
 >
 	<input
+		{...$$restProps}
 		use:typeAction
 		placeholder={placeholder}
 		bind:value
@@ -94,7 +100,6 @@
 		on:change={change}
 		on:input={onInput}
 		bind:this={input}
-		{...$$restProps}
 		use:forwardEvents
 	/>
 	{#if getSuffixVisible()}

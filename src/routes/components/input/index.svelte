@@ -31,7 +31,7 @@ let value = ''
 `}>
 		<div slot="source">
 			<div class="demo-list">
-				<BeInput bind:value placeholder="请输入内容" />
+				<BeInput class='aa bb' bind:value placeholder="请输入内容" />
 				<hr>
 				<BeInput bind:value placeholder="请输入内容" size="medium" />
 				<hr>
