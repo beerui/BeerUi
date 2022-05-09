@@ -9,6 +9,7 @@
 
 - 修改 Change `BeButton` 样式统一
 
+- 修复 Fixed `BeInput`组件 自定义class会覆盖原有class
 - 修复 Fixed `BeSelectTree`组件 初始化不赋值
 - 修复 Fixed `BeSelect`组件 在异步加载值和option的时候 未设置值
 - 修复 Fixed `BeUpload` 异步设置limit时 设置hideUpload=true的情况下 新增按钮不隐藏
