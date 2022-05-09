@@ -12,18 +12,22 @@
 }
 
 .be-button {
+  @include button-variant(
+    var(--be-primary),
+    var(--be-primary),
+    var(--text-color-white),
+    var(--be-primary-hover),
+    var(--be-primary-hover),
+    var(--text-color-white)
+  );
   font-size: $--button-font-size;
   font-weight: $--button-font-weight;
   line-height: 1;
   white-space: nowrap;
-  color: var(--text-color-white);
-  background: var(--be-primary);
-  border: none;
   padding: 12px 20px;
   border-radius: 4px;
   cursor: pointer;
   transition: .3s;
-  span {color: var(--text-color-white)}
 
   &--medium{
     @include button-size(
