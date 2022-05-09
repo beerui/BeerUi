@@ -24,7 +24,10 @@
 	}
 	store.subscribe.push(subscribeHandle)
 	let optionSize = 0
-	const getSize = size => optionSize = size
+	const getSize = async size => {
+		optionSize = size;
+		setCurrentValue() // fixed async load options data
+	}
 	store.sizeSubscribe.push(getSize)
 	let inputValue = ''
 	export let disabled = false // 是否禁用
@@ -37,17 +40,18 @@
 	$:initValue(value)
 	$:if(visible) store.setHover(value)
 
-
-
 	let inner = false; // 是否是内部改变的值
 	function initValue(value) {
 		if (inner) return
 		let node = store.getCurrent(value)
 		if (node) store.setCurrent(node)
 	}
-	onMount(() => {
+	const setCurrentValue = () => {
 		let node = store.getCurrent(value)
 		inputValue = node?.label
+	}
+	onMount(() => {
+		setCurrentValue()
 	})
 	// 打开关闭下拉功能
 	const handleShowPopper = () => visible = true
@@ -83,7 +87,7 @@
 	<div class='be-select__option' class:visible={visible}>
 		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
 			<slot></slot>
-			{#if optionSize == 0}
+			{#if optionSize === 0}
 			<div class="be-select-dropdown__empty">无数据</div>
 			{/if}
 		</ul>
