@@ -135,11 +135,11 @@
 		if (hideUpload) isHideUpload = fileList.length + files.length >= limit;
 	}
 	const uploadFiles = (files) => {
-		hideUploadHandle(files)
 		if (limit && fileList.length + files.length > limit) {
 			onExceed && onExceed(files, fileList);
 			return;
 		}
+		hideUploadHandle(files)
 		let postFiles = Array.prototype.slice.call(files);
 		if (!multiple) { postFiles = postFiles.slice(0, 1); }
 		if (postFiles.length === 0) { return; }
@@ -285,6 +285,7 @@
 	}
 </script>
 <div class="be-upload" style={$$props.style}>
+	fileList {fileList.length}
 	{#if drag}
 		<div
 			class="be-upload--{listType}"
