@@ -2,8 +2,7 @@
 	import { BeSelect, BeOption } from '$lib';
 	import DemoBlock from "$lib/demo/DemoBlock.svelte";
 	import BeButton from '$lib/be-button/BeButton.svelte';
-	import BeDrawer from '$lib/be-drawer/BeDrawer.svelte';
-	let query = { value: '', options: [] }
+	let value = ''
 	let options = [
 		{
 			value1: '0',
@@ -26,24 +25,11 @@
 			label2: '北京烤鸭',
 		}
 	];
-	let visible = false
-
-	const setVisible = () => {
-		visible = true
-		setValue()
-		setTimeout(() => {
-			query.options = [
-				{ label: '测试', value: '1' },
-				{ label: '测试2', value: '2' },
-				{ label: '测试3', value: '3' },
-			]
-		}, 1000)
-	}
 	const setValue = () => {
-		query.value = '1'
+		value = '1'
 	}
 	const clearValue = () => {
-		query.value = ''
+		value = ''
 	}
 	let options1 = [
 		{
@@ -77,9 +63,9 @@
 </script>
 
 <div class="page-container content">
-	<h2 on:click={() => value = ''}>BeSelect 选择框</h2>
+	<h2>BeSelect 选择框</h2>
 	<p>当选项过多时，使用下拉菜单展示并选择内容。</p>
-	<h3 on:click={() => value = '2'}>基本用法</h3>
+	<h3>基本用法</h3>
 	<DemoBlock code={`
 <BeSelect bind:value={value} clearable={true} on:change={changeSelect}>
 	<BeOption label="测试" value="0"/>
@@ -95,16 +81,13 @@ const changeSelect = (e) => {
 	>
 		<div slot='source'>
 			<BeButton on:click={setValue}>setValue('1')</BeButton>
-			<BeButton on:click={clearValue}>clearValue()</BeButton>
-			<BeButton on:click={setVisible}>openVisible</BeButton>
-			<p>value：{query.value}</p>
-			<BeDrawer bind:visible>
-				<BeSelect bind:value={query.value} clearable={true} on:change={changeSelect}>
-					{#each query.options as item}
-					<BeOption label={item.label} value={item.value}/>
-					{/each}
-				</BeSelect>
-			</BeDrawer>
+			<BeButton on:click={clearValue}>clearValue</BeButton>
+			<p>value：{value}</p>
+			<BeSelect bind:value={value} clearable={true} on:change={changeSelect}>
+				<BeOption label="测试" value="0"/>
+				<BeOption label="测试2" value="1"/>
+				<BeOption label="测试3" value="2"/>
+			</BeSelect>
 		</div>
 	</DemoBlock>
 	<h3>有禁用选项</h3>

@@ -26,6 +26,7 @@
 	let optionSize = 0
 	const getSize = async size => {
 		optionSize = size;
+		await tick()
 		setCurrentValue() // fixed async load options data
 	}
 	store.sizeSubscribe.push(getSize)
