@@ -25,14 +25,12 @@
   // export let scrollable = false
 
 
-  console.log('be-alert--' + type);
   const dispatch = createEventDispatcher()
 
   // 关闭alert
   function close(){
     dispatch('close')
   }
-  console.log($$slots);
 </script>
 <!-- <div > -->
   <div transition:fade class={['be-alert',type ? ' be-alert--' + type:'', effect ? ' is-' + effect:'' ].join('')}>

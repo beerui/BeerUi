@@ -11,7 +11,6 @@
 		const notification = notify('Now Playing', 'Mr Brightest')
 
 		if (notification) {
-			console.log('Notification are active');
 			notification.addEventListener('click', e => {
 				window.parent.focus()
 				e.target.close()

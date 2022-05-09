@@ -19,7 +19,6 @@
 
 	// 实例化时间
   const times = new FormatTime(formatTime)
-  console.log(times.getTime);
 
 	let timer = null
 	let timerShow = defaultTime

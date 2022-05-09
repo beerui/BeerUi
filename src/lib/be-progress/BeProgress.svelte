@@ -29,13 +29,11 @@
 		}
 	}
 	let dragendHandle = (evt) => {
-		console.log(`draggedIndex ${draggedIndex} dragEnterIndex ${dragEnterIndex}`, evt);
 		status = false
 		dragEnterIndex = null
 		pIndex = null
 	};
 	let dropHandler = (evt) => {
-		console.log('dropHandler', evt);
 		const { index } = evt.target.dataset
 		const oldIndex = _list.splice(index, 1)
 		_list.splice(dragEnterIndex, 0, ...oldIndex)
@@ -45,7 +43,6 @@
 
 		document.addEventListener("drop", function(event) {
 			event.preventDefault();
-			console.log('dropHandler1', event);
 		});
 	})
 </script>

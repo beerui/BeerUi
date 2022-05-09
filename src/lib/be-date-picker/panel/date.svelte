@@ -81,7 +81,6 @@ function handleNextYear() {
 
 function confirmDatePick(e) {
   value = e.detail
-  console.log(e.detail);
 
   timeValue = getTimeValueFormat(e.detail)
   if(selectMode != 'datetime') dispatch('pick', e.detail)
@@ -106,7 +105,6 @@ function confirmYearPick(e) {
 
 function handleShowTimePopper(e) {
 		timeVisible = true;
-		console.log('handleShowTimePopper');
 	}
 	function handleTimeChange() {
 		timeVisible = false;
@@ -144,7 +142,7 @@ function handleShowTimePopper(e) {
 <div class="be-picker-panel be-date-picker be-popper be-{selectMode}-{direction}" in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__body-wrapper">
     <div class="be-picker-panel__body">
-    
+
       <div class="be-date-picker__header">
           {#if currentView === 'date'}
             <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth}></span>

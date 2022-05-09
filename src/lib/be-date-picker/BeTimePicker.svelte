@@ -10,7 +10,7 @@
 	const dispatch = createEventDispatcher()
 	const DEFAULT_FORMATS = {
 		time: 'HH:mm:ss'
-	}		
+	}
 	export let value
 	export let selectableRange = []
 	export let format = DEFAULT_FORMATS['time']
@@ -35,7 +35,6 @@
 	}
 	function handleShowDatePopper(e) {
 		visible = true;
-		console.log('handleShowDatePopper');
 	}
 	function handleChange() {
 		visible = false;
