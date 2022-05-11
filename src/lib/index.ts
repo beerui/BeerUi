@@ -25,6 +25,7 @@ import messageBox from './utils/MessageBox';
 import BeDrawer from './be-drawer/BeDrawer.svelte';
 import BeCountTo from './be-count-to/BeCountTo.svelte';
 import BeSelectTree from './be-select-tree/BeSelectTree.svelte';
+import BeTextarea from './be-textarea/BeTextarea.svelte';
 import { BeCollapse, BeCollapseItem } from './be-collapse';
 
 import { BeTable, BeTableColumn } from './be-table';
@@ -36,4 +37,4 @@ import { BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu } from './be-menu';
 import { BeBreadcrumb, BeBreadcrumbItem } from './be-breadcrumb';
 import { showNotice, closeALlNotice, closeNotice } from './utils/notice';
 import { loading, loadingSerive } from './utils/loading';
-export { loading, loadingSerive, BeSelectTree, BeCountTo, BeCollapse, BeCollapseItem, showNotice, closeALlNotice, closeNotice, messageBox, BeDrawer, BeCascader, BeRadio, BeRadioGroup, BeButton, previewImages, BeIcon, BeTable, BeTableColumn, BeCarouselItem, BeCarousel, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker, BeClock, BeDrag, BeScrollbar, BeProgress, BeUpload, BeNotification, BeLoading, BeCheckbox, BeCheckboxGroup, BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu, BeBreadcrumb, BeBreadcrumbItem, BeTree, BeEmpty, BeTimePicker, BeOption };
+export { BeTextarea, loading, loadingSerive, BeSelectTree, BeCountTo, BeCollapse, BeCollapseItem, showNotice, closeALlNotice, closeNotice, messageBox, BeDrawer, BeCascader, BeRadio, BeRadioGroup, BeButton, previewImages, BeIcon, BeTable, BeTableColumn, BeCarouselItem, BeCarousel, BeAlert, BeDialog, BePagination, BeSwitch, BeTabs, BeTabPane, BeSelect, BeInput, BeDatePicker, BeClock, BeDrag, BeScrollbar, BeProgress, BeUpload, BeNotification, BeLoading, BeCheckbox, BeCheckboxGroup, BeMenu, BeMenuItem, BeMenuItemGroup, BeSubMenu, BeBreadcrumb, BeBreadcrumbItem, BeTree, BeEmpty, BeTimePicker, BeOption };

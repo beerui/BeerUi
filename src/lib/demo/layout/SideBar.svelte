@@ -12,6 +12,7 @@
 			</li>
 			<li><span class='base'>表单</span></li>
 			<li><a class:active={$page.url.pathname === '/components/input'} href='/components/input'>Input 示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/textarea'} href='/components/textarea'>Textarea 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/radio'} href='/components/radio'>Radio 单选框</a></li>
 			<li><a class:active={$page.url.pathname === '/components/checkbox'} href='/components/checkbox'>Checkbox
 				多选框</a></li>

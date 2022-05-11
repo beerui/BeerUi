@@ -63,7 +63,7 @@
 			padding: 5px 15px;
 			width: 100%;
 			min-height: 34px;
-			height: 80px;
+			height: 34px;
 			line-height: $--base-line-height;
 			color: var(--text-primary);
 			font-size: $--font-size-base;
