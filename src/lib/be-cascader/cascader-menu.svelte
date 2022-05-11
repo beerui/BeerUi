@@ -9,16 +9,20 @@
 	export let checkStrictly;
 	export let selectValue;
 	export let config;
+	export let lazy = false
+
 	const hoverNodes = (item) => {
 		if (expandTrigger == 'click') return;
 		if (expandTrigger == 'hover' && (!item[config.children] || !item[config.children].length)) {
 			return;
 		} else {
+			if(lazy) item.loading = true
 			store.publishHandle(item);
 		}
 	};
 	const clickNodes = (item, type = 'default') => {
 		// BeerPS.publish(key, item)
+		if(lazy) item.loading = true
 		const params = {
 			...item,
 			type
@@ -43,10 +47,14 @@
 					         on:click={() => clickNodes(item, 'radio')} />
 				{/if}
 				<span class='be-cascader-node__label'>{item[config.label]}</span>
-				{#if item.children && item.children.length}
+				{#if (lazy && item.hasChild) || (item.children && item.children.length)}
+					{#if item.loading}
+					<BeIcon name='refresh'width='18' height='18' class="be-cascader-node__loading"/>
+					{:else}
 					<BeIcon name='chevron-right'
-					        color="{item.disabled ? '#c0c4cc' : (value == item[config.value] ? '#409eff' : '#606266')}"
-					        width='18' height='18' />
+									color="{item.disabled ? '#c0c4cc' : (value == item[config.value] ? '#409eff' : '#606266')}"
+									width='18' height='18' />
+					{/if}
 				{/if}
 			</li>
 		{/each}

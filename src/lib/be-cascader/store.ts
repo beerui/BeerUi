@@ -20,10 +20,12 @@ export default class Store {
 	menus: Array<object> = []
   checkStrictly: boolean = false
   showAllLevels: boolean = true
+	lazy: boolean = false
 	constructor(data, props) {
 		this.config = {...this.config, ...props.config}
 		this.options = data;
 		this.defaultValue = props.value
+		this.lazy = props.lazy
 		if(this.defaultValue && this.defaultValue.length) {
       if(Array.isArray(this.defaultValue)) {
         this.initMenuByPath(this.options, this.defaultValue[this.defaultValue.length - 1])
@@ -74,7 +76,6 @@ export default class Store {
 		// this.value.splice(this.level - step, this.value.length - 1, items.value)
 		// this.label.splice(this.level - step, this.label.length - 1, items.label)
     // console.log(this.label, this.value);
-    
 	}
 	clear() {
 		this.value = []
@@ -83,8 +84,17 @@ export default class Store {
     this.defaultValue = []
 		this.setMenu(this.options)
 	}
-	setMenu(data) {
-    this.menus = this.menus.slice(0, this.level)
+	setMenu(data, key?) {
+		this.menus = this.menus.slice(0, this.level)
+		if(this.lazy) {
+			const menu = this.menus[this.menus.length - 1] || []
+			menu.forEach(item => {
+				if(item[this.config.value] == key) {
+					item[this.config.children] = data
+				}
+				item.loading = false
+			})
+		}
 		data = this.flatten(data, ++this.level)
 		this.menus.push(data)
 	}

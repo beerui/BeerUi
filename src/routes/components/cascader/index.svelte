@@ -11,12 +11,15 @@
 		value: 'id',
 		label: 'value'
 	}
+	let lazy = true
+	
 	let value1 = ''
 	let value2 = ''
 	let value3 = ''
 	let value4 = ''
 	let value5 = ''
 	let value6 = ''
+	let value7 = ''
 	let expandTrigger = 'hover';
 
 	let options = [{
@@ -625,9 +628,31 @@
 			value: '组件交互文档'
 		}]
 	}]
+	let lazyOptions = [
+		{
+			value: 'zhinan',
+			label: '选项1',
+			hasChild: true,
+			children: []
+		}
+	]
 	const change = (e) => {
 		console.log(e);
 	};
+	let id = 1;
+	const lazyLoad = (node, resolve) => {
+		const { level } = node;
+		setTimeout(() => {
+			const nodes = Array.from({ length: level + 1 })
+				.map(item => ({
+					value: ++id,
+					label: `选项${id}`,
+					hasChild: level <= 2
+				}));
+			// 通过调用resolve将子节点数据返回，通知组件数据加载完成
+			resolve(nodes);
+		}, 1000);
+	}
 	let visible = false
 </script>
 <div class='page-container content'>
@@ -1746,6 +1771,43 @@
 		</div>
 		<div slot='description'>
 			通过config 来设置自定义选项的值。默认取对象中的value和label
+		</div>
+	</DemoBlock>
+	<h3>动态加载</h3>
+	<p>当选中某一级时，动态加载该级下的选项。</p>
+	<DemoBlock code = {
+		`<BeCascader bind:value={value} lazy = {true} options = {lazyOptions} lazyLoad = {lazyLoad}/>`}
+		js={`
+		let value = []
+		let id = 1;
+		let lazyOptions = [
+			{
+				value: 'zhinan',
+				label: '选项1',
+				hasChild: true,
+				children: []
+			}
+		]
+		const lazyLoad = (node, resolve) => {
+			const { level } = node;
+			setTimeout(() => {
+				const nodes = Array.from({ length: level + 1 })
+					.map(item => ({
+						value: ++id,
+						label: `+'`'+`选项`+'${id}'+'`'+`,
+						hasChild: level <= 2
+					}));
+				// 通过调用resolve将子节点数据返回，通知组件数据加载完成
+				resolve(nodes);
+			}, 1000);
+		}`}>
+		<div slot='source'>
+			<div class='flex justify-around'>
+				<BeCascader bind:value={value7} lazy = {true} options = {lazyOptions} lazyLoad = {lazyLoad}/>
+			</div>
+		</div>
+		<div slot='description'>
+			通过<code>lazy</code>开启动态加载，并通过<code>lazyload</code>来设置加载数据源的方法。<code>lazyload</code>方法有两个参数，第一个参数<code>node</code>为当前点击的节点，第二个<code>resolve</code>为数据加载完成的回调(必须调用)。了更准确的显示节点的状态，还可以对节点数据添加是否为叶子节点的标志位 (默认字段为hasChild)，否则会简单的以有无子节点来判断是否为叶子节点。
 		</div>
 	</DemoBlock>
 </div>

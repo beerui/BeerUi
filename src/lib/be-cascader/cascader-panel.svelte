@@ -10,6 +10,8 @@
 	export let expandTrigger;
 	export let config;
 	export let left;
+	export let lazy = false
+	export let lazyLoad = (node, resolve) => {}
 	export let bottom: { status: string, value: number } = { status: 'init', value: 0 };
 	// const store = new Store(options, $$props)
 	const store = getContext('store');
@@ -53,46 +55,40 @@
 			store.setCurrent(items);
 			value = store.value;
 		} else {
-			store.setCurrent(items);
-			value = store.value;
-			menus = store.menus.slice(0, items.level);
-			let params = {
-				value: store.value,
-				label: store.label,
-				store: store
-			};
-			if (!checkStrictly) dispatch('change', params);
+			// 没有子集并且规定了有下级
+			if(lazy && items.hasChild) {
+				lazyLoad(items, (nodes) => {
+					store.level = items.level
+					store.setMenu(nodes, items[config.value])
+					menus = store.getMenus()
+					store.setCurrent(items);
+					value = store.value;
+				})
+			} else {
+				store.setCurrent(items);
+				value = store.value;
+				menus = store.menus.slice(0, items.level);
+				let params = {
+					value: store.value,
+					label: store.label,
+					store: store
+				};
+				if (!checkStrictly) dispatch('change', params);
+			}
 		}
 		if (checkStrictly && items.type == 'radio') {
 			selectValue = items[config.value];
 			dispatch('change', { selectValue, value: store.value, label: store.label, store: store });
 		}
-	};
+	}
 	store.subscribe.push(subscribeHandle);
-	// const key = `cascaderChange_${ genKey() }`
-	// setContext('cascaderChangeKey', key)
-	// BeerPS.subscribe(key, items => {
-	//   if(items.children && items.children.length) {
-	//     store.level = items.level
-	//     store.setMenu(items.children)
-	//     menus = store.getMenus()
-	//     store.setCurrent(items)
-	//     value = store.value
-	//   } else {
-	//     store.setCurrent(items)
-	//     value = store.value
-	//     menus = store.menus.slice(0, items.level)
-	//     dispatch('change', {value: store.value, label: store.label, store: store})
-	//   }
-	// })
 </script>
 
 
 <div class='be-cascader-panel' bind:this={cascaderRect} bind:clientWidth={cascaderWidth} class:visible={visible}>
 	{#if menus && menus.length > 0}
 		{#each menus as menu, index}
-			<CascaderMenu {expandTrigger} {selectValue} {config} {menu} {checkStrictly}
-			              value={ value[index] || selectValue } {store} />
+			<CascaderMenu {expandTrigger} {selectValue} {config} {menu} {checkStrictly} {lazy} value={ value[index] || selectValue } {store} />
 		{/each}
 	{:else}
 		<div class='be-cascader-dropdown__empty'>暂无数据</div>

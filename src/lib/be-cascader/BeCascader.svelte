@@ -23,6 +23,10 @@
 		label: 'label',
 		children: 'children'
 	};
+	// 是否开启动态加载
+	export let lazy = false
+	// 动态加载方法
+	export let lazyLoad = (node, resolve) => {}
 	// 是否禁用
 	export let disabled = false;
 	// 位置
@@ -86,7 +90,7 @@
 	window.onresize = function() {
 		getLeft();
 	};
-	$:if (visible) {
+	$:if(visible) {
 		getLeft();
 	}
 	onMount(() => {
@@ -145,7 +149,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {options} {bottom} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels}
-	               on:change={change} />
+	<CascaderPanel {visible} {options} {bottom} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels} {lazy} {lazyLoad} on:change={change} />
 </div>
 
