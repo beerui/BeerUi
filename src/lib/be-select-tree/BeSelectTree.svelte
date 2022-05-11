@@ -7,6 +7,7 @@
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
 	export let value = [];
+	export let lazy: boolean = false;
 
 	export let clearable = true
 	export let load: Function = null;
@@ -15,6 +16,20 @@
 	// Tree
 	export let data = []
 	export let defaultProps = { children: 'children', label: 'label', id: 'id' }
+	export let emptyText: string = '暂无数据';
+	export let showCheckbox: boolean = false;
+	export let showCount: boolean = false; // 展示子集的数量
+	export let defaultExpandAll: boolean = false;
+	export let renderAfterExpand: boolean = true;
+	export let highlightCurrent: boolean = false;
+	export let checkStrictly: boolean = false;
+	export let checkDescendants: boolean = false;
+	export let autoExpandParent: boolean = true;
+	export let clickLabelIsExpanded: boolean = true;
+	export let defaultCheckedKeys: [] = [];
+	export let defaultExpandedKeys: [] = [];
+	export let currentNodeKey: [String, Number] = [];
+	export let renderContent: Function = null;
 
 	let visible = false // 选框是否展示
 	let inputVal = '' // 输入框的值
@@ -124,6 +139,16 @@
 						bind:this={theFilter}
 						bind:data={data}
 						bind:value={value}
+						bind:lazy={lazy}
+						bind:emptyText={emptyText}
+						bind:showCheckbox={showCheckbox}
+						bind:defaultExpandAll={defaultExpandAll}
+						bind:renderAfterExpand={renderAfterExpand}
+						bind:checkStrictly={checkStrictly}
+						bind:checkDescendants={checkDescendants}
+						bind:autoExpandParent={autoExpandParent}
+						bind:currentNodeKey={currentNodeKey}
+						bind:renderContent={renderContent}
 						props={defaultProps}
 						on:nodeClick={handleNodeClick}
 						on:checkChange={checkChange}
