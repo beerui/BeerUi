@@ -9,6 +9,7 @@
 	// 下拉框选中的值
 	export let value;
 	export let size = 'normal';
+	export let maxHeight = '300px';
 	const store = new SelectStore({ value: $$props.value })
 	setContext('selectStore', store)
 	const subscribeHandle = async item => {
@@ -91,7 +92,7 @@
 		</BeInput>
 	</div>
 	<div class='be-select__option' class:visible={visible}>
-		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')}>
+		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')} style:max-height={maxHeight}>
 			<slot></slot>
 			{#if optionSize === 0}
 			<div class="be-select-dropdown__empty">无数据</div>
