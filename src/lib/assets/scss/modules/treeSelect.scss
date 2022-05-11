@@ -64,7 +64,7 @@
     }
   }
   &__menu {
-    max-height: 300px;
+    max-height: 300px;overflow: auto;
   }
   &__single-value, &__placeholder {
     overflow: hidden;

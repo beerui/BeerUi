@@ -9,6 +9,7 @@
 	export let value = [];
 
 	export let clearable = true
+	export let load: Function = null;
 	export let nodeKey = 'label'
 	export let placeholder = '请选择'
 	// Tree
@@ -47,10 +48,10 @@
 
 	const handleNodeClick = ({ detail }) => {
 		// id: 9 label: "三级 1-1-1"
-		value = [detail.id]
-		inputVal = detail.label
+		value = [detail[defaultProps.id]]
+		inputVal = detail[defaultProps.label]
 		visible = !visible
-		theFilter.setCurrentKey(detail.id)
+		theFilter.setCurrentKey(detail[defaultProps.id])
 	}
 	// 输入框被点击
 	const handleInputClick = () => visible = !visible
@@ -127,6 +128,7 @@
 						on:nodeClick={handleNodeClick}
 						on:checkChange={checkChange}
 						showCount
+						load={load}
 						clickLabelIsExpanded={false}
 						defaultCheckedKeys={value}
 						defaultExpandedKeys={value}

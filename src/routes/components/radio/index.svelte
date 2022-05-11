@@ -3,7 +3,7 @@
 	import { BeRadio, BeRadioGroup } from "$lib";
 	import BeButton from '$lib/be-button/BeButton.svelte';
 
-	let radio = '1';
+	let radio = 1;
 	let radio2 = '1';
 	let radio3 = '1';
 
@@ -26,8 +26,8 @@ let radio = '1';
 		<div slot="source">
 			<div>radio: {radio}</div>
 			<div class="demo-list">
-				<BeRadio bind:checked={radio} label='1'>备选项1</BeRadio>
-				<BeRadio bind:checked={radio} label='2'>备选项2</BeRadio>
+				<BeRadio bind:checked={radio} label='{1}'>备选项1</BeRadio>
+				<BeRadio bind:checked={radio} label='{2}'>备选项2</BeRadio>
 			</div>
 		</div>
 	</DemoBlock>

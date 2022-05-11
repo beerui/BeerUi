@@ -146,11 +146,11 @@
 			<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 		</div>
 	</div>
-	{#if selectMode == 'datetimerange'}
+	{#if selectMode === 'datetimerange'}
 	<DateTimeRange bind:visible={visible} {direction} {format} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
-	{:else if selectMode == 'monthrange'}
+	{:else if selectMode === 'monthrange'}
 	<MonthRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
-	{:else if selectMode == 'yearrange'}
+	{:else if selectMode === 'yearrange'}
 	<YearRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
 	{:else}
 	<DateRange bind:visible={visible} {direction} value= {displayValue} {disabledDate} on:pick={confirmRangePick}/>
@@ -158,7 +158,7 @@
 </div>
 {:else}
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper} bind:this={inputRect}>
-	<BeInput on:change={handleChange} {value} {placeholder} on:focus={handleShowDatePopper} bind:this={input}/>
+	<BeInput on:change={handleChange} disabled={disabled} readonly={readonly} {value} {placeholder} on:focus={handleShowDatePopper} bind:this={input}/>
 	<div class="be-date__prefix">
 		<BeIcon name="calendar"/>
 	</div>
