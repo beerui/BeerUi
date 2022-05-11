@@ -1,14 +1,14 @@
-<script lang="ts">
-  import { filterClass } from "$lib/utils/beerui";
+<script lang='ts'>
+	import { filterClass } from '$lib/utils/beerui';
 
-  export let style = null;
-  export let nativeType = "button";
-  export let disabled = false;
+	export let style = null;
+	export let nativeType = 'button';
+	export let disabled = false;
 	export let circle = false;
 	export let round = false;
 
-  const preClass = ["type", "size", "round", "loading"];
-  const _class = ["be-button",...filterClass($$props, "be-button--", preClass)].join(" ");
+	const preClass = ['type', 'size', 'round', 'loading'];
+	const _class = ['be-button', ...filterClass($$props, 'be-button--', preClass)].join(' ');
 </script>
 <button
 	class={_class}

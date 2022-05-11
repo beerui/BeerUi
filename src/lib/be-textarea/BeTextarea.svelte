@@ -1,63 +1,29 @@
 <script lang='ts'>
 	import { createEventDispatcher } from 'svelte';
-	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';
 
-	const forwardEvents = forwardEventsBuilder(get_current_component());
-	export let value = '';
-	export let placeholder = '';
-	export let size = '';
-	export let readonly = false;
-	export let disabled = false;
-	// 是否显示清除按钮
-	export let clearable = false;
-	export let type = 'text';
-	// 右侧icon
-	export let suffixIcon = '';
-	// let showClear = false;
-	let input;
+	export let value: string | number = '';
+	export let placeholder: string = '';
+	export let readonly: boolean = false;
+	export let disabled: boolean = false;
+	export let maxlength: string | number = '';
 
-	function showClear() {
-		return clearable && !readonly && !disabled;
-	}
-
-	let suffix;
-
-	// 判断后置内容是否存在
-	function getSuffixVisible() {
-		return $$slots.suffix;
-	}
+	let instance = null
 
 	let dispatch = createEventDispatcher();
 
 	// 在input失去焦点时触发
-	function blur(event) {
-		dispatch('blur', event);
-	}
-
-	// 是输入框获取焦点
-	export function getblur() {
-		input.focus();
-	}
-
+	const blur = evt => dispatch('blur', evt);
 	// 在input获得焦点时触发
-	function focus(event) {
-		dispatch('focus', event);
-	}
-
-	// 仅在输入框失去焦点或用户按下回车时触发
-	function change(event) {
-		dispatch('change', event.target.value);
-	}
-
+	const focus = evt => dispatch('focus', evt);
 	// 在 input 值改变时触发
-	function onInput(e) {
-		dispatch('input', e.target.value);
+	const input = evt => {
+		value = evt.target.value
+		dispatch('input', value);
 	}
-
-	function typeAction(node) {
-		node.type = type;
-	}
+	// 设置焦点
+	export const setBlur = () => instance.focus()
+	// 仅在输入框失去焦点或用户按下回车时触发
+	const onChange = evt => dispatch('onChange', evt.target.value);
 
 	let _class: $$props['class'] = '';
 	export { _class as class };
@@ -65,43 +31,59 @@
 <div
 	class='be-textarea {_class}'
 	class:is-disabled={disabled}
-	style={$$props.style}
 	on:click
 	on:contextmenu
 	on:dblclick
-	on:focusin
 	on:mousedown
 	on:mouseup
-	on:focusout
 	on:keydown
 	on:keyup
 >
-	<input
+	<textarea
 		{...$$restProps}
-		use:typeAction
 		placeholder={placeholder}
+		class:is-gray={!value}
+		style={$$props.style}
+		{maxlength}
 		bind:value
 		class='be-textarea__inner'
 		{readonly}
 		{disabled}
 		on:blur={blur}
 		on:focus={focus}
-		on:change={change}
-		on:input={onInput}
-		bind:this={input}
-		use:forwardEvents
-	/>
-	{#if getSuffixVisible()}
-	  <span class={['be-input__suffix',disabled ? ' is-disabled':''].join('')}>
-	    <span class='be-input__suffix-inner '>
-	      <template>
-            <slot name='suffix'></slot>
-	        {#if suffixIcon}
-                <i class={['be-input__icon ', suffixIcon].join('')}></i>
-            {/if}
-	      </template>
-	    </span>
-	  </span>
-	{/if}
+		on:change={onChange}
+		on:input={input}
+		bind:this={instance}
+	></textarea>
 </div>
-
+<style lang='scss'>
+	@import '../assets/scss/common/var';
+	.be-textarea {
+		textarea {
+			padding: 5px 15px;
+			width: 100%;
+			min-height: 34px;
+			height: 80px;
+			line-height: $--base-line-height;
+			color: var(--text-primary);
+			font-size: $--font-size-base;
+			border-radius: $--border-radius-base;
+			border: 1px solid #dcdfe6;
+			resize: vertical;
+			box-sizing: border-box;
+			background-color: #ffffff;
+			background-image: none;
+			transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+		}
+		textarea::placeholder {
+			width: 100%;
+			color: var(--text-placeholder);
+			line-height: $--base-line-height;
+			font-size: $--font-size-base;
+		}
+		textarea:focus {
+			outline: none;
+			border-color: #409eff;
+		}
+	}
+</style>

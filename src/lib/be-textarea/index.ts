@@ -1,2 +1,1 @@
-import BeTextarea from './BeTextarea.svelte';
-export default BeTextarea;
+export { default as default } from './BeTextarea.svelte';
