@@ -1783,7 +1783,7 @@
 	<h3>动态加载</h3>
 	<p>当选中某一级时，动态加载该级下的选项。</p>
 	<DemoBlock code = {
-		`<BeCascader bind:value={value} lazy = {true} options = {lazyOptions} lazyLoad = {lazyLoad}/>`}
+		`<BeCascader bind:value={value} lazy = {true} bind:options = {lazyOptions} lazyLoad = {lazyLoad}/>`}
 		js={`
 		let value = []
 		let id = 1;
