@@ -5,6 +5,10 @@
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
 	let value = 'dingbudaohang';
+	// setTimeout(() => {
+	// 	value = 'yizhi';
+	// 	console.log('以改变')
+	// }, 3000);
 	let showAllLevels = false
 	let checkStrictly = true
 	let config= {
@@ -16,8 +20,8 @@
 	let value1 = ''
 	let value2 = ''
 	let value3 = ''
-	let value4 = ''
-	let value5 = ''
+	let value4 = 'dingbudaohang'
+	let value5 = 'dingbudaohang'
 	let value6 = ''
 	let value7 = ''
 	let expandTrigger = 'hover';
@@ -628,18 +632,21 @@
 			value: '组件交互文档'
 		}]
 	}]
-	let lazyOptions = [
-		{
-			value: 'zhinan',
-			label: '选项1',
-			hasChild: true,
-			children: []
-		}
-	]
+	let lazyOptions = []
 	const change = (e) => {
 		console.log(e);
 	};
 	let id = 1;
+	setTimeout(() => {
+		lazyOptions = [{
+			value: 'zhinan',
+			label: '选项1',
+			hasChild: true,
+			children: []
+		}]
+		lazyOptions = lazyOptions
+		console.log('已添加')
+	}, 2000);
 	const lazyLoad = (node, resolve) => {
 		const { level } = node;
 		setTimeout(() => {
@@ -1803,7 +1810,7 @@
 		}`}>
 		<div slot='source'>
 			<div class='flex justify-around'>
-				<BeCascader bind:value={value7} lazy = {true} options = {lazyOptions} lazyLoad = {lazyLoad}/>
+				<BeCascader bind:value={value7} lazy = {true} bind:options = {lazyOptions} lazyLoad = {lazyLoad}/>
 			</div>
 		</div>
 		<div slot='description'>

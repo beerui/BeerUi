@@ -20,16 +20,17 @@
 	let cascaderRect;
 	let popperArrow;
 	let cascaderWidth;
-	let selectValue = Array.isArray(store.defaultValue) ? store.defaultValue[store.defaultValue.length - 1] : store.defaultValue;
+	let selectValue
 	$:if (visible) {
 		menus = store.getMenus();
 		value = store.value;
+		selectValue = Array.isArray(store.defaultValue) ? store.defaultValue[store.defaultValue.length - 1] : store.defaultValue;
 		cascaderRect.style.top = bottom.value + 'px';
 	}
 
 	$: {
 		// 处理右边边界问题 优化性能：滚动时不触发左位置的改变
-		if (bottom.status === 'update') {
+		if (bottom.status === 'update' && visible) {
 			const clientWidth = document.body.clientWidth;
 			const clientRect = cascaderRect && cascaderRect.getBoundingClientRect();
 			if (clientRect && cascaderWidth) {
@@ -54,6 +55,7 @@
 			menus = store.getMenus();
 			store.setCurrent(items);
 			value = store.value;
+			console.log(store)
 		} else {
 			// 没有子集并且规定了有下级
 			if(lazy && items.hasChild) {
@@ -67,13 +69,15 @@
 			} else {
 				store.setCurrent(items);
 				value = store.value;
-				menus = store.menus.slice(0, items.level);
+				menus = store.menus.slice(0, items.level)
 				let params = {
 					value: store.value,
 					label: store.label,
 					store: store
 				};
-				if (!checkStrictly) dispatch('change', params);
+				if (!checkStrictly) {
+					dispatch('change', params)
+				}
 			}
 		}
 		if (checkStrictly && items.type == 'radio') {

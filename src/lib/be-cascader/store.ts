@@ -26,6 +26,10 @@ export default class Store {
 		this.options = data;
 		this.defaultValue = props.value
 		this.lazy = props.lazy
+    this.checkStrictly = props.checkStrictly
+		this.init()
+	}
+	init() {
 		if(this.defaultValue && this.defaultValue.length) {
       if(Array.isArray(this.defaultValue)) {
         this.initMenuByPath(this.options, this.defaultValue[this.defaultValue.length - 1])
@@ -33,9 +37,8 @@ export default class Store {
         this.initMenuByPath(this.options, this.defaultValue)
       }
 		} else {
-      this.setMenu(data)
+      this.setMenu(this.options)
     }
-    this.checkStrictly = props.checkStrictly
 	}
   initMenuByPath(list, val) {
     const level = ++this.level
