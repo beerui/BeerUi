@@ -9,7 +9,6 @@
 	let handleContextMenu;
 	export let node;
 	export let value: string[] | number[] = [];
-	export let key;
 	let treeNode = null;
 	export let showCheckbox = null;
 	export let highlightCurrent: boolean = false;
