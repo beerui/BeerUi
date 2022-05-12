@@ -1,4 +1,3 @@
-
 <script lang="ts">
 import type { TabItem } from '../common.d.ts';
 import { createEventDispatcher, onMount } from 'svelte';

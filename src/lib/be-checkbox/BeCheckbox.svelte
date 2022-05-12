@@ -37,7 +37,7 @@
 		}
 	};
 </script>
-<label class={_class}
+<div class={_class}
        style={$$props.style}
        class:is-checked={checked}
        class:is-disabled={disabled}
@@ -64,4 +64,4 @@
 		    {label}
 		{/if}
   </span>
-</label>
+</div>

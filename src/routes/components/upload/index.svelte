@@ -78,6 +78,7 @@ let fileList1 =  [{name: 'food.jpg', url: 'https://fuss10.elemecdn.com/3/63/4e7f
 					multiple
 					limit={9}
 					hideUpload={true}
+					beforeRemove={beforeRemove}
 					fileList={fileList1}>
 					<BeButton size="small" type="primary">点击上传</BeButton>
 					<p slot="tip">只能上传jpg/png文件，且不超过500kb</p>

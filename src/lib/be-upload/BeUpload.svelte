@@ -95,7 +95,7 @@
 	export let drag: boolean = false // 是否启用拖拽上传
 	export let action: string = '' // 必选参数，上传的地址	string
 	export let headers: string = '' // 设置上传的请求头部	object
-	export let onPreview: Function = noop // 点击文件列表中已上传的文件时的钩子 function(file)
+	// export let onPreview: Function = noop // 点击文件列表中已上传的文件时的钩子 function(file)
 	export let onRemove: Function = noop // 文件列表移除文件时的钩子	function(file, fileList)
 	export let onSuccess: Function = noop // 文件上传成功时的钩子	function(response, file, fileList)
 	export let onError: Function = noop // 文件上传失败时的钩子	function(err, file, fileList)
@@ -114,11 +114,7 @@
 	export let onExceed: Function = noop // 文件超出个数限制时的钩子	function(files, fileList)
 
 	let files = null // input元素
-	let uploadInner = null // input元素
-	let mouseover = false;
 	let reqs = {}
-	let dragOver = false
-	let draging = false
 	let tempIndex = 1
 
 	$: if (limit || fileList) hideUploadHandle([])
@@ -323,8 +319,8 @@
 						</span>
 					</div>
 				{:else}
-					<a class="be-upload-list__item-name"><BeIcon name="file" />{file.name}</a>
-					<label class="be-upload-list__item-status-label">
+					<span class="be-upload-list__item-name"><BeIcon name="file" />{file.name}</span>
+					<div class="be-upload-list__item-status-label">
 						{#if file.status === 'fail'}
 							<BeIcon name="close-circle" />
 						{:else if file.status === 'ready'}
@@ -334,7 +330,7 @@
 						{:else}
 							<BeIcon name="check-circle" />
 						{/if}
-					</label>
+					</div>
 					<span class="be-icon-close" on:click={() => handleRemove(file, file.raw)}><BeIcon name="close" /></span>
 				{/if}
 			</li>

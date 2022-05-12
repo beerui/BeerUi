@@ -148,8 +148,11 @@
 	on:keydown
 	on:keyup
 >
-	<div on:mouseover={() => {if(clearable && inputValue.length) showClose = true}}
-	     on:mouseleave={() => {if(clearable && inputValue.length) showClose = false}}>
+	<div
+		on:mouseover={() => {if(clearable && inputValue.length) showClose = true}}
+	    on:mouseleave={() => {if(clearable && inputValue.length) showClose = false}}
+		on:focus
+	>
 		<BeInput {placeholder} value={inputValue.join('/')} readonly disabled={disabled}>
 			<div slot='suffix'>
 				<div class='input-suffix-icon' class:is-reverse={visible && !showClose}
