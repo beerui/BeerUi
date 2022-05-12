@@ -39,8 +39,8 @@
   $: switchDisabled =  disabled
 
 </script>
-
-
+<slot name="checked-slot" prop={checked}></slot>
+<slot></slot>
 <div class="be-switch" class:is-checked = {checked} class:is-disabled = {switchDisabled} on:click={switchValue}>
   <!-- <input class="be-switch__input" disabled={switchDisabled} checked={checked} type="checkbox" /> -->
   <!--  {checked ? 'border-color:' + activeColor + ';background-color:' + activeColor : 'border-color:' + inactiveColor + ';background-color:' + inactiveColor}  -->

@@ -152,12 +152,12 @@
 						props={defaultProps}
 						on:nodeClick={handleNodeClick}
 						on:checkChange={checkChange}
-						showCount
+						showCount={showCount}
 						load={load}
-						clickLabelIsExpanded={false}
-						defaultCheckedKeys={value}
-						defaultExpandedKeys={value}
-						highlightCurrent
+						clickLabelIsExpanded={clickLabelIsExpanded}
+						defaultCheckedKeys={defaultCheckedKeys}
+						defaultExpandedKeys={defaultExpandedKeys}
+						highlightCurrent={highlightCurrent}
 						filterNodeMethod={filterNodeMethod}
 						nodeKey={nodeKey}
 					/>

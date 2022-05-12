@@ -37,7 +37,7 @@
 		}
 	}
 </script>
-<label class='be-radio {_class}'
+<div class='be-radio {_class}'
        class:is-checked={isChecked}
        class:is-disabled={disabled}
        style={$$props.style}
@@ -62,4 +62,4 @@
 	    {label}
 	  {/if}
   </span>
-</label>
+</div>

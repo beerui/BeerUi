@@ -52,7 +52,7 @@
 		return getNodeKey(nodeKey, child);
 	};
 
-	const isTree = true;
+	// const isTree = true;
 	let store = new TreeStore({
 		key: nodeKey,
 		data: data,

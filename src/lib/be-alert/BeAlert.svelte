@@ -1,8 +1,4 @@
 <script lang="ts">
-    /**
-     * This is a Alert component
-    */
-
   import { createEventDispatcher } from 'svelte'
   import { fade } from 'svelte/transition'
   // 标题

@@ -1,8 +1,4 @@
 <script lang="ts">
-  /**
-   * this is scrollbar component
-   *
-  */
   import {onMount } from 'svelte'
   let beScroll
   let scrollContent;

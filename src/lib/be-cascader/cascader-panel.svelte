@@ -3,10 +3,8 @@
 	import { createEventDispatcher, getContext } from 'svelte';
 
 	const dispatch = createEventDispatcher();
-	export let options = [];
 	export let visible = false;
 	export let checkStrictly;
-	export let showAllLevels;
 	export let expandTrigger;
 	export let config;
 	export let left;
