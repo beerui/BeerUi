@@ -16,7 +16,6 @@ const dispatch = createEventDispatcher()
 export let value
 export let visible = false
 export let format
-export let valueFormat = ''
 export let selectMode
 export let disabledDate: Function
 export let selectableRange = []
