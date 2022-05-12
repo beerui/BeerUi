@@ -4,7 +4,7 @@
 	import { BeCascader } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
-	let value = 'dingbudaohang';
+	let value = ['zhinan','daohang','dingbudaohang'];
 	// setTimeout(() => {
 	// 	value = 'yizhi';
 	// 	console.log('以改变')
@@ -20,10 +20,10 @@
 	let value1 = ''
 	let value2 = ''
 	let value3 = ''
-	let value4 = 'dingbudaohang'
-	let value5 = 'dingbudaohang'
+	let value4 = ''
+	let value5 = ''
 	let value6 = ''
-	let value7 = ''
+	let value7 = '2'
 	let expandTrigger = 'hover';
 
 	let options = [{
@@ -638,14 +638,14 @@
 	};
 	let id = 1;
 	setTimeout(() => {
-		lazyOptions = [{
+		const res = [{
 			value: 'zhinan',
 			label: '选项1',
 			hasChild: true,
 			children: []
 		}]
-		lazyOptions = lazyOptions
-		console.log('已添加')
+		lazyOptions = res
+		// lazyOptions = lazyOptions
 	}, 2000);
 	const lazyLoad = (node, resolve) => {
 		const { level } = node;
@@ -1783,7 +1783,7 @@
 	<h3>动态加载</h3>
 	<p>当选中某一级时，动态加载该级下的选项。</p>
 	<DemoBlock code = {
-		`<BeCascader bind:value={value} lazy = {true} options = {lazyOptions} lazyLoad = {lazyLoad}/>`}
+		`<BeCascader bind:value={value} lazy = {true} bind:options = {lazyOptions} lazyLoad = {lazyLoad}/>`}
 		js={`
 		let value = []
 		let id = 1;
