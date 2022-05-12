@@ -36,10 +36,15 @@ export default class Store {
       } else {
         this.initMenuByPath(this.options, this.defaultValue)
       }
+			// 如果有初始值，但是初始值与实际值不符，不展示所有级联，只展示一级。
+			if(this.menus.length == 0) {
+				this.setMenu(this.options)
+			}
 		} else {
       this.setMenu(this.options)
     }
 	}
+	// 根据初始值找当前选中的label和需要展示的级联
   initMenuByPath(list, val) {
     const level = ++this.level
     if(!list || list.length === 0) return false
@@ -60,6 +65,7 @@ export default class Store {
     }
     return false
   }
+	// 设置每层列表的level
 	flatten(arr, level) {
 		let result = [];
 		for(let i = 0; i < arr.length; i++) {
@@ -69,6 +75,7 @@ export default class Store {
 		}
 		return result
 	}
+	// 设置当前点击状态
 	setCurrent(items) {
 		const step = items.level !== this.level ? 2 : 1
 		this.value = this.value.slice(0, this.level - step)
@@ -87,6 +94,7 @@ export default class Store {
     this.defaultValue = []
 		this.setMenu(this.options)
 	}
+	// 设置当前级联面板
 	setMenu(data, key?) {
 		this.menus = this.menus.slice(0, this.level)
 		if(this.lazy) {

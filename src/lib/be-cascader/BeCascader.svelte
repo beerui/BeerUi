@@ -93,7 +93,6 @@
 		showClose = false;
 		visible = false;
 		store.clear();
-		console.log(store)
 	};
 	const mousedownHandle = () => {
 		visible = true;

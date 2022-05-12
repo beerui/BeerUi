@@ -55,7 +55,6 @@
 			menus = store.getMenus();
 			store.setCurrent(items);
 			value = store.value;
-			console.log(store)
 		} else {
 			// 没有子集并且规定了有下级
 			if(lazy && items.hasChild) {
