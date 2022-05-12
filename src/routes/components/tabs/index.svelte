@@ -3,7 +3,7 @@
 	import type { TabItem } from '$lib/common';
   import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
-	let active = 'u1'
+	let active = 'u2'
 	const tabClick = (evt) => {
 		active = evt.detail
 	}

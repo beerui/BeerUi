@@ -1,5 +1,20 @@
 # BeerUi 
 
+## @brewer/beerui@1.0.30-next.49 `2022/5/12`
+
+### Patch Changes
+
+- 新增 Add `SelectTree` 增加懒加载示例
+- 新增 Add `BeTextarea` 增加多行文本框
+- 新增 Add `BeSwitch` 增加切换前的回调
+- 新增 Add `BeCascader` 增加懒加载
+
+- 修复 Fixed `BeCascader`组件 动态加载第一次数据不出现的问题
+- 修复 Fixed `BeSelectTree`组件 增加懒加载和`BeTree`的组件传值
+- 修复 Fixed `BeSelect`组件 数据过多时 没有滚动条的问题 现在可以设置滚动高度
+- 修复 Fixed `BePagination` 输入页码 跳转判断错误的问题
+
+
 ## @brewer/beerui@1.0.30-next.46 `2022/5/9`
 
 ### Patch Changes

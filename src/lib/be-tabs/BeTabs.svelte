@@ -1,7 +1,7 @@
 
 <script lang="ts">
 import type { TabItem } from '../common.d.ts';
-import { createEventDispatcher } from 'svelte';
+import { createEventDispatcher, onMount } from 'svelte';
 import { classes } from '../utils';
 
 let _class = null;
@@ -12,7 +12,6 @@ const dispatcher = createEventDispatcher()
 export let active:string // 当前选中的key
 export let items:TabItem[] // tab的元素
 
-let navbar // 获取选项卡的 DOM 元素
 let index = 0 // 当前选中的key 索引
 let navbarList:number[] = [] // 获取选项卡的元素的宽度
 
@@ -31,13 +30,28 @@ function tabClick(key, i) {
 	index = i
 	dispatcher('tabClick', key)
 }
+
+const initTableActive = () => {
+	for (let i = 0; i < items.length; i++) {
+		if (active === items[i].key) {
+			if (index !== i) {
+				index = i
+			}
+			break
+		}
+	}
+}
+
+onMount(() => {
+	initTableActive()
+})
 </script>
 <div class={classes('be-tab', _class)}>
 	<div class="be-tabs-pane">
 		<div class='be-tabs__header'>
 			<div class='be-tabs__nav-wrap'>
 				<div class='be-tabs__nav-scroll'>
-					<div class='be-tabs__nav' bind:this={navbar}>
+					<div class='be-tabs__nav'>
 						<div class="be-tabs__active-bar is-top" style="width: {navbarWidth}px; transform: translateX({navbarTansX}px);"></div>
 						{#each items as item, i}
 						<div class='be-tabs__item' bind:clientWidth={navbarList[i]} class:is-active={active === item.key} on:click={() => tabClick(item.key, i)}>{item.label}</div>
