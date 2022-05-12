@@ -1,7 +1,4 @@
 <script lang='ts'>
-	/**
-	 * this is input component
-	 */
 	import { createEventDispatcher } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';

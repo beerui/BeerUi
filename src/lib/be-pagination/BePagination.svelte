@@ -8,7 +8,6 @@
 	 * @params pagerCount 显示多少个
 	 * @params layouts 最大页码按钮数
 	 * @params async 后续是否更新 异步接口需要开启 必须在初始状态就设置
-	 *
 	 * 格式
 	 * I. 1 2 3 4 5 6 7 8 9... 12
 	 * II. 1  ...5 6 7 8 9 ... 100

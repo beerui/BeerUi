@@ -5,7 +5,6 @@
 	import clickOutside from '$lib/_actions/clickOutside';
 	import SelectStore from './select'
 	let dispatch = createEventDispatcher()
-	export let options;
 	// 下拉框选中的值
 	export let value;
 	export let size = 'normal';
@@ -77,9 +76,8 @@
 	let _class: $$props["class"] = "";
 	export {_class as class};
 </script>
-
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
-	<div on:click|stopPropagation={toggleVisible} on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
+	<div on:click|stopPropagation={toggleVisible} on:focus on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
 		<BeInput {placeholder} value={inputValue} bind:this={input} readonly disabled={disabled}>
 			<div slot='suffix'>
 				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
