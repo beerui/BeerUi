@@ -66,6 +66,11 @@
 	<h2>BeSelect 选择框</h2>
 	<p>当选项过多时，使用下拉菜单展示并选择内容。</p>
 	<h3>基本用法</h3>
+	<ul>
+		<li>maxHeight='100px' 最大出现滚动的高度</li>
+		<li>size='normal' 尺寸</li>
+		<li>value 绑定的值 string/number</li>
+	</ul>
 	<DemoBlock code={`
 <BeSelect bind:value={value} clearable={true} on:change={changeSelect}>
 	<BeOption label="测试" value="0"/>
@@ -86,6 +91,10 @@ const changeSelect = (e) => {
 			<BeSelect bind:value={value} clearable={true} on:change={changeSelect}>
 				<BeOption label="测试" value="0"/>
 				<BeOption label="测试2" value="1"/>
+				<BeOption label="测试3" value="2"/>
+				<BeOption label="测试3" value="2"/>
+				<BeOption label="测试3" value="2"/>
+				<BeOption label="测试3" value="2"/>
 				<BeOption label="测试3" value="2"/>
 			</BeSelect>
 		</div>

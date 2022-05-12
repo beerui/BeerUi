@@ -1,6 +1,6 @@
 <script lang="ts">
   import DemoBlock from "$lib/demo/DemoBlock.svelte";
-  import BeTree, { filter } from '$lib/be-tree/BeTree.svelte';
+  import BeTree from '$lib/be-tree/BeTree.svelte';
   import BeButton from "$lib/be-button/BeButton.svelte";
   import BeInput from '$lib/be-input/BeInput.svelte';
 

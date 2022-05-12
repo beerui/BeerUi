@@ -150,7 +150,7 @@
 	$: if (pageSize) dispatch('pageSizeChange', pageSize)
 	const keydownHandle = (evt) => {
 		if (evt.keyCode === 13) {
-			if (jumpPage > pageSize || jumpPage <= 0) {
+			if (jumpPage > totalpages || jumpPage <= 0) {
 				openPosInfo('提示', '页码不正确！')
 				return
 			}
