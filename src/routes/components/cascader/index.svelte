@@ -4,7 +4,7 @@
 	import { BeCascader } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
-	let value = ['zhinan','daohang','dingbudaohan111g'];
+	let value = ['zhinan','daohang','dingbudaohang'];
 	// setTimeout(() => {
 	// 	value = 'yizhi';
 	// 	console.log('以改变')

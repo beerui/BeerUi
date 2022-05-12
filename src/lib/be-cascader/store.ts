@@ -38,16 +38,18 @@ export default class Store {
       }
 			// 如果有初始值，但是初始值与实际值不符，不展示所有级联，只展示一级。
 			if(this.menus.length == 0) {
+				this.level = 0
 				this.setMenu(this.options)
 			}
 		} else {
       this.setMenu(this.options)
     }
+		console.log(this.menus)
 	}
 	// 根据初始值找当前选中的label和需要展示的级联
-  initMenuByPath(list, val) {
-    const level = ++this.level
+  initMenuByPath(list, val , level = 0) {
     if(!list || list.length === 0) return false
+		level++
     for(let i = 0; i < list.length; i++) {
       const item = list[i]
       if(item[this.config.value] === val) {
@@ -56,7 +58,7 @@ export default class Store {
 				this.menus.push(this.flatten(list, level))
         return true
       }
-      if(this.initMenuByPath(item[this.config.children], val)) {
+      if(this.initMenuByPath(item[this.config.children], val, level)) {
 				this.label.unshift(item[this.config.label])
         this.value.unshift(item[this.config.value])
 				this.menus.unshift(this.flatten(list, level))
