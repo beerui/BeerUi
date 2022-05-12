@@ -10,7 +10,6 @@
 	export let selectValue;
 	export let config;
 	export let lazy = false
-	console.log('进入的value', value)
 	const hoverNodes = (item) => {
 		if (expandTrigger == 'click') return;
 		if (expandTrigger == 'hover' && (!item[config.children] || !item[config.children].length)) {
