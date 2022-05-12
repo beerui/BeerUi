@@ -39,6 +39,48 @@
 			}]
 		}
 	];
+	let lazyData = [
+		{
+			id: 1,
+			label: '一级 1'
+		}
+	];
+
+	let count = 1
+	const props = {
+		label: 'name',
+		children: 'zones'
+	}
+	const loadNode = (node, resolve) => {
+		if (node.level === 0) {
+			return resolve([{ name: 'region1' }, { name: 'region2' }]);
+		}
+		if (node.level > 3) return resolve([]);
+
+		var hasChild;
+		if (node.data.name === 'region1') {
+			hasChild = true;
+		} else if (node.data.name === 'region2') {
+			hasChild = false;
+		} else {
+			hasChild = Math.random() > 0.5;
+		}
+
+		setTimeout(() => {
+			var data;
+			if (hasChild) {
+				data = [{
+					name: 'zone' + count++
+				}, {
+					name: 'zone' + count++
+				}];
+			} else {
+				data = [];
+			}
+
+			resolve(data);
+		}, 500);
+	};
 	let value = [5];
 
 	const defaultProps = { children: 'children', label: 'label1' }
@@ -51,6 +93,7 @@
 	<p class='desc'>通过折叠面板收纳内容区域</p>
 	<h3>基本用法</h3>
 	<p>可同时展开多个面板，面板之间不影响</p>
+
 	<DemoBlock js={`
 import { BeSelectTree } from '@brewer/beerui'
 let value = [1];
@@ -77,6 +120,71 @@ const defaultProps = { children: 'children', label: 'label1' }
 				<li>change // value改变的回调</li>
 				<li>nodeKey // label的指向</li>
 				<li><pre><code>{@html `defaultProps = { children: 'children', label: 'label' }`}</code></pre></li>
+			</ol>
+		</div>
+	</DemoBlock>
+
+	<h3>懒加载自定义叶子节点</h3>
+	<p>动态加载节点数据的方法</p>
+	<DemoBlock js={`
+let count = 1
+const props = {
+	label: 'name',
+	children: 'zones'
+}
+const loadNode = (node, resolve) => {
+	if (node.level === 0) {
+		return resolve([{ name: 'region1' }, { name: 'region2' }]);
+	}
+	if (node.level > 3) return resolve([]);
+
+	var hasChild;
+	if (node.data.name === 'region1') {
+		hasChild = true;
+	} else if (node.data.name === 'region2') {
+		hasChild = false;
+	} else {
+		hasChild = Math.random() > 0.5;
+	}
+
+	setTimeout(() => {
+		var data;
+		if (hasChild) {
+			data = [{
+				name: 'zone' + count++
+			}, {
+				name: 'zone' + count++
+			}];
+		} else {
+			data = [];
+		}
+
+		resolve(data);
+	}, 500);
+};
+`} code={
+	`
+<BeSelectTree
+	lazy
+	load={loadNode}
+	bind:value={value}
+	defaultProps={props}
+/>
+`}>
+		<div slot='source'>
+			<div class='demo-list'>
+				<BeSelectTree
+					lazy
+					load={loadNode}
+					bind:value={value}
+					defaultProps={props}
+				/>
+			</div>
+		</div>
+		<div slot='description'>
+			<ol>
+				<li>lazy // 开启懒加载</li>
+				<li>load // 懒加载数据的方法</li>
 			</ol>
 		</div>
 	</DemoBlock>
