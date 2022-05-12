@@ -123,9 +123,9 @@
 	};
 	const change = (e) => {
 		inputValue = showAllLevelsData(e.detail.label);
-		value = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
+		const resultValue = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
 		if (!checkStrictly) visible = false;
-		dispatch('change', value);
+		dispatch('change', resultValue);
 	};
 	const showAllLevelsData = (data) => {
 		return showAllLevels ? data : data.slice(data.length - 1, data.length);
