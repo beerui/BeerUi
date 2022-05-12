@@ -13,6 +13,7 @@
 - 修复 Fixed `BeSelectTree`组件 增加懒加载和`BeTree`的组件传值
 - 修复 Fixed `BeSelect`组件 数据过多时 没有滚动条的问题 现在可以设置滚动高度
 - 修复 Fixed `BePagination` 输入页码 跳转判断错误的问题
+- 修复 Fixed `BeTabs` 初始化选中效果位置不正确
 
 
 ## @brewer/beerui@1.0.30-next.46 `2022/5/9`
