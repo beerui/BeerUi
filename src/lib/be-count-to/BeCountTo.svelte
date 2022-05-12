@@ -5,7 +5,7 @@
   export let end:number = 0
   export let duration:number = 2000
   export let autoplay:boolean = true
-  export let useEasing:boolean = true 
+  export let useEasing:boolean = true
   export let decimals:number = 0
   export let separator:string = ','
   let startTime

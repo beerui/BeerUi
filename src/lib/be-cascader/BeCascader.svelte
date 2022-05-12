@@ -165,6 +165,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {options} {bottom} {left} {config} {expandTrigger} {checkStrictly} {showAllLevels} {lazy} {lazyLoad} on:change={change} />
+	<CascaderPanel {visible} {bottom} {left} {config} {expandTrigger} {checkStrictly} {lazy} {lazyLoad} on:change={change} />
 </div>
 
