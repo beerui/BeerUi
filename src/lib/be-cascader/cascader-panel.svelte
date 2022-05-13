@@ -3,8 +3,10 @@
 	import { createEventDispatcher, getContext } from 'svelte';
 
 	const dispatch = createEventDispatcher();
+	export let options = [];
 	export let visible = false;
 	export let checkStrictly;
+	export let showAllLevels;
 	export let expandTrigger;
 	export let config;
 	export let left;
@@ -12,17 +14,16 @@
 	export let lazyLoad = (node, resolve) => {}
 	export let bottom: { status: string, value: number } = { status: 'init', value: 0 };
 	// const store = new Store(options, $$props)
+	export let selectValue 
 	const store = getContext('store');
 	let menus = [];
 	let value = [];
 	let cascaderRect;
 	let popperArrow;
 	let cascaderWidth;
-	let selectValue
 	$:if (visible) {
 		menus = store.getMenus();
 		value = store.value;
-		selectValue = Array.isArray(store.defaultValue) ? store.defaultValue[store.defaultValue.length - 1] : store.defaultValue;
 		cascaderRect.style.top = bottom.value + 'px';
 	}
 
@@ -54,7 +55,7 @@
 			store.setCurrent(items);
 			value = store.value;
 		} else {
-			// 没有子集并且规定了有下级
+			// 动态加载：没有子集并且规定了有下级
 			if(lazy && items.hasChild) {
 				lazyLoad(items, (nodes) => {
 					store.level = items.level
@@ -66,7 +67,8 @@
 			} else {
 				store.setCurrent(items);
 				value = store.value;
-				menus = store.menus.slice(0, items.level)
+				store.menus = store.menus.slice(0, items.level)
+				menus = store.getMenus()
 				let params = {
 					value: store.value,
 					label: store.label,

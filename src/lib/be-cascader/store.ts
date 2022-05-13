@@ -44,7 +44,6 @@ export default class Store {
 		} else {
       this.setMenu(this.options)
     }
-		console.log(this.menus)
 	}
 	// 根据初始值找当前选中的label和需要展示的级联
   initMenuByPath(list, val , level = 0) {

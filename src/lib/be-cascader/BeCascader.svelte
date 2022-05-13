@@ -36,9 +36,8 @@
 	setContext('store', store);
 	// 显示的值
 	let inputValue = store.label
-
+	let selectValue = null
 	// let cascaderStore
-	let hasChildren = false;
 	const preClass = ['size'];
 	const _class = ['be-cascader', ...filterClass($$props, 'be-cascader--', preClass)].join(' ');
 	// 下拉框
@@ -85,7 +84,12 @@
 		store.level = 0
 		store.options = options
 		store.defaultValue = value
+		inputValue = store.label
+		selectValue = getLastValue()
 		store.init()
+	}
+	const getLastValue = () => {
+		return Array.isArray(value) ? value[value.length - 1] : value
 	}
 	const clearValue = () => {
 		inputValue = [];
@@ -123,9 +127,9 @@
 	};
 	const change = (e) => {
 		inputValue = showAllLevelsData(e.detail.label);
-		const resultValue = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
+		const result = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
 		if (!checkStrictly) visible = false;
-		dispatch('change', resultValue);
+		dispatch('change', result);
 	};
 	const showAllLevelsData = (data) => {
 		return showAllLevels ? data : data.slice(data.length - 1, data.length);
@@ -165,6 +169,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {bottom} {left} {config} {expandTrigger} {checkStrictly} {lazy} {lazyLoad} on:change={change} />
+	<CascaderPanel {visible} {selectValue} {bottom} {left} {config} {expandTrigger} {checkStrictly} {lazy} {lazyLoad} on:change={change} />
 </div>
 
