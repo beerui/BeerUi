@@ -68,6 +68,12 @@
 		defaultExpandAll: defaultExpandAll,
 		filterNodeMethod: filterNodeMethod
 	});
+	$: if (data) {
+		store.setData(data)
+		store['data'] = data
+		root = store['root']
+	}
+
 	let root = store['root'];
 	let handleChildNodeExpand = (evt) => {
 		dispatch('nodeExpand', evt.detail);

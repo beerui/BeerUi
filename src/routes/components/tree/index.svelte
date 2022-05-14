@@ -4,6 +4,10 @@
   import BeButton from "$lib/be-button/BeButton.svelte";
   import BeInput from '$lib/be-input/BeInput.svelte';
 
+  let dataLazy = []
+  setTimeout(() => {
+	 dataLazy = data
+  }, 1000)
   const data = [{
     label: "一级 1",
     children: [{
@@ -250,7 +254,7 @@ const handleNodeClick = (evt) => console.log('index', evt.detail)`}
 
         <div slot='source'>
             <div class='demo-list'>
-	            <BeTree {data} props={defaultProps} on:nodeClick={handleNodeClick} />
+	            <BeTree bind:data={dataLazy} props={defaultProps} on:nodeClick={handleNodeClick} />
             </div>
         </div>
     </DemoBlock>
