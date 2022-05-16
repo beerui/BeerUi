@@ -30,8 +30,8 @@ export default class Store {
 		this.init()
 	}
 	init() {
-		if(this.defaultValue && this.defaultValue.length) {
-      if(Array.isArray(this.defaultValue)) {
+		if(this.defaultValue) {
+      if(Array.isArray(this.defaultValue) && this.defaultValue.length !== 0) {
         this.initMenuByPath(this.options, this.defaultValue[this.defaultValue.length - 1])
       } else {
         this.initMenuByPath(this.options, this.defaultValue)
@@ -55,6 +55,7 @@ export default class Store {
         this.label.push(item[this.config.label])
         this.value.push(item[this.config.value])
 				this.menus.push(this.flatten(list, level))
+				
         return true
       }
       if(this.initMenuByPath(item[this.config.children], val, level)) {
@@ -104,11 +105,12 @@ export default class Store {
 				if(item[this.config.value] == key) {
 					item[this.config.children] = data
 				}
-				item.loading = false
+				// item.loading = false
 			})
 		}
 		data = this.flatten(data, ++this.level)
 		this.menus.push(data)
+	
 	}
 	getMenus() {
 		return this.menus

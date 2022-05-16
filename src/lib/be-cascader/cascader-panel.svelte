@@ -15,14 +15,15 @@
 	export let bottom: { status: string, value: number } = { status: 'init', value: 0 };
 	// const store = new Store(options, $$props)
 	export let selectValue 
+	export let menus = []
 	const store = getContext('store');
-	let menus = [];
 	let value = [];
+	let curLoadingId = null
 	let cascaderRect;
 	let popperArrow;
 	let cascaderWidth;
+	let isLoading = false
 	$:if (visible) {
-		menus = store.getMenus();
 		value = store.value;
 		cascaderRect.style.top = bottom.value + 'px';
 	}
@@ -48,40 +49,44 @@
 	const subscribeHandle = items => {
 		bottom.status = 'update'; // 数据改变的时候 重置状态
 		if (items.disabled) return;
-		if (items[config.children] && items[config.children].length) {
-			store.level = items.level;
-			store.setMenu(items[config.children]);
-			menus = store.getMenus();
+		store.level = items.level;
+		if (checkStrictly && items.type == 'radio') {
 			store.setCurrent(items);
-			value = store.value;
+			selectValue = items[config.value];
+			dispatch('change', {selectValue, value: store.value, label: store.label});
 		} else {
-			// 动态加载：没有子集并且规定了有下级
-			if(lazy && items.hasChild) {
-				lazyLoad(items, (nodes) => {
-					store.level = items.level
-					store.setMenu(nodes, items[config.value])
-					menus = store.getMenus()
-					store.setCurrent(items);
-					value = store.value;
-				})
-			} else {
+			if (items[config.children] && items[config.children].length) {
+				store.setMenu(items[config.children]);
 				store.setCurrent(items);
-				value = store.value;
-				store.menus = store.menus.slice(0, items.level)
-				menus = store.getMenus()
-				let params = {
-					value: store.value,
-					label: store.label,
-					store: store
-				};
-				if (!checkStrictly) {
-					dispatch('change', params)
+				// value = store.value;
+				menus = store.getMenus();
+				curLoadingId = null
+			} else {
+				// 动态加载：没有子集并且规定了有下级
+				if(lazy && items.hasChild){
+					if(isLoading) return
+					isLoading = true
+					lazyLoad(items, (nodes) => {
+						store.setMenu(nodes, items[config.value])
+						store.setCurrent(items);
+						// value = store.value;
+						menus = store.getMenus()
+						isLoading = false
+						curLoadingId = null
+					})
+				} else {
+					if(!checkStrictly) {
+						store.setCurrent(items);
+						// value = store.value;
+						let params = {
+							value: store.value,
+							label: store.label,
+							store: store
+						}
+						dispatch('change', params)
+					}
 				}
 			}
-		}
-		if (checkStrictly && items.type == 'radio') {
-			selectValue = items[config.value];
-			dispatch('change', { selectValue, value: store.value, label: store.label, store: store });
 		}
 	}
 	store.subscribe.push(subscribeHandle);
@@ -91,7 +96,7 @@
 <div class='be-cascader-panel' bind:this={cascaderRect} bind:clientWidth={cascaderWidth} class:visible={visible}>
 	{#if menus && menus.length > 0}
 		{#each menus as menu, index}
-			<CascaderMenu {expandTrigger} {selectValue} {config} {menu} {checkStrictly} {lazy} value={ value[index] || selectValue } {store} />
+			<CascaderMenu {expandTrigger} {selectValue} {config} {menu} bind:curLoadingId={curLoadingId} {checkStrictly} {lazy} value={ value[index] || selectValue } {store} />
 		{/each}
 	{:else}
 		<div class='be-cascader-dropdown__empty'>暂无数据</div>

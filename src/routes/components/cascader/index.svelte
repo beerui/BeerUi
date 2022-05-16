@@ -5,10 +5,7 @@
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 
 	let value = ['zhinan','daohang','dingbudaohang'];
-	// setTimeout(() => {
-	// 	value = 'yizhi';
-	// 	console.log('以改变')
-	// }, 3000);
+
 	let showAllLevels = false
 	let checkStrictly = true
 	let config= {
@@ -21,11 +18,18 @@
 	let value2 = ''
 	let value3 = ''
 	let value4 = ''
-	let value5 = ''
+	let value5 = 'dingbudaohang'
 	let value6 = ''
-	let value7 = '2'
+	let value7 = ''
+	$: {
+		console.log('value7', value7);
+	}
 	let expandTrigger = 'hover';
-
+	setTimeout(() => {
+		// value = 'yizhi'
+		value7 = 3
+		console.log('以改变')
+	}, 3000);
 	let options = [{
 		value: 'zhinan',
 		label: '指南',
@@ -634,13 +638,13 @@
 	}]
 	let lazyOptions = []
 	const change = (e) => {
-		console.log(e);
+		// value7 = e.detail[0]
 	};
 	let id = 1;
 	setTimeout(() => {
 		const res = [{
-			value: 'zhinan',
-			label: '选项1',
+			id: 'zhinan',
+			value: '选项1',
 			hasChild: true,
 			children: []
 		}]
@@ -652,8 +656,8 @@
 		setTimeout(() => {
 			const nodes = Array.from({ length: level + 1 })
 				.map(item => ({
-					value: ++id,
-					label: `选项${id}`,
+					id: ++id,
+					value: `选项${id}`,
 					hasChild: level <= 2
 				}));
 			// 通过调用resolve将子节点数据返回，通知组件数据加载完成
@@ -1810,7 +1814,7 @@
 		}`}>
 		<div slot='source'>
 			<div class='flex justify-around'>
-				<BeCascader bind:value={value7} lazy = {true} bind:options = {lazyOptions} lazyLoad = {lazyLoad}/>
+				<BeCascader bind:value={value7} lazy = {true} {checkStrictly} bind:options = {lazyOptions} {config} lazyLoad = {lazyLoad} on:change={change}/>
 			</div>
 		</div>
 		<div slot='description'>

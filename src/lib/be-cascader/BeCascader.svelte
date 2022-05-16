@@ -47,46 +47,23 @@
 	let bottom;
 	let clientRect;
 	let scrollDom;
+	let menus = []
 	// 获取输入框
 	let showClose = false;
 	config = store.config;
-	// const findPathByValue = (list, val) => {
-	// 	if (!list || list.length === 0) return false;
-	// 	for (let i = 0; i < list.length; i++) {
-	// 		const item = list[i];
-	// 		if (item[config.value] === val) {
-	// 			// 如果是父子不关联的 赋值找到的最后一个值
-	// 			if (checkStrictly) value = [item[config.value]];
-	// 			hasChildren = item[config.children] && item[config.children].length;
-	// 			inputValue.push(item[config.label]);
-	// 			return true;
-	// 		}
-	// 		if (findPathByValue(item[config.children], val)) {
-	// 			inputValue.unshift(item[config.label]);
-	// 			return true;
-	// 		}
-	// 	}
-	// 	return false;
-	// };
-	// if (value && value.length) {
-	// 	if (Array.isArray(value)) {
-	// 		findPathByValue(options, value[value.length - 1]);
-	// 	} else {
-	// 		findPathByValue(options, value);
-	// 	}
-		if (!showAllLevels) inputValue = inputValue.slice(inputValue.length - 1, inputValue.length);
-	// 	if (hasChildren && !checkStrictly) inputValue = [];
-	// }
+	let level = 0
+	if (!showAllLevels) inputValue = inputValue.slice(inputValue.length - 1, inputValue.length);
 	$: {
 		store.menus = []
 		store.label = []
 		store.value = []
-		store.level = 0
+		store.level = level
 		store.options = options
 		store.defaultValue = value
 		inputValue = store.label
 		selectValue = getLastValue()
 		store.init()
+		menus = store.getMenus()
 	}
 	const getLastValue = () => {
 		return Array.isArray(value) ? value[value.length - 1] : value
@@ -127,9 +104,9 @@
 	};
 	const change = (e) => {
 		inputValue = showAllLevelsData(e.detail.label);
-		const result = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
-		if (!checkStrictly) visible = false;
-		dispatch('change', result);
+		value = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
+		if (!checkStrictly) visible = false
+		dispatch('change', value);
 	};
 	const showAllLevelsData = (data) => {
 		return showAllLevels ? data : data.slice(data.length - 1, data.length);
@@ -169,6 +146,6 @@
 			</div>
 		</BeInput>
 	</div>
-	<CascaderPanel {visible} {selectValue} {bottom} {left} {config} {expandTrigger} {checkStrictly} {lazy} {lazyLoad} on:change={change} />
+	<CascaderPanel {visible} {selectValue} {bottom} {menus} {left} {config} {expandTrigger} {checkStrictly} {lazy} {lazyLoad} on:change={change} />
 </div>
 

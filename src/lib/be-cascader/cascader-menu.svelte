@@ -10,18 +10,19 @@
 	export let selectValue;
 	export let config;
 	export let lazy = false
+	export let curLoadingId = null
 	const hoverNodes = (item) => {
 		if (expandTrigger == 'click') return;
 		if (expandTrigger == 'hover' && (!item[config.children] || !item[config.children].length)) {
 			return;
 		} else {
-			if(lazy) item.loading = true
+			if(lazy) curLoadingId = item[config.value]
 			store.publishHandle(item);
 		}
 	};
 	const clickNodes = (item, type = 'default') => {
 		// BeerPS.publish(key, item)
-		if(lazy) item.loading = true
+		if(lazy && type === 'default') curLoadingId = item[config.value]
 		const params = {
 			...item,
 			type
@@ -34,8 +35,7 @@
 	<ul class='be-cascader-menu__list'>
 		{#each menu as item, index}
 			<li class='be-cascader-node' tabindex='-1' class:in-active-path={value == item[config.value]}
-			    class:is-disabled={item.disabled} on:click={() => clickNodes(item)}
-			    on:mouseenter={() => hoverNodes(item)}>
+			    class:is-disabled={item.disabled}>
 				{#if (!item.children || !item.children.length) && value == item[config.value] && !checkStrictly}
 					<div class='be-cascader-node__prefix'>
 						<BeIcon name='check' color='#409eff' width='16' height='16' />
@@ -45,9 +45,9 @@
 					<BeRadio bind:checked={selectValue} disabled={item.disabled} label={item[config.value]}
 					         on:click={() => clickNodes(item, 'radio')} />
 				{/if}
-				<span class='be-cascader-node__label'>{item[config.label]}</span>
+				<span  class='be-cascader-node__label'  on:click={() => clickNodes(item)} on:mouseenter={() => hoverNodes(item)}>{item[config.label]}</span>
 				{#if (lazy && item.hasChild) || (item.children && item.children.length)}
-					{#if item.loading}
+					{#if curLoadingId == item[config.value]}
 					<BeIcon name='refresh'width='18' height='18' class="be-cascader-node__loading"/>
 					{:else}
 					<BeIcon name='chevron-right'
