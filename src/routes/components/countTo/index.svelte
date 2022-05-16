@@ -17,7 +17,7 @@
     <BeButton on:click={countTo.pauseHandler()}>暂停</BeButton>
     <BeButton on:click={countTo.resumeHandler()}>恢复</BeButton>
     <BeButton on:click={countTo.resetHandler()}>重置</BeButton>
-    `} js={` 
+    `} js={`
     let countTo
     let start = 0
     let end = 2022
@@ -25,9 +25,9 @@
     let decimal = 0`}>
 		<div slot='source'>
       <div class="count-to-example-num">
-        <BeCountTo {start} {end} {duration} {decimals} bind:this={countTo} />
+        <BeCountTo class='ww' {start} {end} {duration} {decimals} bind:this={countTo} />
       </div>
-      
+
       <div class="count-to-example">
         <div class="count-to-example-input">start： <BeInput type="number" bind:value={start}/></div>
         <div class="count-to-example-input">end： <BeInput type="number" bind:value={end}/></div>

@@ -83,6 +83,6 @@
 </script>
 
 
-<span>
+<span {...$$props}>
   {formatNumber(currentValue)}
 </span>
