@@ -21,15 +21,12 @@
 	let value5 = 'dingbudaohang'
 	let value6 = ''
 	let value7 = ''
-	$: {
-		console.log('value7', value7);
-	}
 	let expandTrigger = 'hover';
-	setTimeout(() => {
-		// value = 'yizhi'
-		value7 = 3
-		console.log('以改变')
-	}, 3000);
+	// setTimeout(() => {
+	// 	// value = 'yizhi'
+	// 	value7 = 3
+	// 	console.log('以改变')
+	// }, 3000);
 	let options = [{
 		value: 'zhinan',
 		label: '指南',
@@ -638,6 +635,7 @@
 	}]
 	let lazyOptions = []
 	const change = (e) => {
+		// console.log(e)
 		// value7 = e.detail[0]
 	};
 	let id = 1;
@@ -1334,7 +1332,7 @@
 			>
 		<div slot='source'>
 			<div class='flex justify-around'>
-				<BeCascader bind:value={value4} options = {options} {showAllLevels}/>
+				<BeCascader bind:value={value4} options = {options} {showAllLevels} on:change={change}/>
 			</div>
 		</div>
 		<div slot='description'>

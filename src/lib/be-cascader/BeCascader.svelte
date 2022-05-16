@@ -60,9 +60,9 @@
 		store.level = level
 		store.options = options
 		store.defaultValue = value
-		inputValue = store.label
 		selectValue = getLastValue()
 		store.init()
+		inputValue = showAllLevelsData(store.label);
 		menus = store.getMenus()
 	}
 	const getLastValue = () => {
@@ -103,7 +103,7 @@
 		bottom = { status: 'update', value: clientRect.bottom };
 	};
 	const change = (e) => {
-		inputValue = showAllLevelsData(e.detail.label);
+		// inputValue = showAllLevelsData(e.detail.label);
 		value = checkStrictly ? [e.detail.selectValue] : showAllLevelsData(e.detail.value);
 		if (!checkStrictly) visible = false
 		dispatch('change', value);
