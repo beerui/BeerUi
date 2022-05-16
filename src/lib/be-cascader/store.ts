@@ -55,7 +55,7 @@ export default class Store {
         this.label.push(item[this.config.label])
         this.value.push(item[this.config.value])
 				this.menus.push(this.flatten(list, level))
-				
+
         return true
       }
       if(this.initMenuByPath(item[this.config.children], val, level)) {
@@ -100,8 +100,8 @@ export default class Store {
 	setMenu(data, key?) {
 		this.menus = this.menus.slice(0, this.level)
 		if(this.lazy) {
-			const menu = this.menus[this.menus.length - 1] || []
-			menu.forEach(item => {
+			const _menu= this.menus[this.menus.length - 1] as Array<any> || []
+			_menu.forEach(item => {
 				if(item[this.config.value] == key) {
 					item[this.config.children] = data
 				}
@@ -110,7 +110,7 @@ export default class Store {
 		}
 		data = this.flatten(data, ++this.level)
 		this.menus.push(data)
-	
+
 	}
 	getMenus() {
 		return this.menus
