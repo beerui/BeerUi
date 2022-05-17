@@ -42,6 +42,20 @@ const ClipboardHandle = icon => {
 			}
 		}
 	}
+
+	.code {
+		background-color: #000000;
+		margin-top: 80px;
+		margin-bottom: 80px;
+		padding: 5px 15px;
+		border: 0;
+		display: flex;
+		align-items: center;
+		border-radius: 4px;
+		cursor: pointer;
+		justify-content: space-between;
+		box-shadow: 9px 7px 15px 1px rgb(25 65 115 / 19%);
+	}
 	.icon {
 		margin-left: 15px;
 		margin-top: -2px;
