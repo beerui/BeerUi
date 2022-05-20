@@ -10,16 +10,6 @@
 	let instance = null
 
 	let dispatch = createEventDispatcher();
-
-	// 在input失去焦点时触发
-	const blur = evt => dispatch('blur', evt);
-	// 在input获得焦点时触发
-	const focus = evt => dispatch('focus', evt);
-	// 在 input 值改变时触发
-	const input = evt => {
-		value = evt.target.value
-		dispatch('input', value);
-	}
 	// 设置焦点
 	export const setBlur = () => instance.focus()
 	// 仅在输入框失去焦点或用户按下回车时触发
@@ -49,10 +39,10 @@
 		class='be-textarea__inner'
 		{readonly}
 		{disabled}
-		on:blur={blur}
-		on:focus={focus}
-		on:change={onChange}
-		on:input={input}
+		on:blur
+		on:focus
+		on:change
+		on:input
 		bind:this={instance}
 	></textarea>
 </div>

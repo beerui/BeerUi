@@ -2,19 +2,19 @@
     import DemoBlock from '$lib/demo/DemoBlock.svelte';
     import { BeTextarea } from '$lib';
     let value = ''
-    let value1 = ''
-    let value2 = ''
-	const onBlurHandle = ({ detail }) => {
-		console.log('onBlurHandle', detail);
+    let value1 = 'BeTextarea disabled'
+    let value2 = 'BeTextarea readonly'
+	const onBlurHandle = () => {
+		console.log('onBlurHandle', value);
 	}
-	const onFocusHandle = ({ detail }) => {
-		console.log('onFocusHandle', detail);
+	const onFocusHandle = () => {
+		console.log('onFocusHandle', value);
 	}
-	const onChangeHandle = ({ detail }) => {
-		console.log('onChangeHandle', detail);
+	const onChangeHandle = () => {
+		console.log('onChangeHandle', value);
 	}
-	const onInputHandle = ({ detail }) => {
-		console.log('onInputHandle', detail);
+	const onInputHandle = () => {
+		console.log('onInputHandle', value);
 	}
 </script>
 <div class="page-container content">
@@ -56,6 +56,7 @@ let value = ''
 					on:focus={onFocusHandle}
 					on:change={onChangeHandle}
 					on:input={onInputHandle}
+					style='height: 100px;'
 				/>
 			</div>
 		</div>
