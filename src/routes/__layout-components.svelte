@@ -20,7 +20,9 @@
 			<div class='be-main-container'>
 				<slot></slot>
 			</div>
-			<Utterances reponame="beerui/BeerUi" theme="github-light" />
+			{#key $page.url.pathname}
+				<Utterances reponame="beerui/BeerUi" bind:issueTerm={$page.url.pathname} theme="github-light" />
+			{/key}
 			<LayoutFooter style='margin-left: 240px;background: #6b84ad;' />
 		</div>
 	</div>
