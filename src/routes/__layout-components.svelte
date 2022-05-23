@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import SideBar from '$lib/demo/layout/SideBar.svelte';
 	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
-
+	import { Utterances } from "@codewithshin/svelte-utterances";
 	$:formatUrl = () => {
 		if ($page.url.pathname.indexOf('/svg') !== -1) {
 			return '/' + $page.url.pathname.split('/')[1];
@@ -20,6 +20,7 @@
 			<div class='be-main-container'>
 				<slot></slot>
 			</div>
+			<Utterances reponame="beerui/BeerUi" theme="github-light" />
 			<LayoutFooter style='margin-left: 240px;background: #6b84ad;' />
 		</div>
 	</div>

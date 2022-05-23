@@ -20,6 +20,7 @@
   "devDependencies": {
     "@babel/core": "7.16.7",
     "@babel/preset-env": "7.16.7",
+    "@codewithshin/svelte-utterances": "^0.2.2",
     "@sveltejs/adapter-vercel": "^1.0.0-next.50",
     "@sveltejs/kit": "^1.0.0-next.328",
     "@tsconfig/svelte": "^3.0.0",
