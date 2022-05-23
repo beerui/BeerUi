@@ -48,7 +48,9 @@
 				<span  class='be-cascader-node__label'  on:click={() => clickNodes(item)} on:mouseenter={() => hoverNodes(item)}>{item[config.label]}</span>
 				{#if (lazy && item.hasChild) || (item.children && item.children.length)}
 					{#if curLoadingId == item[config.value]}
-					<BeIcon name='refresh'width='18' height='18' class="be-cascader-node__loading"/>
+					<div class='be-cascader-node__loading'>
+						<BeIcon name='loading' />
+					</div>
 					{:else}
 					<BeIcon name='chevron-right'
 									color="{item.disabled ? '#c0c4cc' : (value == item[config.value] ? '#409eff' : '#606266')}"
