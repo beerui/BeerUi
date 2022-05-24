@@ -74,6 +74,7 @@
 		showClose = false;
 		visible = false;
 		store.clear();
+		dispatch('change', value);
 	};
 	const mousedownHandle = () => {
 		visible = true;
