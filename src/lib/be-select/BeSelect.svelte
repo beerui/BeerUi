@@ -40,7 +40,7 @@
 	let showClose = false
 	$:initValue(value)
 	$:if(visible) store.setHover(value)
-	$:if(value) {
+	$:if(value || value === 0) {
 		store.value = value
 		setCurrentValue();
 	}
