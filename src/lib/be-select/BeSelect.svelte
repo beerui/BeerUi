@@ -6,9 +6,12 @@
 	import SelectStore from './select'
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
-	export let value;
-	export let size = 'normal';
-	export let maxHeight = '300px';
+	export let value: string | number | string[] | number[];
+	export let size:string = 'normal';
+	export let maxHeight:string = '300px';
+	export let multiple:boolean = false; // 是否多选
+	export let collapseTags:boolean = false; // 多选 收缩
+
 	const store = new SelectStore({ value: $$props.value })
 	setContext('selectStore', store)
 	const subscribeHandle = async item => {
@@ -78,16 +81,22 @@
 </script>
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
 	<div on:click|stopPropagation={toggleVisible} on:focus on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
-		<BeInput {placeholder} value={inputValue} bind:this={input} readonly disabled={disabled}>
-			<div slot='suffix'>
-				<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
-					<BeIcon name='chevron-down' width='18' height='18' />
-				</div>
-				<div on:click|stopPropagation={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
-					<BeIcon name='close-circle' width='14' height='14'/>
-				</div>
+		{#if multiple}
+			<div class='be-select__tags'>
+				<span class="be-tag"><span class="be-select__tags-text">黄金糕</span><span>x</span></span>
 			</div>
-		</BeInput>
+		{:else}
+			<BeInput {placeholder} value={inputValue} bind:this={input} readonly disabled={disabled}>
+				<div slot='suffix'>
+					<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
+						<BeIcon name='chevron-down' width='18' height='18' />
+					</div>
+					<div on:click|stopPropagation={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
+						<BeIcon name='close-circle' width='14' height='14'/>
+					</div>
+				</div>
+			</BeInput>
+		{/if}
 	</div>
 	<div class='be-select__option' class:visible={visible}>
 		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')} style:max-height={maxHeight}>

@@ -2,7 +2,7 @@ export default class SelectStore {
 	optionList = new Map(); // 数据集合
 	subscribe: Function[] = []; // 订阅方法
 	sizeSubscribe: Function[] = []; // 订阅方法
-	public value: string; // 当前选中的值
+	public value: string | number | string[] | number[]; // 当前选中的值
 	public isChange: boolean = true;
 	constructor(options) {
 		this.value = null;
