@@ -12,6 +12,8 @@
 	export let multiple:boolean = false; // 是否多选
 	export let collapseTags:boolean = false; // 多选 收缩
 
+	if (multiple) value = []
+
 	const store = new SelectStore({ value: $$props.value })
 	setContext('selectStore', store)
 	const subscribeHandle = async item => {
@@ -80,12 +82,19 @@
 	export {_class as class};
 </script>
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
-	<div on:click|stopPropagation={toggleVisible} on:focus on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
-		{#if multiple}
-			<div class='be-select__tags'>
-				<span class="be-tag"><span class="be-select__tags-text">黄金糕</span><span>x</span></span>
-			</div>
-		{:else}
+	{#if multiple}
+		<div
+			class='be-select__tags'
+			on:click|stopPropagation={toggleVisible}
+			on:mouseover={() => {if(clearable && inputValue) showClose = true}}
+			on:mouseleave={() => {if(clearable && inputValue) showClose = false}}
+		>
+			{#each value as item}
+				<span class="be-tag"><span class="be-tag-text">{item.label}</span><span>x</span></span>
+			{/each}
+		</div>
+	{:else}
+		<div on:click|stopPropagation={toggleVisible} on:focus on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
 			<BeInput {placeholder} value={inputValue} bind:this={input} readonly disabled={disabled}>
 				<div slot='suffix'>
 					<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
@@ -96,8 +105,8 @@
 					</div>
 				</div>
 			</BeInput>
-		{/if}
-	</div>
+		</div>
+	{/if}
 	<div class='be-select__option' class:visible={visible}>
 		<ul class={['be-select__option_content',position === 'top'?' is_top':''].join('')} style:max-height={maxHeight}>
 			<slot></slot>
