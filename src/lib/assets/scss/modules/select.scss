@@ -9,18 +9,43 @@
     border: 1px solid #e4e7ed;
     .be-tag {
       box-sizing: border-box;
-      border-color: transparent;
       margin: 2px 0 2px 6px;
-      background-color: #f0f2f5;
       display: flex;
       max-width: 100%;
       align-items: center;
+      background-color: #f4f4f5;
+      border-color: #e9e9eb;
+      color: #909399;
+      height: 24px;
+      padding: 0 8px;
+      line-height: 22px;
+      &-suffix {
+        align-items: center;
+        color: #c0c4cc;
+        display: flex;
+        height: 100%;
+        position: absolute;
+        right: 5px;
+        text-align: center;
+        top: 0;
+        transition: all .3s;
+        &-icon {
+          transform: rotate(0deg);transition: .3s;
+          &.is-reverse {transform: rotate(180deg)}
+        }
+      }
       &-text {
+        color: #909399;
+        font-size: 12px;
         overflow: hidden;
         text-overflow: ellipsis;
       }
       &-close {
         color: #909399;
+        cursor: pointer;
+        &:hover {
+          color: #424344;
+        }
       }
     }
   }
@@ -135,6 +160,13 @@
   box-sizing: border-box;
   cursor: pointer;
 
+  &.is-multiple {
+    position: relative;
+    .be-icon-inner {
+      position: absolute;right: 30px;display: none;top: 10px;
+      &.is-block {display: block;}
+    }
+  }
   &.selected {
     color: #409eff;
     font-weight: 700;
