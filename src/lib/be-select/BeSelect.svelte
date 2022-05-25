@@ -3,7 +3,6 @@
 	import { createEventDispatcher, setContext, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import SelectStore, { ArrayValue } from './select';
-	import { debounce } from '$lib/utils/throttle';
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
 	export let value: string | number | ArrayValue;
@@ -50,13 +49,13 @@
 	// $:initValue(value)
 	$:if(visible) store.setHover(value)
 
-	$: setValue(value) 
 	export const setValue = (value) => {
 		if(!inner) {
 			store.value = value
 			newInitStore()
 		}
 	}
+	$: setValue(value)
 
 	const setCurrentValue = () => {
 		let node = store.getCurrent(value)
@@ -82,7 +81,6 @@
 	  store.toggleMultiple(item)
 	}
 
-
 	let _class: $$props["class"] = "";
 	export {_class as class};
 	tick().then(() => {
@@ -90,7 +88,6 @@
 		newInitStore()
 	})
 </script>
-{store.value}
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
 	{#if multiple}
 		<div
