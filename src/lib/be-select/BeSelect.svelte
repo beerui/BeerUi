@@ -17,6 +17,7 @@
 	export let clearable = false
 	export let placeholder = '请选择'
 
+	let inner = false; // 是否是内部改变的值
 	let render = false
 	const newInitStore = () => multiple ? store.setMultipleCurrentValue() : setCurrentValue()
 	const store = new SelectStore({ value, multiple, multipleLimit, collapseTags })
@@ -26,6 +27,7 @@
 		if (store.isChange) {
 			inner = true // 内部更新值
 			value = store.value // 设置value
+			store.multipleValue = store.multipleValue
 			inputValue = item.label // 设置输入框的值
 			await tick()
 			inner = false
@@ -48,11 +50,13 @@
 	// $:initValue(value)
 	$:if(visible) store.setHover(value)
 
+	$: setValue(value) 
 	export const setValue = (value) => {
-		store.value = value
-		newInitStore()
+		if(!inner) {
+			store.value = value
+			newInitStore()
+		}
 	}
-	let inner = false; // 是否是内部改变的值
 
 	const setCurrentValue = () => {
 		let node = store.getCurrent(value)
@@ -86,6 +90,7 @@
 		newInitStore()
 	})
 </script>
+{store.value}
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
 	{#if multiple}
 		<div

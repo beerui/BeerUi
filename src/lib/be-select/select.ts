@@ -18,7 +18,6 @@ export default class SelectStore {
 				this[option] = options[option];
 			}
 		}
-		console.log(this);
 	}
 
 	// 创建Node并存储
@@ -60,7 +59,6 @@ export default class SelectStore {
 	}
 	// 设置value
 	setMultipleCurrentValue() {
-		console.log('setMultipleCurrentValue');
 		const _value = []
 		this.optionList.forEach(el => {
 			el.isChecked = (this.value as ArrayValue).includes(el.value)
@@ -104,7 +102,6 @@ export default class SelectStore {
 	}
 	// 移除多选中的一项
 	toggleMultiple(node) {
-		console.log('toggleMultiple');
 		const _value = []
 		this.optionList.forEach(el => {
 			if (el.value === node.value) el.isChecked = !el.isChecked
@@ -120,7 +117,6 @@ export default class SelectStore {
 	}
 	// 通知集合改变
 	publishHandle(item) {
-		console.log('publishHandle');
 		this.subscribe.forEach(cb => cb(item));
 	}
 	sizeHandle(size) {
