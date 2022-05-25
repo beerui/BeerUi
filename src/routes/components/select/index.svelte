@@ -151,7 +151,7 @@ let value4 = 2
 			<BeButton on:click={() => value4 = []}>clearValue</BeButton>
 			value4：{JSON.stringify(value4)}
 			<hr>
-			<BeSelect bind:value={value4} multiple>
+			<BeSelect bind:value={value4} multiple multipleLimit={2} on:change={() => console.log('1')}>
 				<BeOption label="测试" value="1"/>
 				<BeOption label="测试2" value={2}/>
 				<BeOption label="测试3" value="3"/>

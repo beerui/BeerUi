@@ -1,14 +1,16 @@
 <script lang='ts'>
 	import BeInput from '../be-input/BeInput.svelte';
-	import { createEventDispatcher, onMount, setContext, tick } from 'svelte';
+	import { createEventDispatcher, setContext, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import SelectStore, { ArrayValue } from './select';
+	import { debounce } from '$lib/utils/throttle';
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
 	export let value: string | number | ArrayValue;
 	export let size:string = 'normal';
 	export let maxHeight:string = '300px';
 	export let multiple:boolean = false; // 是否多选
+	export let multipleLimit:number = 0; // 多选时用户最多可以选择的项目数，为 0 则不限制
 	export let collapseTags:boolean = false; // 多选 收缩
 	export let disabled = false // 是否禁用
 	export let position = 'bottom' // 位置
@@ -17,7 +19,7 @@
 
 	let render = false
 	const newInitStore = () => multiple ? store.setMultipleCurrentValue() : setCurrentValue()
-	const store = new SelectStore({ value, multiple, collapseTags })
+	const store = new SelectStore({ value, multiple, multipleLimit, collapseTags })
 	setContext('selectStore', store)
 	const subscribeHandle = async item => {
 		if (!render) return
@@ -45,11 +47,11 @@
 	let showClose = false
 	// $:initValue(value)
 	$:if(visible) store.setHover(value)
-	$: {
+
+	export const setValue = (value) => {
 		store.value = value
 		newInitStore()
 	}
-
 	let inner = false; // 是否是内部改变的值
 
 	const setCurrentValue = () => {

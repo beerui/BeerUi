@@ -23,7 +23,9 @@
 	// 鼠标移入
 	const hoverCurrent = flag => hover = flag
 	// 初始化创建节点
-	let node = store.creatNode({ label, value, key: value, hover: hoverCurrent });
+	let node = store.creatNode({ label, value, disabled, key: value, hover: hoverCurrent, disabledCb: (flag) => {
+		disabled = flag
+	} });
 	isSelectHandle(store)
 
 	// 点击设置当前

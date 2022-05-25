@@ -11,6 +11,7 @@ export default class SelectStore {
 	public multipleValue: NodeType[] = []; // 当前选中的值
 	public isChange: boolean = true;
 	multiple: boolean = false;
+	private multipleLimit: number = 0;
 	constructor(options) {
 		for (let option in options) {
 			if (options.hasOwnProperty(option)) {
@@ -30,7 +31,8 @@ export default class SelectStore {
 			index: ++len,
 			key: props.key,
 			isChecked: false,
-			hover: props.hover
+			hover: props.hover,
+			disabledCb: props.disabledCb
 		};
 		this.optionList.set(node.key, node);
 		this.sizeHandle(this.optionList.size)
@@ -46,17 +48,28 @@ export default class SelectStore {
 			}
 		});
 	}
+	isLimit() {
+		return this.multipleLimit !== 0
+	}
+	isExcced() {
+		let i = 0
+		this.optionList.forEach(el => {
+			if (el.isChecked) i++
+		})
+		return i >= this.multipleLimit
+	}
 	// 设置value
 	setMultipleCurrentValue() {
 		console.log('setMultipleCurrentValue');
 		const _value = []
 		this.optionList.forEach(el => {
 			el.isChecked = (this.value as ArrayValue).includes(el.value)
-			if (el.isChecked) _value.push({ label: el.label, value: el.value, isChecked: true })
+			if (el.isChecked) _value.push({ ...el, isChecked: true });
 		})
 		this.multipleValue = _value;
 		this.value = this.multipleValue.map(el => el.value)
 		this.publishHandle(this.value)
+		this.setDisabledList()
 	}
 	// 获取当前Node
 	getCurrent(key) {
@@ -75,23 +88,39 @@ export default class SelectStore {
 		this.value = node.value;
 		this.publishHandle({ label: node.label, value: this.value })
 	}
+	setDisabledList() {
+		this.optionList.forEach(el => {
+			el.disabled = false
+			el.disabledCb(el.disabled)
+		})
+		if (this.isLimit() && this.isExcced()) {
+			this.optionList.forEach(el => {
+				if (!el.isChecked) {
+					el.disabled = true
+					el.disabledCb(el.disabled)
+				}
+			})
+		}
+	}
 	// 移除多选中的一项
 	toggleMultiple(node) {
 		console.log('toggleMultiple');
 		const _value = []
 		this.optionList.forEach(el => {
 			if (el.value === node.value) el.isChecked = !el.isChecked
-			if (el.isChecked) _value.push({ label: el.label, value: el.value, isChecked: el.isChecked })
+			if (el.isChecked) _value.push({ label: el.label, value: el.value, isChecked: el.isChecked });
 		})
 		this.multipleValue = _value;
 		this.value = this.multipleValue.map(el => el.value)
 		this.publishHandle(this.value)
+		this.setDisabledList()
 	}
 	clearList() {
 		this.optionList.clear();
 	}
 	// 通知集合改变
 	publishHandle(item) {
+		console.log('publishHandle');
 		this.subscribe.forEach(cb => cb(item));
 	}
 	sizeHandle(size) {
