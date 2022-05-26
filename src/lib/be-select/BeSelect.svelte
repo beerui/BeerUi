@@ -23,6 +23,7 @@
 	setContext('selectStore', store)
 	const subscribeHandle = async item => {
 		if (!render) return
+		console.log('subscribeHandle');
 		if (store.isChange) {
 			inner = true // 内部更新值
 			value = store.value // 设置value
@@ -50,6 +51,7 @@
 	$:if(visible) store.setHover(value)
 
 	export const setValue = (value) => {
+		console.log('setValue');
 		if(!inner) {
 			store.value = value
 			newInitStore()
@@ -58,6 +60,7 @@
 	$: setValue(value)
 
 	const setCurrentValue = () => {
+		console.log('setCurrentValue');
 		let node = store.getCurrent(value)
 		inputValue = node?.label
 	}

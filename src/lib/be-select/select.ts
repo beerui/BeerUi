@@ -82,7 +82,7 @@ export default class SelectStore {
 	// 设置当前Node
 	setCurrent(node) {
 		// 判断选中了相同项
-		this.isChange = !(this.value == node.value);
+		this.isChange = !(this.value === node.value);
 		this.value = node.value;
 		this.publishHandle({ label: node.label, value: this.value })
 	}

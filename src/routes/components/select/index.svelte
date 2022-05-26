@@ -2,27 +2,27 @@
 	import { BeSelect, BeOption } from '$lib';
 	import DemoBlock from "$lib/demo/DemoBlock.svelte";
 	import BeButton from '$lib/be-button/BeButton.svelte';
-	let value = '选项1'
+	let value = ''
 	let options = [
 		{
-			value1: '0',
-			label2: '黄金糕',
+			value: 0,
+			label: '黄金糕',
 		},
 		{
-			value1: '2',
-			label2: '双皮奶',
+			value: 2,
+			label: '双皮奶',
 		},
 		{
-			value1: '3',
-			label2: '蚵仔煎',
+			value: 3,
+			label: '蚵仔煎',
 		},
 		{
-			value1: '4',
-			label2: '龙须面',
+			value: 4,
+			label: '龙须面',
 		},
 		{
-			value1: '5',
-			label2: '北京烤鸭',
+			value: 5,
+			label: '北京烤鸭',
 		}
 	];
 
@@ -72,6 +72,12 @@
 		<li>clearable = false 显示清除按钮</li>
 		<li>placeholder = '请选择'</li>
 	</ol>
+
+<!--	<BeSelect bind:value clearable on:change={changeSelect}>-->
+<!--		{#each options as item, index}-->
+<!--			<BeOption label={item.label} value={item.value}/>-->
+<!--		{/each}-->
+<!--	</BeSelect>-->
 	<DemoBlock code={`
 <BeSelect bind:value clearable on:change={changeSelect} maxHeight='180px'>
 	{#each Array(20) as item, index}
