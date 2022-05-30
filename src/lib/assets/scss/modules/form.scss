@@ -32,5 +32,39 @@
       &:after {clear: both;}
       @include table-form-ab;
     }
+    &.is-required:not(.is-no-asterisk) .be-form-item__label-wrap>.be-form-item__label:before, .be-form-item.is-required:not(.is-no-asterisk)>.be-form-item__label:before {
+      content: "*";
+      color: #f56c6c;
+      margin-right: 4px;
+    }
+  }
+  &--inline {
+    .be-form-item {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: top;
+      &__label {
+        float: none;
+        display: inline-block;
+      }
+      &__content {
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+  }
+  &--label-right {
+
+  }
+  &--label-left {
+    .be-form-item__label {text-align: left;}
+  }
+  &--label-top {
+    .be-form-item__label {
+      float: none;
+      display: inline-block;
+      text-align: left;
+      padding: 0 0 10px;
+    }
   }
 }

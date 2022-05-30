@@ -2,22 +2,7 @@
 // noinspection JSUnresolvedVariable,JSUnresolvedFunction
 
 import { markNodeData, NODE_KEY } from './util';
-
-export function objectAssign (target) {
-  for (let i = 1, j = arguments.length; i < j; i++) {
-    let source = arguments[i] || {};
-    for (let prop in source) {
-      if (source.hasOwnProperty(prop)) {
-        let value = source[prop];
-        if (value !== undefined) {
-          target[prop] = value;
-        }
-      }
-    }
-  }
-
-  return target;
-}
+import { objectAssign } from '$lib/utils/index.js';
 
 export const arrayFindIndex = function(arr, pred) {
   for (let i = 0; i !== arr.length; ++i) {

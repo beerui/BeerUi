@@ -9,6 +9,7 @@ specifiers:
   '@tsconfig/svelte': ^3.0.0
   '@typescript-eslint/eslint-plugin': 5.9.0
   '@typescript-eslint/parser': 5.9.0
+  async-validator: ^4.1.1
   autoprefixer: ^10.4.1
   babel-loader: 8.2.3
   cssnano: ^5.0.14
@@ -44,6 +45,7 @@ devDependencies:
   '@tsconfig/svelte': 3.0.0
   '@typescript-eslint/eslint-plugin': 5.9.0_bd2fd93dbcc607ad2f21b784bccfe0c8
   '@typescript-eslint/parser': 5.9.0_eslint@8.6.0+typescript@4.5.4
+  async-validator: 4.1.1
   babel-loader: 8.2.3_@babel+core@7.16.7
   eslint: 8.6.0
   eslint-config-prettier: 8.3.0_eslint@8.6.0
@@ -1712,6 +1714,10 @@ packages:
   /array-union/2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
+    dev: true
+
+  /async-validator/4.1.1:
+    resolution: {integrity: sha512-p4DO/JXwjs8klJyJL8Q2oM4ks5fUTze/h5k10oPPKMiLe1fj3G1QMzPHNmN1Py4ycOk7WlO2DcGXv1qiESJCZA==}
     dev: true
 
   /autoprefixer/10.4.7_postcss@8.4.14:
