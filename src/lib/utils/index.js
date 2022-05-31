@@ -170,7 +170,16 @@ export function mergeObject(...objs) {
 }
 
 export const eventBus = {
-	callbacks: {}
+	callbacks: {},
+	emit(type, data) {
+
+	},
+	on(type, callback) {
+
+	},
+	off(eventName) {
+
+	}
 }
 
 eventBus.on = function(type, callback) {

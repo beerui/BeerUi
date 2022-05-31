@@ -2,6 +2,8 @@
 	import { createEventDispatcher } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';
+	import { writable } from 'svelte/store';
+	import { eventBus } from '$lib/utils';
 	const forwardEvents = forwardEventsBuilder(get_current_component());
 	export let value = '';
 	export let placeholder = '';
@@ -10,6 +12,7 @@
 	export let disabled = false;
 	// 是否显示清除按钮
 	export let clearable = false;
+	export let validateEvent = true;
 	export let type = 'text';
 	// 右侧icon
 	export let suffixIcon = '';
@@ -32,6 +35,9 @@
 	// 在input失去焦点时触发
 	function blur(event) {
 		dispatch('blur', event);
+		if (validateEvent) {
+			eventBus.emit('BEFormItem', { key: 'be.form.blur', value: [value] });
+		}
 	}
 
 	// 是输入框获取焦点
@@ -46,7 +52,11 @@
 
 	// 仅在输入框失去焦点或用户按下回车时触发
 	function change(event) {
-		dispatch('change', event.target.value);
+		dispatch('change', value);
+		if (validateEvent) {
+			eventBus.emit('BEFormItem', { key: 'be.form.change', value: [value] });
+			console.log('eventBus', eventBus);
+		}
 	}
 
 	// 在 input 值改变时触发

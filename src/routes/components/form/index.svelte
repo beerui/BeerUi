@@ -257,26 +257,30 @@
 					bind:rules={rules}
 					bind:this={ruleFormDom}
 				>
-					<BeFormItem label='活动名称'>
-						<BeInput bind:value={ruleForm.name} prop='name' />
+					<BeFormItem label='活动名称' prop='name'>
+						<BeInput bind:value={ruleForm.name} />
 					</BeFormItem>
-					<BeFormItem label='活动区域'>
+					<BeFormItem label='活动区域' prop='region'>
 						<BeSelect bind:value={ruleForm.region}>
 							<BeOption label="区域一" value="shanghai"></BeOption>
 							<BeOption label="区域二" value="beijing"></BeOption>
 						</BeSelect>
 					</BeFormItem>
-					<BeFormItem label='活动时间'>
+					<BeFormItem label='活动时间' required>
 						<div class='flex'>
-							<BeDatePicker bind:value={ruleForm.date1} placeholder='选择日期' selectMode="date" />
+							<BeFormItem prop='date1'>
+								<BeDatePicker bind:value={ruleForm.date1} placeholder='选择日期' selectMode="date" />
+							</BeFormItem>
 							<span class='px-10'>-</span>
-							<BeTimePicker bind:value={ruleForm.date2}/>
+							<BeFormItem prop='date2'>
+								<BeTimePicker bind:value={ruleForm.date2}/>
+							</BeFormItem>
 						</div>
 					</BeFormItem>
-					<BeFormItem label='即时配送'>
+					<BeFormItem label='即时配送' prop='delivery'>
 						<BeSwitch bind:checked={ruleForm.delivery} />
 					</BeFormItem>
-					<BeFormItem label='活动性质'>
+					<BeFormItem label='活动性质' prop='type'>
 						<BeCheckboxGroup bind:checked={ruleForm.type}>
 							<BeCheckbox label="美食/餐厅线上活动" name="type"></BeCheckbox>
 							<BeCheckbox label="地推活动" name="type"></BeCheckbox>
@@ -284,13 +288,13 @@
 							<BeCheckbox label="单纯品牌曝光" name="type"></BeCheckbox>
 						</BeCheckboxGroup>
 					</BeFormItem>
-					<BeFormItem label='特殊资源'>
+					<BeFormItem label='特殊资源' prop='resource'>
 						<BeRadioGroup bind:checked={ruleForm.resource}>
 							<BeRadio label="线上品牌商赞助"></BeRadio>
 							<BeRadio label="线下场地免费"></BeRadio>
 						</BeRadioGroup>
 					</BeFormItem>
-					<BeFormItem label='活动形式'>
+					<BeFormItem label='活动形式' prop='desc'>
 						<BeTextarea bind:value={ruleForm.desc}></BeTextarea>
 					</BeFormItem>
 					<BeFormItem>

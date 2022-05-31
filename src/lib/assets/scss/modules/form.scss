@@ -32,7 +32,7 @@
       &:after {clear: both;}
       @include table-form-ab;
     }
-    &.is-required:not(.is-no-asterisk) .be-form-item__label-wrap>.be-form-item__label:before, .be-form-item.is-required:not(.is-no-asterisk)>.be-form-item__label:before {
+    &.is-required .be-form-item__label:before {
       content: "*";
       color: #f56c6c;
       margin-right: 4px;

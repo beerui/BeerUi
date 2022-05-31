@@ -88,13 +88,15 @@
 	const labelWidthWatch = writable(labelWidth);
 	const labelPositionWatch = writable(labelPosition);
 	const rulesWatch = writable(rules);
+	const modelWatch = writable(model);
 	$: labelWidthWatch.set(labelWidth);
 	$: labelPositionWatch.set(labelPosition);
+	$: modelWatch.set(model);
 
-	const watchRules = (rules) => {
-		if (!rules) return
+	const watchRules = (rules, fields) => {
+		if (!rules || !fields) return
+		console.log('watchRules', rules);
 		console.log('fields', fields);
-		console.log('rules', rules);
 		fields.forEach(field => {
 			field.removeValidateEvents();
 			field.addValidateEvents();
@@ -103,9 +105,15 @@
 			validate(() => {});
 		}
 	}
-	$: watchRules(rules)
+	$: watchRules(rules, fields)
 
-	setContext("BeForm", { labelWidthWatch, labelPositionWatch, rulesWatch });
+	const callback = (item) => {
+		console.log('callback', item);
+	}
+	const addFiledCallback = (item) => {
+		fields.push(item)
+	}
+	setContext("BeForm", { labelWidthWatch, labelPositionWatch, rulesWatch, modelWatch, callback, addFiledCallback });
 
 </script>
 <form
