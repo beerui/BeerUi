@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AsyncValidator from 'async-validator';
 	import { getContext, onMount, setContext, tick } from 'svelte';
-	import { objectAssign } from '$lib/utils';
+	import { deepClone, objectAssign } from '$lib/utils';
 	import { writable } from 'svelte/store';
 
 	export let label: string = ''; //
@@ -25,12 +25,13 @@
 	let isLabelPositionTop = false
 	const unsubscribeLabelPosition = ctx.labelPositionWatch.subscribe(value => isLabelPositionTop = value === 'top');
 	// value的监听
-	let modelValue = ''
+	let modelValue: any = {}
 	let fieldValue = ''
 	const unsubscribeFieldValue = ctx.modelWatch.subscribe(value => {
-		console.log('prop', modelValue[prop]);
-		modelValue = value;
-		fieldValue = modelValue[prop] || '';
+		console.log('unsubscribeFieldValue');
+		// console.log('prop', modelValue[prop], prop);
+		// modelValue = deepClone(value);
+		// fieldValue = modelValue[prop] || '';
 	});
 	// 验证规则监听
 	let formRules = []
@@ -50,17 +51,17 @@
 		}
 		isRequired = _isRequired
 	}
-	const initRule = (p) => {
-		if (!p) return
-		formRule = formRules[p]
-		fieldValue = modelValue[p] // initModel
-		initRequired(formRule)
-	}
-	const unsubscribeRulesWatch = ctx.rulesWatch.subscribe(items => {
-		formRules = items;
-		initRule(prop)
-	});
-	$: initRule(prop)
+	// const initRule = (p) => {
+	// 	if (!p) return
+	// 	formRule = formRules[p]
+	// 	fieldValue = modelValue[p] // initModel
+	// 	initRequired(formRule)
+	// }
+	// const unsubscribeRulesWatch = ctx.rulesWatch.subscribe(items => {
+	// 	formRules = items;
+	// 	initRule(prop)
+	// });
+	// $: initRule(prop)
 
 	let validateDisabled = false
 	let validateMessage = ''
@@ -151,13 +152,22 @@
 		return () => {
 			unsubscribeLabelWidth();
 			unsubscribeLabelPosition();
-			unsubscribeRulesWatch();
+			// unsubscribeRulesWatch();
 			unsubscribeFieldValue();
 		};
 	});
 	const validateHandle = () => {
 
 	}
+
+	// 初始化
+	tick().then(() => {
+		if (prop) {
+			formRule = deepClone(formRules[prop])
+			fieldValue = deepClone(modelValue[prop]) // initModel
+			initRequired(formRule)
+		}
+	})
 </script>
 <div
 	{...$$restProps}

@@ -4,7 +4,7 @@
 	import BeIcon  from '../be-icon/BeIcon.svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { FormatTime } from '$lib/utils/beerui';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, getContext, tick } from 'svelte';
 	import { modifyWithTimeString } from './date-util.js'
 
 	const dispatch = createEventDispatcher()
@@ -16,6 +16,14 @@
 	export let format = DEFAULT_FORMATS['time']
 	export let clearable = true
 	export let placeholder = '选择时间'
+	export let validateEvent: boolean = true; // 是否发送验证表单
+
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+	ctx.propWatch.subscribe(value => prop = value)
+
 	let direction = 'bottom'
 	let visible;
 	let date
@@ -46,6 +54,10 @@
 		value = times.setTime(e.detail);
 		visible = false
 		dispatch('change',  value)
+		if (validateEvent) {
+			console.log('watchValue');
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
 	}
 	const handlerClear = () => {
 		value = null
@@ -53,6 +65,8 @@
 		visible = false
 		dispatch('change',  value)
 	}
+
+
 </script>
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
 	<BeInput validateEvent={false} {placeholder} on:change={handleChange} {value} on:focus={handleShowDatePopper} />

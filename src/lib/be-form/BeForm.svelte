@@ -38,6 +38,7 @@
 	}
 
 	export const validate = (callback) => {
+		console.log('validate');
 		if (!model) {
 			console.warn('[BeerUi Warn][Form]model is required for validate to work!');
 			return;
@@ -74,6 +75,7 @@
 		}
 	}
 	export const validateField = (props, cb) => {
+		console.log('validateField');
 		props = [].concat(props);
 		const fields = fields.filter(field => props.indexOf(field.prop) !== -1);
 		if (!fields.length) {
@@ -91,7 +93,7 @@
 	const modelWatch = writable(model);
 	$: labelWidthWatch.set(labelWidth);
 	$: labelPositionWatch.set(labelPosition);
-	$: modelWatch.set(model);
+	// $: modelWatch.set(model);
 
 	const watchRules = (rules, fields) => {
 		if (validateOnRuleChange || !rules || !fields) return

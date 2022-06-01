@@ -262,23 +262,23 @@
 					<BeFormItem label='活动名称' prop='name' required message='这是行内的提示' trigger='blur'>
 						<BeInput bind:value={ruleForm.name} />
 					</BeFormItem>
-					<BeFormItem label='活动区域' prop='region'>
-						<BeSelect bind:value={ruleForm.region}>
-							<BeOption label="区域一" value="shanghai"></BeOption>
-							<BeOption label="区域二" value="beijing"></BeOption>
-						</BeSelect>
-					</BeFormItem>
-					<BeFormItem label='活动时间' required>
-						<div class='flex'>
-							<BeFormItem prop='date1'>
-								<BeDatePicker bind:value={ruleForm.date1} placeholder='选择日期' selectMode="date" />
-							</BeFormItem>
-							<span class='px-10'>-</span>
-							<BeFormItem prop='date2'>
-								<BeTimePicker bind:value={ruleForm.date2}/>
-							</BeFormItem>
-						</div>
-					</BeFormItem>
+<!--					<BeFormItem label='活动区域' prop='region'>-->
+<!--						<BeSelect bind:value={ruleForm.region}>-->
+<!--							<BeOption label="区域一" value="shanghai"></BeOption>-->
+<!--							<BeOption label="区域二" value="beijing"></BeOption>-->
+<!--						</BeSelect>-->
+<!--					</BeFormItem>-->
+<!--					<BeFormItem label='活动时间' required>-->
+<!--						<div class='flex'>-->
+<!--							<BeFormItem prop='date1'>-->
+<!--								<BeDatePicker bind:value={ruleForm.date1} placeholder='选择日期' selectMode="date" />-->
+<!--							</BeFormItem>-->
+<!--							<span class='px-10'>-</span>-->
+<!--							<BeFormItem prop='date2'>-->
+<!--								<BeTimePicker bind:value={ruleForm.date2}/>-->
+<!--							</BeFormItem>-->
+<!--						</div>-->
+<!--					</BeFormItem>-->
 <!--					<BeFormItem label='即时配送' prop='delivery'>-->
 <!--						<BeSwitch bind:checked={ruleForm.delivery} />-->
 <!--					</BeFormItem>-->

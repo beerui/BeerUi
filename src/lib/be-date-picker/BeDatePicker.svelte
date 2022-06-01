@@ -8,7 +8,7 @@
 	import BeInput from '../be-input/BeInput.svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { FormatTime } from '$lib/utils/beerui';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, getContext, tick } from 'svelte';
 	const dispatch = createEventDispatcher()
 
 	const DEFAULT_FORMATS = {
@@ -34,6 +34,7 @@
 	export let clearable = true
 	export let disabled = false
 	export let readonly = true
+	export let validateEvent: boolean = true; // 是否发送验证表单
 	let active = false
 	let displayValue = []
 	if(format && !valueFormat) valueFormat = format
@@ -135,7 +136,21 @@
 		dispatch('change',  value)
 	}
 
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+	ctx.propWatch.subscribe(value => prop = value)
 
+	const watchValue = (value) => {
+		if (isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(value)
+	tick().then(() => {
+		isInit = true;
+	})
 </script>
 {#if ranged}
 <div class='be-date be-range' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
