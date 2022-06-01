@@ -259,7 +259,7 @@
 					bind:this={ruleFormDom}
 					on:submit={submitRules}
 				>
-					<BeFormItem label='活动名称' prop='name' required message='这是行内的提示' trigger='blur'>
+					<BeFormItem label='活动名称' prop='name'>
 						<BeInput bind:value={ruleForm.name} />
 					</BeFormItem>
 <!--					<BeFormItem label='活动区域' prop='region'>-->

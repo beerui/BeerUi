@@ -15,6 +15,9 @@
 
 	let _this = null
 	const ctx = getContext("BeForm");
+	ctx.modelWatch.subscribe(value => {
+		console.log('ctx.modelWatch');
+	})
 
 	// label的监听
 	const unsubscribeLabelWidth = ctx.labelWidthWatch.subscribe((value) => {
@@ -27,12 +30,12 @@
 	// value的监听
 	let modelValue: any = {}
 	let fieldValue = ''
-	const unsubscribeFieldValue = ctx.modelWatch.subscribe(value => {
-		console.log('unsubscribeFieldValue');
-		// console.log('prop', modelValue[prop], prop);
-		// modelValue = deepClone(value);
-		// fieldValue = modelValue[prop] || '';
-	});
+	// const unsubscribeFieldValue = ctx.modelWatch.subscribe(value => {
+	// 	console.log('unsubscribeFieldValue');
+	// 	// console.log('prop', modelValue[prop], prop);
+	// 	// modelValue = deepClone(value);
+	// 	// fieldValue = modelValue[prop] || '';
+	// });
 	// 验证规则监听
 	let formRules = []
 	let formRule = []

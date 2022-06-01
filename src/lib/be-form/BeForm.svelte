@@ -93,8 +93,15 @@
 	const modelWatch = writable(model);
 	$: labelWidthWatch.set(labelWidth);
 	$: labelPositionWatch.set(labelPosition);
-	// $: modelWatch.set(model);
 
+	const initWatchModel = (model) => {
+		console.log('initWatchModel');
+		modelWatch.set(model);
+	}
+	$: initWatchModel(model);
+	modelWatch.subscribe(value => {
+		console.log('modelWatch1');
+	})
 	const watchRules = (rules, fields) => {
 		if (validateOnRuleChange || !rules || !fields) return
 	}
