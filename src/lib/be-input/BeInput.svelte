@@ -1,9 +1,7 @@
 <script lang='ts'>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, getContext, tick } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';
-	import { writable } from 'svelte/store';
-	import { eventBus } from '$lib/utils';
 	const forwardEvents = forwardEventsBuilder(get_current_component());
 	export let value = '';
 	export let placeholder = '';
@@ -12,18 +10,25 @@
 	export let disabled = false;
 	// 是否显示清除按钮
 	export let clearable = false;
-	export let validateEvent = true;
+	export let validateEvent: boolean = true; // 是否发送验证表单
 	export let type = 'text';
+	export let name = '';
 	// 右侧icon
 	export let suffixIcon = '';
 	// let showClear = false;
 	let input;
+
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	ctx.propWatch.subscribe(value => prop = value)
 
 	function showClear() {
 		return clearable && !readonly && !disabled;
 	}
 
 	let suffix;
+	let isInit: boolean = false;
 
 	// 判断后置内容是否存在
 	function getSuffixVisible() {
@@ -36,7 +41,7 @@
 	function blur(event) {
 		dispatch('blur', event);
 		if (validateEvent) {
-			eventBus.emit('BEFormItem', { key: 'be.form.blur', value: [value] });
+			ctx.FormItemEventCallback({ type: 'blur', value: [value] })
 		}
 	}
 
@@ -53,10 +58,6 @@
 	// 仅在输入框失去焦点或用户按下回车时触发
 	function change(event) {
 		dispatch('change', value);
-		if (validateEvent) {
-			eventBus.emit('BEFormItem', { key: 'be.form.change', value: [value] });
-			console.log('eventBus', eventBus);
-		}
 	}
 
 	// 在 input 值改变时触发
@@ -67,8 +68,18 @@
 	function typeAction(node) {
 		node.type = type;
 	}
+	const watchValue = (value) => {
+		if (isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(value)
+
 	let _class: $$props["class"] = "";
 	export {_class as class};
+	tick().then(() => {
+		isInit = true;
+	})
 </script>
 <div
 	class='be-input {_class}'
@@ -105,6 +116,7 @@
 		on:blur={blur}
 		on:focus={focus}
 		on:change={change}
+		name={prop || name}
 		on:input={onInput}
 		bind:this={input}
 		use:forwardEvents

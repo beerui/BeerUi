@@ -55,7 +55,7 @@
 	}
 </script>
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
-	<BeInput {placeholder} on:change={handleChange} {value} on:focus={handleShowDatePopper} />
+	<BeInput validateEvent={false} {placeholder} on:change={handleChange} {value} on:focus={handleShowDatePopper} />
 	<div class="be-date__prefix">
 		<BeIcon name="time"/>
 	</div>

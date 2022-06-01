@@ -32,10 +32,22 @@
       &:after {clear: both;}
       @include table-form-ab;
     }
+    &__error {
+      color: #F56C6C;
+      font-size: 12px;
+      line-height: 1;
+      padding-top: 4px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
     &.is-required .be-form-item__label:before {
       content: "*";
       color: #f56c6c;
       margin-right: 4px;
+    }
+    &.is-error .be-input__inner {
+      border-color: #F56C6C;
     }
   }
   &--inline {

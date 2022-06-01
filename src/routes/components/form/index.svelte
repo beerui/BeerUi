@@ -68,8 +68,8 @@
     }
     let rules = {
 	    name: [
-		    { required: true, message: '请输入活动名称', trigger: 'blur' },
-		    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+		    { required: true, message: '请输入活动名称', trigger: 'change' },
+		    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
 	    ],
 	    region: [
 		    { required: true, message: '请选择活动区域', trigger: 'change' }
@@ -92,6 +92,7 @@
     }
 	let ruleFormDom = null
 	const submitRules = () => {
+		console.log('ruleFormDom');
 		ruleFormDom.validate((valid) => {
 			if (valid) {
 				alert('submit!');
@@ -256,8 +257,9 @@
 					bind:model={ruleForm}
 					bind:rules={rules}
 					bind:this={ruleFormDom}
+					on:submit={submitRules}
 				>
-					<BeFormItem label='活动名称' prop='name'>
+					<BeFormItem label='活动名称' prop='name' required message='这是行内的提示' trigger='blur'>
 						<BeInput bind:value={ruleForm.name} />
 					</BeFormItem>
 					<BeFormItem label='活动区域' prop='region'>
@@ -277,28 +279,28 @@
 							</BeFormItem>
 						</div>
 					</BeFormItem>
-					<BeFormItem label='即时配送' prop='delivery'>
-						<BeSwitch bind:checked={ruleForm.delivery} />
-					</BeFormItem>
-					<BeFormItem label='活动性质' prop='type'>
-						<BeCheckboxGroup bind:checked={ruleForm.type}>
-							<BeCheckbox label="美食/餐厅线上活动" name="type"></BeCheckbox>
-							<BeCheckbox label="地推活动" name="type"></BeCheckbox>
-							<BeCheckbox label="线下主题活动" name="type"></BeCheckbox>
-							<BeCheckbox label="单纯品牌曝光" name="type"></BeCheckbox>
-						</BeCheckboxGroup>
-					</BeFormItem>
-					<BeFormItem label='特殊资源' prop='resource'>
-						<BeRadioGroup bind:checked={ruleForm.resource}>
-							<BeRadio label="线上品牌商赞助"></BeRadio>
-							<BeRadio label="线下场地免费"></BeRadio>
-						</BeRadioGroup>
-					</BeFormItem>
-					<BeFormItem label='活动形式' prop='desc'>
-						<BeTextarea bind:value={ruleForm.desc}></BeTextarea>
-					</BeFormItem>
+<!--					<BeFormItem label='即时配送' prop='delivery'>-->
+<!--						<BeSwitch bind:checked={ruleForm.delivery} />-->
+<!--					</BeFormItem>-->
+<!--					<BeFormItem label='活动性质' prop='type'>-->
+<!--						<BeCheckboxGroup bind:checked={ruleForm.type}>-->
+<!--							<BeCheckbox label="美食/餐厅线上活动" name="type"></BeCheckbox>-->
+<!--							<BeCheckbox label="地推活动" name="type"></BeCheckbox>-->
+<!--							<BeCheckbox label="线下主题活动" name="type"></BeCheckbox>-->
+<!--							<BeCheckbox label="单纯品牌曝光" name="type"></BeCheckbox>-->
+<!--						</BeCheckboxGroup>-->
+<!--					</BeFormItem>-->
+<!--					<BeFormItem label='特殊资源' prop='resource'>-->
+<!--						<BeRadioGroup bind:checked={ruleForm.resource}>-->
+<!--							<BeRadio label="线上品牌商赞助"></BeRadio>-->
+<!--							<BeRadio label="线下场地免费"></BeRadio>-->
+<!--						</BeRadioGroup>-->
+<!--					</BeFormItem>-->
+<!--					<BeFormItem label='活动形式' prop='desc'>-->
+<!--						<BeTextarea bind:value={ruleForm.desc}></BeTextarea>-->
+<!--					</BeFormItem>-->
 					<BeFormItem>
-						<BeButton type='primary' on:click={onSubmit}>立即创建</BeButton>
+						<BeButton type='primary' on:click={submitRules}>立即创建</BeButton>
 						<BeButton>取消</BeButton>
 					</BeFormItem>
 				</BeForm>

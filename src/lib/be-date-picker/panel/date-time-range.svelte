@@ -189,13 +189,13 @@ function handleShowTimePopper(e) {
   <div class="be-picker-panel__footer be-picker-panel__footer-datetime">
     <div class="be-date-picker__range-time-header">
       <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseTimePopper }} on:outside={handleCloseTimePopper}>
-        <BeInput placeholder="选择时间" readonly value = {timeValue} on:focus={handleShowTimePopper} />
+        <BeInput validateEvent={false} placeholder="选择时间" readonly value = {timeValue} on:focus={handleShowTimePopper} />
         <Time date = {minDate} direction='top' {format} visible={timeVisible} on:pick={confirmTimePick}/>
       </div>
     </div>
     <div class="be-date-picker__range-time-header be-picker-panel__footer-datetime">
       <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseRightTimePopper }} on:outside={handleCloseRightTimePopper}>
-        <BeInput placeholder="选择时间" readonly value = {timeRightValue} on:focus={handleShowRightTimePopper} />
+        <BeInput validateEvent={false} placeholder="选择时间" readonly value = {timeRightValue} on:focus={handleShowRightTimePopper} />
         <Time date = {maxDate} direction='top' {format} visible={timeRightVisible} on:pick={confirmRightTimePick}/>
       </div>
       <BeButton type="default" size="mini" disabled = {disabledBtn} on:click = {handleConfirm}>确认</BeButton>

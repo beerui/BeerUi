@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import BeInput from '../be-input/BeInput.svelte';
-	import { createEventDispatcher, setContext, tick } from 'svelte';
+	import { createEventDispatcher, getContext, setContext, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import SelectStore, { ArrayValue } from './select';
 	let dispatch = createEventDispatcher()
@@ -15,6 +15,7 @@
 	export let position = 'bottom' // 位置
 	export let clearable = false
 	export let placeholder = '请选择'
+	export let validateEvent: boolean = true; // 是否发送验证表单
 
 	let inner = false; // 是否是内部改变的值
 	let render = false
@@ -57,6 +58,18 @@
 	}
 	$: setValue(value)
 
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	ctx.propWatch.subscribe(value => prop = value)
+	let isInit: boolean = false
+	const watchValue = (value) => {
+		if (isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(value)
+
 	const setCurrentValue = () => {
 		let node = store.getCurrent(value)
 		inputValue = node?.label
@@ -85,6 +98,7 @@
 	export {_class as class};
 	tick().then(() => {
 		render = true;
+		isInit = true;
 		newInitStore()
 	})
 </script>

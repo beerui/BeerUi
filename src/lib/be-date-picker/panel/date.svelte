@@ -177,7 +177,7 @@ function handleShowTimePopper(e) {
   {#if selectMode === 'datetime'}
     <div class="be-picker-panel__footer be-picker-panel__footer-datetime">
       <div class="be-date-picker__time-header" use:clickOutside={{ cb: handleCloseTimePopper }} on:outside={handleCloseTimePopper}>
-        <BeInput placeholder="选择时间" on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
+        <BeInput validateEvent={false} placeholder="选择时间" on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
         <Time {date} direction='top' {format} visible={timeVisible} {selectableRange} on:pick={confirmTimePick}/>
       </div>
       <BeButton type="default" size="mini" on:click = {confirmDateTimePick}>确认</BeButton>

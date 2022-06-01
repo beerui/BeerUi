@@ -134,6 +134,8 @@
 		handleCloseDatePopper()
 		dispatch('change',  value)
 	}
+
+
 </script>
 {#if ranged}
 <div class='be-date be-range' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
@@ -158,7 +160,7 @@
 </div>
 {:else}
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper} bind:this={inputRect}>
-	<BeInput on:change={handleChange} disabled={disabled} readonly={readonly} {value} {placeholder} on:focus={handleShowDatePopper} bind:this={input}/>
+	<BeInput validateEvent={false} on:change={handleChange} disabled={disabled} readonly={readonly} {value} {placeholder} on:focus={handleShowDatePopper} bind:this={input}/>
 	<div class="be-date__prefix">
 		<BeIcon name="calendar"/>
 	</div>

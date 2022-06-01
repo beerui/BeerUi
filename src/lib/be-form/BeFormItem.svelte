@@ -1,13 +1,15 @@
 <script lang="ts">
 	import AsyncValidator from 'async-validator';
-	import { getContext, onMount } from 'svelte';
-	import { eventBus, getPropByPath, objectAssign } from '$lib/utils';
-	import { get_current_component } from 'svelte/internal';
+	import { getContext, onMount, setContext, tick } from 'svelte';
+	import { objectAssign } from '$lib/utils';
+	import { writable } from 'svelte/store';
 
 	export let label: string = ''; //
 	export let prop: string = ''; // 匹配 rule
-	export let rules: [Object, Array<any>] = []; // 匹配 rule
-	export let required: boolean = false
+	export let rules: [Object, Array<any>]; // 匹配 rule
+	export let required: boolean = false // 行内必填
+	export let trigger: string = ''; // 匹配行内必填 触发事件
+	export let message: string = ''; // 匹配行内必填 提示信息
 	let isRequired: boolean = false
 	let initialLabelWidth: string = '80px' // 表单域标签的宽度
 
@@ -26,25 +28,14 @@
 	let modelValue = ''
 	let fieldValue = ''
 	const unsubscribeFieldValue = ctx.modelWatch.subscribe(value => {
+		console.log('prop', modelValue[prop]);
 		modelValue = value;
-		if (prop) fieldValue = modelValue[prop]
+		fieldValue = modelValue[prop] || '';
 	});
 	// 验证规则监听
 	let formRules = []
 	let formRule = []
 	let validateState = ''
-	const unsubscribeRulesWatch = ctx.rulesWatch.subscribe(items => formRules = items);
-	const initRule = (p) => {
-		if (!p) return
-		formRule = formRules[p]
-		initRequired(formRule)
-	}
-	$: initRule(prop)
-	const initModel = (p) => {
-		if (!p) return
-		fieldValue = modelValue[p]
-	}
-	$: initModel(prop)
 
 	const initRequired = (rules) => {
 		let _isRequired = false;
@@ -59,15 +50,23 @@
 		}
 		isRequired = _isRequired
 	}
+	const initRule = (p) => {
+		if (!p) return
+		formRule = formRules[p]
+		fieldValue = modelValue[p] // initModel
+		initRequired(formRule)
+	}
+	const unsubscribeRulesWatch = ctx.rulesWatch.subscribe(items => {
+		formRules = items;
+		initRule(prop)
+	});
+	$: initRule(prop)
+
 	let validateDisabled = false
 	let validateMessage = ''
 	const getRules = () => {
-		let formRules = formRule;
-		const selfRules = rules;
-		const requiredRule = required !== undefined ? { required: !!required } : [];
-		const prop = getPropByPath(formRules, prop || '');
-		formRules = formRules ? (prop.o[prop || ''] || prop.v) : [];
-		return [].concat(selfRules || formRules || []).concat(requiredRule);
+		const requiredRule = required !== undefined ? { required: !!required, message: message || '', trigger } : [];
+		return [].concat(rules || formRule || []).concat(requiredRule);
 	}
 	const getFilteredRule = (trigger) => {
 		const rules = getRules();
@@ -97,7 +96,7 @@
 		descriptor[prop] = rules;
 		const validator = new AsyncValidator(descriptor);
 		const model = {};
-		model[prop] = fieldValue;
+		model[prop] = modelValue[prop] || '';
 		validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
 			validateState = !errors ? 'success' : 'error';
 			validateMessage = errors ? errors[0].message : '';
@@ -112,10 +111,6 @@
 	}
 	export let error = ''
 	export let validateStatus = ''
-	export let _for = ''
-	export let size = ''
-	export let inlineMessage: [String, Boolean] = []
-	export let showMessage: Boolean = true
 	const onFieldChange = () => {
 		if (validateDisabled) {
 			validateDisabled = false;
@@ -126,24 +121,18 @@
 	const onFieldBlur = () => {
 		validate('blur');
 	}
-	const addValidateEvents = () => {
-		const rules = getRules();
-		if (rules.length || required !== undefined) {
-			eventBus.on('BEFormItem', (item) => {
-				console.log('onFieldBlur', item);
-				onFieldBlur()
-			});
-			eventBus.on('BEFormItem', (item) => {
-				console.log('onFieldChange', item);
-				onFieldChange()
-			});
-		}
-	}
-	export const removeValidateEvents = () => {
-		eventBus.off('');
-	}
-	onMount(() => {
 
+	// 传递到表单组件
+	const FormItemEventCallback = async (item) => {
+		await tick()
+		if (item.type === 'change') onFieldChange()
+		if (item.type === 'blur') onFieldBlur()
+	}
+	const propWatch = writable(prop);
+	$: propWatch.set(prop);
+	setContext("BeFormItem", { FormItemEventCallback, propWatch });
+
+	onMount(() => {
 		if (prop) {
 			ctx.addFiledCallback({
 				label,
@@ -151,17 +140,14 @@
 				required,
 				validate,
 				clearValidate,
-				removeValidateEvents,
-				addValidateEvents,
+				FormItemEventCallback,
 				fieldValue,
 				rules,
 				formRule,
 				error,
 				validateStatus,
-				for: _for
 			})
 		}
-		// addValidateEvents()
 		return () => {
 			unsubscribeLabelWidth();
 			unsubscribeLabelPosition();
@@ -173,10 +159,6 @@
 
 	}
 </script>
-<div on:click={validateHandle}>validate</div>
-<div>rules: {JSON.stringify(rules)}</div>
-<div>formRule: {JSON.stringify(formRule)}</div>
-<div>fieldValue: {JSON.stringify(fieldValue)}</div>
 <div
 	{...$$restProps}
 	bind:this={_this}
@@ -191,6 +173,8 @@
 	{/if}
 	<div class='be-form-item__content' style:margin-left={(isLabelPositionTop || !label) ? '' : initialLabelWidth}>
 		<slot></slot>
+		{#if validateState === 'error'}
+			<div class='be-form-item__error'>{validateMessage}</div>
+		{/if}
 	</div>
-	<div class='be-form-item__error'></div>
 </div>

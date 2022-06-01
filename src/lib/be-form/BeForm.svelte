@@ -37,7 +37,7 @@
 		});
 	}
 
-	const validate = (callback) => {
+	export const validate = (callback) => {
 		if (!model) {
 			console.warn('[BeerUi Warn][Form]model is required for validate to work!');
 			return;
@@ -73,7 +73,7 @@
 			return promise;
 		}
 	}
-	const validateField = (props, cb) => {
+	export const validateField = (props, cb) => {
 		props = [].concat(props);
 		const fields = fields.filter(field => props.indexOf(field.prop) !== -1);
 		if (!fields.length) {
@@ -94,21 +94,12 @@
 	$: modelWatch.set(model);
 
 	const watchRules = (rules, fields) => {
-		if (!rules || !fields) return
-		console.log('watchRules', rules);
-		console.log('fields', fields);
-		fields.forEach(field => {
-			field.removeValidateEvents();
-			field.addValidateEvents();
-		});
-		if (validateOnRuleChange) {
-			validate(() => {});
-		}
+		if (validateOnRuleChange || !rules || !fields) return
 	}
 	$: watchRules(rules, fields)
 
 	const callback = (item) => {
-		console.log('callback', item);
+		// console.log('callback', item);
 	}
 	const addFiledCallback = (item) => {
 		fields.push(item)
