@@ -15,9 +15,6 @@
 
 	let _this = null
 	const ctx = getContext("BeForm");
-	ctx.modelWatch.subscribe(value => {
-		console.log('ctx.modelWatch');
-	})
 
 	// label的监听
 	const unsubscribeLabelWidth = ctx.labelWidthWatch.subscribe((value) => {
@@ -30,12 +27,12 @@
 	// value的监听
 	let modelValue: any = {}
 	let fieldValue = ''
-	// const unsubscribeFieldValue = ctx.modelWatch.subscribe(value => {
-	// 	console.log('unsubscribeFieldValue');
-	// 	// console.log('prop', modelValue[prop], prop);
-	// 	// modelValue = deepClone(value);
-	// 	// fieldValue = modelValue[prop] || '';
-	// });
+	const unsubscribeFieldValue = ctx.modelWatch.subscribe(value => {
+		console.log('unsubscribeFieldValue');
+		// console.log('prop', modelValue[prop], prop);
+		modelValue = deepClone(value);
+		fieldValue = modelValue[prop] || '';
+	});
 	// 验证规则监听
 	let formRules = []
 	let formRule = []
@@ -54,17 +51,13 @@
 		}
 		isRequired = _isRequired
 	}
-	// const initRule = (p) => {
-	// 	if (!p) return
-	// 	formRule = formRules[p]
-	// 	fieldValue = modelValue[p] // initModel
-	// 	initRequired(formRule)
-	// }
-	// const unsubscribeRulesWatch = ctx.rulesWatch.subscribe(items => {
-	// 	formRules = items;
-	// 	initRule(prop)
-	// });
-	// $: initRule(prop)
+
+	const unsubscribeRulesWatch = ctx.rulesWatch.subscribe(items => {
+		formRules = items;
+		formRule = formRules[prop]
+		fieldValue = modelValue[prop] // initModel
+		initRequired(formRule)
+	});
 
 	let validateDisabled = false
 	let validateMessage = ''
@@ -155,7 +148,7 @@
 		return () => {
 			unsubscribeLabelWidth();
 			unsubscribeLabelPosition();
-			// unsubscribeRulesWatch();
+			unsubscribeRulesWatch();
 			unsubscribeFieldValue();
 		};
 	});
@@ -166,8 +159,8 @@
 	// 初始化
 	tick().then(() => {
 		if (prop) {
-			formRule = deepClone(formRules[prop])
-			fieldValue = deepClone(modelValue[prop]) // initModel
+			formRule = formRules[prop]
+			fieldValue = modelValue[prop] // initModel
 			initRequired(formRule)
 		}
 	})
