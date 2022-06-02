@@ -62,7 +62,7 @@
 	    date1: '',
 	    date2: '',
 	    delivery: false,
-	    type1: [],
+	    type: [],
 	    resource: '',
 	    desc: ''
     }
@@ -80,7 +80,7 @@
 	    date2: [
 		    { required: true, message: '请选择时间', trigger: 'change' }
 	    ],
-	    type1: [
+	    type: [
 		    { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
 	    ],
 	    resource: [
@@ -282,8 +282,8 @@
 					<BeFormItem label='即时配送' prop='delivery'>
 						<BeSwitch bind:checked={ruleForm.delivery} />
 					</BeFormItem>
-					<BeFormItem label='活动性质' prop='type1'>
-						<BeCheckboxGroup bind:checked={ruleForm.type1} validateEvent={false}>
+					<BeFormItem label='活动性质' prop='type'>
+						<BeCheckboxGroup bind:checked={ruleForm.type} validateEvent={false}>
 							<BeCheckbox label="美食/餐厅线上活动"></BeCheckbox>
 							<BeCheckbox label="地推活动"></BeCheckbox>
 							<BeCheckbox label="线下主题活动"></BeCheckbox>
