@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { createEventDispatcher, getContext } from 'svelte';
+	import { createEventDispatcher, getContext, tick } from 'svelte';
 	import { mapAttributes } from '$lib/utils/beerui';
 
 	const store = getContext('checkStore')
@@ -10,6 +10,7 @@
 	export let disabled = '';
 	export let name = '';
 	export let indeterminate: boolean = false;
+	export let validateEvent: boolean = true; // 是否发送验证表单
 	export let value = '';
 	export let label = '';
 
@@ -36,6 +37,22 @@
 			dispatch('change', { label, checked: checked });
 		}
 	};
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+	ctx.propWatch.subscribe(value => prop = value)
+
+	const watchValue = (value) => {
+		if (isInit && validateEvent) {
+			console.log(1);
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(checked)
+	tick().then(() => {
+		isInit = true;
+	})
 </script>
 <div class={_class}
        style={$$props.style}

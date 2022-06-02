@@ -52,10 +52,10 @@
 	}
 	function confirmPick(e) {
 		value = times.setTime(e.detail);
+		console.log('value', value);
 		visible = false
 		dispatch('change',  value)
 		if (validateEvent) {
-			console.log('watchValue');
 			ctx.FormItemEventCallback({ type: 'change', value: [value] })
 		}
 	}

@@ -1,11 +1,12 @@
 <script lang='ts'>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, getContext, tick } from 'svelte';
 
 	export let value: string | number = '';
 	export let placeholder: string = '';
 	export let readonly: boolean = false;
 	export let disabled: boolean = false;
 	export let maxlength: string | number = '';
+	export let validateEvent: boolean = true; // 是否发送验证表单
 
 	let instance = null
 
@@ -13,10 +14,30 @@
 	// 设置焦点
 	export const setBlur = () => instance.focus()
 	// 仅在输入框失去焦点或用户按下回车时触发
-	const onChange = evt => dispatch('onChange', evt.target.value);
-
+	const onChange = evt => dispatch('onChange', value);
+	const blur = () => {
+		dispatch('blur', value);
+		if (isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'blur', value: [value] })
+		}
+	}
 	let _class: $$props['class'] = '';
 	export { _class as class };
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+	ctx.propWatch.subscribe(value => prop = value)
+
+	const watchValue = (value) => {
+		if (isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(value)
+	tick().then(() => {
+		isInit = true;
+	})
 </script>
 <div
 	class='be-textarea {_class}'
@@ -39,7 +60,7 @@
 		class='be-textarea__inner'
 		{readonly}
 		{disabled}
-		on:blur
+		on:blur={blur}
 		on:focus
 		on:change
 		on:input

@@ -62,7 +62,7 @@
 	    date1: '',
 	    date2: '',
 	    delivery: false,
-	    type: [],
+	    type1: [],
 	    resource: '',
 	    desc: ''
     }
@@ -78,9 +78,9 @@
 		    { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
 	    ],
 	    date2: [
-		    { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+		    { required: true, message: '请选择时间', trigger: 'change' }
 	    ],
-	    type: [
+	    type1: [
 		    { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
 	    ],
 	    resource: [
@@ -92,7 +92,6 @@
     }
 	let ruleFormDom = null
 	const submitRules = () => {
-		console.log('ruleFormDom');
 		ruleFormDom.validate((valid) => {
 			if (valid) {
 				alert('submit!');
@@ -262,43 +261,44 @@
 					<BeFormItem label='活动名称' prop='name'>
 						<BeInput bind:value={ruleForm.name} />
 					</BeFormItem>
-<!--					<BeFormItem label='活动区域' prop='region'>-->
-<!--						<BeSelect bind:value={ruleForm.region}>-->
-<!--							<BeOption label="区域一" value="shanghai"></BeOption>-->
-<!--							<BeOption label="区域二" value="beijing"></BeOption>-->
-<!--						</BeSelect>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动时间' required>-->
-<!--						<div class='flex'>-->
-<!--							<BeFormItem prop='date1'>-->
-<!--								<BeDatePicker bind:value={ruleForm.date1} placeholder='选择日期' selectMode="date" />-->
-<!--							</BeFormItem>-->
-<!--							<span class='px-10'>-</span>-->
-<!--							<BeFormItem prop='date2'>-->
-<!--								<BeTimePicker bind:value={ruleForm.date2}/>-->
-<!--							</BeFormItem>-->
-<!--						</div>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='即时配送' prop='delivery'>-->
-<!--						<BeSwitch bind:checked={ruleForm.delivery} />-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动性质' prop='type'>-->
-<!--						<BeCheckboxGroup bind:checked={ruleForm.type}>-->
-<!--							<BeCheckbox label="美食/餐厅线上活动" name="type"></BeCheckbox>-->
-<!--							<BeCheckbox label="地推活动" name="type"></BeCheckbox>-->
-<!--							<BeCheckbox label="线下主题活动" name="type"></BeCheckbox>-->
-<!--							<BeCheckbox label="单纯品牌曝光" name="type"></BeCheckbox>-->
-<!--						</BeCheckboxGroup>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='特殊资源' prop='resource'>-->
-<!--						<BeRadioGroup bind:checked={ruleForm.resource}>-->
-<!--							<BeRadio label="线上品牌商赞助"></BeRadio>-->
-<!--							<BeRadio label="线下场地免费"></BeRadio>-->
-<!--						</BeRadioGroup>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动形式' prop='desc'>-->
-<!--						<BeTextarea bind:value={ruleForm.desc}></BeTextarea>-->
-<!--					</BeFormItem>-->
+					<BeFormItem label='活动区域' prop='region'>
+						<BeSelect bind:value={ruleForm.region}>
+							<BeOption label="" value={null}></BeOption>
+							<BeOption label="区域一" value="shanghai"></BeOption>
+							<BeOption label="区域二" value="beijing"></BeOption>
+						</BeSelect>
+					</BeFormItem>
+					<BeFormItem label='活动时间' required>
+						<div class='flex'>
+							<BeFormItem prop='date1'>
+								<BeDatePicker bind:value={ruleForm.date1} placeholder='选择日期' selectMode="date" />
+							</BeFormItem>
+							<span class='px-10'>-</span>
+							<BeFormItem prop='date2'>
+								<BeTimePicker bind:value={ruleForm.date2}/>
+							</BeFormItem>
+						</div>
+					</BeFormItem>
+					<BeFormItem label='即时配送' prop='delivery'>
+						<BeSwitch bind:checked={ruleForm.delivery} />
+					</BeFormItem>
+					<BeFormItem label='活动性质' prop='type1'>
+						<BeCheckboxGroup bind:checked={ruleForm.type1}>
+							<BeCheckbox label="美食/餐厅线上活动"></BeCheckbox>
+							<BeCheckbox label="地推活动"></BeCheckbox>
+							<BeCheckbox label="线下主题活动"></BeCheckbox>
+							<BeCheckbox label="单纯品牌曝光"></BeCheckbox>
+						</BeCheckboxGroup>
+					</BeFormItem>
+					<BeFormItem label='特殊资源' prop='resource'>
+						<BeRadioGroup bind:checked={ruleForm.resource}>
+							<BeRadio label="线上品牌商赞助"></BeRadio>
+							<BeRadio label="线下场地免费"></BeRadio>
+						</BeRadioGroup>
+					</BeFormItem>
+					<BeFormItem label='活动形式' prop='desc'>
+						<BeTextarea bind:value={ruleForm.desc}></BeTextarea>
+					</BeFormItem>
 					<BeFormItem>
 						<BeButton type='primary' on:click={submitRules}>立即创建</BeButton>
 						<BeButton>取消</BeButton>

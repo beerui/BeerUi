@@ -1,10 +1,11 @@
 <script lang="ts">
 	// 选中的列表
-	import { createEventDispatcher, setContext } from 'svelte';
+	import { createEventDispatcher, getContext, setContext, tick } from 'svelte';
 	import RadioStore from './radio'
 	import { debounce } from '../utils/throttle';
 	const dispatch = createEventDispatcher();
 	export let checked: string = '';
+	export let validateEvent: boolean = true; // 是否发送验证表单
 	const store = new RadioStore({ checked })
 	setContext('radioStore', store)
 
@@ -30,6 +31,23 @@
 	export {_class as class};
 
 	$: if (checked) setChecked(checked)
+
+
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+	ctx.propWatch.subscribe(value => prop = value)
+
+	const watchValue = (value) => {
+		if (isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(checked)
+	tick().then(() => {
+		isInit = true;
+	})
 </script>
 <div role="group" aria-label="checkbox-group" class='be-radio-group {_class}' style={$$props.style}>
 	<slot></slot>

@@ -28,8 +28,7 @@
 	let modelValue: any = {}
 	let fieldValue = ''
 	const unsubscribeFieldValue = ctx.modelWatch.subscribe(value => {
-		console.log('unsubscribeFieldValue');
-		// console.log('prop', modelValue[prop], prop);
+		if (!prop) return
 		modelValue = deepClone(value);
 		fieldValue = modelValue[prop] || '';
 	});
@@ -53,6 +52,7 @@
 	}
 
 	const unsubscribeRulesWatch = ctx.rulesWatch.subscribe(items => {
+		if (!prop) return
 		formRules = items;
 		formRule = formRules[prop]
 		fieldValue = modelValue[prop] // initModel
@@ -62,10 +62,11 @@
 	let validateDisabled = false
 	let validateMessage = ''
 	const getRules = () => {
-		const requiredRule = required !== undefined ? { required: !!required, message: message || '', trigger } : [];
+		const requiredRule = required ? { required: !!required, message: message || '', trigger } : [];
 		return [].concat(rules || formRule || []).concat(requiredRule);
 	}
 	const getFilteredRule = (trigger) => {
+		if (!prop) return
 		const rules = getRules();
 		return rules.filter(rule => {
 			if (!rule.trigger || trigger === '') return true;
@@ -77,9 +78,11 @@
 		}).map(rule => objectAssign({}, rule));
 	}
 	const validate = (trigger, callback = (validateMessage?: string, invalidFields?) => {}) => {
+		console.log('validate', prop);
+		if (!prop) return
 		validateDisabled = false;
 		const rules = getFilteredRule(trigger);
-		if ((!rules || rules.length === 0) && required === undefined) {
+		if ((!rules || rules.length === 0) && !required) {
 			callback();
 			return true;
 		}
