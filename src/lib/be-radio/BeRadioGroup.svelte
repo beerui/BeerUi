@@ -32,15 +32,16 @@
 
 	$: if (checked) setChecked(checked)
 
-
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
 	let isInit: boolean = false
-	ctx.propWatch.subscribe(value => prop = value)
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
+	}
 
 	const watchValue = (value) => {
-		if (isInit && validateEvent) {
+		if (ctx && prop && isInit && validateEvent) {
 			ctx.FormItemEventCallback({ type: 'change', value: [value] })
 		}
 	}

@@ -41,12 +41,15 @@
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
 	let isInit: boolean = false
-	ctx.propWatch.subscribe(value => prop = value)
 
-	const watchValue = (value) => {
-		if (isInit && validateEvent) {
-			console.log(1);
-			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
+	}
+
+	const watchValue = (checked) => {
+		if (ctx && isInit && validateEvent) {
+			console.log('watchValue checkGroup', checked);
+			ctx.FormItemEventCallback({ type: 'change', value: [checked] })
 		}
 	}
 	$: watchValue(checked)

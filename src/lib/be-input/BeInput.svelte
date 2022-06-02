@@ -21,7 +21,9 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	ctx.propWatch.subscribe(value => prop = value)
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
+	}
 
 	function showClear() {
 		return clearable && !readonly && !disabled;
@@ -69,7 +71,7 @@
 		node.type = type;
 	}
 	const watchValue = (value) => {
-		if (isInit && validateEvent) {
+		if (ctx && prop && isInit && validateEvent) {
 			ctx.FormItemEventCallback({ type: 'change', value: [value] })
 		}
 	}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher, getContext } from "svelte";
+	import { createEventDispatcher, getContext, tick } from 'svelte';
 	import { mapAttributes } from "$lib/utils/beerui";
 
 	const store = getContext("radioStore");
@@ -10,6 +10,7 @@
 	export let name = "";
 	export let checked = "";
 	export let label = "";
+	export let validateEvent: boolean = true; // 是否发送验证表单
 
 	let _class: $$props["class"] = "";
 	export {_class as class};
@@ -21,9 +22,26 @@
 		const subscribeHandle = () => isChecked = store.isChecked(label)
 		store.subscribe.push(subscribeHandle)
 	}
-	$: {
-		if (!store) isChecked = checked === label
+	$: if (!store) isChecked = checked === label
+
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
 	}
+
+	const watchValue = (value) => {
+		if (ctx && prop && isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(checked)
+	tick().then(() => {
+		isInit = true;
+	})
+
 	const handleClick = (evt) => {
 		dispatch('click', evt);
 		if (disabled) return

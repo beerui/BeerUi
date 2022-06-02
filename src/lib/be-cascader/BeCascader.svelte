@@ -1,11 +1,12 @@
 <script lang='ts'>
 	import BeIcon from '$lib/be-icon/BeIcon.svelte';
 	import BeInput from '$lib/be-input/BeInput.svelte';
-	import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
+	import { createEventDispatcher, getContext, onDestroy, onMount, setContext, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import { filterClass, getScrollContainer } from '$lib/utils/beerui';
 	import CascaderPanel from './cascader-panel.svelte';
 	import Store from './store';
+	import { validateEvent } from '$lib/be-textarea/BeTextarea.svelte';
 
 	const dispatch = createEventDispatcher();
 	export let options;
@@ -32,6 +33,7 @@
 	// 位置
 	export let clearable = true;
 	export let placeholder = '请选择';
+	export let validateEvent: boolean = true; // 是否发送验证表单
 	let store = new Store(options, $$props);
 	setContext('store', store);
 	// 显示的值
@@ -112,6 +114,23 @@
 	const showAllLevelsData = (data) => {
 		return showAllLevels ? data : data.slice(data.length - 1, data.length);
 	};
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
+	}
+
+	const watchValue = (value) => {
+		if (ctx && prop && isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(value)
+	tick().then(() => {
+		isInit = true;
+	})
 </script>
 <div
 	class={_class}
