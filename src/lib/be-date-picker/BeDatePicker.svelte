@@ -140,7 +140,9 @@
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
 	let isInit: boolean = false
-	ctx.propWatch.subscribe(value => prop = value)
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
+	}
 
 	const watchValue = (value) => {
 		if (ctx && prop && isInit && validateEvent) {

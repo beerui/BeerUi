@@ -22,7 +22,9 @@
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
 	let isInit: boolean = false
-	ctx.propWatch.subscribe(value => prop = value)
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
+	}
 
 	let direction = 'bottom'
 	let visible;

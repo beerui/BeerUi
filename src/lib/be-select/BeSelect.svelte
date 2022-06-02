@@ -61,7 +61,9 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	ctx.propWatch.subscribe(value => prop = value)
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
+	}
 	let isInit: boolean = false
 	const watchValue = (value) => {
 		if (ctx && prop && isInit && validateEvent) {
