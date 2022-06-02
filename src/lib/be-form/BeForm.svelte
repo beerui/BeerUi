@@ -16,7 +16,7 @@
 	export let hideRequiredAsterisk: Boolean = true; //
 
 	let fields = []
-	const resetFields = () => {
+	export const resetFields = () => {
 		if (!model) {
 			console.warn('[BeerUi Warn][Form]model is required for resetFields to work.');
 			return;

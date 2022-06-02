@@ -125,6 +125,52 @@
 	<h3>典型表单</h3>
 	<p>包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。</p>
 	<DemoBlock code={`
+<BeForm
+	bind:ref={ref}
+	bind:model={form}
+	labelWidth="80px"
+>
+	<BeFormItem label='活动名称'>
+		<BeInput bind:value={form.name} />
+	</BeFormItem>
+	<BeFormItem label='活动区域'>
+		<BeSelect bind:value={form.region}>
+			<BeOption label="区域一" value="shanghai"></BeOption>
+			<BeOption label="区域二" value="beijing"></BeOption>
+		</BeSelect>
+	</BeFormItem>
+	<BeFormItem label='活动时间'>
+		<div class='flex'>
+			<BeDatePicker bind:value={form.date1} placeholder='选择日期' selectMode="date" />
+			<span class='px-10'>-</span>
+			<BeTimePicker bind:value={form.date2}/>
+		</div>
+	</BeFormItem>
+	<BeFormItem label='即时配送'>
+		<BeSwitch bind:checked={form.delivery} />
+	</BeFormItem>
+	<BeFormItem label='活动性质'>
+		<BeCheckboxGroup bind:checked={form.type}>
+			<BeCheckbox label="美食/餐厅线上活动" name="type"></BeCheckbox>
+			<BeCheckbox label="地推活动" name="type"></BeCheckbox>
+			<BeCheckbox label="线下主题活动" name="type"></BeCheckbox>
+			<BeCheckbox label="单纯品牌曝光" name="type"></BeCheckbox>
+		</BeCheckboxGroup>
+	</BeFormItem>
+	<BeFormItem label='特殊资源'>
+		<BeRadioGroup bind:checked={form.resource}>
+			<BeRadio label="线上品牌商赞助"></BeRadio>
+			<BeRadio label="线下场地免费"></BeRadio>
+		</BeRadioGroup>
+	</BeFormItem>
+	<BeFormItem label='活动形式'>
+		<BeTextarea bind:value={form.desc}></BeTextarea>
+	</BeFormItem>
+	<BeFormItem>
+		<BeButton type='primary' on:click={onSubmit}>立即创建</BeButton>
+		<BeButton>取消</BeButton>
+	</BeFormItem>
+</BeForm>
 `} js={`
 import { BeForm } from '@brewer/beerui';
 `}>
@@ -184,6 +230,23 @@ import { BeForm } from '@brewer/beerui';
 	<h3>行内表单</h3>
 	<p>当垂直方向空间受限且表单较简单时，可以在一行内放置表单。</p>
 	<DemoBlock code={`
+<BeForm
+	bind:model={formInline}
+	inline
+>
+	<BeFormItem label='审批人'>
+		<BeInput bind:value={formInline.user} />
+	</BeFormItem>
+	<BeFormItem label='活动区域'>
+		<BeSelect bind:value={formInline.region}>
+			<BeOption label="区域一" value="shanghai"></BeOption>
+			<BeOption label="区域二" value="beijing"></BeOption>
+		</BeSelect>
+	</BeFormItem>
+	<BeFormItem>
+		<BeButton type='primary' on:click={onSubmitInline}>查询</BeButton>
+	</BeFormItem>
+</BeForm>
 `} js={`
 `}>
 		<div slot="source">
@@ -215,7 +278,28 @@ import { BeForm } from '@brewer/beerui';
 	</DemoBlock>
 	<h3>对齐方式</h3>
 	<p>根据具体目标和制约因素，选择最佳的标签对齐方式。</p>
-	<DemoBlock code={``} js={``}>
+	<DemoBlock code={`
+<BeForm
+	bind:model={formLabelAlign}
+	{labelPosition}
+	inline
+>
+	<BeFormItem label='名称'>
+		<BeInput bind:value={formLabelAlign.name} />
+	</BeFormItem>
+	<BeFormItem label='活动区域'>
+		<BeSelect bind:value={formLabelAlign.region}>
+			<BeOption label="区域一" value="shanghai"></BeOption>
+			<BeOption label="区域二" value="beijing"></BeOption>
+		</BeSelect>
+	</BeFormItem>
+	<BeFormItem label='活动形式'>
+		<BeInput bind:value={formLabelAlign.type} />
+	</BeFormItem>
+	<BeFormItem>
+		<BeButton type='primary' on:click={onSubmitInline}>查询</BeButton>
+	</BeFormItem>
+</BeForm>`} js={``}>
 		<div slot="source">
 			<div class="demo-list">
 				formLabelAlign: {JSON.stringify(formLabelAlign)}
@@ -255,7 +339,59 @@ import { BeForm } from '@brewer/beerui';
 	</DemoBlock>
 	<h3>表单验证</h3>
 	<p>在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误。</p>
-	<DemoBlock code={``} js={``}>
+	<DemoBlock code={`
+<BeForm
+	bind:model={ruleForm}
+	bind:rules={rules}
+	bind:this={ruleFormDom}
+	on:submit={submitRules}
+>
+	<BeFormItem label='活动名称' prop='name'>
+		<BeInput bind:value={ruleForm.name} />
+	</BeFormItem>
+	<BeFormItem label='活动区域' prop='region'>
+		<BeSelect bind:value={ruleForm.region}>
+			<BeOption label="" value={null}></BeOption>
+			<BeOption label="区域一" value="shanghai"></BeOption>
+			<BeOption label="区域二" value="beijing"></BeOption>
+		</BeSelect>
+	</BeFormItem>
+	<BeFormItem label='活动时间' required>
+		<div class='flex'>
+			<BeFormItem prop='date1'>
+				<BeDatePicker bind:value={ruleForm.date1} placeholder='选择日期' selectMode="date" />
+			</BeFormItem>
+			<span class='px-10'>-</span>
+			<BeFormItem prop='date2'>
+				<BeTimePicker bind:value={ruleForm.date2}/>
+			</BeFormItem>
+		</div>
+	</BeFormItem>
+	<BeFormItem label='即时配送' prop='delivery'>
+		<BeSwitch bind:checked={ruleForm.delivery} />
+	</BeFormItem>
+	<BeFormItem label='活动性质' prop='type'>
+		<BeCheckboxGroup bind:checked={ruleForm.type} validateEvent={false}>
+			<BeCheckbox label="美食/餐厅线上活动"></BeCheckbox>
+			<BeCheckbox label="地推活动"></BeCheckbox>
+			<BeCheckbox label="线下主题活动"></BeCheckbox>
+			<BeCheckbox label="单纯品牌曝光"></BeCheckbox>
+		</BeCheckboxGroup>
+	</BeFormItem>
+	<BeFormItem label='特殊资源' prop='resource'>
+		<BeRadioGroup bind:checked={ruleForm.resource}>
+			<BeRadio label="线上品牌商赞助"></BeRadio>
+			<BeRadio label="线下场地免费"></BeRadio>
+		</BeRadioGroup>
+	</BeFormItem>
+	<BeFormItem label='活动形式' prop='desc'>
+		<BeTextarea bind:value={ruleForm.desc}></BeTextarea>
+	</BeFormItem>
+	<BeFormItem>
+		<BeButton type='primary' on:click={submitRules}>立即创建</BeButton>
+		<BeButton>取消</BeButton>
+	</BeFormItem>
+</BeForm>`} js={``}>
 		<div slot="source">
 			<div class="demo-list">
 				ruleForm: {JSON.stringify(ruleForm)}
@@ -309,7 +445,7 @@ import { BeForm } from '@brewer/beerui';
 					</BeFormItem>
 					<BeFormItem>
 						<BeButton type='primary' on:click={submitRules}>立即创建</BeButton>
-						<BeButton>取消</BeButton>
+						<BeButton on:click={resetForm}>重置</BeButton>
 					</BeFormItem>
 				</BeForm>
 			</div>

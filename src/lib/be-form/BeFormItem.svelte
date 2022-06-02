@@ -81,7 +81,6 @@
 		if (!prop) return
 		validateDisabled = false;
 		const rules = getFilteredRule(trigger);
-		console.log('rules', rules);
 		if ((!rules || rules.length === 0) && !required) {
 			callback();
 			return true;
@@ -97,7 +96,6 @@
 		const validator = new AsyncValidator(descriptor);
 		const model = {};
 		model[prop] = modelValue[prop] || '';
-		console.log('model[prop]', model[prop]);
 		validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
 			validateState = !errors ? 'success' : 'error';
 			validateMessage = errors ? errors[0].message : '';
@@ -123,6 +121,28 @@
 		validate('blur');
 	}
 
+	const resetField = () => {
+		validateState = '';
+		validateMessage = '';
+		// let model = form.model;
+		// let value = fieldValue;
+		// let path = prop;
+		// if (path.indexOf(':') !== -1) {
+		// 	path = path.replace(/:/, '.');
+		// }
+		// let prop = getPropByPath(model, path, true);
+		// this.validateDisabled = true;
+		// if (Array.isArray(value)) {
+		// 	prop.o[prop.k] = [].concat(this.initialValue);
+		// } else {
+		// 	prop.o[prop.k] = this.initialValue;
+		// }
+		// // reset validateDisabled after onFieldChange triggered
+		// this.$nextTick(() => {
+		// 	this.validateDisabled = false;
+		// });
+		// this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
+	}
 	// 传递到表单组件
 	const FormItemEventCallback = async (item) => {
 		await tick()
@@ -145,6 +165,7 @@
 				fieldValue,
 				rules,
 				formRule,
+				resetField,
 				error,
 				validateStatus,
 			})
