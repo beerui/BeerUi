@@ -11,7 +11,6 @@
 	// 设置选中数据
 	export const setCheckedList = (items) => {
 		store.setCheckedList(items);
-		console.log('setCheckedList', items);
 	}
 
 	const subscribeHandle = () => checked = store.optionList

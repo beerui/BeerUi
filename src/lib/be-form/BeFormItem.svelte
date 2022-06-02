@@ -78,10 +78,10 @@
 		}).map(rule => objectAssign({}, rule));
 	}
 	const validate = (trigger, callback = (validateMessage?: string, invalidFields?) => {}) => {
-		console.log('validate', prop);
 		if (!prop) return
 		validateDisabled = false;
 		const rules = getFilteredRule(trigger);
+		console.log('rules', rules);
 		if ((!rules || rules.length === 0) && !required) {
 			callback();
 			return true;
@@ -97,6 +97,7 @@
 		const validator = new AsyncValidator(descriptor);
 		const model = {};
 		model[prop] = modelValue[prop] || '';
+		console.log('model[prop]', model[prop]);
 		validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
 			validateState = !errors ? 'success' : 'error';
 			validateMessage = errors ? errors[0].message : '';

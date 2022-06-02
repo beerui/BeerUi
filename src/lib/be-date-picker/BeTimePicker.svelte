@@ -18,14 +18,6 @@
 	export let placeholder = '选择时间'
 	export let validateEvent: boolean = true; // 是否发送验证表单
 
-	// 表单验证
-	const ctx = getContext('BeFormItem')
-	let prop = '' // name
-	let isInit: boolean = false
-	if (ctx) {
-		ctx.propWatch.subscribe(value => prop = value)
-	}
-
 	let direction = 'bottom'
 	let visible;
 	let date
@@ -65,8 +57,28 @@
 		date = new Date()
 		visible = false
 		dispatch('change',  value)
+		if (ctx && prop && isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	// 表单验证
+	const ctx = getContext('BeFormItem')
+	let prop = '' // name
+	let isInit: boolean = false
+
+	if (ctx) {
+		ctx.propWatch.subscribe(value => prop = value)
 	}
 
+	const watchValue = (value) => {
+		if (ctx && prop && isInit && validateEvent) {
+			ctx.FormItemEventCallback({ type: 'change', value: [value] })
+		}
+	}
+	$: watchValue(value)
+	tick().then(() => {
+		isInit = true;
+	})
 
 </script>
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
