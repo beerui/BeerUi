@@ -283,7 +283,7 @@
 						<BeSwitch bind:checked={ruleForm.delivery} />
 					</BeFormItem>
 					<BeFormItem label='活动性质' prop='type1'>
-						<BeCheckboxGroup bind:checked={ruleForm.type1}>
+						<BeCheckboxGroup bind:checked={ruleForm.type1} validateEvent={false}>
 							<BeCheckbox label="美食/餐厅线上活动"></BeCheckbox>
 							<BeCheckbox label="地推活动"></BeCheckbox>
 							<BeCheckbox label="线下主题活动"></BeCheckbox>
