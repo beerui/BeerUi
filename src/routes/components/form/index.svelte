@@ -111,140 +111,148 @@
 	<h3>基本用法</h3>
 
 	<ol>
-		<li>value</li>
+		<li>ref: Element = null; // 获得对表单元素的引用</li>
+		<li>inline: Boolean = false; // 行内表单模式</li>
+		<li>labelWidth: string = '80px'; // 表单域标签的宽度，默认 '80px'。作为 Form 直接子元素的 form-item 会继承该值。支持 auto。</li>
+		<li>model: any = null; // 获得表单元素绑定的值</li>
+		<li>rules: any = null; // 获得表单元素绑定的验证规则</li>
+		<li>labelPosition: LabelPosition = ''; // 表单域标签的位置</li>
+		<li>validateOnRuleChange: Boolean = true; // 规则改变时验证</li>
+		<li>hideRequiredAsterisk: Boolean = true; //</li>
+		<li>TODO 重置 自定义规则</li>
 	</ol>
 
-<!--	<h3>典型表单</h3>-->
-<!--	<p>包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。</p>-->
-<!--	<DemoBlock code={`-->
-<!--`} js={`-->
-<!--import { BeForm } from '@brewer/beerui';-->
-<!--`}>-->
-<!--		<div slot="source">-->
-<!--			<div class="demo-list">-->
-<!--				form: {JSON.stringify(form)}-->
-<!--				<hr>-->
-<!--				<BeForm-->
-<!--					bind:ref={ref}-->
-<!--					bind:model={form}-->
-<!--					labelWidth="80px"-->
-<!--				>-->
-<!--					<BeFormItem label='活动名称'>-->
-<!--						<BeInput bind:value={form.name} />-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动区域'>-->
-<!--						<BeSelect bind:value={form.region}>-->
-<!--							<BeOption label="区域一" value="shanghai"></BeOption>-->
-<!--							<BeOption label="区域二" value="beijing"></BeOption>-->
-<!--						</BeSelect>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动时间'>-->
-<!--						<div class='flex'>-->
-<!--							<BeDatePicker bind:value={form.date1} placeholder='选择日期' selectMode="date" />-->
-<!--							<span class='px-10'>-</span>-->
-<!--							<BeTimePicker bind:value={form.date2}/>-->
-<!--						</div>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='即时配送'>-->
-<!--						<BeSwitch bind:checked={form.delivery} />-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动性质'>-->
-<!--						<BeCheckboxGroup bind:checked={form.type}>-->
-<!--							<BeCheckbox label="美食/餐厅线上活动" name="type"></BeCheckbox>-->
-<!--							<BeCheckbox label="地推活动" name="type"></BeCheckbox>-->
-<!--							<BeCheckbox label="线下主题活动" name="type"></BeCheckbox>-->
-<!--							<BeCheckbox label="单纯品牌曝光" name="type"></BeCheckbox>-->
-<!--						</BeCheckboxGroup>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='特殊资源'>-->
-<!--						<BeRadioGroup bind:checked={form.resource}>-->
-<!--							<BeRadio label="线上品牌商赞助"></BeRadio>-->
-<!--							<BeRadio label="线下场地免费"></BeRadio>-->
-<!--						</BeRadioGroup>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动形式'>-->
-<!--						<BeTextarea bind:value={form.desc}></BeTextarea>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem>-->
-<!--						<BeButton type='primary' on:click={onSubmit}>立即创建</BeButton>-->
-<!--						<BeButton>取消</BeButton>-->
-<!--					</BeFormItem>-->
-<!--				</BeForm>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</DemoBlock>-->
-<!--	<h3>行内表单</h3>-->
-<!--	<p>当垂直方向空间受限且表单较简单时，可以在一行内放置表单。</p>-->
-<!--	<DemoBlock code={`-->
-<!--`} js={`-->
-<!--`}>-->
-<!--		<div slot="source">-->
-<!--			<div class="demo-list">-->
-<!--				formInline: {JSON.stringify(formInline)}-->
-<!--				<hr>-->
-<!--				<BeForm-->
-<!--					bind:model={formInline}-->
-<!--					inline-->
-<!--				>-->
-<!--					<BeFormItem label='审批人'>-->
-<!--						<BeInput bind:value={formInline.user} />-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动区域'>-->
-<!--						<BeSelect bind:value={formInline.region}>-->
-<!--							<BeOption label="区域一" value="shanghai"></BeOption>-->
-<!--							<BeOption label="区域二" value="beijing"></BeOption>-->
-<!--						</BeSelect>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem>-->
-<!--						<BeButton type='primary' on:click={onSubmitInline}>查询</BeButton>-->
-<!--					</BeFormItem>-->
-<!--				</BeForm>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div slot='description'>-->
-<!--			设置 inline 属性可以让表单域变为行内的表单域-->
-<!--		</div>-->
-<!--	</DemoBlock>-->
-<!--	<h3>对齐方式</h3>-->
-<!--	<p>根据具体目标和制约因素，选择最佳的标签对齐方式。</p>-->
-<!--	<DemoBlock code={``} js={``}>-->
-<!--		<div slot="source">-->
-<!--			<div class="demo-list">-->
-<!--				formLabelAlign: {JSON.stringify(formLabelAlign)}-->
-<!--				<hr>-->
-<!--				<BeRadioGroup bind:checked={labelPosition}>-->
-<!--					<span class='px-10'><BeRadio label="left">左对齐</BeRadio></span>-->
-<!--					<span class='px-10'><BeRadio label="right">右对齐</BeRadio></span>-->
-<!--					<span class='px-10'><BeRadio label="top">顶部对齐</BeRadio></span>-->
-<!--				</BeRadioGroup>-->
-<!--				<hr>-->
-<!--				<BeForm-->
-<!--					bind:model={formLabelAlign}-->
-<!--					{labelPosition}-->
-<!--					inline-->
-<!--				>-->
-<!--					<BeFormItem label='名称'>-->
-<!--						<BeInput bind:value={formLabelAlign.name} />-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动区域'>-->
-<!--						<BeSelect bind:value={formLabelAlign.region}>-->
-<!--							<BeOption label="区域一" value="shanghai"></BeOption>-->
-<!--							<BeOption label="区域二" value="beijing"></BeOption>-->
-<!--						</BeSelect>-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem label='活动形式'>-->
-<!--						<BeInput bind:value={formLabelAlign.type} />-->
-<!--					</BeFormItem>-->
-<!--					<BeFormItem>-->
-<!--						<BeButton type='primary' on:click={onSubmitInline}>查询</BeButton>-->
-<!--					</BeFormItem>-->
-<!--				</BeForm>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div slot='description'>-->
-<!--			通过设置 label-position 属性可以改变表单域标签的位置，可选值为 top、left，当设为 top 时标签会置于表单域的顶部-->
-<!--		</div>-->
-<!--	</DemoBlock>-->
+	<h3>典型表单</h3>
+	<p>包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。</p>
+	<DemoBlock code={`
+`} js={`
+import { BeForm } from '@brewer/beerui';
+`}>
+		<div slot="source">
+			<div class="demo-list">
+				form: {JSON.stringify(form)}
+				<hr>
+				<BeForm
+					bind:ref={ref}
+					bind:model={form}
+					labelWidth="80px"
+				>
+					<BeFormItem label='活动名称'>
+						<BeInput bind:value={form.name} />
+					</BeFormItem>
+					<BeFormItem label='活动区域'>
+						<BeSelect bind:value={form.region}>
+							<BeOption label="区域一" value="shanghai"></BeOption>
+							<BeOption label="区域二" value="beijing"></BeOption>
+						</BeSelect>
+					</BeFormItem>
+					<BeFormItem label='活动时间'>
+						<div class='flex'>
+							<BeDatePicker bind:value={form.date1} placeholder='选择日期' selectMode="date" />
+							<span class='px-10'>-</span>
+							<BeTimePicker bind:value={form.date2}/>
+						</div>
+					</BeFormItem>
+					<BeFormItem label='即时配送'>
+						<BeSwitch bind:checked={form.delivery} />
+					</BeFormItem>
+					<BeFormItem label='活动性质'>
+						<BeCheckboxGroup bind:checked={form.type}>
+							<BeCheckbox label="美食/餐厅线上活动" name="type"></BeCheckbox>
+							<BeCheckbox label="地推活动" name="type"></BeCheckbox>
+							<BeCheckbox label="线下主题活动" name="type"></BeCheckbox>
+							<BeCheckbox label="单纯品牌曝光" name="type"></BeCheckbox>
+						</BeCheckboxGroup>
+					</BeFormItem>
+					<BeFormItem label='特殊资源'>
+						<BeRadioGroup bind:checked={form.resource}>
+							<BeRadio label="线上品牌商赞助"></BeRadio>
+							<BeRadio label="线下场地免费"></BeRadio>
+						</BeRadioGroup>
+					</BeFormItem>
+					<BeFormItem label='活动形式'>
+						<BeTextarea bind:value={form.desc}></BeTextarea>
+					</BeFormItem>
+					<BeFormItem>
+						<BeButton type='primary' on:click={onSubmit}>立即创建</BeButton>
+						<BeButton>取消</BeButton>
+					</BeFormItem>
+				</BeForm>
+			</div>
+		</div>
+	</DemoBlock>
+	<h3>行内表单</h3>
+	<p>当垂直方向空间受限且表单较简单时，可以在一行内放置表单。</p>
+	<DemoBlock code={`
+`} js={`
+`}>
+		<div slot="source">
+			<div class="demo-list">
+				formInline: {JSON.stringify(formInline)}
+				<hr>
+				<BeForm
+					bind:model={formInline}
+					inline
+				>
+					<BeFormItem label='审批人'>
+						<BeInput bind:value={formInline.user} />
+					</BeFormItem>
+					<BeFormItem label='活动区域'>
+						<BeSelect bind:value={formInline.region}>
+							<BeOption label="区域一" value="shanghai"></BeOption>
+							<BeOption label="区域二" value="beijing"></BeOption>
+						</BeSelect>
+					</BeFormItem>
+					<BeFormItem>
+						<BeButton type='primary' on:click={onSubmitInline}>查询</BeButton>
+					</BeFormItem>
+				</BeForm>
+			</div>
+		</div>
+		<div slot='description'>
+			设置 inline 属性可以让表单域变为行内的表单域
+		</div>
+	</DemoBlock>
+	<h3>对齐方式</h3>
+	<p>根据具体目标和制约因素，选择最佳的标签对齐方式。</p>
+	<DemoBlock code={``} js={``}>
+		<div slot="source">
+			<div class="demo-list">
+				formLabelAlign: {JSON.stringify(formLabelAlign)}
+				<hr>
+				<BeRadioGroup bind:checked={labelPosition}>
+					<span class='px-10'><BeRadio label="left">左对齐</BeRadio></span>
+					<span class='px-10'><BeRadio label="right">右对齐</BeRadio></span>
+					<span class='px-10'><BeRadio label="top">顶部对齐</BeRadio></span>
+				</BeRadioGroup>
+				<hr>
+				<BeForm
+					bind:model={formLabelAlign}
+					{labelPosition}
+					inline
+				>
+					<BeFormItem label='名称'>
+						<BeInput bind:value={formLabelAlign.name} />
+					</BeFormItem>
+					<BeFormItem label='活动区域'>
+						<BeSelect bind:value={formLabelAlign.region}>
+							<BeOption label="区域一" value="shanghai"></BeOption>
+							<BeOption label="区域二" value="beijing"></BeOption>
+						</BeSelect>
+					</BeFormItem>
+					<BeFormItem label='活动形式'>
+						<BeInput bind:value={formLabelAlign.type} />
+					</BeFormItem>
+					<BeFormItem>
+						<BeButton type='primary' on:click={onSubmitInline}>查询</BeButton>
+					</BeFormItem>
+				</BeForm>
+			</div>
+		</div>
+		<div slot='description'>
+			通过设置 label-position 属性可以改变表单域标签的位置，可选值为 top、left，当设为 top 时标签会置于表单域的顶部
+		</div>
+	</DemoBlock>
 	<h3>表单验证</h3>
 	<p>在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误。</p>
 	<DemoBlock code={``} js={``}>

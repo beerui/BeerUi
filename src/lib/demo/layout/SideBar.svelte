@@ -22,6 +22,7 @@
 			</li>
 			<li><a class:active={$page.url.pathname === '/components/cascader'} href='/components/cascader'>Cascader
 				示例</a></li>
+			<li><a class:active={$page.url.pathname === '/components/form'} href='/components/form'>Form 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/upload'} href='/components/upload'>Upload 示例</a>
 			</li>
 			<li><a class:active={$page.url.pathname === '/components/datePicker'} href='/components/datePicker'>date-picker
