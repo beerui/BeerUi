@@ -6,7 +6,6 @@
 	import { filterClass, getScrollContainer } from '$lib/utils/beerui';
 	import CascaderPanel from './cascader-panel.svelte';
 	import Store from './store';
-	import { validateEvent } from '$lib/be-textarea/BeTextarea.svelte';
 
 	const dispatch = createEventDispatcher();
 	export let options;
