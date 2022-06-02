@@ -17,7 +17,7 @@
 	const onChange = evt => dispatch('onChange', value);
 	const blur = () => {
 		dispatch('blur', value);
-		if (isInit && validateEvent) {
+		if (ctx && prop && isInit && validateEvent) {
 			ctx.FormItemEventCallback({ type: 'blur', value: [value] })
 		}
 	}

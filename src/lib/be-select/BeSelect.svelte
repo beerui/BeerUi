@@ -64,7 +64,7 @@
 	ctx.propWatch.subscribe(value => prop = value)
 	let isInit: boolean = false
 	const watchValue = (value) => {
-		if (isInit && validateEvent) {
+		if (ctx && prop && isInit && validateEvent) {
 			ctx.FormItemEventCallback({ type: 'change', value: [value] })
 		}
 	}

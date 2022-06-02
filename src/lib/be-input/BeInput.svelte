@@ -42,7 +42,7 @@
 	// 在input失去焦点时触发
 	function blur(event) {
 		dispatch('blur', event);
-		if (validateEvent) {
+		if (ctx && prop && isInit && validateEvent) {
 			ctx.FormItemEventCallback({ type: 'blur', value: [value] })
 		}
 	}

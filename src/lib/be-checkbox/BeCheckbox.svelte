@@ -47,7 +47,7 @@
 	}
 
 	const watchValue = (checked) => {
-		if (ctx && isInit && validateEvent) {
+		if (ctx && prop && isInit && validateEvent) {
 			console.log('watchValue checkGroup', checked);
 			ctx.FormItemEventCallback({ type: 'change', value: [checked] })
 		}
