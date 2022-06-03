@@ -16,7 +16,7 @@
 	    BeButton,
 	    BeTimePicker
 	} from '$lib';
-    import { onMount } from 'svelte';
+		import { onMount, tick } from 'svelte';
 
 	let ref
     onMount(() => {
@@ -101,9 +101,20 @@
 			}
 		});
 	}
-    const resetForm = () => {
+    const resetForm = async () => {
+			ruleForm = {
+				name: '',
+				region: '',
+				date1: '',
+				date2: '',
+				delivery: false,
+				type: [],
+				resource: '',
+				desc: ''
+			}
+			await tick()
 			ruleFormDom.resetFields();
-    }
+		}
 </script>
 <div class="page-container content">
 	<h2>Form 表单</h2>

@@ -1,3 +1,8 @@
+<!--
+https://github.com/sveltejs/svelte/issues/7579
+https://svelte.dev/repl/e80db44258b54eaba32a9023dca21197?version=3.5.3
+-->
+<svelte:options immutable/>
 <script lang="ts">
 	import AsyncValidator from 'async-validator';
 	import { getContext, onMount, setContext, tick } from 'svelte';
