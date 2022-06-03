@@ -101,8 +101,8 @@
 			}
 		});
 	}
-    const resetForm = (formName) => {
-	    formName.resetFields();
+    const resetForm = () => {
+			ruleFormDom.resetFields();
     }
 </script>
 <div class="page-container content">
