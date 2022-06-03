@@ -101,7 +101,7 @@
 			}
 		});
 	}
-    const resetForm = async () => {
+    const resetForm = () => {
 			ruleForm = {
 				name: '',
 				region: '',
@@ -112,8 +112,9 @@
 				resource: '',
 				desc: ''
 			}
-			await tick()
-			ruleFormDom.resetFields();
+			setTimeout(() => {
+				ruleFormDom.resetFields();
+			}, 60)
 		}
 </script>
 <div class="page-container content">
@@ -137,7 +138,6 @@
 	<p>包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。</p>
 	<DemoBlock code={`
 <BeForm
-	bind:ref={ref}
 	bind:model={form}
 	labelWidth="80px"
 >
@@ -184,6 +184,19 @@
 </BeForm>
 `} js={`
 import { BeForm } from '@brewer/beerui';
+let form = {
+  name: '',
+  region: '',
+  date1: '',
+  date2: '',
+  delivery: false,
+  type: [],
+  resource: '',
+  desc: ''
+}
+let onSubmit = () => {
+  console.log(form);
+};
 `}>
 		<div slot="source">
 			<div class="demo-list">
@@ -310,7 +323,14 @@ import { BeForm } from '@brewer/beerui';
 	<BeFormItem>
 		<BeButton type='primary' on:click={onSubmitInline}>查询</BeButton>
 	</BeFormItem>
-</BeForm>`} js={``}>
+</BeForm>`} js={`
+let labelPosition = 'right'
+let formLabelAlign = {
+  name: '',
+  region: '',
+  type: ''
+}
+`}>
 		<div slot="source">
 			<div class="demo-list">
 				formLabelAlign: {JSON.stringify(formLabelAlign)}
@@ -402,7 +422,67 @@ import { BeForm } from '@brewer/beerui';
 		<BeButton type='primary' on:click={submitRules}>立即创建</BeButton>
 		<BeButton>取消</BeButton>
 	</BeFormItem>
-</BeForm>`} js={``}>
+</BeForm>`} js={`
+let ruleForm = {
+	name: '',
+	region: '',
+	date1: '',
+	date2: '',
+	delivery: false,
+	type: [],
+	resource: '',
+	desc: ''
+}
+let rules = {
+	name: [
+		{ required: true, message: '请输入活动名称', trigger: 'change' },
+		{ min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
+	],
+	region: [
+		{ required: true, message: '请选择活动区域', trigger: 'change' }
+	],
+	date1: [
+		{ type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+	],
+	date2: [
+		{ required: true, message: '请选择时间', trigger: 'change' }
+	],
+	type: [
+		{ type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+	],
+	resource: [
+		{ required: true, message: '请选择活动资源', trigger: 'change' }
+	],
+	desc: [
+		{ required: true, message: '请填写活动形式', trigger: 'blur' }
+	]
+    }
+let ruleFormDom = null
+const submitRules = () => {
+ruleFormDom.validate((valid) => {
+	if (valid) {
+		alert('submit!');
+	} else {
+		console.log('error submit!!');
+		return false;
+	}
+});
+}
+    const resetForm = () => {
+	ruleForm = {
+		name: '',
+		region: '',
+		date1: '',
+		date2: '',
+		delivery: false,
+		type: [],
+		resource: '',
+		desc: ''
+	}
+	setTimeout(() => {
+		ruleFormDom.resetFields();
+	}, 60)
+}`}>
 		<div slot="source">
 			<div class="demo-list">
 				ruleForm: {JSON.stringify(ruleForm)}
