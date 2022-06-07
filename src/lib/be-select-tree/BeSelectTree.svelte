@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import BeTree from '../be-tree/BeTree.svelte';
 	import { createEventDispatcher, onMount, tick } from 'svelte';
-	import clickOutside from '$lib/_actions/clickOutside';
+	import clickOutside from '../_actions/clickOutside';
 	import BeIcon from '../be-icon/BeIcon.svelte';
 	import { slide } from 'svelte/transition';
 	let dispatch = createEventDispatcher()

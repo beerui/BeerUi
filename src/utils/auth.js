@@ -1,4 +1,4 @@
-import { browser } from "$app/env";
+const browser = typeof window !== 'undefined';
 
 const TokenKey = 'jw_token'
 const MenuKey = 'MENU_ACTIVE'

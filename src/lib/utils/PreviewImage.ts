@@ -1,7 +1,7 @@
 import { svgList } from './svgList';
 import { on, off } from './beerui';
 import { throttle } from './throttle';
-import { browser } from "$app/env";
+const browser = typeof window !== 'undefined';
 /**
  * 图片预览
  * @param {string} src 当前图片链接

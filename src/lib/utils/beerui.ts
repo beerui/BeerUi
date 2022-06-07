@@ -1,6 +1,5 @@
-import { browser } from "$app/env";
-
-if (browser) {
+const is_browser = typeof window !== 'undefined';
+if (is_browser) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   window.__beerui__ = {
@@ -70,7 +69,7 @@ export class FormatTime {
 }
 
 export const on = ((): any => {
-  if (browser && document.addEventListener) {
+  if (is_browser && document.addEventListener) {
     return (element: Node, event: string, handler: EventListenerOrEventListenerObject): any => {
       if (element && event && handler) {
         element.addEventListener(event, handler, false);
@@ -87,7 +86,7 @@ export const on = ((): any => {
 })();
 
 export const off = ((): any => {
-  if (browser && document.removeEventListener) {
+  if (is_browser && document.removeEventListener) {
     return (element: Node, event: string, handler: EventListenerOrEventListenerObject): any => {
       if (element && event) {
         element.removeEventListener(event, handler, false);

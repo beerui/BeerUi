@@ -1,5 +1,5 @@
-import { addClass, removeClass, setStyle, isString } from '$lib/utils/beerui';
-import { browser } from '$app/env';
+import { addClass, removeClass, setStyle, isString } from './beerui';
+const browser = typeof window !== 'undefined';
 let loadingNode:HTMLElement
 if (browser) {
   loadingNode = document.createElement('div');
