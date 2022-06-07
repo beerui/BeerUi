@@ -1,5 +1,19 @@
 # BeerUi 
 
+## @brewer/beerui@1.0.30-next.56 `2022/6/3`
+
+### Patch Changes
+
+- 新增 Add `BeForm` 增加表单验证
+- 新增 Add `SelectTree` 增加懒加载示例
+- 新增 Add `BeSelect` 增加多选
+- 新增 Add `CountTo` 接入用户传入属性
+
+- 修复 Fixed `BeCascader`组件 接收默认值错误修改 统一loading图标 清空的时候 未触发change cascader取值、赋值问题
+- 修复 Fixed `BeSelect`组件 用户传入value=0 不能回显
+- 修复 Fixed `BeTabs` remove overflow
+- 修复 Fixed `BeRadio` remove margin-right
+ 
 ## @brewer/beerui@1.0.30-next.49 `2022/5/12`
 
 ### Patch Changes
