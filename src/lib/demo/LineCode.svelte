@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { showNotice } from '$lib';
+	import { showNotice, BeIcon } from '$lib';
 	import Clipboard from '$utils/Clipboard';
-	import { BeIcon } from '$lib/modules.js';
 	export let code = 'npm i @brewer/beerui'
 	const ClipboardHandle = icon => {
 		showNotice({
