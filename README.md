@@ -13,7 +13,7 @@ This is a Svelte Ui Components,`@brewer/beerui`.
 ## 引入方式
 
 ### 快捷引入 包含css (推荐)
-- `import { BeButton, ... } '@brewer/beerui/all'`
+- `import { BeButton, ... } '@brewer/beerui'`
 > 打包发布时，会按需打包
 
 ### 按需引入 css需要单独导入
