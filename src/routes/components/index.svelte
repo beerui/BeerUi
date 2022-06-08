@@ -21,7 +21,7 @@ let value = "import { BeButton } from '@brewer/beerui'";
 	<LineCode code={`import '@brewer/beerui/assets/scss/dist/beer.css'`} />
 
 	<h4>注意：</h4>
-	<p>在REPL中不能直接导入 @brewer/beerui 因为repl无法识别入口文件中的css导入</p>
+	<p>在REPL中不能直接导入 @brewer/beerui 因为repl无法识别入口文件中的css</p>
 	<ReplBlock
 		js={`import BeButton from '@brewer/beerui/be-button'`}
 		html={`<BeButton type="default">Hello BeerUi</BeButton>`}
