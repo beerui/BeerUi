@@ -20,55 +20,12 @@ let value = "import { BeButton } from '@brewer/beerui'";
 	<LineCode code={`import { BeButton } '@brewer/beerui/be-button'`} />
 	<LineCode code={`import '@brewer/beerui/assets/scss/dist/beer.css'`} />
 
-	<ReplBlock js={`import BeButton from '@brewer/beerui/be-button'`} html={`
-<BeButton type="default">Hello BeerUi</BeButton>
-	`} />
-<!--	<DemoBlock code={`-->
-<!--<BeButton>-->
-<!--	<div class='flex justify-center items-center'>-->
-<!--		<BeIcon name='add'></BeIcon>-->
-<!--		Add-->
-<!--	</div>-->
-<!--</BeButton>`} js={`-->
-<!--import { BeButton } from '@brewer/beerui'`}>-->
-<!--		<div slot='source'>-->
-<!--			<div class='demo-list'>-->
-<!--				<BeButton>-->
-<!--					<div class='flex justify-center items-center'>-->
-<!--						<BeIcon name='add'></BeIcon>-->
-<!--						Add-->
-<!--					</div>-->
-<!--				</BeButton>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div slot='description'>-->
-<!--		</div>-->
-<!--	</DemoBlock>-->
-<!--	<h2>按需引用</h2>-->
-<!--	<DemoBlock code={`-->
-<!--<BeButton>-->
-<!--	<div class='flex justify-center items-center'>-->
-<!--		<BeIcon name='add'></BeIcon>-->
-<!--		Add-->
-<!--	</div>-->
-<!--</BeButton>`} js={`-->
-<!--import BeButton from '@brewer/beerui/be-button/BeButton.svelte'`}>-->
-<!--		<div slot='source'>-->
-<!--			<div class='demo-list'>-->
-<!--				<BeButton>-->
-<!--					<div class='flex justify-center items-center'>-->
-<!--						<BeIcon name='add'></BeIcon>-->
-<!--						Add-->
-<!--					</div>-->
-<!--				</BeButton>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div slot='description'>-->
-<!--			在全局css处引入css，`@brewer/beerui/assets/scss/dist/beer.css`-->
-<!--		</div>-->
-<!--	</DemoBlock>-->
-<!--	<h2>REPL</h2>-->
-<!--	<iframe class='m-iframe' src='https://svelte.dev/repl/19e434b319d84e54abce9eae4b1c7b91?version=3.46.4' frameborder='0'></iframe>-->
+	<h4>注意：</h4>
+	<p>在REPL中不能直接导入 @brewer/beerui 因为repl无法识别入口文件中的css导入</p>
+	<ReplBlock
+		js={`import BeButton from '@brewer/beerui/be-button'`}
+		html={`<BeButton type="default">Hello BeerUi</BeButton>`}
+	/>
 </div>
 <style lang='scss'>
 	//.m-iframe {width: 100%;height: 600px;}

@@ -16,10 +16,6 @@ This is a Svelte Ui Components,`@brewer/beerui`.
 - `import { BeButton, ... } '@brewer/beerui/all'`
 > 打包发布时，会按需打包
 
-### 快捷引入 css需要单独导入
-- `import { BeButton, ... } '@brewer/beerui'`
-- `import '@brewer/beerui/assets/scss/dist/beer.css'`
-
 ### 按需引入 css需要单独导入
 - `import BeButton '@brewer/beerui/be-button'` 或者
 - `import '@brewer/beerui/assets/scss/dist/beer.css'`

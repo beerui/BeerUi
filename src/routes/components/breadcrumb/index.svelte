@@ -2,6 +2,7 @@
     import DemoBlock from '$lib/demo/DemoBlock.svelte';
     import BeBreadcrumb from "$lib/be-breadcrumb/BeBreadcrumb.svelte";
     import BeBreadcrumbItem from "$lib/be-breadcrumb/BeBreadcrumbItem.svelte";
+    import ReplBlock from '$lib/demo/ReplBlock.svelte';
 </script>
 <div class='page-container'>
     <h2>Breadcrumb 面包屑</h2>
@@ -33,4 +34,19 @@
 		    </ol>
 	    </div>
     </DemoBlock>
+	<h3>Repl</h3>
+	<ReplBlock
+		js={`import { BeBreadcrumb, BeBreadcrumbItem } from '@brewer/beerui/be-breadcrumb'`}
+		html={`
+
+<div style='padding: 20px;'>
+	<BeBreadcrumb separator='/'>
+	  <BeBreadcrumbItem path='/' prefetch>首页</BeBreadcrumbItem>
+	  <BeBreadcrumbItem><a href='/'>活动管理</a></BeBreadcrumbItem>
+	  <BeBreadcrumbItem>活动列表</BeBreadcrumbItem>
+	  <BeBreadcrumbItem>活动详情</BeBreadcrumbItem>
+	</BeBreadcrumb>
+</div>
+`}
+	/>
 </div>

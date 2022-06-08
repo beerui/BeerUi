@@ -1,6 +1,7 @@
 <script lang='ts'>
 	import { BeAlert } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
+	import ReplBlock from '$lib/demo/ReplBlock.svelte';
 </script>
 <div class='page-container content'>
 	<h2>Alert 警告</h2>
@@ -26,5 +27,10 @@ import { BeAlert } from '@brewer/beerui';
 			</div>
 		</div>
 	</DemoBlock>
+	<h3>Repl</h3>
+	<ReplBlock
+		js={`import BeAlert from '@brewer/beerui/be-alert'`}
+		html={`<BeAlert title='这是消息提示' type='info' />`}
+	/>
 </div>
 

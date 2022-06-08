@@ -1,6 +1,7 @@
 <script lang="ts">
     import DemoBlock from '$lib/demo/DemoBlock.svelte';
     import { BeTextarea } from '$lib';
+    import ReplBlock from '$lib/demo/ReplBlock.svelte';
     let value = ''
     let value1 = 'BeTextarea disabled'
     let value2 = 'BeTextarea readonly'
@@ -33,34 +34,46 @@
 		<li>change 事件监听</li>
 		<li>input 事件监听</li>
 	</ol>
-	<DemoBlock code={`
-<BeTextarea
-	bind:value
-	placeholder="请输入内容"
-	on:blur={onBlurHandle}
-	on:focus={onFocusHandle}
-	on:change={onChangeHandle}
-	on:input={onInputHandle}
-/>
-`} js={`
-import { BeTextarea } from '@brewer/beerui';
-let value = ''
-`}>
-		<div slot="source">
-			<div class="demo-list">
-				value: {value}
-				<BeTextarea
-					bind:value
-					placeholder="请输入内容"
-					on:blur={onBlurHandle}
-					on:focus={onFocusHandle}
-					on:change={onChangeHandle}
-					on:input={onInputHandle}
-					style='height: 100px;'
-				/>
-			</div>
-		</div>
-	</DemoBlock>
+
+	<ReplBlock
+		js={`import BeTextarea from '@brewer/beerui/be-textarea';
+	let value = ''
+
+	const onBlurHandle = () => {
+		console.log('onBlurHandle', value);
+	}
+	const onFocusHandle = () => {
+		console.log('onFocusHandle', value);
+	}
+	const onChangeHandle = () => {
+		console.log('onChangeHandle', value);
+	}
+	const onInputHandle = () => {
+		console.log('onInputHandle', value);
+	}
+	`}
+		html={`
+<div style='padding: 20px;'>
+	<BeTextarea
+		bind:value
+		placeholder="请输入内容"
+		on:blur={onBlurHandle}
+		on:focus={onFocusHandle}
+		on:change={onChangeHandle}
+		on:input={onInputHandle}
+		style='height: 100px;'
+	/>
+	<BeTextarea
+		value='disabled'
+		disabled
+	/>
+	<BeTextarea
+		value='readonly'
+		readonly
+	/>
+</div>
+`}
+	/>
 	<h3>禁用状态</h3>
 	<p>通过<code>disabled</code> 属性指定是否禁用 BeTextarea 组件</p>
 	<DemoBlock code={`

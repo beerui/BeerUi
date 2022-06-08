@@ -5,6 +5,8 @@
 
 	export let js = ''
 	export let html = ''
+	export let css = ''
+	export let height = '500px'
 	let repl;
 
 	onMount(() => {
@@ -21,6 +23,9 @@
   <link rel="stylesheet" href="https://unpkg.com/@brewer/beerui/assets/scss/dist/beer.css" />
 </svelte:head>
 ${html}
+<sty` + `le>
+${css}
+</sty` + `le>
 `
 				}
 			]
@@ -28,12 +33,11 @@ ${html}
 	});
 </script>
 
-<div class='repl-container'>
+<div
+	class='repl-container'
+	style:height={height}
+>
 	{#if is_browser}
 		<Repl bind:this={repl} showAst />
 	{/if}
 </div>
-
-<style>
-	.repl-container {height: 500px;}
-</style>
