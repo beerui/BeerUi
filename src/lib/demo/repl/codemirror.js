@@ -1,7 +1,7 @@
 import CodeMirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import './theme.css';
-import './code.css';
+import './code.scss';
 
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/handlebars/handlebars.js';

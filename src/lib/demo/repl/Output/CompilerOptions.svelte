@@ -140,16 +140,16 @@
 	}
 
 	input[type='radio'] + label:before {
-		background-color: var(--second);
+		background-color: #676778;
 		border-radius: 100%;
 		box-shadow: inset 0 0 0 0.5em rgba(255, 255, 255, 0.95);
-		border: 1px solid var(--second);
+		border: 1px solid #676778;
 	}
 
 	input[type='radio']:checked + label:before {
-		background-color: var(--prime);
+		background-color: #ff3e00;
 		box-shadow: inset 0 0 0 0.15em rgba(255, 255, 255, 0.95);
-		border: 1px solid var(--second);
+		border: 1px solid #676778;
 		transition: box-shadow 0.2s ease-out;
 	}
 </style>

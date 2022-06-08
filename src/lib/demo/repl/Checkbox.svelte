@@ -30,13 +30,13 @@
 		border-radius: 1em;
 		top: 0;
 		left: 0;
-		background: var(--second);
+		background: #676778;
 		/* box-sizing: border-box; */
 		box-sizing: content-box;
 	}
 
 	input[type='checkbox']:checked::before {
-		background: var(--prime);
+		background: #ff3e00;
 	}
 
 	input[type='checkbox']::after {

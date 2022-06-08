@@ -38,7 +38,7 @@
 <style>
 	.editor-wrapper {
 		z-index: 5;
-		background: var(--back-light);
+		background: #f6fafd;
 		display: flex;
 		flex-direction: column;
 	}
@@ -49,7 +49,7 @@
 	}
 
 	.info {
-		background-color: var(--second);
+		background-color: #676778;
 		max-height: 50%;
 		overflow: auto;
 	}

@@ -69,7 +69,7 @@
 		--base: hsl(45, 7%, 45%);
 		--string: hsl(41, 37%, 45%);
 		--number: hsl(102, 27%, 50%);
-		background: var(--back-light);
+		background: #f6fafd;
 		color: var(--base);
 		display: flex;
 		flex-direction: column;

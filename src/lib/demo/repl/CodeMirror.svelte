@@ -248,7 +248,7 @@
 	}
 
 	.codemirror-container :global(.mark-text) {
-		background-color: var(--highlight);
+		background-color: #ffff82;
 	}
 
 	textarea {

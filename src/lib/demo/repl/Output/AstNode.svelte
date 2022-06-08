@@ -96,7 +96,7 @@
 	}
 
 	.marked {
-		background-color: var(--highlight);
+		background-color: #ffff82;
 	}
 
 	.preview {

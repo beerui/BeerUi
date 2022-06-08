@@ -225,9 +225,9 @@
 	}
 
 	.file-tabs .button.active {
-		/* color: var(--second); */
+		/* color: #676778; */
 		color: #333;
-		border-bottom: 3px solid var(--prime);
+		border-bottom: 3px solid #ff3e00;
 	}
 
 	.editable,
@@ -250,13 +250,13 @@
 		top: 12px;
 		font: 400 12px/1.5 var(--font);
 		border: none;
-		color: var(--flash);
+		color: #40b3ff;
 		outline: none;
 		background-color: transparent;
 	}
 
 	.duplicate {
-		color: var(--prime);
+		color: #ff3e00;
 	}
 
 	.remove {
@@ -272,7 +272,7 @@
 	}
 
 	.remove:hover {
-		color: var(--flash);
+		color: #40b3ff;
 	}
 
 	.file-tabs .button.active .editable {
@@ -302,7 +302,7 @@
 	}
 
 	.add-new:hover {
-		color: var(--flash) !important;
+		color: #40b3ff !important;
 	}
 
 	.drag-handle {

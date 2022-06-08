@@ -14,7 +14,7 @@
 		align-items: center;
 		width: 100%;
 		height: 42px;
-		border-top: 1px solid var(--second);
+		border-top: 1px solid #676778;
 		z-index: 2;
 	}
 

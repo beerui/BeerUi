@@ -152,7 +152,7 @@
 	}
 
 	button.active {
-		border-bottom: 3px solid var(--prime);
+		border-bottom: 3px solid #ff3e00;
 		color: #333;
 	}
 

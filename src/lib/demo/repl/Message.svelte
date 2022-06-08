@@ -87,6 +87,6 @@
 	}
 
 	.info {
-		background-color: var(--second);
+		background-color: #676778;
 	}
 </style>

@@ -19,7 +19,7 @@
 
 .cm-s-svelte .CodeMirror-gutters {
 	padding: 0 16px 0 8px;
-	background: var(--back-light);
+	background: #f6fafd;
 	border: none;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .cm-s-svelte span.cm-link {
-	color: var(--flash);;
+	color: #40b3ff;;
 }
 
 .cm-s-svelte span.cm-error,
