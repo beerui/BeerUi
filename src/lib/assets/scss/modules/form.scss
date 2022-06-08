@@ -41,7 +41,7 @@
       top: 100%;
       left: 0;
     }
-    &.is-required .be-form-item__label:before {
+    &.is-required:not(.is-no-asterisk) .be-form-item__label:before {
       content: "*";
       color: #f56c6c;
       margin-right: 4px;

@@ -344,9 +344,9 @@ let formLabelAlign = {
 				<BeForm
 					bind:model={formLabelAlign}
 					{labelPosition}
-					inline
+					hideRequiredAsterisk
 				>
-					<BeFormItem label='名称'>
+					<BeFormItem label='名称' required>
 						<BeInput bind:value={formLabelAlign.name} />
 					</BeFormItem>
 					<BeFormItem label='活动区域'>

@@ -2,7 +2,7 @@
 This is a Svelte Ui Components,`@brewer/beerui`.
 
 ## 使用前的说明
-本项目的状态为开发中，不保证结构不变动，谨慎使用！
+本项目的状态为开发中，但已在内部交付项目中使用，几乎所有的组件都可正常使用。
 
 ## 在线文档
 [BeerUi](https://beer-ui.vercel.app/)
@@ -10,32 +10,25 @@ This is a Svelte Ui Components,`@brewer/beerui`.
 ## 更新日志
 [更新日志](./CHANGELOG.md)
 
-## 你需要知道的
-- 使用 `pnpm`
-- 使用 `Node 14+`
+## 引入方式
 
-## Chinese mirror
-A mirror site based in China, provided by Alibaba, contains binaries for both sharp and libvips.
+### 快捷引入 包含css (推荐)
+- `import { BeButton, ... } '@brewer/beerui/all'`
+> 打包发布时，会按需打包
 
-To use this either set the following configuration:
-```
-npm config set sharp_binary_host "https://npmmirror.com/mirrors/sharp"
-npm config set sharp_libvips_binary_host "https://npmmirror.com/mirrors/sharp-libvips"
-npm install sharp
-```
-or set the following environment variables:
-```
-npm_config_sharp_binary_host="https://npmmirror.com/mirrors/sharp" \
-npm_config_sharp_libvips_binary_host="https://npmmirror.com/mirrors/sharp-libvips" \
-npm install sharp
-```
+### 快捷引入 css需要单独导入
+- `import { BeButton, ... } '@brewer/beerui'`
+- `import '@brewer/beerui/assets/scss/dist/beer.css'`
+
+### 按需引入 css需要单独导入
+- `import BeButton '@brewer/beerui/be-button'` 或者
+- `import '@brewer/beerui/assets/scss/dist/beer.css'`
+
 
 ## 怎样使用
 svelte & svelte-kit
 
 - `npm i @brewer/beerui -D`
-- `npm i postcss`
-- `npm i async-validator'`
 
 ## 联系我们
 `beerui2021@gmail.com`

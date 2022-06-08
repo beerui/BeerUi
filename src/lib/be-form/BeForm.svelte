@@ -13,7 +13,7 @@
 	export let rules: any = null; // 获得表单元素绑定的验证规则
 	export let labelPosition: LabelPosition = ''; // 表单域标签的位置
 	export let validateOnRuleChange: Boolean = true; // 规则改变时验证
-	export let hideRequiredAsterisk: Boolean = true; //
+	export let hideRequiredAsterisk: Boolean = false; // 是否隐藏必填字段的标签旁边的红色星号
 
 	let fields = []
 	export const resetFields = () => {
@@ -89,9 +89,11 @@
 	const labelPositionWatch = writable(labelPosition);
 	const rulesWatch = writable(rules);
 	const modelWatch = writable(model);
+	const inlineWatch = writable(inline);
 	$: labelWidthWatch.set(labelWidth);
 	$: labelPositionWatch.set(labelPosition);
 	$: modelWatch.set(model);
+	$: inlineWatch.set(inline);
 
 	const watchRules = (rules, fields) => {
 		if (validateOnRuleChange || !rules || !fields) return
@@ -104,7 +106,7 @@
 	const addFiledCallback = (item) => {
 		fields.push(item)
 	}
-	setContext("BeForm", { labelWidthWatch, labelPositionWatch, rulesWatch, modelWatch, callback, addFiledCallback });
+	setContext("BeForm", { labelWidthWatch, labelPositionWatch, rulesWatch, modelWatch, inlineWatch, callback, addFiledCallback, hideRequiredAsterisk });
 
 </script>
 <form
@@ -113,10 +115,12 @@
 	class:be-form--label-top={labelPosition === 'top'}
 	class:be-form--label-right={labelPosition === 'right'}
 	class:be-form--label-left={labelPosition === 'left'}
+	class:be-form--inline={inline}
 	bind:this="{ref}"
 	on:click
 	on:keydown
 	on:mouseover
+	on:focus
 	on:mouseenter
 	on:mouseleave
 	on:submit

@@ -24,6 +24,9 @@
 	// labelPosition的监听
 	let isLabelPositionTop = false
 	const unsubscribeLabelPosition = ctx.labelPositionWatch.subscribe(value => isLabelPositionTop = value === 'top');
+	// inline的监听
+	let isInline = false
+	const unsubscribeInline = ctx.inlineWatch.subscribe(value => isInline = value);
 	// value的监听
 	let modelValue: any = {}
 	let fieldValue = ''
@@ -175,6 +178,7 @@
 			unsubscribeLabelPosition();
 			unsubscribeRulesWatch();
 			unsubscribeFieldValue();
+			unsubscribeInline();
 		};
 	});
 	const validateHandle = () => {
@@ -198,11 +202,12 @@
 	class:is-validating={validateState === 'validating'}
 	class:is-success={validateState === 'success'}
 	class:is-required={isRequired || required}
+	class:is-no-asterisk={ctx.hideRequiredAsterisk}
 >
 	{#if label}
 		<div class='be-form-item__label' style:width={isLabelPositionTop ? '' : initialLabelWidth}>{label}</div>
 	{/if}
-	<div class='be-form-item__content' style:margin-left={(isLabelPositionTop || !label) ? '' : initialLabelWidth}>
+	<div class='be-form-item__content' style:margin-left={(isInline || isLabelPositionTop || !label) ? '' : initialLabelWidth}>
 		<slot></slot>
 		{#if validateState === 'error'}
 			<div class='be-form-item__error'>{validateMessage}</div>

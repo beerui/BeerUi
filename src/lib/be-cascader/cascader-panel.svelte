@@ -3,10 +3,10 @@
 	import { createEventDispatcher, getContext } from 'svelte';
 
 	const dispatch = createEventDispatcher();
-	export let options = [];
+	// export let options = [];
 	export let visible = false;
 	export let checkStrictly;
-	export let showAllLevels;
+	// export let showAllLevels;
 	export let expandTrigger;
 	export let config;
 	export let left;
@@ -14,7 +14,7 @@
 	export let lazyLoad = (node, resolve) => {}
 	export let bottom: { status: string, value: number } = { status: 'init', value: 0 };
 	// const store = new Store(options, $$props)
-	export let selectValue 
+	export let selectValue
 	export let menus = []
 	const store = getContext('store');
 	let value = [];

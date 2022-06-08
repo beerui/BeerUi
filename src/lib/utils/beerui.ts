@@ -1,4 +1,4 @@
-const is_browser = typeof window !== 'undefined';
+export const is_browser = typeof window !== 'undefined';
 if (is_browser) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

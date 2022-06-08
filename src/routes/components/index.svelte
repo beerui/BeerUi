@@ -1,7 +1,5 @@
 <script lang='ts'>
-import DemoBlock from '$lib/demo/DemoBlock.svelte';
-import { BeButton, BeIcon } from '$lib';
-import CodeMirror from 'codemirror-svelte-modules';
+import ReplBlock from '$lib/demo/ReplBlock.svelte';
 
 // initial content
 let value = "import { BeButton } from '@brewer/beerui'";
@@ -14,7 +12,9 @@ let value = "import { BeButton } from '@brewer/beerui'";
 		<code>npm i @brewer/beerui -D</code>
 	</pre>
 	<h2>使用</h2>
-	<CodeMirror basicSetup height='300px' bind:initialValue={value} />
+	<ReplBlock js={`import BeButton from 'beerer/be-button'`} html={`
+<BeButton type="default">默认按钮</BeButton>
+	`} />
 <!--	<DemoBlock code={`-->
 <!--<BeButton>-->
 <!--	<div class='flex justify-center items-center'>-->

@@ -28,7 +28,8 @@ const config = {
 				alias: {
 					$utils: path.resolve('./src/utils'),
 					$assets: path.resolve('./src/assets'),
-					$template: path.resolve('./src/template')
+					$template: path.resolve('./src/template'),
+					'@brewer/repl': path.resolve('./src/lib/demo/repl')
 				}
 			}
 		}

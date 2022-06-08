@@ -110,6 +110,7 @@
 			class='be-select__tags'
 			on:click|stopPropagation={toggleVisible}
 			on:mouseover={() => {if(clearable && inputValue) showClose = true}}
+			on:focus
 			on:mouseleave={() => {if(clearable && inputValue) showClose = false}}
 		>
 			{#if collapseTags && store.value.length > 0}
