@@ -62,7 +62,7 @@
 	}
 	table {
 		font-size: 12px;
-		font-family: var(--font-mono);
+		font-family: 'Fira Mono', monospace;;
 		border-collapse: collapse;
 		line-height: 1;
 		border: 1px solid #aaa;

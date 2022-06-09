@@ -125,14 +125,14 @@
 	}
 
 	.token {
-		color: var(--base);
+		color: hsl(45, 7%, 45%);
 	}
 
 	.token.string {
-		color: var(--string);
+		color:hsl(41, 37%, 45%);
 	}
 
 	.token.number {
-		color: var(--number);
+		color: hsl(102, 27%, 50%);
 	}
 </style>

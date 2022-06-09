@@ -6,7 +6,7 @@
 	--string: hsl(41, 37%, 45%);
 	--number: hsl(102, 27%, 50%);
 	background: transparent;
-	color: var(--base);
+	color: hsl(45, 7%, 45%);;
 }
 
 .cm-s-svelte .CodeMirror-selected {

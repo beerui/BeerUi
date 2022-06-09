@@ -57,7 +57,7 @@
 	}
 
 	h3 {
-		font: 700 12px/1.5 var(--font);
+		font: 700 12px/1.5 'Fira Mono', monospace;
 		color: #333;
 	}
 

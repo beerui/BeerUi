@@ -71,12 +71,12 @@
 		display: flex;
 		position: relative;
 		font-size: 12px;
-		font-family: var(--font-mono);
+		font-family: 'Fira Mono', monospace;;
 	}
 
 	.log > :global(*) {
 		margin-right: 10px;
-		font-family: var(--font-mono);
+		font-family: 'Fira Mono', monospace;;
 	}
 
 	.console-warn, .console-system-warn {
@@ -106,7 +106,7 @@
 	.trace {
 		border-bottom: 1px solid #eee;
 		font-size: 12px;
-		font-family: var(--font-mono);
+		font-family: 'Fira Mono', monospace;;
 		padding: 4px 0 2px;
 	}
 
@@ -122,7 +122,7 @@
 
 	.info {
 		color: #666;
-		font-family: var(--font) !important;
+		font-family: 'Fira Mono', monospace !important;
 		font-size: 12px;
 	}
 
@@ -150,7 +150,7 @@
 	}
 
 	.title {
-		font-family: var(--font-mono);
+		font-family: 'Fira Mono', monospace;;
 		font-size: 13px;
 		font-weight: bold;
 		padding-left: 11px;

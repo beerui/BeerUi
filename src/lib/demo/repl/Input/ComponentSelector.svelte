@@ -213,7 +213,7 @@
 	.file-tabs button {
 		position: relative;
 		display: inline-block;
-		font: 400 12px/1.5 var(--font);
+		font: 400 12px/1.5 'Fira Mono', monospace;
 		background: white;
 		border: none;
 		border-bottom: 3px solid transparent;
@@ -248,7 +248,7 @@
 		width: 100%;
 		left: 16px;
 		top: 12px;
-		font: 400 12px/1.5 var(--font);
+		font: 400 12px/1.5 'Fira Mono', monospace;
 		border: none;
 		color: #40b3ff;
 		outline: none;

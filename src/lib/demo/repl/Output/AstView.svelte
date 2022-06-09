@@ -70,17 +70,20 @@
 		--string: hsl(41, 37%, 45%);
 		--number: hsl(102, 27%, 50%);
 		background: #f6fafd;
-		color: var(--base);
+		color: hsl(45, 7%, 45%);;
 		display: flex;
 		flex-direction: column;
 	}
 
 	.ast-view,
+	button,
+	ul,
+	li,
 	pre,
 	code {
 		height: 100%;
 		block-size: 100%;
-		font: 400 var(--code-fs) / 1.7 var(--font-mono);
+		font: 400 12px/ 1.7 'Fira Mono', monospace;;
 	}
 
 	pre {

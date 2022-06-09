@@ -59,7 +59,7 @@
 <style>
 	.options {
 		padding: 0 10px;
-		font-family: var(--font-mono);
+		font-family: 'Fira Mono', monospace;;
 		font-size: 13px;
 		color: #999;
 		line-height: 1.8;

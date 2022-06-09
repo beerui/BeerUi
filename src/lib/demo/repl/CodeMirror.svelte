@@ -235,7 +235,7 @@
 
 	.codemirror-container :global(.CodeMirror) {
 		height: 100%;
-		font: 400 var(--code-fs)/1.7 var(--font-mono);
+		font: 400 12px/1.7 'Fira Mono', monospace;;
 	}
 
 	.codemirror-container :global(.error-loc) {
@@ -264,7 +264,7 @@
 		border: none;
 		padding: 4px 4px 4px 60px;
 		resize: none;
-		font-family: var(--font-mono);
+		font-family: 'Fira Mono', monospace;;
 		font-size: 13px;
 		line-height: 1.7;
 		user-select: none;
