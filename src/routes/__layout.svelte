@@ -1,5 +1,5 @@
 <script lang="ts">
-	import  '$lib/assets/scss/index.scss'
+	import  '$lib/assets/beer.css'
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
 	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';

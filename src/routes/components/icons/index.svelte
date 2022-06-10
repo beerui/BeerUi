@@ -25,7 +25,7 @@
 						<div class='demo-icon'>
 							<BeIcon name={icon} width='30' height='30' />
 						</div>
-						<div style="text-align:center;">{icon}</div>
+						<div class='demo-text'>{icon}</div>
 					</div>
 				{/each}
 			</div>
@@ -40,7 +40,7 @@
     width: 200px;
     height: 120px;
     padding: 25px;
-    font-size: 12px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,5 +61,6 @@
 		}
 	}
 	.demo-icon {padding-bottom: 30px;color: var(--text-color-primary);}
+	.demo-text {font-size: 14px;text-align: center;}
 	.demo-list {display: flex;flex-wrap: wrap;color: var(--text-color-primary);}
 </style>
