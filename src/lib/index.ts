@@ -1,3 +1,4 @@
+import './assets/beer.css';
 import BeButton from './be-button/BeButton.svelte';
 import BeAlert from './be-alert/BeAlert.svelte';
 import BeDialog from './be-dialog/BeDialog.svelte';
