@@ -18,7 +18,7 @@ let value = "import { BeButton } from '@brewer/beerui'";
 	<hr>
 	<h4>按需引入 css需要单独导入</h4>
 	<LineCode code={`import { BeButton } '@brewer/beerui/be-button'`} />
-	<LineCode code={`import '@brewer/beerui/assets/scss/dist/beer.css'`} />
+	<LineCode code={`import '@brewer/beerui/assets/beer.css'`} />
 
 	<h4>注意：</h4>
 	<p>在REPL中不能直接导入 @brewer/beerui 因为repl无法识别入口文件中的css</p>
