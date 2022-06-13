@@ -18,8 +18,7 @@ This is a Svelte Ui Components,`@brewer/beerui`.
 
 ### 按需引入 css需要单独导入
 - `import BeButton '@brewer/beerui/be-button'` 或者
-- `import '@brewer/beerui/assets/scss/dist/beer.css'`
-
+- `import '@brewer/beerui/assets/beer.css'`
 
 ## 怎样使用
 svelte & svelte-kit

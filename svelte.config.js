@@ -18,10 +18,10 @@ const config = {
 		adapter: vercel(),
 		package: {
 			files(filepath) {
-				const isFlag = filepath.indexOf('/src/lib/assets/scss/node_modules') !== -1;
+				console.log('filepath', filepath);
 				const isRoute = filepath.indexOf('/src/routes') !== -1;
-				const isDemo = filepath.indexOf('/src/lib/demo') !== -1;
-				return !filepath.endsWith('.stories.svelte') || isFlag || isRoute || isDemo;
+				const isDemo = filepath.indexOf('demo/') !== -1;
+				return !filepath.endsWith('.stories.svelte') || isRoute || isDemo;
 			},
 		},
 		vite: {
