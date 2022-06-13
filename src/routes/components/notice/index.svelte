@@ -97,9 +97,15 @@
 			title: '提示',
 			toast: toast,
 			message: type,
-			duration: 3000,
+			duration: 30000,
 			type
 		});
+	}
+	const types = {
+		success: { name: 'check-circle-filled', color: '#67c23a' },
+		warning: { name: 'error-circle-filled', color: '#e6a23c' },
+		info: { name: 'info-circle-filled', color: '#909399' },
+		error: { name: 'close-circle-filled', color: '#f56c6c' }
 	}
 </script>
 

@@ -76,9 +76,7 @@ class Notice {
 		<div class='be-notify__group'>
 		  <h2 class='be-notify__title' style='color:${ this.titleColor ? this.titleColor : '#000' }' >${ this.title }</h2>
 		  <div class='be-notice__close' id='notice-close' style='width: 16px;height: 16px;'>
-			<svg class='be-svg' width='100%' height='100%' viewBox='0 0 16 16' style='color:#909399' xmlns='http://www.w3.org/2000/svg'>
-				<path d='M8.00005 8.91923L11.076 11.9951L11.9952 11.0759L8.91929 7.99999L11.9952 4.92409L11.076 4.00485L8.00005 7.08075L4.92412 4.00482L4.00488 4.92406L7.08081 7.99999L4.00488 11.0759L4.92412 11.9952L8.00005 8.91923Z' fill='currentColor' fill-opacity='0.9'/>
-			</svg>
+		    <i class='be-icon be-icon-close'></i>
 		  </div>
 		  <div class='be-notify__content' style='color:${ this.messageColor ? this.messageColor : '#000' }' >${ this.message }</div>
 		</div>
@@ -139,16 +137,14 @@ class Notice {
 	computedType() {
 		if (this.type) {
 			const types = {
-				success: '<path d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM4.5 8.2065L5.2065 7.5L7 9.293L10.7925 5.5L11.5 6.2075L7 10.707L4.5 8.2065Z" fill="#67c23a" fill-opacity="0.9"/>',
-				warning: '<path d="M15 8C15 4.13401 11.866 1 8 1C4.13401 0.999998 1 4.134 1 8C0.999998 11.866 4.134 15 8 15C11.866 15 15 11.866 15 8ZM8.5 4.0003V9.49999H7.5V4.0003H8.5ZM7.39429 11H8.59429V12.2H7.39429V11Z" fill="#e6a23c" fill-opacity="0.9"/>',
-				info: '<path d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM7.3999 4H8.59985V5.19995H7.3999V4ZM7.50562 6.5H8.50562V11.9998H7.50562V6.5Z" fill="#909399" fill-opacity="0.9"/>',
-				error: '<path d="M15 8C15 4.13401 11.866 1 8 1C4.13401 0.999998 1 4.134 1 8C0.999998 11.866 4.134 15 8 15C11.866 15 15 11.866 15 8ZM5.67091 4.94754L8.00001 7.29075L10.3291 4.94754L11.0384 5.65251L8.70499 8L11.0383 10.3475L10.3291 11.0525L8.00001 8.70925L5.67092 11.0525L4.96168 10.3475L7.29503 8L4.96167 5.65251L5.67091 4.94754Z" fill="#f56c6c" fill-opacity="0.9"/>'
+				success: { name: 'check-circle-filled', color: '#67c23a' },
+				warning: { name: 'error-circle-filled', color: '#e6a23c' },
+				info: { name: 'info-circle-filled', color: '#909399' },
+				error: { name: 'close-circle-filled', color: '#f56c6c' }
 			}
 			return `
-			<div class='be-icon' style='width: 24px;height: 24px;'>
-				<svg class="be-svg" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-					${types[this.type]}
-				</svg>
+			<div class='be-icon' style='color: ${types[this.type].color};font-size: 24px;'>
+				<i class='be-icon be-icon-${types[this.type].name}'></i>
 			</div>
 			`
 		}

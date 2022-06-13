@@ -198,11 +198,11 @@
 		{#if direction !== 'vertical' && !hideArrow}
 			<button type='button' on:click={doPrevHandle} class='be-carousel__arrow be-carousel__arrow--left'
 			        style:display={arrowDisplay}>
-				<BeIcon width='35' height='22' name='chevron-left' />
+				<BeIcon name='chevron-left' />
 			</button>
 			<button type='button' on:click={doNextHandle} class='be-carousel__arrow be-carousel__arrow--right'
 			        style:display={arrowDisplay}>
-				<BeIcon width='35' height='22' name='chevron-right' />
+				<BeIcon name='chevron-right' />
 			</button>
 		{/if}
 		<slot></slot>

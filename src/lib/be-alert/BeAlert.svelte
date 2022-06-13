@@ -28,24 +28,22 @@
     dispatch('close')
   }
 </script>
-<!-- <div > -->
-  <div transition:fade class={['be-alert',type ? ' be-alert--' + type:'', effect ? ' is-' + effect:'' ].join('')}>
-      <!-- {#if iconClass}
-    <i class={['be-alert__icon', ' be-icon', ' be-icon-' + iconClass ].join('')}></i>
-      {/if} -->
-    <div class="be-alert__content">
-        {#if $$slots.title || title}
-      <span class="be-alert__title">
-        <slot name="title">{title}</slot>
-      </span>
-        {/if}
+<div transition:fade class={['be-alert',type ? ' be-alert--' + type:'', effect ? ' is-' + effect:'' ].join('')}>
+    <!-- {#if iconClass}
+  <i class={['be-alert__icon', ' be-icon', ' be-icon-' + iconClass ].join('')}></i>
+    {/if} -->
+  <div class="be-alert__content">
+    {#if $$slots.title || title}
+	    <span class="be-alert__title">
+	      <slot name="title">{title}</slot>
+	    </span>
+    {/if}
 
-      {#if $$slots.default && !description}
-        <p class="be-alert__description" ><slot>{description}</slot></p>
-      {/if}
-      {#if closable}
-      <i class="be-alert__closebtn be-icon-close" on:click={close}></i>
-      {/if}
-    </div>
+    {#if $$slots.default && !description}
+      <p class="be-alert__description" ><slot>{description}</slot></p>
+    {/if}
+    {#if closable}
+      <i class="be-alert__closebtn be-icon be-icon-close" on:click={close}></i>
+    {/if}
   </div>
-<!-- </div> -->
+  </div>

@@ -1,4 +1,3 @@
-import { svgList } from './svgList';
 import { on, off } from './beerui';
 import { throttle } from './throttle';
 const browser = typeof window !== 'undefined';
@@ -82,25 +81,13 @@ class PreviewImage {
 			this.container.innerHTML = `
 				<div class='be-preview__mask'></div>
 				<div class='be-preview__btn be-preview__close'>
-					<div class='be-icon' style='width: 24px;height: 24px;'>
-						<svg class="be-svg" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-							${svgList['close']}
-						</svg>
-					</div>
+					<i class='be-icon be-icon-close'></i>
 				</div>
 				<div class='be-preview__btn be-preview__prev'>
-					<div class='be-icon' style='width: 24px;height: 24px;'>
-						<svg class="be-svg" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-							${svgList['chevron-left']}
-						</svg>
-					</div>
+					<i class='be-icon be-icon-chevron-left'></i>
 				</div>
 				<div class='be-preview__btn be-preview__next'>
-					<div class='be-icon' style='width: 24px;height: 24px;'>
-						<svg class="be-svg" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-							${svgList['chevron-right']}
-						</svg>
-					</div>
+					<i class='be-icon be-icon-chevron-right'></i>
 				</div>
 				${ this.renderBtn() }
 				<div class='be-preview__container'>
@@ -117,26 +104,10 @@ class PreviewImage {
 	  return `
 		<div class='be-preview__actions'>
 			<div class='be-preview__actions__inner'>
-				<div class='be-icon' data-type='zoomOut' style='width: 28px;height: 28px;'>
-					<svg class="be-svg" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-						${svgList['zoom-out']}
-					</svg>
-				</div>
-				<div class='be-icon' data-type='zoomIn' style='width: 28px;height: 28px;'>
-					<svg class="be-svg" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-						${svgList['zoom-in']}
-					</svg>
-				</div>
-				<div class='be-icon' data-type='chevronLeft' style='width: 28px;height: 28px;'>
-					<svg class="be-svg" width="100%" height="100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-						${svgList['refresh-left']}
-					</svg>
-				</div>
-				<div class='be-icon' data-type='chevronRight' style='width: 28px;height: 28px;'>
-					<svg class="be-svg" width="100%" height="100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-						${svgList['refresh-right']}
-					</svg>
-				</div>
+				<i data-type='zoomOut' class='be-icon be-icon-zoom-out'></i>
+				<i data-type='zoomIn' class='be-icon be-icon-zoom-in'></i>
+				<i data-type='chevronLeft' class='be-icon be-icon-rollback'></i>
+				<i data-type='chevronRight' class='be-icon be-icon-rollback' style='transform: rotateY(180deg);'></i>
 			</div>
 		</div>`
 	}
