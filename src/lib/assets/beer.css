@@ -6,8 +6,8 @@
   src: url(bb93f076bab714a6432a.eot), /* for IE 9*/
   url(bb93f076bab714a6432a.eot?#iefix) format("embedded-opentype"), /* under IE9 */
   url(3e23f8f488c71f07c1ed.woff) format("woff"),  /* chrome, firefox */
-  url(d223c9ef0e9a0ee3aceb.ttf) format("truetype"),  /* opera, Safari, Android, iOS 4.2+ */
-  url(826685d9afcae6f15ed5.svg) format("svg");  /* iOS 4.1- */
+  url(d223c9ef0e9a0ee3aceb.ttf) format("truetype");  /* opera, Safari, Android, iOS 4.2+ */
+    /* url('./t.svg') format("svg")  iOS 4.1- */
   font-weight: normal;
   font-style: normal;
 }
