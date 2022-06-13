@@ -61,7 +61,14 @@
   },
   "type": "module",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "svelte",
+    "beerui",
+    "components",
+    "UI",
+    "framework",
+    "templates"
+  ],
   "author": "",
   "dependencies": {
     "acorn": "^8.7.1",
