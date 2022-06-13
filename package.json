@@ -69,7 +69,7 @@
     "framework",
     "templates"
   ],
-  "author": "",
+  "author": "beerui",
   "dependencies": {
     "acorn": "^8.7.1",
     "async-validator": "^4.1.1",
