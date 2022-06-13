@@ -1,5 +1,25 @@
 # BeerUi 
 
+## @brewer/beerui@1.0.31 `2022/6/13`
+
+### Patch Changes
+
+- 新增 Add `Repl` 增加在线运行示例
+
+- 更改 Change `BeIcon` 改用字体文件引入图标
+
+- 修复 Fixed `BeForm`组件 样式问题
+
+> 此版本应是`1.0`最后一个版本,下一个版本会开启`1.1`版本。版本日志将改为`/logs/1.0`
+
+#### 版本升级展望
+1. 在`1.1`中将会把`css`和`js`分开，用户需要分别引入
+2. 按需引入`js`和`css`
+3. 完善主题色
+4. 重写`BeTable`
+5. 完善表单验证
+6. 增加业务组件
+
 ## @brewer/beerui@1.0.30-next.56 `2022/6/3`
 
 ### Patch Changes
