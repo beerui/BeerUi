@@ -50,16 +50,21 @@
 	}
 
 
+	let notices = []
 	function openNotice() {
-		showNotice({
+		const id = showNotice({
 			title: '滕王阁序',
 			message: '落霞与孤鹜齐飞,秋水共长天一色',
 			duration: 0
 		});
+		notices.push(id)
+		notices = notices
 	}
 
-	function closeOne() {
-		closeNotice(noticeInstance);
+	function closeOne(id, index) {
+		closeNotice(id);
+		notices.splice(index, 1)
+		notices = notices
 	}
 
 	function closeAll() {
@@ -240,11 +245,17 @@ function onClick() {
 					<BeButton size='normal' type='default' on:click={openColorNotice}>自定义颜色</BeButton>
 				</div>
 				<h3>手动关闭</h3>
-				<p>目前手动关闭只能关闭最后一个notice使用<code>close</code>如果要一次性关闭所有可使用<code>closeAll</code>
+				<p>根据<code>showNotice</code>指定关闭一个notice</p>
+				<p>如果要一次性关闭所有可使用<code>closeAll</code></p>
 				<div>
 					<BeButton size='normal' type='default' on:click={openNotice}>弹出</BeButton>
-					<BeButton size='normal' type='default' on:click={closeOne}>关闭</BeButton>
 					<BeButton size='normal' type='default' on:click={closeAll}>关闭所有</BeButton>
+				</div>
+				<hr>
+				<div>
+					{#each notices as item, index}
+						<BeButton size='normal' type='default' on:click={() => closeOne(item, index)}>关闭第{index}个</BeButton>
+					{/each}
 				</div>
 			</div>
 		</div>

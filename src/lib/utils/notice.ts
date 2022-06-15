@@ -1,13 +1,17 @@
 /**
  * this is notice component
  */
+import { Message } from './beerui';
+import { objectAssign } from './index';
+
 interface options {
-	toast: boolean;
 	type: string;
 	title: string,
 	message: string,
 	onClose?: () => void,
 	onClick?: () => void,
+
+	toast: boolean;
 	duration?: number,
 	position?: string
 	titleColor?: string
@@ -15,7 +19,7 @@ interface options {
 }
 
 interface instanceType extends options {
-	id: number,
+	id: string,
 	dom: HTMLElement,
 	timer: NodeJS.Timeout | null,
 	verticalOffset: number,
@@ -38,58 +42,51 @@ export const closeALlNotice = () => NoticeInstance && NoticeInstance.closeAll()
 // 关闭单个弹框
 export const closeNotice = (id, cb = () => {}) => NoticeInstance && NoticeInstance.close(id, cb)
 
-class Notice {
-	title: string; // 标题
-	message: string; // 内容
-	duration: number; // 间隔
-	position: string; // 位置
-	private _body: HTMLElement = document.body; // 私有属性 获取body
+class Notice extends Message{
 	instances: Array<instanceType> = [];  // 储存弹窗信息
-	seed = 0;
-	id: number;
-	titleColor: string;
-	messageColor: string;
 	constructor(options?){
+		super(options)
 		if (options) this.setNotice(options)
 	}
-
 	// 生成弹窗
-	private type: string;
 	setNotice(options: options): instanceType {
-		this.title = options.title || '提示';
-		this.message = options.message || '';
-		this.type = options.type;
-		this.position = options.position || 'top-right';
-		this.duration = options.duration || 3000;
-		this.titleColor = options.titleColor;
-		this.messageColor = options.messageColor;
+		console.log('zIndex', this.zIndex);
 		const userOnClose = options.onClose;
 		const userOnClick = options.onClick;
+		const defaultOptions = {
+			title: '提示',
+			message: '',
+			type: '',
+			position: 'top-right',
+			duration: 3000,
+			titleColor: '',
+			messageColor: '',
+		}
+		options = <options>objectAssign(defaultOptions, options);
 
-
+		this.zIndex++
+		this.id = `NoticeWrapper_${this.zIndex}`
 		const container: HTMLElement = document.createElement('div');
 		container.classList.add('be-notify');
 		if (options.toast) container.classList.add('be-notify-toast');
-		else container.classList.add(this.setPositionClass(this.position));
+		else container.classList.add(this.setPositionClass(options.position));
+		if (this.customClass) container.classList.add(this.customClass);
 		container.innerHTML = `
-		${this.computedType()}
+		${this.renderType()}
 		<div class='be-notify__group'>
-		  <h2 class='be-notify__title' style='color:${ this.titleColor ? this.titleColor : '#000' }' >${ this.title }</h2>
-		  <div class='be-notice__close' id='notice-close' style='width: 16px;height: 16px;'>
-		    <i class='be-icon be-icon-close'></i>
-		  </div>
-		  <div class='be-notify__content' style='color:${ this.messageColor ? this.messageColor : '#000' }' >${ this.message }</div>
+		  <h2 class='be-notify__title' style='color:${ options.titleColor ? options.titleColor : '#000' }' >${ options.title }</h2>
+		  ${this.showClose ? `<div class='be-notice__close'>` +  this.renderIcon({ name: 'close' }) + `</div>` : ''}
+		  <div class='be-notify__content' style='color:${ options.messageColor ? options.messageColor : '#000' }' >${ options.message }</div>
 		</div>
 		`;
-		this._body.appendChild(container);
+		this.body.appendChild(container);
 		setTimeout(() => {
 			container.style.transform = 'translateX(0%)';
 		});
 
 		const instance = <instanceType>{};
-		this.id = this.seed++;
 		instance.dom = container;
-		instance.duration = this.duration;
+		instance.duration = options.duration;
 		instance.id = this.id;
 		// 关闭回调
 		instance.onClose = () => {
@@ -100,8 +97,8 @@ class Notice {
 			this.close(instance.id, userOnClose);
 		};
 		// 点击关闭按钮
-		const closeBtn = document.getElementById('notice-close');
-		closeBtn.addEventListener('click', instance.close);
+		const closeBtn = container.querySelector('.be-notice__close');
+		closeBtn && closeBtn.addEventListener('click', instance.close);
 		if (typeof userOnClick === 'function') {
 			instance.dom.addEventListener('click', userOnClick);
 			instance.onClick = () => {
@@ -109,13 +106,13 @@ class Notice {
 			};
 		}
 
-		instance.position = this.position;
-		instance.verticalProperty = this.setProperty(this.position);
+		instance.position = options.position;
+		instance.verticalProperty = this.setProperty(options.position);
 		this.instances.push(instance);
 		let verticalOffset = 0;
 
 		// 将同一位置的弹框过滤到一个数组中并设置偏移量
-		this.instances.filter(item => item.position === this.position).forEach((item, index) => {
+		this.instances.filter(item => item.position === options.position).forEach((item, index) => {
 			item.dom.style['z-index'] = 2000 + index;
 			if (index !== 0) {
 				verticalOffset += item.dom.offsetHeight + 16;
@@ -125,7 +122,7 @@ class Notice {
 		});
 		verticalOffset += 16;
 		instance.verticalOffset = verticalOffset;
-		instance.dom.style[this.setProperty(this.position)] = verticalOffset + 'px';
+		instance.dom.style[this.setProperty(options.position)] = verticalOffset + 'px';
 		if (instance.duration > 0) {
 			instance.timer = setTimeout(() => {
 				this.close(instance.id, userOnClose);
@@ -134,24 +131,8 @@ class Notice {
 
 		return instance;
 	}
-	computedType() {
-		if (this.type) {
-			const types = {
-				success: { name: 'check-circle-filled', color: '#67c23a' },
-				warning: { name: 'error-circle-filled', color: '#e6a23c' },
-				info: { name: 'info-circle-filled', color: '#909399' },
-				error: { name: 'close-circle-filled', color: '#f56c6c' }
-			}
-			return `
-			<div class='be-icon' style='color: ${types[this.type].color};font-size: 24px;'>
-				<i class='be-icon be-icon-${types[this.type].name}'></i>
-			</div>
-			`
-		}
-		return ''
-	}
 	// 关闭
-	close(id: number, userOnClose?): void {
+	close(id: string, userOnClose?): void {
 		let index = -1;
 		const len = this.instances.length;
 		const instance = this.instances.filter((instance, i) => {

@@ -307,66 +307,200 @@ function is_truthy(value: any): boolean {
   return value !== undefined && value !== "" && value !== false;
 }
 
-type BeerPublishSubscribe = {
-  id: number,
-  callbacks: {},
-  subscribe?: Function,
-  publish?: Function,
-  unsubscribe?: Function,
+type RenderIcon = {
+	customClass?: string
+	name?: string
+}
+type RenderBtn = {
+	dom?: Element
+	cb?: Function
+	customClass?: string
+	style?: string
+	id?: string | number
+	_id?: string | number
+	name?: string
+	type?: string
+	text?: string
+	prevIcon?: string
+	nextIcon?: string
+}
+export class Message {
+	protected readonly body: HTMLElement = document.body;
+	protected container: HTMLElement; // 生成的元素
+	protected id: string | number;
+	protected title: string = '提示'; // MessageBox 标题
+	protected message: string = ''; // MessageBox 消息正文内容
+	protected readonly customClass: string = ''; // 自定义类名
+	protected showClose: boolean = true; // 是否显示右上角关闭按钮
+	protected type: string = ''; // 消息类型，用于显示图标 success / info / warning / error
+	protected zIndex: number = 2000;
+	protected beforeClose: Function = null; // 关闭前的回调，会暂停实例的关闭
+	protected complete: Function = null; // 渲染完成的回调
+	protected closed: Function = null; // 关闭后的回调
+	constructor(options) {
+		for (let option in options) {
+			if (options.hasOwnProperty(option)) {
+				this[option] = options[option];
+			}
+		}
+	}
+	renderType() {
+		if (this.type) {
+			const types = {
+				success: { name: 'check-circle-filled', color: '#67c23a' },
+				warning: { name: 'error-circle-filled', color: '#e6a23c' },
+				info: { name: 'info-circle-filled', color: '#909399' },
+				error: { name: 'close-circle-filled', color: '#f56c6c' }
+			}
+			return `
+			<div class='be-icon' style='color: ${types[this.type].color};font-size: 24px;'>
+				<i class='be-icon be-icon-${types[this.type].name}'></i>
+			</div>
+			`
+		}
+		return ''
+	}
+	renderBtn(ctx:RenderBtn) {
+		ctx = Object.assign({ customClass: 'be-button--normal', type: 'button', text: '', style: '', id: '' }, ctx)
+		return `<button class="${ctx.customClass}" type=${ctx.type} id=${ctx.id} style='${ctx.style}'>
+			${this.renderIcon({ name: ctx.prevIcon })}
+			<span>${ctx.text}</span>
+			${this.renderIcon({ name: ctx.nextIcon })}
+		</button>`
+	}
+	renderIcon(ctx:RenderIcon) {
+		ctx = Object.assign({ customClass: '', name: '' }, ctx)
+		return ctx.name ? `<i class='be-icon be-icon-${ctx.name} ${ctx.customClass}'></i>` : ''
+	}
+
+	getIdName(str: string | number) {
+		return 'message_' + this.zIndex + '_' + str
+	}
 }
 
-// 生成唯一KEY
-export const genKey = (length: number = 3): string => Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
+/**
+ * MessageBox 弹框
+ * @description 模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
+ */
+export class MessageBox extends Message {
+	private style: string; // body样式恢复
+	private readonly buttons: [RenderBtn?] = [];
+	private closeOnClickModal: boolean = true; // 是否可通过点击遮罩关闭 MessageBox
+	private lockScroll: boolean = true; // 是否在 MessageBox 出现时将 body 滚动锁定
+	private node: Element;
 
-export const BeerPS: BeerPublishSubscribe = {
-  id: 1,
-  callbacks: {}
-};
-// 订阅
-BeerPS.subscribe = function(channel, callback) {
-  let token = "token_" + this.id++;
+	constructor(options) {
+		super(options)
+		for (let option in options) {
+			if (options.hasOwnProperty(option)) {
+				this[option] = options[option];
+			}
+		}
+		this.init();
+	}
 
-  if (this.callbacks[channel]) {
-    this.callbacks[channel][token] = callback;
-  } else {
-    this.callbacks[channel] = {
-      [token]: callback
-    };
-  }
-  return token;
-};
-// 发布
-BeerPS.publish = function(channel, data) {
-  if (this.callbacks[channel]) {
-    Object.values(this.callbacks[channel]).forEach(cb => publishCallback(cb, data));
-    // Object.values(this.callbacks[channel]).forEach(callback => callback(data))
-  }
-};
-const publishCallback = (callback, data) => callback(data);
-// 清空
-BeerPS.unsubscribe = function(flag) {
-  if (flag === undefined) {
-    this.callbacks = {};
-  } else if (typeof flag === "string") {
-    if (flag.indexOf("token_") === 0) {
-      let callbackObj = Object.values(this.callbacks).find(obj => Object.prototype.hasOwnProperty.call(obj, flag));
-      if (callbackObj) delete callbackObj[flag];
-    } else {
-      this.callbacks && delete this.callbacks[flag];
-    }
+	init() {
+		this.id = `MessageBoxWrapper_${this.zIndex}`
+		this.container = document.createElement('div');
+		this.container.classList.add('be-message-box__wrapper');
+		if (this.customClass) this.container.classList.add(this.customClass);
+		this.container.style.zIndex = String(this.zIndex)
+		this.container.setAttribute('id', this.id)
+		this.container.setAttribute('tabindex', '-1')
+		this.container.setAttribute('role', 'dialog')
+		this.container.setAttribute('aria-modal', 'true')
+		this.container.setAttribute('aria-label', this.title)
 
-  }
-};
+		this.container.innerHTML = `
+				<div class='be-message-box__mask'></div>
+				<div class='be-message-box'>
+					<div class='be-message-box__header'>
+						<div class='be-message-box__title'><span>${this.title}</span></div>
+						${this.showClose ? this.renderBtn({ customClass: 'be-message-box__headerbtn', nextIcon: 'close', text: '' }) : ''}
+					</div>
+					<div class='be-message-box__content'>
+						<div class='be-message-box__container'>
+							<div class='be-message-box__status'>${this.renderType()}</div>
+							<div class='be-message-box__message'><p>${this.message}</p></div>
+						</div>
+					</div>
+					<div class='be-message-box__btns'>
+						${this.renderButtons()}
+					</div>
+				</div>
+			`;
+		this.disableScroll();
+		this.renderDom();
+		this.body.appendChild(this.container);
+		this.complete && this.complete()
+	}
 
-export const publish = (name, data) => {
-	const key = `${name}_${ genKey() }`
-	BeerPS.publish(key, data);
-	return key
-}
+	renderDom() {
+		// 获取节点
+		this.node = this.container.querySelector('.be-message-box'); // 底部遮照层
+		const maskDom = this.container.querySelector('.be-message-box__mask'); // 底部遮照层
+		const closeDom = this.container.querySelector(".be-message-box__headerbtn"); // 关闭
+		// 绑定事件
+		maskDom && maskDom.addEventListener('click', () => this.closeOnClickModal && this._beforeClose());
+		closeDom && closeDom.addEventListener("click", () => this._beforeClose());
+		this.bindButtonsEvent()
+		this.zIndex++
+	}
+	renderButtons() {
+		if (this.buttons.length <= 0) return ''
+		let str = ''
+		const isLast = i => i < this.buttons.length
+		this.buttons.map((el:RenderBtn, index) => {
+			const _id = this.getIdName(index)
+			str += this.renderBtn({ ...el, id: this.getIdName(index), style: isLast(index) ? 'margin-right: 10px;' : '' })
+			if (el.cb) el['_id'] = _id
+		});
+		return str
+	}
+	bindButtonsEvent() {
+		if (this.buttons.length > 0) {
+			this.buttons.map((el:RenderBtn) => {
+				if (el._id) {
+					el.dom = this.container.querySelector(`#${el._id}`)
+					el.dom.addEventListener("click", () => el.cb({ close: this._beforeClose.bind(this) }));
+				}
+			})
+		}
+	}
+	// 判断关闭前 是否需要关闭
+	_beforeClose() {
+		if (this.beforeClose) {
+			if (this.beforeClose()) this.close()
+		} else {
+			this.close()
+		}
+	}
+	close() {
+		this.doAnimate()
+		let timer = setTimeout(() => {
+			this.recoveryScroll();
+			this.body.removeChild(this.container);
+			this.zIndex--
+			if (this.closed) this.closed() // 回调
+			clearTimeout(timer)
+		}, 200)
+	}
 
+	doAnimate() {
+		this.node.classList.add('be-message-box__out')
+		const dom = document.querySelector(`#${this.id}`)
+		dom.classList.add('message-slide-out')
+	}
 
-export const subscribe = (key) => {
-	return BeerPS.subscribe(key, items => {
-		return items
-	})
+	// 禁用 / 释放滚动条
+	private disableScroll() {
+		if (!this.lockScroll) return
+		this.style = this.body.style.overflow;
+		this.body.style.overflow = 'hidden';
+	}
+
+	private recoveryScroll() {
+		if (!this.lockScroll) return
+		this.body.style.overflow = this.style;
+	}
 }

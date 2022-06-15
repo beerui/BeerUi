@@ -21,7 +21,6 @@
 		}
 	};
 	const clickNodes = (item, type = 'default') => {
-		// BeerPS.publish(key, item)
 		if(lazy && type === 'default') curLoadingId = item[config.value]
 		const params = {
 			...item,

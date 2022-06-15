@@ -7,17 +7,15 @@
 		messageBox({
 			title: 'i am title',
 			message: 'i am message content!',
+			buttons: [
+				{ text: '取消', customClass: 'be-button be-button--default', cb: ctx => ctx.close()},
+				{ text: '确定', type: 'submit', customClass: 'be-button be-button--normal be-button--primary', cb: () => console.log('确定') },
+			],
 			beforeClose() {
 				return true
 			},
 			complete() {
 				console.log('complete');
-			},
-			confirm() {
-				console.log('confirm');
-			},
-			cancel() {
-				console.log('cancel');
 			}
 		})
 	}
