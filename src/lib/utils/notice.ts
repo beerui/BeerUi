@@ -50,7 +50,6 @@ class Notice extends Message{
 	}
 	// 生成弹窗
 	setNotice(options: options): instanceType {
-		console.log('zIndex', this.zIndex);
 		const userOnClose = options.onClose;
 		const userOnClick = options.onClick;
 		const defaultOptions = {
