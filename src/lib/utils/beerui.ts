@@ -1,3 +1,5 @@
+import { objectAssign } from './index';
+
 export const is_browser = typeof window !== 'undefined';
 if (is_browser) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -313,16 +315,15 @@ type RenderIcon = {
 }
 type RenderBtn = {
 	dom?: Element
-	cb?: Function
+	cb?: Function // click handle callback
 	customClass?: string
 	style?: string
 	id?: string | number
 	_id?: string | number
-	name?: string
-	type?: string
-	text?: string
-	prevIcon?: string
-	nextIcon?: string
+	type?: string // button/submit
+	text?: string // button text
+	prevIcon?: string // button prev icon name
+	nextIcon?: string // button next icon name
 }
 export class Message {
 	protected readonly body: HTMLElement = document.body;
@@ -361,7 +362,7 @@ export class Message {
 		return ''
 	}
 	renderBtn(ctx:RenderBtn) {
-		ctx = Object.assign({ customClass: 'be-button--normal', type: 'button', text: '', style: '', id: '' }, ctx)
+		ctx = objectAssign({ customClass: 'be-button--normal', type: 'button', text: '', style: '', id: '' }, ctx)
 		return `<button class="${ctx.customClass}" type=${ctx.type} id=${ctx.id} style='${ctx.style}'>
 			${this.renderIcon({ name: ctx.prevIcon })}
 			<span>${ctx.text}</span>
@@ -369,7 +370,7 @@ export class Message {
 		</button>`
 	}
 	renderIcon(ctx:RenderIcon) {
-		ctx = Object.assign({ customClass: '', name: '' }, ctx)
+		ctx = objectAssign({ customClass: '', name: '' }, ctx)
 		return ctx.name ? `<i class='be-icon be-icon-${ctx.name} ${ctx.customClass}'></i>` : ''
 	}
 

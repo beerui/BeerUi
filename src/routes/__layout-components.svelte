@@ -11,7 +11,17 @@
 		}
 		return $page.url.pathname;
 	};
+	const formatName = (path) => {
+		const _path = path.split('/') || ['Components']
+		const _name = _path[_path.length-1]
+		return _name.slice(0, 1).toUpperCase() + _name.slice(1, _name.length)
+	}
 </script>
+<svelte:head>
+	<title>{formatName($page.url.pathname)} | BeerUi Components</title>
+	<meta name="description" content="BeerUi, base on svelte 3.0 web component">
+	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class='be-warp'>
 	<LayoutHeader menu={formatUrl()} />
 	<div class='be-container'>
@@ -31,9 +41,14 @@
 	.be-warp {
 		height: 100%;
 		overflow: hidden;
+		font-size: 18px;
 		background: var(--bg-color-container);
 	}
 
+	.demo-pre {
+		background: rgb(107, 132, 173);color: #ffffff;border-radius: 3px;padding: 0 15px;
+		font-family: Menlo, Monaco, "Courier New", monospace;
+	}
 	.be-main-container {min-height: calc(100vh - 60px);}
 	.be-container, .be-main {
 		height: calc(100vh - 60px);
