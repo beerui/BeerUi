@@ -67,7 +67,7 @@ export default class MenuStore {
 	computedNodesMap(list, parent) {
 		list.forEach(el => {
 			el.level = parent.level
-			const hasChild = el.children && el.children.length > 0 && !el.children.some(el => el.hidden);
+			const hasChild = el.children && el.children.length > 0 && !el.children.every(elChild => elChild.hidden);
 			if (hasChild) {
 				++el.level
 				el.type = 'submenu'
@@ -97,61 +97,6 @@ export default class MenuStore {
 		this.publishHandle({ status: 'done', data: this.nodesMap })
 		this.setActiveKey(this.active)
 	}
-	// initTree(els) {
-	// 	if (!els) return
-	// 	const key = genKey(4)
-	// 	this.root.key = key
-	// 	this.convertToMap(els, this.root)
-	// 	this.convertToTree(this.root, this.nodesMap, key, [])
-	// 	this.publishHandle({ status: 'done', data: this.nodesMap })
-	// 	this.setActiveKey(this.active)
-	// }
-	// 转为树
-	// convertToTree(tree, list, pkey, keys) {
-	// 	keys.push(pkey)
-	// 	const result = [];
-	// 	for (const key in list) {
-	// 		if (list[key].pkey === pkey) {
-	// 			const item = list[key]
-	// 			item.parent = tree
-	// 			result.push(item);
-	// 		}
-	// 	}
-	// 	tree['children'] = result
-	// 	for (const key in list) {
-	// 		if (!keys.includes(list[key].key)) this.convertToTree(list[key], list, list[key].key, keys)
-	// 	}
-	// }
-	// // 清洗数据
-	// convertToMap(els: Element, parent) {
-	// 	Object.entries(els.children).forEach(el => {
-	// 		const _item = el[1];
-	// 		const key = this.getAttr(_item, 'key')
-	// 		const index = this.getAttr(_item, 'index')
-	// 		const type = this.getAttr(_item, 'data-type')
-	// 		const child = {
-	// 			key: key || parent.key,
-	// 			index,
-	// 			level: parent.level,
-	// 			pid: parent.id,
-	// 			open: false,
-	// 			active: false,
-	// 			type: type || 'menuitem',
-	// 			pkey: parent.key
-	// 		}
-	// 		if (key) {
-	// 			child['level'] = ++child.level;
-	// 			child['id'] = ++this.nodeIdSeed;
-	// 		}
-	// 		if (_item && _item.children.length > 0) {
-	// 			this.convertToMap(_item, child)
-	// 		}
-	// 		if (key) this.nodesMap[key] = child
-	// 	});
-	// }
-	// getAttr(el: Element, value: string) {
-	// 	return el.getAttribute(value)
-	// }
 	// 根据用户index来设置选中
 	setActiveKey(id) {
 		for (const key in this.nodesMap) {
