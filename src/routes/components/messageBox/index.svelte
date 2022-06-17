@@ -45,7 +45,7 @@
 		<li>type: string = 'normal'; // 消息类型，用于显示图标 success / info / warning / error</li>
 		<li>title: string = '提示'; // MessageBox 标题</li>
 		<li>message: string = ''; // MessageBox 消息正文内容</li>
-		<li>buttons: [RenderBtn] = []; // MessageBox 底部按钮组 <code>@brewer/beerui@1.1.2</code></li>
+		<li>buttons: [RenderBtn] = []; // MessageBox 底部按钮组 <code>@brewer/beerui@1.1.0</code></li>
 		<li>customClass: string = ''; // MessageBox 的自定义类名</li>
 		<li>showClose: boolean = true; // MessageBox 是否显示右上角关闭按钮</li>
 		<li>closeOnClickModal: boolean = true; // 是否可通过点击遮罩关闭 MessageBox</li>
