@@ -18,7 +18,6 @@ const config = {
 		adapter: vercel(),
 		package: {
 			files(filepath) {
-				console.log('filepath', filepath);
 				const isRoute = filepath.indexOf('/src/routes') !== -1;
 				const isDemo = filepath.indexOf('demo/') !== -1;
 				return !filepath.endsWith('.stories.svelte') || isRoute || isDemo;
