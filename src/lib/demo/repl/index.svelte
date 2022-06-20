@@ -275,15 +275,15 @@
 	<div class="viewport" class:output={show_output}>
 		<SplitPane
 			type={orientation === 'rows' ? 'vertical' : 'horizontal'}
-			pos={(mobile || fixed) ? fixedPos : orientation === 'rows' ? 50 : 60}
+			pos={(mobile || fixed) ? fixedPos : orientation === 'rows' ? 30 : 70}
 			fixed={fixed}
 		>
-			<section slot="a">
+			<section slot="b">
 				<ComponentSelector show_modified={showModified} {handle_select} on:add on:remove />
 				<ModuleEditor errorLoc={sourceErrorLoc} {theme} />
 			</section>
 
-			<section slot="b" style="height: 100%;">
+			<section slot="a" style="height: 100%;">
 				<Output {svelteUrl} status={status_visible && status} {embedded} {relaxed} {injectedJS} {injectedCSS} {theme} {showAst} />
 			</section>
 		</SplitPane>
