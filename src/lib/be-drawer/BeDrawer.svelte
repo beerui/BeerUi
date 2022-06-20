@@ -17,11 +17,7 @@
 	export let isCloseEscape = true // 是否可以通过按下 ESC 关闭 Drawer
 	const handleClose = () => closeOnClickModal && close();
 	onDestroy(() => {
-		dispatch('destroyOnClose')
 		dispatch('close')
-	})
-	onMount(() => {
-		dispatch('open')
 	})
 
 	const handleKeydown = e => isCloseEscape && e.key === 'Escape' && close();

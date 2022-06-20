@@ -26,7 +26,7 @@
 		});
 	}
 
-	const clearValidate = (props = []) => {
+	export const clearValidate = (props = []) => {
 		const fields = props.length
 			? (typeof props === 'string'
 					? fields.filter(field => props === field.prop)

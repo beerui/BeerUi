@@ -34,6 +34,34 @@
 			使用name来使用不同的图标样式。
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>name</td>
+				<td>图标name</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>color</td>
+				<td>图标颜色</td>
+				<td>色值</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 <style lang='scss'>
 	.icon-list {

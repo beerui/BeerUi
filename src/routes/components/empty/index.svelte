@@ -55,4 +55,39 @@
             </div>
         </div>
     </DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>description</td>
+				<td>描述</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>image</td>
+				<td>图片的src</td>
+				<td>string</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>size</td>
+				<td>尺寸</td>
+				<td>string</td>
+				<td>-</td>
+				<td>160px</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

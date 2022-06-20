@@ -110,6 +110,7 @@ let checkboxGroup;
 
 	<h3>Repl</h3>
 	<ReplBlock
+		height='350px'
 		js={`import { BeCheckboxGroup, BeCheckbox } from '@brewer/beerui/be-checkbox';
 		let checkedCities = [];
 		const onChange = evt => console.log(evt)

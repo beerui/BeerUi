@@ -36,4 +36,46 @@
 			<div>秒 ss/s</div>
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>type</td>
+			<td>类型</td>
+			<td>string</td>
+			<td>success/warning/info/error</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>defaultTime</td>
+			<td>初始值</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>formatTime</td>
+			<td>日期格式</td>
+			<td>string</td>
+			<td>-</td>
+			<td>yyyy-MM-dd HH:mm:ss</td>
+		</tr>
+		<tr>
+			<td>async</td>
+			<td>同步</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		</tbody>
+	</table>
 </div>

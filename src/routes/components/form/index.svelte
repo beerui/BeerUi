@@ -677,6 +677,201 @@ ruleFormDom.validate((valid) => {
 	</BeForm>
 </div>`}
 	/>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<h3 class='demo-table-title'>Form-Item Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>ref</td>
+				<td>获得对表单元素的引用</td>
+				<td>Element</td>
+				<td>-</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>description</td>
+				<td>辅助性文字</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>inline</td>
+				<td>行内表单模式</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>false</td>
+			</tr>
+			<tr>
+				<td>labelWidth</td>
+				<td>表单域标签的宽度</td>
+				<td>string</td>
+				<td>-</td>
+				<td>80px</td>
+			</tr>
+			<tr>
+				<td>model</td>
+				<td>获得表单元素绑定的值</td>
+				<td>any</td>
+				<td>-</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>rules</td>
+				<td>获得表单元素绑定的验证规则</td>
+				<td>any</td>
+				<td>-</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>labelPosition</td>
+				<td>表单域标签的位置</td>
+				<td>string</td>
+				<td>'' | 'top' | 'left' | 'right'</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>validateOnRuleChange</td>
+				<td>规则改变时验证</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>true</td>
+			</tr>
+			<tr>
+				<td>hideRequiredAsterisk</td>
+				<td>是否隐藏必填字段的标签旁边的红色星号</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>false</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Methods</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>validate</td>
+				<td>对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise</td>
+				<td>Function(callback: Function(boolean, object))</td>
+			</tr>
+			<tr>
+				<td>validateField</td>
+				<td>对部分表单字段进行校验的方法</td>
+				<td>Function(props: array | string, callback: Function(errorMessage: string))</td>
+			</tr>
+			<tr>
+				<td>resetFields</td>
+				<td>对整个表单进行重置，将所有字段值重置为初始值并移除校验结果</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>clearValidate</td>
+				<td>移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果</td>
+				<td>Function(props: array | string)</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Form-Item Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>prop</td>
+			<td>表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的</td>
+			<td>string</td>
+			<td>传入 Form 组件的 model 中的字段</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>label</td>
+			<td>标签文本</td>
+			<td>string</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>inline</td>
+			<td>行内表单模式</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>labelWidth</td>
+			<td>表单域标签的宽度</td>
+			<td>string</td>
+			<td>-</td>
+			<td>80px</td>
+		</tr>
+		<tr>
+			<td>required</td>
+			<td>是否必填，如不设置，则会根据校验规则自动生成</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>rules</td>
+			<td>表单验证规则</td>
+			<td>object</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>trigger</td>
+			<td>行内必填 触发事件</td>
+			<td>string</td>
+			<td>click/hover</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>message</td>
+			<td>行内必填 提示信息</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Slot</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>name</th>
+			<th>说明</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>icon</td>
+			<td>标题前的icon</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 
 <style lang='scss'>

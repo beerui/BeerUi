@@ -91,27 +91,27 @@
 	<h3 class='demo-table-title'>Events</h3>
 	<table class='demo-table'>
 		<thead>
-		<tr>
-			<th>事件名称</th>
-			<th>说明</th>
-			<th>回调参数</th>
-		</tr>
+			<tr>
+				<th>事件名称</th>
+				<th>说明</th>
+				<th>回调参数</th>
+			</tr>
 		</thead>
 		<tbody>
-		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
-		</tr>
+			<tr>
+				<td>close</td>
+				<td>关闭的回调</td>
+				<td>''</td>
+			</tr>
 		</tbody>
 	</table>
 	<h3 class='demo-table-title'>Slot</h3>
 	<table class='demo-table'>
 		<thead>
-		<tr>
-			<th>name</th>
-			<th>说明</th>
-		</tr>
+			<tr>
+				<th>name</th>
+				<th>说明</th>
+			</tr>
 		</thead>
 		<tbody>
 			<tr>

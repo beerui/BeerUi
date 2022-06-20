@@ -64,7 +64,7 @@
 
 	// 在 input 值改变时触发
 	function onInput(e) {
-		dispatch('input', e.target.value);
+		dispatch('input', value);
 	}
 
 	function typeAction(node) {
@@ -123,16 +123,16 @@
 		bind:this={input}
 		use:forwardEvents
 	/>
-	{#if getSuffixVisible()}
-	  <span class={['be-input__suffix',disabled ? ' is-disabled':''].join('')}>
+	{#if clearable || suffixIcon}
+	  <span class={['be-input__suffix', disabled ? ' is-disabled':''].join('')}>
 	    <span class='be-input__suffix-inner '>
-	      <template>
-	        <slot name='suffix'></slot>
-		      <!-- suffixIcon -->
-		      {#if suffixIcon}
+	      <slot name='suffix'></slot>
+	      {#if suffixIcon}
 	        <i class={['be-input__icon ', suffixIcon].join('')}></i>
-	        {/if}
-	      </template>
+	      {/if}
+		    {#if value && clearable}
+			    <i class='be-icon be-icon-close'></i>
+		    {/if}
 	    </span>
 	  </span>
 	{/if}

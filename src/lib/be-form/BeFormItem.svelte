@@ -127,24 +127,6 @@
 	const resetField = () => {
 		validateState = '';
 		validateMessage = '';
-		// let model = form.model;
-		// let value = fieldValue;
-		// let path = prop;
-		// if (path.indexOf(':') !== -1) {
-		// 	path = path.replace(/:/, '.');
-		// }
-		// let prop = getPropByPath(model, path, true);
-		// this.validateDisabled = true;
-		// if (Array.isArray(value)) {
-		// 	prop.o[prop.k] = [].concat(this.initialValue);
-		// } else {
-		// 	prop.o[prop.k] = this.initialValue;
-		// }
-		// // reset validateDisabled after onFieldChange triggered
-		// this.$nextTick(() => {
-		// 	this.validateDisabled = false;
-		// });
-		// this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
 	}
 	// 传递到表单组件
 	const FormItemEventCallback = async (item) => {
