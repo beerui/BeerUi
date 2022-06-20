@@ -1,38 +1,5 @@
 <script lang="ts">
-	import { BeButton, BeDialog } from '$lib';
-	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 	import ReplBlock from '$lib/demo/ReplBlock.svelte';
-
-	let visible1 = false
-	let visible2 = false
-	let visible3 = false
-	let visible4 = false
-	let openDialog1 = () => visible1 = true
-	let openDialog2 = () => visible2 = true
-	let openDialog3 = () => visible3 = true
-	let openDialog4 = () => visible4 = true
-	const beforeClose1 = (type) => type !== 'cancel'
-
-
-	let code = `
-<BeDialog width='30%' bind:visible={visible1} beforeClose={beforeClose1}>
-	<p>基础 Dialog</p>
-</BeDialog>`
-	const code1 = `
-<BeDialog bind:visible={visible2} closeOnClickModal={false} isDrag={true}>
-	<p>点击Mask不可以关闭</p>
-</BeDialog>
-	`
-	const code3 = `
-<BeDialog bind:visible={visible3} isDrag={true} isLimit={true}>
-	<p>限制拖拽范围</p>
-</BeDialog>
-	`
-	const code2 = `
-<BeDialog bind:visible={visible4} isDrag={true} isFree={true}>
-	<p>拖拽完全自由</p>
-</BeDialog>
-	`
 </script>
 <div class='page-container'>
 	<h2>BeDialog 对话框</h2>
