@@ -13,7 +13,7 @@
 		label: 'value'
 	}
 	let lazy = true
-	
+
 	let value1 = ''
 	let value2 = ''
 	let value3 = ''
@@ -665,7 +665,7 @@
 	let visible = false
 </script>
 <div class='page-container content'>
-	
+
 	<BeDrawer
 	bind:visible={visible}
   width="30%"
@@ -1327,7 +1327,7 @@
 					label: '组件交互文档'
 				}]
 			}]
-			
+
 		`}
 			>
 		<div slot='source'>
@@ -1819,4 +1819,57 @@
 			通过<code>lazy</code>开启动态加载，并通过<code>lazyload</code>来设置加载数据源的方法。<code>lazyload</code>方法有两个参数，第一个参数<code>node</code>为当前点击的节点，第二个<code>resolve</code>为数据加载完成的回调(必须调用)。了更准确的显示节点的状态，还可以对节点数据添加是否为叶子节点的标志位 (默认字段为hasChild)，否则会简单的以有无子节点来判断是否为叶子节点。
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>value</td>
+			<td>下拉框选中的值</td>
+			<td>array</td>
+			<td>-</td>
+			<td>[]</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>change</td>
+			<td>值改变后的回调</td>
+			<td>''</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Slot</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>name</th>
+			<th>说明</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>icon</td>
+			<td>标题前的icon</td>
+		</tr>
+		</tbody>
+	</table>
 </div>

@@ -11,7 +11,6 @@
 	export let name = '';
 	export let indeterminate: boolean = false;
 	export let validateEvent: boolean = true; // 是否发送验证表单
-	export let value = '';
 	export let label = '';
 
 	const _class = ['be-checkbox'];
@@ -26,7 +25,7 @@
 	}
 
 	const handleClick = (evt) => {
-		dispatch('click', evt);
+		dispatch('click', { label, checked: checked });
 		if (disabled) return
 		// group的时候
 		if (store) {
@@ -70,7 +69,7 @@
   >
     <span class='be-checkbox__inner'></span>
     <input
-	    {...mapAttributes({ disabled, id, name, value })}
+	    {...mapAttributes({ disabled, id, name })}
 	    type='checkbox'
 	    aria-hidden='false'
 	    class='be-checkbox__original'

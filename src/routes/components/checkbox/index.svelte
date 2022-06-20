@@ -128,6 +128,120 @@ let checkboxGroup;
 `}
 		css={`:global(.m-check .be-checkbox){margin-right: 15px;}`}
 	/>
+	<h3 class='demo-table-title'>BeCheckbox Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>checked</td>
+			<td>绑定的值</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>id</td>
+			<td>选框的id</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>禁用</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>name</td>
+			<td>选框的name</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>label</td>
+			<td>选中状态的值</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>BeCheckboxGroup Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>checked</td>
+			<td>绑定的值</td>
+			<td>array</td>
+			<td>-</td>
+			<td>[]</td>
+		</tr>
+		<tr>
+			<td>validateEvent</td>
+			<td>是否验证表单(在BeForm中使用)</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>true</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>BeCheckbox Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>change</td>
+			<td>值改变的回调</td>
+			<td>{ `{ label, checked }` }</td>
+		</tr>
+		<tr>
+			<td>click</td>
+			<td>点击的回调</td>
+			<td>{ `{ label, checked }` }</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>BeCheckbox Slot</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>name</th>
+			<th>说明</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>default</td>
+			<td>自定义样式</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 <style lang="scss">
 </style>

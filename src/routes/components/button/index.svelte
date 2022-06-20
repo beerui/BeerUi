@@ -133,6 +133,70 @@
 			额外的尺寸：medium、small、mini，通过设置size属性来配置它们。
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>style</td>
+			<td>style标签</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>nativeType</td>
+			<td>按钮type</td>
+			<td>string</td>
+			<td>-</td>
+			<td>button</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>禁用</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>circle</td>
+			<td>圆形</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>round</td>
+			<td>圆角按钮</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Slot</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>name</th>
+			<th>说明</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>default</td>
+			<td>默认slot</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 
 <style lang='scss' global>
