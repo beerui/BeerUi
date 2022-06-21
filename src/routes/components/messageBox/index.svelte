@@ -2,7 +2,6 @@
 	import { BeButton, showNotice } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 	import messageBox from '$lib/utils/MessageBox';
-	import LineCode from '$lib/demo/LineCode.svelte';
 
 	const openMessage = () => {
 		messageBox({
@@ -40,32 +39,7 @@
 	<h2 on:click={openNotice}>MessageBox 弹框</h2>
 	<p class='desc'>模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。</p>
 	<h3>基本用法</h3>
-	<ol>
-		<li>complete: Function = null; // 渲染完成的回调函数</li>
-		<li>type: string = 'normal'; // 消息类型，用于显示图标 success / info / warning / error</li>
-		<li>title: string = '提示'; // MessageBox 标题</li>
-		<li>message: string = ''; // MessageBox 消息正文内容</li>
-		<li>buttons: [RenderBtn] = []; // MessageBox 底部按钮组 <code>@brewer/beerui@1.1.0</code></li>
-		<li>customClass: string = ''; // MessageBox 的自定义类名</li>
-		<li>showClose: boolean = true; // MessageBox 是否显示右上角关闭按钮</li>
-		<li>closeOnClickModal: boolean = true; // 是否可通过点击遮罩关闭 MessageBox</li>
-		<li>lockScroll: boolean = true; // 是否在 MessageBox 出现时将 body 滚动锁定</li>
-		<li>beforeClose: Function = null; // MessageBox 关闭前的回调，会暂停实例的关闭</li>
-		<li>closed: Function = null; // 关闭后的回调</li>
-	</ol>
-	<pre class='demo-pre'>
-			{`
-type RenderBtn = {
-    cb?: Function // click handle callback
-    customClass?: string
-    style?: string
-    type?: string // button/submit
-    text?: string // button text
-    prevIcon?: string // button prev icon name
-    nextIcon?: string // button next icon name
-}`}
-	</pre>
-	<h3>消息提示</h3>
+
 	<DemoBlock
 	js={`
 import { messageBox } from '@brewer/beerui'
@@ -104,7 +78,116 @@ const openTypeMessage = () => {
 		</div>
 	</DemoBlock>
 	<hr>
-	bdoc
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+			<tr>
+				<th>参数</th>
+				<th>说明</th>
+				<th>类型</th>
+				<th>可选值</th>
+				<th>默认值</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>type</td>
+				<td>消息类型，用于显示图标</td>
+				<td>string</td>
+				<td>success / info / warning / error</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>title</td>
+				<td>标题</td>
+				<td>string</td>
+				<td>-</td>
+				<td>提示</td>
+			</tr>
+			<tr>
+				<td>message</td>
+				<td>消息正文内容</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>buttons</td>
+				<td>底部按钮组</td>
+				<td>[RenderBtn]</td>
+				<td>-</td>
+				<td>[]</td>
+			</tr>
+			<tr>
+				<td>customClass</td>
+				<td>自定义类名</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>showClose</td>
+				<td>展示右上角的关闭按钮</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>true</td>
+			</tr>
+			<tr>
+				<td>closeOnClickModal</td>
+				<td>是否可通过点击遮罩关闭</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>true</td>
+			</tr>
+			<tr>
+				<td>lockScroll</td>
+				<td>是否在 MessageBox 出现时将 body 滚动锁定</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>true</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>complete</td>
+				<td>渲染完成的回调函数</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>beforeClose</td>
+				<td>MessageBox 关闭前的回调，会暂停实例的关闭</td>
+				<td>(event) => return true</td>
+			</tr>
+			<tr>
+				<td>closed</td>
+				<td>关闭后的回调</td>
+				<td>(event)</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<pre class='demo-pre'>
+			{`
+type RenderBtn = {
+    cb?: Function // click handle callback
+    customClass?: string
+    style?: string
+    type?: string // button/submit
+    text?: string // button text
+    prevIcon?: string // button prev icon name
+    nextIcon?: string // button next icon name
+}`}
+	</pre>
 </div>
 
 <style lang='scss' global>

@@ -337,16 +337,6 @@
 	<h2>NavMenu 导航菜单</h2>
 	<p>为网站提供导航功能的菜单。</p>
 	<h3>基础用法</h3>
-<!--	<div style='width: 240px;'>-->
-<!--		<div>-->
-<!--			<BeButton on:click={toggleCollapse1}>切换 collapse</BeButton>-->
-<!--			<BeButton on:click={changeActive}>changeActive</BeButton>-->
-<!--		</div>-->
-<!--		{active}-->
-<!--		<BeMenu bind:this={BeMenuDom} on:change={menuChange} data={menus} bind:active={active} mode="vertical" trigger="click" bind:collapse={$menu.collapse}>-->
-<!--			<NavMenu {menus}/>-->
-<!--		</BeMenu>-->
-<!--	</div>-->
 	<DemoBlock
 		code={`
 <BeMenu class="be-menu-demo" active="1" mode="horizontal" bind:this={MenuDom} on:change={changeMenu}>
@@ -582,4 +572,103 @@ const toggleCollapse = () => collapse = !collapse
 			</ol>
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>BeMenu Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>active</td>
+			<td>选中菜单标识Id</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>mode</td>
+			<td>菜单方向</td>
+			<td>string</td>
+			<td>horizontal/vertical</td>
+			<td>horizontal</td>
+		</tr>
+		<tr>
+			<td>trigger</td>
+			<td>触发形式</td>
+			<td>string</td>
+			<td>hover/click</td>
+			<td>hover</td>
+		</tr>
+		<tr>
+			<td>data</td>
+			<td>菜单数据</td>
+			<td>any[]</td>
+			<td>-</td>
+			<td>[]</td>
+		</tr>
+		<tr>
+			<td>collapse</td>
+			<td>展开收起的状态</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>isOnlyOne</td>
+			<td>仅有一个下级菜单展开</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>BeMenu Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>setMenuActive</td>
+				<td>设置选中的菜单(active)</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>change</td>
+				<td>菜单改变的回调</td>
+				<td>当前选中菜单数据</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>BeMenuItem/BeSubMenu Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>id</td>
+			<td>选中菜单标识Id</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		</tbody>
+	</table>
 </div>

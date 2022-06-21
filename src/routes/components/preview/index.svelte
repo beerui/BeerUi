@@ -49,6 +49,51 @@ import { previewImages } from '@brewer/beerui'
 			</div>
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>src</td>
+				<td>当前需要展示图片的src</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>list</td>
+				<td>需要展示图片的src数组</td>
+				<td>Array</td>
+				<td>-</td>
+				<td>[]</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>cb</td>
+			<td>图片切换后 监听的回调</td>
+			<td>''</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 <style lang='scss'>
 	.demo-list {

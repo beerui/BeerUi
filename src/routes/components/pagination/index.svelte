@@ -261,4 +261,113 @@ const pageSizeChange = ({ detail }) => {
 			</ol>
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>total</td>
+				<td>总条数</td>
+				<td>number</td>
+				<td>-</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>type</td>
+				<td>类别</td>
+				<td>string</td>
+				<td>mini/normal</td>
+				<td>normal</td>
+			</tr>
+			<tr>
+				<td>currentPage</td>
+				<td>当前页</td>
+				<td>number</td>
+				<td>-</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>pageSize</td>
+				<td>显示条数</td>
+				<td>number</td>
+				<td>-</td>
+				<td>10</td>
+			</tr>
+			<tr>
+				<td>layouts</td>
+				<td>功能按钮</td>
+				<td>string</td>
+				<td>prev, pager, next, sizes, jumper, info, all</td>
+				<td>prev, pager, next</td>
+			</tr>
+			<tr>
+				<td>async</td>
+				<td>异步接口需要开启</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>false</td>
+			</tr>
+			<tr>
+				<td>pageSizes</td>
+				<td>可选页码</td>
+				<td>number[]</td>
+				<td>-</td>
+				<td>[10, 15, 20]</td>
+			</tr>
+			<tr>
+				<td>options</td>
+				<td>其它设置</td>
+				<td>optionsType</td>
+				<td>-</td>
+				<td>见下方类型</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>changePage</td>
+			<td>页码数改变</td>
+			<td>当前页数</td>
+		</tr>
+		<tr>
+			<td>pageSizeChange</td>
+			<td>条数改变</td>
+			<td>当前条数</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<pre class='demo-pre'>
+			{`
+type optionsType = {
+	card: boolean // 是否是块状
+	showNumber: number // 分页按钮展示数量
+	scroll: boolean // 是否需要自动滚动到头部
+	icon: any // 上一页 下一页的大小和颜色
+}
+const defaultOptions: optionsType = {
+  card: false,
+  showNumber: 8,
+  scroll: true,
+  icon: {}
+}
+	`}
+	</pre>
 </div>

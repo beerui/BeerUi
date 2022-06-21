@@ -1,6 +1,4 @@
 <script lang='ts'>
-	import { BeAlert } from '$lib';
-	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 	import ReplBlock from '$lib/demo/ReplBlock.svelte';
 </script>
 <div class='page-container content'>

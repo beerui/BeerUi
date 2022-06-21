@@ -29,14 +29,21 @@
 	export let async = false // 后续是否更新
 	export let pageSizes = [10, 15, 20] // 后续是否更新
 
-	// 其它设置
-	export let options = {
-		card: false, // 是否是块状
-		showNumber: 8, // 是否是块状
-		scroll: true, // 是否需要自动滚动到头部
-		icon: {} // 上一页 下一页的大小和颜色
+	type optionsType = {
+		card?: boolean // 是否是块状
+		showNumber?: number // 分页按钮展示数量
+		scroll?: boolean // 是否需要自动滚动到头部
+		icon?: any // 上一页 下一页的大小和颜色
 	}
-
+	// 其它设置
+	export let options: optionsType = {}
+  const	defaultOptions: optionsType = {
+	  card: false,
+	  showNumber: 8,
+	  scroll: true,
+	  icon: {}
+  }
+	options = Object.assign(defaultOptions, options)
 	$: totalpages = Math.ceil(total / pageSize) // 总页数
 	$: pageList = []
 

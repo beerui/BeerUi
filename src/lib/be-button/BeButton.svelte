@@ -14,6 +14,7 @@
 	class={_class}
 	class:is-circle={circle}
 	class:is-round={round}
+	class:is-disabled={disabled}
 	{style}
 	on:click
 	on:contextmenu
@@ -32,7 +33,6 @@
 	on:pointerout
 	on:pointerup
 	on:input
-	class:is-disabled={disabled}
 	{disabled}
 	type={nativeType}
 >

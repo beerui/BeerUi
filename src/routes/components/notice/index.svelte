@@ -124,19 +124,6 @@
 		<li>closeNotice(id, cb) 关闭单个消息弹框</li>
 	</ol>
 	<h4>options</h4>
-	<ol>
-		<li>title 标题 </li>
-		<li>toast false 是否居中显示 只展示message内容 </li>
-		<li>type 带有倾向性</li>
-		<li>message 内容</li>
-		<li>duration 持续时间</li>
-		<li>position 展示位置</li>
-		<li>titleColor 标题颜色</li>
-		<li>messageColor 信息颜色</li>
-		<li>onClick</li>
-		<li>closeAll()</li>
-		<li>close()</li>
-	</ol>
 	<DemoBlock js={`
 import { showNotice, closeALlNotice, closeNotice } from '@brewer/beerui';
 let noticeInstance;
@@ -320,15 +307,6 @@ const openTypeNotice = (type, toast) => {
 				</div>
 			</BeButton>
 		</div>
-		<div slot='description'>
-			<ol>
-				<li>title: string 标题</li>
-				<li>toast: boolean 居中展示的提示。标题不显示 只展示message</li>
-				<li>message: string 展示信息</li>
-				<li>duration: number 持续时间</li>
-				<li>type: number => success warning info error带图标的提示</li>
-			</ol>
-		</div>
 	</DemoBlock>
 
 	<h3>监听notice关闭</h3>
@@ -342,4 +320,102 @@ const openTypeNotice = (type, toast) => {
 	<div>
 		<BeButton size='normal' type='default' on:click={openNotice2}>弹出</BeButton>
 	</div>
+	<h3 class='demo-table-title'>Attributes</h3>
+
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>type</td>
+				<td>消息类型，用于显示图标</td>
+				<td>string</td>
+				<td>success / info / warning / error</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>title</td>
+				<td>标题</td>
+				<td>string</td>
+				<td>-</td>
+				<td>提示</td>
+			</tr>
+			<tr>
+				<td>message</td>
+				<td>消息正文内容</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>duration</td>
+				<td>持续时间</td>
+				<td>number</td>
+				<td>-</td>
+				<td>3000(ms)</td>
+			</tr>
+			<tr>
+				<td>position</td>
+				<td>位置</td>
+				<td>string</td>
+				<td>top-right/top-left/bottom-right/bottom-left</td>
+				<td>top-right</td>
+			</tr>
+			<tr>
+				<td>titleColor</td>
+				<td>标题颜色</td>
+				<td>string</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>messageColor</td>
+				<td>信息颜色</td>
+				<td>string</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>toast</td>
+				<td>是否居中显示 只展示message内容</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>false</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>close</td>
+				<td>关闭的回调</td>
+				<td>示例ID</td>
+			</tr>
+			<tr>
+				<td>closeAll</td>
+				<td>关闭所有</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>onClick</td>
+				<td>点击关闭触发</td>
+				<td>''</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

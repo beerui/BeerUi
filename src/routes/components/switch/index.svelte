@@ -55,6 +55,59 @@ let switchValue = true`}>
 			</div>
 		</div>
 	</DemoBlock>
+	<h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>title</td>
+			<td>标题</td>
+			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>close</td>
+			<td>关闭的回调</td>
+			<td>''</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Slot</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>name</th>
+			<th>说明</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>icon</td>
+			<td>标题前的icon</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 
 
