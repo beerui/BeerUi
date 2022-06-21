@@ -104,6 +104,7 @@ const openTypeMessage = () => {
 		</div>
 	</DemoBlock>
 	<hr>
+	bdoc
 </div>
 
 <style lang='scss' global>

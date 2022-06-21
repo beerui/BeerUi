@@ -5,6 +5,11 @@
 	import BeIcon from '../be-icon/BeIcon.svelte';
 	import { slide } from 'svelte/transition';
 	let dispatch = createEventDispatcher()
+	interface defaultPropsType  {
+		children?: 'children'
+		label?: 'label'
+		id?: 'id'
+	}
 	// 下拉框选中的值
 	export let value = [];
 	export let lazy: boolean = false;
@@ -15,7 +20,7 @@
 	export let placeholder = '请选择'
 	// Tree
 	export let data = []
-	export let defaultProps = { children: 'children', label: 'label', id: 'id' }
+	export let defaultProps: defaultPropsType  = { children: 'children', label: 'label', id: 'id' }
 	export let emptyText: string = '暂无数据';
 	export let showCheckbox: boolean = false;
 	export let showCount: boolean = false; // 展示子集的数量
@@ -36,6 +41,7 @@
 	let isFocus = false // 输入框是否聚焦
 	let theFilter = null
 
+	defaultProps = Object.assign({ children: 'children', label: 'label', id: 'id' }, defaultProps)
 	onMount(async () => {
 		await tick()
 		setCurrentValue()
@@ -63,7 +69,7 @@
 
 	const handleNodeClick = ({ detail }) => {
 		// id: 9 label: "三级 1-1-1"
-		value = [detail[defaultProps.id]]
+		value = [detail[nodeKey] || detail[defaultProps.id] || detail[defaultProps.label]]
 		inputVal = detail[defaultProps.label]
 		visible = !visible
 		theFilter.setCurrentKey(detail[defaultProps.id])

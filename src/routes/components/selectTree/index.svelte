@@ -108,6 +108,7 @@ const defaultProps = { children: 'children', label: 'label1' }
 `}>
 		<div slot='source'>
 			<div class='demo-list'>
+				value: {JSON.stringify(value)}
 				<BeSelectTree defaultProps={defaultProps} bind:data={data} bind:value={value} on:change={handleChange} nodeKey='id' />
 			</div>
 		</div>
@@ -173,6 +174,8 @@ const loadNode = (node, resolve) => {
 `}>
 		<div slot='source'>
 			<div class='demo-list'>
+				value: {JSON.stringify(value)}
+				<hr>
 				<BeSelectTree
 					lazy
 					load={loadNode}
