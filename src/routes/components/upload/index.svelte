@@ -348,7 +348,7 @@ const beforeUpload = (file) => {
 	</tr>
 	<tr>
 		<td>fileList</td>
-		<td>上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]</td>
+		<td>{`上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]`}</td>
 		<td>array</td>
 		<td>—</td>
 		<td>[]</td>

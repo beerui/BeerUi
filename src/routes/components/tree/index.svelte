@@ -665,11 +665,324 @@ const resetChecked = () => {
 		</thead>
 		<tbody>
 		<tr>
-			<td>title</td>
-			<td>标题</td>
+			<td>data</td>
+			<td>展示数据</td>
+			<td>array</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>emptyText</td>
+			<td>内容为空的时候展示的文本</td>
+			<td>String</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>nodeKey</td>
+			<td>每个树节点用来作为唯一标识的属性，整棵树应该是唯一的</td>
+			<td>String</td>
+			<td>—</td>
+			<td>label</td>
+		</tr>
+		<tr>
+			<td>props</td>
+			<td>配置选项，具体看下表</td>
+			<td>object</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>renderAfterExpand</td>
+			<td>是否在第一次展开某个树节点后才渲染其子节点</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>true</td>
+		</tr>
+		<tr>
+			<td>load</td>
+			<td>加载子树数据的方法，仅当 lazy 属性为true 时生效</td>
+			<td>function(node, resolve)</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>renderContent</td>
+			<td>树节点的内容区的渲染 Function</td>
+			<td>{`Function(h, { node, data, store }`}</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>highlightCurrent</td>
+			<td>是否高亮当前选中节点，默认值是 false。</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>defaultExpandAll</td>
+			<td>是否默认展开所有节点</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>expandOnClickNode</td>
+			<td>是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>true</td>
+		</tr>
+		<tr>
+			<td>checkOnClickNode</td>
+			<td>是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点。</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>autoExpandParent</td>
+			<td>展开子节点的时候是否自动展开父节点</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>true</td>
+		</tr>
+		<tr>
+			<td>defaultExpandedKeys</td>
+			<td>默认展开的节点的 key 的数组</td>
+			<td>array</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>showCheckbox</td>
+			<td>节点是否可被选择</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>checkStrictly</td>
+			<td>在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>defaultCheckedKeys</td>
+			<td>默认勾选的节点的 key 的数组</td>
+			<td>array</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>currentNodeKey</td>
+			<td>当前选中的节点</td>
+			<td>string, number</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>filterNodeMethod</td>
+			<td>对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏</td>
+			<td>Function(value, data, node)</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>accordion(TODO)</td>
+			<td>是否每次只打开一个同级树节点展开</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>indent(TODO)</td>
+			<td>相邻级节点间的水平缩进，单位为像素</td>
+			<td>number</td>
+			<td>—</td>
+			<td>16</td>
+		</tr>
+		<tr>
+			<td>iconClass(TODO)</td>
+			<td>自定义树节点的图标</td>
 			<td>string</td>
 			<td>-</td>
-			<td>''</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>lazy</td>
+			<td>是否懒加载子节点，需与 load 方法结合使用</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>draggable(TODO)</td>
+			<td>是否开启拖拽节点功能</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>allowDrag(TODO)</td>
+			<td>判断节点能否被拖拽</td>
+			<td>Function(node)</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>allowDrop(TODO)</td>
+			<td>拖拽时判定目标节点能否被放置。<code>type</code> 参数有三种情况：'prev'、'inner' 和 'next'，分别表示放置在目标节点前、插入至目标节点和放置在目标节点后</td>
+			<td>Function(draggingNode, dropNode, type)</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Props</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>label</td>
+			<td>指定节点标签为节点对象的某个属性值</td>
+			<td>string, function(data, node)</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>children</td>
+			<td>指定子树为节点对象的某个属性值</td>
+			<td>string</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>指定节点选择框是否禁用为节点对象的某个属性值</td>
+			<td>boolean, function(data, node)</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>isLeaf</td>
+			<td>指定节点是否为叶子节点，仅在指定了 lazy 属性的情况下生效</td>
+			<td>boolean, function(data, node)</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Method</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>name</th>
+			<th>说明</th>
+			<th>参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>filter</td>
+			<td>对树节点进行筛选操作</td>
+			<td>接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数</td>
+		</tr>
+		<tr>
+			<td>updateKeyChildren</td>
+			<td>通过 keys 设置节点子元素，使用此方法必须设置 node-key 属性</td>
+			<td>(key, data) 接收两个参数，1. 节点 key 2. 节点数据的数组</td>
+		</tr>
+		<tr>
+			<td>getCheckedNodes</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前被选中的节点所组成的数组</td>
+			<td>(leafOnly, includeHalfChecked) 接收两个 boolean 类型的参数，1. 是否只是叶子节点，默认值为 <code>false</code> 2. 是否包含半选节点，默认值为 <code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>setCheckedNodes</td>
+			<td>设置目前勾选的节点，使用此方法必须设置 node-key 属性</td>
+			<td>(nodes) 接收勾选节点数据的数组</td>
+		</tr>
+		<tr>
+			<td>getCheckedKeys</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前被选中的节点的 key 所组成的数组</td>
+			<td>(leafOnly) 接收一个 boolean 类型的参数，若为 <code>true</code> 则仅返回被选中的叶子节点的 keys，默认值为 <code>false</code></td>
+		</tr>
+		<tr>
+			<td>setCheckedKeys</td>
+			<td>通过 keys 设置目前勾选的节点，使用此方法必须设置 node-key 属性</td>
+			<td>(keys, leafOnly) 接收两个参数，1. 勾选节点的 key 的数组 2. boolean 类型的参数，若为 <code>true</code> 则仅设置叶子节点的选中状态，默认值为
+				<code>false</code></td>
+		</tr>
+		<tr>
+			<td>setChecked</td>
+			<td>通过 key / data 设置某个节点的勾选状态，使用此方法必须设置 node-key 属性</td>
+			<td>(key/data, checked, deep) 接收三个参数，1. 勾选节点的 key 或者 data 2. boolean 类型，节点是否选中 3. boolean 类型，是否设置子节点 ，默认为 false
+			</td>
+		</tr>
+		<tr>
+			<td>getHalfCheckedNodes</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前半选中的节点所组成的数组</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>getHalfCheckedKeys</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前半选中的节点的 key 所组成的数组</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>getCurrentKey</td>
+			<td>获取当前被选中节点的 key，使用此方法必须设置 node-key 属性，若没有节点被选中则返回 null</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>getCurrentNode</td>
+			<td>获取当前被选中节点的 data，若没有节点被选中则返回 null</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>setCurrentKey</td>
+			<td>通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性</td>
+			<td>(key) 待被选节点的 key，若为 null 则取消当前高亮的节点</td>
+		</tr>
+		<tr>
+			<td>setCurrentNode</td>
+			<td>通过 node 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性</td>
+			<td>(node) 待被选节点的 node</td>
+		</tr>
+		<tr>
+			<td>getNode</td>
+			<td>根据 data 或者 key 拿到 Tree 组件中的 node</td>
+			<td>(data) 要获得 node 的 key 或者 data</td>
+		</tr>
+		<tr>
+			<td>remove</td>
+			<td>删除 Tree 中的一个节点，使用此方法必须设置 node-key 属性</td>
+			<td>(data) 要删除的节点的 data 或者 node</td>
+		</tr>
+		<tr>
+			<td>append</td>
+			<td>为 Tree 中的一个节点追加一个子节点</td>
+			<td>(data, parentNode) 接收两个参数，1. 要追加的子节点的 data 2. 子节点的 parent 的 data、key 或者 node</td>
+		</tr>
+		<tr>
+			<td>insertBefore</td>
+			<td>为 Tree 的一个节点的前面增加一个节点</td>
+			<td>(data, refNode) 接收两个参数，1. 要增加的节点的 data 2. 要增加的节点的后一个节点的 data、key 或者 node</td>
+		</tr>
+		<tr>
+			<td>insertAfter</td>
+			<td>为 Tree 的一个节点的后面增加一个节点</td>
+			<td>(data, refNode) 接收两个参数，1. 要增加的节点的 data 2. 要增加的节点的前一个节点的 data、key 或者 node</td>
 		</tr>
 		</tbody>
 	</table>
@@ -684,24 +997,36 @@ const resetChecked = () => {
 		</thead>
 		<tbody>
 		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
+			<td>nodeClick</td>
+			<td>节点被点击时的回调</td>
+			<td>共三个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。</td>
 		</tr>
-		</tbody>
-	</table>
-	<h3 class='demo-table-title'>Slot</h3>
-	<table class='demo-table'>
-		<thead>
 		<tr>
-			<th>name</th>
-			<th>说明</th>
+			<td>nodeContextmenu</td>
+			<td>当某一节点被鼠标右键点击时会触发该事件</td>
+			<td>共四个参数，依次为：event、传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。</td>
 		</tr>
-		</thead>
-		<tbody>
 		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
+			<td>checkChange</td>
+			<td>节点选中状态发生变化时的回调</td>
+			<td>共三个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点本身是否被选中、节点的子树中是否有被选中的节点</td>
+		</tr>
+		<tr>
+			<td>check(TODO)</td>
+			<td>当复选框被点击的时候触发</td>
+			<td>共两个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、树目前的选中状态对象，包含
+				checkedNodes、checkedKeys、halfCheckedNodes、halfCheckedKeys 四个属性
+			</td>
+		</tr>
+		<tr>
+			<td>currentChange(TODO)</td>
+			<td>当前选中节点变化时触发的事件</td>
+			<td>共两个参数，依次为：当前节点的数据，当前节点的 Node 对象</td>
+		</tr>
+		<tr>
+			<td>nodeExpand</td>
+			<td>节点被展开时触发的事件</td>
+			<td>共三个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身</td>
 		</tr>
 		</tbody>
 	</table>
