@@ -122,20 +122,6 @@
 	<h2>Form 表单</h2>
 	<p>由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据</p>
 	<h3>基本用法</h3>
-
-	<ol>
-		<li>ref: Element = null; // 获得对表单元素的引用</li>
-		<li>inline: Boolean = false; // 行内表单模式</li>
-		<li>labelWidth: string = '80px'; // 表单域标签的宽度，默认 '80px'。作为 Form 直接子元素的 form-item 会继承该值。支持 auto。</li>
-		<li>model: any = null; // 获得表单元素绑定的值</li>
-		<li>rules: any = null; // 获得表单元素绑定的验证规则</li>
-		<li>labelPosition: LabelPosition = ''; // 表单域标签的位置</li>
-		<li>validateOnRuleChange: Boolean = true; // 规则改变时验证</li>
-		<li>hideRequiredAsterisk: Boolean = true; //</li>
-		<li>TODO 重置 自定义规则</li>
-	</ol>
-
-	<h3>典型表单</h3>
 	<p>包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。</p>
 	<DemoBlock code={`
 <BeForm
