@@ -1,13 +1,10 @@
 <script lang="ts">
     import ReplBlock from '$lib/demo/ReplBlock.svelte';
-    import BeInput from '$lib/be-input/index.js';
 </script>
 <div class="page-container content">
 	<h2>input 输入框</h2>
 	<p>通过鼠标或键盘输入字符</p>
 	<h3>基本用法</h3>
-	<BeInput placeholder="请输入内容" />
-	<BeInput placeholder="请输入内容" clearable />
 	<ReplBlock
 		height='100vh'
 		js={`import BeInput from '@brewer/beerui/be-input';
