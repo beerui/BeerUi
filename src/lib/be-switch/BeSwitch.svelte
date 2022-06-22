@@ -6,7 +6,8 @@
   export let disabled:boolean = false
   export let width:number = 40
   export let activeColor:string
-  export let inactiveColor:string
+	export let name:string
+	export let inactiveColor:string
   export let beforeChange = () =>{ return true}
   let switchColor = ''
   function switchValue() {
@@ -41,8 +42,6 @@
 </script>
 <slot name="checked-slot" prop={checked}></slot>
 <slot></slot>
-<div class="be-switch" class:is-checked = {checked} class:is-disabled = {switchDisabled} on:click={switchValue}>
-  <!-- <input class="be-switch__input" disabled={switchDisabled} checked={checked} type="checkbox" /> -->
-  <!--  {checked ? 'border-color:' + activeColor + ';background-color:' + activeColor : 'border-color:' + inactiveColor + ';background-color:' + inactiveColor}  -->
+<div {name} class="be-switch" class:is-checked = {checked} class:is-disabled = {switchDisabled} on:click={switchValue}>
   <span class="be-switch__core" style="width: {width}px;{switchColor}"></span>
 </div>

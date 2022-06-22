@@ -11,7 +11,7 @@ import BeInput from './be-input/BeInput.svelte';
 import BeClock from './be-clock/BeClock.svelte';
 import BeScrollbar from './be-scrollbar/BeScrollbar.svelte';
 import BeDrag from './be-drag/BeDrag.svelte';
-import BeProgress from './be-progress-bar/BeProgress.svelte';
+import BeProgress from './be-progress/BeProgress.svelte';
 import BeUpload from './be-upload/BeUpload.svelte';
 import BeLoading from './be-loading/BeLoading.svelte';
 import BeEmpty from './be-empty/BeEmpty.svelte';

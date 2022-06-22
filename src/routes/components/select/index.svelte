@@ -187,11 +187,151 @@ let value4 = 2
 		</thead>
 		<tbody>
 		<tr>
-			<td>title</td>
-			<td>标题</td>
+			<td>value</td>
+			<td>绑定值</td>
+			<td>boolean / string / number / [string | number]</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>multiple</td>
+			<td>是否多选</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>是否禁用</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>value-key(TODO)</td>
+			<td>作为 value 唯一标识的键名，绑定值为对象类型时必填</td>
 			<td>string</td>
-			<td>-</td>
-			<td>''</td>
+			<td>—</td>
+			<td>value</td>
+		</tr>
+		<tr>
+			<td>size</td>
+			<td>输入框尺寸</td>
+			<td>string</td>
+			<td>medium/small/mini</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>clearable</td>
+			<td>是否可以清空选项</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>collapseTags</td>
+			<td>多选时是否将选中值按文字的形式展示</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>multipleLimit</td>
+			<td>多选时用户最多可以选择的项目数，为 0 则不限制</td>
+			<td>number</td>
+			<td>—</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>name</td>
+			<td>select input 的 name 属性</td>
+			<td>string</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>autocomplete</td>
+			<td>select input 的 autocomplete 属性</td>
+			<td>string</td>
+			<td>—</td>
+			<td>off</td>
+		</tr>
+		<tr>
+			<td>placeholder</td>
+			<td>占位符</td>
+			<td>string</td>
+			<td>—</td>
+			<td>请选择</td>
+		</tr>
+		<tr>
+			<td>filterable(TODO)</td>
+			<td>是否可搜索</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>allow-create(TODO)</td>
+			<td>是否允许用户创建新条目，需配合 <code>filterable</code> 使用</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>filter-method(TODO)</td>
+			<td>自定义搜索方法</td>
+			<td>function</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>remote(TODO)</td>
+			<td>是否为远程搜索</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>remote-method(TODO)</td>
+			<td>远程搜索方法</td>
+			<td>function</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>loading(TODO)</td>
+			<td>是否正在从远程获取数据</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>loading-text(TODO)</td>
+			<td>远程加载时显示的文字</td>
+			<td>string</td>
+			<td>—</td>
+			<td>加载中</td>
+		</tr>
+		<tr>
+			<td>no-match-text(TODO)</td>
+			<td>搜索条件无匹配时显示的文字，也可以使用<code>slot="empty"</code>设置</td>
+			<td>string</td>
+			<td>—</td>
+			<td>无匹配数据</td>
+		</tr>
+		<tr>
+			<td>no-data-text(TODO)</td>
+			<td>选项为空时显示的文字，也可以使用<code>slot="empty"</code>设置</td>
+			<td>string</td>
+			<td>—</td>
+			<td>无数据</td>
+		</tr>
+		<tr>
+			<td>reserve-keyword(TODO)</td>
+			<td>多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
 		</tr>
 		</tbody>
 	</table>
@@ -206,9 +346,34 @@ let value4 = 2
 		</thead>
 		<tbody>
 		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
+			<td>change</td>
+			<td>选中值发生变化时触发</td>
+			<td>目前的选中值</td>
+		</tr>
+		<tr>
+			<td>visibleChange</td>
+			<td>下拉框出现/隐藏时触发</td>
+			<td>出现则为 true，隐藏则为 false</td>
+		</tr>
+		<tr>
+			<td>removeTag</td>
+			<td>多选模式下移除tag时触发</td>
+			<td>移除的tag值</td>
+		</tr>
+		<tr>
+			<td>clear</td>
+			<td>可清空的单选模式下用户点击清空按钮时触发</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>blur</td>
+			<td>当 input 失去焦点时触发</td>
+			<td>(event: Event)</td>
+		</tr>
+		<tr>
+			<td>focus</td>
+			<td>当 input 获得焦点时触发</td>
+			<td>(event: Event)</td>
 		</tr>
 		</tbody>
 	</table>
@@ -222,8 +387,8 @@ let value4 = 2
 		</thead>
 		<tbody>
 		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
+			<td>suffix</td>
+			<td>Select 组件尾部内容</td>
 		</tr>
 		</tbody>
 	</table>

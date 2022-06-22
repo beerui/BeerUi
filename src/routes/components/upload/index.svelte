@@ -210,16 +210,178 @@ const beforeUpload = (file) => {
 			<th>可选值</th>
 			<th>默认值</th>
 		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>title</td>
-			<td>标题</td>
-			<td>string</td>
-			<td>-</td>
-			<td>''</td>
-		</tr>
-		</tbody>
+		</thead>	<tbody>
+	<tr>
+		<td>action</td>
+		<td>必选参数，上传的地址</td>
+		<td>string</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>headers</td>
+		<td>设置上传的请求头部</td>
+		<td>object</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>multiple</td>
+		<td>是否支持多选文件</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>data</td>
+		<td>上传时附带的额外参数</td>
+		<td>object</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>上传的文件字段名</td>
+		<td>string</td>
+		<td>—</td>
+		<td>file</td>
+	</tr>
+	<tr>
+		<td>withCredentials</td>
+		<td>支持发送 cookie 凭证信息</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>showFileList</td>
+		<td>是否显示已上传文件列表</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>drag</td>
+		<td>是否启用拖拽上传</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>accept</td>
+		<td>接受上传的<a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept'>文件类型</a>（thumbnail-mode
+			模式下此参数无效）
+		</td>
+		<td>string</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>onPreview</td>
+		<td>点击文件列表中已上传的文件时的钩子</td>
+		<td>function(file)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>onRemove</td>
+		<td>文件列表移除文件时的钩子</td>
+		<td>function(file, fileList)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>onSuccess</td>
+		<td>文件上传成功时的钩子</td>
+		<td>function(response, file, fileList)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>onError</td>
+		<td>文件上传失败时的钩子</td>
+		<td>function(err, file, fileList)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>onProgress</td>
+		<td>文件上传时的钩子</td>
+		<td>function(event, file, fileList)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>onChange</td>
+		<td>文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用</td>
+		<td>function(file, fileList)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>beforeUpload</td>
+		<td>上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。</td>
+		<td>function(file)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>beforeRemove</td>
+		<td>删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。</td>
+		<td>function(file, fileList)</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>listType</td>
+		<td>文件列表的类型</td>
+		<td>string</td>
+		<td>text/picture/picture-card</td>
+		<td>text</td>
+	</tr>
+	<tr>
+		<td>autoUpload</td>
+		<td>是否在选取文件后立即进行上传</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>fileList</td>
+		<td>上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]</td>
+		<td>array</td>
+		<td>—</td>
+		<td>[]</td>
+	</tr>
+	<tr>
+		<td>httpRequest</td>
+		<td>覆盖默认的上传行为，可以自定义上传的实现</td>
+		<td>function</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>disabled</td>
+		<td>是否禁用</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>limit</td>
+		<td>最大允许上传个数</td>
+		<td>number</td>
+		<td>—</td>
+		<td>—</td>
+	</tr>
+	<tr>
+		<td>onExceed</td>
+		<td>文件超出个数限制时的钩子</td>
+		<td>function(files, fileList)</td>
+		<td>—</td>
+		<td>-</td>
+	</tr>
+	</tbody>
 	</table>
 	<h3 class='demo-table-title'>Events</h3>
 	<table class='demo-table'>
@@ -232,9 +394,19 @@ const beforeUpload = (file) => {
 		</thead>
 		<tbody>
 		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
+			<td>clearFiles</td>
+			<td>清空已上传的文件列表（该方法不支持在 beforeUpload 中调用）</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>abort</td>
+			<td>取消上传请求</td>
+			<td>（ file: fileList 中的 file 对象 ）</td>
+		</tr>
+		<tr>
+			<td>submit</td>
+			<td>手动上传文件列表</td>
+			<td>—</td>
 		</tr>
 		</tbody>
 	</table>
@@ -248,8 +420,8 @@ const beforeUpload = (file) => {
 		</thead>
 		<tbody>
 		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
+			<td>tip</td>
+			<td>提示</td>
 		</tr>
 		</tbody>
 	</table>

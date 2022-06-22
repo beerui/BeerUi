@@ -46,18 +46,6 @@ let direction = 'rtl'`} code={
 		</div>
 		<div slot='description'>
 			需要设置 visible 属性，它的类型是 boolean,当为 true 时显示 Drawer。Drawer 分为两个部分：title 和 body，title 需要具名为 title 的 slot, 也可以通过 title 属性来定义，默认值为空。需要注意的是, Drawer 默认是从右往左打开
-			<ol>
-				<li>mask = true  是否需要遮罩层</li>
-				<li>visible = true  是否显示 Drawer</li>
-				<li>title = '提示'  标题文字 slot=title</li>
-				<li>direction = 'rtl'  方向 ltr/rtl/ttb/btt</li>
-				<li>size = '30%'  窗体的大小, 请传入 'x%'/'100px'</li>
-				<li>isShowHeader = true  是否显示头部</li>
-				<li>isShowClose = true  是否显示关闭按钮</li>
-				<li>closeOnClickModal = true  是否可以通过点击 modal 关闭 Dialog</li>
-				<li>beforeClose = null  是否可以通过点击 modal 关闭 Dialog 传入函数 接收返回值true/false false时不执行关闭操作 beforeClose={() => false}</li>
-				<li>isCloseEscape = true  是否可以通过按下 ESC 关闭 Drawer</li>
-			</ol>
 		</div>
 	</DemoBlock>
 	<h3 class='demo-table-title'>Attributes</h3>

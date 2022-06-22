@@ -84,45 +84,83 @@ import { BeProgress } from '$lib';
 		</tr>
 		</thead>
 		<tbody>
-		<tr>
-			<td>title</td>
-			<td>标题</td>
-			<td>string</td>
-			<td>-</td>
-			<td>''</td>
-		</tr>
-		</tbody>
-	</table>
-	<h3 class='demo-table-title'>Events</h3>
-	<table class='demo-table'>
-		<thead>
-		<tr>
-			<th>事件名称</th>
-			<th>说明</th>
-			<th>回调参数</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
-		</tr>
-		</tbody>
-	</table>
-	<h3 class='demo-table-title'>Slot</h3>
-	<table class='demo-table'>
-		<thead>
-		<tr>
-			<th>name</th>
-			<th>说明</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
-		</tr>
+			<tr>
+				<td><strong>percentage</strong></td>
+				<td><strong>百分比（必填）</strong></td>
+				<td>number</td>
+				<td>0-100</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>type</td>
+				<td>进度条类型</td>
+				<td>string</td>
+				<td>line/circle/dashboard</td>
+				<td>line</td>
+			</tr>
+			<tr>
+				<td>strokeWidth</td>
+				<td>进度条的宽度，单位 px</td>
+				<td>number</td>
+				<td>—</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td>textInside</td>
+				<td>进度条显示文字内置在进度条内（只在 type=line 时可用）</td>
+				<td>boolean</td>
+				<td>—</td>
+				<td>false</td>
+			</tr>
+			<tr>
+				<td>status</td>
+				<td>进度条当前状态</td>
+				<td>string</td>
+				<td>primary/success/info/warning/danger</td>
+				<td>primary</td>
+			</tr>
+			<tr>
+				<td>background</td>
+				<td>设置背景颜色</td>
+				<td>string</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>color</td>
+				<td>进度条背景色（会覆盖 status 状态颜色）</td>
+				<td>string</td>
+				<td>—</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>width</td>
+				<td>环形进度条画布宽度（只在 type 为 circle 或 dashboard 时可用）</td>
+				<td>number</td>
+				<td></td>
+				<td>126</td>
+			</tr>
+			<tr>
+				<td>showText</td>
+				<td>是否显示进度条文字内容</td>
+				<td>boolean</td>
+				<td>—</td>
+				<td>true</td>
+			</tr>
+			<tr>
+				<td>strokeLinecap</td>
+				<td>circle/dashboard 类型路径两端的形状</td>
+				<td>string</td>
+				<td>butt/round/square</td>
+				<td>round</td>
+			</tr>
+			<tr>
+				<td>format(TODO)</td>
+				<td>指定进度条文字内容</td>
+				<td>function(percentage)</td>
+				<td>—</td>
+				<td>—</td>
+			</tr>
 		</tbody>
 	</table>
 </div>

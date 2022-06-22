@@ -22,19 +22,6 @@
 	<h2>textarea 文本框</h2>
 	<p>通过鼠标或键盘输入字符</p>
 	<h3>基本用法</h3>
-
-	<ol>
-		<li>value</li>
-		<li>placeholder</li>
-		<li>readonly</li>
-		<li>disabled</li>
-		<li>maxlength</li>
-		<li>blur 事件监听</li>
-		<li>focus 事件监听</li>
-		<li>change 事件监听</li>
-		<li>input 事件监听</li>
-	</ol>
-
 	<ReplBlock
 		js={`import BeTextarea from '@brewer/beerui/be-textarea';
 	let value = ''
@@ -104,44 +91,47 @@
 		</thead>
 		<tbody>
 		<tr>
-			<td>title</td>
-			<td>标题</td>
+			<td>value</td>
+			<td>绑定的值</td>
+			<td>string / number</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>placeholder</td>
+			<td>提示文字</td>
 			<td>string</td>
 			<td>-</td>
 			<td>''</td>
 		</tr>
-		</tbody>
-	</table>
-	<h3 class='demo-table-title'>Events</h3>
-	<table class='demo-table'>
-		<thead>
 		<tr>
-			<th>事件名称</th>
-			<th>说明</th>
-			<th>回调参数</th>
+			<td>readonly</td>
+			<td>只读</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
 		</tr>
-		</thead>
-		<tbody>
 		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
+			<td>disabled</td>
+			<td>禁用</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>maxlength</td>
+			<td>最大长度</td>
+			<td>string / number</td>
+			<td>-</td>
 			<td>''</td>
 		</tr>
-		</tbody>
-	</table>
-	<h3 class='demo-table-title'>Slot</h3>
-	<table class='demo-table'>
-		<thead>
 		<tr>
-			<th>name</th>
-			<th>说明</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
-		</tr>
+			<td>validateEvent</td>
+			<td>开启表单验证</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>true</td>
+			</tr>
 		</tbody>
 	</table>
 </div>

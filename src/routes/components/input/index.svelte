@@ -119,6 +119,13 @@
 			<td>-</td>
 			<td>''</td>
 		</tr>
+		<tr>
+			<td>validateEvent</td>
+			<td>输入时是否触发表单的校验</td>
+			<td>boolean</td>
+			<td>true/false</td>
+			<td>true</td>
+		</tr>
 		</tbody>
 	</table>
 	<h3 class='demo-table-title'>Events</h3>
@@ -131,11 +138,6 @@
 		</tr>
 		</thead>
 		<tbody>
-		blur	在 Input 失去焦点时触发	(event: Event)
-		focus	在 Input 获得焦点时触发	(event: Event)
-		change	仅在输入框失去焦点或用户按下回车时触发	(value: string | number)
-		input	在 Input 值改变时触发	(value: string | number)
-		clear	在点击由 clearable 属性生成的清空按钮时触发
 		<tr>
 				<td>blur</td>
 				<td>在 Input 失去焦点时触发</td>

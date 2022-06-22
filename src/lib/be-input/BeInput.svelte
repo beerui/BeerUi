@@ -15,8 +15,8 @@
 	export let name = '';
 	// 右侧icon
 	export let suffixIcon = '';
-	// let showClear = false;
 	let input;
+	let showClose = false
 
 	// 表单验证
 	const ctx = getContext('BeFormItem')
@@ -25,9 +25,7 @@
 		ctx.propWatch.subscribe(value => prop = value)
 	}
 
-	function showClear() {
-		return clearable && !readonly && !disabled;
-	}
+	const showClear = () => showClose = clearable && value && !readonly && !disabled
 
 	let suffix;
 	let isInit: boolean = false;
@@ -63,7 +61,8 @@
 	}
 
 	// 在 input 值改变时触发
-	function onInput(e) {
+	const onInput = () => {
+		showClear()
 		dispatch('input', value);
 	}
 
@@ -74,6 +73,9 @@
 		if (ctx && prop && isInit && validateEvent) {
 			ctx.FormItemEventCallback({ type: 'change', value: [value] })
 		}
+	}
+	const clearValue = () => {
+		value = ''
 	}
 	$: watchValue(value)
 
@@ -89,6 +91,7 @@
 	class:be-input--medium={size === 'medium'}
 	class:be-input--small={size === 'small'}
 	class:be-input--mini={size === 'mini'}
+	class:be-input--suffix={clearable || suffixIcon || $$slots.suffix}
 	style={$$props.style}
 	on:click
 	on:contextmenu
@@ -99,13 +102,8 @@
 	on:focusout
 	on:keydown
 	on:keyup
-	on:pointercancel
-	on:pointerdown
-	on:pointerenter
-	on:pointerleave
-	on:pointermove
-	on:pointerout
-	on:pointerup
+	on:mouseover={showClear}
+	on:mouseleave={() => showClose = false}
 >
 	<input
 		{...$$restProps}
@@ -123,15 +121,15 @@
 		bind:this={input}
 		use:forwardEvents
 	/>
-	{#if clearable || suffixIcon}
+	{#if clearable || suffixIcon || $$slots.suffix}
 	  <span class={['be-input__suffix', disabled ? ' is-disabled':''].join('')}>
-	    <span class='be-input__suffix-inner '>
+	    <span class='be-input__suffix-inner'>
 	      <slot name='suffix'></slot>
 	      {#if suffixIcon}
-	        <i class={['be-input__icon ', suffixIcon].join('')}></i>
+	        <i class={['be-input__icon be-icon ', suffixIcon].join('')}></i>
 	      {/if}
-		    {#if value && clearable}
-			    <i class='be-icon be-icon-close'></i>
+		    {#if value && clearable && showClose}
+			    <i class='be-input__icon be-icon be-icon-close-circle' on:click={clearValue}></i>
 		    {/if}
 	    </span>
 	  </span>

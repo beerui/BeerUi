@@ -27,7 +27,10 @@ let radio = '1';
 			<div>radio: {radio}</div>
 			<div class="demo-list">
 				<BeRadio bind:checked={radio} label='{1}'>备选项1</BeRadio>
-				<BeRadio bind:checked={radio} label='{2}'>备选项2</BeRadio>
+				<BeRadio bind:checked={radio} label='{2}' border name='iam'>备选项2</BeRadio>
+				<BeRadio bind:checked={radio} label='{3}' border size='medium'>备选项2</BeRadio>
+				<BeRadio bind:checked={radio} label='{4}' border size='small'>备选项2</BeRadio>
+				<BeRadio bind:checked={radio} label='{5}' border size='mini'>备选项2</BeRadio>
 			</div>
 		</div>
 	</DemoBlock>
@@ -42,7 +45,7 @@ let radio2 = '1';
 			<div>radio2: {radio2}</div>
 			<div class="demo-list">
 				<BeRadio bind:checked={radio2} label='1' disabled>备选项1</BeRadio>
-				<BeRadio bind:checked={radio2} label='2'>备选项2</BeRadio>
+				<BeRadio bind:checked={radio2} label='2' >备选项2</BeRadio>
 			</div>
 		</div>
 	</DemoBlock>
@@ -68,15 +71,92 @@ const clearChecked = () => checkedDom.clear()
 				<BeButton on:click={clearChecked}>clearChecked()</BeButton>
 			</div>
 			<div class="demo-list">
-				<BeRadioGroup bind:this={checkedDom} bind:checked={radio3} on:change={handleChange}>
-					<BeRadio label='1'>备选项</BeRadio>
-					<BeRadio label='2'>备选项</BeRadio>
-					<BeRadio label='3'>备选项</BeRadio>
+				<BeRadioGroup
+					bind:this={checkedDom}
+					bind:checked={radio3}
+					on:change={handleChange}
+				>
+					<BeRadio label='1' style='margin-right: 15px;'>备选项</BeRadio>
+					<BeRadio label='2' style='margin-right: 15px;'>备选项</BeRadio>
+					<BeRadio label='3' style='margin-right: 15px;'>备选项</BeRadio>
 				</BeRadioGroup>
 			</div>
 		</div>
 	</DemoBlock>
-	<h3 class='demo-table-title'>Attributes</h3>
+	<h3 class='demo-table-title'>Radio Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>checked</td>
+				<td>绑定值</td>
+				<td>string / number / boolean</td>
+				<td>—</td>
+				<td>—</td>
+			</tr>
+			<tr>
+				<td>label</td>
+				<td>Radio 的 value</td>
+				<td>string / number / boolean</td>
+				<td>—</td>
+				<td>—</td>
+			</tr>
+			<tr>
+				<td>disabled</td>
+				<td>是否禁用</td>
+				<td>boolean</td>
+				<td>—</td>
+				<td>false</td>
+			</tr>
+			<tr>
+				<td>border</td>
+				<td>是否显示边框</td>
+				<td>boolean</td>
+				<td>—</td>
+				<td>false</td>
+			</tr>
+			<tr>
+				<td>size</td>
+				<td>Radio 的尺寸，仅在 border 为真时有效</td>
+				<td>string</td>
+				<td>medium / small / mini</td>
+				<td>—</td>
+			</tr>
+			<tr>
+				<td>name</td>
+				<td>原生 name 属性</td>
+				<td>string</td>
+				<td>—</td>
+				<td>—</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Radio / Radio Group Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>change</td>
+			<td>绑定值变化时触发的事件</td>
+			<td>选中的 Radio label 值</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>Radio-group Attributes</h3>
 	<table class='demo-table'>
 		<thead>
 		<tr>
@@ -89,28 +169,39 @@ const clearChecked = () => checkedDom.clear()
 		</thead>
 		<tbody>
 		<tr>
-			<td>title</td>
-			<td>标题</td>
+			<td>checked</td>
+			<td>绑定值</td>
+			<td>string / number / boolean</td>
+			<td>—</td>
+			<td>—</td>
+		</tr>
+		<tr>
+			<td>size</td>
+			<td>单选框组尺寸，仅对按钮形式的 Radio 或带有边框的 Radio 有效</td>
 			<td>string</td>
-			<td>-</td>
-			<td>''</td>
+			<td>medium / small / mini</td>
+			<td>—</td>
 		</tr>
-		</tbody>
-	</table>
-	<h3 class='demo-table-title'>Events</h3>
-	<table class='demo-table'>
-		<thead>
 		<tr>
-			<th>事件名称</th>
-			<th>说明</th>
-			<th>回调参数</th>
+			<td>disabled</td>
+			<td>是否禁用</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
 		</tr>
-		</thead>
-		<tbody>
 		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
+			<td>textColor</td>
+			<td>按钮形式的 Radio 激活时的文本颜色</td>
+			<td>string</td>
+			<td>—</td>
+			<td>#ffffff</td>
+		</tr>
+		<tr>
+			<td>fill</td>
+			<td>按钮形式的 Radio 激活时的填充色和边框色</td>
+			<td>string</td>
+			<td>—</td>
+			<td>#409EFF</td>
 		</tr>
 		</tbody>
 	</table>
@@ -124,8 +215,8 @@ const clearChecked = () => checkedDom.clear()
 		</thead>
 		<tbody>
 		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
+			<td>default</td>
+			<td>替代label</td>
 		</tr>
 		</tbody>
 	</table>

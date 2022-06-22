@@ -14,7 +14,6 @@
 	// 设置焦点
 	export const setBlur = () => instance.focus()
 	// 仅在输入框失去焦点或用户按下回车时触发
-	const onChange = evt => dispatch('onChange', value);
 	const blur = () => {
 		dispatch('blur', value);
 		if (ctx && prop && isInit && validateEvent) {

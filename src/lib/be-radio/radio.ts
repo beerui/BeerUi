@@ -2,10 +2,19 @@ export default class RadioStore {
 	private readonly dispatch: <EventKey extends Extract<keyof any, string>>(type: EventKey, detail?: any) => void;
 	subscribe: Function[] = []; // 订阅方法
 	current: string;
+	private size: string;
+	private disabled: boolean;
+	private textColor: string;
+	private fill: string;
 
 	constructor(options) {
-		this.current = options.checked;
-		this.dispatch = options.dispatch;
+		for (let option in options) {
+			if (options.hasOwnProperty(option)) {
+				this[option] = options[option];
+			}
+		}
+		console.log(this);
+
 		this.subscribe = options.subscribe || [];
 	}
 

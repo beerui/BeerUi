@@ -94,7 +94,7 @@
 	export let showFileList: boolean = true // 是否显示已上传文件列表
 	export let drag: boolean = false // 是否启用拖拽上传
 	export let action: string = '' // 必选参数，上传的地址	string
-	export let headers: string = '' // 设置上传的请求头部	object
+	export let headers: object = {} // 设置上传的请求头部	object
 	// export let onPreview: Function = noop // 点击文件列表中已上传的文件时的钩子 function(file)
 	export let onRemove: Function = noop // 文件列表移除文件时的钩子	function(file, fileList)
 	export let onSuccess: Function = noop // 文件上传成功时的钩子	function(response, file, fileList)

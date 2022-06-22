@@ -68,11 +68,46 @@ let switchValue = true`}>
 		</thead>
 		<tbody>
 		<tr>
-			<td>title</td>
-			<td>标题</td>
+			<td>checked</td>
+			<td>绑定值</td>
+			<td>booleanx</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>是否禁用</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>width</td>
+			<td>switch 的宽度（像素）</td>
+			<td>number</td>
+			<td>—</td>
+			<td>40</td>
+		</tr>
+		<tr>
+			<td>activeColor</td>
+			<td>switch 打开时的背景色</td>
 			<td>string</td>
-			<td>-</td>
-			<td>''</td>
+			<td>—</td>
+			<td>#409EFF</td>
+		</tr>
+		<tr>
+			<td>inactiveColor</td>
+			<td>switch 关闭时的背景色</td>
+			<td>string</td>
+			<td>—</td>
+			<td>#C0CCDA</td>
+		</tr>
+		<tr>
+			<td>name</td>
+			<td>switch 对应的 name 属性</td>
+			<td>string</td>
+			<td>—</td>
+			<td>—</td>
 		</tr>
 		</tbody>
 	</table>
@@ -87,9 +122,9 @@ let switchValue = true`}>
 		</thead>
 		<tbody>
 		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
+			<td>change</td>
+			<td>switch 状态发生变化时的回调函数</td>
+			<td>新状态的值</td>
 		</tr>
 		</tbody>
 	</table>
@@ -103,8 +138,8 @@ let switchValue = true`}>
 		</thead>
 		<tbody>
 		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
+			<td>checked-slot</td>
+			<td>?</td>
 		</tr>
 		</tbody>
 	</table>

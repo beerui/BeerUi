@@ -68,7 +68,42 @@ let active2 = 'u1';`} code={`
 			</BeTabs >
 		</div>
 	</DemoBlock>
-	<h3 class='demo-table-title'>Attributes</h3>
+	<h3 class='demo-table-title'>BeTabs Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>active</td>
+				<td>绑定值，选中选项卡的 key</td>
+				<td>string</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+			<tr>
+				<td>items</td>
+				<td>选项</td>
+				<td>TabItem</td>
+				<td>-</td>
+				<td>''</td>
+			</tr>
+		</tbody>
+	</table>
+	<pre class='demo-pre'>
+			{`
+interface TabItem {
+	key: string,
+	label: string
+}`}
+	</pre>
+	<h3 class='demo-table-title'>BeTabPane Attributes</h3>
 	<table class='demo-table'>
 		<thead>
 		<tr>
@@ -81,15 +116,22 @@ let active2 = 'u1';`} code={`
 		</thead>
 		<tbody>
 		<tr>
-			<td>title</td>
-			<td>标题</td>
+			<td>active</td>
+			<td>绑定值，选中选项卡的 key</td>
 			<td>string</td>
+			<td>-</td>
+			<td>''</td>
+		</tr>
+		<tr>
+			<td>key</td>
+			<td>判断选中的标识</td>
+			<td>TabItem</td>
 			<td>-</td>
 			<td>''</td>
 		</tr>
 		</tbody>
 	</table>
-	<h3 class='demo-table-title'>Events</h3>
+	<h3 class='demo-table-title'>BeTabs Events</h3>
 	<table class='demo-table'>
 		<thead>
 		<tr>
@@ -100,13 +142,13 @@ let active2 = 'u1';`} code={`
 		</thead>
 		<tbody>
 		<tr>
-			<td>close</td>
-			<td>关闭的回调</td>
-			<td>''</td>
+			<td>tabClick</td>
+			<td>tab点击触发</td>
+			<td>当前点击的key</td>
 		</tr>
 		</tbody>
 	</table>
-	<h3 class='demo-table-title'>Slot</h3>
+	<h3 class='demo-table-title'>BeTabPane Slot</h3>
 	<table class='demo-table'>
 		<thead>
 		<tr>
@@ -116,8 +158,8 @@ let active2 = 'u1';`} code={`
 		</thead>
 		<tbody>
 		<tr>
-			<td>icon</td>
-			<td>标题前的icon</td>
+			<td>default</td>
+			<td>默认</td>
 		</tr>
 		</tbody>
 	</table>

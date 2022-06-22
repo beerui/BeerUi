@@ -5,8 +5,13 @@
 	import { debounce } from '../utils/throttle';
 	const dispatch = createEventDispatcher();
 	export let checked: string = '';
+	export let size: string;
+	export let disabled: boolean;
+	export let border: boolean;
+	export let textColor: string;
+	export let fill: string;
 	export let validateEvent: boolean = true; // 是否发送验证表单
-	const store = new RadioStore({ checked })
+	const store = new RadioStore({ checked, border, size, disabled, textColor, fill })
 	setContext('radioStore', store)
 
 	// 设置选中数据
