@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import { createEventDispatcher, getContext, tick } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils/forwardEventsBuilder';
+	import { forwardEventsBuilder } from '../utils/forwardEventsBuilder';
 	const forwardEvents = forwardEventsBuilder(get_current_component());
 	export let value = '';
 	export let placeholder = '';
