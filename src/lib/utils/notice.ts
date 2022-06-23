@@ -63,6 +63,7 @@ class Notice extends Message{
 		}
 		options = <options>objectAssign(defaultOptions, options);
 
+		this.type = options.type
 		this.zIndex++
 		this.id = `NoticeWrapper_${this.zIndex}`
 		const container: HTMLElement = document.createElement('div');

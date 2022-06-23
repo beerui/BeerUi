@@ -17,7 +17,9 @@
 	const setTheme = v => document.querySelector('html').setAttribute('theme-mode', v);
 </script>
 <div class='be-header'>
-	<div class='logo'>BeerUi</div>
+	<div class='logo flex'>
+		BeerUi
+	</div>
 	<div class='nav'>
 		<a class:active={menu === '/'} href='/'>主页</a>
 		<a class:active={menu === '/svg'} href='/components'>组件</a>

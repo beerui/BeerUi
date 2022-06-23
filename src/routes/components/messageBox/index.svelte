@@ -19,9 +19,9 @@
 			}
 		})
 	}
-	const openTypeMessage = () => {
+	const openTypeMessage = (type) => {
 		messageBox({
-			type: 'success',
+			type,
 			title: 'i am title',
 			message: 'i am message content!'
 		})
@@ -41,6 +41,8 @@
 	<h3>基本用法</h3>
 
 	<DemoBlock
+		code={`
+<BeButton size="normal" type="warning" on:click={() => openTypeMessage('warning')}>打开 warning MessageBox</BeButton>`}
 	js={`
 import { messageBox } from '@brewer/beerui'
 const openMessage = () => {
@@ -61,9 +63,9 @@ const openMessage = () => {
 		}
 	})
 }
-const openTypeMessage = () => {
+const openTypeMessage = (type) => {
 	messageBox({
-		type: 'success',
+		type ,
 		title: 'i am title',
 		message: 'i am message content!'
 	})
@@ -73,7 +75,9 @@ const openTypeMessage = () => {
 			<div class='demo-list'>
 				<BeButton size="normal" type="primary" on:click={openMessage}>打开 messageBox</BeButton>
 				<hr>
-				<BeButton size="normal" type="success" on:click={openTypeMessage}>打开 messageBox 带有类型</BeButton>
+				<BeButton size="normal" type="success" on:click={() => openTypeMessage('success')}>打开 success MessageBox</BeButton>
+				<hr>
+				<BeButton size="normal" type="warning" on:click={() => openTypeMessage('warning')}>打开 warning MessageBox</BeButton>
 			</div>
 		</div>
 	</DemoBlock>

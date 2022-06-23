@@ -346,20 +346,18 @@ export class Message {
 		}
 	}
 	renderType() {
-		if (this.type) {
-			const types = {
-				success: { name: 'check-circle-filled', color: '#67c23a' },
-				warning: { name: 'error-circle-filled', color: '#e6a23c' },
-				info: { name: 'info-circle-filled', color: '#909399' },
-				error: { name: 'close-circle-filled', color: '#f56c6c' }
-			}
-			return `
-			<div class='be-icon' style='color: ${types[this.type].color};font-size: 24px;'>
-				<i class='be-icon be-icon-${types[this.type].name}'></i>
-			</div>
-			`
+		if (!this.type) return ''
+		const types = {
+			success: { name: 'check-circle-filled', color: '#67c23a' },
+			warning: { name: 'error-circle-filled', color: '#e6a23c' },
+			info: { name: 'info-circle-filled', color: '#909399' },
+			error: { name: 'close-circle-filled', color: '#f56c6c' }
 		}
-		return ''
+		return `
+		<div class='be-icon' style='color: ${types[this.type].color};font-size: 24px;'>
+			<i class='be-icon be-icon-${types[this.type].name}'></i>
+		</div>
+		`
 	}
 	renderBtn(ctx:RenderBtn) {
 		ctx = objectAssign({ customClass: 'be-button--normal', type: 'button', text: '', style: '', id: '' }, ctx)
