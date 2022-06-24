@@ -46,7 +46,7 @@
 	}
 
 	.demo-pre {
-		background: rgb(107, 132, 173);color: #ffffff;border-radius: 3px;padding: 0 15px;
+		background: var(--brand-main-light);color: var(--be-default-text);border-radius: 3px;padding: 0 15px;
 		font-family: Menlo, Monaco, "Courier New", monospace;
 	}
 	.be-main-container {min-height: calc(100vh - 60px);}
@@ -127,7 +127,6 @@
 			border-top: solid 1px #eaeefb;
 			height: 44px;
 			box-sizing: border-box;
-			background-color: #fff;
 			border-bottom-left-radius: 4px;
 			border-bottom-right-radius: 4px;
 			display: flex;
@@ -169,11 +168,10 @@
 			}
 
 			&:hover {
-				color: #409EFF;
-				background-color: #f9fafc;
+				color: var( --be-primary-hover);
 
 				.triangle {
-					border-color: transparent transparent #409EFF transparent;
+					border-color: transparent transparent var( --be-primary-hover) transparent;
 				}
 			}
 		}
