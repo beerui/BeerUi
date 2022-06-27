@@ -49,6 +49,8 @@
 	}
 	// 拖动状态
 	const isInDragHandle = (evt) => dragStatus = evt.detail
+	let _class: $$props["class"] = "";
+	export {_class as class};
 </script>
 <!--
 @component
@@ -79,7 +81,7 @@ import { BeDialog } from "@brewer/beerui";
 -->
 <svelte:window on:keydown={handle_keydown}/>
 {#if visible}
-	<div class='be-dialog' style={$$props.style} use:clickOutside|stop={ { isInDrag: dragStatus } } on:outside={close}>
+	<div class={_class} class:be-dialog={true} style={$$props.style} use:clickOutside|stop={ { isInDrag: dragStatus } } on:outside={close}>
 		{#if mask}
 		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close}></div>
 		{/if}
