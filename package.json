@@ -1,18 +1,17 @@
 {
   "name": "@brewer/beerui",
-  "version": "1.1.0-next.4",
+  "version": "1.1.0-next.5",
   "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
     "build": "vite build",
-    "build-scss": "cd src/lib/assets/scss/ && npm i && npm run build",
     "publish": "cd package && npm publish",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "dev": "vite dev --port 3333 --host",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "lint": "eslint --ignore-path .gitignore .",
-    "package": "vite package",
+    "package": "svelte-kit package",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "test": "start-server-and-test storybook http://localhost:6006 cy:run"
