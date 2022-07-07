@@ -61,18 +61,6 @@
 	<h2>BeSelect 选择框</h2>
 	<p>当选项过多时，使用下拉菜单展示并选择内容。</p>
 	<h3>基本用法</h3>
-	<ol>
-		<li>value: string; 绑定的值 多选(multiple)时 string[]</li>
-		<li>size:string = 'normal';尺寸</li>
-		<li>maxHeight:string = '300px';最大出现滚动的高度</li>
-		<li>multiple:boolean = false; // 是否多选</li>
-		<li>collapseTags:boolean = false; // 多选 收缩</li>
-		<li>disabled = false // 是否禁用</li>
-		<li>position = 'bottom' // 位置</li>
-		<li>clearable = false 显示清除按钮</li>
-		<li>placeholder = '请选择'</li>
-	</ol>
-
 <!--	<BeSelect bind:value clearable on:change={changeSelect}>-->
 <!--		{#each options as item, index}-->
 <!--			<BeOption label={item.label} value={item.value}/>-->

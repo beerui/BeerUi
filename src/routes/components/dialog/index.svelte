@@ -1,5 +1,28 @@
 <script lang="ts">
 	import ReplBlock from '$lib/demo/ReplBlock.svelte';
+	import BeDialog from '$lib/be-dialog/index.js';
+	import BeButton from '$lib/be-button/BeButton.svelte';
+	import { messageBox, showNotice } from '$lib';
+	import BeDrawer from '$lib/be-drawer/BeDrawer.svelte';
+	let visible = false;
+	let isDrag = false
+	let isLimit = false
+
+	function openInnerWindow(type: string) {
+		if (type === '1') {
+			messageBox({
+				title: 'Dialog inner MessageBox'
+			})
+		} else if (type === '2') {
+			showNotice({
+				title: 'Dialog inner Notice'
+			})
+		} else {
+			drawerVisible = true
+		}
+	}
+
+	let drawerVisible = false;
 </script>
 <div class='page-container'>
 	<h2>BeDialog 对话框</h2>
@@ -7,34 +30,51 @@
 	<h3>用法示例</h3>
 	<p>使用 <code>beforeClose</code>可以阻止关闭</p>
 	<p>设置 <code>closeOnClickModal=false</code>,点击mask遮照也无法关闭！</p>
-	<ReplBlock
-		js={`import { BeButton, BeDialog, BeSwitch } from '@brewer/beerui';
-	const beforeClose = (type) => type !== 'cancel';
-	let visible = false;
-	let isDrag = false
-  let isLimit = false
-  let closeOnClickModal = true`}
-		html={`<div style='padding: 20px;'>
-	<div>
-		<BeSwitch bind:checked={visible}>打开 Dialog</BeSwitch>
-		<BeSwitch bind:checked={isDrag}>开启拖拽</BeSwitch>
-		<BeSwitch bind:checked={isLimit}>限制拖拽范围</BeSwitch>
-		<BeSwitch bind:checked={closeOnClickModal}>关闭遮照的点击</BeSwitch>
-	</div>
-	<hr>
-		<BeDialog
-			width='30%'
-			bind:visible
-			bind:isDrag={isDrag}
-			bind:isLimit={isLimit}
-			bind:closeOnClickModal={closeOnClickModal}
-			beforeClose={beforeClose}
+
+	<BeButton on:click={() => visible = true}>打开弹框</BeButton>
+	visible: {visible}
+	<BeDialog
+		width='30%'
+		bind:visible
+	>
+		<p>Dialog 示例</p>
+		<BeButton on:click={() => openInnerWindow('1')}>打开MessageBox弹框</BeButton>
+		<BeButton on:click={() => openInnerWindow('2')}>打开Notice弹框</BeButton>
+		<BeButton on:click={() => openInnerWindow('3')}>打开Drawer弹框</BeButton>
+		<BeDrawer
+			bind:visible={drawerVisible}
 		>
-			<p>Dialog 示例</p>
-		</BeDialog>
-	</div>
-		`}
-	/>
+			<p>Drawer</p>
+		</BeDrawer>
+	</BeDialog>
+<!--	<ReplBlock-->
+<!--		js={`import { BeButton, BeDialog, BeSwitch } from '@brewer/beerui';-->
+<!--	const beforeClose = (type) => type !== 'cancel';-->
+<!--	let visible = false;-->
+<!--	let isDrag = false-->
+<!--  let isLimit = false-->
+<!--  let closeOnClickModal = true`}-->
+<!--		html={`<div style='padding: 20px;'>-->
+<!--	<div>-->
+<!--		<BeSwitch bind:checked={visible}>打开 Dialog</BeSwitch>-->
+<!--		<BeSwitch bind:checked={isDrag}>开启拖拽</BeSwitch>-->
+<!--		<BeSwitch bind:checked={isLimit}>限制拖拽范围</BeSwitch>-->
+<!--		<BeSwitch bind:checked={closeOnClickModal}>关闭遮照的点击</BeSwitch>-->
+<!--	</div>-->
+<!--	<hr>-->
+<!--		<BeDialog-->
+<!--			width='30%'-->
+<!--			bind:visible-->
+<!--			bind:isDrag={isDrag}-->
+<!--			bind:isLimit={isLimit}-->
+<!--			bind:closeOnClickModal={closeOnClickModal}-->
+<!--			beforeClose={beforeClose}-->
+<!--		>-->
+<!--			<p>Dialog 示例</p>-->
+<!--		</BeDialog>-->
+<!--	</div>-->
+<!--		`}-->
+<!--	/>-->
 
 	<h3 class='demo-table-title'>Attributes</h3>
 	<table class='demo-table'>
