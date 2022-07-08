@@ -1,6 +1,7 @@
 <script lang='ts'>
 	import { getStorage, setStorage } from '$lib/utils/storage';
 	import { onMount } from 'svelte';
+	import Logo from '$lib/demo/Logo.svelte';
 
 	export let menu: string = '/';
 	let active: string = 'light';
@@ -18,7 +19,8 @@
 </script>
 <div class='be-header'>
 	<div class='logo flex'>
-		BeerUi
+		<Logo />
+		<span></span>
 	</div>
 	<div class='nav'>
 		<a class:active={menu === '/'} href='/'>主页</a>
@@ -73,8 +75,9 @@
 		box-shadow: 9px 7px 15px 1px rgba(25, 65, 115, 0.19);
 
 		.logo {
-			padding: 20px;
 			font-weight: bold;
+			height: 60px;
+			display: flex;align-items: center;padding: 10px 20px;
 		}
 
 		.nav {

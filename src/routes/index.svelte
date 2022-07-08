@@ -2,6 +2,7 @@
 import BeIcon from '$lib/be-icon/BeIcon.svelte';
 import { showNotice } from '$lib/utils/notice';
 import Clipboard from '$utils/Clipboard';
+import Logo from '$lib/demo/Logo.svelte';
 
 const ClipboardHandle = icon => {
 	showNotice({
