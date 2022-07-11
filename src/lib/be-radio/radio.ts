@@ -13,7 +13,6 @@ export default class RadioStore {
 				this[option] = options[option];
 			}
 		}
-		console.log(this);
 
 		this.subscribe = options.subscribe || [];
 	}
