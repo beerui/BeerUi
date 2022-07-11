@@ -2,7 +2,6 @@
 	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import BeButton from '../be-button/BeButton.svelte';
-	import clickOutside from '$lib/_actions/clickOutside';
 	import DragEvent from '$lib/_actions/drag';
 
 	const dispatch = createEventDispatcher()
