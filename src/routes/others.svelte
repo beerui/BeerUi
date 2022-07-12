@@ -1,3 +1,10 @@
+<script>
+	import Logo from '$lib/demo/Logo.svelte';
+</script>
+
+<div style='width: 200px;margin: 30px auto;'>
+	<Logo />
+</div>
 <h3 class='title'>怎么来的？</h3>
 <div class='m-content'>
 	<div class='content'>
@@ -11,7 +18,7 @@
 	</div>
 </div>
 <style lang='scss'>
-	.title {color: #f0f8ff;text-align: center;margin: 100px 0;font-size: 80px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
+	.title {color: #f0f8ff;text-align: center;margin: 30px 0;font-size: 80px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
 	.m-content {background: rgb(255 255 255 / 5%);padding: 60px 0;margin-bottom: 60px;}
 	.content{
 		color: #f0f8ff;text-indent:50px;padding-bottom: 20px;width: 50%; margin: 0 auto;line-height: 1.8;
