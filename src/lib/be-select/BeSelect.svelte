@@ -3,6 +3,7 @@
 	import { createEventDispatcher, getContext, setContext, tick } from 'svelte';
 	import clickOutside from '$lib/_actions/clickOutside';
 	import SelectStore, { ArrayValue } from './select';
+	import { debounce } from '$lib/utils/throttle';
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
 	export let value: string | number | ArrayValue;
@@ -24,7 +25,7 @@
 	const newInitStore = () => multiple ? store.setMultipleCurrentValue() : setCurrentValue()
 	const store = new SelectStore({ value, multiple, multipleLimit, collapseTags })
 	setContext('selectStore', store)
-	const subscribeHandle = async item => {
+	const subscribeHandle = debounce(async item => {
 		if (!render) return
 		if (store.isChange) {
 			inner = true // 内部更新值
@@ -36,7 +37,7 @@
 			dispatch('change', store.value) // 值发生改变的时候发送给用户
 		}
 		if (!multiple) handleClosePopper()
-	}
+	}, 20)
 	store.subscribe.push(subscribeHandle)
 	let optionSize = 0
 	const getSize = async size => {
