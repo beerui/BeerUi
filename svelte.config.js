@@ -14,14 +14,7 @@ const config = {
 	],
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
-		adapter: vercel(),
-		package: {
-			files(filepath) {
-				const isRoute = filepath.indexOf('/src/routes') !== -1;
-				const isDemo = filepath.indexOf('demo/') !== -1;
-				return !filepath.endsWith('.stories.svelte') || isRoute || isDemo;
-			},
-		}
+		adapter: vercel()
 	},
 };
 

@@ -1,10 +1,6 @@
 <script lang='ts'>
 import ReplBlock from '$lib/demo/ReplBlock.svelte';
 import LineCode from '$lib/demo/LineCode.svelte';
-
-// initial content
-let value = "import { BeButton } from '@brewer/beerui'";
-
 </script>
 <div class='page-container'>
 	<h1>快速开始</h1>
@@ -27,6 +23,3 @@ let value = "import { BeButton } from '@brewer/beerui'";
 		html={`<BeButton type="default">Hello BeerUi</BeButton>`}
 	/>
 </div>
-<style lang='scss'>
-	//.m-iframe {width: 100%;height: 600px;}
-</style>

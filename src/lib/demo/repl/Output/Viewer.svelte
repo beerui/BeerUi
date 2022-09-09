@@ -6,7 +6,7 @@
 	import Console from './Console.svelte';
 	import Message from '../Message.svelte';
 	import srcdoc from './srcdoc/index.html?raw';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	const { bundle } = getContext('REPL');
 console.log('bundle', $bundle);
@@ -200,7 +200,7 @@ console.log('bundle', $bundle);
 				title="Result"
 				class:inited
 				bind:this={iframe}
-			
+
 				class={error || pending || pending_imports ? 'greyed-out' : ''}
 				srcdoc={browser ? srcdoc : ''}
 			/>
