@@ -16,9 +16,10 @@
 	setContext('menuStore', store)
 
 	const subscribeHandle = debounce(item => {
-		if (active !== store.active && item.menu.type !== 'submenu') active = store.active
-		if (item.type === 'click') dispatch('click', item.data[store.active])
-		dispatch('change', item.data[store.active])
+		let _active = store && store.active ? store.active : ''
+		if (store && store.active && active !== store.active && item.menu.type !== 'submenu') active = store.active
+		if (item.type === 'click') dispatch('click', _active)
+		dispatch('change', _active)
 	}, 60)
 	store.subscribe.push(subscribeHandle)
 

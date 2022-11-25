@@ -5,6 +5,11 @@ import path from 'path';
 const config = {
 	plugins: [sveltekit()],
 
+	manifest: true,
+	sourcemap: true,
+	emptyOutDir: true,
+	target: "es2018",
+	overlay: false,
 	resolve: {
 		alias: {
 			$utils: path.resolve('./src/utils'),
@@ -15,8 +20,20 @@ const config = {
 	},
 
 	server: {
+		cors: true,
 		fs: {
 			strict: false
+		}
+	},
+	build: {
+		rollupOptions: {
+			onwarn: (warning, handler) => {
+				const { code, frame } = warning;
+				if (code === "css-unused-selector")
+					return;
+
+				handler(warning);
+			}
 		}
 	}
 };

@@ -98,7 +98,7 @@
 		</div>
 	</DemoBlock>
 
-	<!-- <div class="test" use:loading={load} loading-text="拼命加载中" loading-background='rgba(0, 0, 0, 0.8)' style="height:300px;" >111111111111111111111111111111111111111111111111</div> -->
+	<!-- <div class="(test)" use:loading={load} loading-text="拼命加载中" loading-background='rgba(0, 0, 0, 0.8)' style="height:300px;" >111111111111111111111111111111111111111111111111</div> -->
 
 	<!-- <div class="test2" style="height:300px;" >1111111111</div> -->
 

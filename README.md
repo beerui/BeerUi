@@ -13,7 +13,8 @@ This is a Svelte Ui Components,`@brewer/beerui`.
 本项目的状态为开发中，但已在内部交付项目中使用，几乎所有的组件都可正常使用。
 
 ### 在线文档
-[BeerUi](https://beer-ui.vercel.app/)
+国内部署：[BeerUi](https://beer-ui.com/)
+外网文档：[BeerUi](https://beer-ui.vercel.app/)
 
 ### 更新日志
 [更新日志](./CHANGELOG.md)

@@ -80,16 +80,24 @@
 	const mousedownHandle = () => {
 		visible = true;
 	};
-	window.onresize = function() {
-		getLeft();
-	};
+	try {
+		window.onresize = function() {
+			getLeft();
+		}
+	} catch (e) {
+		console.log('no window');
+	}
 	$:if(visible) {
 		getLeft();
 	}
 	onMount(() => {
-		scrollDom = getScrollContainer(cascaderRect, true);
-		if (scrollDom) {
-			scrollDom.addEventListener('scroll', calcBottom)
+		try {
+			scrollDom = getScrollContainer(cascaderRect, true);
+			if (scrollDom) {
+				scrollDom.addEventListener('scroll', calcBottom)
+			}
+		} catch (e) {
+			console.log('scrollDom error');
 		}
 	})
 	const calcBottom = () => {
@@ -97,7 +105,11 @@
 		bottom = { status: 'scroll', value: clientRect.bottom };
 	}
 	onDestroy(() => {
-		scrollDom.removeEventListener('scroll', calcBottom)
+		try {
+			scrollDom.removeEventListener('scroll', calcBottom)
+		} catch (e) {
+			console.log(e);
+		}
 	})
 	const getLeft = () => {
 		clientRect = cascaderRect.getBoundingClientRect();
