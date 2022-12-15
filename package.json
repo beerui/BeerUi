@@ -1,10 +1,11 @@
 {
   "name": "@brewer/beerui",
-  "version": "1.1.0-next.6",
+  "version": "1.1.7",
   "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
-    "build": "vite build --mode=office",
+    "build": "vite build --mode=vercel",
+    "build:office": "vite build --mode=office",
     "publish": "cd package && npm publish",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",

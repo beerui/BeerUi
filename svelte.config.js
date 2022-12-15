@@ -32,12 +32,11 @@ const config = {
 	],
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
-		adapter: process.env.mode === '' ? vercel() : adapter({
+		adapter: process.env.mode === 'vercel' ? vercel() : adapter({
 			// default options are shown. On some platforms
 			// these options are set automatically — see below
 			pages: 'build',
 			assets: 'build',
-			fallback: null,
 			precompress: false,
 			strict: true
 		})
