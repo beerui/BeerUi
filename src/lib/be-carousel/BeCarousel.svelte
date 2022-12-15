@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import { addClass, filterClass, removeClass } from '$lib/utils/beerui';
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import BeIcon from '$lib/be-icon/BeIcon.svelte';
 
 	const preClass = ['direction', 'type'];
@@ -20,6 +20,7 @@
 	export let initialIndex: number = 0; // 初始状态激活的幻灯片的索引，从 0 开始
 	export let height: string = ''; // 走马灯的高度 300px
 
+	let dispatch = createEventDispatcher();
 	// 按钮显示和事件触发
 	let arrowDisplay = 'none';
 	let isHover = false;
@@ -116,6 +117,7 @@
 				el.style.transform = `${ translateType }(${ transX }px) scale(1)`;
 			}
 		});
+		dispatch('change', { oldIndex: oldIndex || 0, nowIndex: initialIndex });
 		oldIndex = initialIndex;
 	};
 	const onceHandle = (el, type, handler) => {

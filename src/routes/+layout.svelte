@@ -4,6 +4,7 @@
 	preparePageTransition();
 </script>
 <slot></slot>
+
 <style>
     html::page-transition-outgoing-image() {
         animation: 0.25s ease 0s 1 normal both running blink-page-transition-fade-out;

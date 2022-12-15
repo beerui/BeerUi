@@ -9,7 +9,6 @@
 	import { browser } from '$app/environment';
 
 	const { bundle } = getContext('REPL');
-console.log('bundle', $bundle);
 	export let error; // TODO should this be exposed as a prop?
 	let logs = [];
 	let log_group_stack = [];

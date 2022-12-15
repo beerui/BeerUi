@@ -56,6 +56,9 @@
 	{/each}
 </BeCarousel>
 `;
+	let onChange = ({ detail }) => {
+		console.log(detail);
+	};
 </script>
 <div class='page-container'>
 	<h2>BeCarousel 轮播图</h2>
@@ -63,7 +66,7 @@
 	<DemoBlock {code} {js}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeCarousel autoplay={false}>
+				<BeCarousel autoplay={true} on:change={onChange}>
 					{#each items as item, i}
 						<BeCarouselItem {item} let:initialIndex={thing}>
 							<div class='w-full h-full carousel-item' data-thing={thing}
@@ -124,7 +127,8 @@
 	<DemoBlock code={code3}>
 		<div slot='source'>
 			<div class='demo-list'>
-				<BeCarousel height='450px' direction='horizontal' trigger='click' type='card' hideIndicator hideArrow>
+				<BeCarousel
+					height='450px' direction='horizontal' trigger='click' type='card' hideIndicator hideArrow>
 					{#each items as item, i}
 						<BeCarouselItem>
 							<div class='w-full h-full carousel-item'
@@ -230,6 +234,23 @@
 			<td>string</td>
 			<td>-</td>
 			<td>300px</td>
+		</tr>
+		</tbody>
+	</table>
+	<h3 class='demo-table-title'>BeCarousel Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>change</td>
+			<td>幻灯片切换时触发</td>
+			<td>目前激活的幻灯片的索引，原幻灯片的索引</td>
 		</tr>
 		</tbody>
 	</table>

@@ -1,7 +1,11 @@
 <script>
 	import Logo from '$lib/demo/Logo.svelte';
 </script>
-
+<svelte:head>
+	<title>BeerUi</title>
+	<meta name="description" content="BeerUi, base on svelte 3.0 web component">
+	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div style='width: 200px;margin: 30px auto;'>
 	<Logo />
 </div>

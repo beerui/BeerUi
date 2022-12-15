@@ -118,7 +118,6 @@ async function get_bundle(uid, mode, cache, lookup) {
 	const repl_plugin = {
 		async resolveId(importee, importer) {
 			if (uid !== current_id) throw ABORT;
-			console.log('resolveId', importee, importer);
 
 			// importing from Svelte
 			if (importee === `svelte`) return `${svelteUrl}/index.mjs`;

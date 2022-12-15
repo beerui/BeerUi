@@ -13,6 +13,11 @@
 		Clipboard(icon)
 	}
 </script>
+<svelte:head>
+	<title>BeerUi</title>
+	<meta name="description" content="BeerUi, base on svelte 3.0 web component">
+	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <h2 class='title'>What's BeerUi?</h2>
 <h3 class='desc'>A Svelte UI Components</h3>
 <div class='m-content'>

@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import  '$lib/assets/beer.css'
+	import '$lib/assets/beer.css'
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
 	import SideBar from '$lib/demo/layout/SideBar.svelte';
