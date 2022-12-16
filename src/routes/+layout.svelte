@@ -1,6 +1,5 @@
 <script>
 	import {preparePageTransition} from '$lib/page-transition';
-
 	preparePageTransition();
 </script>
 <slot></slot>
@@ -9,7 +8,6 @@
     html::page-transition-outgoing-image() {
         animation: 0.25s ease 0s 1 normal both running blink-page-transition-fade-out;
     }
-
     html::page-transition-incoming-image() {
         animation: 0.25s ease 0s 1 normal both running blink-page-transition-fade-in;
     }

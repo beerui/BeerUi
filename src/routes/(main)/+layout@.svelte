@@ -3,9 +3,6 @@
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
 	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
-	import {preparePageTransition} from '$lib/page-transition.js';
-
-	preparePageTransition();
 </script>
 <div class='be-warp'>
 	<LayoutHeader menu={$page.url.pathname} />
