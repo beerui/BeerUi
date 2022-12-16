@@ -210,6 +210,128 @@
         可通过format指定显示时间,通过selectableRange设置禁用范围
       </div>
   </DemoBlock>
+  <h3 class='demo-table-title'>Attributes</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>value / bind:value</td>
+			<td>绑定值</td>
+			<td>date(DatePicker) / array(DateRangePicker)</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+    <tr>
+			<td>clearable</td>
+			<td>是否显示清除按钮</td>
+			<td>boolean</td>
+			<td>-</td>
+			<td>true</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>禁用</td>
+			<td>boolean</td>
+			<td>-</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>readonly</td>
+			<td>完全只读</td>
+			<td>boolean</td>
+			<td>-</td>
+			<td>true</td>
+		</tr>
+		<tr>
+			<td>selectMode</td>
+			<td>显示类型</td>
+			<td>string</td>
+			<td>year/month/date datetime/datetimerange/ daterange/monthrange/yearrange</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>format</td>
+			<td>显示在输入框中的格式</td>
+			<td>string</td>
+      <td>年:yyyy 月:MM 日:dd 时:HH 分:mm 秒:ss</td>
+			<td>yyyy-MM-dd</td>
+		</tr>
+		<tr>
+			<td>valueFormat</td>
+			<td>可选，绑定值的格式。不指定则绑定值为 Date 对象</td>
+			<td>string</td>
+			<td>年:yyyy 月:MM 日:dd 时:HH 分:mm 秒:ss</td>
+			<td>Date 对象</td>
+		</tr>
+		<tr>
+			<td>placeholder</td>
+			<td>非范围选择时的占位内容</td>
+			<td>string</td>
+			<td>-</td>
+			<td>选择日期/选择时间</td>
+		</tr>
+		<tr>
+			<td>startPlaceholder</td>
+			<td>范围选择时开始日期的占位内容</td>
+			<td>string</td>
+			<td>-</td>
+			<td>开始时间</td>
+		</tr>
+		<tr>
+			<td>endPlaceholder</td>
+			<td>范围选择时结束日期的占位内容</td>
+			<td>string</td>
+			<td>-</td>
+			<td>结束时间</td>
+		</tr>
+		<tr>
+			<td>separator</td>
+			<td>选择范围时的分隔符</td>
+			<td>string</td>
+			<td>-</td>
+			<td>至</td>
+		</tr>
+		<tr>
+			<td>disabledDate(含有日期时生效)</td>
+			<td>设置禁用状态，参数为当前日期，要求返回 Boolean</td>
+			<td>Function</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>selectableRange(含有时间选择时生效)</td>
+			<td>可选时间段，例如'18:30:00 - 20:30:00'或者传入数组['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']</td>
+			<td>string / array</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		</tbody>
+	</table>
+  <h3 class='demo-table-title'>Events</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>change</td>
+			<td>用户确认选定的值时触发</td>
+			<td>组件绑定值。格式与绑定值一致，可受 value-format 控制</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 
 <style lang="scss">

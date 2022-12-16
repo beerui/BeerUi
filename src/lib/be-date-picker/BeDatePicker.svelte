@@ -35,12 +35,12 @@
 	export let disabled = false
 	export let readonly = true
 	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let disabledDate: Function
 	let active = false
 	let displayValue = []
 	if(format && !valueFormat) valueFormat = format
 	const valueFormats = new FormatTime(valueFormat)
 	const formats = new FormatTime(format)
-	export let disabledDate: Function
 	let inputRect
 	let direction = 'bottom'
 	let visible;
