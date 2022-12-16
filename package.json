@@ -4,7 +4,7 @@
   "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
-    "build": "vite build --mode=vercel --output public",
+    "build": "vite build --mode=vercel",
     "build:office": "vite build --mode=office",
     "publish": "cd package && npm publish",
     "check": "svelte-check --tsconfig ./tsconfig.json",
