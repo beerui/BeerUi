@@ -7,6 +7,7 @@ node_modules
 /.vercel
 /package
 .idea/
+.vscode/
 *.log
 cypress/screenshots
 cypress/videos
