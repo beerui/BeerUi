@@ -58,29 +58,29 @@
 	}
 	// 日期格式化
 	$: initValue(value)
-	function initValue(value) {
-		if(value) {
-			if(ranged) {
-				if(Array.isArray(value)) {
-					let start
-					let end
-					start = new Date(String(value[0]))
-					end = new Date(String(value[1]))
-					if(start == 'Invalid Date') start = ''
-					if(end == 'Invalid Date') end = ''
-					displayValue = [formatDate(start), formatDate(end)]
-				} else {
-					throw new Error('需为数组格式的时间！')
-				}
-			} else {
-				value = new Date(value)
-				if(value == 'Invalid Date') value = ''
-				value = formatDate(value)
-			}
-		} else {
+	function initValue(initVal) {
+		if(!initVal) {
 			value = ''
 			displayValue = []
+			return
 		}
+		if(!ranged) {
+			const date = new Date(initVal)
+			value = isInvalidDate(date) ? '' : formatDate(date)
+			return
+		}
+		if(Array.isArray(initVal)) {
+			const dateStart = new Date(String(initVal[0]))
+			let endStart = new Date(String(initVal[1]))
+			const start = isInvalidDate(dateStart) ? '' : formatDate(dateStart)
+			const end = isInvalidDate(endStart) ? '' : formatDate(endStart)
+			displayValue = [start, end]
+		} else {
+			throw new Error('value must be array！')
+		}
+	}
+	const isInvalidDate = (date) => {
+		return date == 'Invalid Date'
 	}
 	$:if(visible) {
 		const clientRect = inputRect && inputRect.getBoundingClientRect()
@@ -153,6 +153,7 @@
 	tick().then(() => {
 		isInit = true;
 	})
+
 </script>
 {#if ranged}
 <div class='be-date be-range' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
@@ -177,7 +178,7 @@
 </div>
 {:else}
 <div class='be-date' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper} bind:this={inputRect}>
-	<BeInput validateEvent={false} on:change={handleChange} disabled={disabled} readonly={readonly} {value} {placeholder} on:focus={handleShowDatePopper} bind:this={input}/>
+	<BeInput validateEvent={false} on:change={handleChange} disabled={disabled} readonly={readonly} bind:value={value} {placeholder} on:focus={handleShowDatePopper} bind:this={input}/>
 	<div class="be-date__prefix">
 		<BeIcon name="calendar"/>
 	</div>
