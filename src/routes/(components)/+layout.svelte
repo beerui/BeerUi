@@ -32,7 +32,7 @@
 			{#key $page.url.pathname}
 				<Utterances reponame="beerui/BeerUi" bind:issueTerm={$page.url.pathname} theme="github-light" />
 			{/key}
-			<LayoutFooter style='margin-left: 240px;background: #6b84ad;' />
+			<LayoutFooter style='margin-left: 240px;' />
 		</div>
 	</div>
 </div>
@@ -41,7 +41,7 @@
 		height: 100%;
 		overflow: hidden;
 		font-size: 18px;
-		background: var(--bg-color-container);
+		//background: var(--bg-color-container);
 	}
 
 	.demo-pre {
@@ -49,6 +49,9 @@
 		font-family: Menlo, Monaco, "Courier New", monospace;
 	}
 	.be-main-container {min-height: calc(100vh - 60px);}
+	.be-main {
+		background: var(--bg-color);
+	}
 	.be-container, .be-main {
 		height: calc(100vh - 60px);
 		overflow-x: hidden;

@@ -80,9 +80,8 @@
 		left: 0;
 		top: 0;
 		width: 240px;
-		background: var(--bg-color-container);
 		padding: 20px 0;
-		border-right: 1px solid var(--border-level-1-color);
+	  	box-shadow: inset -4px 0px 6px 4px rgba(239, 228, 139, 8%);
 		z-index: 9;
 		font-size: 14px;
 
@@ -124,8 +123,9 @@
 				color: var(--text-secondary);
 
 				&:hover, &.active {
-					color: var(--text-primary);
+					//color: var(--text-primary);
 					background: var(--bg-color-container-hover);
+					  background: rgb(16 106 55 / 50%);
 				}
 			}
 		}

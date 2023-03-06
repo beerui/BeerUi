@@ -33,7 +33,7 @@
 	</div>
 </div>
 
-<LayoutFooter />
+<LayoutFooter isWhite />
 <style lang='scss'>
   .title {color: #f0f8ff;text-align: center;margin: 100px 0 0;font-size: 100px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
   .desc {color: #f0f8ff;padding: 40px 0;text-align: center;font-size: 36px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
