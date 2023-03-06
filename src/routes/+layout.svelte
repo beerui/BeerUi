@@ -1,18 +1,17 @@
 <script>
-	import {preparePageTransition} from '$lib/page-transition';
-	preparePageTransition();
+	import  '$lib/assets/beer.css'
+	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
+	import { page } from '$app/stores';
+	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
 </script>
-<slot></slot>
-
+<div class='be-warp'>
+	<LayoutHeader menu={$page.url.pathname} />
+	<div class='be-container'>
+		<slot></slot>
+	</div>
+</div>
 <style>
-    html::page-transition-outgoing-image() {
-        animation: 0.25s ease 0s 1 normal both running blink-page-transition-fade-out;
-    }
-    html::page-transition-incoming-image() {
-        animation: 0.25s ease 0s 1 normal both running blink-page-transition-fade-in;
-    }
-    ::page-transition-outgoing-image(root),
-    ::page-transition-incoming-image(root) {
-        animation-duration: 3s;
+    .be-warp {
+        background: rgb(107, 132, 173);
     }
 </style>

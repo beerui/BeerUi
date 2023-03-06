@@ -23,7 +23,6 @@
 	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
 </svelte:head>
 <div class='be-warp'>
-	<LayoutHeader menu={formatUrl()} />
 	<div class='be-container'>
 		<SideBar />
 		<div class='be-main'>

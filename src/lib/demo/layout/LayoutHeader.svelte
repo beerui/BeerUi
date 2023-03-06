@@ -23,7 +23,7 @@
 		<span></span>
 	</div>
 	<div class='nav'>
-		<a class:active={menu === '/home'} href='/home'>主页</a>
+		<a class:active={menu === '/'} href='/'>主页</a>
 		<a class:active={menu === '/components'} href='/components'>组件</a>
 		<a target='_blank' href='https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md'>更新日志</a>
 		<a class:active={menu === '/others'} href='/others'>其它</a>
