@@ -1,8 +1,7 @@
 <div align='center'>
 
-<span style='margin-left: 70px;'>
-<img src="./static/logo_new.svg" width='320px' />
-</span>
+<div style='width: 200px;height: 40px'></div>
+<img src="./static/logo_new.svg" width='340px' />
 
 [![npm version](https://img.shields.io/npm/v/@brewer/beerui.svg)](https://www.npmjs.com/package/@brewer/beerui) [![license](https://img.shields.io/npm/l/@brewer/beerui)](LICENSE.md) ![NPM Downloads](https://img.shields.io/npm/dt/@brewer/beerui?color=%23fb7182&label=downloads) 
 
