@@ -1,7 +1,12 @@
 <script>
 	import Logo from '$lib/demo/Logo.svelte';
+	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
 </script>
-
+<svelte:head>
+	<title>BeerUi</title>
+	<meta name="description" content="BeerUi, base on svelte 3.0 web component">
+	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div style='width: 200px;margin: 30px auto;'>
 	<Logo />
 </div>
@@ -17,6 +22,7 @@
 		当然这也是我们坚定不移的理念,在这充满荆棘且蜿蜒曲折的路上,以键盘为剑,我们握紧手中剑披荆斩棘走在这路上,通向崇高的目标的道路,总是崎岖的艰难的,也许会慢但是我们永远不会停止。
 	</div>
 </div>
+<LayoutFooter />
 <style lang='scss'>
 	.title {color: #f0f8ff;text-align: center;margin: 30px 0;font-size: 80px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
 	.m-content {background: rgb(255 255 255 / 5%);padding: 60px 0;margin-bottom: 60px;}

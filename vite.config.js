@@ -29,6 +29,7 @@ const config = {
 		rollupOptions: {
 			onwarn: (warning, handler) => {
 				const { code, frame } = warning;
+				console.log('-------------------', code);
 				if (code === "css-unused-selector")
 					return;
 

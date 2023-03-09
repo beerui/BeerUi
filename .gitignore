@@ -2,10 +2,12 @@
 node_modules
 /build
 /.svelte-kit
+/package-lock.json
 /.vercel_build_output
 /.vercel
 /package
 .idea/
+.vscode/
 *.log
 cypress/screenshots
 cypress/videos

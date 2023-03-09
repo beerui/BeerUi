@@ -1,3 +1,8 @@
+<script>
+	let env = process.env.NODE_ENV
+	console.log(env);
+</script>
+
 <div class='be-main__footer' style={$$props.style}>
 	<div class='list'>
 		<div class='list-item'><span>Contributors</span></div>
@@ -13,6 +18,9 @@
 	<div class='list'>
 		<div class='list-item'><span>Github</span></div>
 		<div class='list-item'><a href='https://github.com/beerui/BeerUi'>组件 BeerUi</a></div>
+		{#if env === 'office'}
+			<div class='list-item'><a class='beian' target='_blank' href='https://beian.miit.gov.cn/'>皖ICP备2022015490号</a></div>
+		{/if}
 <!--		<div class='list-item'>-->
 <!--			系统 Svelte-BeerUi-Admin-->
 <!--			<a href='https://github.com/beerui/Svelte-Beerui-admin'>系统 Svelte-BeerUi-Admin</a>-->
@@ -43,5 +51,8 @@
 			color: var(--text-color-white);
 			text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
 		}
+	  .beian {
+		text-shadow: 0 1px 2px #999;
+	  }
 	}
 </style>

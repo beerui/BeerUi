@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import  '$lib/assets/beer.css'
+	import '$lib/assets/beer.css'
 	import LayoutHeader from '$lib/demo/layout/LayoutHeader.svelte';
 	import { page } from '$app/stores';
 	import SideBar from '$lib/demo/layout/SideBar.svelte';
@@ -23,7 +23,6 @@
 	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
 </svelte:head>
 <div class='be-warp'>
-	<LayoutHeader menu={formatUrl()} />
 	<div class='be-container'>
 		<SideBar />
 		<div class='be-main'>

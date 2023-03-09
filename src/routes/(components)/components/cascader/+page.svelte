@@ -1,6 +1,5 @@
 <script>
-	import BeDrawer from './../../../lib/be-drawer/BeDrawer.svelte';
-	import { BeRadio } from '$lib';
+	import BeDrawer from '$lib/be-drawer/BeDrawer.svelte';
 	import { BeCascader } from '$lib';
 	import DemoBlock from '$lib/demo/DemoBlock.svelte';
 

@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
   import { getRangeHours, getRangeMinutes, getRangeSeconds, modifyTime, timeRangeParse } from '../date-util.js'
+  import { debounce } from '$lib/utils/throttle';
   export let date
   export let selectableRange
   export let format
@@ -46,12 +47,12 @@
     selectTime(type, timeSelect[type])
   }
 
-  const handleScroll = (type) => {
+  const handleScroll = debounce((type) => {
     timeSelect[type] = Math.round(timeDom[type].scrollTop / itemHeight)
     const value = timeSelect[type] * itemHeight
     timeDom[type].scrollTop = value
     sendEmit()
-  }
+  }, 100)
   const canSelectTime = (list) => {
     return list.findIndex((item)=>{
       return !item

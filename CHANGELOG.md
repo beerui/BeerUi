@@ -3,6 +3,17 @@
 > 1.0的日志参阅 [v1.0](./logs/v1.0.md)
 
 ----
+## @brewer/beerui@1.1.8 `2022/12/15`
+
+### Patch Changes
+
+- 更新 Update SvelteKit正式版
+- 更新 Update 依赖更新
+
+
+- 新增 Add `BeCarousel` `change`事件
+- 新增 Add `BeIcon` 事件现在传出
+----
 ## @brewer/beerui@1.1.7 `2022/7/21`
 
 ### Patch Changes
