@@ -3,8 +3,8 @@
 	import { onMount } from 'svelte';
 	import Logo from '$lib/demo/Logo.svelte';
 
-	export let menu: string = '/home';
-	let active: string = 'light';
+	export let menu = '/home';
+	let active = 'light';
 	onMount(() => {
 		const _theme = getStorage('BEER_THEME');
 		if (_theme) active = _theme.v;
@@ -24,7 +24,7 @@
 	</div>
 	<div class='nav'>
 		<a class:active={menu === '/'} href='/'>主页</a>
-		<a class:active={menu === '/components'} href='/components'>组件</a>
+		<a class:active={menu === '/components/start'} href='/components/start'>组件</a>
 		<a target='_blank' href='https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md'>更新日志</a>
 		<a class:active={menu === '/others'} href='/others'>其它</a>
 		<div class='tabs'>

@@ -12,9 +12,7 @@
 		<div class='list-item'><span>Resource</span></div>
 		<div class='list-item'><a href='https://svelte.dev/'>svelte</a></div>
 		<div class='list-item'><a href='https://kit.svelte.dev/'>svelteKit</a></div>
-		<div class='list-item'><a href='https://www.npmjs.com/package/@brewer/beerui'>@brewer/beerui</a>
-		<div class='list-item'><a href='https://component-party.dev/'>各框架对比</a>
-		</div>
+		<div class='list-item'><a href='https://www.npmjs.com/package/@brewer/beerui'>@brewer/beerui</a></div>
 	</div>
 	<div class='list'>
 		<div class='list-item'><span>Github</span></div>

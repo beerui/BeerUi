@@ -17,13 +17,14 @@ import LineCode from '$lib/demo/LineCode.svelte';
 	<LineCode code={`import '@brewer/beerui/assets/beer.css'`} />
 
 	<h4>注意：</h4>
-	
+
 	<h4>学习资料</h4>
-	<a href='https://learn.svelte.dev/tutorial/welcome-to-svelte' target='_blank'>welcome-to-svelte 欢迎来到Svelte</a>
-	<a href='https://component-party.dev/' target='_blank'>Svelte与其它框架语法对比</a>
-	<p>在REPL中不能直接导入 @brewer/beerui 因为repl无法识别入口文件中的css</p>
-	<ReplBlock
-		js={`import BeButton from '@brewer/beerui/be-button'`}
-		html={`<BeButton type="default">Hello BeerUi</BeButton>`}
-	/>
+	<ol>
+		<li>
+			<a href='https://learn.svelte.dev/tutorial/welcome-to-svelte' target='_blank'>welcome-to-svelte 互动式教程</a>
+		</li>
+		<li>
+			<a href='https://component-party.dev/' target='_blank'>Svelte与其它框架语法对比</a>
+		</li>
+	</ol>
 </div>
