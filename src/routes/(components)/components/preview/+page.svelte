@@ -14,8 +14,13 @@
 		// previewImages(src, list, res => console.log(res))
   }
 </script>
+<svelte:head>
+	<title>PreviewImages 预览图片 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="PreviewImages 预览图片, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class='page-container'>
-	<h2>previewImages 预览图片</h2>
+	<h2>PreviewImages 预览图片</h2>
 	<h3>基础用法</h3>
 	<p>预览多图</p>
 	<DemoBlock code={`

@@ -57,6 +57,11 @@
 	const changeSelect = ({ detail }) => console.log(detail);
 </script>
 
+<svelte:head>
+	<title>BeSelect 选择框 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="BeSelect 选择框, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class="page-container content">
 	<h2>BeSelect 选择框</h2>
 	<p>当选项过多时，使用下拉菜单展示并选择内容。</p>

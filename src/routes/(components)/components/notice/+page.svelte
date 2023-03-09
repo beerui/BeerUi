@@ -114,8 +114,13 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Notice 通知 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="Notice 通知, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class='page-container content'>
-	<h2>notice</h2>
+	<h2>Notice 通知</h2>
 	<p>显示全局的通知提醒消息</p>
 	<h3>基本用法</h3>
 	<ol>

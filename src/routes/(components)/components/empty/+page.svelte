@@ -3,6 +3,11 @@
     import BeEmpty from "$lib/be-empty/index.ts";
     import BeButton from "$lib/be-button/BeButton.svelte";
 </script>
+<svelte:head>
+	<title>Empty 空状态 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="Empty 空状态, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class='page-container'>
     <h2>Empty 空状态</h2>
     <p>空状态时的占位提示。</p>

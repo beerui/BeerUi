@@ -3,9 +3,9 @@
 	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
 </script>
 <svelte:head>
-	<title>BeerUi</title>
-	<meta name="description" content="BeerUi, base on svelte 3.0 web component">
-	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
+	<title>其它 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="beerui其它,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
 </svelte:head>
 <div style='width: 200px;margin: 30px auto;'>
 	<Logo />

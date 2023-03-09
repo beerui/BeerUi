@@ -18,8 +18,14 @@
 		console.log('onInputHandle', value);
 	}
 </script>
+
+<svelte:head>
+	<title>Textarea 文本框 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="Textarea 文本框, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class="page-container content">
-	<h2>textarea 文本框</h2>
+	<h2>Textarea 文本框</h2>
 	<p>通过鼠标或键盘输入字符</p>
 	<h3>基本用法</h3>
 	<ReplBlock
