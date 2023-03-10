@@ -5,6 +5,11 @@
 	let visible = false
 	let direction = 'rtl'
 </script>
+<svelte:head>
+	<title>BeDrawer 抽屉 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="BeDrawer 抽屉, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class='page-container'>
 	<h2>BeDrawer 抽屉</h2>
 	<p class='desc'>有些时候, Dialog 组件并不满足我们的需求, 比如你的表单很长, 亦或是你需要临时展示一些文档, Drawer 拥有和 Dialog 几乎相同的 API, 在 UI 上带来不一样的体验.</p>

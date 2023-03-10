@@ -4,6 +4,12 @@
     import BeBreadcrumbItem from "$lib/be-breadcrumb/BeBreadcrumbItem.svelte";
     import ReplBlock from '$lib/demo/ReplBlock.svelte';
 </script>
+
+<svelte:head>
+	<title>Breadcrumb 面包屑 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="Breadcrumb 面包屑, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class='page-container'>
     <h2>Breadcrumb 面包屑</h2>
     <p>显示当前页面的路径，快速返回之前的任意页面。</p>

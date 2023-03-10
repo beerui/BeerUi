@@ -12,6 +12,8 @@
 </div>
 <style>
     .be-warp {
-        background: rgb(107, 132, 173);
+        /*background: rgb(107, 132, 173);*/
+    /*rgb(16, 106, 55)*/
+    /*    background: linear-gradient(rgba(16, 106, 55, 50%), rgba(107, 132, 173, 50%));*/
     }
 </style>

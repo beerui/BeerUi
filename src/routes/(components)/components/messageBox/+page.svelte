@@ -35,6 +35,11 @@
 		});
 	}
 </script>
+<svelte:head>
+	<title>MessageBox 弹框 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="MessageBox 弹框, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class='page-container'>
 	<h2 on:click={openNotice}>MessageBox 弹框</h2>
 	<p class='desc'>模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。</p>

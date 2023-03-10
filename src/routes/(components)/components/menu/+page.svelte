@@ -333,6 +333,11 @@
 	// 	}
 	// };
 </script>
+<svelte:head>
+	<title>NavMenu 导航菜单 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="NavMenu 导航菜单, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class="page-container">
 	<h2>NavMenu 导航菜单</h2>
 	<p>为网站提供导航功能的菜单。</p>

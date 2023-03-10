@@ -136,11 +136,12 @@
   --be-mask-disabled: rgba(0, 0, 0, 60%); // 遮罩-禁用
 
   // 背景色
+  --bg-color: transparnt;
   --bg-color-page: var(--be-gray-color-14);                        // 色彩 - page
   --bg-color-code: #9f9f9f;                        // 色彩 - page
   --bg-color-container: var(--be-gray-color-13);                   // 色彩 - 容器
-  --bg-color-container-hover: var(--be-gray-color-12);             // 色彩 - 容器 - hover
-  --bg-color-container-active: var(--be-gray-color-10);            // 色彩 - 容器 - active
+  --bg-color-container-hover: rgb(16 106 55 / 50%);             // 色彩 - 容器 - hover
+  --bg-color-container-active: rgb(16 106 55 / 50%);            // 色彩 - 容器 - active
   --bg-color-container-select: var(--be-gray-color-9);             // 色彩 - 容器 - select
   --bg-color-secondarycontainer: var(--be-gray-color-12);          // 色彩 - 次级容器
   --bg-color-secondarycontainer-hover: var(--be-gray-color-11);    // 色彩 - 次级容器 - hover

@@ -3,13 +3,13 @@
 	import LayoutFooter from '$lib/demo/layout/LayoutFooter.svelte';
 </script>
 <svelte:head>
-	<title>BeerUi</title>
-	<meta name="description" content="BeerUi, base on svelte 3.0 web component">
-	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
+	<title>其它 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="beerui其它,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
 </svelte:head>
-<div style='width: 200px;margin: 30px auto;'>
-	<Logo />
-</div>
+<!--<div style='width: 200px;margin: 30px auto;'>-->
+<!--	<Logo />-->
+<!--</div>-->
 <h3 class='title'>怎么来的？</h3>
 <div class='m-content'>
 	<div class='content'>
@@ -22,10 +22,10 @@
 		当然这也是我们坚定不移的理念,在这充满荆棘且蜿蜒曲折的路上,以键盘为剑,我们握紧手中剑披荆斩棘走在这路上,通向崇高的目标的道路,总是崎岖的艰难的,也许会慢但是我们永远不会停止。
 	</div>
 </div>
-<LayoutFooter />
+<LayoutFooter isWhite />
 <style lang='scss'>
-	.title {color: #f0f8ff;text-align: center;margin: 30px 0;font-size: 80px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
-	.m-content {background: rgb(255 255 255 / 5%);padding: 60px 0;margin-bottom: 60px;}
+	.title {color: #f0f8ff;text-align: center;margin: 30px 0;font-size: 40px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
+	.m-content {padding: 60px 0;margin-bottom: 60px;}
 	.content{
 		color: #f0f8ff;text-indent:50px;padding-bottom: 20px;width: 50%; margin: 0 auto;line-height: 1.8;
 		font-size: 18px;letter-spacing: 1.2px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);

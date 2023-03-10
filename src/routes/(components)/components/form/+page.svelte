@@ -118,6 +118,11 @@
 			}, 60)
 		}
 </script>
+<svelte:head>
+	<title>Form 表单 组件文档 BeerUi-官方文档</title>
+	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
+	<meta name="keywords" content="Form 表单, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+</svelte:head>
 <div class="page-container content">
 	<h2>Form 表单</h2>
 	<p>由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据</p>

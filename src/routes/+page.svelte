@@ -15,9 +15,9 @@
 	}
 </script>
 <svelte:head>
-	<title>BeerUi-官方文档 - 基于 svelte 的 PC端 组件库</title>
+	<title>BeerUi 官方文档 - 基于 svelte 的 PC端 组件库</title>
 	<meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component">
-	<meta name="keywords" content="beerui, BeerUi,@brewer/beerui,svelte,component,svelteKit">
+	<meta name="keywords" content="beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit">
 </svelte:head>
 <h2 class='title'>What's BeerUi?</h2>
 <h3 class='desc'>A Svelte UI Components</h3>
@@ -33,7 +33,7 @@
 	</div>
 </div>
 
-<LayoutFooter />
+<LayoutFooter isWhite />
 <style lang='scss'>
   .title {color: #f0f8ff;text-align: center;margin: 100px 0 0;font-size: 100px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}
   .desc {color: #f0f8ff;padding: 40px 0;text-align: center;font-size: 36px;text-shadow: 0 4px 4px rgb(0 0 0 / 25%);}

@@ -1,7 +1,5 @@
 import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-static';
-import vercel from '@sveltejs/adapter-vercel';
-import { sitemapWrapAdapter } from 'sveltekit-static-sitemap';
 // 如果需要打包发布到 vercel 打开注释即可
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
@@ -33,16 +31,14 @@ const config = {
 	],
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
-		adapter: process.env.NODE_ENV !== 'office' ? sitemapWrapAdapter(vercel(), {
-			origin: 'https://beer-ui.com'
-		}) : sitemapWrapAdapter(adapter({
+		adapter: adapter({
 			// default options are shown. On some platforms
 			// these options are set automatically — see below
 			pages: 'build',
 			assets: 'build',
-			fallback: 'index.html'
-		}), {
-			origin: 'https://beer-ui.com'
+			fallback: null,
+			precompress: false,
+			strict: true
 		})
 	},
 };
