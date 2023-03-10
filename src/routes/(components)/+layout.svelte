@@ -17,11 +17,6 @@
 		return _name.slice(0, 1).toUpperCase() + _name.slice(1, _name.length)
 	}
 </script>
-<svelte:head>
-	<title>{formatName($page.url.pathname)} | BeerUi Components</title>
-	<meta name="description" content="BeerUi, base on svelte 3.0 web component">
-	<meta name="keywords" content="BeerUi,@brewer/beerui,svelte,component,svelteKit">
-</svelte:head>
 <div class='be-warp'>
 	<div class='be-container'>
 		<SideBar />
