@@ -33,13 +33,17 @@ const config = {
 	],
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
-		adapter: process.env.NODE_ENV !== 'office' ? sitemapWrapAdapter(vercel()) : sitemapWrapAdapter(adapter({
+		adapter: process.env.NODE_ENV !== 'office' ? sitemapWrapAdapter(vercel(), {
+			origin: 'https://beer-ui.com'
+		}) : sitemapWrapAdapter(adapter({
 			// default options are shown. On some platforms
 			// these options are set automatically — see below
 			pages: 'build',
 			assets: 'build',
 			fallback: 'index.html'
-		}))
+		}), {
+			origin: 'https://beer-ui.com'
+		})
 	},
 };
 
