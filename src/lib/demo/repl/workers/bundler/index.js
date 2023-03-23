@@ -265,11 +265,6 @@ async function get_bundle(uid, mode, cache, lookup) {
 }
 
 async function bundle({ uid, components }) {
-	if (import.meta.env.PROD) {
-		console.clear();
-		console.log(`running Svelte compiler version %c${svelte.VERSION}`, 'font-weight: bold');
-	}
-
 	const lookup = {};
 	components.forEach((component) => {
 		const path = `./${component.name}.${component.type}`;
