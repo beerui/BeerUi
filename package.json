@@ -1,18 +1,18 @@
 {
   "name": "@brewer/beerui",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
     "build": "vite build",
     "build:office": "cross-env NODE_ENV=office vite build",
-    "publish": "cd package && npm publish",
+    "patch-release": "cd package && npm version patch && npm publish && git push --follow-tags",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "dev": "vite dev --port 3333 --host",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "lint": "eslint --ignore-path .gitignore .",
-    "package": "svelte-package",
+    "package": "svelte-package -o package",
     "preview": "vite preview",
     "install": "pnpm install",
     "preinstall": "npx only-allow pnpm",
@@ -24,8 +24,7 @@
     "@codewithshin/svelte-utterances": "^0.2.2",
     "@sveltejs/adapter-static": "2.0.1",
     "@sveltejs/adapter-vercel": "2.3.0",
-    "@sveltejs/kit": "1.10.0",
-    "@sveltejs/package": "^2.0.2",
+    "@sveltejs/package": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^2.0.3",
     "@tsconfig/svelte": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
@@ -73,7 +72,554 @@
     "templates"
   ],
   "author": "beerui",
+  "exports": {
+    "./package.json": "./package.json",
+    "svelte": "./dist/index.js",
+    "./assets/3e23f8f488c71f07c1ed.woff": "./package/assets/3e23f8f488c71f07c1ed.woff",
+    "./assets/bb93f076bab714a6432a.eot": "./package/assets/bb93f076bab714a6432a.eot",
+    "./assets/beer.css": "./package/assets/beer.css",
+    "./assets/d223c9ef0e9a0ee3aceb.ttf": "./package/assets/d223c9ef0e9a0ee3aceb.ttf",
+    "./assets/main": {
+      "types": "./package/assets/main.d.ts",
+      "default": "./package/assets/main.js"
+    },
+    "./be-alert/BeAlert.svelte": {
+      "types": "./package/be-alert/BeAlert.svelte.d.ts",
+      "svelte": "./package/be-alert/BeAlert.svelte",
+      "default": "./package/be-alert/BeAlert.svelte"
+    },
+    "./be-alert": {
+      "types": "./package/be-alert/index.d.ts",
+      "svelte": "./package/be-alert/index.js",
+      "default": "./package/be-alert/index.js"
+    },
+    "./be-breadcrumb/BeBreadcrumb.svelte": {
+      "types": "./package/be-breadcrumb/BeBreadcrumb.svelte.d.ts",
+      "svelte": "./package/be-breadcrumb/BeBreadcrumb.svelte",
+      "default": "./package/be-breadcrumb/BeBreadcrumb.svelte"
+    },
+    "./be-breadcrumb/BeBreadcrumbItem.svelte": {
+      "types": "./package/be-breadcrumb/BeBreadcrumbItem.svelte.d.ts",
+      "svelte": "./package/be-breadcrumb/BeBreadcrumbItem.svelte",
+      "default": "./package/be-breadcrumb/BeBreadcrumbItem.svelte"
+    },
+    "./be-breadcrumb": {
+      "types": "./package/be-breadcrumb/index.d.ts",
+      "svelte": "./package/be-breadcrumb/index.js",
+      "default": "./package/be-breadcrumb/index.js"
+    },
+    "./be-button/BeButton.svelte": {
+      "types": "./package/be-button/BeButton.svelte.d.ts",
+      "svelte": "./package/be-button/BeButton.svelte",
+      "default": "./package/be-button/BeButton.svelte"
+    },
+    "./be-button": {
+      "types": "./package/be-button/index.d.ts",
+      "svelte": "./package/be-button/index.js",
+      "default": "./package/be-button/index.js"
+    },
+    "./be-carousel/BeCarousel.svelte": {
+      "types": "./package/be-carousel/BeCarousel.svelte.d.ts",
+      "svelte": "./package/be-carousel/BeCarousel.svelte",
+      "default": "./package/be-carousel/BeCarousel.svelte"
+    },
+    "./be-carousel/BeCarouselItem.svelte": {
+      "types": "./package/be-carousel/BeCarouselItem.svelte.d.ts",
+      "svelte": "./package/be-carousel/BeCarouselItem.svelte",
+      "default": "./package/be-carousel/BeCarouselItem.svelte"
+    },
+    "./be-carousel": {
+      "types": "./package/be-carousel/index.d.ts",
+      "svelte": "./package/be-carousel/index.js",
+      "default": "./package/be-carousel/index.js"
+    },
+    "./be-cascader/BeCascader.svelte": {
+      "types": "./package/be-cascader/BeCascader.svelte.d.ts",
+      "svelte": "./package/be-cascader/BeCascader.svelte",
+      "default": "./package/be-cascader/BeCascader.svelte"
+    },
+    "./be-cascader/cascader-menu.svelte": {
+      "types": "./package/be-cascader/cascader-menu.svelte.d.ts",
+      "svelte": "./package/be-cascader/cascader-menu.svelte",
+      "default": "./package/be-cascader/cascader-menu.svelte"
+    },
+    "./be-cascader/cascader-panel.svelte": {
+      "types": "./package/be-cascader/cascader-panel.svelte.d.ts",
+      "svelte": "./package/be-cascader/cascader-panel.svelte",
+      "default": "./package/be-cascader/cascader-panel.svelte"
+    },
+    "./be-cascader": {
+      "types": "./package/be-cascader/index.d.ts",
+      "svelte": "./package/be-cascader/index.js",
+      "default": "./package/be-cascader/index.js"
+    },
+    "./be-cascader/store": {
+      "types": "./package/be-cascader/store.d.ts",
+      "default": "./package/be-cascader/store.js"
+    },
+    "./be-checkbox/BeCheckbox.svelte": {
+      "types": "./package/be-checkbox/BeCheckbox.svelte.d.ts",
+      "svelte": "./package/be-checkbox/BeCheckbox.svelte",
+      "default": "./package/be-checkbox/BeCheckbox.svelte"
+    },
+    "./be-checkbox/BeCheckboxGroup.svelte": {
+      "types": "./package/be-checkbox/BeCheckboxGroup.svelte.d.ts",
+      "svelte": "./package/be-checkbox/BeCheckboxGroup.svelte",
+      "default": "./package/be-checkbox/BeCheckboxGroup.svelte"
+    },
+    "./be-checkbox/check": {
+      "types": "./package/be-checkbox/check.d.ts",
+      "default": "./package/be-checkbox/check.js"
+    },
+    "./be-checkbox": {
+      "types": "./package/be-checkbox/index.d.ts",
+      "svelte": "./package/be-checkbox/index.js",
+      "default": "./package/be-checkbox/index.js"
+    },
+    "./be-clock/BeClock.svelte": {
+      "types": "./package/be-clock/BeClock.svelte.d.ts",
+      "svelte": "./package/be-clock/BeClock.svelte",
+      "default": "./package/be-clock/BeClock.svelte"
+    },
+    "./be-clock": {
+      "types": "./package/be-clock/index.d.ts",
+      "svelte": "./package/be-clock/index.js",
+      "default": "./package/be-clock/index.js"
+    },
+    "./be-collapse/BeCollapse.svelte": {
+      "types": "./package/be-collapse/BeCollapse.svelte.d.ts",
+      "svelte": "./package/be-collapse/BeCollapse.svelte",
+      "default": "./package/be-collapse/BeCollapse.svelte"
+    },
+    "./be-collapse/BeCollapseItem.svelte": {
+      "types": "./package/be-collapse/BeCollapseItem.svelte.d.ts",
+      "svelte": "./package/be-collapse/BeCollapseItem.svelte",
+      "default": "./package/be-collapse/BeCollapseItem.svelte"
+    },
+    "./be-collapse": {
+      "types": "./package/be-collapse/index.d.ts",
+      "svelte": "./package/be-collapse/index.js",
+      "default": "./package/be-collapse/index.js"
+    },
+    "./be-collapse/store": {
+      "types": "./package/be-collapse/store.d.ts",
+      "default": "./package/be-collapse/store.js"
+    },
+    "./be-count-to/BeCountTo.svelte": {
+      "types": "./package/be-count-to/BeCountTo.svelte.d.ts",
+      "svelte": "./package/be-count-to/BeCountTo.svelte",
+      "default": "./package/be-count-to/BeCountTo.svelte"
+    },
+    "./be-count-to": {
+      "types": "./package/be-count-to/index.d.ts",
+      "svelte": "./package/be-count-to/index.js",
+      "default": "./package/be-count-to/index.js"
+    },
+    "./be-count-to/requestAnimationFrame": {
+      "types": "./package/be-count-to/requestAnimationFrame.d.ts",
+      "default": "./package/be-count-to/requestAnimationFrame.js"
+    },
+    "./be-date-picker/basic/date-table.svelte": {
+      "types": "./package/be-date-picker/basic/date-table.svelte.d.ts",
+      "svelte": "./package/be-date-picker/basic/date-table.svelte",
+      "default": "./package/be-date-picker/basic/date-table.svelte"
+    },
+    "./be-date-picker/basic/month-table.svelte": {
+      "types": "./package/be-date-picker/basic/month-table.svelte.d.ts",
+      "svelte": "./package/be-date-picker/basic/month-table.svelte",
+      "default": "./package/be-date-picker/basic/month-table.svelte"
+    },
+    "./be-date-picker/basic/time-spinner.svelte": {
+      "types": "./package/be-date-picker/basic/time-spinner.svelte.d.ts",
+      "svelte": "./package/be-date-picker/basic/time-spinner.svelte",
+      "default": "./package/be-date-picker/basic/time-spinner.svelte"
+    },
+    "./be-date-picker/basic/year-table.svelte": {
+      "types": "./package/be-date-picker/basic/year-table.svelte.d.ts",
+      "svelte": "./package/be-date-picker/basic/year-table.svelte",
+      "default": "./package/be-date-picker/basic/year-table.svelte"
+    },
+    "./be-date-picker/BeDatePicker.svelte": {
+      "types": "./package/be-date-picker/BeDatePicker.svelte.d.ts",
+      "svelte": "./package/be-date-picker/BeDatePicker.svelte",
+      "default": "./package/be-date-picker/BeDatePicker.svelte"
+    },
+    "./be-date-picker/BeTimePicker.svelte": {
+      "types": "./package/be-date-picker/BeTimePicker.svelte.d.ts",
+      "svelte": "./package/be-date-picker/BeTimePicker.svelte",
+      "default": "./package/be-date-picker/BeTimePicker.svelte"
+    },
+    "./be-date-picker/date-util": {
+      "types": "./package/be-date-picker/date-util.d.ts",
+      "default": "./package/be-date-picker/date-util.js"
+    },
+    "./be-date-picker/date": {
+      "types": "./package/be-date-picker/date.d.ts",
+      "default": "./package/be-date-picker/date.js"
+    },
+    "./be-date-picker": {
+      "types": "./package/be-date-picker/index.d.ts",
+      "svelte": "./package/be-date-picker/index.js",
+      "default": "./package/be-date-picker/index.js"
+    },
+    "./be-date-picker/panel/date-range.svelte": {
+      "types": "./package/be-date-picker/panel/date-range.svelte.d.ts",
+      "svelte": "./package/be-date-picker/panel/date-range.svelte",
+      "default": "./package/be-date-picker/panel/date-range.svelte"
+    },
+    "./be-date-picker/panel/date-time-range.svelte": {
+      "types": "./package/be-date-picker/panel/date-time-range.svelte.d.ts",
+      "svelte": "./package/be-date-picker/panel/date-time-range.svelte",
+      "default": "./package/be-date-picker/panel/date-time-range.svelte"
+    },
+    "./be-date-picker/panel/date.svelte": {
+      "types": "./package/be-date-picker/panel/date.svelte.d.ts",
+      "svelte": "./package/be-date-picker/panel/date.svelte",
+      "default": "./package/be-date-picker/panel/date.svelte"
+    },
+    "./be-date-picker/panel/month-range.svelte": {
+      "types": "./package/be-date-picker/panel/month-range.svelte.d.ts",
+      "svelte": "./package/be-date-picker/panel/month-range.svelte",
+      "default": "./package/be-date-picker/panel/month-range.svelte"
+    },
+    "./be-date-picker/panel/time.svelte": {
+      "types": "./package/be-date-picker/panel/time.svelte.d.ts",
+      "svelte": "./package/be-date-picker/panel/time.svelte",
+      "default": "./package/be-date-picker/panel/time.svelte"
+    },
+    "./be-date-picker/panel/year-range.svelte": {
+      "types": "./package/be-date-picker/panel/year-range.svelte.d.ts",
+      "svelte": "./package/be-date-picker/panel/year-range.svelte",
+      "default": "./package/be-date-picker/panel/year-range.svelte"
+    },
+    "./be-dialog/BeDialog.svelte": {
+      "types": "./package/be-dialog/BeDialog.svelte.d.ts",
+      "svelte": "./package/be-dialog/BeDialog.svelte",
+      "default": "./package/be-dialog/BeDialog.svelte"
+    },
+    "./be-dialog": {
+      "types": "./package/be-dialog/index.d.ts",
+      "svelte": "./package/be-dialog/index.js",
+      "default": "./package/be-dialog/index.js"
+    },
+    "./be-drag/BeDrag.svelte": {
+      "types": "./package/be-drag/BeDrag.svelte.d.ts",
+      "svelte": "./package/be-drag/BeDrag.svelte",
+      "default": "./package/be-drag/BeDrag.svelte"
+    },
+    "./be-drag": {
+      "types": "./package/be-drag/index.d.ts",
+      "svelte": "./package/be-drag/index.js",
+      "default": "./package/be-drag/index.js"
+    },
+    "./be-drawer/BeDrawer.svelte": {
+      "types": "./package/be-drawer/BeDrawer.svelte.d.ts",
+      "svelte": "./package/be-drawer/BeDrawer.svelte",
+      "default": "./package/be-drawer/BeDrawer.svelte"
+    },
+    "./be-drawer": {
+      "types": "./package/be-drawer/index.d.ts",
+      "svelte": "./package/be-drawer/index.js",
+      "default": "./package/be-drawer/index.js"
+    },
+    "./be-empty/BeEmpty.svelte": {
+      "types": "./package/be-empty/BeEmpty.svelte.d.ts",
+      "svelte": "./package/be-empty/BeEmpty.svelte",
+      "default": "./package/be-empty/BeEmpty.svelte"
+    },
+    "./be-empty": {
+      "types": "./package/be-empty/index.d.ts",
+      "svelte": "./package/be-empty/index.js",
+      "default": "./package/be-empty/index.js"
+    },
+    "./be-form/BeForm.svelte": {
+      "types": "./package/be-form/BeForm.svelte.d.ts",
+      "svelte": "./package/be-form/BeForm.svelte",
+      "default": "./package/be-form/BeForm.svelte"
+    },
+    "./be-form/BeFormItem.svelte": {
+      "types": "./package/be-form/BeFormItem.svelte.d.ts",
+      "svelte": "./package/be-form/BeFormItem.svelte",
+      "default": "./package/be-form/BeFormItem.svelte"
+    },
+    "./be-form": {
+      "types": "./package/be-form/index.d.ts",
+      "svelte": "./package/be-form/index.js",
+      "default": "./package/be-form/index.js"
+    },
+    "./be-icon/BeIcon.svelte": {
+      "types": "./package/be-icon/BeIcon.svelte.d.ts",
+      "svelte": "./package/be-icon/BeIcon.svelte",
+      "default": "./package/be-icon/BeIcon.svelte"
+    },
+    "./be-icon": {
+      "types": "./package/be-icon/index.d.ts",
+      "svelte": "./package/be-icon/index.js",
+      "default": "./package/be-icon/index.js"
+    },
+    "./be-input/BeInput.svelte": {
+      "types": "./package/be-input/BeInput.svelte.d.ts",
+      "svelte": "./package/be-input/BeInput.svelte",
+      "default": "./package/be-input/BeInput.svelte"
+    },
+    "./be-input": {
+      "types": "./package/be-input/index.d.ts",
+      "svelte": "./package/be-input/index.js",
+      "default": "./package/be-input/index.js"
+    },
+    "./be-loading/BeLoading.svelte": {
+      "types": "./package/be-loading/BeLoading.svelte.d.ts",
+      "svelte": "./package/be-loading/BeLoading.svelte",
+      "default": "./package/be-loading/BeLoading.svelte"
+    },
+    "./be-loading": {
+      "types": "./package/be-loading/index.d.ts",
+      "svelte": "./package/be-loading/index.js",
+      "default": "./package/be-loading/index.js"
+    },
+    "./be-menu/BeMenu.svelte": {
+      "types": "./package/be-menu/BeMenu.svelte.d.ts",
+      "svelte": "./package/be-menu/BeMenu.svelte",
+      "default": "./package/be-menu/BeMenu.svelte"
+    },
+    "./be-menu/BeMenuItem.svelte": {
+      "types": "./package/be-menu/BeMenuItem.svelte.d.ts",
+      "svelte": "./package/be-menu/BeMenuItem.svelte",
+      "default": "./package/be-menu/BeMenuItem.svelte"
+    },
+    "./be-menu/BeMenuItemGroup.svelte": {
+      "types": "./package/be-menu/BeMenuItemGroup.svelte.d.ts",
+      "svelte": "./package/be-menu/BeMenuItemGroup.svelte",
+      "default": "./package/be-menu/BeMenuItemGroup.svelte"
+    },
+    "./be-menu/BeSubMenu.svelte": {
+      "types": "./package/be-menu/BeSubMenu.svelte.d.ts",
+      "svelte": "./package/be-menu/BeSubMenu.svelte",
+      "default": "./package/be-menu/BeSubMenu.svelte"
+    },
+    "./be-menu": {
+      "types": "./package/be-menu/index.d.ts",
+      "svelte": "./package/be-menu/index.js",
+      "default": "./package/be-menu/index.js"
+    },
+    "./be-menu/menu": {
+      "types": "./package/be-menu/menu.d.ts",
+      "default": "./package/be-menu/menu.js"
+    },
+    "./be-pagination/BePagination.svelte": {
+      "types": "./package/be-pagination/BePagination.svelte.d.ts",
+      "svelte": "./package/be-pagination/BePagination.svelte",
+      "default": "./package/be-pagination/BePagination.svelte"
+    },
+    "./be-pagination": {
+      "types": "./package/be-pagination/index.d.ts",
+      "svelte": "./package/be-pagination/index.js",
+      "default": "./package/be-pagination/index.js"
+    },
+    "./be-progress/BeProgress.svelte": {
+      "types": "./package/be-progress/BeProgress.svelte.d.ts",
+      "svelte": "./package/be-progress/BeProgress.svelte",
+      "default": "./package/be-progress/BeProgress.svelte"
+    },
+    "./be-progress": {
+      "types": "./package/be-progress/index.d.ts",
+      "svelte": "./package/be-progress/index.js",
+      "default": "./package/be-progress/index.js"
+    },
+    "./be-radio/BeRadio.svelte": {
+      "types": "./package/be-radio/BeRadio.svelte.d.ts",
+      "svelte": "./package/be-radio/BeRadio.svelte",
+      "default": "./package/be-radio/BeRadio.svelte"
+    },
+    "./be-radio/BeRadioGroup.svelte": {
+      "types": "./package/be-radio/BeRadioGroup.svelte.d.ts",
+      "svelte": "./package/be-radio/BeRadioGroup.svelte",
+      "default": "./package/be-radio/BeRadioGroup.svelte"
+    },
+    "./be-radio": {
+      "types": "./package/be-radio/index.d.ts",
+      "svelte": "./package/be-radio/index.js",
+      "default": "./package/be-radio/index.js"
+    },
+    "./be-radio/radio": {
+      "types": "./package/be-radio/radio.d.ts",
+      "default": "./package/be-radio/radio.js"
+    },
+    "./be-scrollbar/BeScrollbar.svelte": {
+      "types": "./package/be-scrollbar/BeScrollbar.svelte.d.ts",
+      "svelte": "./package/be-scrollbar/BeScrollbar.svelte",
+      "default": "./package/be-scrollbar/BeScrollbar.svelte"
+    },
+    "./be-scrollbar": {
+      "types": "./package/be-scrollbar/index.d.ts",
+      "svelte": "./package/be-scrollbar/index.js",
+      "default": "./package/be-scrollbar/index.js"
+    },
+    "./be-select/BeOption.svelte": {
+      "types": "./package/be-select/BeOption.svelte.d.ts",
+      "svelte": "./package/be-select/BeOption.svelte",
+      "default": "./package/be-select/BeOption.svelte"
+    },
+    "./be-select/BeSelect.svelte": {
+      "types": "./package/be-select/BeSelect.svelte.d.ts",
+      "svelte": "./package/be-select/BeSelect.svelte",
+      "default": "./package/be-select/BeSelect.svelte"
+    },
+    "./be-select": {
+      "types": "./package/be-select/index.d.ts",
+      "svelte": "./package/be-select/index.js",
+      "default": "./package/be-select/index.js"
+    },
+    "./be-select/select": {
+      "types": "./package/be-select/select.d.ts",
+      "default": "./package/be-select/select.js"
+    },
+    "./be-select-tree/BeSelectTree.svelte": {
+      "types": "./package/be-select-tree/BeSelectTree.svelte.d.ts",
+      "svelte": "./package/be-select-tree/BeSelectTree.svelte",
+      "default": "./package/be-select-tree/BeSelectTree.svelte"
+    },
+    "./be-select-tree": {
+      "types": "./package/be-select-tree/index.d.ts",
+      "svelte": "./package/be-select-tree/index.js",
+      "default": "./package/be-select-tree/index.js"
+    },
+    "./be-switch/BeSwitch.svelte": {
+      "types": "./package/be-switch/BeSwitch.svelte.d.ts",
+      "svelte": "./package/be-switch/BeSwitch.svelte",
+      "default": "./package/be-switch/BeSwitch.svelte"
+    },
+    "./be-switch": {
+      "types": "./package/be-switch/index.d.ts",
+      "svelte": "./package/be-switch/index.js",
+      "default": "./package/be-switch/index.js"
+    },
+    "./be-table/BeTable.svelte": {
+      "types": "./package/be-table/BeTable.svelte.d.ts",
+      "svelte": "./package/be-table/BeTable.svelte",
+      "default": "./package/be-table/BeTable.svelte"
+    },
+    "./be-table/BeTableColumn.svelte": {
+      "types": "./package/be-table/BeTableColumn.svelte.d.ts",
+      "svelte": "./package/be-table/BeTableColumn.svelte",
+      "default": "./package/be-table/BeTableColumn.svelte"
+    },
+    "./be-table": {
+      "types": "./package/be-table/index.d.ts",
+      "svelte": "./package/be-table/index.js",
+      "default": "./package/be-table/index.js"
+    },
+    "./be-tabs/BeTabPane.svelte": {
+      "types": "./package/be-tabs/BeTabPane.svelte.d.ts",
+      "svelte": "./package/be-tabs/BeTabPane.svelte",
+      "default": "./package/be-tabs/BeTabPane.svelte"
+    },
+    "./be-tabs/BeTabs.svelte": {
+      "types": "./package/be-tabs/BeTabs.svelte.d.ts",
+      "svelte": "./package/be-tabs/BeTabs.svelte",
+      "default": "./package/be-tabs/BeTabs.svelte"
+    },
+    "./be-tabs": {
+      "types": "./package/be-tabs/index.d.ts",
+      "svelte": "./package/be-tabs/index.js",
+      "default": "./package/be-tabs/index.js"
+    },
+    "./be-textarea/BeTextarea.svelte": {
+      "types": "./package/be-textarea/BeTextarea.svelte.d.ts",
+      "svelte": "./package/be-textarea/BeTextarea.svelte",
+      "default": "./package/be-textarea/BeTextarea.svelte"
+    },
+    "./be-textarea": {
+      "types": "./package/be-textarea/index.d.ts",
+      "svelte": "./package/be-textarea/index.js",
+      "default": "./package/be-textarea/index.js"
+    },
+    "./be-tree/BeTree.svelte": {
+      "types": "./package/be-tree/BeTree.svelte.d.ts",
+      "svelte": "./package/be-tree/BeTree.svelte",
+      "default": "./package/be-tree/BeTree.svelte"
+    },
+    "./be-tree/BeTreeNode.svelte": {
+      "types": "./package/be-tree/BeTreeNode.svelte.d.ts",
+      "svelte": "./package/be-tree/BeTreeNode.svelte",
+      "default": "./package/be-tree/BeTreeNode.svelte"
+    },
+    "./be-tree": {
+      "types": "./package/be-tree/index.d.ts",
+      "svelte": "./package/be-tree/index.js",
+      "default": "./package/be-tree/index.js"
+    },
+    "./be-tree/model/node": {
+      "types": "./package/be-tree/model/node.d.ts",
+      "default": "./package/be-tree/model/node.js"
+    },
+    "./be-tree/model/TreeStore": {
+      "types": "./package/be-tree/model/TreeStore.d.ts",
+      "default": "./package/be-tree/model/TreeStore.js"
+    },
+    "./be-tree/model/util": {
+      "types": "./package/be-tree/model/util.d.ts",
+      "default": "./package/be-tree/model/util.js"
+    },
+    "./be-upload/ajax": {
+      "types": "./package/be-upload/ajax.d.ts",
+      "default": "./package/be-upload/ajax.js"
+    },
+    "./be-upload/BeUpload.svelte": {
+      "types": "./package/be-upload/BeUpload.svelte.d.ts",
+      "svelte": "./package/be-upload/BeUpload.svelte",
+      "default": "./package/be-upload/BeUpload.svelte"
+    },
+    "./be-upload": {
+      "types": "./package/be-upload/index.d.ts",
+      "svelte": "./package/be-upload/index.js",
+      "default": "./package/be-upload/index.js"
+    },
+    ".": {
+      "types": "./package/index.d.ts",
+      "svelte": "./package/index.js",
+      "default": "./package/index.js"
+    },
+    "./utils/beerui": {
+      "types": "./package/utils/beerui.d.ts",
+      "default": "./package/utils/beerui.js"
+    },
+    "./utils/forwardEventsBuilder": {
+      "types": "./package/utils/forwardEventsBuilder.d.ts",
+      "default": "./package/utils/forwardEventsBuilder.js"
+    },
+    "./utils": {
+      "types": "./package/utils/index.d.ts",
+      "svelte": "./package/utils/index.js",
+      "default": "./package/utils/index.js"
+    },
+    "./utils/loading": {
+      "types": "./package/utils/loading.d.ts",
+      "default": "./package/utils/loading.js"
+    },
+    "./utils/MessageBox": {
+      "types": "./package/utils/MessageBox.d.ts",
+      "default": "./package/utils/MessageBox.js"
+    },
+    "./utils/notice": {
+      "types": "./package/utils/notice.d.ts",
+      "default": "./package/utils/notice.js"
+    },
+    "./utils/PreviewImage": {
+      "types": "./package/utils/PreviewImage.d.ts",
+      "default": "./package/utils/PreviewImage.js"
+    },
+    "./utils/storage": {
+      "types": "./package/utils/storage.d.ts",
+      "default": "./package/utils/storage.js"
+    },
+    "./utils/throttle": {
+      "types": "./package/utils/throttle.d.ts",
+      "default": "./package/utils/throttle.js"
+    }
+  },
   "dependencies": {
+    "@sveltejs/kit": "1.10.0",
     "acorn": "^8.8.0",
     "async-validator": "^4.2.5",
     "autoprefixer": "^10.4.12",
@@ -85,9 +631,351 @@
     "sourcemap-codec": "^1.4.8",
     "svelte": "^3.55.1",
     "svelte-json-tree": "^1.0.0",
-    "yootils": "^0.3.1"
-  },
-  "peerDependencies": {
+    "yootils": "^0.3.1",
     "vite": "4.0.1"
+  },
+  "files": [
+    "package"
+  ],
+  "svelte": "./package/index.js",
+  "typesVersions": {
+    ">4.0": {
+      "assets/main": [
+        "./package/assets/main.d.ts"
+      ],
+      "be-alert/BeAlert.svelte": [
+        "./package/be-alert/BeAlert.svelte.d.ts"
+      ],
+      "be-alert": [
+        "./package/be-alert/index.d.ts"
+      ],
+      "be-breadcrumb/BeBreadcrumb.svelte": [
+        "./package/be-breadcrumb/BeBreadcrumb.svelte.d.ts"
+      ],
+      "be-breadcrumb/BeBreadcrumbItem.svelte": [
+        "./package/be-breadcrumb/BeBreadcrumbItem.svelte.d.ts"
+      ],
+      "be-breadcrumb": [
+        "./package/be-breadcrumb/index.d.ts"
+      ],
+      "be-button/BeButton.svelte": [
+        "./package/be-button/BeButton.svelte.d.ts"
+      ],
+      "be-button": [
+        "./package/be-button/index.d.ts"
+      ],
+      "be-carousel/BeCarousel.svelte": [
+        "./package/be-carousel/BeCarousel.svelte.d.ts"
+      ],
+      "be-carousel/BeCarouselItem.svelte": [
+        "./package/be-carousel/BeCarouselItem.svelte.d.ts"
+      ],
+      "be-carousel": [
+        "./package/be-carousel/index.d.ts"
+      ],
+      "be-cascader/BeCascader.svelte": [
+        "./package/be-cascader/BeCascader.svelte.d.ts"
+      ],
+      "be-cascader/cascader-menu.svelte": [
+        "./package/be-cascader/cascader-menu.svelte.d.ts"
+      ],
+      "be-cascader/cascader-panel.svelte": [
+        "./package/be-cascader/cascader-panel.svelte.d.ts"
+      ],
+      "be-cascader": [
+        "./package/be-cascader/index.d.ts"
+      ],
+      "be-cascader/store": [
+        "./package/be-cascader/store.d.ts"
+      ],
+      "be-checkbox/BeCheckbox.svelte": [
+        "./package/be-checkbox/BeCheckbox.svelte.d.ts"
+      ],
+      "be-checkbox/BeCheckboxGroup.svelte": [
+        "./package/be-checkbox/BeCheckboxGroup.svelte.d.ts"
+      ],
+      "be-checkbox/check": [
+        "./package/be-checkbox/check.d.ts"
+      ],
+      "be-checkbox": [
+        "./package/be-checkbox/index.d.ts"
+      ],
+      "be-clock/BeClock.svelte": [
+        "./package/be-clock/BeClock.svelte.d.ts"
+      ],
+      "be-clock": [
+        "./package/be-clock/index.d.ts"
+      ],
+      "be-collapse/BeCollapse.svelte": [
+        "./package/be-collapse/BeCollapse.svelte.d.ts"
+      ],
+      "be-collapse/BeCollapseItem.svelte": [
+        "./package/be-collapse/BeCollapseItem.svelte.d.ts"
+      ],
+      "be-collapse": [
+        "./package/be-collapse/index.d.ts"
+      ],
+      "be-collapse/store": [
+        "./package/be-collapse/store.d.ts"
+      ],
+      "be-count-to/BeCountTo.svelte": [
+        "./package/be-count-to/BeCountTo.svelte.d.ts"
+      ],
+      "be-count-to": [
+        "./package/be-count-to/index.d.ts"
+      ],
+      "be-count-to/requestAnimationFrame": [
+        "./package/be-count-to/requestAnimationFrame.d.ts"
+      ],
+      "be-date-picker/basic/date-table.svelte": [
+        "./package/be-date-picker/basic/date-table.svelte.d.ts"
+      ],
+      "be-date-picker/basic/month-table.svelte": [
+        "./package/be-date-picker/basic/month-table.svelte.d.ts"
+      ],
+      "be-date-picker/basic/time-spinner.svelte": [
+        "./package/be-date-picker/basic/time-spinner.svelte.d.ts"
+      ],
+      "be-date-picker/basic/year-table.svelte": [
+        "./package/be-date-picker/basic/year-table.svelte.d.ts"
+      ],
+      "be-date-picker/BeDatePicker.svelte": [
+        "./package/be-date-picker/BeDatePicker.svelte.d.ts"
+      ],
+      "be-date-picker/BeTimePicker.svelte": [
+        "./package/be-date-picker/BeTimePicker.svelte.d.ts"
+      ],
+      "be-date-picker/date-util": [
+        "./package/be-date-picker/date-util.d.ts"
+      ],
+      "be-date-picker/date": [
+        "./package/be-date-picker/date.d.ts"
+      ],
+      "be-date-picker": [
+        "./package/be-date-picker/index.d.ts"
+      ],
+      "be-date-picker/panel/date-range.svelte": [
+        "./package/be-date-picker/panel/date-range.svelte.d.ts"
+      ],
+      "be-date-picker/panel/date-time-range.svelte": [
+        "./package/be-date-picker/panel/date-time-range.svelte.d.ts"
+      ],
+      "be-date-picker/panel/date.svelte": [
+        "./package/be-date-picker/panel/date.svelte.d.ts"
+      ],
+      "be-date-picker/panel/month-range.svelte": [
+        "./package/be-date-picker/panel/month-range.svelte.d.ts"
+      ],
+      "be-date-picker/panel/time.svelte": [
+        "./package/be-date-picker/panel/time.svelte.d.ts"
+      ],
+      "be-date-picker/panel/year-range.svelte": [
+        "./package/be-date-picker/panel/year-range.svelte.d.ts"
+      ],
+      "be-dialog/BeDialog.svelte": [
+        "./package/be-dialog/BeDialog.svelte.d.ts"
+      ],
+      "be-dialog": [
+        "./package/be-dialog/index.d.ts"
+      ],
+      "be-drag/BeDrag.svelte": [
+        "./package/be-drag/BeDrag.svelte.d.ts"
+      ],
+      "be-drag": [
+        "./package/be-drag/index.d.ts"
+      ],
+      "be-drawer/BeDrawer.svelte": [
+        "./package/be-drawer/BeDrawer.svelte.d.ts"
+      ],
+      "be-drawer": [
+        "./package/be-drawer/index.d.ts"
+      ],
+      "be-empty/BeEmpty.svelte": [
+        "./package/be-empty/BeEmpty.svelte.d.ts"
+      ],
+      "be-empty": [
+        "./package/be-empty/index.d.ts"
+      ],
+      "be-form/BeForm.svelte": [
+        "./package/be-form/BeForm.svelte.d.ts"
+      ],
+      "be-form/BeFormItem.svelte": [
+        "./package/be-form/BeFormItem.svelte.d.ts"
+      ],
+      "be-form": [
+        "./package/be-form/index.d.ts"
+      ],
+      "be-icon/BeIcon.svelte": [
+        "./package/be-icon/BeIcon.svelte.d.ts"
+      ],
+      "be-icon": [
+        "./package/be-icon/index.d.ts"
+      ],
+      "be-input/BeInput.svelte": [
+        "./package/be-input/BeInput.svelte.d.ts"
+      ],
+      "be-input": [
+        "./package/be-input/index.d.ts"
+      ],
+      "be-loading/BeLoading.svelte": [
+        "./package/be-loading/BeLoading.svelte.d.ts"
+      ],
+      "be-loading": [
+        "./package/be-loading/index.d.ts"
+      ],
+      "be-menu/BeMenu.svelte": [
+        "./package/be-menu/BeMenu.svelte.d.ts"
+      ],
+      "be-menu/BeMenuItem.svelte": [
+        "./package/be-menu/BeMenuItem.svelte.d.ts"
+      ],
+      "be-menu/BeMenuItemGroup.svelte": [
+        "./package/be-menu/BeMenuItemGroup.svelte.d.ts"
+      ],
+      "be-menu/BeSubMenu.svelte": [
+        "./package/be-menu/BeSubMenu.svelte.d.ts"
+      ],
+      "be-menu": [
+        "./package/be-menu/index.d.ts"
+      ],
+      "be-menu/menu": [
+        "./package/be-menu/menu.d.ts"
+      ],
+      "be-pagination/BePagination.svelte": [
+        "./package/be-pagination/BePagination.svelte.d.ts"
+      ],
+      "be-pagination": [
+        "./package/be-pagination/index.d.ts"
+      ],
+      "be-progress/BeProgress.svelte": [
+        "./package/be-progress/BeProgress.svelte.d.ts"
+      ],
+      "be-progress": [
+        "./package/be-progress/index.d.ts"
+      ],
+      "be-radio/BeRadio.svelte": [
+        "./package/be-radio/BeRadio.svelte.d.ts"
+      ],
+      "be-radio/BeRadioGroup.svelte": [
+        "./package/be-radio/BeRadioGroup.svelte.d.ts"
+      ],
+      "be-radio": [
+        "./package/be-radio/index.d.ts"
+      ],
+      "be-radio/radio": [
+        "./package/be-radio/radio.d.ts"
+      ],
+      "be-scrollbar/BeScrollbar.svelte": [
+        "./package/be-scrollbar/BeScrollbar.svelte.d.ts"
+      ],
+      "be-scrollbar": [
+        "./package/be-scrollbar/index.d.ts"
+      ],
+      "be-select/BeOption.svelte": [
+        "./package/be-select/BeOption.svelte.d.ts"
+      ],
+      "be-select/BeSelect.svelte": [
+        "./package/be-select/BeSelect.svelte.d.ts"
+      ],
+      "be-select": [
+        "./package/be-select/index.d.ts"
+      ],
+      "be-select/select": [
+        "./package/be-select/select.d.ts"
+      ],
+      "be-select-tree/BeSelectTree.svelte": [
+        "./package/be-select-tree/BeSelectTree.svelte.d.ts"
+      ],
+      "be-select-tree": [
+        "./package/be-select-tree/index.d.ts"
+      ],
+      "be-switch/BeSwitch.svelte": [
+        "./package/be-switch/BeSwitch.svelte.d.ts"
+      ],
+      "be-switch": [
+        "./package/be-switch/index.d.ts"
+      ],
+      "be-table/BeTable.svelte": [
+        "./package/be-table/BeTable.svelte.d.ts"
+      ],
+      "be-table/BeTableColumn.svelte": [
+        "./package/be-table/BeTableColumn.svelte.d.ts"
+      ],
+      "be-table": [
+        "./package/be-table/index.d.ts"
+      ],
+      "be-tabs/BeTabPane.svelte": [
+        "./package/be-tabs/BeTabPane.svelte.d.ts"
+      ],
+      "be-tabs/BeTabs.svelte": [
+        "./package/be-tabs/BeTabs.svelte.d.ts"
+      ],
+      "be-tabs": [
+        "./package/be-tabs/index.d.ts"
+      ],
+      "be-textarea/BeTextarea.svelte": [
+        "./package/be-textarea/BeTextarea.svelte.d.ts"
+      ],
+      "be-textarea": [
+        "./package/be-textarea/index.d.ts"
+      ],
+      "be-tree/BeTree.svelte": [
+        "./package/be-tree/BeTree.svelte.d.ts"
+      ],
+      "be-tree/BeTreeNode.svelte": [
+        "./package/be-tree/BeTreeNode.svelte.d.ts"
+      ],
+      "be-tree": [
+        "./package/be-tree/index.d.ts"
+      ],
+      "be-tree/model/node": [
+        "./package/be-tree/model/node.d.ts"
+      ],
+      "be-tree/model/TreeStore": [
+        "./package/be-tree/model/TreeStore.d.ts"
+      ],
+      "be-tree/model/util": [
+        "./package/be-tree/model/util.d.ts"
+      ],
+      "be-upload/ajax": [
+        "./package/be-upload/ajax.d.ts"
+      ],
+      "be-upload/BeUpload.svelte": [
+        "./package/be-upload/BeUpload.svelte.d.ts"
+      ],
+      "be-upload": [
+        "./package/be-upload/index.d.ts"
+      ],
+      "index": [
+        "./package/index.d.ts"
+      ],
+      "utils/beerui": [
+        "./package/utils/beerui.d.ts"
+      ],
+      "utils/forwardEventsBuilder": [
+        "./package/utils/forwardEventsBuilder.d.ts"
+      ],
+      "utils": [
+        "./package/utils/index.d.ts"
+      ],
+      "utils/loading": [
+        "./package/utils/loading.d.ts"
+      ],
+      "utils/MessageBox": [
+        "./package/utils/MessageBox.d.ts"
+      ],
+      "utils/notice": [
+        "./package/utils/notice.d.ts"
+      ],
+      "utils/PreviewImage": [
+        "./package/utils/PreviewImage.d.ts"
+      ],
+      "utils/storage": [
+        "./package/utils/storage.d.ts"
+      ],
+      "utils/throttle": [
+        "./package/utils/throttle.d.ts"
+      ]
+    }
   }
 }
