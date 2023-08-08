@@ -13,6 +13,12 @@ This is a Svelte Ui Components,`@brewer/beerui`.
 
 2.0版本会考虑进行风格和写法大变。
 
+其它想法：考虑到一些中文网不完善不便使用，在进行一系列上线中文网的计划。
+
+如：[浓香 Turf.js](https://tianna.beer-ui.com/luzhou/)
+
+还有很多想法，但碍于空闲时间不多，没法好好实现，想要参与的可以邮件我。
+
 ### 在线文档
 国内部署：[BeerUi](https://beer-ui.com/)
 外网文档：[BeerUi](https://beer-ui.vercel.app/)
