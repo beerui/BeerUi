@@ -2,11 +2,11 @@
 	import { createEventDispatcher, getContext, tick } from 'svelte';
 
 	export let value: string | number = '';
-	export let placeholder: string = '';
-	export let readonly: boolean = false;
-	export let disabled: boolean = false;
+	export let placeholder = '';
+	export let readonly = false;
+	export let disabled = false;
 	export let maxlength: string | number = '';
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 
 	let instance = null
 
@@ -25,7 +25,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
 	}
@@ -41,6 +41,8 @@
 	})
 </script>
 <div
+	role='searchbox'
+	tabindex='-1'
 	class='be-textarea {_class}'
 	class:is-disabled={disabled}
 	on:click

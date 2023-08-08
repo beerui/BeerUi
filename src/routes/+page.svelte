@@ -26,7 +26,7 @@
 		<a href='/components/icons'>Start Now</a>
 	</div>
 	<div class='content'>
-		<div class='code' title='Copy Code To Clipboard' on:click={() => ClipboardHandle(`npm i @brewer/beerui`)}>
+		<div class='code' title='Copy Code To Clipboard' on:click={() => ClipboardHandle(`npm i @brewer/beerui`)} on:keydown>
 			npm i @brewer/beerui
 			<div class='icon'><BeIcon name='file-copy' width='18' height='18' /></div>
 		</div>

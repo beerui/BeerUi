@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/LayoutHeader.5b3b3ed1.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/LayoutFooter.b2d8d7c4.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_layout.019cf28e.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/loading.94dd0eb0.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/github.cb54580c.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.1e536230.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.21613952.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.05b97e7b.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.88f9aa6d.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.b0d17614.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/environment.7328c2e2.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.svelte.d4c93525.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Logo.51a85fb9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/stores.f4482d01.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/LayoutFooter.74254c16.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-layout.svelte.ac4fa1b3.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-components-pagination-page.svelte.325ee14f.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/beerui.dfc24136.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.d5ff37b9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeOption.c598d3d8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeInput.7724363f.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/clickOutside.2fee1283.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/throttle.c22c4fe7.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/loading.6fc7a1f8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/notice.3b3d46d2.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeTableColumn.37b6e980.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeCheckbox.4530d735.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DemoBlock.d66327e5.js"><title>BePagination 分页 组件文档 BeerUi-官方文档</title><!-- HEAD_svelte-1eytwic_START --><script>var _paq = window._paq = window._paq || [];
+	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//log.beer-ui.com/";
+		_paq.push(['setTrackerUrl', u+'matomo.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+</script><!-- HEAD_svelte-1eytwic_END --><!-- HEAD_svelte-p3zqhb_START --><meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component"><meta name="keywords" content="BePagination 分页, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit"><!-- HEAD_svelte-p3zqhb_END -->
+		<style>
+			body {background: rgba(16, 106, 55, 30%);}
+            #svelte {
+                background: linear-gradient(rgba(16, 106, 55, 80%), rgba(107, 132, 173, 80%));
+				min-height: 100vh;
+            }
+		</style>
+	</head>
+	<body data-sveltekit-preload-data="viewport">
+		<div id="svelte">
+
+
+<div class="be-warp">
+
+<div class="be-header s-UFfHt6Njpvg7"><div class="logo flex s-UFfHt6Njpvg7">
+<embed src="/logo_new.svg" width="100%" height="100%" type="image/svg+xml">
+		<span></span></div>
+	<div class="nav s-UFfHt6Njpvg7"><a href="/" class="s-UFfHt6Njpvg7">主页</a>
+		<a href="/components/start" class="s-UFfHt6Njpvg7">组件</a>
+		<a rel="noreferrer" target="_blank" href="https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md" class="s-UFfHt6Njpvg7">更新日志</a>
+		<a href="/others" class="s-UFfHt6Njpvg7">其它</a>
+		<div class="tabs s-UFfHt6Njpvg7"><div data-theme="light" class="item sun s-UFfHt6Njpvg7 active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99996 3.15217C10.5252 3.15217 10.951 2.72636 10.951 2.20109C10.951 1.67582 10.5252 1.25 9.99996 1.25C9.47469 1.25 9.04887 1.67582 9.04887 2.20109C9.04887 2.72636 9.47469 3.15217 9.99996 3.15217Z"></path><path fill="currentColor" d="M9.99992 4.29348C6.84829 4.29348 4.2934 6.84838 4.2934 10C4.2934 13.1516 6.84829 15.7065 9.99992 15.7065C13.1515 15.7065 15.7064 13.1516 15.7064 10C15.7064 6.84838 13.1515 4.29348 9.99992 4.29348Z"></path><path fill="currentColor" d="M16.4673 4.4837C16.4673 5.00896 16.0415 5.43478 15.5162 5.43478C14.991 5.43478 14.5652 5.00896 14.5652 4.4837C14.5652 3.95843 14.991 3.53261 15.5162 3.53261C16.0415 3.53261 16.4673 3.95843 16.4673 4.4837Z"></path><path fill="currentColor" d="M17.7989 10.9511C18.3241 10.9511 18.75 10.5253 18.75 10C18.75 9.47474 18.3241 9.04891 17.7989 9.04891C17.2736 9.04891 16.8478 9.47474 16.8478 10C16.8478 10.5253 17.2736 10.9511 17.7989 10.9511Z"></path><path fill="currentColor" d="M16.4673 15.5163C16.4673 16.0416 16.0415 16.4674 15.5162 16.4674C14.991 16.4674 14.5652 16.0416 14.5652 15.5163C14.5652 14.991 14.991 14.5652 15.5162 14.5652C16.0415 14.5652 16.4673 14.991 16.4673 15.5163Z"></path><path fill="currentColor" d="M9.99996 18.75C10.5252 18.75 10.951 18.3242 10.951 17.7989C10.951 17.2736 10.5252 16.8478 9.99996 16.8478C9.47469 16.8478 9.04887 17.2736 9.04887 17.7989C9.04887 18.3242 9.47469 18.75 9.99996 18.75Z"></path><path fill="currentColor" d="M5.43469 15.5163C5.43469 16.0416 5.00887 16.4674 4.4836 16.4674C3.95833 16.4674 3.53252 16.0416 3.53252 15.5163C3.53252 14.991 3.95833 14.5652 4.4836 14.5652C5.00887 14.5652 5.43469 14.991 5.43469 15.5163Z"></path><path fill="currentColor" d="M2.20096 10.9511C2.72623 10.9511 3.15205 10.5253 3.15205 10C3.15205 9.47474 2.72623 9.04891 2.20096 9.04891C1.67569 9.04891 1.24988 9.47474 1.24988 10C1.24988 10.5253 1.67569 10.9511 2.20096 10.9511Z"></path><path fill="currentColor" d="M5.43469 4.4837C5.43469 5.00896 5.00887 5.43478 4.4836 5.43478C3.95833 5.43478 3.53252 5.00896 3.53252 4.4837C3.53252 3.95843 3.95833 3.53261 4.4836 3.53261C5.00887 3.53261 5.43469 3.95843 5.43469 4.4837Z"></path></svg></div>
+			<div data-theme="dark" class="item moon s-UFfHt6Njpvg7"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99993 3.12494C6.20294 3.12494 3.12488 6.203 3.12488 10C3.12488 13.797 6.20294 16.8751 9.99993 16.8751C13.7969 16.8751 16.875 13.797 16.875 10C16.875 9.52352 16.8264 9.0577 16.7337 8.6075C16.6752 8.32295 16.4282 8.11628 16.1378 8.10872C15.8474 8.10117 15.5901 8.29473 15.5168 8.57585C15.1411 10.0167 13.8302 11.0795 12.2727 11.0795C10.4212 11.0795 8.92039 9.57869 8.92039 7.72726C8.92039 6.16969 9.98319 4.85879 11.4241 4.48312C11.7052 4.40983 11.8988 4.15249 11.8912 3.86207C11.8836 3.57165 11.677 3.32473 11.3924 3.26616C10.9422 3.1735 10.4764 3.12494 9.99993 3.12494Z"></path></svg></div></div></div>
+</div>
+	<div class="be-container"><div class="be-warp"><div class="be-container"><section class="nav-container s-SQJzG6QE6tAA"><div class="nav-container__scroll"><ul class="s-SQJzG6QE6tAA"><li class="s-SQJzG6QE6tAA"><a href="/components/start" class="s-SQJzG6QE6tAA">快速开始</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/repl" class="s-SQJzG6QE6tAA">REPL</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">基本</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/icons" class="s-SQJzG6QE6tAA">Icons 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/button" class="s-SQJzG6QE6tAA">Button 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">表单</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/input" class="s-SQJzG6QE6tAA">Input 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/textarea" class="s-SQJzG6QE6tAA">Textarea 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/radio" class="s-SQJzG6QE6tAA">Radio 单选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/checkbox" class="s-SQJzG6QE6tAA">Checkbox
+				多选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/switch" class="s-SQJzG6QE6tAA">Switch 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/select" class="s-SQJzG6QE6tAA">Select 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/cascader" class="s-SQJzG6QE6tAA">Cascader
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/form" class="s-SQJzG6QE6tAA">Form 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/upload" class="s-SQJzG6QE6tAA">Upload 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/datePicker" class="s-SQJzG6QE6tAA">date-picker
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drag" class="s-SQJzG6QE6tAA">Drag 拖动排序</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">data 数据</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/table" class="s-SQJzG6QE6tAA">Table 表格</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tree" class="s-SQJzG6QE6tAA">Tree 树形控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/selectTree" class="s-SQJzG6QE6tAA">SelectTree
+				树形选择控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/pagination" class="s-SQJzG6QE6tAA active">Pagination
+				分页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/progress" class="s-SQJzG6QE6tAA">progress
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/empty" class="s-SQJzG6QE6tAA">Empty 空状态</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">提示</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/loading" class="s-SQJzG6QE6tAA">Loading 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/messageBox" class="s-SQJzG6QE6tAA">MessageBox
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/dialog" class="s-SQJzG6QE6tAA">Dialog 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/alert" class="s-SQJzG6QE6tAA">Alert 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/notice" class="s-SQJzG6QE6tAA">Notice 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">导航 Navigation</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tabs" class="s-SQJzG6QE6tAA">Tabs 标签页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/menu" class="s-SQJzG6QE6tAA">NavMenu 导航菜单</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/breadcrumb" class="s-SQJzG6QE6tAA">Breadcrumb
+				面包屑</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">其它 Others</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/clock" class="s-SQJzG6QE6tAA">Clock 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drawer" class="s-SQJzG6QE6tAA">Drawer 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/collapse" class="s-SQJzG6QE6tAA">Collapse
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/scrollbar" class="s-SQJzG6QE6tAA">Scrollbar
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/carousel" class="s-SQJzG6QE6tAA">Carousel
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/countTo" class="s-SQJzG6QE6tAA">CountTo 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/preview" class="s-SQJzG6QE6tAA">PreviewImage
+				示例</a></li></ul></div>
+</section>
+		<div class="be-main"><div class="be-main-container">
+
+
+<div class="page-container"><h2>BePagination 分页</h2>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list"><div class="overflow-x-auto"><table class="table w-full table-zebra"><thead><tr><td>序号</td>
+							<td>姓名</td>
+							<td>年龄</td>
+							<td>创建时间</td></tr></thead>
+						<tbody><tr><td>1</td>
+								<td>Mr.22</td>
+								<td>39</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>2</td>
+								<td>Mr.19</td>
+								<td>35</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>3</td>
+								<td>Mr.22</td>
+								<td>52</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>4</td>
+								<td>Mr.69</td>
+								<td>10</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>5</td>
+								<td>Mr.64</td>
+								<td>34</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>6</td>
+								<td>Mr.93</td>
+								<td>21</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>7</td>
+								<td>Mr.40</td>
+								<td>40</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>8</td>
+								<td>Mr.20</td>
+								<td>17</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>9</td>
+								<td>Mr.56</td>
+								<td>32</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>10</td>
+								<td>Mr.4</td>
+								<td>43</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr></tbody></table></div>
+				
+
+<div class="be-pagination be-pagination-card">
+	<div class="be-pagination__container">
+			<div class="be-pagination__container"><div role="button" tabindex="-1" class="list disabled"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path></svg></div></div>
+				
+				<div role="button" tabindex="-1" class="list"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path></svg></div></div>
+				
+				</div></div>
+</div></div>
+			<div class="demo-list">
+
+<div class="be-pagination be-pagination-card">
+	<div class="be-pagination__container">
+			<div class="be-pagination__container"><div role="button" tabindex="-1" class="list disabled"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path></svg></div></div>
+				
+				<div role="button" tabindex="-1" class="list"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path></svg></div></div>
+				
+				</div></div>
+</div></div>
+			<div class="demo-list">
+
+<div class="be-pagination be-pagination-card">
+	<div class="be-pagination__container">
+			<div class="be-pagination__container"><div role="button" tabindex="-1" class="list disabled"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path></svg></div></div>
+				
+				<div role="button" tabindex="-1" class="list"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path></svg></div></div>
+				
+				</div></div>
+</div></div>
+			<div class="demo-list"><div class="be-table is-center"><div style="visibility: hidden;position: absolute;z-index: -1;display: none;"><div style="display: none;" class="be-table__source__column" data-prop="index" data-type="" data-label="" data-name="" data-width="60" data-align="" data-headeralign=""></div>
+					<div style="display: none;" class="be-table__source__column" data-prop="name" data-type="" data-label="姓名" data-name="" data-width="" data-align="" data-headeralign=""></div>
+					<div style="display: none;" class="be-table__source__column" data-prop="age" data-type="" data-label="age" data-name="" data-width="" data-align="" data-headeralign=""></div>
+					<div style="display: none;" class="be-table__source__column" data-prop="time" data-type="" data-label="日期" data-name="" data-width="" data-align="" data-headeralign=""></div></div>
+    <div class="be-table__header-wrapper"><table class="be-table__body" style="width: 0px;"><colgroup>
+                    <col width="0"></colgroup>
+                <thead class="has-gutter"></thead></table></div>
+    <div class="be-table__body-wrapper"><table class="be-table__body" style="width: 0px;"><colgroup></colgroup>
+            <tbody></tbody></table>
+	    <div class="be-table__empty-block" style="height: 100%; width: 100%;"><span class="be-table__empty-text">暂无数据</span></div></div></div>
+				
+
+<div class="be-pagination">
+	<div class="be-pagination__container">
+			<div class="be-pagination__container"><div role="button" tabindex="-1" class="list disabled"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path></svg></div></div>
+				
+				<div role="button" tabindex="-1" class="list"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path></svg></div></div>
+				
+				</div></div>
+</div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">使用options配置分页的显示样式，card:是否是卡片 showNumber:显示数目 低于5条时不展示... icon: 大小和颜色
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">BePagination</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@brewer/beerui&#x27;</span>
+<span class="hljs-keyword">const</span> query = { <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-attr">page</span>: <span class="hljs-number">1</span> }
+<span class="hljs-keyword">const</span> options = {
+	<span class="hljs-attr">card</span>: <span class="hljs-literal">true</span>,
+	<span class="hljs-attr">showNumber</span>: <span class="hljs-number">6</span>,
+	<span class="hljs-attr">icon</span>: {
+		<span class="hljs-attr">width</span>: <span class="hljs-number">12</span>,
+		<span class="hljs-attr">height</span>: <span class="hljs-number">12</span>,
+		<span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;#1492FF&#x27;</span>
+	}
+}
+<span class="hljs-keyword">let</span> list = []
+<span class="hljs-keyword">let</span> total = <span class="hljs-number">11</span> <span class="hljs-comment">// 总条数</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">feedBackList</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+	total = <span class="hljs-number">11</span>
+	<span class="hljs-keyword">const</span> name = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;h&#x27;</span>]
+	<span class="hljs-keyword">const</span> defaultItem = {
+		<span class="hljs-attr">name</span>: name[<span class="hljs-number">0</span>],
+		<span class="hljs-attr">phone</span>: <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>().<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">substr</span>(<span class="hljs-number">0</span>, <span class="hljs-number">11</span>),
+		<span class="hljs-attr">content</span>: <span class="hljs-string">&#x27;1&#x27;</span>
+	}
+<span class="hljs-keyword">let</span> temp = []
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+	temp.<span class="hljs-title function_">push</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(defaultItem, { <span class="hljs-attr">content</span>: name[i % <span class="hljs-number">8</span>], <span class="hljs-attr">name</span>: i + <span class="hljs-string">&#x27;name&#x27;</span> }))
+}
+list = temp
+}
+<span class="hljs-title function_">feedBackList</span>()
+<span class="hljs-comment">// 切换页面</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">changePage</span>(<span class="hljs-params">item</span>) {
+	query.<span class="hljs-property">page</span> = <span class="hljs-title class_">Number</span>(item.<span class="hljs-property">detail</span>)
+	<span class="hljs-title function_">feedBackList</span>()
+}
+	<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+
+<span class="hljs-tag">&lt;<span class="hljs-name">BePagination</span>
+	<span class="hljs-attr">currentPage</span>=<span class="hljs-string">1</span>
+	<span class="hljs-attr">pageSize</span>=<span class="hljs-string">{query.limit}</span>
+	{<span class="hljs-attr">total</span>}
+	<span class="hljs-attr">on:changePage</span>=<span class="hljs-string">{changePage}</span>
+	{<span class="hljs-attr">options</span>}
+/&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">BePagination</span>
+	<span class="hljs-attr">currentPage</span>=<span class="hljs-string">1</span>
+	<span class="hljs-attr">pageSize</span>=<span class="hljs-string">{query.limit}</span>
+	<span class="hljs-attr">total</span>=<span class="hljs-string">200</span>
+	<span class="hljs-attr">async</span>
+	<span class="hljs-attr">layouts</span>=<span class="hljs-string">&quot;prev, pager, next&quot;</span>
+	<span class="hljs-attr">on:changePage</span>=<span class="hljs-string">{changePage}</span>
+	{<span class="hljs-attr">options</span>}
+/&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">BePagination</span>
+	<span class="hljs-attr">currentPage</span>=<span class="hljs-string">1</span>
+	<span class="hljs-attr">pageSize</span>=<span class="hljs-string">{query.limit}</span>
+	<span class="hljs-attr">total</span>=<span class="hljs-string">300</span>
+	<span class="hljs-attr">async</span>
+	<span class="hljs-attr">layouts</span>=<span class="hljs-string">&quot;prev, pager, next&quot;</span>
+	<span class="hljs-attr">on:changePage</span>=<span class="hljs-string">{changePage}</span>
+	<span class="hljs-attr">options</span>=<span class="hljs-string">{options1}</span>
+/&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">BePagination</span>
+	<span class="hljs-attr">currentPage</span>=<span class="hljs-string">1</span>
+	<span class="hljs-attr">pageSize</span>=<span class="hljs-string">{query.limit}</span>
+	<span class="hljs-attr">total</span>=<span class="hljs-string">50</span>
+	<span class="hljs-attr">async</span>
+	<span class="hljs-attr">layouts</span>=<span class="hljs-string">&quot;prev, pager, next&quot;</span>
+	<span class="hljs-attr">on:changePage</span>=<span class="hljs-string">{changePage}</span>
+	<span class="hljs-attr">options</span>=<span class="hljs-string">{options2}</span>
+/&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+
+	<h2>附加功能</h2>
+
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list"><div class="overflow-x-auto"><table class="table w-full table-zebra"><thead><tr><td>序号</td>
+							<td>姓名</td>
+							<td>年龄</td>
+							<td>创建时间</td></tr></thead>
+						<tbody><tr><td>1</td>
+								<td>Mr.84</td>
+								<td>22</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>2</td>
+								<td>Mr.93</td>
+								<td>51</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>3</td>
+								<td>Mr.43</td>
+								<td>35</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>4</td>
+								<td>Mr.59</td>
+								<td>28</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>5</td>
+								<td>Mr.78</td>
+								<td>59</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>6</td>
+								<td>Mr.37</td>
+								<td>47</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>7</td>
+								<td>Mr.97</td>
+								<td>18</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>8</td>
+								<td>Mr.75</td>
+								<td>18</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>9</td>
+								<td>Mr.82</td>
+								<td>53</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr><tr><td>10</td>
+								<td>Mr.81</td>
+								<td>29</td>
+								<td>2023-08-08 18:44:42</td>
+							</tr></tbody></table></div>
+				
+
+<div class="be-pagination be-pagination-card">
+	<div class="be-pagination__container"><div class="be-pagination__analyze"><p class="text-sm text-gray-700">显示
+							<span class="font-medium">10条 </span>
+							当前在
+							<span class="font-medium">第1 / 5页</span>
+						共
+						<span class="font-medium">41</span>
+						条
+					</p></div>
+			<div class="be-pagination__container"><div role="button" tabindex="-1" class="list disabled"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M356.7 509.83L780.2 931.4c20 19.91 20 52.24 0 72.14-19.99 19.91-52.47 19.91-72.47 0L250.36 548.25c-10.57-10.53-15.67-24.6-14.9-38.42-0.64-13.82 4.33-27.89 14.9-38.42L707.6 16.12c20-19.9 52.48-19.9 72.47 0 20 19.91 20 52.24 0 72.14L356.7 509.83z m0 0"></path></svg></div></div>
+				
+				<div role="button" tabindex="-1" class="list"><div class="sr-only pointer-events-none svg-icon s-KSxv2xdCcbJE"><svg class="icon" viewBox="0 0 1024 1024" width="12" height="12"><path fill="#1492FF" d="M673.88 509.84L250.38 88.26c-20-19.91-20-52.24 0-72.14 19.99-19.91 52.47-19.91 72.47 0l457.37 455.29c10.57 10.53 15.67 24.6 14.9 38.42 0.64 13.82-4.33 27.89-14.9 38.42l-457.25 455.3c-20 19.9-52.48 19.9-72.47 0-20-19.91-20-52.24 0-72.14l423.38-421.57z m0 0"></path></svg></div></div>
+				<div class="be-select be-select--mini " style="width: 100px"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input autocomplete="false" role="button" tabindex="-1" placeholder="" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i class="be-icon be-icon-chevron-down"></i></div>
+					<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i class="be-icon be-icon-close-circle"></i></div></div>
+	      
+		    </span></span></div></div>
+		<div class="be-select__option"><ul class="be-select__option_content" style="max-height: 300px;"><li class="be-select-dropdown__item   selected" data-value="10"><div role="button" tabindex="-1">10条/页
+		</div></li><li class="be-select-dropdown__item" data-value="15"><div role="button" tabindex="-1">15条/页
+		</div></li><li class="be-select-dropdown__item" data-value="20"><div role="button" tabindex="-1">20条/页
+		</div></li>
+				</ul>
+			<div class="popper__arrow"></div></div></div>
+				<div class="m-jumper"><span>跳至</span>
+						<div role="button" tabindex="-1" class="be-input     be-input--mini" style="width: 50px"><input style="width: 50px" role="button" tabindex="-1" placeholder="" class="be-input__inner" name="" value="">
+	</div>
+						<span>页</span></div></div></div>
+</div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description"><ol><li>layouts prev, pager, next, sizes, jumper, info, all 展示不同的区块</li>
+				<li>changePage 监听页码改变</li>
+				<li>pageSizeChange 监听页数改变</li></ol></div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">pageSizeChange</span> = (<span class="hljs-params">{ detail }</span>) =&gt; {
+	query.<span class="hljs-property">limit</span> = detail
+	<span class="hljs-title function_">feedBackList</span>()
+}<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BePagination</span>
+	<span class="hljs-attr">currentPage</span>=<span class="hljs-string">1</span>
+    <span class="hljs-attr">pageSize</span>=<span class="hljs-string">{query.limit}</span>
+    {<span class="hljs-attr">total</span>}
+    <span class="hljs-attr">async</span>
+    <span class="hljs-attr">layouts</span>=<span class="hljs-string">&quot;prev, pager, next, sizes, jumper, info, all&quot;</span>
+    <span class="hljs-attr">on:changePage</span>=<span class="hljs-string">{changePage}</span>
+    <span class="hljs-attr">on:pageSizeChange</span>=<span class="hljs-string">{pageSizeChange}</span>
+    {<span class="hljs-attr">options</span>}
+/&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3 class="demo-table-title">Attributes</h3>
+	<table class="demo-table"><thead><tr><th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th></tr></thead>
+		<tbody><tr><td>total</td>
+				<td>总条数</td>
+				<td>number</td>
+				<td>-</td>
+				<td>0</td></tr>
+			<tr><td>type</td>
+				<td>类别</td>
+				<td>string</td>
+				<td>mini/normal</td>
+				<td>normal</td></tr>
+			<tr><td>currentPage</td>
+				<td>当前页</td>
+				<td>number</td>
+				<td>-</td>
+				<td>1</td></tr>
+			<tr><td>pageSize</td>
+				<td>显示条数</td>
+				<td>number</td>
+				<td>-</td>
+				<td>10</td></tr>
+			<tr><td>layouts</td>
+				<td>功能按钮</td>
+				<td>string</td>
+				<td>prev, pager, next, sizes, jumper, info, all</td>
+				<td>prev, pager, next</td></tr>
+			<tr><td>async</td>
+				<td>异步接口需要开启</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>false</td></tr>
+			<tr><td>pageSizes</td>
+				<td>可选页码</td>
+				<td>number[]</td>
+				<td>-</td>
+				<td>[10, 15, 20]</td></tr>
+			<tr><td>options</td>
+				<td>其它设置</td>
+				<td>optionsType</td>
+				<td>-</td>
+				<td>见下方类型</td></tr></tbody></table>
+	<h3 class="demo-table-title">Events</h3>
+	<table class="demo-table"><thead><tr><th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th></tr></thead>
+		<tbody><tr><td>changePage</td>
+			<td>页码数改变</td>
+			<td>当前页数</td></tr>
+		<tr><td>pageSizeChange</td>
+			<td>条数改变</td>
+			<td>当前条数</td></tr></tbody></table>
+
+	<pre class="demo-pre">			
+type optionsType = {
+	card: boolean // 是否是块状
+	showNumber: number // 分页按钮展示数量
+	scroll: boolean // 是否需要自动滚动到头部
+	icon: any // 上一页 下一页的大小和颜色
+}
+const defaultOptions: optionsType = {
+  card: false,
+  showNumber: 8,
+  scroll: true,
+  icon: {}
+}
+	
+	</pre></div></div>
+			<div></div>
+			<div class="be-main__footer s-hZl-oQVdfKrr" style="margin-left: 240px;"><div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Contributors</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://tianna.beer-ui.com/luzhou" class="s-hZl-oQVdfKrr">Turf.js中文网</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Resource</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://svelte.dev/" class="s-hZl-oQVdfKrr">svelte</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://kit.svelte.dev/" class="s-hZl-oQVdfKrr">svelteKit</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://www.npmjs.com/package/@brewer/beerui" class="s-hZl-oQVdfKrr">@brewer/beerui</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Github</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">组件 BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a class="beian s-hZl-oQVdfKrr" rel="noreferrer" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2022015490号-1</a></div>
+
+
+
+</div>
+</div></div></div>
+</div></div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_1n8wl93 = {
+						env: {},
+						base: new URL("..", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("../_app/immutable/entry/start.1e536230.js"),
+						import("../_app/immutable/entry/app.b0d17614.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1n8wl93.element, {
+							node_ids: [0, 2, 26],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

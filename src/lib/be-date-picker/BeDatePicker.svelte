@@ -34,7 +34,7 @@
 	export let clearable = true
 	export let disabled = false
 	export let readonly = true
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 	export let disabledDate: Function
 	let active = false
 	let displayValue = []
@@ -139,7 +139,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
 	}
@@ -157,12 +157,26 @@
 </script>
 {#if ranged}
 <div class='be-date be-range' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
-	<div class='be-input__inner be-range-{selectMode}' class:active={active} on:click={handleShowDatePopper} bind:this={inputRect}>
+	<div
+		role='button'
+		tabindex='-1'
+		class='be-input__inner be-range-{selectMode}'
+		class:active={active}
+		on:click={handleShowDatePopper}
+		on:keydown
+		bind:this={inputRect}
+	>
 		<BeIcon name="calendar"/>
 		<input autocomplete="off" placeholder={startPlaceholder} bind:value={displayValue[0]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
 		<span class="be-range-separator">{separator}</span>
 		<input autocomplete="off" placeholder={endPlaceholder} bind:value={displayValue[1]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
-		<div class="be-range__close-icon" class:clearable={clearable && displayValue && displayValue.length > 0}  on:click|stopPropagation={handlerClear}>
+		<div
+			role='button' tabindex='-1'
+			class="be-range__close-icon"
+			class:clearable={clearable && displayValue && displayValue.length > 0}
+			on:click|stopPropagation={handlerClear}
+			on:keydown|stopPropagation
+		>
 			<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 		</div>
 	</div>
@@ -182,7 +196,14 @@
 	<div class="be-date__prefix">
 		<BeIcon name="calendar"/>
 	</div>
-	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
+	<div
+		role='button'
+		tabindex='-1'
+		class="be-date__suffix"
+		class:clearable={clearable && value}
+		on:click|stopPropagation={handlerClear}
+		on:keydown|stopPropagation
+	>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
 	<Dates {valueFormat} {direction} {selectableRange} {disabledDate} {value} {selectMode} {format} bind:visible={visible} on:pick={confirmPick} />

@@ -4,13 +4,13 @@
 	import RadioStore from './radio'
 	import { debounce } from '../utils/throttle';
 	const dispatch = createEventDispatcher();
-	export let checked: string = '';
+	export let checked = '';
 	export let size: string;
 	export let disabled: boolean;
 	export let border: boolean;
 	export let textColor: string;
 	export let fill: string;
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 	const store = new RadioStore({ checked, border, size, disabled, textColor, fill })
 	setContext('radioStore', store)
 
@@ -40,7 +40,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
 	}
@@ -55,6 +55,6 @@
 		isInit = true;
 	})
 </script>
-<div role="group" aria-label="checkbox-group" class='be-radio-group {_class}' style={$$props.style}>
+<div role="radiogroup" aria-label="checkbox-group" class='be-radio-group {_class}' style={$$props.style}>
 	<slot></slot>
 </div>

@@ -1,0 +1,1 @@
+function o(t){if(t=String(t),navigator.clipboard)return navigator.clipboard.writeText(t);{let e=document.createElement("textarea");return document.body.appendChild(e),e.style.position="fixed",e.style.clip="rect(0 0 0 0)",e.style.top="10px",e.value=t,e.select(),document.execCommand("copy",!0),document.body.removeChild(e),Promise.resolve()}}export{o as C};

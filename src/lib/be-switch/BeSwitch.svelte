@@ -2,12 +2,12 @@
 
 	import { onMount, createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher()
-  export let checked:boolean = false
-  export let disabled:boolean = false
-  export let width:number = 40
-  export let activeColor:string
-	export let name:string
-	export let inactiveColor:string
+  export let checked = false
+  export let disabled = false
+  export let width = 40
+  export let activeColor = ''
+	export let name = ''
+	export let inactiveColor = ''
   export let beforeChange = () =>{ return true}
   let switchColor = ''
   function switchValue() {
@@ -42,6 +42,16 @@
 </script>
 <slot name="checked-slot" prop={checked}></slot>
 <slot></slot>
-<div {name} class="be-switch" class:is-checked = {checked} class:is-disabled = {switchDisabled} on:click={switchValue}>
+<div
+	{name}
+	class="be-switch"
+	class:is-checked = {checked}
+	class:is-disabled = {switchDisabled}
+	aria-checked={checked}
+	on:click={switchValue}
+	on:keydown
+	role='switch'
+	tabindex='-1'
+>
   <span class="be-switch__core" style="width: {width}px;{switchColor}"></span>
 </div>

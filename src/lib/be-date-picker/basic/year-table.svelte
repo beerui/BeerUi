@@ -17,7 +17,7 @@
   $: ininYear(date)
   $: markRange(minDate, maxDate)
   function ininYear(date) {
-  const endYear = startYear + 9  
+  const endYear = startYear + 9
   rows =  [[], [], []]
   for (let i = 0; i < 3; i++) {
     const row = rows[i];
@@ -37,7 +37,7 @@
         row.push(cell)
       }
     }
-  } 
+  }
 }
   function isDisabled(date) {
     return typeof disabledDate === 'function' && disabledDate(date)
@@ -118,7 +118,7 @@
   const row = target.parentNode.rowIndex;
   const column = target.cellIndex;
   const index = row * 4 + column + startYear
-  
+
   let newDate = new Date(String(index))
   if(isDisabled(newDate)) return
   dispatch('changerange', {
@@ -136,7 +136,7 @@
     {#each rows as row}
     <tr>
       {#each row as cell}
-        <td class={getCellClasses(cell)} on:click={(e)=> selectYear(e, cell)}>
+        <td role='button' tabindex='-1' class={getCellClasses(cell)} on:click={(e)=> selectYear(e, cell)} on:keydown>
           <div>
             <span class="cell">{cell.text}</span>
           </div>

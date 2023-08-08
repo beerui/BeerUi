@@ -6,7 +6,7 @@ $: isActive = (key === active)
 <div class='be-tabs__content' class:hidden={!isActive} class:block={isActive}>
 	<slot></slot>
 </div>
-<style lang="scss">
+<style>
   .be-tabs__content {position: relative;}
   .hidden {display: none;}
   .block {display: block;}

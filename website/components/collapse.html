@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/LayoutHeader.5b3b3ed1.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/LayoutFooter.b2d8d7c4.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_layout.019cf28e.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_page.38d2104f.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/github.cb54580c.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/loading.94dd0eb0.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.1e536230.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.21613952.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.05b97e7b.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.88f9aa6d.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.b0d17614.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/environment.7328c2e2.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.svelte.d4c93525.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Logo.51a85fb9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/stores.f4482d01.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/LayoutFooter.74254c16.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-layout.svelte.ac4fa1b3.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-components-collapse-page.svelte.8704f0a8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DemoBlock.d66327e5.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/beerui.dfc24136.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.d5ff37b9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/loading.6fc7a1f8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/throttle.c22c4fe7.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeIcon.5c59230e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.e882418f.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.3cd19b6c.js"><title>Collapse 折叠面板 组件文档 BeerUi-官方文档</title><!-- HEAD_svelte-1eytwic_START --><script>var _paq = window._paq = window._paq || [];
+	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//log.beer-ui.com/";
+		_paq.push(['setTrackerUrl', u+'matomo.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+</script><!-- HEAD_svelte-1eytwic_END --><!-- HEAD_svelte-qc1w8f_START --><meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component"><meta name="keywords" content="Collapse 折叠面板, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit"><!-- HEAD_svelte-qc1w8f_END -->
+		<style>
+			body {background: rgba(16, 106, 55, 30%);}
+            #svelte {
+                background: linear-gradient(rgba(16, 106, 55, 80%), rgba(107, 132, 173, 80%));
+				min-height: 100vh;
+            }
+		</style>
+	</head>
+	<body data-sveltekit-preload-data="viewport">
+		<div id="svelte">
+
+
+<div class="be-warp">
+
+<div class="be-header s-UFfHt6Njpvg7"><div class="logo flex s-UFfHt6Njpvg7">
+<embed src="/logo_new.svg" width="100%" height="100%" type="image/svg+xml">
+		<span></span></div>
+	<div class="nav s-UFfHt6Njpvg7"><a href="/" class="s-UFfHt6Njpvg7">主页</a>
+		<a href="/components/start" class="s-UFfHt6Njpvg7">组件</a>
+		<a rel="noreferrer" target="_blank" href="https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md" class="s-UFfHt6Njpvg7">更新日志</a>
+		<a href="/others" class="s-UFfHt6Njpvg7">其它</a>
+		<div class="tabs s-UFfHt6Njpvg7"><div data-theme="light" class="item sun s-UFfHt6Njpvg7 active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99996 3.15217C10.5252 3.15217 10.951 2.72636 10.951 2.20109C10.951 1.67582 10.5252 1.25 9.99996 1.25C9.47469 1.25 9.04887 1.67582 9.04887 2.20109C9.04887 2.72636 9.47469 3.15217 9.99996 3.15217Z"></path><path fill="currentColor" d="M9.99992 4.29348C6.84829 4.29348 4.2934 6.84838 4.2934 10C4.2934 13.1516 6.84829 15.7065 9.99992 15.7065C13.1515 15.7065 15.7064 13.1516 15.7064 10C15.7064 6.84838 13.1515 4.29348 9.99992 4.29348Z"></path><path fill="currentColor" d="M16.4673 4.4837C16.4673 5.00896 16.0415 5.43478 15.5162 5.43478C14.991 5.43478 14.5652 5.00896 14.5652 4.4837C14.5652 3.95843 14.991 3.53261 15.5162 3.53261C16.0415 3.53261 16.4673 3.95843 16.4673 4.4837Z"></path><path fill="currentColor" d="M17.7989 10.9511C18.3241 10.9511 18.75 10.5253 18.75 10C18.75 9.47474 18.3241 9.04891 17.7989 9.04891C17.2736 9.04891 16.8478 9.47474 16.8478 10C16.8478 10.5253 17.2736 10.9511 17.7989 10.9511Z"></path><path fill="currentColor" d="M16.4673 15.5163C16.4673 16.0416 16.0415 16.4674 15.5162 16.4674C14.991 16.4674 14.5652 16.0416 14.5652 15.5163C14.5652 14.991 14.991 14.5652 15.5162 14.5652C16.0415 14.5652 16.4673 14.991 16.4673 15.5163Z"></path><path fill="currentColor" d="M9.99996 18.75C10.5252 18.75 10.951 18.3242 10.951 17.7989C10.951 17.2736 10.5252 16.8478 9.99996 16.8478C9.47469 16.8478 9.04887 17.2736 9.04887 17.7989C9.04887 18.3242 9.47469 18.75 9.99996 18.75Z"></path><path fill="currentColor" d="M5.43469 15.5163C5.43469 16.0416 5.00887 16.4674 4.4836 16.4674C3.95833 16.4674 3.53252 16.0416 3.53252 15.5163C3.53252 14.991 3.95833 14.5652 4.4836 14.5652C5.00887 14.5652 5.43469 14.991 5.43469 15.5163Z"></path><path fill="currentColor" d="M2.20096 10.9511C2.72623 10.9511 3.15205 10.5253 3.15205 10C3.15205 9.47474 2.72623 9.04891 2.20096 9.04891C1.67569 9.04891 1.24988 9.47474 1.24988 10C1.24988 10.5253 1.67569 10.9511 2.20096 10.9511Z"></path><path fill="currentColor" d="M5.43469 4.4837C5.43469 5.00896 5.00887 5.43478 4.4836 5.43478C3.95833 5.43478 3.53252 5.00896 3.53252 4.4837C3.53252 3.95843 3.95833 3.53261 4.4836 3.53261C5.00887 3.53261 5.43469 3.95843 5.43469 4.4837Z"></path></svg></div>
+			<div data-theme="dark" class="item moon s-UFfHt6Njpvg7"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99993 3.12494C6.20294 3.12494 3.12488 6.203 3.12488 10C3.12488 13.797 6.20294 16.8751 9.99993 16.8751C13.7969 16.8751 16.875 13.797 16.875 10C16.875 9.52352 16.8264 9.0577 16.7337 8.6075C16.6752 8.32295 16.4282 8.11628 16.1378 8.10872C15.8474 8.10117 15.5901 8.29473 15.5168 8.57585C15.1411 10.0167 13.8302 11.0795 12.2727 11.0795C10.4212 11.0795 8.92039 9.57869 8.92039 7.72726C8.92039 6.16969 9.98319 4.85879 11.4241 4.48312C11.7052 4.40983 11.8988 4.15249 11.8912 3.86207C11.8836 3.57165 11.677 3.32473 11.3924 3.26616C10.9422 3.1735 10.4764 3.12494 9.99993 3.12494Z"></path></svg></div></div></div>
+</div>
+	<div class="be-container"><div class="be-warp"><div class="be-container"><section class="nav-container s-SQJzG6QE6tAA"><div class="nav-container__scroll"><ul class="s-SQJzG6QE6tAA"><li class="s-SQJzG6QE6tAA"><a href="/components/start" class="s-SQJzG6QE6tAA">快速开始</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/repl" class="s-SQJzG6QE6tAA">REPL</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">基本</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/icons" class="s-SQJzG6QE6tAA">Icons 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/button" class="s-SQJzG6QE6tAA">Button 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">表单</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/input" class="s-SQJzG6QE6tAA">Input 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/textarea" class="s-SQJzG6QE6tAA">Textarea 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/radio" class="s-SQJzG6QE6tAA">Radio 单选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/checkbox" class="s-SQJzG6QE6tAA">Checkbox
+				多选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/switch" class="s-SQJzG6QE6tAA">Switch 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/select" class="s-SQJzG6QE6tAA">Select 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/cascader" class="s-SQJzG6QE6tAA">Cascader
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/form" class="s-SQJzG6QE6tAA">Form 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/upload" class="s-SQJzG6QE6tAA">Upload 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/datePicker" class="s-SQJzG6QE6tAA">date-picker
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drag" class="s-SQJzG6QE6tAA">Drag 拖动排序</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">data 数据</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/table" class="s-SQJzG6QE6tAA">Table 表格</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tree" class="s-SQJzG6QE6tAA">Tree 树形控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/selectTree" class="s-SQJzG6QE6tAA">SelectTree
+				树形选择控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/pagination" class="s-SQJzG6QE6tAA">Pagination
+				分页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/progress" class="s-SQJzG6QE6tAA">progress
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/empty" class="s-SQJzG6QE6tAA">Empty 空状态</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">提示</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/loading" class="s-SQJzG6QE6tAA">Loading 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/messageBox" class="s-SQJzG6QE6tAA">MessageBox
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/dialog" class="s-SQJzG6QE6tAA">Dialog 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/alert" class="s-SQJzG6QE6tAA">Alert 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/notice" class="s-SQJzG6QE6tAA">Notice 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">导航 Navigation</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tabs" class="s-SQJzG6QE6tAA">Tabs 标签页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/menu" class="s-SQJzG6QE6tAA">NavMenu 导航菜单</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/breadcrumb" class="s-SQJzG6QE6tAA">Breadcrumb
+				面包屑</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">其它 Others</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/clock" class="s-SQJzG6QE6tAA">Clock 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drawer" class="s-SQJzG6QE6tAA">Drawer 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/collapse" class="s-SQJzG6QE6tAA active">Collapse
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/scrollbar" class="s-SQJzG6QE6tAA">Scrollbar
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/carousel" class="s-SQJzG6QE6tAA">Carousel
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/countTo" class="s-SQJzG6QE6tAA">CountTo 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/preview" class="s-SQJzG6QE6tAA">PreviewImage
+				示例</a></li></ul></div>
+</section>
+		<div class="be-main"><div class="be-main-container">
+<div class="page-container"><h2>Collapse 折叠面板</h2>
+	<p class="desc">通过折叠面板收纳内容区域</p>
+	<h3>基本用法</h3>
+	<p>可同时展开多个面板，面板之间不影响</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list"><div role="tablist" aria-multiselectable="true" class="be-collapse "><div class="be-collapse-item  is-active"><div role="tab" aria-controls="be-collapse-content-1" aria-describedby="be-collapse-content"><div role="button" tabindex="1" id="be-collapse-head-1" class="be-collapse-item__header is-active">
+				一致性 Consistency
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-1" id="be-collapse-content-1" class="be-collapse-item__wrap" aria-hidden="true" style="display: block;"><div class="be-collapse-item__content"><div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+						<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div></div></div></div>
+					<div class="be-collapse-item"><div role="tab" aria-controls="be-collapse-content-2" aria-describedby="be-collapse-content"><div role="button" tabindex="2" id="be-collapse-head-2" class="be-collapse-item__header">
+				反馈 Feedback
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-2" id="be-collapse-content-2" class="be-collapse-item__wrap" aria-hidden="true" style="display: none;"><div class="be-collapse-item__content"><div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+						<div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div></div></div></div>
+					<div class="be-collapse-item"><div role="tab" aria-controls="be-collapse-content-3" aria-describedby="be-collapse-content"><div role="button" tabindex="3" id="be-collapse-head-3" class="be-collapse-item__header">
+				效率 Efficiency
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-3" id="be-collapse-content-3" class="be-collapse-item__wrap" aria-hidden="true" style="display: none;"><div class="be-collapse-item__content"><div>简化流程：设计简洁直观的操作流程；</div>
+						<div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+						<div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div></div></div></div>
+					<div class="be-collapse-item"><div role="tab" aria-controls="be-collapse-content-4" aria-describedby="be-collapse-content"><div role="button" tabindex="4" id="be-collapse-head-4" class="be-collapse-item__header">
+				可控 Controllability
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-4" id="be-collapse-content-4" class="be-collapse-item__wrap" aria-hidden="true" style="display: none;"><div class="be-collapse-item__content"><div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+						<div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div></div></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description"><ol><li>export let value: string | string[]  = [&#39;&#39;] // 当前激活的面板(如果是手风琴模式，绑定值类型需要为string，否则为array)</li>
+				<li>export let accordion: boolean = false // 是否手风琴模式</li></ol></div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">BeCollapse</span>, <span class="hljs-title class_">BeCollapseItem</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@brewer/beerui&#x27;</span>
+<span class="hljs-keyword">let</span> active = [<span class="hljs-string">&#x27;1&#x27;</span>]
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleChange</span> = (<span class="hljs-params">val</span>) =&gt; {
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(val);
+}
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapse</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{active}</span> <span class="hljs-attr">on:change</span>=<span class="hljs-string">{handleChange}</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapseItem</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;一致性 Consistency&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapseItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapseItem</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;反馈 Feedback&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapseItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapseItem</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;效率 Efficiency&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;3&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>简化流程：设计简洁直观的操作流程；<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapseItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapseItem</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;可控 Controllability&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;4&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapseItem</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapse</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+
+	<h3>手风琴效果</h3>
+	<p>每次只能展开一个面板</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list"><div role="tablist" aria-multiselectable="true" class="be-collapse "><div class="be-collapse-item  is-active"><div role="tab" aria-controls="be-collapse-content-1" aria-describedby="be-collapse-content"><div role="button" tabindex="1" id="be-collapse-head-1" class="be-collapse-item__header is-active">
+				测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-1" id="be-collapse-content-1" class="be-collapse-item__wrap" aria-hidden="true" style="display: block;"><div class="be-collapse-item__content"><div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+						<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div></div></div></div>
+					<div class="be-collapse-item"><div role="tab" aria-controls="be-collapse-content-2" aria-describedby="be-collapse-content"><div role="button" tabindex="2" id="be-collapse-head-2" class="be-collapse-item__header">
+				反馈 Feedback
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-2" id="be-collapse-content-2" class="be-collapse-item__wrap" aria-hidden="true" style="display: none;"><div class="be-collapse-item__content"><div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+						<div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div></div></div></div>
+					<div class="be-collapse-item is-disabled"><div role="tab" aria-controls="be-collapse-content-3" aria-describedby="be-collapse-content"><div role="button" tabindex="3" id="be-collapse-head-3" class="be-collapse-item__header">
+				效率 Efficiency
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-3" id="be-collapse-content-3" class="be-collapse-item__wrap" aria-hidden="true" style="display: none;"><div class="be-collapse-item__content"><div>简化流程：设计简洁直观的操作流程；</div>
+						<div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+						<div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div></div></div></div>
+					<div class="be-collapse-item"><div role="tab" aria-controls="be-collapse-content-4" aria-describedby="be-collapse-content"><div role="button" tabindex="4" id="be-collapse-head-4" class="be-collapse-item__header">
+				可控 Controllability
+				<div class="be-collapse-item__arrow"><i class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+			</div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-4" id="be-collapse-content-4" class="be-collapse-item__wrap" aria-hidden="true" style="display: none;"><div class="be-collapse-item__content"><div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+						<div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div></div></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description"><ol><li>export let value: string | string[]  = [&#39;&#39;] // 当前激活的面板(如果是手风琴模式，绑定值类型需要为string，否则为array)</li>
+				<li>export let accordion: boolean = false // 是否手风琴模式</li></ol></div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">let</span> active1 = <span class="hljs-string">&#x27;1&#x27;</span>
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapse</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{active1}</span> <span class="hljs-attr">accordion</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapseItem</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;一致性 Consistency&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapseItem</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapse</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>自定义样式</h3>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list"><div role="tablist" aria-multiselectable="true" class="be-collapse "><div class="be-collapse-item  is-active"><div role="tab" aria-controls="be-collapse-content-1" aria-describedby="be-collapse-content"><div role="button" tabindex="1" id="be-collapse-head-1" class="be-collapse-item__header is-active"><div class="m-list__header" slot="title"><div class="m-list__title">自定义样式标题1</div>
+							<div class="m-list__icon"><i class="be-icon be-icon-remove " role="button" tabindex="-1" style=""></i></div></div></div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-1" id="be-collapse-content-1" class="be-collapse-item__wrap" aria-hidden="true" style="display: block;"><div class="be-collapse-item__content"><div class="m-list__content">使用Css和自定义布局打造自己喜爱的风格</div></div></div></div>
+					<div class="be-collapse-item"><div role="tab" aria-controls="be-collapse-content-2" aria-describedby="be-collapse-content"><div role="button" tabindex="2" id="be-collapse-head-2" class="be-collapse-item__header"><div class="m-list__header" slot="title"><div class="m-list__title">自定义样式标题2</div>
+							<div class="m-list__icon"><i class="be-icon be-icon-add " role="button" tabindex="-1" style=""></i></div></div></div></div>
+	<div role="tabpanel" aria-labelledby="be-collapse-head-2" id="be-collapse-content-2" class="be-collapse-item__wrap" aria-hidden="true" style="display: none;"><div class="be-collapse-item__content"><div class="m-list__content">使用Css和自定义布局打造自己喜爱的风格</div></div></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">let</span> active3 = <span class="hljs-string">&#x27;1&#x27;</span>
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapse</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{active3}</span> <span class="hljs-attr">accordion</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapseItem</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;自定义样式标题1&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__header&#x27;</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&#x27;title&#x27;</span> <span class="hljs-attr">let:prop</span>=<span class="hljs-string">{node}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__title&#x27;</span>&gt;</span>{node.title}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			{#if node.active}
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__icon&#x27;</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">BeIcon</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;remove&#x27;</span> /&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			{:else}
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__icon&#x27;</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">BeIcon</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;add&#x27;</span> /&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			{/if}
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__content&#x27;</span>&gt;</span>使用Css和自定义布局打造自己喜爱的风格<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapseItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCollapseItem</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;自定义样式标题2&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__header&#x27;</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&#x27;title&#x27;</span> <span class="hljs-attr">let:prop</span>=<span class="hljs-string">{node}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__title&#x27;</span>&gt;</span>{node.title}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			{#if node.active}
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__icon&#x27;</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">BeIcon</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;remove&#x27;</span> /&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			{:else}
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__icon&#x27;</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">BeIcon</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;add&#x27;</span> /&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			{/if}
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;m-list__content&#x27;</span>&gt;</span>使用Css和自定义布局打造自己喜爱的风格<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapseItem</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeCollapse</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3 class="demo-table-title">BeCollapse Attributes</h3>
+	<table class="demo-table"><thead><tr><th>参数</th>
+				<th>说明</th>
+				<th>类型</th>
+				<th>可选值</th>
+				<th>默认值</th></tr></thead>
+			<tbody><tr><td>value</td>
+				<td>绑定的值</td>
+				<td>string | string[]</td>
+				<td>-</td>
+				<td>&#39;&#39;</td></tr>
+			<tr><td>accordion</td>
+				<td>手风琴模式</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>false</td></tr></tbody></table>
+	<h3 class="demo-table-title">BeCollapseItem Attributes</h3>
+	<table class="demo-table"><thead><tr><th>参数</th>
+				<th>说明</th>
+				<th>类型</th>
+				<th>可选值</th>
+				<th>默认值</th></tr></thead>
+			<tbody><tr><td>name</td>
+				<td>唯一标志符</td>
+				<td>string | number</td>
+				<td>-</td>
+				<td>&#39;&#39;</td></tr>
+			<tr><td>title</td>
+				<td>标题</td>
+				<td>string</td>
+				<td>-</td>
+				<td>&#39;&#39;</td></tr>
+			<tr><td>disabled</td>
+				<td>禁用</td>
+				<td>boolean</td>
+				<td>true/false</td>
+				<td>false</td></tr></tbody></table>
+</div></div>
+			<div></div>
+			<div class="be-main__footer s-hZl-oQVdfKrr" style="margin-left: 240px;"><div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Contributors</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://tianna.beer-ui.com/luzhou" class="s-hZl-oQVdfKrr">Turf.js中文网</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Resource</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://svelte.dev/" class="s-hZl-oQVdfKrr">svelte</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://kit.svelte.dev/" class="s-hZl-oQVdfKrr">svelteKit</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://www.npmjs.com/package/@brewer/beerui" class="s-hZl-oQVdfKrr">@brewer/beerui</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Github</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">组件 BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a class="beian s-hZl-oQVdfKrr" rel="noreferrer" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2022015490号-1</a></div>
+
+
+
+</div>
+</div></div></div>
+</div></div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_1n8wl93 = {
+						env: {},
+						base: new URL("..", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("../_app/immutable/entry/start.1e536230.js"),
+						import("../_app/immutable/entry/app.b0d17614.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1n8wl93.element, {
+							node_ids: [0, 2, 11],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

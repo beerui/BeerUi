@@ -80,7 +80,7 @@
   </div>
   {#if rate < 1}
   <div class="be-scroll-thumb">
-    <div class="be-scroll-bar" style={`height:${thumbH};top:${thumbTop};`} on:mousedown={mousedown} on:mouseup={mouseup}></div>
+    <div role='button' tabindex='-1' class="be-scroll-bar" style={`height:${thumbH};top:${thumbTop};`} on:mousedown={mousedown} on:mouseup={mouseup}></div>
   </div>
   {/if}
 </div>

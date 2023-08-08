@@ -21,10 +21,10 @@ import LineCode from '$lib/demo/LineCode.svelte';
 	<h4>学习资料</h4>
 	<ol>
 		<li>
-			<a href='https://learn.svelte.dev/tutorial/welcome-to-svelte' target='_blank'>welcome-to-svelte 互动式教程</a>
+			<a href='https://learn.svelte.dev/tutorial/welcome-to-svelte' rel='noreferrer' target='_blank'>welcome-to-svelte 互动式教程</a>
 		</li>
 		<li>
-			<a href='https://component-party.dev/' target='_blank'>Svelte与其它框架语法对比</a>
+			<a rel='noreferrer' href='https://component-party.dev/' target='_blank'>Svelte与其它框架语法对比</a>
 		</li>
 	</ol>
 </div>

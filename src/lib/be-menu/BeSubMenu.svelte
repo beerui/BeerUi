@@ -4,7 +4,7 @@
 	import { fade, fly } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 
-	export let id: String = "";
+	export let id = "";
 	const store = getContext("menuStore");
 
 	const subscribeHandle = item => node = item.data[id];
@@ -14,21 +14,21 @@
 	let node = store.nodesMap[id] || { level: 1, id: 0, open: false }
 
 	const enterMenu = () => {
-		let isFlag: boolean = false;
+		let isFlag = false;
 		if (store.trigger === 'hover' || store.collapse) {
 			isFlag = true;
 			changeActive(isFlag);
 		}
 	};
 	const leaveMenu = () => {
-		let isFlag: boolean = true;
+		let isFlag = true;
 		if (store.trigger === 'hover' || store.collapse) {
 			isFlag = false;
 			changeActive(isFlag);
 		}
 	};
 
-	const changeActive = (isFlag: boolean, handleTime: number = 300) => {
+	const changeActive = (isFlag: boolean, handleTime = 300) => {
 		clearTimeout(timeout);
 		timeout = setTimeout(() => {
 			node.open = isFlag;
@@ -78,6 +78,7 @@
     on:dblclick|stopPropagation
     on:mousedown|stopPropagation={handleClick}
     on:mouseup|stopPropagation
+    on:keydown|stopPropagation
     on:click|stopPropagation
 >
 	<div class="be-submenu__title" style:padding-left={node.level*20 + 'px'}>

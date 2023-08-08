@@ -40,7 +40,7 @@ function confirm() {
     <TimeSpinner {selectableRange} {format} {date} on:pick={PickTime}/>
   </div>
   <div class="be-picker-panel__footer">
-    <BeButton type="default" size="mini" on:click={confirm}>确认</BeButton>
+    <BeButton type="default" size="mini" on:click={confirm} on:keydown>确认</BeButton>
   </div>
   {#if direction=='bottom'}
   <div class="popper__arrow"></div>

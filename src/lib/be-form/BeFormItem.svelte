@@ -4,14 +4,14 @@
 	import { deepClone, objectAssign } from '$lib/utils';
 	import { writable } from 'svelte/store';
 
-	export let label: string = ''; //
-	export let prop: string = ''; // 匹配 rule
-	export let rules: [Object, Array<any>]; // 匹配 rule
-	export let required: boolean = false // 行内必填
-	export let trigger: string = ''; // 匹配行内必填 触发事件
-	export let message: string = ''; // 匹配行内必填 提示信息
-	let isRequired: boolean = false
-	let initialLabelWidth: string = '80px' // 表单域标签的宽度
+	export let label = ''; //
+	export let prop = ''; // 匹配 rule
+	export let rules: [Object, Array<any>] = []; // 匹配 rule
+	export let required = false // 行内必填
+	export let trigger = ''; // 匹配行内必填 触发事件
+	export let message = ''; // 匹配行内必填 提示信息
+	let isRequired = false
+	let initialLabelWidth = '80px' // 表单域标签的宽度
 
 	let _this = null
 	const ctx = getContext("BeForm");

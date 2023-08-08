@@ -87,13 +87,13 @@
 		onChange(file, fileList);
 	}
 	export let accept: string // 接受上传的文件类型（thumbnail-mode 模式下此参数无效）
-	export let multiple: boolean = true // 是否支持多选文件	boolean
-	export let name: string = 'file' // 上传的文件字段名 默认 file
+	export let multiple = true // 是否支持多选文件	boolean
+	export let name = 'file' // 上传的文件字段名 默认 file
 	export let data: object = null // 上传时附带的额外参数
-	export let withCredentials: boolean = false // 支持发送 cookie 凭证信息
-	export let showFileList: boolean = true // 是否显示已上传文件列表
-	export let drag: boolean = false // 是否启用拖拽上传
-	export let action: string = '' // 必选参数，上传的地址	string
+	export let withCredentials = false // 支持发送 cookie 凭证信息
+	export let showFileList = true // 是否显示已上传文件列表
+	export let drag = false // 是否启用拖拽上传
+	export let action = '' // 必选参数，上传的地址	string
 	export let headers: object = {} // 设置上传的请求头部	object
 	// export let onPreview: Function = noop // 点击文件列表中已上传的文件时的钩子 function(file)
 	export let onRemove: Function = noop // 文件列表移除文件时的钩子	function(file, fileList)
@@ -103,13 +103,13 @@
 	export let onChange: Function = noop // 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用	function(file, fileList)
 	export let beforeUpload: Function = noop // 上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。	function(file)
 	export let beforeRemove: Function = noop // 删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。	function(file, fileList)
-	export let listType: string = 'text' // text/picture/picture-card
-	export let autoUpload: boolean = true // 是否在选取文件后立即进行上传	boolean	—	true
+	export let listType = 'text' // text/picture/picture-card
+	export let autoUpload = true // 是否在选取文件后立即进行上传	boolean	—	true
 	export let fileList: any[] = [] // 上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]	array
 	export let httpRequest: Function = ajax // 覆盖默认的上传行为，可以自定义上传的实现 function
-	export let disabled: boolean = false // 是否禁用	boolean
-	export let hideUpload: boolean = false // 是否自动隐藏上传按钮	boolean
-	export let isHideUpload: boolean = false // 是否隐藏上传按钮	boolean
+	export let disabled = false // 是否禁用	boolean
+	export let hideUpload = false // 是否自动隐藏上传按钮	boolean
+	export let isHideUpload = false // 是否隐藏上传按钮	boolean
 	export let limit: number = null // 最大允许上传个数
 	export let onExceed: Function = noop // 文件超出个数限制时的钩子	function(files, fileList)
 
@@ -284,10 +284,12 @@
 <div class="be-upload" style={$$props.style}>
 	{#if drag}
 		<div
+			role='button' tabindex='-1'
 			class="be-upload--{listType}"
 			class:be-upload-dragger={drag}
 			class:be-upload__hide={isHideUpload}
 			on:click|stopPropagation={handleClick}
+			on:keydown|stopPropagation
 			on:drop|preventDefault={onDrop}
 			on:dragover|preventDefault={onDragover}
 			on:dragleave|preventDefault={() => dragover = false}
@@ -302,18 +304,18 @@
 	{#if showFileList}
 		<ul class="be-upload-list be-upload-list--{listType}">
 			{#each fileList as file}
-			<li tabindex="0" class="be-upload-list__item is-{file.status || 'success'}">
+			<li tabindex="-1" class="be-upload-list__item is-{file.status || 'success'}">
 				{#if listType === 'picture-card'}
 					<div>
 						<img src={file.url} alt="" class="be-upload-list__item-thumbnail">
 						<span class="be-upload-list__item-actions">
-							<span class="be-upload-list__item-preview" on:click={previewImages(file.url)}>
+							<span role='button' tabindex='-1' class="be-upload-list__item-preview" on:click={previewImages(file.url)} on:keydown>
 								<BeIcon width="20" height="20" name="zoom-in" />
 							</span>
 	<!--						<span class="be-upload-list__item-delete">-->
 	<!--							<BeIcon width="20" height="20" name="download" />-->
 	<!--						</span>-->
-							<span class="be-upload-list__item-delete" on:click={() => handleRemove(file, file.raw)}>
+							<span role='button' tabindex='-1' class="be-upload-list__item-delete" on:click={() => handleRemove(file, file.raw)} on:keydown>
 								<BeIcon width="20" height="20" name="delete" />
 							</span>
 						</span>
@@ -331,7 +333,7 @@
 							<BeIcon name="check-circle" />
 						{/if}
 					</div>
-					<span class="be-icon-close" on:click={() => handleRemove(file, file.raw)}><BeIcon name="close" /></span>
+					<span role='button' tabindex='-1' class="be-icon-close" on:click={() => handleRemove(file, file.raw)} on:keydown><BeIcon name="close" /></span>
 				{/if}
 			</li>
 			{/each}
@@ -339,10 +341,12 @@
 	{/if}
 	{#if !drag}
 		<div
+			role='button' tabindex='-1'
 			class="be-upload--{listType}"
 			class:be-upload-dragger={drag}
 			class:be-upload__hide={isHideUpload}
 			on:click|stopPropagation={handleClick}
+			on:keydown|stopPropagation
 			on:drop|preventDefault={onDrop}
 			on:dragover|preventDefault={onDragover}
 			on:dragleave|preventDefault={() => dragover = false}
