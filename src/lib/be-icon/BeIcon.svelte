@@ -8,6 +8,7 @@
 	{...$$restProps}
 	class='be-icon be-icon-{name} {_class}'
 	style:color={color}
+	role="button"
 	on:click
 	on:contextmenu
 	on:dblclick

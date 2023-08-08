@@ -5,12 +5,12 @@
 	const store = getContext('checkStore')
 	const dispatch = createEventDispatcher();
 	// 选中
-	export let checked: boolean = false;
+	export let checked = false;
 	export let id = '';
 	export let disabled = '';
 	export let name = '';
-	export let indeterminate: boolean = false;
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let indeterminate = false;
+	export let validateEvent = true; // 是否发送验证表单
 	export let label = '';
 
 	const _class = ['be-checkbox'];
@@ -39,7 +39,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
@@ -55,11 +55,13 @@
 		isInit = true;
 	})
 </script>
-<div class={_class}
-       style={$$props.style}
-       class:is-checked={checked}
-       class:is-disabled={disabled}
-       on:click|preventDefault={handleClick}
+<div
+	class={_class}
+	style={$$props.style}
+	class:is-checked={checked}
+	class:is-disabled={disabled}
+	on:click|preventDefault={handleClick}
+	on:keydown|preventDefault
 >
   <span class='be-checkbox__input'
         class:is-indeterminate={indeterminate}

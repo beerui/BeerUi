@@ -12,7 +12,7 @@
 	export let label = "";
 	export let border = false;
 	export let size = '';
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 
 	let _class: $$props["class"] = "";
 	export {_class as class};
@@ -36,7 +36,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
 	}
@@ -74,6 +74,7 @@
 		 style={$$props.style}
      style:background-color={isChecked ? fill : ''}
 		 on:click|stopPropagation={handleClick}
+		 on:keydown|stopPropagation
 >
   <span class="be-radio__input"
         class:is-checked={isChecked}

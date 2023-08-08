@@ -53,7 +53,13 @@ onMount(() => {
 					<div class='be-tabs__nav'>
 						<div class="be-tabs__active-bar is-top" style="width: {navbarWidth}px; transform: translateX({navbarTansX}px);"></div>
 						{#each items as item, i}
-						<div class='be-tabs__item' bind:clientWidth={navbarList[i]} class:is-active={active === item.key} on:click={() => tabClick(item.key, i)}>{item.label}</div>
+						<div
+							class='be-tabs__item'
+							bind:clientWidth={navbarList[i]}
+							class:is-active={active === item.key}
+							on:click={() => tabClick(item.key, i)}
+							on:keydown
+						>{item.label}</div>
 						{/each}
 					</div>
 				</div>

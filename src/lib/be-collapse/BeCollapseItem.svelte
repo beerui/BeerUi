@@ -5,8 +5,8 @@
 	const store = getContext('collapseStore')
 	const dispatch = createEventDispatcher()
 	export let name: string | number  = '' // 唯一标志符
-	export let title: string = '' // 面板标题
-	export let disabled: boolean = false // 是否禁用
+	export let title = '' // 面板标题
+	export let disabled = false // 是否禁用
 	const subscribeHandle = () => node = node
 	let node = store.creatNode({ name, title, disabled, handler: subscribeHandle });
 	const handlerClick = () => store.clickNode(node)
@@ -23,8 +23,8 @@
 >
 	<div
 		role='tab'
-	    aria-controls='be-collapse-content-{node.index}'
-	    aria-describedby='be-collapse-content'
+		aria-controls='be-collapse-content-{node.index}'
+		aria-describedby='be-collapse-content'
 	>
 		<div
 			role='button'
@@ -33,6 +33,7 @@
 			class='be-collapse-item__header'
 			class:is-active={node.active}
 			on:click={handlerClick}
+			on:keydown
 		>
 			<slot name='title' prop={node}>
 				{node.title}

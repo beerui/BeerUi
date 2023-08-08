@@ -14,7 +14,7 @@
     row: null,
     column: null
   }
-  
+
   $:leftDate = resetDate(value[0])
   $:rightDate = nextDate(leftDate)
   $:leftLabel =  leftDate.getFullYear() + '年'
@@ -65,7 +65,7 @@ function handleNextYear() {
 }
 const handleRangePick = (val) => {
   // const defaultTime = value || [];
-  
+
   const minDate1 = modifyWithTimeString(val.detail.minDate);
   const maxDate1 = modifyWithTimeString(val.detail.maxDate);
   if (maxDate === minDate1 && minDate === maxDate1) {
@@ -107,7 +107,7 @@ const isValidValue = (value) => {
 <div class="be-picker-panel be-date-picker be-range-daterange-picker be-popper be-month-range-{direction}" bind:this={rangeRect} in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
-      <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear}></span>
+      <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown></span>
       <span class="be-date-picker__header-label">{leftLabel}</span>
       <!-- {#if currentView === 'date'}
         <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth}></span>
@@ -119,7 +119,7 @@ const isValidValue = (value) => {
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
       <span class="be-date-picker__header-label">{rightLabel}</span>
-      <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear}></span>
+      <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear} on:keydown></span>
     </div>
     <MonthTable date = {rightDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
   </div>

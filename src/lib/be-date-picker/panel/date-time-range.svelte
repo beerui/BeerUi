@@ -172,8 +172,8 @@ function handleShowTimePopper(e) {
 <div class="be-picker-panel be-date-picker be-range-daterange-picker be-datetime-range-{direction} be-popper" bind:this={rangeRect} in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
-      <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth}></span>
-      <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear}></span>
+      <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth} on:keydown></span>
+      <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown></span>
       <span class="be-date-picker__header-label">{leftLabel}</span>
     </div>
     <DateTable date = {leftDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
@@ -181,8 +181,8 @@ function handleShowTimePopper(e) {
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
       <span class="be-date-picker__header-label">{rightLabel}</span>
-      <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth}></span>
-      <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear}></span>
+      <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth} on:keydown></span>
+      <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear} on:keydown></span>
     </div>
     <DateTable date = {rightDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
   </div>
@@ -198,7 +198,7 @@ function handleShowTimePopper(e) {
         <BeInput validateEvent={false} placeholder="选择时间" readonly value = {timeRightValue} on:focus={handleShowRightTimePopper} />
         <Time date = {maxDate} direction='top' {format} visible={timeRightVisible} on:pick={confirmRightTimePick}/>
       </div>
-      <BeButton type="default" size="mini" disabled = {disabledBtn} on:click = {handleConfirm}>确认</BeButton>
+      <BeButton type="default" size="mini" disabled = {disabledBtn} on:click = {handleConfirm} on:keydown>确认</BeButton>
     </div>
   </div>
   {#if direction=='bottom'}

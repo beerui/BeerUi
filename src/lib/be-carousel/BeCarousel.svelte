@@ -7,18 +7,18 @@
 	const _class = ['be-carousel', ...filterClass($$props, 'be-carousel--', preClass)].join(' ');
 	export { _class as class };
 
-	export let direction: string = 'horizontal'; // 走马灯展示的方向 vertical
-	export let loop: boolean = true; // 是否循环显示
-	export let type: string = ''; // 走马灯的类型 ''/none/card
-	export let arrow: string = 'hover'; // 切换箭头的显示时机 always/hover/never
-	export let indicatorPosition: string = 'none'; // 指示器的位置 outside/none
-	export let hideIndicator: boolean = false; // 指示器是否显示 false/true
-	export let hideArrow: boolean = false; // 箭头是否显示 false/true
-	export let interval: number = 3000; // 自动切换的时间间隔，单位为毫秒
-	export let autoplay: boolean = true; // 是否自动切换 true/false
-	export let trigger: string = 'click'; // 指示器的触发方式 click/hover
-	export let initialIndex: number = 0; // 初始状态激活的幻灯片的索引，从 0 开始
-	export let height: string = ''; // 走马灯的高度 300px
+	export let direction = 'horizontal'; // 走马灯展示的方向 vertical
+	export let loop = true; // 是否循环显示
+	export let type = ''; // 走马灯的类型 ''/none/card
+	export let arrow = 'hover'; // 切换箭头的显示时机 always/hover/never
+	export let indicatorPosition = 'none'; // 指示器的位置 outside/none
+	export let hideIndicator = false; // 指示器是否显示 false/true
+	export let hideArrow = false; // 箭头是否显示 false/true
+	export let interval = 3000; // 自动切换的时间间隔，单位为毫秒
+	export let autoplay = true; // 是否自动切换 true/false
+	export let trigger = 'click'; // 指示器的触发方式 click/hover
+	export let initialIndex = 0; // 初始状态激活的幻灯片的索引，从 0 开始
+	export let height = ''; // 走马灯的高度 300px
 
 	let dispatch = createEventDispatcher();
 	// 按钮显示和事件触发
@@ -198,11 +198,11 @@
 		on:touchmove={touchmoveHandle}
 	>
 		{#if direction !== 'vertical' && !hideArrow}
-			<button type='button' on:click={doPrevHandle} class='be-carousel__arrow be-carousel__arrow--left'
+			<button type='button' on:click={doPrevHandle} on:keydown class='be-carousel__arrow be-carousel__arrow--left'
 			        style:display={arrowDisplay}>
 				<BeIcon name='chevron-left' />
 			</button>
-			<button type='button' on:click={doNextHandle} class='be-carousel__arrow be-carousel__arrow--right'
+			<button type='button' on:click={doNextHandle} on:keydown class='be-carousel__arrow be-carousel__arrow--right'
 			        style:display={arrowDisplay}>
 				<BeIcon name='chevron-right' />
 			</button>
@@ -217,6 +217,7 @@
 					class:active={i === initialIndex}
 					on:click={() => { doIndicatorHandle(i) }}
 					on:mouseenter={() => { doIndicatorHandle(i)}}
+					on:keydown
 				>
 					<button class='be-carousel__button'></button>
 				</li>

@@ -10,12 +10,12 @@
 	export let disabled = false;
 	// 是否显示清除按钮
 	export let clearable = false;
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 	export let type = 'text';
 	export let name = '';
 	// 右侧icon
 	export let suffixIcon = '';
-	let input;
+	let input = null;
 	let showClose = false
 
 	// 表单验证
@@ -28,7 +28,7 @@
 	const showClear = () => showClose = clearable && value && !readonly && !disabled
 
 	let suffix;
-	let isInit: boolean = false;
+	let isInit = false;
 
 	// 判断后置内容是否存在
 	function getSuffixVisible() {
@@ -116,7 +116,7 @@
 		on:blur={blur}
 		on:focus={focus}
 		on:change={change}
-		name={prop || name}
+		name={prop || name || ''}
 		on:input={onInput}
 		bind:this={input}
 		use:forwardEvents

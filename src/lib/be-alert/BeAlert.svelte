@@ -36,9 +36,9 @@
     {/if}
     {#if closable}
 	    {#if closeText}
-		    <i class='be-alert__closebtn is-customed' on:click={close}>{closeText}</i>
+		    <i class='be-alert__closebtn is-customed' on:click={close} on:keydown>{closeText}</i>
 	    {:else}
-		    <i class='be-alert__closebtn be-icon be-icon-close' on:click={close}></i>
+		    <i class='be-alert__closebtn be-icon be-icon-close' on:click={close} on:keydown></i>
 	    {/if}
     {/if}
   </div>

@@ -11,7 +11,7 @@
 	export let value: string[] | number[] = [];
 	let treeNode = null;
 	export let showCheckbox = null;
-	export let highlightCurrent: boolean = false;
+	export let highlightCurrent = false;
 	export let props = null;
 	export let renderContent: Function;
 	export let renderAfterExpand = true;
@@ -20,7 +20,7 @@
 
 	let indent = 18;
 	let iconClass = '';
-	export let nodeKey: string = 'label';
+	export let nodeKey = 'label';
 
 	let handleChildNodeExpand = (evt) => {
 		dispatch('nodeExpand', evt);
@@ -72,6 +72,7 @@
      on:contextmenu={handleContextMenu}
      role='treeitem'
      tabindex='-1'
+		 aria-selected={isSelected}
      aria-expanded={node.expanded}
      aria-disabled={node.disabled}
      aria-checked={node.checked}
@@ -79,6 +80,7 @@
 <!--	on:click|stopPropagation={handleClick}-->
 	<div class='be-tree-node__content' style={ 'padding-left: ' + (node.level - 1) * indent + 'px' }>
 		<span on:click|stopPropagation={handleExpandIconClick}
+					on:keydown|stopPropagation
 		      class:is-leaf={node.isLeaf}
 		      class:expanded={!node.isLeaf && node.expanded}
 		>
@@ -97,7 +99,7 @@
 				<BeIcon name='loading' />
 			</div>
 		{/if}
-		<span class='be-tree-node__label' on:click|stopPropagation={handleClick}>
+		<span class='be-tree-node__label' on:click|stopPropagation={handleClick} on:keydown>
 			{ node.label }
 			{#if showCount && node.childNodes.length}
 				<span class='be-tree-node__label-num'>

@@ -204,7 +204,7 @@ const handleMouseMove = (event) => {
     {#each rows as row, i}
       <tr>
         {#each row as cell, j}
-        <td class={getCellClasses(cell)} on:click={(e)=> selectDay(e, cell, j)}>
+        <td class={getCellClasses(cell)} on:click={(e)=> selectDay(e, cell, j)} on:keydown>
           <div><span>{cell.text}</span></div>
         </td>
         {/each}

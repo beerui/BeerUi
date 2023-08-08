@@ -18,7 +18,7 @@
 		<div class='list-item'><span>Github</span></div>
 		<div class='list-item'><a href='https://github.com/beerui/BeerUi'>组件 BeerUi</a></div>
 		{#if env === 'office'}
-			<div class='list-item'><a class='beian' target='_blank' href='https://beian.miit.gov.cn/'>皖ICP备2022015490号-1</a></div>
+			<div class='list-item'><a class='beian' rel='noreferrer' target='_blank' href='https://beian.miit.gov.cn/'>皖ICP备2022015490号-1</a></div>
 		{/if}
 <!--		<div class='list-item'>-->
 <!--			系统 Svelte-BeerUi-Admin-->

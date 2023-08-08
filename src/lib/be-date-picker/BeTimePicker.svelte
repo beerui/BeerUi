@@ -16,7 +16,7 @@
 	export let format = DEFAULT_FORMATS['time']
 	export let clearable = true
 	export let placeholder = '选择时间'
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 
 	let direction = 'bottom'
 	let visible;
@@ -64,7 +64,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
@@ -86,7 +86,12 @@
 	<div class="be-date__prefix">
 		<BeIcon name="time"/>
 	</div>
-	<div class="be-date__suffix" class:clearable={clearable && value} on:click|stopPropagation={handlerClear}>
+	<div
+		class="be-date__suffix"
+		class:clearable={clearable && value}
+		on:click|stopPropagation={handlerClear}
+		on:keydown|stopPropagation
+	>
 		<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
 	</div>
 	<Time {date} {format} direction='bottom' {selectableRange} bind:visible={visible} on:pick={confirmPick}/>

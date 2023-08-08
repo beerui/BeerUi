@@ -32,7 +32,7 @@
 	// 位置
 	export let clearable = true;
 	export let placeholder = '请选择';
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 	let store = new Store(options, $$props);
 	setContext('store', store);
 	// 显示的值
@@ -128,7 +128,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
 	}
@@ -170,7 +170,7 @@
 				     style="display:{!showClose ? 'block' : 'none'}">
 					<BeIcon name='chevron-down' width='18' height='18' />
 				</div>
-				<div on:click={clearValue} class:close={showClose}
+				<div on:click={clearValue} on:keydown class:close={showClose}
 				     style="display:{showClose ? 'block' : 'none'};margin-right:2px">
 					<BeIcon name='close-circle' width='14' height='14' />
 				</div>
