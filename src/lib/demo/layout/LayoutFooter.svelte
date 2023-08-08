@@ -7,6 +7,7 @@
 	<div class='list'>
 		<div class='list-item'><span>Contributors</span></div>
 		<div class='list-item'><a href='https://github.com/beerui/BeerUi'>BeerUi</a></div>
+		<div class='list-item'><a href='https://tianna.beer-ui.com/luzhou'>Turf.js中文网</a></div>
 	</div>
 	<div class='list'>
 		<div class='list-item'><span>Resource</span></div>
