@@ -111,7 +111,7 @@
 		class:is-open={visible}
 	>
 		<div
-			role='search'
+			role='button'
 			tabindex='-1'
 			class='be-select-tree__value-container'
 			class:is-focus={visible && isFocus}

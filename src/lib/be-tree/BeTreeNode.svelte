@@ -72,10 +72,6 @@
      on:contextmenu={handleContextMenu}
      role='button'
      tabindex='-1'
-		 aria-selected={isSelected}
-     aria-expanded={node.expanded}
-     aria-disabled={node.disabled}
-     aria-checked={node.checked}
 >
 <!--	on:click|stopPropagation={handleClick}-->
 	<div class='be-tree-node__content' style={ 'padding-left: ' + (node.level - 1) * indent + 'px' }>

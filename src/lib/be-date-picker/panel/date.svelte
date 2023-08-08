@@ -146,7 +146,7 @@ function handleShowTimePopper(e) {
           {#if currentView === 'date'}
             <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth} on:keydown={handlePrevMonth}></span>
           {/if}
-          <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown={handlePrevYear}></span>
+          <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown={handlePrevYear}></span>
           {#if currentView !== 'year'}
             <span role='button' tabindex='-1' class="be-date-picker__header-label" on:click={() => currentView = 'year'} on:keydown={() => currentView = 'year'}>{year} 年</span>
           {/if}

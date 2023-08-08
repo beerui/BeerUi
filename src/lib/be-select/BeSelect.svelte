@@ -114,7 +114,7 @@
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
 	{#if multiple}
 		<div
-			role='group'
+			role='button'
 			tabindex='-1'
 			class='be-select__tags'
 			on:click|stopPropagation={toggleVisible}

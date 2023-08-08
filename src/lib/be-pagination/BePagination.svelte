@@ -252,6 +252,6 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style>
 	.svg-icon {display: flex;justify-content: center;align-items: center;height: 100%;}
 </style>

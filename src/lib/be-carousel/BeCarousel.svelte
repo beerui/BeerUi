@@ -216,16 +216,16 @@
 		<ul class="be-carousel__indicators be-carousel__indicators--{direction === 'vertical' ? 'vertical' : 'horizontal'}">
 			{#each list as item, i}
 				<li
-					role='button'
-					tabindex='-1'
 					class="be-carousel__indicator be-carousel__indicator--{direction === 'vertical' ? 'vertical' : 'horizontal'}"
 					class:active={i === initialIndex}
-					on:click={() => { doIndicatorHandle(i) }}
-					on:mouseenter={() => { doIndicatorHandle(i)}}
-					on:keydown={() => { doIndicatorHandle(i) }}
 				>
-					<button class='be-carousel__button'></button>
-				</li>
+					<button
+						class='be-carousel__button'
+						tabIndex='-1'
+						on:click={() => { doIndicatorHandle(i) }}
+						on:mouseenter={() => { doIndicatorHandle(i)}}
+						on:keydown={() => { doIndicatorHandle(i) }}
+					></button>
 			{/each}
 		</ul>
 	{/if}
