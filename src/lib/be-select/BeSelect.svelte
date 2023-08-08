@@ -8,7 +8,7 @@
 	// 下拉框选中的值
 	export let value: string | number | ArrayValue;
 	export let size = 'normal';
-	export let name:string;
+	export let name = '';
 	export let maxHeight = '300px';
 	export let multiple = false; // 是否多选
 	export let multipleLimit = 0; // 多选时用户最多可以选择的项目数，为 0 则不限制
@@ -114,9 +114,11 @@
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
 	{#if multiple}
 		<div
+			role='group'
+			tabindex='-1'
 			class='be-select__tags'
 			on:click|stopPropagation={toggleVisible}
-			on:keydown|stopPropagation
+			on:keydown|stopPropagation={toggleVisible}
 			on:mouseover={() => {if(clearable && inputValue) showClose = true}}
 			on:mouseleave={() => {if(clearable && inputValue) showClose = false}}
 			on:focus
@@ -126,6 +128,7 @@
 					<span class="be-tag-text">{store.multipleValue[0].label}</span>
 					<span
 						class="be-tag-close"
+						role='button' tabindex='-1'
 						on:click|stopPropagation={() => closeMultipleHandle(store.multipleValue[0])}
 						on:keydown|stopPropagation
 					>
@@ -143,6 +146,7 @@
 						<span class="be-tag-text">{item.label}</span>
 						<span
 							class="be-tag-close"
+							role='button' tabindex='-1'
 							on:click|stopPropagation={() => closeMultipleHandle(item)}
 							on:keydown
 						>
@@ -156,6 +160,7 @@
 					<i class='be-icon be-icon-chevron-down'></i>
 				</div>
 				<div
+					role='button' tabindex='-1'
 					on:click|stopPropagation={clearValue}
 					on:keydown|stopPropagation
 					class:close={showClose}
@@ -176,6 +181,7 @@
 		</div>
 	{:else}
 		<div
+			role='button' tabindex='-1'
 			on:click|stopPropagation={toggleVisible}
 			on:keydown|stopPropagation
 			on:focus
@@ -183,6 +189,7 @@
 			on:mouseleave={() => {if(clearable && inputValue) showClose = false}}
 		>
 			<BeInput
+				{name}
 				{placeholder}
 				value={inputValue}
 				bind:this={input}
@@ -197,6 +204,7 @@
 						<i class='be-icon be-icon-chevron-down'></i>
 					</div>
 					<div
+						role='button' tabindex='-1'
 						on:click|stopPropagation={clearValue}
 						on:keydown
 						class:close={showClose}

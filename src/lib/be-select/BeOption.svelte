@@ -40,6 +40,7 @@
 	export {_class as class};
 </script>
 <li
+	role='listitem'
 	class="be-select-dropdown__item {_class}"
 	class:is-multiple={multiple}
 	data-value={value}

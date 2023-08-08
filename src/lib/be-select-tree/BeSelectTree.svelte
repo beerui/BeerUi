@@ -111,17 +111,19 @@
 		class:is-open={visible}
 	>
 		<div
+			role='search'
+			tabindex='-1'
 			class='be-select-tree__value-container'
 			class:is-focus={visible && isFocus}
 			on:click={handleInputClick}
-			on:keydown
+			on:keydown={handleInputClick}
 		>
 			<div class='be-select-tree__input-container'>
 				<input
 					class="be-select-tree__input"
 					type='text'
 					autocomplete="off"
-					tabindex='0'
+					tabindex='-1'
 					bind:value={inputVal}
 					{placeholder}
 					on:input={handleInput}
@@ -132,6 +134,7 @@
 		</div>
 		{#if clearable && inputVal}
 			<div
+				role='button' tabindex='-1'
 				class='be-select-tree__close'
 			  on:click={clearInput}
 				on:keydown
@@ -139,7 +142,7 @@
 				<BeIcon name='close' />
 			</div>
 		{/if}
-		<div class='be-select-tree__arrow' class:is-open={visible} on:click={() => visible = !visible} on:keydown>
+		<div role='button' tabindex='-1' class='be-select-tree__arrow' class:is-open={visible} on:click={() => visible = !visible} on:keydown>
 			<BeIcon name='caret-down-small' width='24' height='24' />
 		</div>
 	</div>

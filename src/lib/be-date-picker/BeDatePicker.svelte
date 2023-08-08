@@ -158,6 +158,8 @@
 {#if ranged}
 <div class='be-date be-range' use:clickOutside={{ cb: handleCloseDatePopper }} on:outside={handleCloseDatePopper}>
 	<div
+		role='button'
+		tabindex='-1'
 		class='be-input__inner be-range-{selectMode}'
 		class:active={active}
 		on:click={handleShowDatePopper}
@@ -169,9 +171,10 @@
 		<span class="be-range-separator">{separator}</span>
 		<input autocomplete="off" placeholder={endPlaceholder} bind:value={displayValue[1]} disabled={disabled} readonly={readonly} on:input={handleStartInput} on:change={handleStartChange} on:focus={handleFocus} class="be-range-input">
 		<div
+			role='button' tabindex='-1'
 			class="be-range__close-icon"
 			class:clearable={clearable && displayValue && displayValue.length > 0}
-		  on:click|stopPropagation={handlerClear}
+			on:click|stopPropagation={handlerClear}
 			on:keydown|stopPropagation
 		>
 			<BeIcon name='close-circle' width='14' height='14' color="#c0c4cc"/>
@@ -194,6 +197,8 @@
 		<BeIcon name="calendar"/>
 	</div>
 	<div
+		role='button'
+		tabindex='-1'
 		class="be-date__suffix"
 		class:clearable={clearable && value}
 		on:click|stopPropagation={handlerClear}

@@ -47,8 +47,11 @@
 	class="be-switch"
 	class:is-checked = {checked}
 	class:is-disabled = {switchDisabled}
+	aria-checked={checked}
 	on:click={switchValue}
 	on:keydown
+	role='switch'
+	tabindex='-1'
 >
   <span class="be-switch__core" style="width: {width}px;{switchColor}"></span>
 </div>

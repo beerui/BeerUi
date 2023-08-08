@@ -55,10 +55,12 @@ onMount(() => {
 						{#each items as item, i}
 						<div
 							class='be-tabs__item'
+							role='button'
+							tabindex='-1'
 							bind:clientWidth={navbarList[i]}
 							class:is-active={active === item.key}
 							on:click={() => tabClick(item.key, i)}
-							on:keydown
+							on:keydown={() => tabClick(item.key, i)}
 						>{item.label}</div>
 						{/each}
 					</div>

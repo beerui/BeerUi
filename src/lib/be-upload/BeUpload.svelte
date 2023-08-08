@@ -284,6 +284,7 @@
 <div class="be-upload" style={$$props.style}>
 	{#if drag}
 		<div
+			role='button' tabindex='-1'
 			class="be-upload--{listType}"
 			class:be-upload-dragger={drag}
 			class:be-upload__hide={isHideUpload}
@@ -308,13 +309,13 @@
 					<div>
 						<img src={file.url} alt="" class="be-upload-list__item-thumbnail">
 						<span class="be-upload-list__item-actions">
-							<span class="be-upload-list__item-preview" on:click={previewImages(file.url)} on:keydown>
+							<span role='button' tabindex='-1' class="be-upload-list__item-preview" on:click={previewImages(file.url)} on:keydown>
 								<BeIcon width="20" height="20" name="zoom-in" />
 							</span>
 	<!--						<span class="be-upload-list__item-delete">-->
 	<!--							<BeIcon width="20" height="20" name="download" />-->
 	<!--						</span>-->
-							<span tabindex='-1' class="be-upload-list__item-delete" on:click={() => handleRemove(file, file.raw)} on:keydown>
+							<span role='button' tabindex='-1' class="be-upload-list__item-delete" on:click={() => handleRemove(file, file.raw)} on:keydown>
 								<BeIcon width="20" height="20" name="delete" />
 							</span>
 						</span>
@@ -332,7 +333,7 @@
 							<BeIcon name="check-circle" />
 						{/if}
 					</div>
-					<span class="be-icon-close" on:click={() => handleRemove(file, file.raw)} on:keydown><BeIcon name="close" /></span>
+					<span role='button' tabindex='-1' class="be-icon-close" on:click={() => handleRemove(file, file.raw)} on:keydown><BeIcon name="close" /></span>
 				{/if}
 			</li>
 			{/each}
@@ -340,6 +341,7 @@
 	{/if}
 	{#if !drag}
 		<div
+			role='button' tabindex='-1'
 			class="be-upload--{listType}"
 			class:be-upload-dragger={drag}
 			class:be-upload__hide={isHideUpload}

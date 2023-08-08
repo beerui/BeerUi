@@ -87,6 +87,7 @@
 		<BeIcon name="time"/>
 	</div>
 	<div
+		role='button' tabindex='-1'
 		class="be-date__suffix"
 		class:clearable={clearable && value}
 		on:click|stopPropagation={handlerClear}

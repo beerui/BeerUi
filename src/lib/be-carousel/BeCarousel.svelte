@@ -185,6 +185,8 @@
 	};
 </script>
 <div
+	role='button'
+	tabindex='-1'
 	class={_class}
 	class:indicatorPosition={indicatorPosition}
 	on:mouseenter={enterCarousel}
@@ -193,16 +195,17 @@
 >
 	<div
 		class='be-carousel__container'
-	    style:height
+		style:height
+		tabindex='-1'
 		on:touchstart={touchstartHandle}
 		on:touchmove={touchmoveHandle}
 	>
 		{#if direction !== 'vertical' && !hideArrow}
-			<button type='button' on:click={doPrevHandle} on:keydown class='be-carousel__arrow be-carousel__arrow--left'
+			<button tabindex='-1' type='button' on:click={doPrevHandle} on:keydown class='be-carousel__arrow be-carousel__arrow--left'
 			        style:display={arrowDisplay}>
 				<BeIcon name='chevron-left' />
 			</button>
-			<button type='button' on:click={doNextHandle} on:keydown class='be-carousel__arrow be-carousel__arrow--right'
+			<button tabindex='-1' type='button' on:click={doNextHandle} on:keydown class='be-carousel__arrow be-carousel__arrow--right'
 			        style:display={arrowDisplay}>
 				<BeIcon name='chevron-right' />
 			</button>
@@ -213,11 +216,13 @@
 		<ul class="be-carousel__indicators be-carousel__indicators--{direction === 'vertical' ? 'vertical' : 'horizontal'}">
 			{#each list as item, i}
 				<li
+					role='button'
+					tabindex='-1'
 					class="be-carousel__indicator be-carousel__indicator--{direction === 'vertical' ? 'vertical' : 'horizontal'}"
 					class:active={i === initialIndex}
 					on:click={() => { doIndicatorHandle(i) }}
 					on:mouseenter={() => { doIndicatorHandle(i)}}
-					on:keydown
+					on:keydown={() => { doIndicatorHandle(i) }}
 				>
 					<button class='be-carousel__button'></button>
 				</li>

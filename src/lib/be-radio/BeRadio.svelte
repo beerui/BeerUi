@@ -64,17 +64,21 @@
 		}
 	}
 </script>
-<div class='be-radio {_class}'
-		 class:is-checked={isChecked}
-		 class:is-disabled={disabled}
-     class:is-bordered={border}
-     class:be-radio--medium={size === 'medium'}
-     class:be-radio--small={size === 'small'}
-     class:be-radio--mini={size === 'mini'}
-		 style={$$props.style}
-     style:background-color={isChecked ? fill : ''}
-		 on:click|stopPropagation={handleClick}
-		 on:keydown|stopPropagation
+<div
+	role='radio'
+	tabindex='-1'
+	aria-checked={checked}
+	class='be-radio {_class}'
+	class:is-checked={isChecked}
+	class:is-disabled={disabled}
+	class:is-bordered={border}
+	class:be-radio--medium={size === 'medium'}
+	class:be-radio--small={size === 'small'}
+	class:be-radio--mini={size === 'mini'}
+	style={$$props.style}
+	style:background-color={isChecked ? fill : ''}
+	on:click|stopPropagation={handleClick}
+	on:keydown|stopPropagation
 >
   <span class="be-radio__input"
         class:is-checked={isChecked}
@@ -84,6 +88,8 @@
     <input
 	    {...mapAttributes({ disabled, id, name })}
 	    type="radio"
+			tabindex='-1'
+			aria-checked={checked}
 	    aria-hidden="false"
 	    class="be-radio__original"
     >

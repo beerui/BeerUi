@@ -1,6 +1,6 @@
 {
   "name": "@brewer/beerui",
-  "version": "1.1.10",
+  "version": "1.1.16",
   "description": "A Svelte Ui Components",
   "main": "index.js",
   "scripts": {
@@ -635,9 +635,11 @@
     "vite": "4.0.1"
   },
   "files": [
-    "package"
+    "package",
+    "README.md",
+    "logo_bg.png"
   ],
-  "svelte": "./package/index.js",
+  "svelte": "index.js",
   "typesVersions": {
     ">4.0": {
       "assets/main": [

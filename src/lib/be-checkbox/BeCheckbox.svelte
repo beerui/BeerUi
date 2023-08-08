@@ -56,6 +56,9 @@
 	})
 </script>
 <div
+	role='checkbox'
+	tabindex='-1'
+ 	aria-checked={checked}
 	class={_class}
 	style={$$props.style}
 	class:is-checked={checked}
@@ -72,6 +75,8 @@
     <input
 	    {...mapAttributes({ disabled, id, name })}
 	    type='checkbox'
+			tabindex='-1'
+			aria-checked={checked}
 	    aria-hidden='false'
 	    class='be-checkbox__original'
 	    value={label}

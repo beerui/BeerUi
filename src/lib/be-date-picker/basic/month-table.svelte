@@ -160,7 +160,7 @@ const handleMouseMove = (event) => {
     {#each rows as row}
       <tr>
         {#each row as cell}
-          <td class={getCellClasses(cell)} on:click={(e)=> selectMonth(e, cell)} on:keydown>
+          <td role='button' tabindex='-1' class={getCellClasses(cell)} on:click={(e)=> selectMonth(e, cell)} on:keydown>
             <div>
               <span class="cell">{MONTHS[cell.text]}</span>
             </div>

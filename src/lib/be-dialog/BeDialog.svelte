@@ -83,21 +83,21 @@ import { BeDialog } from "@brewer/beerui";
 <!--	<div class={_class} class:be-dialog={true} style={$$props.style} use:clickOutside|stop={ { isInDrag: dragStatus } } on:outside={close}>-->
 	<div class={_class} class:be-dialog={true} style={$$props.style}>
 		{#if mask}
-		<div class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close} on:keydown></div>
+		<div role='button' tabindex='-1' class="be-dialog__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handle_close} on:keydown></div>
 		{/if}
 		<div
 			class="be-dialog__container relative z-50"
-		    use:DragEvent|stopPropagation={ { isLimit, isDrag, isFree, els: '.drag' } }
-		    on:isInDrag={isInDragHandle}
-		    role="dialog"
-		    aria-modal="true"
-		    transition:fade="{{delay: 0, duration: 300}}"
+			use:DragEvent|stopPropagation={ { isLimit, isDrag, isFree, els: '.drag' } }
+			on:isInDrag={isInDragHandle}
+			role="dialog"
+			aria-modal="true"
+			transition:fade="{{delay: 0, duration: 300}}"
 			style:width={width}
 		>
 			<slot name='header'>
 				<div class='be-dialog__header' class:drag={isDrag}>
 					<span class='be-dialog__title'>{title}</span>
-					<div class='be-dialog__close' on:click={close} on:keydown>×</div>
+					<div role='button' tabindex='-1' class='be-dialog__close' on:click={close} on:keydown>×</div>
 				</div>
 			</slot>
 			<div class="be-dialog__body">

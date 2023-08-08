@@ -62,7 +62,7 @@
 							<slot name='title'>{title}</slot>
 						</span>
 						{#if isShowClose}
-							<div on:click={close} on:keydown>
+							<div role='button' tabindex='-1' on:click={close} on:keydown>
 								<BeIcon class='be-drawer__close-btn' name='close' />
 							</div>
 						{/if}
@@ -73,7 +73,7 @@
 				</section>
 			</div>
 			{#if mask}
-				<div class="be-drawer__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handleClose} on:keydown></div>
+				<div role='button' tabindex='-1' class="be-drawer__mask" transition:fade="{{delay: 0, duration: 300}}" on:click={handleClose} on:keydown></div>
 			{/if}
 		</div>
 	</div>

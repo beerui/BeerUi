@@ -113,9 +113,9 @@ const isValidValue = (value) => {
 <div class="be-picker-panel be-date-picker be-range-daterange-picker be-date-range-{direction} be-popper" bind:this={rangeRect} in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
-      <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth} on:keydown></span>
-      <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown></span>
-      <span class="be-date-picker__header-label">{leftLabel}</span>
+      <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth} on:keydown></span>
+      <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown></span>
+      <span role='button' tabindex='-1' class="be-date-picker__header-label">{leftLabel}</span>
       <!-- {#if currentView === 'date'}
         <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth}></span>
       {/if}
@@ -126,8 +126,8 @@ const isValidValue = (value) => {
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
       <span class="be-date-picker__header-label">{rightLabel}</span>
-      <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth} on:keydown></span>
-      <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear} on:keydown></span>
+      <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth} on:keydown></span>
+      <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear} on:keydown></span>
     </div>
     <DateTable date = {rightDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
   </div>

@@ -49,7 +49,7 @@
 						on:keydown
 					/>
 				{/if}
-				<span  class='be-cascader-node__label' on:keydown  on:click={() => clickNodes(item)} on:mouseenter={() => hoverNodes(item)}>{item[config.label]}</span>
+				<span role='button' tabindex='-1' class='be-cascader-node__label' on:keydown  on:click={() => clickNodes(item)} on:mouseenter={() => hoverNodes(item)}>{item[config.label]}</span>
 				{#if (lazy && item.hasChild) || (item.children && item.children.length)}
 					{#if curLoadingId == item[config.value]}
 					<div class='be-cascader-node__loading'>
