@@ -8,8 +8,10 @@
 
 This is a Svelte Ui Components,`@brewer/beerui`.
 
-### 使用前的说明
-本项目的状态为开发中，但已在内部交付项目中使用，几乎所有的组件都可正常使用。
+### 一些想法和计划
+前期参考了ElementUi的样式，后面接触到TDesign后有想使用全套TDesign的想法。
+
+2.0版本会考虑进行风格和写法大变。
 
 ### 在线文档
 国内部署：[BeerUi](https://beer-ui.com/)
