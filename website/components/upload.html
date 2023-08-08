@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/LayoutHeader.5b3b3ed1.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/LayoutFooter.b2d8d7c4.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_layout.019cf28e.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/loading.32345c4f.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/github.cb54580c.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.ba899424.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.21613952.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.8b8d8aa2.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.88f9aa6d.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.64c37aa9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/environment.7328c2e2.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.svelte.93dfca2d.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Logo.51a85fb9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/stores.8c0f5618.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/LayoutFooter.91d637cf.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-layout.svelte.7d31eda4.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-components-upload-page.svelte.33a61233.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeButton.f53a9660.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/beerui.dfc24136.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.d5ff37b9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/loading.6fc7a1f8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/throttle.c22c4fe7.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeIcon.48a73047.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DemoBlock.d66327e5.js"><title>上传 Upload 组件文档 BeerUi-官方文档</title><!-- HEAD_svelte-1eytwic_START --><script>var _paq = window._paq = window._paq || [];
+	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//log.beer-ui.com/";
+		_paq.push(['setTrackerUrl', u+'matomo.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+</script><!-- HEAD_svelte-1eytwic_END --><!-- HEAD_svelte-12xgyjz_START --><meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component"><meta name="keywords" content="Upload 上传, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit"><!-- HEAD_svelte-12xgyjz_END -->
+		<style>
+			body {background: rgba(16, 106, 55, 30%);}
+            #svelte {
+                background: linear-gradient(rgba(16, 106, 55, 80%), rgba(107, 132, 173, 80%));
+				min-height: 100vh;
+            }
+		</style>
+	</head>
+	<body data-sveltekit-preload-data="viewport">
+		<div id="svelte">
+
+
+<div class="be-warp">
+
+<div class="be-header s-UFfHt6Njpvg7"><div class="logo flex s-UFfHt6Njpvg7">
+<embed src="/logo_new.svg" width="100%" height="100%" type="image/svg+xml">
+		<span></span></div>
+	<div class="nav s-UFfHt6Njpvg7"><a href="/" class="s-UFfHt6Njpvg7">主页</a>
+		<a href="/components/start" class="s-UFfHt6Njpvg7">组件</a>
+		<a rel="noreferrer" target="_blank" href="https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md" class="s-UFfHt6Njpvg7">更新日志</a>
+		<a href="/others" class="s-UFfHt6Njpvg7">其它</a>
+		<div class="tabs s-UFfHt6Njpvg7"><div data-theme="light" class="item sun s-UFfHt6Njpvg7 active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99996 3.15217C10.5252 3.15217 10.951 2.72636 10.951 2.20109C10.951 1.67582 10.5252 1.25 9.99996 1.25C9.47469 1.25 9.04887 1.67582 9.04887 2.20109C9.04887 2.72636 9.47469 3.15217 9.99996 3.15217Z"></path><path fill="currentColor" d="M9.99992 4.29348C6.84829 4.29348 4.2934 6.84838 4.2934 10C4.2934 13.1516 6.84829 15.7065 9.99992 15.7065C13.1515 15.7065 15.7064 13.1516 15.7064 10C15.7064 6.84838 13.1515 4.29348 9.99992 4.29348Z"></path><path fill="currentColor" d="M16.4673 4.4837C16.4673 5.00896 16.0415 5.43478 15.5162 5.43478C14.991 5.43478 14.5652 5.00896 14.5652 4.4837C14.5652 3.95843 14.991 3.53261 15.5162 3.53261C16.0415 3.53261 16.4673 3.95843 16.4673 4.4837Z"></path><path fill="currentColor" d="M17.7989 10.9511C18.3241 10.9511 18.75 10.5253 18.75 10C18.75 9.47474 18.3241 9.04891 17.7989 9.04891C17.2736 9.04891 16.8478 9.47474 16.8478 10C16.8478 10.5253 17.2736 10.9511 17.7989 10.9511Z"></path><path fill="currentColor" d="M16.4673 15.5163C16.4673 16.0416 16.0415 16.4674 15.5162 16.4674C14.991 16.4674 14.5652 16.0416 14.5652 15.5163C14.5652 14.991 14.991 14.5652 15.5162 14.5652C16.0415 14.5652 16.4673 14.991 16.4673 15.5163Z"></path><path fill="currentColor" d="M9.99996 18.75C10.5252 18.75 10.951 18.3242 10.951 17.7989C10.951 17.2736 10.5252 16.8478 9.99996 16.8478C9.47469 16.8478 9.04887 17.2736 9.04887 17.7989C9.04887 18.3242 9.47469 18.75 9.99996 18.75Z"></path><path fill="currentColor" d="M5.43469 15.5163C5.43469 16.0416 5.00887 16.4674 4.4836 16.4674C3.95833 16.4674 3.53252 16.0416 3.53252 15.5163C3.53252 14.991 3.95833 14.5652 4.4836 14.5652C5.00887 14.5652 5.43469 14.991 5.43469 15.5163Z"></path><path fill="currentColor" d="M2.20096 10.9511C2.72623 10.9511 3.15205 10.5253 3.15205 10C3.15205 9.47474 2.72623 9.04891 2.20096 9.04891C1.67569 9.04891 1.24988 9.47474 1.24988 10C1.24988 10.5253 1.67569 10.9511 2.20096 10.9511Z"></path><path fill="currentColor" d="M5.43469 4.4837C5.43469 5.00896 5.00887 5.43478 4.4836 5.43478C3.95833 5.43478 3.53252 5.00896 3.53252 4.4837C3.53252 3.95843 3.95833 3.53261 4.4836 3.53261C5.00887 3.53261 5.43469 3.95843 5.43469 4.4837Z"></path></svg></div>
+			<div data-theme="dark" class="item moon s-UFfHt6Njpvg7"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99993 3.12494C6.20294 3.12494 3.12488 6.203 3.12488 10C3.12488 13.797 6.20294 16.8751 9.99993 16.8751C13.7969 16.8751 16.875 13.797 16.875 10C16.875 9.52352 16.8264 9.0577 16.7337 8.6075C16.6752 8.32295 16.4282 8.11628 16.1378 8.10872C15.8474 8.10117 15.5901 8.29473 15.5168 8.57585C15.1411 10.0167 13.8302 11.0795 12.2727 11.0795C10.4212 11.0795 8.92039 9.57869 8.92039 7.72726C8.92039 6.16969 9.98319 4.85879 11.4241 4.48312C11.7052 4.40983 11.8988 4.15249 11.8912 3.86207C11.8836 3.57165 11.677 3.32473 11.3924 3.26616C10.9422 3.1735 10.4764 3.12494 9.99993 3.12494Z"></path></svg></div></div></div>
+</div>
+	<div class="be-container"><div class="be-warp"><div class="be-container"><section class="nav-container s-SQJzG6QE6tAA"><div class="nav-container__scroll"><ul class="s-SQJzG6QE6tAA"><li class="s-SQJzG6QE6tAA"><a href="/components/start" class="s-SQJzG6QE6tAA">快速开始</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/repl" class="s-SQJzG6QE6tAA">REPL</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">基本</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/icons" class="s-SQJzG6QE6tAA">Icons 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/button" class="s-SQJzG6QE6tAA">Button 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">表单</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/input" class="s-SQJzG6QE6tAA">Input 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/textarea" class="s-SQJzG6QE6tAA">Textarea 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/radio" class="s-SQJzG6QE6tAA">Radio 单选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/checkbox" class="s-SQJzG6QE6tAA">Checkbox
+				多选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/switch" class="s-SQJzG6QE6tAA">Switch 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/select" class="s-SQJzG6QE6tAA">Select 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/cascader" class="s-SQJzG6QE6tAA">Cascader
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/form" class="s-SQJzG6QE6tAA">Form 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/upload" class="s-SQJzG6QE6tAA active">Upload 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/datePicker" class="s-SQJzG6QE6tAA">date-picker
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drag" class="s-SQJzG6QE6tAA">Drag 拖动排序</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">data 数据</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/table" class="s-SQJzG6QE6tAA">Table 表格</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tree" class="s-SQJzG6QE6tAA">Tree 树形控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/selectTree" class="s-SQJzG6QE6tAA">SelectTree
+				树形选择控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/pagination" class="s-SQJzG6QE6tAA">Pagination
+				分页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/progress" class="s-SQJzG6QE6tAA">progress
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/empty" class="s-SQJzG6QE6tAA">Empty 空状态</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">提示</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/loading" class="s-SQJzG6QE6tAA">Loading 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/messageBox" class="s-SQJzG6QE6tAA">MessageBox
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/dialog" class="s-SQJzG6QE6tAA">Dialog 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/alert" class="s-SQJzG6QE6tAA">Alert 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/notice" class="s-SQJzG6QE6tAA">Notice 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">导航 Navigation</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tabs" class="s-SQJzG6QE6tAA">Tabs 标签页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/menu" class="s-SQJzG6QE6tAA">NavMenu 导航菜单</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/breadcrumb" class="s-SQJzG6QE6tAA">Breadcrumb
+				面包屑</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">其它 Others</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/clock" class="s-SQJzG6QE6tAA">Clock 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drawer" class="s-SQJzG6QE6tAA">Drawer 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/collapse" class="s-SQJzG6QE6tAA">Collapse
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/scrollbar" class="s-SQJzG6QE6tAA">Scrollbar
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/carousel" class="s-SQJzG6QE6tAA">Carousel
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/countTo" class="s-SQJzG6QE6tAA">CountTo 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/preview" class="s-SQJzG6QE6tAA">PreviewImage
+				示例</a></li></ul></div>
+</section>
+		<div class="be-main"><div class="be-main-container">
+<div class="page-container"><h1>Upload 上传</h1>
+	<p>通过点击或者拖拽上传文件</p>
+	<h2>点击上传</h2>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list"><div class="be-upload">
+	<ul class="be-upload-list be-upload-list--text"><li tabindex="-1" class="be-upload-list__item is-success"><span class="be-upload-list__item-name"><i class="be-icon be-icon-file " role="button" style=""></i>food.jpg</span>
+					<div class="be-upload-list__item-status-label"><i class="be-icon be-icon-check-circle " role="button" style=""></i></div>
+					<span class="be-icon-close"><i class="be-icon be-icon-close " role="button" style=""></i></span>
+			</li></ul>
+	<div class="be-upload--text"><button class="be-button be-button--small be-button--primary"  type="button"><span>点击上传</span></button>
+			<input type="file" name="file" multiple class="be-upload__input"></div>
+		<div class="be-upload__tip"><p slot="tip">只能上传jpg/png文件，且不超过500kb</p></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description"><ol><li><a href="https://element.eleme.cn/#/zh-CN/component/upload" target="_blank">Element Ui Upload</a></li>
+				<li>accept	接受上传的文件类型（thumbnail-mode 模式下此参数无效）	string	—	—</li>
+				<li>listType	文件列表的类型	string	text/picture/picture-card	text</li>
+				<li>autoUpload	是否在选取文件后立即进行上传	boolean	—	true</li>
+				<li>fileList	上传的文件列表, 例如: 	array	—	[]</li></ol></div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">let</span> fileList1 =  [{<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;food.jpg&#x27;</span>, <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100&#x27;</span>}]
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeUpload</span>
+	<span class="hljs-attr">action</span>=<span class="hljs-string">&quot;https://jsonplaceholder.typicode.com/posts/&quot;</span>
+	<span class="hljs-attr">multiple</span>
+	<span class="hljs-attr">limit</span>=<span class="hljs-string">{9}</span>
+	<span class="hljs-attr">fileList</span>=<span class="hljs-string">{fileList1}</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;small&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;primary&quot;</span>&gt;</span>点击上传<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;tip&quot;</span>&gt;</span>只能上传jpg/png文件，且不超过500kb<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeUpload</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h1>照片墙</h1>
+	<p>使用 list-type 属性来设置文件列表的样式。</p>
+
+	<div class="demo-block"><div class="source"><div slot="source"><div><button class="be-button"  type="button"><span>查看文件</span></button></div>
+			<div class="demo-list"><div class="be-upload" style="width: 480px;">
+	<ul class="be-upload-list be-upload-list--picture-card"><li tabindex="-1" class="be-upload-list__item is-success"><div><img src="https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100" alt="" class="be-upload-list__item-thumbnail">
+						<span class="be-upload-list__item-actions"><span class="be-upload-list__item-preview"><i width="20" height="20" class="be-icon be-icon-zoom-in " role="button" style=""></i></span>
+	
+	
+	
+							<span tabindex="-1" class="be-upload-list__item-delete"><i width="20" height="20" class="be-icon be-icon-delete " role="button" style=""></i>
+							</span></span>
+					</div>
+			</li></ul>
+	<div class="be-upload--picture-card"><div class="upload-card"><i width="40" height="40" class="be-icon be-icon-add " role="button" style=""></i></div>
+			<input type="file" name="file" multiple class="be-upload__input"></div>
+		<div class="be-upload__tip"><p slot="tip">只能上传jpg/png文件，且不超过500kb</p></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description"><ol><li>hideUpload 在超出限制个数后 隐藏上传按钮</li>
+				<li><a href="https://element.eleme.cn/#/zh-CN/component/upload" target="_blank">Element Ui Upload</a></li></ol></div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">submitHandle</span> = (<span class="hljs-params"></span>) =&gt; {
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fileList2);
+}
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeUpload</span>
+	<span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 480px;&quot;</span>
+	<span class="hljs-attr">action</span>=<span class="hljs-string">&quot;https://jsonplaceholder.typicode.com/posts/&quot;</span>
+	<span class="hljs-attr">multiple</span>
+	<span class="hljs-attr">listType</span>=<span class="hljs-string">&quot;picture-card&quot;</span>
+	<span class="hljs-attr">limit</span>=<span class="hljs-string">{9}</span>
+	<span class="hljs-attr">hideUpload</span>=<span class="hljs-string">{true}</span>
+	<span class="hljs-attr">fileList</span>=<span class="hljs-string">{fileList2}</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;upload-card&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">BeIcon</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;add&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;40&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;40&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeUpload</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h1>拖拽上传</h1>
+
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list"><div class="be-upload" style="width: 480px;"><div class="be-upload--text be-upload-dragger"><div class="upload-card__drag"><div class="upload-card__icon"><i width="40" height="40" class="be-icon be-icon-upload " role="button" style=""></i></div>
+						<div class="be-upload__text">将文件拖到此处，或<em>点击上传</em></div></div>
+			<input type="file" name="file" multiple accept=".pdf,.doc,.docx" class="be-upload__input"></div>
+		<div class="be-upload__tip"><p slot="tip">application/pdf,application/doc,application/docx 只能上传jpg/png文件，且不超过2MB</p></div>
+	<ul class="be-upload-list be-upload-list--text"></ul>
+	</div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description"><ol><li>drag	是否启用拖拽上传	boolean	—	false</li></ol></div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">beforeUpload</span> = (<span class="hljs-params">file</span>) =&gt; {
+	<span class="hljs-keyword">const</span> isLt2M = file.<span class="hljs-property">size</span> / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span> &lt; <span class="hljs-number">2</span>;
+	<span class="hljs-keyword">if</span> (!isLt2M) {
+		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;上传头像图片大小不能超过 2MB!&#x27;</span>);
+	}
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;isLt2M&#x27;</span>, isLt2M);
+	<span class="hljs-keyword">return</span> isLt2M;
+}
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeUpload</span>
+	<span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 480px;&quot;</span>
+	<span class="hljs-attr">action</span>=<span class="hljs-string">&quot;https://jsonplaceholder.typicode.com/posts/&quot;</span>
+	<span class="hljs-attr">drag</span>
+	<span class="hljs-attr">multiple</span>
+	<span class="hljs-attr">limit</span>=<span class="hljs-string">{3}</span>
+	<span class="hljs-attr">accept</span>=<span class="hljs-string">&#x27;.pdf,.doc,.docx&#x27;</span>
+	<span class="hljs-attr">fileList</span>=<span class="hljs-string">{fileList3}</span>
+	<span class="hljs-attr">beforeUpload</span>=<span class="hljs-string">{beforeUpload}</span>
+&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;upload-card__drag&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;upload-card__icon&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeIcon</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;upload&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;40&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;40&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;be-upload__text&quot;</span>&gt;</span>将文件拖到此处，或<span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>点击上传<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;tip&quot;</span>&gt;</span>application/pdf,application/doc,application/docx 只能上传jpg/png文件，且不超过2MB<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeUpload</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3 class="demo-table-title">Attributes</h3>
+	<table class="demo-table"><thead><tr><th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th></tr></thead>	<tbody><tr><td>action</td>
+		<td>必选参数，上传的地址</td>
+		<td>string</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>headers</td>
+		<td>设置上传的请求头部</td>
+		<td>object</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>multiple</td>
+		<td>是否支持多选文件</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>true</td></tr>
+	<tr><td>data</td>
+		<td>上传时附带的额外参数</td>
+		<td>object</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>name</td>
+		<td>上传的文件字段名</td>
+		<td>string</td>
+		<td>—</td>
+		<td>file</td></tr>
+	<tr><td>withCredentials</td>
+		<td>支持发送 cookie 凭证信息</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>false</td></tr>
+	<tr><td>showFileList</td>
+		<td>是否显示已上传文件列表</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>true</td></tr>
+	<tr><td>drag</td>
+		<td>是否启用拖拽上传</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>false</td></tr>
+	<tr><td>accept</td>
+		<td>接受上传的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept">文件类型</a>（thumbnail-mode
+			模式下此参数无效）
+		</td>
+		<td>string</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>onPreview</td>
+		<td>点击文件列表中已上传的文件时的钩子</td>
+		<td>function(file)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>onRemove</td>
+		<td>文件列表移除文件时的钩子</td>
+		<td>function(file, fileList)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>onSuccess</td>
+		<td>文件上传成功时的钩子</td>
+		<td>function(response, file, fileList)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>onError</td>
+		<td>文件上传失败时的钩子</td>
+		<td>function(err, file, fileList)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>onProgress</td>
+		<td>文件上传时的钩子</td>
+		<td>function(event, file, fileList)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>onChange</td>
+		<td>文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用</td>
+		<td>function(file, fileList)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>beforeUpload</td>
+		<td>上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。</td>
+		<td>function(file)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>beforeRemove</td>
+		<td>删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。</td>
+		<td>function(file, fileList)</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>listType</td>
+		<td>文件列表的类型</td>
+		<td>string</td>
+		<td>text/picture/picture-card</td>
+		<td>text</td></tr>
+	<tr><td>autoUpload</td>
+		<td>是否在选取文件后立即进行上传</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>true</td></tr>
+	<tr><td>fileList</td>
+		<td>上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]</td>
+		<td>array</td>
+		<td>—</td>
+		<td>[]</td></tr>
+	<tr><td>httpRequest</td>
+		<td>覆盖默认的上传行为，可以自定义上传的实现</td>
+		<td>function</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>disabled</td>
+		<td>是否禁用</td>
+		<td>boolean</td>
+		<td>—</td>
+		<td>false</td></tr>
+	<tr><td>limit</td>
+		<td>最大允许上传个数</td>
+		<td>number</td>
+		<td>—</td>
+		<td>—</td></tr>
+	<tr><td>onExceed</td>
+		<td>文件超出个数限制时的钩子</td>
+		<td>function(files, fileList)</td>
+		<td>—</td>
+		<td>-</td></tr></tbody></table>
+	<h3 class="demo-table-title">Events</h3>
+	<table class="demo-table"><thead><tr><th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th></tr></thead>
+		<tbody><tr><td>clearFiles</td>
+			<td>清空已上传的文件列表（该方法不支持在 beforeUpload 中调用）</td>
+			<td>—</td></tr>
+		<tr><td>abort</td>
+			<td>取消上传请求</td>
+			<td>（ file: fileList 中的 file 对象 ）</td></tr>
+		<tr><td>submit</td>
+			<td>手动上传文件列表</td>
+			<td>—</td></tr></tbody></table>
+	<h3 class="demo-table-title">Slot</h3>
+	<table class="demo-table"><thead><tr><th>name</th>
+			<th>说明</th></tr></thead>
+		<tbody><tr><td>tip</td>
+			<td>提示</td></tr></tbody></table></div></div>
+			<div></div>
+			<div class="be-main__footer s-hZl-oQVdfKrr" style="margin-left: 240px;"><div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Contributors</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">BeerUi</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Resource</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://svelte.dev/" class="s-hZl-oQVdfKrr">svelte</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://kit.svelte.dev/" class="s-hZl-oQVdfKrr">svelteKit</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://www.npmjs.com/package/@brewer/beerui" class="s-hZl-oQVdfKrr">@brewer/beerui</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Github</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">组件 BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a class="beian s-hZl-oQVdfKrr" rel="noreferrer" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2022015490号-1</a></div>
+
+
+
+</div>
+</div></div></div>
+</div></div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_1y608e5 = {
+						env: {},
+						base: new URL("..", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("../_app/immutable/entry/start.ba899424.js"),
+						import("../_app/immutable/entry/app.64c37aa9.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1y608e5.element, {
+							node_ids: [0, 2, 41],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

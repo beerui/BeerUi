@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+	xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:xhtml="https://www.w3.org/1999/xhtml"
+>
+
+	<url>
+		<loc>https://beer-ui.com/</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/alert</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/breadcrumb</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/button</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/carousel</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/cascader</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/checkbox</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/clock</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/collapse</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/countTo</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/datePicker</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/dialog</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/drag</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/drawer</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/empty</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/form</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/form/test</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/icons</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/input</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/loading</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/menu</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/messageBox</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/notice</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/pagination</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/preview</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/progress</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/radio</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/repl</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/scrollbar</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/selectTree</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/select</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/start</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/switch</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/table</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/tabs</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/test</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/textarea</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/tree</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/components/upload</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://beer-ui.com/others</loc>
+		<lastmod>2023-08-08T03:39:22.377Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+</urlset>

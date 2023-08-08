@@ -408,7 +408,7 @@ let value4 = 2
 		</tr>
 		<tr>
 			<td>slot</td>
-			<td>新增插槽（v1.1.10）</td>
+			<td>新增插槽（v1.1.16）</td>
 		</tr>
 		</tbody>
 	</table>

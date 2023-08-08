@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/LayoutHeader.5b3b3ed1.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/LayoutFooter.b2d8d7c4.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_layout.019cf28e.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/github.cb54580c.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.ba899424.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.21613952.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.8b8d8aa2.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.88f9aa6d.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.64c37aa9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/environment.7328c2e2.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.svelte.93dfca2d.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Logo.51a85fb9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/stores.8c0f5618.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/LayoutFooter.91d637cf.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-layout.svelte.7d31eda4.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-components-tree-page.svelte.c153e22a.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DemoBlock.d66327e5.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeTree.4bc71ea0.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeIcon.48a73047.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeCheckbox.b215013d.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/beerui.dfc24136.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.d5ff37b9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeButton.f53a9660.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeInput.e7dc5488.js"><title>Tree 树形控件 组件文档 BeerUi-官方文档</title><!-- HEAD_svelte-1eytwic_START --><script>var _paq = window._paq = window._paq || [];
+	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//log.beer-ui.com/";
+		_paq.push(['setTrackerUrl', u+'matomo.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+</script><!-- HEAD_svelte-1eytwic_END --><!-- HEAD_svelte-185pi9j_START --><meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component"><meta name="keywords" content="Tree 树形控件, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit"><!-- HEAD_svelte-185pi9j_END -->
+		<style>
+			body {background: rgba(16, 106, 55, 30%);}
+            #svelte {
+                background: linear-gradient(rgba(16, 106, 55, 80%), rgba(107, 132, 173, 80%));
+				min-height: 100vh;
+            }
+		</style>
+	</head>
+	<body data-sveltekit-preload-data="viewport">
+		<div id="svelte">
+
+
+<div class="be-warp">
+
+<div class="be-header s-UFfHt6Njpvg7"><div class="logo flex s-UFfHt6Njpvg7">
+<embed src="/logo_new.svg" width="100%" height="100%" type="image/svg+xml">
+		<span></span></div>
+	<div class="nav s-UFfHt6Njpvg7"><a href="/" class="s-UFfHt6Njpvg7">主页</a>
+		<a href="/components/start" class="s-UFfHt6Njpvg7">组件</a>
+		<a rel="noreferrer" target="_blank" href="https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md" class="s-UFfHt6Njpvg7">更新日志</a>
+		<a href="/others" class="s-UFfHt6Njpvg7">其它</a>
+		<div class="tabs s-UFfHt6Njpvg7"><div data-theme="light" class="item sun s-UFfHt6Njpvg7 active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99996 3.15217C10.5252 3.15217 10.951 2.72636 10.951 2.20109C10.951 1.67582 10.5252 1.25 9.99996 1.25C9.47469 1.25 9.04887 1.67582 9.04887 2.20109C9.04887 2.72636 9.47469 3.15217 9.99996 3.15217Z"></path><path fill="currentColor" d="M9.99992 4.29348C6.84829 4.29348 4.2934 6.84838 4.2934 10C4.2934 13.1516 6.84829 15.7065 9.99992 15.7065C13.1515 15.7065 15.7064 13.1516 15.7064 10C15.7064 6.84838 13.1515 4.29348 9.99992 4.29348Z"></path><path fill="currentColor" d="M16.4673 4.4837C16.4673 5.00896 16.0415 5.43478 15.5162 5.43478C14.991 5.43478 14.5652 5.00896 14.5652 4.4837C14.5652 3.95843 14.991 3.53261 15.5162 3.53261C16.0415 3.53261 16.4673 3.95843 16.4673 4.4837Z"></path><path fill="currentColor" d="M17.7989 10.9511C18.3241 10.9511 18.75 10.5253 18.75 10C18.75 9.47474 18.3241 9.04891 17.7989 9.04891C17.2736 9.04891 16.8478 9.47474 16.8478 10C16.8478 10.5253 17.2736 10.9511 17.7989 10.9511Z"></path><path fill="currentColor" d="M16.4673 15.5163C16.4673 16.0416 16.0415 16.4674 15.5162 16.4674C14.991 16.4674 14.5652 16.0416 14.5652 15.5163C14.5652 14.991 14.991 14.5652 15.5162 14.5652C16.0415 14.5652 16.4673 14.991 16.4673 15.5163Z"></path><path fill="currentColor" d="M9.99996 18.75C10.5252 18.75 10.951 18.3242 10.951 17.7989C10.951 17.2736 10.5252 16.8478 9.99996 16.8478C9.47469 16.8478 9.04887 17.2736 9.04887 17.7989C9.04887 18.3242 9.47469 18.75 9.99996 18.75Z"></path><path fill="currentColor" d="M5.43469 15.5163C5.43469 16.0416 5.00887 16.4674 4.4836 16.4674C3.95833 16.4674 3.53252 16.0416 3.53252 15.5163C3.53252 14.991 3.95833 14.5652 4.4836 14.5652C5.00887 14.5652 5.43469 14.991 5.43469 15.5163Z"></path><path fill="currentColor" d="M2.20096 10.9511C2.72623 10.9511 3.15205 10.5253 3.15205 10C3.15205 9.47474 2.72623 9.04891 2.20096 9.04891C1.67569 9.04891 1.24988 9.47474 1.24988 10C1.24988 10.5253 1.67569 10.9511 2.20096 10.9511Z"></path><path fill="currentColor" d="M5.43469 4.4837C5.43469 5.00896 5.00887 5.43478 4.4836 5.43478C3.95833 5.43478 3.53252 5.00896 3.53252 4.4837C3.53252 3.95843 3.95833 3.53261 4.4836 3.53261C5.00887 3.53261 5.43469 3.95843 5.43469 4.4837Z"></path></svg></div>
+			<div data-theme="dark" class="item moon s-UFfHt6Njpvg7"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99993 3.12494C6.20294 3.12494 3.12488 6.203 3.12488 10C3.12488 13.797 6.20294 16.8751 9.99993 16.8751C13.7969 16.8751 16.875 13.797 16.875 10C16.875 9.52352 16.8264 9.0577 16.7337 8.6075C16.6752 8.32295 16.4282 8.11628 16.1378 8.10872C15.8474 8.10117 15.5901 8.29473 15.5168 8.57585C15.1411 10.0167 13.8302 11.0795 12.2727 11.0795C10.4212 11.0795 8.92039 9.57869 8.92039 7.72726C8.92039 6.16969 9.98319 4.85879 11.4241 4.48312C11.7052 4.40983 11.8988 4.15249 11.8912 3.86207C11.8836 3.57165 11.677 3.32473 11.3924 3.26616C10.9422 3.1735 10.4764 3.12494 9.99993 3.12494Z"></path></svg></div></div></div>
+</div>
+	<div class="be-container"><div class="be-warp"><div class="be-container"><section class="nav-container s-SQJzG6QE6tAA"><div class="nav-container__scroll"><ul class="s-SQJzG6QE6tAA"><li class="s-SQJzG6QE6tAA"><a href="/components/start" class="s-SQJzG6QE6tAA">快速开始</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/repl" class="s-SQJzG6QE6tAA">REPL</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">基本</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/icons" class="s-SQJzG6QE6tAA">Icons 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/button" class="s-SQJzG6QE6tAA">Button 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">表单</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/input" class="s-SQJzG6QE6tAA">Input 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/textarea" class="s-SQJzG6QE6tAA">Textarea 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/radio" class="s-SQJzG6QE6tAA">Radio 单选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/checkbox" class="s-SQJzG6QE6tAA">Checkbox
+				多选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/switch" class="s-SQJzG6QE6tAA">Switch 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/select" class="s-SQJzG6QE6tAA">Select 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/cascader" class="s-SQJzG6QE6tAA">Cascader
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/form" class="s-SQJzG6QE6tAA">Form 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/upload" class="s-SQJzG6QE6tAA">Upload 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/datePicker" class="s-SQJzG6QE6tAA">date-picker
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drag" class="s-SQJzG6QE6tAA">Drag 拖动排序</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">data 数据</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/table" class="s-SQJzG6QE6tAA">Table 表格</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tree" class="s-SQJzG6QE6tAA active">Tree 树形控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/selectTree" class="s-SQJzG6QE6tAA">SelectTree
+				树形选择控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/pagination" class="s-SQJzG6QE6tAA">Pagination
+				分页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/progress" class="s-SQJzG6QE6tAA">progress
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/empty" class="s-SQJzG6QE6tAA">Empty 空状态</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">提示</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/loading" class="s-SQJzG6QE6tAA">Loading 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/messageBox" class="s-SQJzG6QE6tAA">MessageBox
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/dialog" class="s-SQJzG6QE6tAA">Dialog 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/alert" class="s-SQJzG6QE6tAA">Alert 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/notice" class="s-SQJzG6QE6tAA">Notice 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">导航 Navigation</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tabs" class="s-SQJzG6QE6tAA">Tabs 标签页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/menu" class="s-SQJzG6QE6tAA">NavMenu 导航菜单</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/breadcrumb" class="s-SQJzG6QE6tAA">Breadcrumb
+				面包屑</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">其它 Others</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/clock" class="s-SQJzG6QE6tAA">Clock 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drawer" class="s-SQJzG6QE6tAA">Drawer 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/collapse" class="s-SQJzG6QE6tAA">Collapse
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/scrollbar" class="s-SQJzG6QE6tAA">Scrollbar
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/carousel" class="s-SQJzG6QE6tAA">Carousel
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/countTo" class="s-SQJzG6QE6tAA">CountTo 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/preview" class="s-SQJzG6QE6tAA">PreviewImage
+				示例</a></li></ul></div>
+</section>
+		<div class="be-main"><div class="be-main-container">
+<div class="page-container"><h2>Tree 树形控件</h2>
+	<p>用清晰的层级结构展示信息，可展开或折叠。</p>
+	<h3>基础用法</h3>
+	<p>基础的树形结构展示。</p>
+    <div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">
+<div class="be-tree" role="tree">
+	
+	<div class="be-tree__drop-indicator"></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">const</span> defaultProps = { <span class="hljs-attr">children</span>: <span class="hljs-string">&#x27;children&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;label&#x27;</span> }
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleNodeClick</span> = (<span class="hljs-params">evt</span>) =&gt; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;index&#x27;</span>, evt.<span class="hljs-property">detail</span>)<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeTree</span> {<span class="hljs-attr">data</span>} <span class="hljs-attr">props</span>=<span class="hljs-string">{defaultProps}</span> <span class="hljs-attr">on:nodeClick</span>=<span class="hljs-string">{handleNodeClick}</span> /&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>可选择</h3>
+	<p>适用于需要选择层级时使用。</p>
+    <div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">
+<div class="be-tree" role="tree"><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">region1
+			</span></div>
+	</div><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">region2
+			</span></div>
+	</div>
+	
+	<div class="be-tree__drop-indicator"></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">本例还展示了动态加载节点数据的方法。
+	    </div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">const</span> defaultProps1 = { <span class="hljs-attr">children</span>: <span class="hljs-string">&#x27;zones&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;name&#x27;</span> }
+<span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">loadNode</span> = (<span class="hljs-params">node, resolve</span>) =&gt; {
+  <span class="hljs-keyword">if</span> (node.<span class="hljs-property">level</span> === <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">resolve</span>([{ <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;region1&#x27;</span> }, { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;region2&#x27;</span> }]);
+  }
+  <span class="hljs-keyword">if</span> (node.<span class="hljs-property">level</span> &gt; <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-title function_">resolve</span>([]);
+  <span class="hljs-keyword">if</span> (!resolve) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">let</span> hasChild;
+  <span class="hljs-keyword">if</span> (node?.<span class="hljs-property">data</span>?.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;region1&#x27;</span>) {
+    hasChild = <span class="hljs-literal">true</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (node?.<span class="hljs-property">data</span>?.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;region2&#x27;</span>) {
+    hasChild = <span class="hljs-literal">false</span>;
+  } <span class="hljs-keyword">else</span> {
+    hasChild = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() &gt; <span class="hljs-number">0.5</span>;
+  }
+
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-keyword">let</span> data;
+    <span class="hljs-keyword">if</span> (hasChild) {
+      data = [{
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;zone&#x27;</span> + count++
+      }, {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;zone&#x27;</span> + count++
+      }];
+    } <span class="hljs-keyword">else</span> {
+      data = [];
+    }
+
+    <span class="hljs-title function_">resolve</span>(data);
+  }, <span class="hljs-number">3500</span>);
+}
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleCheckChange</span> = (<span class="hljs-params">evt</span>) =&gt; {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(evt);
+}<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeTree</span>
+  <span class="hljs-attr">props</span>=<span class="hljs-string">{defaultProps1}</span>
+  <span class="hljs-attr">load</span>=<span class="hljs-string">{loadNode}</span>
+  <span class="hljs-attr">lazy</span>
+  <span class="hljs-attr">showCheckbox</span>
+  <span class="hljs-attr">on:nodeClick</span>=<span class="hljs-string">{handleNodeClick}</span>
+  <span class="hljs-attr">on:checkChange</span>=<span class="hljs-string">{handleCheckChange}</span>
+/&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>懒加载自定义叶子节点</h3>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">
+<div class="be-tree" role="tree"><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">region
+			</span></div>
+	</div>
+	
+	<div class="be-tree__drop-indicator"></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">由于在点击节点时才进行该层数据的获取，默认情况下 Tree 无法预知某个节点是否为叶子节点，所以会为每个节点添加一个下拉按钮，如果节点没有下层数据，则点击后下拉按钮会消失。同时，你也可以提前告知 Tree
+			某个节点是否为叶子节点，从而避免在叶子节点前渲染下拉按钮。
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">const</span> defaultProps2 = {
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;name&#x27;</span>,
+  <span class="hljs-attr">children</span>: <span class="hljs-string">&#x27;zones&#x27;</span>,
+  <span class="hljs-attr">isLeaf</span>: <span class="hljs-string">&#x27;leaf&#x27;</span>
+};
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">loadNode2</span> = (<span class="hljs-params">node, resolve</span>) =&gt; {
+  <span class="hljs-keyword">if</span> (node.<span class="hljs-property">level</span> === <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">resolve</span>([{ <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;region&#x27;</span> }]);
+  }
+  <span class="hljs-keyword">if</span> (node.<span class="hljs-property">level</span> &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-title function_">resolve</span>([]);
+
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> data = [{
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;leaf&#x27;</span>,
+      <span class="hljs-attr">leaf</span>: <span class="hljs-literal">true</span>
+    }, {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;zone&#x27;</span>
+    }];
+
+    <span class="hljs-title function_">resolve</span>(data);
+  }, <span class="hljs-number">500</span>)
+}<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeTree</span>
+  <span class="hljs-attr">props</span>=<span class="hljs-string">{defaultProps2}</span>
+  <span class="hljs-attr">load</span>=<span class="hljs-string">{loadNode2}</span>
+  <span class="hljs-attr">showCheckbox</span>
+  <span class="hljs-attr">lazy</span>
+/&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>默认展开和默认选中</h3>
+    <div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">
+<div class="be-tree" role="tree"><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 1
+			</span></div>
+	</div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input is-indeterminate"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show    is-focusable is-checked" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="true">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox is-checked"><span class="be-checkbox__input  is-checked"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-1
+			</span></div>
+	</div><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-2
+			</span></div>
+	</div></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input is-indeterminate"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 3
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show    is-focusable is-checked" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="true">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox is-checked"><span class="be-checkbox__input  is-checked"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 3-1
+			</span></div>
+	</div><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 3-2
+			</span></div>
+	</div></div></div>
+	
+	<div class="be-tree__drop-indicator"></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">分别通过default-expanded-keys和default-checked-keys设置默认展开和默认选中的节点。需要注意的是，此时必须设置node-key，其值为节点数据中的一个字段名，该字段在整棵树中是唯一的。	    </div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">let</span> dataDefault = [{
+  <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一级 1&#x27;</span>,
+  <span class="hljs-attr">children</span>: [{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 1-1&#x27;</span>,
+    <span class="hljs-attr">children</span>: [{
+      <span class="hljs-attr">id</span>: <span class="hljs-number">9</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 1-1-1&#x27;</span>
+    }, {
+      <span class="hljs-attr">id</span>: <span class="hljs-number">10</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 1-1-2&#x27;</span>
+    }]
+  }]
+}, {
+  <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一级 2&#x27;</span>,
+  <span class="hljs-attr">children</span>: [{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 2-1&#x27;</span>
+  }, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">6</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 2-2&#x27;</span>
+  }]
+}, {
+  <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一级 3&#x27;</span>,
+  <span class="hljs-attr">children</span>: [{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">7</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 3-1&#x27;</span>
+  }, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">8</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 3-2&#x27;</span>
+  }]
+}]
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeTree</span>
+  <span class="hljs-attr">data</span>=<span class="hljs-string">{dataDefault}</span>
+  <span class="hljs-attr">showCheckbox</span>
+  <span class="hljs-attr">nodeKey</span>=<span class="hljs-string">&quot;id&quot;</span>
+  <span class="hljs-attr">defaultExpandedKeys</span>=<span class="hljs-string">{[2,</span> <span class="hljs-attr">3</span>]}
+  <span class="hljs-attr">defaultCheckedKeys</span>=<span class="hljs-string">{[5,</span> <span class="hljs-attr">7</span>]}
+/&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>禁用状态</h3>
+	<p>可将 Tree 的某些节点设置为禁用状态</p>
+    <div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">
+<div class="be-tree" role="tree"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input is-indeterminate"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input is-indeterminate"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 3-1-1
+			</span></div>
+	</div><div class="be-tree-node is-show" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="true" aria-checked="true">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox is-checked is-disabled"><span class="be-checkbox__input  is-checked is-disabled"><span class="be-checkbox__inner"></span>
+    <input disabled type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 3-1-2
+			</span></div>
+	</div></div></div><div class="be-tree-node is-show is-expanded" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="true" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox  is-disabled"><span class="be-checkbox__input   is-disabled"><span class="be-checkbox__inner"></span>
+    <input disabled type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show    is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 3-2-1
+			</span></div>
+	</div><div class="be-tree-node is-show" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="false" aria-disabled="true" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox  is-disabled"><span class="be-checkbox__input   is-disabled"><span class="be-checkbox__inner"></span>
+    <input disabled type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 3-2-2
+			</span></div>
+	</div></div></div></div></div>
+	
+	<div class="be-tree__drop-indicator"></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">通过disabled设置禁用状态。
+	    </div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">const</span> data2 = [{
+  <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一级 2&#x27;</span>,
+  <span class="hljs-attr">children</span>: [{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 2-1&#x27;</span>,
+    <span class="hljs-attr">children</span>: [{
+      <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 3-1-1&#x27;</span>
+    }, {
+      <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 3-1-2&#x27;</span>,
+      <span class="hljs-attr">disabled</span>: <span class="hljs-literal">true</span>
+    }]
+  }, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 2-2&#x27;</span>,
+    <span class="hljs-attr">disabled</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">children</span>: [{
+      <span class="hljs-attr">id</span>: <span class="hljs-number">6</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 3-2-1&#x27;</span>
+    }, {
+      <span class="hljs-attr">id</span>: <span class="hljs-number">7</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 3-2-2&#x27;</span>,
+      <span class="hljs-attr">disabled</span>: <span class="hljs-literal">true</span>
+    }]
+  }]
+}]
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeTree</span>
+  <span class="hljs-attr">data</span>=<span class="hljs-string">{data2}</span>
+  <span class="hljs-attr">showCheckbox</span>
+  <span class="hljs-attr">nodeKey</span>=<span class="hljs-string">&quot;id&quot;</span>
+  <span class="hljs-attr">defaultExpandedKeys</span>=<span class="hljs-string">{[2,</span> <span class="hljs-attr">3</span>]}
+  <span class="hljs-attr">defaultCheckedKeys</span>=<span class="hljs-string">{[5]}</span>
+/&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>树节点的选择</h3>
+	<p>可将 Tree 的某些节点设置为禁用状态</p>
+    <div class="demo-block"><div class="source"><div slot="source"><div class="buttons"><button class="be-button"  type="button"><span>通过 node 获取</span></button>
+		        <button class="be-button"  type="button"><span>通过 key 获取</span></button>
+		        <button class="be-button"  type="button"><span>通过 node 设置</span></button>
+		        <button class="be-button"  type="button"><span>通过 key 设置</span></button>
+		        <button class="be-button"  type="button"><span>清空</span></button></div>
+            <div class="demo-list">
+<div class="be-tree highlightCurrent" role="tree"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 1-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 1-1-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 1-1-2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div></div></div></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input is-indeterminate"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable is-checked" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="true">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox is-checked"><span class="be-checkbox__input  is-checked"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 3
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 3-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 3-2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div></div></div>
+	
+	<div class="be-tree__drop-indicator"></div></div>
+	            </div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">通过disabled设置禁用状态。
+	    </div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">let</span> data3 = [{
+  <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一级 1&#x27;</span>,
+  <span class="hljs-attr">children</span>: [{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 1-1&#x27;</span>,
+    <span class="hljs-attr">children</span>: [{
+      <span class="hljs-attr">id</span>: <span class="hljs-number">9</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 1-1-1&#x27;</span>
+    }, {
+      <span class="hljs-attr">id</span>: <span class="hljs-number">10</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 1-1-2&#x27;</span>
+    }]
+  }]
+}, {
+  <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一级 2&#x27;</span>,
+  <span class="hljs-attr">children</span>: [{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 2-1&#x27;</span>
+  }, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">6</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 2-2&#x27;</span>
+  }]
+}, {
+  <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一级 3&#x27;</span>,
+  <span class="hljs-attr">children</span>: [{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">7</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 3-1&#x27;</span>
+  }, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">8</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 3-2&#x27;</span>
+  }]
+}];
+<span class="hljs-keyword">let</span> theTree = <span class="hljs-literal">null</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getCheckedNodes</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(theTree);
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(theTree.<span class="hljs-title function_">getCheckedNodes</span>());
+}
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">getCheckedKeys</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(theTree.<span class="hljs-title function_">getCheckedKeys</span>());
+}
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">setCheckedNodes</span> = (<span class="hljs-params"></span>) =&gt; {
+	theTree.<span class="hljs-title function_">setCheckedNodes</span>([{
+      <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;二级 2-1&#x27;</span>
+    }, {
+      <span class="hljs-attr">id</span>: <span class="hljs-number">9</span>,
+      <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;三级 1-1-1&#x27;</span>
+    }])
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;theTree&#x27;</span>, theTree);
+}
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">setCheckedKeys</span> = (<span class="hljs-params"></span>) =&gt; {
+	theTree.<span class="hljs-title function_">setCheckedKeys</span>([<span class="hljs-number">3</span>])
+}
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">resetChecked</span> = (<span class="hljs-params"></span>) =&gt; {
+	theTree.<span class="hljs-title function_">setCheckedKeys</span>([])
+}
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{getCheckedNodes}</span>&gt;</span>通过 node 获取<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{getCheckedKeys}</span>&gt;</span>通过 key 获取<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{setCheckedNodes}</span>&gt;</span>通过 node 设置<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{setCheckedKeys}</span>&gt;</span>通过 key 设置<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{resetChecked}</span>&gt;</span>清空<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">BeTree</span>
+  <span class="hljs-attr">bind:this</span>=<span class="hljs-string">{theTree}</span>
+  <span class="hljs-attr">data</span>=<span class="hljs-string">{data3}</span>
+  <span class="hljs-attr">showCheckbox</span>
+  <span class="hljs-attr">nodeKey</span>=<span class="hljs-string">&quot;id&quot;</span>
+  <span class="hljs-attr">defaultExpandAll</span>
+  <span class="hljs-attr">highlightCurrent</span>
+  <span class="hljs-attr">defaultExpandedKeys</span>=<span class="hljs-string">{[2,</span> <span class="hljs-attr">3</span>]}
+  <span class="hljs-attr">defaultCheckedKeys</span>=<span class="hljs-string">{[5]}</span>
+/&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>节点过滤</h3>
+	<p>通过关键字过滤树节点</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="buttons"><div class="be-input"><input placeholder="请输入内容" class="be-input__inner" name="" value="">
+	</div></div>
+			<div class="demo-list">
+<div class="be-tree highlightCurrent" role="tree"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 1-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 1-1-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 36px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">三级 1-1-2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div></div></div></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input is-indeterminate"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable is-checked" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="true">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox is-checked"><span class="be-checkbox__input  is-checked"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 2-2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 0px"><span class="expanded"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">一级 3
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 3-1
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div><div class="be-tree-node is-show is-expanded   is-focusable" role="treeitem" tabindex="-1" aria-selected="false" aria-expanded="true" aria-disabled="" aria-checked="false">
+	<div class="be-tree-node__content" style="padding-left: 18px"><span class="is-leaf"><i class="be-icon be-icon-caret-right-small " role="button" style=""></i></span>
+		<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value=""></span>
+	<span class="be-checkbox__label"></span></div>
+		
+		<span class="be-tree-node__label">二级 3-2
+			</span></div>
+	<div class="el-tree-node__children expanded" role="group" aria-expanded="true"></div></div></div></div>
+	
+	<div class="be-tree__drop-indicator"></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">在需要对节点进行过滤时，调用 Tree 实例的filter方法，参数为关键字。需要注意的是，此时需要设置filterNodeMethod，值为过滤函数。
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+  <span class="hljs-keyword">let</span> theFilterTree = <span class="hljs-literal">null</span>
+  <span class="hljs-keyword">let</span> value = <span class="hljs-string">&#x27;&#x27;</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">filterText</span> = (<span class="hljs-params"></span>) =&gt; {
+	  theFilterTree.<span class="hljs-title function_">filter</span>(value)
+  }
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">filterNodeMethod</span> = (<span class="hljs-params">value, data</span>) =&gt; {
+	  <span class="hljs-keyword">if</span> (!value) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+	  <span class="hljs-keyword">return</span> data.<span class="hljs-property">label</span>.<span class="hljs-title function_">indexOf</span>(value) !== -<span class="hljs-number">1</span>;
+  }<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeInput</span> <span class="hljs-attr">bind:value</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请输入内容&quot;</span> <span class="hljs-attr">on:input</span>=<span class="hljs-string">{filterText}</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">BeTree</span>
+	<span class="hljs-attr">bind:this</span>=<span class="hljs-string">{theFilterTree}</span>
+	<span class="hljs-attr">data</span>=<span class="hljs-string">{data3}</span>
+	<span class="hljs-attr">showCheckbox</span>
+	<span class="hljs-attr">nodeKey</span>=<span class="hljs-string">&quot;id&quot;</span>
+	<span class="hljs-attr">defaultExpandAll</span>
+	<span class="hljs-attr">highlightCurrent</span>
+	<span class="hljs-attr">defaultExpandedKeys</span>=<span class="hljs-string">{[2,</span> <span class="hljs-attr">3</span>]}
+	<span class="hljs-attr">defaultCheckedKeys</span>=<span class="hljs-string">{[5]}</span>
+	<span class="hljs-attr">filterNodeMethod</span>=<span class="hljs-string">{filterNodeMethod}</span>
+/&gt;</span>
+		<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3 class="demo-table-title">Attributes</h3>
+	<table class="demo-table"><thead><tr><th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th></tr></thead>
+		<tbody><tr><td>data</td>
+			<td>展示数据</td>
+			<td>array</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>emptyText</td>
+			<td>内容为空的时候展示的文本</td>
+			<td>String</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>nodeKey</td>
+			<td>每个树节点用来作为唯一标识的属性，整棵树应该是唯一的</td>
+			<td>String</td>
+			<td>—</td>
+			<td>label</td></tr>
+		<tr><td>props</td>
+			<td>配置选项，具体看下表</td>
+			<td>object</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>renderAfterExpand</td>
+			<td>是否在第一次展开某个树节点后才渲染其子节点</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>true</td></tr>
+		<tr><td>load</td>
+			<td>加载子树数据的方法，仅当 lazy 属性为true 时生效</td>
+			<td>function(node, resolve)</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>renderContent</td>
+			<td>树节点的内容区的渲染 Function</td>
+			<td>Function(h, { node, data, store }</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>highlightCurrent</td>
+			<td>是否高亮当前选中节点，默认值是 false。</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>defaultExpandAll</td>
+			<td>是否默认展开所有节点</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>expandOnClickNode</td>
+			<td>是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>true</td></tr>
+		<tr><td>checkOnClickNode</td>
+			<td>是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点。</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>autoExpandParent</td>
+			<td>展开子节点的时候是否自动展开父节点</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>true</td></tr>
+		<tr><td>defaultExpandedKeys</td>
+			<td>默认展开的节点的 key 的数组</td>
+			<td>array</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>showCheckbox</td>
+			<td>节点是否可被选择</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>checkStrictly</td>
+			<td>在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>defaultCheckedKeys</td>
+			<td>默认勾选的节点的 key 的数组</td>
+			<td>array</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>currentNodeKey</td>
+			<td>当前选中的节点</td>
+			<td>string, number</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>filterNodeMethod</td>
+			<td>对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏</td>
+			<td>Function(value, data, node)</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>accordion(TODO)</td>
+			<td>是否每次只打开一个同级树节点展开</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>indent(TODO)</td>
+			<td>相邻级节点间的水平缩进，单位为像素</td>
+			<td>number</td>
+			<td>—</td>
+			<td>16</td></tr>
+		<tr><td>iconClass(TODO)</td>
+			<td>自定义树节点的图标</td>
+			<td>string</td>
+			<td>-</td>
+			<td>-</td></tr>
+		<tr><td>lazy</td>
+			<td>是否懒加载子节点，需与 load 方法结合使用</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>draggable(TODO)</td>
+			<td>是否开启拖拽节点功能</td>
+			<td>boolean</td>
+			<td>—</td>
+			<td>false</td></tr>
+		<tr><td>allowDrag(TODO)</td>
+			<td>判断节点能否被拖拽</td>
+			<td>Function(node)</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>allowDrop(TODO)</td>
+			<td>拖拽时判定目标节点能否被放置。<code>type</code> 参数有三种情况：&#39;prev&#39;、&#39;inner&#39; 和 &#39;next&#39;，分别表示放置在目标节点前、插入至目标节点和放置在目标节点后</td>
+			<td>Function(draggingNode, dropNode, type)</td>
+			<td>—</td>
+			<td>—</td></tr></tbody></table>
+	<h3 class="demo-table-title">Props</h3>
+	<table class="demo-table"><thead><tr><th>参数</th>
+			<th>说明</th>
+			<th>类型</th></tr></thead>
+		<tbody><tr><td>label</td>
+			<td>指定节点标签为节点对象的某个属性值</td>
+			<td>string, function(data, node)</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>children</td>
+			<td>指定子树为节点对象的某个属性值</td>
+			<td>string</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>disabled</td>
+			<td>指定节点选择框是否禁用为节点对象的某个属性值</td>
+			<td>boolean, function(data, node)</td>
+			<td>—</td>
+			<td>—</td></tr>
+		<tr><td>isLeaf</td>
+			<td>指定节点是否为叶子节点，仅在指定了 lazy 属性的情况下生效</td>
+			<td>boolean, function(data, node)</td>
+			<td>—</td>
+			<td>—</td></tr></tbody></table>
+	<h3 class="demo-table-title">Method</h3>
+	<table class="demo-table"><thead><tr><th>name</th>
+			<th>说明</th>
+			<th>参数</th></tr></thead>
+		<tbody><tr><td>filter</td>
+			<td>对树节点进行筛选操作</td>
+			<td>接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数</td></tr>
+		<tr><td>updateKeyChildren</td>
+			<td>通过 keys 设置节点子元素，使用此方法必须设置 node-key 属性</td>
+			<td>(key, data) 接收两个参数，1. 节点 key 2. 节点数据的数组</td></tr>
+		<tr><td>getCheckedNodes</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前被选中的节点所组成的数组</td>
+			<td>(leafOnly, includeHalfChecked) 接收两个 boolean 类型的参数，1. 是否只是叶子节点，默认值为 <code>false</code> 2. 是否包含半选节点，默认值为 <code>false</code></td></tr>
+		<tr><td>setCheckedNodes</td>
+			<td>设置目前勾选的节点，使用此方法必须设置 node-key 属性</td>
+			<td>(nodes) 接收勾选节点数据的数组</td></tr>
+		<tr><td>getCheckedKeys</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前被选中的节点的 key 所组成的数组</td>
+			<td>(leafOnly) 接收一个 boolean 类型的参数，若为 <code>true</code> 则仅返回被选中的叶子节点的 keys，默认值为 <code>false</code></td></tr>
+		<tr><td>setCheckedKeys</td>
+			<td>通过 keys 设置目前勾选的节点，使用此方法必须设置 node-key 属性</td>
+			<td>(keys, leafOnly) 接收两个参数，1. 勾选节点的 key 的数组 2. boolean 类型的参数，若为 <code>true</code> 则仅设置叶子节点的选中状态，默认值为
+				<code>false</code></td></tr>
+		<tr><td>setChecked</td>
+			<td>通过 key / data 设置某个节点的勾选状态，使用此方法必须设置 node-key 属性</td>
+			<td>(key/data, checked, deep) 接收三个参数，1. 勾选节点的 key 或者 data 2. boolean 类型，节点是否选中 3. boolean 类型，是否设置子节点 ，默认为 false
+			</td></tr>
+		<tr><td>getHalfCheckedNodes</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前半选中的节点所组成的数组</td>
+			<td>-</td></tr>
+		<tr><td>getHalfCheckedKeys</td>
+			<td>若节点可被选择（即 <code>show-checkbox</code> 为 <code>true</code>），则返回目前半选中的节点的 key 所组成的数组</td>
+			<td>-</td></tr>
+		<tr><td>getCurrentKey</td>
+			<td>获取当前被选中节点的 key，使用此方法必须设置 node-key 属性，若没有节点被选中则返回 null</td>
+			<td>—</td></tr>
+		<tr><td>getCurrentNode</td>
+			<td>获取当前被选中节点的 data，若没有节点被选中则返回 null</td>
+			<td>—</td></tr>
+		<tr><td>setCurrentKey</td>
+			<td>通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性</td>
+			<td>(key) 待被选节点的 key，若为 null 则取消当前高亮的节点</td></tr>
+		<tr><td>setCurrentNode</td>
+			<td>通过 node 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性</td>
+			<td>(node) 待被选节点的 node</td></tr>
+		<tr><td>getNode</td>
+			<td>根据 data 或者 key 拿到 Tree 组件中的 node</td>
+			<td>(data) 要获得 node 的 key 或者 data</td></tr>
+		<tr><td>remove</td>
+			<td>删除 Tree 中的一个节点，使用此方法必须设置 node-key 属性</td>
+			<td>(data) 要删除的节点的 data 或者 node</td></tr>
+		<tr><td>append</td>
+			<td>为 Tree 中的一个节点追加一个子节点</td>
+			<td>(data, parentNode) 接收两个参数，1. 要追加的子节点的 data 2. 子节点的 parent 的 data、key 或者 node</td></tr>
+		<tr><td>insertBefore</td>
+			<td>为 Tree 的一个节点的前面增加一个节点</td>
+			<td>(data, refNode) 接收两个参数，1. 要增加的节点的 data 2. 要增加的节点的后一个节点的 data、key 或者 node</td></tr>
+		<tr><td>insertAfter</td>
+			<td>为 Tree 的一个节点的后面增加一个节点</td>
+			<td>(data, refNode) 接收两个参数，1. 要增加的节点的 data 2. 要增加的节点的前一个节点的 data、key 或者 node</td></tr></tbody></table>
+	<h3 class="demo-table-title">Events</h3>
+	<table class="demo-table"><thead><tr><th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th></tr></thead>
+		<tbody><tr><td>nodeClick</td>
+			<td>节点被点击时的回调</td>
+			<td>共三个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。</td></tr>
+		<tr><td>nodeContextmenu</td>
+			<td>当某一节点被鼠标右键点击时会触发该事件</td>
+			<td>共四个参数，依次为：event、传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。</td></tr>
+		<tr><td>checkChange</td>
+			<td>节点选中状态发生变化时的回调</td>
+			<td>共三个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点本身是否被选中、节点的子树中是否有被选中的节点</td></tr>
+		<tr><td>check(TODO)</td>
+			<td>当复选框被点击的时候触发</td>
+			<td>共两个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、树目前的选中状态对象，包含
+				checkedNodes、checkedKeys、halfCheckedNodes、halfCheckedKeys 四个属性
+			</td></tr>
+		<tr><td>currentChange(TODO)</td>
+			<td>当前选中节点变化时触发的事件</td>
+			<td>共两个参数，依次为：当前节点的数据，当前节点的 Node 对象</td></tr>
+		<tr><td>nodeExpand</td>
+			<td>节点被展开时触发的事件</td>
+			<td>共三个参数，依次为：传递给 <code>data</code> 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身</td></tr></tbody></table></div></div>
+			<div></div>
+			<div class="be-main__footer s-hZl-oQVdfKrr" style="margin-left: 240px;"><div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Contributors</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">BeerUi</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Resource</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://svelte.dev/" class="s-hZl-oQVdfKrr">svelte</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://kit.svelte.dev/" class="s-hZl-oQVdfKrr">svelteKit</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://www.npmjs.com/package/@brewer/beerui" class="s-hZl-oQVdfKrr">@brewer/beerui</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Github</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">组件 BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a class="beian s-hZl-oQVdfKrr" rel="noreferrer" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2022015490号-1</a></div>
+
+
+
+</div>
+</div></div></div>
+</div></div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_1y608e5 = {
+						env: {},
+						base: new URL("..", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("../_app/immutable/entry/start.ba899424.js"),
+						import("../_app/immutable/entry/app.64c37aa9.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1y608e5.element, {
+							node_ids: [0, 2, 40],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

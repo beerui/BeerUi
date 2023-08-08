@@ -3,6 +3,16 @@
 > 1.0的日志参阅 [v1.0](./logs/v1.0.md)
 
 ----
+## @brewer/beerui@1.1.15 `2022/12/15`
+
+### Patch Changes
+
+- 更新 Update 可访问性优化
+- 更新 Update 官网样式
+
+- 新增 Add `BeOption` slot，现在可自定义样式
+
+----
 ## @brewer/beerui@1.1.8 `2022/12/15`
 
 ### Patch Changes

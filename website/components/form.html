@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/LayoutHeader.5b3b3ed1.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/LayoutFooter.b2d8d7c4.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_layout.019cf28e.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_page.be67cd0c.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/github.cb54580c.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/loading.32345c4f.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/index.4963bb57.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/codemirror.d4628b00.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.ba899424.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.21613952.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.8b8d8aa2.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.88f9aa6d.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.64c37aa9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/environment.7328c2e2.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.svelte.93dfca2d.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Logo.51a85fb9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/stores.8c0f5618.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/LayoutFooter.91d637cf.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-layout.svelte.7d31eda4.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-components-form-page.svelte.a57924cb.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DemoBlock.d66327e5.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeButton.f53a9660.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/beerui.dfc24136.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.d5ff37b9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeOption.de59911c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeInput.e7dc5488.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/clickOutside.2fee1283.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/throttle.c22c4fe7.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/loading.6fc7a1f8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeSwitch.fd6547da.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeTimePicker.54b72652.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeIcon.48a73047.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.3cd19b6c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeCheckbox.b215013d.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeRadio.d2632d8c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeTextarea.bc38b8d2.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeFormItem.9c7a47cb.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeCheckboxGroup.2a914649.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeRadioGroup.40c296a0.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/ReplBlock.3b82ab88.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.svelte_svelte_type_style_lang.2af6c490.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.e882418f.js"><title>Form 表单 组件文档 BeerUi-官方文档</title><!-- HEAD_svelte-1eytwic_START --><script>var _paq = window._paq = window._paq || [];
+	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//log.beer-ui.com/";
+		_paq.push(['setTrackerUrl', u+'matomo.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+</script><!-- HEAD_svelte-1eytwic_END --><!-- HEAD_svelte-my74u9_START --><meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component"><meta name="keywords" content="Form 表单, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit"><!-- HEAD_svelte-my74u9_END --><!-- HEAD_svelte-my74u9_START --><meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component"><meta name="keywords" content="Form 表单, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit"><!-- HEAD_svelte-my74u9_END -->
+		<style>
+			body {background: rgba(16, 106, 55, 30%);}
+            #svelte {
+                background: linear-gradient(rgba(16, 106, 55, 80%), rgba(107, 132, 173, 80%));
+				min-height: 100vh;
+            }
+		</style>
+	</head>
+	<body data-sveltekit-preload-data="viewport">
+		<div id="svelte">
+
+
+<div class="be-warp">
+
+<div class="be-header s-UFfHt6Njpvg7"><div class="logo flex s-UFfHt6Njpvg7">
+<embed src="/logo_new.svg" width="100%" height="100%" type="image/svg+xml">
+		<span></span></div>
+	<div class="nav s-UFfHt6Njpvg7"><a href="/" class="s-UFfHt6Njpvg7">主页</a>
+		<a href="/components/start" class="s-UFfHt6Njpvg7">组件</a>
+		<a rel="noreferrer" target="_blank" href="https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md" class="s-UFfHt6Njpvg7">更新日志</a>
+		<a href="/others" class="s-UFfHt6Njpvg7">其它</a>
+		<div class="tabs s-UFfHt6Njpvg7"><div data-theme="light" class="item sun s-UFfHt6Njpvg7 active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99996 3.15217C10.5252 3.15217 10.951 2.72636 10.951 2.20109C10.951 1.67582 10.5252 1.25 9.99996 1.25C9.47469 1.25 9.04887 1.67582 9.04887 2.20109C9.04887 2.72636 9.47469 3.15217 9.99996 3.15217Z"></path><path fill="currentColor" d="M9.99992 4.29348C6.84829 4.29348 4.2934 6.84838 4.2934 10C4.2934 13.1516 6.84829 15.7065 9.99992 15.7065C13.1515 15.7065 15.7064 13.1516 15.7064 10C15.7064 6.84838 13.1515 4.29348 9.99992 4.29348Z"></path><path fill="currentColor" d="M16.4673 4.4837C16.4673 5.00896 16.0415 5.43478 15.5162 5.43478C14.991 5.43478 14.5652 5.00896 14.5652 4.4837C14.5652 3.95843 14.991 3.53261 15.5162 3.53261C16.0415 3.53261 16.4673 3.95843 16.4673 4.4837Z"></path><path fill="currentColor" d="M17.7989 10.9511C18.3241 10.9511 18.75 10.5253 18.75 10C18.75 9.47474 18.3241 9.04891 17.7989 9.04891C17.2736 9.04891 16.8478 9.47474 16.8478 10C16.8478 10.5253 17.2736 10.9511 17.7989 10.9511Z"></path><path fill="currentColor" d="M16.4673 15.5163C16.4673 16.0416 16.0415 16.4674 15.5162 16.4674C14.991 16.4674 14.5652 16.0416 14.5652 15.5163C14.5652 14.991 14.991 14.5652 15.5162 14.5652C16.0415 14.5652 16.4673 14.991 16.4673 15.5163Z"></path><path fill="currentColor" d="M9.99996 18.75C10.5252 18.75 10.951 18.3242 10.951 17.7989C10.951 17.2736 10.5252 16.8478 9.99996 16.8478C9.47469 16.8478 9.04887 17.2736 9.04887 17.7989C9.04887 18.3242 9.47469 18.75 9.99996 18.75Z"></path><path fill="currentColor" d="M5.43469 15.5163C5.43469 16.0416 5.00887 16.4674 4.4836 16.4674C3.95833 16.4674 3.53252 16.0416 3.53252 15.5163C3.53252 14.991 3.95833 14.5652 4.4836 14.5652C5.00887 14.5652 5.43469 14.991 5.43469 15.5163Z"></path><path fill="currentColor" d="M2.20096 10.9511C2.72623 10.9511 3.15205 10.5253 3.15205 10C3.15205 9.47474 2.72623 9.04891 2.20096 9.04891C1.67569 9.04891 1.24988 9.47474 1.24988 10C1.24988 10.5253 1.67569 10.9511 2.20096 10.9511Z"></path><path fill="currentColor" d="M5.43469 4.4837C5.43469 5.00896 5.00887 5.43478 4.4836 5.43478C3.95833 5.43478 3.53252 5.00896 3.53252 4.4837C3.53252 3.95843 3.95833 3.53261 4.4836 3.53261C5.00887 3.53261 5.43469 3.95843 5.43469 4.4837Z"></path></svg></div>
+			<div data-theme="dark" class="item moon s-UFfHt6Njpvg7"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99993 3.12494C6.20294 3.12494 3.12488 6.203 3.12488 10C3.12488 13.797 6.20294 16.8751 9.99993 16.8751C13.7969 16.8751 16.875 13.797 16.875 10C16.875 9.52352 16.8264 9.0577 16.7337 8.6075C16.6752 8.32295 16.4282 8.11628 16.1378 8.10872C15.8474 8.10117 15.5901 8.29473 15.5168 8.57585C15.1411 10.0167 13.8302 11.0795 12.2727 11.0795C10.4212 11.0795 8.92039 9.57869 8.92039 7.72726C8.92039 6.16969 9.98319 4.85879 11.4241 4.48312C11.7052 4.40983 11.8988 4.15249 11.8912 3.86207C11.8836 3.57165 11.677 3.32473 11.3924 3.26616C10.9422 3.1735 10.4764 3.12494 9.99993 3.12494Z"></path></svg></div></div></div>
+</div>
+	<div class="be-container"><div class="be-warp"><div class="be-container"><section class="nav-container s-SQJzG6QE6tAA"><div class="nav-container__scroll"><ul class="s-SQJzG6QE6tAA"><li class="s-SQJzG6QE6tAA"><a href="/components/start" class="s-SQJzG6QE6tAA">快速开始</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/repl" class="s-SQJzG6QE6tAA">REPL</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">基本</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/icons" class="s-SQJzG6QE6tAA">Icons 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/button" class="s-SQJzG6QE6tAA">Button 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">表单</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/input" class="s-SQJzG6QE6tAA">Input 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/textarea" class="s-SQJzG6QE6tAA">Textarea 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/radio" class="s-SQJzG6QE6tAA">Radio 单选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/checkbox" class="s-SQJzG6QE6tAA">Checkbox
+				多选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/switch" class="s-SQJzG6QE6tAA">Switch 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/select" class="s-SQJzG6QE6tAA">Select 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/cascader" class="s-SQJzG6QE6tAA">Cascader
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/form" class="s-SQJzG6QE6tAA active">Form 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/upload" class="s-SQJzG6QE6tAA">Upload 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/datePicker" class="s-SQJzG6QE6tAA">date-picker
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drag" class="s-SQJzG6QE6tAA">Drag 拖动排序</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">data 数据</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/table" class="s-SQJzG6QE6tAA">Table 表格</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tree" class="s-SQJzG6QE6tAA">Tree 树形控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/selectTree" class="s-SQJzG6QE6tAA">SelectTree
+				树形选择控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/pagination" class="s-SQJzG6QE6tAA">Pagination
+				分页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/progress" class="s-SQJzG6QE6tAA">progress
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/empty" class="s-SQJzG6QE6tAA">Empty 空状态</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">提示</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/loading" class="s-SQJzG6QE6tAA">Loading 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/messageBox" class="s-SQJzG6QE6tAA">MessageBox
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/dialog" class="s-SQJzG6QE6tAA">Dialog 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/alert" class="s-SQJzG6QE6tAA">Alert 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/notice" class="s-SQJzG6QE6tAA">Notice 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">导航 Navigation</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tabs" class="s-SQJzG6QE6tAA">Tabs 标签页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/menu" class="s-SQJzG6QE6tAA">NavMenu 导航菜单</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/breadcrumb" class="s-SQJzG6QE6tAA">Breadcrumb
+				面包屑</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">其它 Others</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/clock" class="s-SQJzG6QE6tAA">Clock 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drawer" class="s-SQJzG6QE6tAA">Drawer 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/collapse" class="s-SQJzG6QE6tAA">Collapse
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/scrollbar" class="s-SQJzG6QE6tAA">Scrollbar
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/carousel" class="s-SQJzG6QE6tAA">Carousel
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/countTo" class="s-SQJzG6QE6tAA">CountTo 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/preview" class="s-SQJzG6QE6tAA">PreviewImage
+				示例</a></li></ul></div>
+</section>
+		<div class="be-main"><div class="be-main-container">
+<div class="page-container content"><h2>Form 表单</h2>
+	<p>由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据</p>
+	<h3>基本用法</h3>
+	<p>包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">form: {"name":"","region":"","date1":"","date2":"","delivery":false,"type":[],"resource":"","desc":""}
+				<hr>
+				<form class="be-form    "><div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">活动名称</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-input"><input placeholder="" class="be-input__inner" name="" value="">
+	</div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">活动区域</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-select be-select--normal "><div><div class="be-input      be-input--suffix"><input autocomplete="false" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i class="be-icon be-icon-chevron-down"></i></div>
+					<div style="display:none;margin-right:2px"><i class="be-icon be-icon-close-circle"></i></div></div>
+	      
+		    </span></span></div></div>
+		<div class="be-select__option"><ul class="be-select__option_content" style="max-height: 300px;"><li class="be-select-dropdown__item" data-value="shanghai">区域一
+	</li>
+							<li class="be-select-dropdown__item" data-value="beijing">区域二
+	</li>
+				</ul>
+			<div class="popper__arrow"></div></div></div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">活动时间</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="flex"><div class="be-date"><div class="be-input"><input placeholder="选择日期" class="be-input__inner" readonly name="" value="">
+	</div>
+	<div class="be-date__prefix"><i class="be-icon be-icon-calendar " role="button" style=""></i></div>
+	<div class="be-date__suffix"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" style="color: #c0c4cc;"></i></div>
+	</div>
+							<span class="px-10 s-VRVJ8wOwdSZH">-</span>
+							<div class="be-date"><div class="be-input"><input placeholder="选择时间" class="be-input__inner" name="" value="">
+	</div>
+	<div class="be-date__prefix"><i class="be-icon be-icon-time " role="button" style=""></i></div>
+	<div class="be-date__suffix"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" style="color: #c0c4cc;"></i></div>
+	</div></div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">即时配送</div>
+	<div class="be-form-item__content" style="margin-left: 80px;">
+
+<div name="" class="be-switch"><span class="be-switch__core" style="width: 40px;"></span></div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">活动性质</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div role="group" aria-label="checkbox-group" class="be-checkbox-group "><div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input name="type" type="checkbox" aria-hidden="false" class="be-checkbox__original" value="美食/餐厅线上活动"></span>
+	<span class="be-checkbox__label">美食/餐厅线上活动</span></div>
+							<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input name="type" type="checkbox" aria-hidden="false" class="be-checkbox__original" value="地推活动"></span>
+	<span class="be-checkbox__label">地推活动</span></div>
+							<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input name="type" type="checkbox" aria-hidden="false" class="be-checkbox__original" value="线下主题活动"></span>
+	<span class="be-checkbox__label">线下主题活动</span></div>
+							<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input name="type" type="checkbox" aria-hidden="false" class="be-checkbox__original" value="单纯品牌曝光"></span>
+	<span class="be-checkbox__label">单纯品牌曝光</span></div></div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">特殊资源</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div role="group" aria-label="checkbox-group" class="be-radio-group "><div class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">线上品牌商赞助</span></div>
+							<div class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">线下场地免费</span></div></div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">活动形式</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-textarea"><textarea placeholder="" maxlength="" class="be-textarea__inner is-gray"></textarea></div>
+		</div></div>
+					<div class="be-form-item     ">
+	<div class="be-form-item__content"><button class="be-button be-button--primary"  type="button"><span>立即创建</span></button>
+						<button class="be-button"  type="button"><span>取消</span></button>
+		</div></div></form></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">BeForm</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@brewer/beerui&#x27;</span>;
+<span class="hljs-keyword">let</span> form = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">region</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">date1</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">date2</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">delivery</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">type</span>: [],
+  <span class="hljs-attr">resource</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;&#x27;</span>
+}
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">onSubmit</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(form);
+};
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeForm</span>
+	<span class="hljs-attr">bind:model</span>=<span class="hljs-string">{form}</span>
+	<span class="hljs-attr">labelWidth</span>=<span class="hljs-string">&quot;80px&quot;</span>
+&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动名称&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeInput</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{form.name}</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动区域&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeSelect</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{form.region}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域一&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;shanghai&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域二&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;beijing&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeSelect</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动时间&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;flex&#x27;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeDatePicker</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{form.date1}</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&#x27;选择日期&#x27;</span> <span class="hljs-attr">selectMode</span>=<span class="hljs-string">&quot;date&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;px-10&#x27;</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeTimePicker</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{form.date2}/</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;即时配送&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeSwitch</span> <span class="hljs-attr">bind:checked</span>=<span class="hljs-string">{form.delivery}</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动性质&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckboxGroup</span> <span class="hljs-attr">bind:checked</span>=<span class="hljs-string">{form.type}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;美食/餐厅线上活动&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;type&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;地推活动&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;type&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;线下主题活动&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;type&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;单纯品牌曝光&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;type&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckboxGroup</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;特殊资源&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeRadioGroup</span> <span class="hljs-attr">bind:checked</span>=<span class="hljs-string">{form.resource}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeRadio</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;线上品牌商赞助&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeRadio</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeRadio</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;线下场地免费&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeRadio</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeRadioGroup</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动形式&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeTextarea</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{form.desc}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeTextarea</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;primary&#x27;</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{onSubmit}</span>&gt;</span>立即创建<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span>&gt;</span>取消<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeForm</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>行内表单</h3>
+	<p>当垂直方向空间受限且表单较简单时，可以在一行内放置表单。</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">formInline: {"user":"","region":""}
+				<hr>
+				<form class="be-form    be-form--inline"><div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">审批人</div>
+	<div class="be-form-item__content"><div class="be-input"><input placeholder="" class="be-input__inner" name="" value="">
+	</div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">活动区域</div>
+	<div class="be-form-item__content"><div class="be-select be-select--normal "><div><div class="be-input      be-input--suffix"><input autocomplete="false" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i class="be-icon be-icon-chevron-down"></i></div>
+					<div style="display:none;margin-right:2px"><i class="be-icon be-icon-close-circle"></i></div></div>
+	      
+		    </span></span></div></div>
+		<div class="be-select__option"><ul class="be-select__option_content" style="max-height: 300px;"><li class="be-select-dropdown__item" data-value="shanghai">区域一
+	</li>
+							<li class="be-select-dropdown__item" data-value="beijing">区域二
+	</li>
+				</ul>
+			<div class="popper__arrow"></div></div></div>
+		</div></div>
+					<div class="be-form-item     ">
+	<div class="be-form-item__content"><button class="be-button be-button--primary"  type="button"><span>查询</span></button>
+		</div></div></form></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">设置 inline 属性可以让表单域变为行内的表单域
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeForm</span>
+	<span class="hljs-attr">bind:model</span>=<span class="hljs-string">{formInline}</span>
+	<span class="hljs-attr">inline</span>
+&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;审批人&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeInput</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{formInline.user}</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动区域&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeSelect</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{formInline.region}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域一&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;shanghai&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域二&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;beijing&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeSelect</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;primary&#x27;</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{onSubmitInline}</span>&gt;</span>查询<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeForm</span>&gt;</span>
+<!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>对齐方式</h3>
+	<p>根据具体目标和制约因素，选择最佳的标签对齐方式。</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">formLabelAlign: {"name":"","region":"","type":""}
+				<hr>
+				<div role="group" aria-label="checkbox-group" class="be-radio-group "><span class="px-10 s-VRVJ8wOwdSZH"><div class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">左对齐</span></div></span>
+					<span class="px-10 s-VRVJ8wOwdSZH"><div class="be-radio  is-checked" style="undefine: undefined;"><span class="be-radio__input is-checked"><span class="be-radio__inner"></span>
+    <input type="radio" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">右对齐</span></div></span>
+					<span class="px-10 s-VRVJ8wOwdSZH"><div class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">顶部对齐</span></div></span></div>
+				<hr>
+				<form class="be-form  be-form--label-right  "><div class="be-form-item    is-required is-no-asterisk"><div class="be-form-item__label" style="width: 80px;">名称</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-input"><input placeholder="" class="be-input__inner" name="" value="">
+	</div>
+		</div></div>
+					<div class="be-form-item     is-no-asterisk"><div class="be-form-item__label" style="width: 80px;">活动区域</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-select be-select--normal "><div><div class="be-input      be-input--suffix"><input autocomplete="false" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i class="be-icon be-icon-chevron-down"></i></div>
+					<div style="display:none;margin-right:2px"><i class="be-icon be-icon-close-circle"></i></div></div>
+	      
+		    </span></span></div></div>
+		<div class="be-select__option"><ul class="be-select__option_content" style="max-height: 300px;"><li class="be-select-dropdown__item" data-value="shanghai">区域一
+	</li>
+							<li class="be-select-dropdown__item" data-value="beijing">区域二
+	</li>
+				</ul>
+			<div class="popper__arrow"></div></div></div>
+		</div></div>
+					<div class="be-form-item     is-no-asterisk"><div class="be-form-item__label" style="width: 80px;">活动形式</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-input"><input placeholder="" class="be-input__inner" name="" value="">
+	</div>
+		</div></div>
+					<div class="be-form-item     is-no-asterisk">
+	<div class="be-form-item__content"><button class="be-button be-button--primary"  type="button"><span>查询</span></button>
+		</div></div></form></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">通过设置 label-position 属性可以改变表单域标签的位置，可选值为 top、left，当设为 top 时标签会置于表单域的顶部
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">let</span> labelPosition = <span class="hljs-string">&#x27;right&#x27;</span>
+<span class="hljs-keyword">let</span> formLabelAlign = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">region</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;&#x27;</span>
+}
+<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeForm</span>
+	<span class="hljs-attr">bind:model</span>=<span class="hljs-string">{formLabelAlign}</span>
+	{<span class="hljs-attr">labelPosition</span>}
+	<span class="hljs-attr">inline</span>
+&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;名称&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeInput</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{formLabelAlign.name}</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动区域&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeSelect</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{formLabelAlign.region}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域一&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;shanghai&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域二&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;beijing&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeSelect</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动形式&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeInput</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{formLabelAlign.type}</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;primary&#x27;</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{onSubmitInline}</span>&gt;</span>查询<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeForm</span>&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>表单验证</h3>
+	<p>在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误。</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="demo-list">ruleForm: {"name":"","region":"","date1":"","date2":"","delivery":false,"type":[],"resource":"","desc":""}
+				<hr>
+				<form class="be-form    "><div class="be-form-item    is-required "><div class="be-form-item__label" style="width: 80px;">活动名称</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-input"><input placeholder="" class="be-input__inner" name="name" value="">
+	</div>
+		</div></div>
+					<div class="be-form-item    is-required "><div class="be-form-item__label" style="width: 80px;">活动区域</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-select be-select--normal "><div><div class="be-input      be-input--suffix"><input autocomplete="false" placeholder="请选择" class="be-input__inner" readonly name="region" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i class="be-icon be-icon-chevron-down"></i></div>
+					<div style="display:none;margin-right:2px"><i class="be-icon be-icon-close-circle"></i></div></div>
+	      
+		    </span></span></div></div>
+		<div class="be-select__option"><ul class="be-select__option_content" style="max-height: 300px;"><li class="be-select-dropdown__item">
+	</li>
+							<li class="be-select-dropdown__item" data-value="shanghai">区域一
+	</li>
+							<li class="be-select-dropdown__item" data-value="beijing">区域二
+	</li>
+				</ul>
+			<div class="popper__arrow"></div></div></div>
+		</div></div>
+					<div class="be-form-item    is-required "><div class="be-form-item__label" style="width: 80px;">活动时间</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="flex"><div class="be-form-item    is-required ">
+	<div class="be-form-item__content"><div class="be-date"><div class="be-input"><input placeholder="选择日期" class="be-input__inner" readonly name="date1" value="">
+	</div>
+	<div class="be-date__prefix"><i class="be-icon be-icon-calendar " role="button" style=""></i></div>
+	<div class="be-date__suffix"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" style="color: #c0c4cc;"></i></div>
+	</div>
+		</div></div>
+							<span class="px-10 s-VRVJ8wOwdSZH">-</span>
+							<div class="be-form-item    is-required ">
+	<div class="be-form-item__content"><div class="be-date"><div class="be-input"><input placeholder="选择时间" class="be-input__inner" name="date2" value="">
+	</div>
+	<div class="be-date__prefix"><i class="be-icon be-icon-time " role="button" style=""></i></div>
+	<div class="be-date__suffix"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" style="color: #c0c4cc;"></i></div>
+	</div>
+		</div></div></div>
+		</div></div>
+					<div class="be-form-item     "><div class="be-form-item__label" style="width: 80px;">即时配送</div>
+	<div class="be-form-item__content" style="margin-left: 80px;">
+
+<div name="" class="be-switch"><span class="be-switch__core" style="width: 40px;"></span></div>
+		</div></div>
+					<div class="be-form-item    is-required "><div class="be-form-item__label" style="width: 80px;">活动性质</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div role="group" aria-label="checkbox-group" class="be-checkbox-group "><div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value="美食/餐厅线上活动"></span>
+	<span class="be-checkbox__label">美食/餐厅线上活动</span></div>
+							<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value="地推活动"></span>
+	<span class="be-checkbox__label">地推活动</span></div>
+							<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value="线下主题活动"></span>
+	<span class="be-checkbox__label">线下主题活动</span></div>
+							<div class="be-checkbox"><span class="be-checkbox__input"><span class="be-checkbox__inner"></span>
+    <input type="checkbox" aria-hidden="false" class="be-checkbox__original" value="单纯品牌曝光"></span>
+	<span class="be-checkbox__label">单纯品牌曝光</span></div></div>
+		</div></div>
+					<div class="be-form-item    is-required "><div class="be-form-item__label" style="width: 80px;">特殊资源</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div role="group" aria-label="checkbox-group" class="be-radio-group "><div class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">线上品牌商赞助</span></div>
+							<div class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">线下场地免费</span></div></div>
+		</div></div>
+					<div class="be-form-item    is-required "><div class="be-form-item__label" style="width: 80px;">活动形式</div>
+	<div class="be-form-item__content" style="margin-left: 80px;"><div class="be-textarea"><textarea placeholder="" maxlength="" class="be-textarea__inner is-gray"></textarea></div>
+		</div></div>
+					<div class="be-form-item     ">
+	<div class="be-form-item__content"><button class="be-button be-button--primary"  type="button"><span>立即创建</span></button>
+						<button class="be-button"  type="button"><span>重置</span></button>
+		</div></div></form></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">Form 组件提供了表单验证的功能，只需要通过 rules 属性传入约定的验证规则，并将 Form-Item 的 prop 属性设置为需校验的字段名即可。校验规则参见 async-validator，
+			如果是数组或对象请在当前组件中加入 validateEvent=false，否则它将在对象改变时同步验证。
+			<a href="https://github.com/sveltejs/svelte/issues/7579">https://github.com/sveltejs/svelte/issues/7579</a></div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+<span class="hljs-keyword">let</span> ruleForm = {
+	<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+	<span class="hljs-attr">region</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+	<span class="hljs-attr">date1</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+	<span class="hljs-attr">date2</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+	<span class="hljs-attr">delivery</span>: <span class="hljs-literal">false</span>,
+	<span class="hljs-attr">type</span>: [],
+	<span class="hljs-attr">resource</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+	<span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;&#x27;</span>
+}
+<span class="hljs-keyword">let</span> rules = {
+	<span class="hljs-attr">name</span>: [
+		{ <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;请输入活动名称&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;change&#x27;</span> },
+		{ <span class="hljs-attr">min</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">max</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;长度在 3 到 5 个字符&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;change&#x27;</span> }
+	],
+	<span class="hljs-attr">region</span>: [
+		{ <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;请选择活动区域&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;change&#x27;</span> }
+	],
+	<span class="hljs-attr">date1</span>: [
+		{ <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;date&#x27;</span>, <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;请选择日期&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;change&#x27;</span> }
+	],
+	<span class="hljs-attr">date2</span>: [
+		{ <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;请选择时间&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;change&#x27;</span> }
+	],
+	<span class="hljs-attr">type</span>: [
+		{ <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;array&#x27;</span>, <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;请至少选择一个活动性质&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;change&#x27;</span> }
+	],
+	<span class="hljs-attr">resource</span>: [
+		{ <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;请选择活动资源&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;change&#x27;</span> }
+	],
+	<span class="hljs-attr">desc</span>: [
+		{ <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;请填写活动形式&#x27;</span>, <span class="hljs-attr">trigger</span>: <span class="hljs-string">&#x27;blur&#x27;</span> }
+	]
+    }
+<span class="hljs-keyword">let</span> ruleFormDom = <span class="hljs-literal">null</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">submitRules</span> = (<span class="hljs-params"></span>) =&gt; {
+ruleFormDom.<span class="hljs-title function_">validate</span>(<span class="hljs-function">(<span class="hljs-params">valid</span>) =&gt;</span> {
+	<span class="hljs-keyword">if</span> (valid) {
+		<span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;submit!&#x27;</span>);
+	} <span class="hljs-keyword">else</span> {
+		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;error submit!!&#x27;</span>);
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+	}
+});
+}
+    <span class="hljs-keyword">const</span> <span class="hljs-title function_">resetForm</span> = (<span class="hljs-params"></span>) =&gt; {
+	ruleForm = {
+		<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+		<span class="hljs-attr">region</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+		<span class="hljs-attr">date1</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+		<span class="hljs-attr">date2</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+		<span class="hljs-attr">delivery</span>: <span class="hljs-literal">false</span>,
+		<span class="hljs-attr">type</span>: [],
+		<span class="hljs-attr">resource</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+		<span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;&#x27;</span>
+	}
+	<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+		ruleFormDom.<span class="hljs-title function_">resetFields</span>();
+	}, <span class="hljs-number">60</span>)
+}<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">BeForm</span>
+	<span class="hljs-attr">bind:model</span>=<span class="hljs-string">{ruleForm}</span>
+	<span class="hljs-attr">bind:rules</span>=<span class="hljs-string">{rules}</span>
+	<span class="hljs-attr">bind:this</span>=<span class="hljs-string">{ruleFormDom}</span>
+	<span class="hljs-attr">on:submit</span>=<span class="hljs-string">{submitRules}</span>
+&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动名称&#x27;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;name&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeInput</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{ruleForm.name}</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动区域&#x27;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;region&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeSelect</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{ruleForm.region}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{null}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域一&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;shanghai&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeOption</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;区域二&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;beijing&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeOption</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeSelect</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动时间&#x27;</span> <span class="hljs-attr">required</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;flex&#x27;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;date1&#x27;</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">BeDatePicker</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{ruleForm.date1}</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&#x27;选择日期&#x27;</span> <span class="hljs-attr">selectMode</span>=<span class="hljs-string">&quot;date&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;px-10&#x27;</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;date2&#x27;</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">BeTimePicker</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{ruleForm.date2}/</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;即时配送&#x27;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;delivery&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeSwitch</span> <span class="hljs-attr">bind:checked</span>=<span class="hljs-string">{ruleForm.delivery}</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动性质&#x27;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;type&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckboxGroup</span> <span class="hljs-attr">bind:checked</span>=<span class="hljs-string">{ruleForm.type}</span> <span class="hljs-attr">validateEvent</span>=<span class="hljs-string">{false}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;美食/餐厅线上活动&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;地推活动&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;线下主题活动&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeCheckbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;单纯品牌曝光&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckbox</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeCheckboxGroup</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;特殊资源&#x27;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;resource&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeRadioGroup</span> <span class="hljs-attr">bind:checked</span>=<span class="hljs-string">{ruleForm.resource}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeRadio</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;线上品牌商赞助&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeRadio</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">BeRadio</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;线下场地免费&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeRadio</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">BeRadioGroup</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;活动形式&#x27;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&#x27;desc&#x27;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeTextarea</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{ruleForm.desc}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">BeTextarea</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeFormItem</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;primary&#x27;</span> <span class="hljs-attr">on:click</span>=<span class="hljs-string">{submitRules}</span>&gt;</span>立即创建<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeButton</span>&gt;</span>取消<span class="hljs-tag">&lt;/<span class="hljs-name">BeButton</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">BeFormItem</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BeForm</span>&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h1>REPL</h1>
+	<div class="repl-container" style="height: 600px;"></div>
+	<h3 class="demo-table-title s-VRVJ8wOwdSZH">Attributes</h3>
+	<h3 class="demo-table-title s-VRVJ8wOwdSZH">Form-Item Attributes</h3>
+	<table class="demo-table s-VRVJ8wOwdSZH"><thead><tr><th class="s-VRVJ8wOwdSZH">参数</th>
+			<th class="s-VRVJ8wOwdSZH">说明</th>
+			<th class="s-VRVJ8wOwdSZH">类型</th>
+			<th class="s-VRVJ8wOwdSZH">可选值</th>
+			<th class="s-VRVJ8wOwdSZH">默认值</th></tr></thead>
+		<tbody><tr><td class="s-VRVJ8wOwdSZH">ref</td>
+				<td class="s-VRVJ8wOwdSZH">获得对表单元素的引用</td>
+				<td class="s-VRVJ8wOwdSZH">Element</td>
+				<td class="s-VRVJ8wOwdSZH">-</td>
+				<td class="s-VRVJ8wOwdSZH">null</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">description</td>
+				<td class="s-VRVJ8wOwdSZH">辅助性文字</td>
+				<td class="s-VRVJ8wOwdSZH">string</td>
+				<td class="s-VRVJ8wOwdSZH">-</td>
+				<td class="s-VRVJ8wOwdSZH">&#39;&#39;</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">inline</td>
+				<td class="s-VRVJ8wOwdSZH">行内表单模式</td>
+				<td class="s-VRVJ8wOwdSZH">boolean</td>
+				<td class="s-VRVJ8wOwdSZH">true/false</td>
+				<td class="s-VRVJ8wOwdSZH">false</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">labelWidth</td>
+				<td class="s-VRVJ8wOwdSZH">表单域标签的宽度</td>
+				<td class="s-VRVJ8wOwdSZH">string</td>
+				<td class="s-VRVJ8wOwdSZH">-</td>
+				<td class="s-VRVJ8wOwdSZH">80px</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">model</td>
+				<td class="s-VRVJ8wOwdSZH">获得表单元素绑定的值</td>
+				<td class="s-VRVJ8wOwdSZH">any</td>
+				<td class="s-VRVJ8wOwdSZH">-</td>
+				<td class="s-VRVJ8wOwdSZH">null</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">rules</td>
+				<td class="s-VRVJ8wOwdSZH">获得表单元素绑定的验证规则</td>
+				<td class="s-VRVJ8wOwdSZH">any</td>
+				<td class="s-VRVJ8wOwdSZH">-</td>
+				<td class="s-VRVJ8wOwdSZH">null</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">labelPosition</td>
+				<td class="s-VRVJ8wOwdSZH">表单域标签的位置</td>
+				<td class="s-VRVJ8wOwdSZH">string</td>
+				<td class="s-VRVJ8wOwdSZH">&#39;&#39; | &#39;top&#39; | &#39;left&#39; | &#39;right&#39;</td>
+				<td class="s-VRVJ8wOwdSZH">&#39;&#39;</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">validateOnRuleChange</td>
+				<td class="s-VRVJ8wOwdSZH">规则改变时验证</td>
+				<td class="s-VRVJ8wOwdSZH">boolean</td>
+				<td class="s-VRVJ8wOwdSZH">true/false</td>
+				<td class="s-VRVJ8wOwdSZH">true</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">hideRequiredAsterisk</td>
+				<td class="s-VRVJ8wOwdSZH">是否隐藏必填字段的标签旁边的红色星号</td>
+				<td class="s-VRVJ8wOwdSZH">boolean</td>
+				<td class="s-VRVJ8wOwdSZH">true/false</td>
+				<td class="s-VRVJ8wOwdSZH">false</td></tr></tbody></table>
+	<h3 class="demo-table-title s-VRVJ8wOwdSZH">Methods</h3>
+	<table class="demo-table s-VRVJ8wOwdSZH"><thead><tr><th class="s-VRVJ8wOwdSZH">事件名称</th>
+			<th class="s-VRVJ8wOwdSZH">说明</th>
+			<th class="s-VRVJ8wOwdSZH">回调参数</th></tr></thead>
+		<tbody><tr><td class="s-VRVJ8wOwdSZH">validate</td>
+				<td class="s-VRVJ8wOwdSZH">对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise</td>
+				<td class="s-VRVJ8wOwdSZH">Function(callback: Function(boolean, object))</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">validateField</td>
+				<td class="s-VRVJ8wOwdSZH">对部分表单字段进行校验的方法</td>
+				<td class="s-VRVJ8wOwdSZH">Function(props: array | string, callback: Function(errorMessage: string))</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">resetFields</td>
+				<td class="s-VRVJ8wOwdSZH">对整个表单进行重置，将所有字段值重置为初始值并移除校验结果</td>
+				<td class="s-VRVJ8wOwdSZH">null</td></tr>
+			<tr><td class="s-VRVJ8wOwdSZH">clearValidate</td>
+				<td class="s-VRVJ8wOwdSZH">移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果</td>
+				<td class="s-VRVJ8wOwdSZH">Function(props: array | string)</td></tr></tbody></table>
+	<h3 class="demo-table-title s-VRVJ8wOwdSZH">Form-Item Attributes</h3>
+	<table class="demo-table s-VRVJ8wOwdSZH"><thead><tr><th class="s-VRVJ8wOwdSZH">参数</th>
+			<th class="s-VRVJ8wOwdSZH">说明</th>
+			<th class="s-VRVJ8wOwdSZH">类型</th>
+			<th class="s-VRVJ8wOwdSZH">可选值</th>
+			<th class="s-VRVJ8wOwdSZH">默认值</th></tr></thead>
+		<tbody><tr><td class="s-VRVJ8wOwdSZH">prop</td>
+			<td class="s-VRVJ8wOwdSZH">表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的</td>
+			<td class="s-VRVJ8wOwdSZH">string</td>
+			<td class="s-VRVJ8wOwdSZH">传入 Form 组件的 model 中的字段</td>
+			<td class="s-VRVJ8wOwdSZH">-</td></tr>
+		<tr><td class="s-VRVJ8wOwdSZH">label</td>
+			<td class="s-VRVJ8wOwdSZH">标签文本</td>
+			<td class="s-VRVJ8wOwdSZH">string</td>
+			<td class="s-VRVJ8wOwdSZH">-</td>
+			<td class="s-VRVJ8wOwdSZH">-</td></tr>
+		<tr><td class="s-VRVJ8wOwdSZH">inline</td>
+			<td class="s-VRVJ8wOwdSZH">行内表单模式</td>
+			<td class="s-VRVJ8wOwdSZH">boolean</td>
+			<td class="s-VRVJ8wOwdSZH">true/false</td>
+			<td class="s-VRVJ8wOwdSZH">false</td></tr>
+		<tr><td class="s-VRVJ8wOwdSZH">labelWidth</td>
+			<td class="s-VRVJ8wOwdSZH">表单域标签的宽度</td>
+			<td class="s-VRVJ8wOwdSZH">string</td>
+			<td class="s-VRVJ8wOwdSZH">-</td>
+			<td class="s-VRVJ8wOwdSZH">80px</td></tr>
+		<tr><td class="s-VRVJ8wOwdSZH">required</td>
+			<td class="s-VRVJ8wOwdSZH">是否必填，如不设置，则会根据校验规则自动生成</td>
+			<td class="s-VRVJ8wOwdSZH">boolean</td>
+			<td class="s-VRVJ8wOwdSZH">true/false</td>
+			<td class="s-VRVJ8wOwdSZH">false</td></tr>
+		<tr><td class="s-VRVJ8wOwdSZH">rules</td>
+			<td class="s-VRVJ8wOwdSZH">表单验证规则</td>
+			<td class="s-VRVJ8wOwdSZH">object</td>
+			<td class="s-VRVJ8wOwdSZH">-</td>
+			<td class="s-VRVJ8wOwdSZH">-</td></tr>
+		<tr><td class="s-VRVJ8wOwdSZH">trigger</td>
+			<td class="s-VRVJ8wOwdSZH">行内必填 触发事件</td>
+			<td class="s-VRVJ8wOwdSZH">string</td>
+			<td class="s-VRVJ8wOwdSZH">click/hover</td>
+			<td class="s-VRVJ8wOwdSZH">&#39;&#39;</td></tr>
+		<tr><td class="s-VRVJ8wOwdSZH">message</td>
+			<td class="s-VRVJ8wOwdSZH">行内必填 提示信息</td>
+			<td class="s-VRVJ8wOwdSZH">string</td>
+			<td class="s-VRVJ8wOwdSZH">-</td>
+			<td class="s-VRVJ8wOwdSZH">&#39;&#39;</td></tr></tbody></table>
+	<h3 class="demo-table-title s-VRVJ8wOwdSZH">Slot</h3>
+	<table class="demo-table s-VRVJ8wOwdSZH"><thead><tr><th class="s-VRVJ8wOwdSZH">name</th>
+			<th class="s-VRVJ8wOwdSZH">说明</th></tr></thead>
+		<tbody><tr><td class="s-VRVJ8wOwdSZH">icon</td>
+			<td class="s-VRVJ8wOwdSZH">标题前的icon</td></tr></tbody></table>
+</div></div>
+			<div></div>
+			<div class="be-main__footer s-hZl-oQVdfKrr" style="margin-left: 240px;"><div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Contributors</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">BeerUi</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Resource</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://svelte.dev/" class="s-hZl-oQVdfKrr">svelte</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://kit.svelte.dev/" class="s-hZl-oQVdfKrr">svelteKit</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://www.npmjs.com/package/@brewer/beerui" class="s-hZl-oQVdfKrr">@brewer/beerui</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Github</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">组件 BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a class="beian s-hZl-oQVdfKrr" rel="noreferrer" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2022015490号-1</a></div>
+
+
+
+</div>
+</div></div></div>
+</div></div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_1y608e5 = {
+						env: {},
+						base: new URL("..", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("../_app/immutable/entry/start.ba899424.js"),
+						import("../_app/immutable/entry/app.64c37aa9.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1y608e5.element, {
+							node_ids: [0, 2, 18],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
