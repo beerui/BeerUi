@@ -1,5 +1,4 @@
 <script lang='ts'>
-import ReplBlock from '$lib/demo/ReplBlock.svelte';
 import LineCode from '$lib/demo/LineCode.svelte';
 </script>
 <svelte:head>

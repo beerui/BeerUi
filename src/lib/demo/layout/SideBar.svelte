@@ -6,7 +6,6 @@
 	<div class='nav-container__scroll'>
 		<ul>
 			<li><a class:active={$page.url.pathname === '/components/start'} href='/components/start'>快速开始</a></li>
-			<li><a class:active={$page.url.pathname === '/components/repl'} href='/components/repl'>REPL</a></li>
 			<li><span class='base'>基本</span></li>
 			<li><a class:active={$page.url.pathname === '/components/icons'} href='/components/icons'>Icons 示例</a></li>
 			<li><a class:active={$page.url.pathname === '/components/button'} href='/components/button'>Button 示例</a>

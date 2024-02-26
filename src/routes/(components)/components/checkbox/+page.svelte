@@ -2,7 +2,6 @@
 	import DemoBlock from "$lib/demo/DemoBlock.svelte";
 	import { BeCheckbox, BeCheckboxGroup } from "$lib";
 	import BeButton from "$lib/be-button/BeButton.svelte";
-	import ReplBlock from '$lib/demo/ReplBlock.svelte';
 
 	type CheckboxGroup = {
 		setCheckedList?: Function
@@ -113,27 +112,6 @@ let checkboxGroup;
 		</div>
 	</DemoBlock>
 
-	<h3>Repl</h3>
-	<ReplBlock
-		height='350px'
-		js={`import { BeCheckboxGroup, BeCheckbox } from '@brewer/beerui/be-checkbox';
-		let checkedCities = [];
-		const onChange = evt => console.log(evt)
-		`}
-		html={`
-<div style='padding: 20px;'>
-	<BeCheckboxGroup class='m-check' bind:checked={checkedCities} on:change={onChange}>
-		<BeCheckbox label="上海" />
-		<BeCheckbox label="北京" />
-		<BeCheckbox label="广州" />
-		<BeCheckbox label="深圳" />
-	</BeCheckboxGroup>
-	<hr>
-	checkedCities: {checkedCities}
-</div>
-`}
-		css={`:global(.m-check .be-checkbox){margin-right: 15px;}`}
-	/>
 	<h3 class='demo-table-title'>BeCheckbox Attributes</h3>
 	<table class='demo-table'>
 		<thead>
