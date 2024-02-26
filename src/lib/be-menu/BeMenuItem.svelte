@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, onDestroy } from 'svelte';
 
-	export let id: string = "";
+	export let id = "";
 	const store = getContext("menuStore");
 
 	const subscribeHandle = item => node = item.data[id]
@@ -20,6 +20,7 @@
     class:is_active={node.active}
     on:click|stopPropagation
     on:dblclick|stopPropagation
+		on:keydown|stopPropagation
     on:mousedown|stopPropagation={handleClick}
     on:mouseup|stopPropagation
     style:padding-left={node.level*20 + 'px'}

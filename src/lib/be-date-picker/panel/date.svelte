@@ -144,29 +144,29 @@ function handleShowTimePopper(e) {
 
       <div class="be-date-picker__header">
           {#if currentView === 'date'}
-            <span class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth}></span>
+            <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__prev-btn" on:click={handlePrevMonth} on:keydown={handlePrevMonth}></span>
           {/if}
-          <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear}></span>
+          <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown={handlePrevYear}></span>
           {#if currentView !== 'year'}
-            <span class="be-date-picker__header-label" on:click={() => currentView = 'year'}>{year} 年</span>
+            <span role='button' tabindex='-1' class="be-date-picker__header-label" on:click={() => currentView = 'year'} on:keydown={() => currentView = 'year'}>{year} 年</span>
           {/if}
           {#if currentView === 'year'}
           <span class="be-date-picker__header-label">{yearLabel}</span>
           {/if}
           {#if currentView === 'date'}
-            <span class="be-date-picker__header-label" on:click={() => currentView = 'month'}>{month} 月</span>
+            <span role='button' tabindex='-1' class="be-date-picker__header-label" on:click={() => currentView = 'month'} on:keydown={() => currentView = 'month'}>{month} 月</span>
           {/if}
           {#if currentView === 'date'}
-            <span class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth}></span>
+            <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__next-btn" on:click={handleNextMonth} on:keydown={handleNextMonth}></span>
           {/if}
-          <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear}></span>
+          <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear} on:keydown={handleNextMonth}></span>
       </div>
       <div class="be-picker-panel__content">
         {#if currentView === 'date'}
           <DateTable {disabledDate} {date} {value} on:pick={confirmDatePick} />
         {/if}
         {#if currentView === 'month'}
-          <MonthTable {disabledDate} {date}  {value}on:pick={confirmMonthPick} />
+          <MonthTable {disabledDate} {date}  {value} on:pick={confirmMonthPick} />
         {/if}
         {#if currentView === 'year'}
           <YearTable {disabledDate} {date} {value} on:pick={confirmYearPick} />
@@ -180,7 +180,7 @@ function handleShowTimePopper(e) {
         <BeInput validateEvent={false} placeholder="选择时间" on:change={handleTimeChange} value = {timeValue} on:focus={handleShowTimePopper} />
         <Time {date} direction='top' {format} visible={timeVisible} {selectableRange} on:pick={confirmTimePick}/>
       </div>
-      <BeButton type="default" size="mini" on:click = {confirmDateTimePick}>确认</BeButton>
+      <BeButton type="default" size="mini" on:click={confirmDateTimePick} on:keydown={confirmDateTimePick}>确认</BeButton>
     </div>
   {/if}
   {#if direction=='bottom'}

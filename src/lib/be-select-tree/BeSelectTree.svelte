@@ -12,7 +12,7 @@
 	}
 	// 下拉框选中的值
 	export let value = [];
-	export let lazy: boolean = false;
+	export let lazy = false;
 
 	export let clearable = true
 	export let load: Function = null;
@@ -21,19 +21,19 @@
 	// Tree
 	export let data = []
 	export let defaultProps: defaultPropsType  = { children: 'children', label: 'label', id: 'id' }
-	export let emptyText: string = '暂无数据';
-	export let showCheckbox: boolean = false;
-	export let showCount: boolean = false; // 展示子集的数量
-	export let defaultExpandAll: boolean = false;
-	export let renderAfterExpand: boolean = true;
-	export let highlightCurrent: boolean = false;
-	export let checkStrictly: boolean = false;
-	export let checkDescendants: boolean = false;
-	export let autoExpandParent: boolean = true;
-	export let clickLabelIsExpanded: boolean = true;
+	export let emptyText = '暂无数据';
+	export let showCheckbox = false;
+	export let showCount = false; // 展示子集的数量
+	export let defaultExpandAll = false;
+	export let renderAfterExpand = true;
+	export let highlightCurrent = false;
+	export let checkStrictly = false;
+	export let checkDescendants = false;
+	export let autoExpandParent = true;
+	export let clickLabelIsExpanded = true;
 	export let defaultCheckedKeys: [] = [];
 	export let defaultExpandedKeys: [] = [];
-	export let currentNodeKey: [String, Number] = [];
+	export let currentNodeKey: [string, number] = [];
 	export let renderContent: Function = null;
 
 	let visible = false // 选框是否展示
@@ -111,16 +111,19 @@
 		class:is-open={visible}
 	>
 		<div
+			role='button'
+			tabindex='-1'
 			class='be-select-tree__value-container'
-		    class:is-focus={visible && isFocus}
-		    on:click={handleInputClick}
+			class:is-focus={visible && isFocus}
+			on:click={handleInputClick}
+			on:keydown={handleInputClick}
 		>
 			<div class='be-select-tree__input-container'>
 				<input
 					class="be-select-tree__input"
 					type='text'
 					autocomplete="off"
-					tabindex='0'
+					tabindex='-1'
 					bind:value={inputVal}
 					{placeholder}
 					on:input={handleInput}
@@ -130,11 +133,16 @@
 			</div>
 		</div>
 		{#if clearable && inputVal}
-			<div class='be-select-tree__close' on:click={clearInput}>
+			<div
+				role='button' tabindex='-1'
+				class='be-select-tree__close'
+			  on:click={clearInput}
+				on:keydown
+			>
 				<BeIcon name='close' />
 			</div>
 		{/if}
-		<div class='be-select-tree__arrow' class:is-open={visible} on:click={() => visible = !visible}>
+		<div role='button' tabindex='-1' class='be-select-tree__arrow' class:is-open={visible} on:click={() => visible = !visible} on:keydown>
 			<BeIcon name='caret-down-small' width='24' height='24' />
 		</div>
 	</div>

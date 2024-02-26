@@ -7,18 +7,18 @@
 	let dispatch = createEventDispatcher()
 	// 下拉框选中的值
 	export let value: string | number | ArrayValue;
-	export let size:string = 'normal';
-	export let name:string;
-	export let maxHeight:string = '300px';
-	export let multiple:boolean = false; // 是否多选
-	export let multipleLimit:number = 0; // 多选时用户最多可以选择的项目数，为 0 则不限制
-	export let collapseTags:boolean = false; // 多选 收缩
-	export let autocomplete:string = 'off'; // 多选 收缩
+	export let size = 'normal';
+	export let name = '';
+	export let maxHeight = '300px';
+	export let multiple = false; // 是否多选
+	export let multipleLimit = 0; // 多选时用户最多可以选择的项目数，为 0 则不限制
+	export let collapseTags = false; // 多选 收缩
+	export let autocomplete = 'off'; // 多选 收缩
 	export let disabled = false // 是否禁用
 	export let position = 'bottom' // 位置
 	export let clearable = false
 	export let placeholder = '请选择'
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 
 	let inner = false; // 是否是内部改变的值
 	let render = false
@@ -70,7 +70,7 @@
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
 	}
-	let isInit: boolean = false
+	let isInit = false
 	const watchValue = (value) => {
 		if (ctx && prop && isInit && validateEvent) {
 			ctx.FormItemEventCallback({ type: 'change', value: [value] })
@@ -114,8 +114,11 @@
 <div class='be-select be-select--{size} {_class}' style={$$props.style} use:clickOutside={{ cb: handleClosePopper }}>
 	{#if multiple}
 		<div
+			role='button'
+			tabindex='-1'
 			class='be-select__tags'
 			on:click|stopPropagation={toggleVisible}
+			on:keydown|stopPropagation={toggleVisible}
 			on:mouseover={() => {if(clearable && inputValue) showClose = true}}
 			on:mouseleave={() => {if(clearable && inputValue) showClose = false}}
 			on:focus
@@ -123,7 +126,12 @@
 			{#if collapseTags && store.value.length > 0}
 				<span class="be-tag">
 					<span class="be-tag-text">{store.multipleValue[0].label}</span>
-					<span class="be-tag-close" on:click|stopPropagation={() => closeMultipleHandle(store.multipleValue[0])}>
+					<span
+						class="be-tag-close"
+						role='button' tabindex='-1'
+						on:click|stopPropagation={() => closeMultipleHandle(store.multipleValue[0])}
+						on:keydown|stopPropagation
+					>
 					  <i class='be-icon be-icon-close'></i>
 					</span>
 				</span>
@@ -136,7 +144,12 @@
 				{#each store.multipleValue as item}
 					<span class="be-tag">
 						<span class="be-tag-text">{item.label}</span>
-						<span class="be-tag-close" on:click|stopPropagation={() => closeMultipleHandle(item)}>
+						<span
+							class="be-tag-close"
+							role='button' tabindex='-1'
+							on:click|stopPropagation={() => closeMultipleHandle(item)}
+							on:keydown
+						>
 							<i class='be-icon be-icon-close'></i>
 						</span>
 					</span>
@@ -146,7 +159,13 @@
 				<div class="be-tag-suffix-icon" class:is-reverse={visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
 					<i class='be-icon be-icon-chevron-down'></i>
 				</div>
-				<div on:click|stopPropagation={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
+				<div
+					role='button' tabindex='-1'
+					on:click|stopPropagation={clearValue}
+					on:keydown|stopPropagation
+					class:close={showClose}
+					style="display:{showClose ? 'block' : 'none'};margin-right:2px"
+				>
 					<i class='be-icon be-icon-close-circle'></i>
 				</div>
 			</div>
@@ -161,8 +180,16 @@
 			<div class="popper__arrow"></div>
 		</div>
 	{:else}
-		<div on:click|stopPropagation={toggleVisible} on:focus on:mouseover={() => {if(clearable && inputValue) showClose = true}} on:mouseleave={() => {if(clearable && inputValue) showClose = false}}>
+		<div
+			role='button' tabindex='-1'
+			on:click|stopPropagation={toggleVisible}
+			on:keydown|stopPropagation
+			on:focus
+			on:mouseover={() => {if(clearable && inputValue) showClose = true}}
+			on:mouseleave={() => {if(clearable && inputValue) showClose = false}}
+		>
 			<BeInput
+				{name}
 				{placeholder}
 				value={inputValue}
 				bind:this={input}
@@ -176,7 +203,13 @@
 					<div class="input-suffix-icon" class:is-reverse = {visible && !showClose} style="display:{!showClose ? 'block' : 'none'}">
 						<i class='be-icon be-icon-chevron-down'></i>
 					</div>
-					<div on:click|stopPropagation={clearValue} class:close={showClose} style="display:{showClose ? 'block' : 'none'};margin-right:2px">
+					<div
+						role='button' tabindex='-1'
+						on:click|stopPropagation={clearValue}
+						on:keydown
+						class:close={showClose}
+						style="display:{showClose ? 'block' : 'none'};margin-right:2px"
+					>
 						<i class='be-icon be-icon-close-circle'></i>
 					</div>
 				</div>

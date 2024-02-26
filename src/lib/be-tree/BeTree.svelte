@@ -14,23 +14,23 @@
 		label: string,
 		children: string
 	}
-	export let emptyText: string = '暂无数据';
-	export let nodeKey: string = 'label';
+	export let emptyText = '暂无数据';
+	export let nodeKey = 'label';
 	export let data: TreeDate[] = [];
-	export let lazy: boolean = false;
-	export let showCheckbox: boolean = false;
-	export let showCount: boolean = false; // 展示子集的数量
-	export let defaultExpandAll: boolean = false;
-	export let renderAfterExpand: boolean = true;
-	export let highlightCurrent: boolean = false;
-	export let checkStrictly: boolean = false;
-	export let checkDescendants: boolean = false;
-	export let autoExpandParent: boolean = true;
-	export let clickLabelIsExpanded: boolean = true;
+	export let lazy = false;
+	export let showCheckbox = false;
+	export let showCount = false; // 展示子集的数量
+	export let defaultExpandAll = false;
+	export let renderAfterExpand = true;
+	export let highlightCurrent = false;
+	export let checkStrictly = false;
+	export let checkDescendants = false;
+	export let autoExpandParent = true;
+	export let clickLabelIsExpanded = true;
 	export let load: Function = null;
 	export let defaultCheckedKeys: [] = [];
 	export let defaultExpandedKeys: [] = [];
-	export let currentNodeKey: [String, Number] = [];
+	export let currentNodeKey: [string, number] = [];
 	export let renderContent: Function = null;
 	export let filterNodeMethod: Function = null;
 	export let value: string[] | number[] = []; // SelectTree
@@ -233,7 +233,7 @@
 
 </script>
 <svelte:options accessors />
-<div class='be-tree' class:highlightCurrent role='tree' bind:this={beTree}
+<div class='be-tree' class:highlightCurrent role='tree' tabindex='-1' bind:this={beTree}
      on:contextmenu
      on:dblclick
      on:mousedown

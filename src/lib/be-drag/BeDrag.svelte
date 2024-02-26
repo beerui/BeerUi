@@ -47,6 +47,8 @@
 <div class={classes('be-drag', _class)}>
 	{#each list as item , index (item.key)}
 		<div
+			role='button'
+			tabindex='-1'
 			class='be-drag-list'
 			on:dragstart={() => dragstartHandle(item)}
 			on:dragover={() => dragoverHandle(item)}

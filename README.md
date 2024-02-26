@@ -1,6 +1,6 @@
 <div align='center'>
 
-<img src="./static/logo_new_md.svg" width='340px' />
+<img src="logo_bg.png" width='382px' height='118px' />
 
 [![npm version](https://img.shields.io/npm/v/@brewer/beerui.svg)](https://www.npmjs.com/package/@brewer/beerui) [![license](https://img.shields.io/npm/l/@brewer/beerui)](LICENSE.md) ![NPM Downloads](https://img.shields.io/npm/dt/@brewer/beerui?color=%23fb7182&label=downloads) 
 
@@ -8,8 +8,16 @@
 
 This is a Svelte Ui Components,`@brewer/beerui`.
 
-### 使用前的说明
-本项目的状态为开发中，但已在内部交付项目中使用，几乎所有的组件都可正常使用。
+### 一些想法和计划
+前期参考了ElementUi的样式，后面接触到TDesign后有想使用全套TDesign的想法。
+
+2.0版本会考虑进行风格和写法大变。
+
+其它想法：考虑到一些中文网不完善不便使用，在进行一系列上线中文网的计划。
+
+如：[浓香 Turf.js](https://tianna.beer-ui.com/luzhou/)
+
+还有很多想法，但碍于空闲时间不多，没法好好实现，想要参与的可以邮件我。
 
 ### 在线文档
 国内部署：[BeerUi](https://beer-ui.com/)

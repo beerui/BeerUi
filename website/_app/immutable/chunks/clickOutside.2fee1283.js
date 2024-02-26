@@ -1,0 +1,1 @@
+import{a as e,o as u}from"./beerui.dfc24136.js";function i(n,c={cb:Function}){if(c.cb&&typeof c.cb!="function")throw new Error("回调需是一个函数 callback must be Function.");function t(o){n.contains(o.target)||(n.dispatchEvent(new CustomEvent("outside")),c.cb&&c.cb())}return e(document,"mousedown",t),{destroy:()=>{u(document,"mousedown",t)}}}export{i as c};

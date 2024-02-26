@@ -6,14 +6,14 @@
 	type LabelPosition = '' | 'top' | 'left' | 'right'
 
 	export let ref: Element = null; // 获得对表单元素的引用
-	export let inline: Boolean = false; // 行内表单模式
-	export let labelWidth: string = '80px'; // 表单域标签的宽度，默认 '80px'。作为 Form 直接子元素的 form-item 会继承该值。支持 auto。
+	export let inline = false; // 行内表单模式
+	export let labelWidth = '80px'; // 表单域标签的宽度，默认 '80px'。作为 Form 直接子元素的 form-item 会继承该值。支持 auto。
 
 	export let model: any = null; // 获得表单元素绑定的值
 	export let rules: any = null; // 获得表单元素绑定的验证规则
 	export let labelPosition: LabelPosition = ''; // 表单域标签的位置
-	export let validateOnRuleChange: Boolean = true; // 规则改变时验证
-	export let hideRequiredAsterisk: Boolean = false; // 是否隐藏必填字段的标签旁边的红色星号
+	export let validateOnRuleChange = true; // 规则改变时验证
+	export let hideRequiredAsterisk = false; // 是否隐藏必填字段的标签旁边的红色星号
 
 	let fields = []
 	export const resetFields = () => {
@@ -117,12 +117,6 @@
 	class:be-form--label-left={labelPosition === 'left'}
 	class:be-form--inline={inline}
 	bind:this="{ref}"
-	on:click
-	on:keydown
-	on:mouseover
-	on:focus
-	on:mouseenter
-	on:mouseleave
 	on:submit
 >
 	<slot />

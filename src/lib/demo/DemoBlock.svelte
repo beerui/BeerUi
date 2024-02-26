@@ -48,7 +48,13 @@
 			{/if}
 		</div>
 	</div>
-	<div class="demo-block-control" style:width={codeWidth} class:is-fixed={fixedControl} on:click={() => {expandedCode(!isExpanden)}}>
+	<div
+		class="demo-block-control"
+		style:width={codeWidth}
+		class:is-fixed={fixedControl}
+		on:click={() => {expandedCode(!isExpanden)}}
+		on:keydown
+	>
 		<div class="triangle" class:triangle-down = {!isExpanden}></div>
 		<span>{ controlText }</span>
 	</div>

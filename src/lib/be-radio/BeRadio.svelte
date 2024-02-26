@@ -12,7 +12,7 @@
 	export let label = "";
 	export let border = false;
 	export let size = '';
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 
 	let _class: $$props["class"] = "";
 	export {_class as class};
@@ -36,7 +36,7 @@
 	// 表单验证
 	const ctx = getContext('BeFormItem')
 	let prop = '' // name
-	let isInit: boolean = false
+	let isInit = false
 	if (ctx) {
 		ctx.propWatch.subscribe(value => prop = value)
 	}
@@ -64,16 +64,21 @@
 		}
 	}
 </script>
-<div class='be-radio {_class}'
-		 class:is-checked={isChecked}
-		 class:is-disabled={disabled}
-     class:is-bordered={border}
-     class:be-radio--medium={size === 'medium'}
-     class:be-radio--small={size === 'small'}
-     class:be-radio--mini={size === 'mini'}
-		 style={$$props.style}
-     style:background-color={isChecked ? fill : ''}
-		 on:click|stopPropagation={handleClick}
+<div
+	role='radio'
+	tabindex='-1'
+	aria-checked={checked}
+	class='be-radio {_class}'
+	class:is-checked={isChecked}
+	class:is-disabled={disabled}
+	class:is-bordered={border}
+	class:be-radio--medium={size === 'medium'}
+	class:be-radio--small={size === 'small'}
+	class:be-radio--mini={size === 'mini'}
+	style={$$props.style}
+	style:background-color={isChecked ? fill : ''}
+	on:click|stopPropagation={handleClick}
+	on:keydown|stopPropagation
 >
   <span class="be-radio__input"
         class:is-checked={isChecked}
@@ -83,6 +88,8 @@
     <input
 	    {...mapAttributes({ disabled, id, name })}
 	    type="radio"
+			tabindex='-1'
+			aria-checked={checked}
 	    aria-hidden="false"
 	    class="be-radio__original"
     >

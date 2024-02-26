@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/LayoutHeader.5b3b3ed1.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/LayoutFooter.b2d8d7c4.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_layout.019cf28e.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/loading.94dd0eb0.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/github.cb54580c.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.1e536230.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.21613952.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons.05b97e7b.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.88f9aa6d.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.b0d17614.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/environment.7328c2e2.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.svelte.d4c93525.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Logo.51a85fb9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/stores.f4482d01.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/LayoutFooter.74254c16.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-layout.svelte.ac4fa1b3.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/(components)-components-cascader-page.svelte.25423eb8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeDrawer.ec1952a0.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.e882418f.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.3cd19b6c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeIcon.5c59230e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/beerui.dfc24136.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.d5ff37b9.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/loading.6fc7a1f8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/throttle.c22c4fe7.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeInput.7724363f.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/clickOutside.2fee1283.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeRadio.a42086fa.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DemoBlock.d66327e5.js"><title>Cascader 级联选择器 组件文档 BeerUi-官方文档</title><!-- HEAD_svelte-1eytwic_START --><script>var _paq = window._paq = window._paq || [];
+	/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		var u="//log.beer-ui.com/";
+		_paq.push(['setTrackerUrl', u+'matomo.php']);
+		_paq.push(['setSiteId', '1']);
+		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+</script><!-- HEAD_svelte-1eytwic_END --><!-- HEAD_svelte-r9tsrn_START --><meta name="description" content="BeerUi, 基于 svelte 的 PC端 组件库，base on svelte 3.0 web component"><meta name="keywords" content="Cascader 级联选择器, beerui组件文档,beerui,beerui文档,beerui官网, BeerUi,@brewer/beerui,svelte,component,svelteKit"><!-- HEAD_svelte-r9tsrn_END -->
+		<style>
+			body {background: rgba(16, 106, 55, 30%);}
+            #svelte {
+                background: linear-gradient(rgba(16, 106, 55, 80%), rgba(107, 132, 173, 80%));
+				min-height: 100vh;
+            }
+		</style>
+	</head>
+	<body data-sveltekit-preload-data="viewport">
+		<div id="svelte">
+
+
+<div class="be-warp">
+
+<div class="be-header s-UFfHt6Njpvg7"><div class="logo flex s-UFfHt6Njpvg7">
+<embed src="/logo_new.svg" width="100%" height="100%" type="image/svg+xml">
+		<span></span></div>
+	<div class="nav s-UFfHt6Njpvg7"><a href="/" class="s-UFfHt6Njpvg7">主页</a>
+		<a href="/components/start" class="s-UFfHt6Njpvg7">组件</a>
+		<a rel="noreferrer" target="_blank" href="https://github.com/beerui/BeerUi/blob/main/CHANGELOG.md" class="s-UFfHt6Njpvg7">更新日志</a>
+		<a href="/others" class="s-UFfHt6Njpvg7">其它</a>
+		<div class="tabs s-UFfHt6Njpvg7"><div data-theme="light" class="item sun s-UFfHt6Njpvg7 active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99996 3.15217C10.5252 3.15217 10.951 2.72636 10.951 2.20109C10.951 1.67582 10.5252 1.25 9.99996 1.25C9.47469 1.25 9.04887 1.67582 9.04887 2.20109C9.04887 2.72636 9.47469 3.15217 9.99996 3.15217Z"></path><path fill="currentColor" d="M9.99992 4.29348C6.84829 4.29348 4.2934 6.84838 4.2934 10C4.2934 13.1516 6.84829 15.7065 9.99992 15.7065C13.1515 15.7065 15.7064 13.1516 15.7064 10C15.7064 6.84838 13.1515 4.29348 9.99992 4.29348Z"></path><path fill="currentColor" d="M16.4673 4.4837C16.4673 5.00896 16.0415 5.43478 15.5162 5.43478C14.991 5.43478 14.5652 5.00896 14.5652 4.4837C14.5652 3.95843 14.991 3.53261 15.5162 3.53261C16.0415 3.53261 16.4673 3.95843 16.4673 4.4837Z"></path><path fill="currentColor" d="M17.7989 10.9511C18.3241 10.9511 18.75 10.5253 18.75 10C18.75 9.47474 18.3241 9.04891 17.7989 9.04891C17.2736 9.04891 16.8478 9.47474 16.8478 10C16.8478 10.5253 17.2736 10.9511 17.7989 10.9511Z"></path><path fill="currentColor" d="M16.4673 15.5163C16.4673 16.0416 16.0415 16.4674 15.5162 16.4674C14.991 16.4674 14.5652 16.0416 14.5652 15.5163C14.5652 14.991 14.991 14.5652 15.5162 14.5652C16.0415 14.5652 16.4673 14.991 16.4673 15.5163Z"></path><path fill="currentColor" d="M9.99996 18.75C10.5252 18.75 10.951 18.3242 10.951 17.7989C10.951 17.2736 10.5252 16.8478 9.99996 16.8478C9.47469 16.8478 9.04887 17.2736 9.04887 17.7989C9.04887 18.3242 9.47469 18.75 9.99996 18.75Z"></path><path fill="currentColor" d="M5.43469 15.5163C5.43469 16.0416 5.00887 16.4674 4.4836 16.4674C3.95833 16.4674 3.53252 16.0416 3.53252 15.5163C3.53252 14.991 3.95833 14.5652 4.4836 14.5652C5.00887 14.5652 5.43469 14.991 5.43469 15.5163Z"></path><path fill="currentColor" d="M2.20096 10.9511C2.72623 10.9511 3.15205 10.5253 3.15205 10C3.15205 9.47474 2.72623 9.04891 2.20096 9.04891C1.67569 9.04891 1.24988 9.47474 1.24988 10C1.24988 10.5253 1.67569 10.9511 2.20096 10.9511Z"></path><path fill="currentColor" d="M5.43469 4.4837C5.43469 5.00896 5.00887 5.43478 4.4836 5.43478C3.95833 5.43478 3.53252 5.00896 3.53252 4.4837C3.53252 3.95843 3.95833 3.53261 4.4836 3.53261C5.00887 3.53261 5.43469 3.95843 5.43469 4.4837Z"></path></svg></div>
+			<div data-theme="dark" class="item moon s-UFfHt6Njpvg7"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.99993 3.12494C6.20294 3.12494 3.12488 6.203 3.12488 10C3.12488 13.797 6.20294 16.8751 9.99993 16.8751C13.7969 16.8751 16.875 13.797 16.875 10C16.875 9.52352 16.8264 9.0577 16.7337 8.6075C16.6752 8.32295 16.4282 8.11628 16.1378 8.10872C15.8474 8.10117 15.5901 8.29473 15.5168 8.57585C15.1411 10.0167 13.8302 11.0795 12.2727 11.0795C10.4212 11.0795 8.92039 9.57869 8.92039 7.72726C8.92039 6.16969 9.98319 4.85879 11.4241 4.48312C11.7052 4.40983 11.8988 4.15249 11.8912 3.86207C11.8836 3.57165 11.677 3.32473 11.3924 3.26616C10.9422 3.1735 10.4764 3.12494 9.99993 3.12494Z"></path></svg></div></div></div>
+</div>
+	<div class="be-container"><div class="be-warp"><div class="be-container"><section class="nav-container s-SQJzG6QE6tAA"><div class="nav-container__scroll"><ul class="s-SQJzG6QE6tAA"><li class="s-SQJzG6QE6tAA"><a href="/components/start" class="s-SQJzG6QE6tAA">快速开始</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/repl" class="s-SQJzG6QE6tAA">REPL</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">基本</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/icons" class="s-SQJzG6QE6tAA">Icons 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/button" class="s-SQJzG6QE6tAA">Button 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">表单</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/input" class="s-SQJzG6QE6tAA">Input 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/textarea" class="s-SQJzG6QE6tAA">Textarea 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/radio" class="s-SQJzG6QE6tAA">Radio 单选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/checkbox" class="s-SQJzG6QE6tAA">Checkbox
+				多选框</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/switch" class="s-SQJzG6QE6tAA">Switch 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/select" class="s-SQJzG6QE6tAA">Select 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/cascader" class="s-SQJzG6QE6tAA active">Cascader
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/form" class="s-SQJzG6QE6tAA">Form 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/upload" class="s-SQJzG6QE6tAA">Upload 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/datePicker" class="s-SQJzG6QE6tAA">date-picker
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drag" class="s-SQJzG6QE6tAA">Drag 拖动排序</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">data 数据</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/table" class="s-SQJzG6QE6tAA">Table 表格</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tree" class="s-SQJzG6QE6tAA">Tree 树形控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/selectTree" class="s-SQJzG6QE6tAA">SelectTree
+				树形选择控件</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/pagination" class="s-SQJzG6QE6tAA">Pagination
+				分页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/progress" class="s-SQJzG6QE6tAA">progress
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/empty" class="s-SQJzG6QE6tAA">Empty 空状态</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">提示</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/loading" class="s-SQJzG6QE6tAA">Loading 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/messageBox" class="s-SQJzG6QE6tAA">MessageBox
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/dialog" class="s-SQJzG6QE6tAA">Dialog 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/alert" class="s-SQJzG6QE6tAA">Alert 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/notice" class="s-SQJzG6QE6tAA">Notice 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">导航 Navigation</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/tabs" class="s-SQJzG6QE6tAA">Tabs 标签页</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/menu" class="s-SQJzG6QE6tAA">NavMenu 导航菜单</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/breadcrumb" class="s-SQJzG6QE6tAA">Breadcrumb
+				面包屑</a></li>
+			<li class="s-SQJzG6QE6tAA"><span class="base s-SQJzG6QE6tAA">其它 Others</span></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/clock" class="s-SQJzG6QE6tAA">Clock 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/drawer" class="s-SQJzG6QE6tAA">Drawer 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/collapse" class="s-SQJzG6QE6tAA">Collapse
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/scrollbar" class="s-SQJzG6QE6tAA">Scrollbar
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/carousel" class="s-SQJzG6QE6tAA">Carousel
+				示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/countTo" class="s-SQJzG6QE6tAA">CountTo 示例</a></li>
+			<li class="s-SQJzG6QE6tAA"><a href="/components/preview" class="s-SQJzG6QE6tAA">PreviewImage
+				示例</a></li></ul></div>
+</section>
+		<div class="be-main"><div class="be-main-container">
+<div class="page-container content">
+
+	<h2>Cascader 级联选择器</h2>
+	<p>当一个数据集合有清晰的层级结构时，可通过级联选择器逐级查看并选择</p>
+	<h3>基本用法</h3>
+	<p>有两种触发子菜单的方式</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="flex justify-around"><div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="指南/导航/顶部导航">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">指南</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">组件</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">资源</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">设计原则</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">导航</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">侧向导航</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node in-active-path" tabindex="-1"><div class="be-cascader-node__prefix"><i width="16" height="16" class="be-icon be-icon-check " role="button" tabindex="-1" style="color: #409eff;"></i>
+					</div>
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">顶部导航</span>
+				
+			</li></ul></div>
+	<div class="popper__arrow"></div></div></div>
+				<div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">指南</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">组件</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">资源</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div>
+	<div class="popper__arrow"></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">只需为 Cascader 的options属性指定选项数组即可渲染出一个级联选择器。通过expandTrigger可以定义展开子级菜单的触发方式。
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+       <span class="hljs-keyword">let</span> value = [<span class="hljs-string">&#x27;zhinan&#x27;</span>, <span class="hljs-string">&#x27;daohang&#x27;</span>, <span class="hljs-string">&#x27;dingbudaohang&#x27;</span>]
+       <span class="hljs-keyword">let</span> value1 = []
+       <span class="hljs-keyword">let</span> expandTrigger = <span class="hljs-string">&#x27;hover&#x27;</span>
+       <span class="hljs-keyword">let</span> options = [{
+          <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zhinan&#x27;</span>,
+          <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;指南&#x27;</span>,
+          <span class="hljs-attr">children</span>: [{
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;shejiyuanze&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;设计原则&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;yizhi&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一致&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;fankui&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;反馈&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;xiaolv&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;效率&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;kekong&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;可控&#x27;</span>
+            }]
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;daohang&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;导航&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航&#x27;</span>,
+              <span class="hljs-attr">children</span>: [
+                {
+                  <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang22&#x27;</span>,
+                  <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航22&#x27;</span>,
+                }
+              ]
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dingbudaohang&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;顶部导航&#x27;</span>
+            }]
+          }]
+        }, {
+          <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zujian&#x27;</span>,
+          <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件&#x27;</span>,
+          <span class="hljs-attr">children</span>: [{
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;basic&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Basic&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;layout&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Layout 布局&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;color&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Color 色彩&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;typography&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Typography 字体&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;icon&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Icon 图标&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;button&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Button 按钮&#x27;</span>
+            }]
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;radio&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Radio 单选框&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;checkbox&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Checkbox 多选框&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Input 输入框&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input-number&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;InputNumber 计数器&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;select&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Select 选择器&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cascader&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Cascader 级联选择器&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;switch&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Switch 开关&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;slider&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Slider 滑块&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;time-picker&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;TimePicker 时间选择器&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;date-picker&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DatePicker 日期选择器&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;datetime-picker&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DateTimePicker 日期时间选择器&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;upload&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Upload 上传&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;rate&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Rate 评分&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form 表单&#x27;</span>
+            }]
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;data&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Data&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;table&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Table 表格&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tag&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tag 标签&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;progress&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Progress 进度条&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tree&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tree 树形控件&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;pagination&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Pagination 分页&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;badge&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Badge 标记&#x27;</span>
+            }]
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notice&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notice&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;alert&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Alert 警告&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;loading&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Loading 加载&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Message 消息提示&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message-box&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MessageBox 弹框&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notification&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notification 通知&#x27;</span>
+            }]
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;navigation&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Navigation&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;menu&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;NavMenu 导航菜单&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tabs&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tabs 标签页&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;breadcrumb&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Breadcrumb 面包屑&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dropdown&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dropdown 下拉菜单&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;steps&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Steps 步骤条&#x27;</span>
+            }]
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;others&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Others&#x27;</span>,
+            <span class="hljs-attr">children</span>: [{
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dialog&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dialog 对话框&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tooltip&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tooltip 文字提示&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;popover&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Popover 弹出框&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;card&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Card 卡片&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;carousel&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Carousel 走马灯&#x27;</span>
+            }, {
+              <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;collapse&#x27;</span>,
+              <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Collapse 折叠面板&#x27;</span>
+            }]
+          }]
+        }, {
+          <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;ziyuan&#x27;</span>,
+          <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;资源&#x27;</span>,
+          <span class="hljs-attr">children</span>: [{
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;axure&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Axure Components&#x27;</span>
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;sketch&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Sketch Templates&#x27;</span>
+          }, {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;jiaohu&#x27;</span>,
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件交互文档&#x27;</span>
+          }]
+        }]
+        <span class="hljs-keyword">const</span> <span class="hljs-title function_">change</span> = (<span class="hljs-params">e</span>) =&gt; {
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e);
+        }
+        <!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+  <span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value}</span> {<span class="hljs-attr">options</span>} /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value1}</span> {<span class="hljs-attr">options</span>} {<span class="hljs-attr">expandTrigger</span>}/&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>禁用选项和清除按钮</h3>
+	<p>通过在数据源中设置<code>disabled</code>字段来声明该选项是禁用的。通过 <code>clearable</code> 设置输入框可清空</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="flex justify-around"><div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">指南</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">组件</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">资源</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div>
+	<div class="popper__arrow"></div></div></div>
+					<div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">指南</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">组件</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">资源</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div>
+	<div class="popper__arrow"></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+		<span class="hljs-keyword">let</span> value2 = []
+		<span class="hljs-keyword">let</span> value3 = []
+		<span class="hljs-keyword">let</span> options = [{
+			<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zhinan&#x27;</span>,
+			<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;指南&#x27;</span>,
+			<span class="hljs-attr">children</span>: [{
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;shejiyuanze&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;设计原则&#x27;</span>,
+				<span class="hljs-attr">disabled</span>: <span class="hljs-literal">true</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;yizhi&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一致&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;fankui&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;反馈&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;xiaolv&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;效率&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;kekong&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;可控&#x27;</span>
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;daohang&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;导航&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航&#x27;</span>,
+					<span class="hljs-attr">children</span>: [
+						{
+							<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang22&#x27;</span>,
+							<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航22&#x27;</span>,
+						}
+					]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dingbudaohang&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;顶部导航&#x27;</span>
+				}]
+			}]
+		}, {
+			<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zujian&#x27;</span>,
+			<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件&#x27;</span>,
+			<span class="hljs-attr">children</span>: [{
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;basic&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Basic&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;layout&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Layout 布局&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;color&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Color 色彩&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;typography&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Typography 字体&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;icon&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Icon 图标&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;button&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Button 按钮&#x27;</span>
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;radio&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Radio 单选框&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;checkbox&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Checkbox 多选框&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Input 输入框&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input-number&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;InputNumber 计数器&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;select&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Select 选择器&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cascader&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Cascader 级联选择器&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;switch&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Switch 开关&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;slider&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Slider 滑块&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;time-picker&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;TimePicker 时间选择器&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;date-picker&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DatePicker 日期选择器&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;datetime-picker&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DateTimePicker 日期时间选择器&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;upload&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Upload 上传&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;rate&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Rate 评分&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form 表单&#x27;</span>
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;data&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Data&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;table&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Table 表格&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tag&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tag 标签&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;progress&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Progress 进度条&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tree&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tree 树形控件&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;pagination&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Pagination 分页&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;badge&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Badge 标记&#x27;</span>
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notice&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notice&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;alert&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Alert 警告&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;loading&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Loading 加载&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Message 消息提示&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message-box&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MessageBox 弹框&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notification&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notification 通知&#x27;</span>
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;navigation&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Navigation&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;menu&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;NavMenu 导航菜单&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tabs&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tabs 标签页&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;breadcrumb&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Breadcrumb 面包屑&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dropdown&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dropdown 下拉菜单&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;steps&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Steps 步骤条&#x27;</span>
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;others&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Others&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dialog&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dialog 对话框&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tooltip&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tooltip 文字提示&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;popover&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Popover 弹出框&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;card&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Card 卡片&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;carousel&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Carousel 走马灯&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;collapse&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Collapse 折叠面板&#x27;</span>
+				}]
+			}]
+		}, {
+			<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;ziyuan&#x27;</span>,
+			<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;资源&#x27;</span>,
+			<span class="hljs-attr">children</span>: [{
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;axure&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Axure Components&#x27;</span>
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;sketch&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Sketch Templates&#x27;</span>
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;jiaohu&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件交互文档&#x27;</span>
+			}]
+		}]
+	<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value2}</span> {<span class="hljs-attr">options</span>} /&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value3}</span> {<span class="hljs-attr">options</span>} <span class="hljs-attr">clearable</span>/&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>显示最后一级</h3>
+	<p>可以仅在输入框中显示选中项最后一级的标签，而不是选中项所在的完整路径。</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="flex justify-around"><div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">指南</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">组件</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">资源</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div>
+	<div class="popper__arrow"></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">属性showAllLevels定义了是否显示完整的路径，将其赋值为false则仅显示最后一级,也可通过config配置value和label
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+			<span class="hljs-keyword">let</span> value = []
+			<span class="hljs-keyword">let</span> showAllLevels = <span class="hljs-literal">false</span>
+			<span class="hljs-keyword">let</span> options = [{
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zhinan&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;指南&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;shejiyuanze&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;设计原则&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;yizhi&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一致&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;fankui&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;反馈&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;xiaolv&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;效率&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;kekong&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;可控&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;daohang&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;导航&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航&#x27;</span>,
+						<span class="hljs-attr">children</span>: [
+							{
+								<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang22&#x27;</span>,
+								<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航22&#x27;</span>,
+							}
+						]
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dingbudaohang&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;顶部导航&#x27;</span>
+					}]
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zujian&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;basic&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Basic&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;layout&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Layout 布局&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;color&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Color 色彩&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;typography&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Typography 字体&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;icon&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Icon 图标&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;button&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Button 按钮&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;radio&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Radio 单选框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;checkbox&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Checkbox 多选框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Input 输入框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input-number&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;InputNumber 计数器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;select&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Select 选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cascader&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Cascader 级联选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;switch&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Switch 开关&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;slider&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Slider 滑块&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;time-picker&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;TimePicker 时间选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;date-picker&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DatePicker 日期选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;datetime-picker&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DateTimePicker 日期时间选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;upload&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Upload 上传&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;rate&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Rate 评分&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form 表单&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;data&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Data&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;table&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Table 表格&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tag&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tag 标签&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;progress&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Progress 进度条&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tree&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tree 树形控件&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;pagination&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Pagination 分页&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;badge&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Badge 标记&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notice&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notice&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;alert&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Alert 警告&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;loading&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Loading 加载&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Message 消息提示&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message-box&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MessageBox 弹框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notification&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notification 通知&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;navigation&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Navigation&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;menu&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;NavMenu 导航菜单&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tabs&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tabs 标签页&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;breadcrumb&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Breadcrumb 面包屑&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dropdown&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dropdown 下拉菜单&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;steps&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Steps 步骤条&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;others&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Others&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dialog&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dialog 对话框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tooltip&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tooltip 文字提示&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;popover&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Popover 弹出框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;card&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Card 卡片&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;carousel&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Carousel 走马灯&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;collapse&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Collapse 折叠面板&#x27;</span>
+					}]
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;ziyuan&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;资源&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;axure&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Axure Components&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;sketch&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Sketch Templates&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;jiaohu&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件交互文档&#x27;</span>
+				}]
+			}]
+
+		<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value}</span> {<span class="hljs-attr">options</span>} {<span class="hljs-attr">showAllLevels</span>}/&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value2}</span> {<span class="hljs-attr">options2</span>} {<span class="hljs-attr">config</span>}/&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>选择任意一级选项</h3>
+	<p>在单选模式下，你只能选择叶子节点；启用该功能后，可让父子节点取消关联，选择任意一级选项(目前只有单选选项)</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="flex justify-around"><div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="指南/导航/顶部导航">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				<div role="radio" tabindex="-1" aria-checked="dingbudaohang" class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" tabindex="-1" aria-checked="dingbudaohang" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">zhinan</span></div>
+				<span role="button" tabindex="-1" class="be-cascader-node__label">指南</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				<div role="radio" tabindex="-1" aria-checked="dingbudaohang" class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" tabindex="-1" aria-checked="dingbudaohang" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">zujian</span></div>
+				<span role="button" tabindex="-1" class="be-cascader-node__label">组件</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				<div role="radio" tabindex="-1" aria-checked="dingbudaohang" class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" tabindex="-1" aria-checked="dingbudaohang" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">ziyuan</span></div>
+				<span role="button" tabindex="-1" class="be-cascader-node__label">资源</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				<div role="radio" tabindex="-1" aria-checked="dingbudaohang" class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" tabindex="-1" aria-checked="dingbudaohang" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">shejiyuanze</span></div>
+				<span role="button" tabindex="-1" class="be-cascader-node__label">设计原则</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				<div role="radio" tabindex="-1" aria-checked="dingbudaohang" class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" tabindex="-1" aria-checked="dingbudaohang" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">daohang</span></div>
+				<span role="button" tabindex="-1" class="be-cascader-node__label">导航</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				<div role="radio" tabindex="-1" aria-checked="dingbudaohang" class="be-radio" style="undefine: undefined;"><span class="be-radio__input"><span class="be-radio__inner"></span>
+    <input type="radio" tabindex="-1" aria-checked="dingbudaohang" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">cexiangdaohang</span></div>
+				<span role="button" tabindex="-1" class="be-cascader-node__label">侧向导航</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node in-active-path" tabindex="-1">
+				<div role="radio" tabindex="-1" aria-checked="dingbudaohang" class="be-radio  is-checked" style="undefine: undefined;"><span class="be-radio__input is-checked"><span class="be-radio__inner"></span>
+    <input type="radio" tabindex="-1" aria-checked="dingbudaohang" aria-hidden="false" class="be-radio__original"></span>
+	<span class="be-radio__label">dingbudaohang</span></div>
+				<span role="button" tabindex="-1" class="be-cascader-node__label">顶部导航</span>
+				
+			</li></ul></div>
+	<div class="popper__arrow"></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">通过checkStrictly 来设置父子节点取消选中关联，从而达到选择任意一级选项的目的。
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+			<span class="hljs-keyword">let</span> value = []
+			<span class="hljs-keyword">let</span> checkStrictly = <span class="hljs-literal">true</span>
+			<span class="hljs-keyword">let</span> options = [{
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zhinan&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;指南&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;shejiyuanze&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;设计原则&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;yizhi&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;一致&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;fankui&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;反馈&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;xiaolv&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;效率&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;kekong&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;可控&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;daohang&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;导航&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航&#x27;</span>,
+						<span class="hljs-attr">children</span>: [
+							{
+								<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cexiangdaohang22&#x27;</span>,
+								<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;侧向导航22&#x27;</span>,
+							}
+						]
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dingbudaohang&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;顶部导航&#x27;</span>
+					}]
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zujian&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;basic&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Basic&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;layout&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Layout 布局&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;color&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Color 色彩&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;typography&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Typography 字体&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;icon&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Icon 图标&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;button&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Button 按钮&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;radio&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Radio 单选框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;checkbox&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Checkbox 多选框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Input 输入框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;input-number&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;InputNumber 计数器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;select&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Select 选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;cascader&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Cascader 级联选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;switch&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Switch 开关&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;slider&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Slider 滑块&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;time-picker&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;TimePicker 时间选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;date-picker&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DatePicker 日期选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;datetime-picker&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;DateTimePicker 日期时间选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;upload&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Upload 上传&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;rate&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Rate 评分&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Form 表单&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;data&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Data&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;table&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Table 表格&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tag&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tag 标签&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;progress&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Progress 进度条&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tree&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tree 树形控件&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;pagination&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Pagination 分页&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;badge&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Badge 标记&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notice&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notice&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;alert&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Alert 警告&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;loading&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Loading 加载&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Message 消息提示&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;message-box&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MessageBox 弹框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;notification&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Notification 通知&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;navigation&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Navigation&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;menu&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;NavMenu 导航菜单&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tabs&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tabs 标签页&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;breadcrumb&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Breadcrumb 面包屑&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dropdown&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dropdown 下拉菜单&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;steps&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Steps 步骤条&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;others&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Others&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;dialog&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Dialog 对话框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;tooltip&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Tooltip 文字提示&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;popover&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Popover 弹出框&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;card&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Card 卡片&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;carousel&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Carousel 走马灯&#x27;</span>
+					}, {
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;collapse&#x27;</span>,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Collapse 折叠面板&#x27;</span>
+					}]
+				}]
+			}, {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;ziyuan&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;资源&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;axure&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Axure Components&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;sketch&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Sketch Templates&#x27;</span>
+				}, {
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;jiaohu&#x27;</span>,
+					<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;组件交互文档&#x27;</span>
+				}]
+			}]
+		<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value}</span> {<span class="hljs-attr">options</span>} {<span class="hljs-attr">checkStrictly</span>}/&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>自定义value和label</h3>
+	<p>指定选项的值和选项标签为选项对象的某个属性值</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="flex justify-around"><div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">指南</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">组件</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li><li class="be-cascader-node" tabindex="-1">
+				
+				<span role="button" tabindex="-1" class="be-cascader-node__label">资源</span>
+				<i width="18" height="18" class="be-icon be-icon-chevron-right " role="button" tabindex="-1" style="color: #606266;"></i>
+			</li></ul></div>
+	<div class="popper__arrow"></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">通过config 来设置自定义选项的值。默认取对象中的value和label
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+			<span class="hljs-keyword">let</span> value = []
+			<span class="hljs-keyword">let</span> config = {
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;id&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;value&#x27;</span>,
+				<span class="hljs-attr">children</span>: <span class="hljs-string">&#x27;children&#x27;</span>
+			}
+			<span class="hljs-keyword">let</span> options = [{
+				<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;zhinan&#x27;</span>,
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;指南&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;shejiyuanze&#x27;</span>,
+					<span class="hljs-comment">// disabled: true,</span>
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;设计原则&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;yizhi&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;一致&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;fankui&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;反馈&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;xiaolv&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;效率&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;kekong&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;可控&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;daohang&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;导航&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;cexiangdaohang&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;侧向导航&#x27;</span>,
+						<span class="hljs-attr">children</span>: [
+							{
+								<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;cexiangdaohang22&#x27;</span>,
+								<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;侧向导航22&#x27;</span>
+							}
+						]
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;dingbudaohang&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;顶部导航&#x27;</span>
+					}]
+				}]
+			}, {
+				<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;zujian&#x27;</span>,
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;组件&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;basic&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Basic&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;layout&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Layout 布局&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;color&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Color 色彩&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;typography&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Typography 字体&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;icon&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Icon 图标&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;button&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Button 按钮&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Form&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;radio&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Radio 单选框&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;checkbox&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Checkbox 多选框&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;input&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Input 输入框&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;input-number&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;InputNumber 计数器&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;select&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Select 选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;cascader&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Cascader 级联选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;switch&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Switch 开关&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;slider&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Slider 滑块&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;time-picker&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;TimePicker 时间选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;date-picker&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;DatePicker 日期选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;datetime-picker&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;DateTimePicker 日期时间选择器&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;upload&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Upload 上传&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;rate&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Rate 评分&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;form&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Form 表单&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;data&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Data&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;table&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Table 表格&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;tag&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Tag 标签&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;progress&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Progress 进度条&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;tree&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Tree 树形控件&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;pagination&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Pagination 分页&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;badge&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Badge 标记&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;notice&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Notice&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;alert&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Alert 警告&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;loading&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Loading 加载&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;message&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Message 消息提示&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;message-box&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;MessageBox 弹框&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;notification&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Notification 通知&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;navigation&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Navigation&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;menu&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;NavMenu 导航菜单&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;tabs&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Tabs 标签页&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;breadcrumb&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Breadcrumb 面包屑&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;dropdown&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Dropdown 下拉菜单&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;steps&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Steps 步骤条&#x27;</span>
+					}]
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;others&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Others&#x27;</span>,
+					<span class="hljs-attr">children</span>: [{
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;dialog&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Dialog 对话框&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;tooltip&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Tooltip 文字提示&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;popover&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Popover 弹出框&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;card&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Card 卡片&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;carousel&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Carousel 走马灯&#x27;</span>
+					}, {
+						<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;collapse&#x27;</span>,
+						<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Collapse 折叠面板&#x27;</span>
+					}]
+				}]
+			}, {
+				<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;ziyuan&#x27;</span>,
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;资源&#x27;</span>,
+				<span class="hljs-attr">children</span>: [{
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;axure&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Axure Components&#x27;</span>
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;sketch&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Sketch Templates&#x27;</span>
+				}, {
+					<span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;jiaohu&#x27;</span>,
+					<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;组件交互文档&#x27;</span>
+				}]
+			}]
+		<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START -->
+		<span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value}</span> {<span class="hljs-attr">options</span>} {<span class="hljs-attr">config</span>}/&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3>动态加载</h3>
+	<p>当选中某一级时，动态加载该级下的选项。</p>
+	<div class="demo-block"><div class="source"><div slot="source"><div class="flex justify-around"><div role="button" tabindex="-1" class="be-cascader"><div role="button" tabindex="-1"><div role="button" tabindex="-1" class="be-input      be-input--suffix"><input role="button" tabindex="-1" placeholder="请选择" class="be-input__inner" readonly name="" value="">
+	<span class="be-input__suffix"><span class="be-input__suffix-inner"><div slot="suffix"><div class="input-suffix-icon" style="display:block"><i width="18" height="18" class="be-icon be-icon-chevron-down " role="button" tabindex="-1" style=""></i></div>
+				<div role="button" tabindex="-1" style="display:none;margin-right:2px"><i width="14" height="14" class="be-icon be-icon-close-circle " role="button" tabindex="-1" style=""></i></div></div>
+	      
+		    </span></span></div></div>
+	<div class="be-cascader-panel"><div class="be-cascader-menu"><ul class="be-cascader-menu__list"></ul></div>
+	<div class="popper__arrow"></div></div></div></div></div></div>
+	<div class="meta" style="display: none;"><div class="description"><div slot="description">通过<code>lazy</code>开启动态加载，并通过<code>lazyload</code>来设置加载数据源的方法。<code>lazyload</code>方法有两个参数，第一个参数<code>node</code>为当前点击的节点，第二个<code>resolve</code>为数据加载完成的回调(必须调用)。了更准确的显示节点的状态，还可以对节点数据添加是否为叶子节点的标志位 (默认字段为hasChild)，否则会简单的以有无子节点来判断是否为叶子节点。
+		</div></div>
+		<div class="demo-code-container pb-0"><div class="high-code " style=""><pre>		<!-- HTML_TAG_START -->
+		<span class="hljs-keyword">let</span> value = []
+		<span class="hljs-keyword">let</span> id = <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">let</span> lazyOptions = [
+			{
+				<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;zhinan&#x27;</span>,
+				<span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;选项1&#x27;</span>,
+				<span class="hljs-attr">hasChild</span>: <span class="hljs-literal">true</span>,
+				<span class="hljs-attr">children</span>: []
+			}
+		]
+		<span class="hljs-keyword">const</span> <span class="hljs-title function_">lazyLoad</span> = (<span class="hljs-params">node, resolve</span>) =&gt; {
+			<span class="hljs-keyword">const</span> { level } = node;
+			<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+				<span class="hljs-keyword">const</span> nodes = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">length</span>: level + <span class="hljs-number">1</span> })
+					.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> ({
+						<span class="hljs-attr">value</span>: ++id,
+						<span class="hljs-attr">label</span>: <span class="hljs-string">`选项<span class="hljs-subst">${id}</span>`</span>,
+						<span class="hljs-attr">hasChild</span>: level &lt;= <span class="hljs-number">2</span>
+					}));
+				<span class="hljs-comment">// 通过调用resolve将子节点数据返回，通知组件数据加载完成</span>
+				<span class="hljs-title function_">resolve</span>(nodes);
+			}, <span class="hljs-number">1000</span>);
+		}<!-- HTML_TAG_END -->
+		<!-- HTML_TAG_START --><span class="hljs-tag">&lt;<span class="hljs-name">BeCascader</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{value}</span> <span class="hljs-attr">lazy</span> = <span class="hljs-string">{true}</span> <span class="hljs-attr">bind:options</span> = <span class="hljs-string">{lazyOptions}</span> <span class="hljs-attr">lazyLoad</span> = <span class="hljs-string">{lazyLoad}/</span>&gt;</span><!-- HTML_TAG_END -->
+	</pre></div></div></div>
+	<div class="demo-block-control"><div class="triangle triangle-down"></div>
+		<span>显示代码</span></div></div>
+	<h3 class="demo-table-title">Attributes</h3>
+	<table class="demo-table"><thead><tr><th>参数</th>
+			<th>说明</th>
+			<th>类型</th>
+			<th>可选值</th>
+			<th>默认值</th></tr></thead>
+		<tbody><tr><td>value</td>
+			<td>下拉框选中的值</td>
+			<td>array</td>
+			<td>-</td>
+			<td>[]</td></tr></tbody></table>
+	<h3 class="demo-table-title">Events</h3>
+	<table class="demo-table"><thead><tr><th>事件名称</th>
+			<th>说明</th>
+			<th>回调参数</th></tr></thead>
+		<tbody><tr><td>change</td>
+			<td>值改变后的回调</td>
+			<td>&#39;&#39;</td></tr></tbody></table>
+	<h3 class="demo-table-title">Slot</h3>
+	<table class="demo-table"><thead><tr><th>name</th>
+			<th>说明</th></tr></thead>
+		<tbody><tr><td>icon</td>
+			<td>标题前的icon</td></tr></tbody></table></div></div>
+			<div></div>
+			<div class="be-main__footer s-hZl-oQVdfKrr" style="margin-left: 240px;"><div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Contributors</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://tianna.beer-ui.com/luzhou" class="s-hZl-oQVdfKrr">Turf.js中文网</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Resource</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://svelte.dev/" class="s-hZl-oQVdfKrr">svelte</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://kit.svelte.dev/" class="s-hZl-oQVdfKrr">svelteKit</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://www.npmjs.com/package/@brewer/beerui" class="s-hZl-oQVdfKrr">@brewer/beerui</a></div></div>
+	<div class="list"><div class="list-item s-hZl-oQVdfKrr"><span class="s-hZl-oQVdfKrr">Github</span></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a href="https://github.com/beerui/BeerUi" class="s-hZl-oQVdfKrr">组件 BeerUi</a></div>
+		<div class="list-item s-hZl-oQVdfKrr"><a class="beian s-hZl-oQVdfKrr" rel="noreferrer" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2022015490号-1</a></div>
+
+
+
+</div>
+</div></div></div>
+</div></div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_1n8wl93 = {
+						env: {},
+						base: new URL("..", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("../_app/immutable/entry/start.1e536230.js"),
+						import("../_app/immutable/entry/app.b0d17614.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1n8wl93.element, {
+							node_ids: [0, 2, 8],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

@@ -14,7 +14,7 @@
     row: null,
     column: null
   }
-  
+
   $:leftDate = resetDate(value[0])
   $:rightDate = nextYear(leftDate, 10)
   $:leftLabel =  Math.floor(leftDate.getFullYear() / 10) * 10  + ' - ' + (Math.floor(leftDate.getFullYear() / 10) * 10 + 9);
@@ -99,7 +99,7 @@ const isValidValue = (value) => {
 <div class="be-picker-panel be-date-picker be-range-daterange-picker be-popper be-month-range-{direction}" bind:this={rangeRect} in:zoomIn="{{duration: 250}}" out:zoomIn="{{duration: 250}}">
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
-      <span class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear}></span>
+      <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__d-prev-btn" on:click={handlePrevYear} on:keydown></span>
       <span class="be-date-picker__header-label">{leftLabel}</span>
     </div>
     <YearTable date = {leftDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
@@ -107,7 +107,7 @@ const isValidValue = (value) => {
   <div class="be-picker-panel__content be-range-daterange-picker__content is-left">
     <div class="be-range-daterange-picker__header">
       <span class="be-date-picker__header-label">{rightLabel}</span>
-      <span class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear}></span>
+      <span role='button' tabindex='-1' class="be-picker-panel__icon-btn be-date-picker__d-next-btn" on:click={handleNextYear} on:keydown></span>
     </div>
     <YearTable date = {rightDate} {value} {disabledDate} {rangeState} {minDate} {maxDate} selectMode='range' on:pick={handleRangePick} on:changerange={handleChangeRange}/>
   </div>

@@ -385,4 +385,31 @@ let value4 = 2
 		</tr>
 		</tbody>
 	</table>
+	<h3 class='demo-table-title'>BeOption</h3>
+	<table class='demo-table'>
+		<thead>
+		<tr>
+			<th>name</th>
+			<th>说明</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>label</td>
+			<td>展示内容</td>
+		</tr>
+		<tr>
+			<td>value</td>
+			<td>选项卡的值</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>禁用 默认false</td>
+		</tr>
+		<tr>
+			<td>slot</td>
+			<td>新增插槽（v1.1.16）</td>
+		</tr>
+		</tbody>
+	</table>
 </div>

@@ -10,12 +10,12 @@
 	export let disabled = false;
 	// 是否显示清除按钮
 	export let clearable = false;
-	export let validateEvent: boolean = true; // 是否发送验证表单
+	export let validateEvent = true; // 是否发送验证表单
 	export let type = 'text';
 	export let name = '';
 	// 右侧icon
 	export let suffixIcon = '';
-	let input;
+	let input = null;
 	let showClose = false
 
 	// 表单验证
@@ -28,7 +28,7 @@
 	const showClear = () => showClose = clearable && value && !readonly && !disabled
 
 	let suffix;
-	let isInit: boolean = false;
+	let isInit = false;
 
 	// 判断后置内容是否存在
 	function getSuffixVisible() {
@@ -65,6 +65,10 @@
 		showClear()
 		dispatch('input', value);
 	}
+	// 在 input 值改变时触发
+	const suffixIconClick = () => {
+		dispatch('suffixIconClick', value);
+	}
 
 	function typeAction(node) {
 		node.type = type;
@@ -86,6 +90,8 @@
 	})
 </script>
 <div
+	role='button'
+	tabindex='-1'
 	class='be-input {_class}'
 	class:is-disabled={disabled}
 	class:be-input--medium={size === 'medium'}
@@ -97,6 +103,7 @@
 	on:contextmenu
 	on:dblclick
 	on:focusin
+	on:focus
 	on:mousedown
 	on:mouseup
 	on:focusout
@@ -107,6 +114,8 @@
 >
 	<input
 		{...$$restProps}
+		role='button'
+		tabindex='-1'
 		use:typeAction
 		placeholder={placeholder}
 		bind:value
@@ -116,7 +125,7 @@
 		on:blur={blur}
 		on:focus={focus}
 		on:change={change}
-		name={prop || name}
+		name={prop || name || ''}
 		on:input={onInput}
 		bind:this={input}
 		use:forwardEvents
@@ -126,10 +135,15 @@
 	    <span class='be-input__suffix-inner'>
 	      <slot name='suffix'></slot>
 	      {#if suffixIcon}
-	        <i class={['be-input__icon be-icon ', suffixIcon].join('')}></i>
+	        <i
+						role='button' tabindex='-1'
+						on:click={suffixIconClick}
+						on:keydown={suffixIconClick}
+						class={['be-input__icon be-icon ', suffixIcon].join('')}
+					></i>
 	      {/if}
 		    {#if value && clearable && showClose}
-			    <i class='be-input__icon be-icon be-icon-close-circle' on:click={clearValue}></i>
+			    <i role='button' tabindex='-1' class='be-input__icon be-icon be-icon-close-circle' on:click={clearValue} on:keydown></i>
 		    {/if}
 	    </span>
 	  </span>

@@ -11,7 +11,7 @@
 	export let value: string[] | number[] = [];
 	let treeNode = null;
 	export let showCheckbox = null;
-	export let highlightCurrent: boolean = false;
+	export let highlightCurrent = false;
 	export let props = null;
 	export let renderContent: Function;
 	export let renderAfterExpand = true;
@@ -20,7 +20,7 @@
 
 	let indent = 18;
 	let iconClass = '';
-	export let nodeKey: string = 'label';
+	export let nodeKey = 'label';
 
 	let handleChildNodeExpand = (evt) => {
 		dispatch('nodeExpand', evt);
@@ -70,17 +70,18 @@
      class:is-checked={!node.disabled && node.checked}
      class:is-selected={isSelected}
      on:contextmenu={handleContextMenu}
-     role='treeitem'
+     role='button'
      tabindex='-1'
-     aria-expanded={node.expanded}
-     aria-disabled={node.disabled}
-     aria-checked={node.checked}
 >
 <!--	on:click|stopPropagation={handleClick}-->
 	<div class='be-tree-node__content' style={ 'padding-left: ' + (node.level - 1) * indent + 'px' }>
-		<span on:click|stopPropagation={handleExpandIconClick}
-		      class:is-leaf={node.isLeaf}
-		      class:expanded={!node.isLeaf && node.expanded}
+		<span
+			role='button'
+			tabindex='-1'
+			on:click|stopPropagation={handleExpandIconClick}
+			on:keydown|stopPropagation={handleExpandIconClick}
+			class:is-leaf={node.isLeaf}
+			class:expanded={!node.isLeaf && node.expanded}
 		>
 			<BeIcon name='caret-right-small' />
 		</span>
@@ -97,7 +98,7 @@
 				<BeIcon name='loading' />
 			</div>
 		{/if}
-		<span class='be-tree-node__label' on:click|stopPropagation={handleClick}>
+		<span role='button' tabindex='-1' class='be-tree-node__label' on:click|stopPropagation={handleClick} on:keydown|stopPropagation={handleClick}>
 			{ node.label }
 			{#if showCount && node.childNodes.length}
 				<span class='be-tree-node__label-num'>
@@ -109,7 +110,7 @@
 	{#if !renderAfterExpand || node.expanded }
 		<div class='el-tree-node__children'
 		     class:expanded={node.expanded}
-		     role='group'
+		     role='button'
 		     aria-expanded={node.expanded}
 		>
 			{#each node.childNodes as child}

@@ -1,0 +1,1 @@
+function u(i,n=0){let l=Number.MIN_SAFE_INTEGER;return(...t)=>{const e=Date.now();e-l>=n&&(i(...t),l=e)}}function o(i,n=50,l){let t=null;return function(...e){t&&clearTimeout(t),l&&!t&&i.apply(this,e),t=setTimeout(()=>{i.apply(this,e)},n)}}export{o as d,u as t};
