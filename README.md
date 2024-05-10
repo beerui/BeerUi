@@ -8,6 +8,10 @@
 
 This is a Svelte Ui Components,`@brewer/beerui`.
 
+### 其它开源库
+
+- EchartsAction 控制echarts自动轮播 [NPM地址](https://www.npmjs.com/package/@brewer/echarts-action)  [![npm version](https://img.shields.io/npm/v/@brewer/echarts-action.svg)](https://www.npmjs.com/package/@brewer/beerui) [![license](https://img.shields.io/npm/l/@brewer/echarts-action)](LICENSE.md) ![NPM Downloads](https://img.shields.io/npm/dt/@brewer/echarts-action?color=%23fb7182&label=downloads) 
+
 ### 一些想法和计划
 前期参考了ElementUi的样式，后面接触到TDesign后有想使用全套TDesign的想法。
 
