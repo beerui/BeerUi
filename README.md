@@ -25,8 +25,7 @@ This is a Svelte Ui Components,`@brewer/beerui`.
 还有很多想法，但碍于空闲时间不多，没法好好实现，想要参与的可以邮件我。
 
 ### 在线文档
-国内部署：[BeerUi](https://beer-ui.com/)
-外网文档：[BeerUi](https://beer-ui.vercel.app/)
+[BeerUi](https://beer-ui.vercel.app/)
 
 ### 更新日志
 [更新日志](./CHANGELOG.md)
