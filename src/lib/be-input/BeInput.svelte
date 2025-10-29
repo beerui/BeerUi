@@ -80,6 +80,7 @@
 	}
 	const clearValue = () => {
 		value = ''
+		dispatch('change', value);
 	}
 	$: watchValue(value)
 
