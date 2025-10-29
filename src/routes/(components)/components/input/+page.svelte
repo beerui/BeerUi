@@ -182,11 +182,6 @@ let value = ''
 				<td>(value: string | number)</td>
 			</tr>
 			<tr>
-				<td>change</td>
-				<td>仅在输入框失去焦点或用户按下回车时触发</td>
-				<td>(value: string | number)</td>
-			</tr>
-			<tr>
 				<td>input</td>
 				<td>在 Input 值改变时触发</td>
 				<td>(value: string | number)</td>
